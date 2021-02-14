@@ -1841,12 +1841,19 @@ namespace XRTK.Services
         /// Is the <see cref="IMixedRealitySystem"/> enabled in the <see cref="ActiveProfile"/>?
         /// </summary>
         /// <typeparam name="T"><see cref="IMixedRealitySystem"/> to check.</typeparam>
+        /// <param name="rootProfile">Optional root profile reference.</param>
         /// <returns>True, if the system is enabled in the <see cref="ActiveProfile"/>, otherwise false.</returns>
-        public static bool IsSystemEnabled<T>() where T : IMixedRealitySystem
+        public static bool IsSystemEnabled<T>(MixedRealityToolkitRootProfile rootProfile = null) where T : IMixedRealitySystem
         {
-            if (HasActiveProfile)
+            if (rootProfile.IsNull())
             {
-                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                rootProfile = instance.activeProfile;
+            }
+
+            if (!rootProfile.IsNull())
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                foreach (var configuration in rootProfile.RegisteredServiceConfigurations)
                 {
                     if (typeof(T).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(T))) &&
                         configuration.Enabled)
@@ -1865,14 +1872,21 @@ namespace XRTK.Services
         /// <typeparam name="TSystem">The <see cref="IMixedRealitySystem"/> type to get the <see cref="TProfile"/> for.</typeparam>
         /// <typeparam name="TProfile">The <see cref="BaseMixedRealityProfile"/> type to get for the <see cref="TSystem"/>.</typeparam>
         /// <param name="profile">The profile instance.</param>
+        /// <param name="rootProfile">Optional root profile reference.</param>
         /// <returns>True if a <see cref="TSystem"/> type is matched and a valid <see cref="TProfile"/> is found, otherwise false.</returns>
-        public static bool TryGetSystemProfile<TSystem, TProfile>(out TProfile profile)
+        public static bool TryGetSystemProfile<TSystem, TProfile>(out TProfile profile, MixedRealityToolkitRootProfile rootProfile = null)
             where TSystem : IMixedRealitySystem
             where TProfile : BaseMixedRealityProfile
         {
-            if (HasActiveProfile)
+            if (rootProfile.IsNull())
             {
-                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                rootProfile = instance.activeProfile;
+            }
+
+            if (!rootProfile.IsNull())
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                foreach (var configuration in rootProfile.RegisteredServiceConfigurations)
                 {
                     if (typeof(TSystem).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(TSystem))))
                     {

@@ -173,7 +173,8 @@ namespace XRTK.Editor
                 if (platformConfigurationProfile.IsNull()) { continue; }
 
                 if (EditorUtility.DisplayDialog("We found a new Platform Configuration",
-                    $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {nameof(MixedRealityToolkitRootProfile)}?",
+                    // ReSharper disable once PossibleNullReferenceException
+                    $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {rootProfile.name}?",
                     "Yes, Absolutely!",
                     "later"))
                 {
@@ -229,7 +230,7 @@ namespace XRTK.Editor
                 switch (configurationType)
                 {
                     case Type _ when typeof(IMixedRealityCameraDataProvider).IsAssignableFrom(configurationType):
-                        if (MixedRealityToolkit.TryGetSystemProfile<IMixedRealityCameraSystem, MixedRealityCameraSystemProfile>(out var cameraSystemProfile))
+                        if (MixedRealityToolkit.TryGetSystemProfile<IMixedRealityCameraSystem, MixedRealityCameraSystemProfile>(out var cameraSystemProfile, rootProfile))
                         {
                             var cameraDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityCameraDataProvider>(configuration);
 
@@ -243,7 +244,7 @@ namespace XRTK.Editor
                         break;
 
                     case Type _ when typeof(IMixedRealityInputDataProvider).IsAssignableFrom(configurationType):
-                        if (MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
+                        if (MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile, rootProfile))
                         {
                             var inputDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityInputDataProvider>(configuration);
 
@@ -257,7 +258,7 @@ namespace XRTK.Editor
                         break;
 
                     case Type _ when typeof(IMixedRealitySpatialAwarenessDataProvider).IsAssignableFrom(configurationType):
-                        if (MixedRealityToolkit.TryGetSystemProfile<IMixedRealitySpatialAwarenessSystem, MixedRealitySpatialAwarenessSystemProfile>(out var spatialAwarenessSystemProfile))
+                        if (MixedRealityToolkit.TryGetSystemProfile<IMixedRealitySpatialAwarenessSystem, MixedRealitySpatialAwarenessSystemProfile>(out var spatialAwarenessSystemProfile, rootProfile))
                         {
                             var spatialObserverConfiguration = new MixedRealityServiceConfiguration<IMixedRealitySpatialAwarenessDataProvider>(configuration);
 

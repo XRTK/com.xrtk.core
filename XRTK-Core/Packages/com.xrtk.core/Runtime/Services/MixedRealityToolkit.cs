@@ -406,7 +406,7 @@ namespace XRTK.Services
                 {
                     if (TryCreateAndRegisterService(configuration, out var service) && service != null)
                     {
-                        if (configuration.Profile is BaseMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
+                        if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
                         {
                             TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, service);
                         }
@@ -687,13 +687,6 @@ namespace XRTK.Services
             {
                 var configuration = configurations[i];
 
-                if (configuration.InstancedType.Type == null)
-                {
-                    anyFailed = true;
-                    Debug.LogWarning($"Could not load the {configuration.Name} configuration's {nameof(configuration.InstancedType)}.");
-                    continue;
-                }
-
                 if (TryCreateAndRegisterService(configuration, out var serviceInstance))
                 {
                     if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile &&
@@ -726,13 +719,6 @@ namespace XRTK.Services
             for (var i = 0; i < configurations?.Length; i++)
             {
                 var configuration = configurations[i];
-
-                if (configuration.InstancedType.Type == null)
-                {
-                    anyFailed = true;
-                    Debug.LogWarning($"Could not load the {configuration.Name} configuration's {nameof(configuration.InstancedType)}.");
-                    continue;
-                }
 
                 if (!TryCreateAndRegisterDataProvider(configuration, serviceParent))
                 {
@@ -861,7 +847,9 @@ namespace XRTK.Services
                     }
                 }
 
-                if (platforms.Count == 0)
+                if (platforms.Count == 0 ||
+                    Application.isEditor &&
+                    !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
                 {
                     if (runtimePlatforms == null ||
                         runtimePlatforms.Count == 0)
@@ -880,16 +868,6 @@ namespace XRTK.Services
                 {
                     Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
                     return false;
-                }
-
-                if (Application.isEditor &&
-                    !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
-                {
-                    // We return true so we don't raise en error.
-                    // Even though we did not register the service,
-                    // it's expected that this is the intended behavior
-                    // when there isn't a valid build target active to run the service on.
-                    return true;
                 }
             }
             else
@@ -1841,12 +1819,19 @@ namespace XRTK.Services
         /// Is the <see cref="IMixedRealitySystem"/> enabled in the <see cref="ActiveProfile"/>?
         /// </summary>
         /// <typeparam name="T"><see cref="IMixedRealitySystem"/> to check.</typeparam>
+        /// <param name="rootProfile">Optional root profile reference.</param>
         /// <returns>True, if the system is enabled in the <see cref="ActiveProfile"/>, otherwise false.</returns>
-        public static bool IsSystemEnabled<T>() where T : IMixedRealitySystem
+        public static bool IsSystemEnabled<T>(MixedRealityToolkitRootProfile rootProfile = null) where T : IMixedRealitySystem
         {
-            if (HasActiveProfile)
+            if (rootProfile.IsNull())
             {
-                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                rootProfile = instance.activeProfile;
+            }
+
+            if (!rootProfile.IsNull())
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                foreach (var configuration in rootProfile.RegisteredServiceConfigurations)
                 {
                     if (typeof(T).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(T))) &&
                         configuration.Enabled)
@@ -1865,14 +1850,21 @@ namespace XRTK.Services
         /// <typeparam name="TSystem">The <see cref="IMixedRealitySystem"/> type to get the <see cref="TProfile"/> for.</typeparam>
         /// <typeparam name="TProfile">The <see cref="BaseMixedRealityProfile"/> type to get for the <see cref="TSystem"/>.</typeparam>
         /// <param name="profile">The profile instance.</param>
+        /// <param name="rootProfile">Optional root profile reference.</param>
         /// <returns>True if a <see cref="TSystem"/> type is matched and a valid <see cref="TProfile"/> is found, otherwise false.</returns>
-        public static bool TryGetSystemProfile<TSystem, TProfile>(out TProfile profile)
+        public static bool TryGetSystemProfile<TSystem, TProfile>(out TProfile profile, MixedRealityToolkitRootProfile rootProfile = null)
             where TSystem : IMixedRealitySystem
             where TProfile : BaseMixedRealityProfile
         {
-            if (HasActiveProfile)
+            if (rootProfile.IsNull())
             {
-                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                rootProfile = instance.activeProfile;
+            }
+
+            if (!rootProfile.IsNull())
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                foreach (var configuration in rootProfile.RegisteredServiceConfigurations)
                 {
                     if (typeof(TSystem).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(TSystem))))
                     {

@@ -68,6 +68,7 @@ namespace XRTK.Editor.Profiles
             configurationList.onAddCallback += OnConfigurationOptionAdded;
             configurationList.onRemoveCallback += OnConfigurationOptionRemoved;
             configurationList.elementHeightCallback += ElementHeightCallback;
+            configurationList.onReorderCallback += OnElementReorderedCallback;
         }
 
         public override void OnInspectorGUI()
@@ -170,7 +171,7 @@ namespace XRTK.Editor.Profiles
                 }
             }
 
-            priorityProperty.intValue = index;
+            priorityProperty.intValue = index - 1;
 
             var lastMode = EditorGUIUtility.wideMode;
             var prevLabelWidth = EditorGUIUtility.labelWidth;
@@ -319,6 +320,14 @@ namespace XRTK.Editor.Profiles
 
             serializedObject.ApplyModifiedProperties();
 
+            if (MixedRealityToolkit.IsInitialized)
+            {
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
+            }
+        }
+
+        private void OnElementReorderedCallback(ReorderableList list)
+        {
             if (MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);

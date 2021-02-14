@@ -406,7 +406,7 @@ namespace XRTK.Services
                 {
                     if (TryCreateAndRegisterService(configuration, out var service) && service != null)
                     {
-                        if (configuration.Profile is BaseMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
+                        if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
                         {
                             TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, service);
                         }
@@ -687,13 +687,6 @@ namespace XRTK.Services
             {
                 var configuration = configurations[i];
 
-                if (configuration.InstancedType.Type == null)
-                {
-                    anyFailed = true;
-                    Debug.LogWarning($"Could not load the {configuration.Name} configuration's {nameof(configuration.InstancedType)}.");
-                    continue;
-                }
-
                 if (TryCreateAndRegisterService(configuration, out var serviceInstance))
                 {
                     if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile &&
@@ -726,13 +719,6 @@ namespace XRTK.Services
             for (var i = 0; i < configurations?.Length; i++)
             {
                 var configuration = configurations[i];
-
-                if (configuration.InstancedType.Type == null)
-                {
-                    anyFailed = true;
-                    Debug.LogWarning($"Could not load the {configuration.Name} configuration's {nameof(configuration.InstancedType)}.");
-                    continue;
-                }
 
                 if (!TryCreateAndRegisterDataProvider(configuration, serviceParent))
                 {

@@ -32,12 +32,6 @@ namespace XRTK.Providers.Speech
 #endif
 
 #if UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
-            var newKeywords = new string[commands.Length];
-
-            for (int i = 0; i < commands.Length; i++)
-            {
-                newKeywords[i] = commands[i].Keyword;
-            }
 
             if (!MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
             {
@@ -47,6 +41,13 @@ namespace XRTK.Providers.Speech
             autoStartBehavior = inputSystemProfile.SpeechCommandsProfile.SpeechRecognizerStartBehavior;
             RecognitionConfidenceLevel = inputSystemProfile.SpeechCommandsProfile.SpeechRecognitionConfidenceLevel;
             commands = inputSystemProfile.SpeechCommandsProfile.SpeechCommands;
+
+            var newKeywords = new string[commands.Length];
+
+            for (int i = 0; i < commands.Length; i++)
+            {
+                newKeywords[i] = commands[i].Keyword;
+            }
 
             if (keywordRecognizer == null)
             {

@@ -847,7 +847,9 @@ namespace XRTK.Services
                     }
                 }
 
-                if (platforms.Count == 0)
+                if (platforms.Count == 0 ||
+                    Application.isEditor &&
+                    !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
                 {
                     if (runtimePlatforms == null ||
                         runtimePlatforms.Count == 0)
@@ -866,16 +868,6 @@ namespace XRTK.Services
                 {
                     Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
                     return false;
-                }
-
-                if (Application.isEditor &&
-                    !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
-                {
-                    // We return true so we don't raise en error.
-                    // Even though we did not register the service,
-                    // it's expected that this is the intended behavior
-                    // when there isn't a valid build target active to run the service on.
-                    return true;
                 }
             }
             else

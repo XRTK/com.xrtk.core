@@ -76,7 +76,8 @@ namespace XRTK.Editor
                 {
                     case 0:
                         EditorGUIUtility.PingObject(target);
-                        EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one.", "OK");
+                        EditorApplication.delayCall += () =>
+                            EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one.", "OK");
                         break;
                     case 1:
                         var rootProfilePath = AssetDatabase.GetAssetPath(rootProfiles[0]);
@@ -93,9 +94,12 @@ namespace XRTK.Editor
                         };
                         break;
                     default:
-                        EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
-                        currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
-                        EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(null, false, string.Empty, currentPickerWindow);
+                        EditorApplication.delayCall += () =>
+                        {
+                            EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
+                            currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
+                            EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(null, false, string.Empty, currentPickerWindow);
+                        };
                         break;
                 }
 

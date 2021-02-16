@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using UnityEditor;
@@ -325,7 +324,7 @@ namespace XRTK.Editor.BuildPipeline
         {
             if (GUILayout.Button("Open Player Settings"))
             {
-                Selection.activeObject = Unsupported.GetSerializedAssetInterfaceSingleton("PlayerSettings");
+                Selection.activeObject = Unsupported.GetSerializedAssetInterfaceSingleton(nameof(PlayerSettings));
             }
         }
 

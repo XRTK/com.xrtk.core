@@ -4,6 +4,10 @@
 using System;
 using XRTK.Interfaces;
 
+#if UNITY_EDITOR
+using System.Linq;
+#endif
+
 namespace XRTK.Definitions.Platforms
 {
     /// <summary>
@@ -16,9 +20,17 @@ namespace XRTK.Definitions.Platforms
         public virtual bool IsAvailable => false;
 
         /// <inheritdoc />
-        public virtual bool IsBuildTargetAvailable => false;
+        public virtual IMixedRealityPlatform[] PlatformOverrides { get; } = new IMixedRealityPlatform[0];
+
+#if UNITY_EDITOR
 
         /// <inheritdoc />
-        public virtual IMixedRealityPlatform[] PlatformOverrides { get; } = new IMixedRealityPlatform[0];
+        public virtual bool IsBuildTargetAvailable => ValidBuildTargets != null &&
+                                                      ValidBuildTargets.Any(buildTarget => UnityEditor.EditorUserBuildSettings.activeBuildTarget == buildTarget);
+
+        /// <inheritdoc />
+        public virtual UnityEditor.BuildTarget[] ValidBuildTargets { get; } = null;
+
+#endif // UNITY_EDITOR
     }
 }

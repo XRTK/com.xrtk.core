@@ -82,15 +82,15 @@ namespace XRTK.Editor.BuildPipeline
 
             if (!buildInfo.IsCommandLine && buildInfo.Install)
             {
-                string fullBuildLocation = BuildDeployWindow.CalcMostRecentBuild();
+                string fullBuildLocation = BuildDeployWindowOld.CalcMostRecentBuild();
 
                 if (UwpBuildDeployPreferences.TargetAllConnections)
                 {
-                    await BuildDeployWindow.InstallAppOnDevicesListAsync(fullBuildLocation, BuildDeployWindow.DevicePortalConnections);
+                    await BuildDeployWindowOld.InstallAppOnDevicesListAsync(fullBuildLocation, BuildDeployWindowOld.DevicePortalConnections);
                 }
                 else
                 {
-                    await BuildDeployWindow.InstallOnTargetDeviceAsync(fullBuildLocation, BuildDeployWindow.CurrentConnection);
+                    await BuildDeployWindowOld.InstallOnTargetDeviceAsync(fullBuildLocation, BuildDeployWindowOld.CurrentConnection);
                 }
             }
         }

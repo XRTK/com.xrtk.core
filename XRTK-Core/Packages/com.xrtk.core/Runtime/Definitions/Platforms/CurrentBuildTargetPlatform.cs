@@ -1,9 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using System.Collections.Generic;
 using XRTK.Interfaces;
+#endif
 
 namespace XRTK.Definitions.Platforms
 {
@@ -16,6 +19,7 @@ namespace XRTK.Definitions.Platforms
         /// <inheritdoc />
         public override bool IsAvailable => Application.isEditor;
 
+#if UNITY_EDITOR
         /// <summary>
         /// Checks to see if the current build target is available for the list of provided platform.
         /// </summary>
@@ -45,5 +49,6 @@ namespace XRTK.Definitions.Platforms
 
             return isBuildTargetActive && isEditorPlatformActive;
         }
+#endif // UNITY_EDITOR
     }
 }

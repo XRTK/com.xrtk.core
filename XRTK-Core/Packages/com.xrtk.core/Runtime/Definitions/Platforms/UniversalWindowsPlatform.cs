@@ -22,16 +22,11 @@ namespace XRTK.Definitions.Platforms
             }
         }
 
-        public override bool IsBuildTargetAvailable
-        {
-            get
-            {
 #if UNITY_EDITOR
-                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WSAPlayer;
-#else
-                return false;
-#endif
-            }
-        }
+
+        /// <inheritdoc />
+        public override UnityEditor.BuildTarget[] ValidBuildTargets { get; } = { UnityEditor.BuildTarget.WSAPlayer };
+
+#endif // UNITY_EDITOR
     }
 }

@@ -484,8 +484,11 @@ namespace XRTK.Services
 
                 availablePlatforms.Add(platform);
 
-                if (platform.IsAvailable ||
-                    platform.IsBuildTargetAvailable)
+                if (platform.IsAvailable
+#if UNITY_EDITOR
+                     || platform.IsBuildTargetAvailable
+#endif
+                    )
                 {
                     foreach (var platformOverride in platform.PlatformOverrides)
                     {
@@ -501,8 +504,11 @@ namespace XRTK.Services
                     continue;
                 }
 
-                if (platform.IsAvailable ||
-                    platform.IsBuildTargetAvailable)
+                if (platform.IsAvailable
+#if UNITY_EDITOR
+                     || platform.IsBuildTargetAvailable
+#endif
+                    )
                 {
                     activePlatforms.Add(platform);
                 }
@@ -847,9 +853,11 @@ namespace XRTK.Services
                     }
                 }
 
-                if (platforms.Count == 0 ||
-                    Application.isEditor &&
-                    !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
+                if (platforms.Count == 0
+#if UNITY_EDITOR
+                    || !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms)
+#endif
+                    )
                 {
                     if (runtimePlatforms == null ||
                         runtimePlatforms.Count == 0)

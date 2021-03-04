@@ -35,8 +35,6 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             if (hasProjectUpdated) { return; }
             hasProjectUpdated = true;
 
-            Debug.Log($"{nameof(OnProjectChanged)}");
-
             void VerifyLinks(object state)
             {
                 while (hasProjectUpdated)

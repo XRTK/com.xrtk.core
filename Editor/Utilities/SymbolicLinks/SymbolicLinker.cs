@@ -453,7 +453,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 }
                 else
                 {
-                    var tempFile = $"{targetAbsolutePath}/temp.txt";
+                    var tempFile = $"{targetAbsolutePath}/temp_test.txt";
 
                     try
                     {

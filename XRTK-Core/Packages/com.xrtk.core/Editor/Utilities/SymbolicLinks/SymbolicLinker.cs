@@ -41,6 +41,8 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 {
                     Task.Delay(2500);
 
+                    var anyInvalid = false;
+
                     foreach (var link in Settings.SymbolicLinks)
                     {
                         var path = $"{ProjectRoot}{link.TargetRelativePath}";
@@ -55,7 +57,13 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                         if (!isValid)
                         {
                             DeleteSymbolicLink(path);
+                            anyInvalid = true;
                         }
+                    }
+
+                    if (anyInvalid)
+                    {
+                        EditorApplication.delayCall += () => RunSync(true);
                     }
                 }
             }

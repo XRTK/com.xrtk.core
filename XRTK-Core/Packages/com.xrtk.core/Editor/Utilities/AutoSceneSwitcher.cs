@@ -76,7 +76,7 @@ namespace XRTK.Editor.Utilities
             // loaded scene(s) may not contain a proper XRTK service locator game object configuration.
             // Least we can do now is offer the user to auto configure the current scene, if none of the
             // loaded scenes already contains a XRTK configuration.
-            if (!MixedRealityToolkit.IsInitialized && EditorPreferences.Get($"{nameof(AutoSceneSwitcher)}", true))
+            if (!MixedRealityToolkit.IsInitialized && EditorPreferences.Get($"{nameof(AutoSceneSwitcher)}", false))
             {
                 var dialogResult = EditorUtility.DisplayDialogComplex(
                         title: "Missing the MixedRealityToolkit",

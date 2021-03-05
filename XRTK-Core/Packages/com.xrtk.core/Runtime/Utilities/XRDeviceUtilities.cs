@@ -11,14 +11,14 @@ using System.Collections.Generic;
 namespace XRTK.Utilities
 {
     /// <summary>
-    /// Helper utilities to determine connected device capabilities and state.
+    /// Utilities to determine connected device capabilities and state.
     /// </summary>
     public static class XRDeviceUtilities
     {
         /// <summary>
         /// Gets whether an XR display device is currently connected to the machine.
         /// </summary>
-        public static bool IsXRDisplayDevicePresent
+        public static bool IsDevicePresent
         {
             get
             {
@@ -37,8 +37,36 @@ namespace XRTK.Utilities
                 return false;
 #else
                 return XRDevice.isPresent;
-#endif
+#endif // UNITY_2020_1_OR_NEWER
             }
         }
+
+#if UNITY_2020_1_OR_NEWER
+
+        /// <summary>
+        /// Gets whether the device has an opaque display.
+        /// </summary>
+        public static bool IsDisplayOpaque
+        {
+            get
+            {
+                var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
+                SubsystemManager.GetInstances(xrDisplaySubsystems);
+                for (int i = 0; i < xrDisplaySubsystems.Count; i++)
+                {
+                    var xrDisplay = xrDisplaySubsystems[i];
+                    if (xrDisplay.running)
+                    {
+                        return xrDisplay.displayOpaque;
+                    }
+                }
+
+                // When no device is attached we are assuming the display
+                // device is the computer's display, which should be opaque.
+                return true;
+            }
+        }
+
+#endif // UNITY_2020_1_OR_NEWER
     }
 }

@@ -61,7 +61,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "2.1.3",
+      "version": "2.1.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -140,14 +140,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.xrtk.arcore": {
-      "version": "file:com.xrtk.arcore",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.7"
-      }
-    },
     "com.xrtk.core": {
       "version": "file:com.xrtk.core",
       "depth": 0,
@@ -156,36 +148,12 @@
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.vr": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.textmeshpro": "2.1.3",
+        "com.unity.textmeshpro": "2.1.4",
         "com.unity.xr.legacyinputhelpers": "2.1.7"
-      }
-    },
-    "com.xrtk.etee": {
-      "version": "file:com.xrtk.etee",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.7"
-      }
-    },
-    "com.xrtk.lenovo": {
-      "version": "file:com.xrtk.lenovo",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.lumin": {
       "version": "file:com.xrtk.lumin",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.7"
-      }
-    },
-    "com.xrtk.nreal": {
-      "version": "file:com.xrtk.nreal",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
@@ -207,22 +175,6 @@
       "dependencies": {
         "com.xrtk.core": "0.2.7",
         "com.unity.textmeshpro": "2.1.3"
-      }
-    },
-    "com.xrtk.steamvr": {
-      "version": "file:com.xrtk.steamvr",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.7"
-      }
-    },
-    "com.xrtk.ultraleap": {
-      "version": "file:com.xrtk.ultraleap",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.7"
       }
     },
     "com.xrtk.wmr": {

@@ -90,7 +90,7 @@ namespace XRTK.Providers.SpatialObservers
 
             for (int i = 0; i < 10; i++)
             {
-                spatialMeshObjectPool.Push(new SpatialMeshObject(-1, CreateBlankSpatialMeshGameObject()));
+                spatialMeshObjectPool.Push(new SpatialMeshObject(Guid.Empty, CreateBlankSpatialMeshGameObject()));
             }
         }
 
@@ -120,7 +120,7 @@ namespace XRTK.Providers.SpatialObservers
                 // if we get low in our object pool, then create a few more.
                 if (spatialMeshObjectPool.Count < 5)
                 {
-                    spatialMeshObjectPool.Push(new SpatialMeshObject(-1, CreateBlankSpatialMeshGameObject()));
+                    spatialMeshObjectPool.Push(new SpatialMeshObject(Guid.Empty, CreateBlankSpatialMeshGameObject()));
                 }
             }
         }
@@ -222,14 +222,14 @@ namespace XRTK.Providers.SpatialObservers
         /// <inheritdoc />
         public Quaternion ObserverOrientation { get; protected set; } = Quaternion.identity;
 
-        private readonly Dictionary<int, SpatialMeshObject> spatialMeshObjects = new Dictionary<int, SpatialMeshObject>();
+        private readonly Dictionary<Guid, SpatialMeshObject> spatialMeshObjects = new Dictionary<Guid, SpatialMeshObject>();
 
         /// <inheritdoc />
         /// <remarks>
         /// This method returns a copy of the collection maintained by the observer so that application
         /// code can iterate through the collection without concern for changes to the backing data.
         /// </remarks>
-        public IReadOnlyDictionary<int, SpatialMeshObject> SpatialMeshObjects => new Dictionary<int, SpatialMeshObject>(spatialMeshObjects);
+        public IReadOnlyDictionary<Guid, SpatialMeshObject> SpatialMeshObjects => new Dictionary<Guid, SpatialMeshObject>(spatialMeshObjects);
 
         private readonly Stack<SpatialMeshObject> spatialMeshObjectPool;
 
@@ -264,7 +264,7 @@ namespace XRTK.Providers.SpatialObservers
                 // Recycle this spatial mesh object and add it back to the pool.
                 spatialMesh.GameObject.name = "Reclaimed Spatial Mesh Object";
                 spatialMesh.Mesh = null;
-                spatialMesh.Id = -1;
+                spatialMesh.Id = Guid.Empty;
 
                 lock (spatialMeshObjectPool)
                 {
@@ -282,7 +282,7 @@ namespace XRTK.Providers.SpatialObservers
         /// </summary>
         /// <param name="meshId">The id of the <see cref="SpatialMeshObject"/>.</param>
         /// <returns>A <see cref="SpatialMeshObject"/></returns>
-        protected async Task<SpatialMeshObject> RequestSpatialMeshObject(int meshId)
+        protected async Task<SpatialMeshObject> RequestSpatialMeshObject(Guid meshId)
         {
             if (spatialMeshObjects.TryGetValue(meshId, out var spatialMesh))
             {

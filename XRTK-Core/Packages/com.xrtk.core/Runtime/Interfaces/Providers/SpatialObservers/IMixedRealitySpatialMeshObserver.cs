@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
@@ -72,7 +73,7 @@ namespace XRTK.Interfaces.Providers.SpatialObservers
         /// <summary>
         /// The collection of mesh <see cref="SpatialMeshObject"/>s that have been observed.
         /// </summary>
-        IReadOnlyDictionary<int, SpatialMeshObject> SpatialMeshObjects { get; }
+        IReadOnlyDictionary<Guid, SpatialMeshObject> SpatialMeshObjects { get; }
 
         /// <summary>
         /// Forwards mesh added event to the <see cref="SpatialAwarenessSystem.IMixedRealitySpatialAwarenessSystem"/>.

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -122,7 +123,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         /// <inheritdoc />
         public uint GenerateNewObserverId()
         {
-            var newId = (uint)Random.Range(1, int.MaxValue);
+            var newId = (uint)UnityEngine.Random.Range(1, int.MaxValue);
 
             foreach (var observer in DetectedSpatialObservers)
             {
@@ -285,7 +286,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         #region Surface Finding Events
 
         /// <inheritdoc />
-        public void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject)
+        public void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceObserver observer, Guid surfaceId, GameObject surfaceObject)
         {
             surfaceFindingEventData.Initialize(observer, surfaceId, surfaceObject);
             HandleEvent(surfaceFindingEventData, OnSurfaceAdded);
@@ -302,7 +303,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             };
 
         /// <inheritdoc />
-        public void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject)
+        public void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceObserver observer, Guid surfaceId, GameObject surfaceObject)
         {
             surfaceFindingEventData.Initialize(observer, surfaceId, surfaceObject);
             HandleEvent(surfaceFindingEventData, OnSurfaceUpdated);
@@ -319,7 +320,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             };
 
         /// <inheritdoc />
-        public void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceObserver observer, int surfaceId)
+        public void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceObserver observer, Guid surfaceId)
         {
             surfaceFindingEventData.Initialize(observer, surfaceId, null);
             HandleEvent(surfaceFindingEventData, OnSurfaceRemoved);

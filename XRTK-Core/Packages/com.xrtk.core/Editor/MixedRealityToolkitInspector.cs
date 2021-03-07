@@ -37,6 +37,12 @@ namespace XRTK.Editor
             activeProfile = serializedObject.FindProperty(nameof(activeProfile));
             currentPickerWindow = -1;
             checkChange = activeProfile.objectReferenceValue.IsNull();
+            profileInspector.Destroy();
+        }
+
+        private void OnDisable()
+        {
+            profileInspector.Destroy();
         }
 
         private void OnDestroy()

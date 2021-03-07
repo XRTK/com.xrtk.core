@@ -2,21 +2,57 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Platforms;
-using XRTK.Extensions;
+using XRTK.Interfaces;
 using XRTK.Services;
+using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildPipeline
 {
     public class BuildDeployWindow : EditorWindow
     {
-        private int platformIndex;
-        private string[] platforms;
+        private int platformIndex = -1;
+        private readonly List<Tuple<IMixedRealityPlatform, string>> platforms = new List<Tuple<IMixedRealityPlatform, string>>();
+
+        private List<Tuple<IMixedRealityPlatform, string>> Platforms
+        {
+            get
+            {
+                if (platforms.Count == 0)
+                {
+                    foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
+                    {
+                        if (availablePlatform is AllPlatforms ||
+                            availablePlatform is EditorPlatform ||
+                            availablePlatform is CurrentBuildTargetPlatform)
+                        {
+                            continue;
+                        }
+
+                        platforms.Add(new Tuple<IMixedRealityPlatform, string>(availablePlatform, availablePlatform.GetType().Name.Replace("Platform", string.Empty)));
+                    }
+
+                    for (var i = 0; i < platforms.Count; i++)
+                    {
+                        var (platform, platformName) = platforms[i];
+
+                        if (MixedRealityPreferences.CurrentPlatformTarget == platform)
+                        {
+                            platformIndex = i;
+                            break;
+                        }
+                    }
+                }
+
+                return platforms;
+            }
+        }
 
         [MenuItem("Mixed Reality Toolkit/Build Window", false, 99)]
         public static void OpenWindow()
@@ -37,18 +73,7 @@ namespace XRTK.Editor.BuildPipeline
 
         private void OnFocus()
         {
-            platforms = MixedRealityToolkit.AvailablePlatforms.Select(platform =>
-            {
-                switch (platform)
-                {
-                    case AllPlatforms _:
-                    case EditorPlatform _:
-                    case CurrentBuildTargetPlatform _:
-                        return null;
-                    default:
-                        return platform.GetType().Name.Replace("Platform", string.Empty);
-                }
-            }).Where(s => s != null).ToArray();
+            platforms.Clear();
         }
 
         private void OnGUI()
@@ -57,8 +82,41 @@ namespace XRTK.Editor.BuildPipeline
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
 
-            platformIndex = EditorGUILayout.Popup("Platform Target", platformIndex, platforms, GUILayout.Width(256));
+            for (var i = 0; i < Platforms.Count; i++)
+            {
+                var (platform, platformName) = Platforms[i];
 
+                if (MixedRealityPreferences.CurrentPlatformTarget == platform)
+                {
+                    platformIndex = i;
+                    break;
+                }
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var prevPlatformIndex = platformIndex;
+            platformIndex = EditorGUILayout.Popup("Platform Target", platformIndex, Platforms.Select(p => p.Item2).ToArray(), GUILayout.Width(256));
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                for (int i = 0; i < Platforms.Count; i++)
+                {
+                    if (i == platformIndex)
+                    {
+                        var (platform, platformName) = Platforms[i];
+
+                        MixedRealityPreferences.CurrentPlatformTarget = platform;
+
+                        var buildTarget = platform.ValidBuildTargets[0]; // For now just get the highest priority one.
+
+                        if (!EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.BuildPipeline.GetBuildTargetGroup(buildTarget), buildTarget))
+                        {
+                            platformIndex = prevPlatformIndex;
+                            Debug.LogWarning($"Failed to switch {platformName} active build target to {buildTarget}");
+                        }
+                    }
+                }
+            }
 
             if (GUILayout.Button("Open Player Settings"))
             {

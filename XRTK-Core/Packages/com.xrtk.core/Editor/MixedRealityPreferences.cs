@@ -11,6 +11,8 @@ using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Editor.Extensions;
 using XRTK.Extensions;
 using XRTK.Editor.Utilities;
+using XRTK.Interfaces;
+using XRTK.Services;
 
 namespace XRTK.Editor
 {
@@ -273,6 +275,55 @@ namespace XRTK.Editor
         }
 
         #endregion Debug Symbolic Links
+
+        #region Current Platform Target
+
+        private static bool isCurrentPlatformPreferenceLoaded;
+
+        private static IMixedRealityPlatform currentPlatformTarget = null;
+
+        /// <summary>
+        /// The current <see cref="IMixedRealityPlatform"/> target.
+        /// </summary>
+        public static IMixedRealityPlatform CurrentPlatformTarget
+        {
+            get
+            {
+                if (!isCurrentPlatformPreferenceLoaded)
+                {
+                    isCurrentPlatformPreferenceLoaded = true;
+
+                    TypeExtensions.TryResolveType(EditorPreferences.Get(nameof(CurrentPlatformTarget), Guid.Empty.ToString()), out var platform);
+
+                    foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
+                    {
+                        if (availablePlatform.GetType() == platform)
+                        {
+                            currentPlatformTarget = availablePlatform;
+                            break;
+                        }
+                    }
+
+                    if (currentPlatformTarget == null && MixedRealityToolkit.ActivePlatforms.Count > 0)
+                    {
+                        currentPlatformTarget = MixedRealityToolkit.ActivePlatforms[0];
+                    }
+                }
+
+                return currentPlatformTarget;
+            }
+            set
+            {
+                currentPlatformTarget = value;
+
+                EditorPreferences.Set(nameof(CurrentPlatformTarget),
+                    currentPlatformTarget != null
+                        ? currentPlatformTarget.GetType().GUID.ToString()
+                        : Guid.Empty.ToString());
+            }
+        }
+
+        #endregion Current Platform Target
 
         [SettingsProvider]
         private static SettingsProvider Preferences()

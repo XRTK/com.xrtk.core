@@ -27,8 +27,8 @@ namespace XRTK.Definitions.Platforms
         /// <inheritdoc />
         public override UnityEditor.BuildTarget[] ValidBuildTargets { get; } =
         {
-            UnityEditor.BuildTarget.StandaloneWindows,
-            UnityEditor.BuildTarget.StandaloneWindows64
+            UnityEditor.BuildTarget.StandaloneWindows64,
+            UnityEditor.BuildTarget.StandaloneWindows
         };
 
 #endif // UNITY_EDITOR

@@ -499,7 +499,8 @@ namespace XRTK.Services
 
             foreach (var platform in availablePlatforms)
             {
-                if (platformOverrides.Contains(platform.GetType()))
+                if (Application.isPlaying &&
+                    platformOverrides.Contains(platform.GetType()))
                 {
                     continue;
                 }

@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities;
 
 namespace XRTK.Editor.BuildPipeline
@@ -29,8 +30,27 @@ namespace XRTK.Editor.BuildPipeline
         /// </remarks>
         public static string BuildDirectory
         {
-            get => $"{EditorPreferences.Get(EDITOR_PREF_BUILD_DIR, "Builds")}/{EditorUserBuildSettings.activeBuildTarget}";
-            set => EditorPreferences.Set(EDITOR_PREF_BUILD_DIR, value.Replace($"/{EditorUserBuildSettings.activeBuildTarget}", string.Empty));
+            get
+            {
+                if (MixedRealityPreferences.CurrentPlatformTarget != null &&
+                    MixedRealityPreferences.CurrentPlatformTarget.GetType() != typeof(AllPlatforms))
+                {
+                    return $"{EditorPreferences.Get(EDITOR_PREF_BUILD_DIR, "Builds")}/{MixedRealityPreferences.CurrentPlatformTarget.GetType().Name.Replace("Platform", string.Empty)}";
+                }
+                return $"{EditorPreferences.Get(EDITOR_PREF_BUILD_DIR, "Builds")}/{EditorUserBuildSettings.activeBuildTarget}";
+            }
+            set
+            {
+                if (MixedRealityPreferences.CurrentPlatformTarget != null &&
+                    MixedRealityPreferences.CurrentPlatformTarget.GetType() != typeof(AllPlatforms))
+                {
+                    EditorPreferences.Set(EDITOR_PREF_BUILD_DIR, value.Replace($"/{MixedRealityPreferences.CurrentPlatformTarget.GetType().Name.Replace("Platform", string.Empty)}", string.Empty));
+                }
+                else
+                {
+                    EditorPreferences.Set(EDITOR_PREF_BUILD_DIR, value.Replace($"/{EditorUserBuildSettings.activeBuildTarget}", string.Empty));
+                }
+            }
         }
 
         /// <summary>

@@ -33,6 +33,11 @@ namespace XRTK.Interfaces
         /// </summary>
         UnityEditor.BuildTarget[] ValidBuildTargets { get; }
 
+        /// <summary>
+        /// The <see cref="IBuildInfo"/> for this platform.
+        /// </summary>
+        IBuildInfo BuildInfo { get; set; }
+
 #endif // UNITY_EDITOR
     }
 }

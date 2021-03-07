@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
+using XRTK.Interfaces;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -113,25 +116,6 @@ namespace XRTK.Editor.BuildPipeline
                 UnityPlayerBuildTools.BuildSymbolRelease,
                 UnityPlayerBuildTools.BuildSymbolMaster
             }).ToString());
-        }
-
-        /// <summary>
-        /// Gets the <see cref="BuildTargetGroup"/> for the <see cref="IBuildInfo"/>'s <see cref="BuildTarget"/>
-        /// </summary>
-        /// <param name="buildTarget"></param>
-        /// <returns>The <see cref="BuildTargetGroup"/> for the <see cref="IBuildInfo"/>'s <see cref="BuildTarget"/></returns>
-        public static BuildTargetGroup GetGroup(this BuildTarget buildTarget)
-        {
-            switch (buildTarget)
-            {
-                case BuildTarget.WSAPlayer:
-                    return BuildTargetGroup.WSA;
-                case BuildTarget.StandaloneWindows:
-                case BuildTarget.StandaloneWindows64:
-                    return BuildTargetGroup.Standalone;
-                default:
-                    return BuildTargetGroup.Unknown;
-            }
         }
     }
 }

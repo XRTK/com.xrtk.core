@@ -1,7 +1,6 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,12 +8,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
-using XRTK.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
+using XRTK.Extensions;
+using XRTK.Interfaces;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildPipeline
@@ -40,7 +41,7 @@ namespace XRTK.Editor.BuildPipeline
 
             buildInfo.ParseCommandLineArgs();
 
-            var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
+            var buildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(buildInfo.BuildTarget);
             var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
             if (!string.IsNullOrEmpty(playerBuildSymbols))
@@ -87,7 +88,7 @@ namespace XRTK.Editor.BuildPipeline
             }
 
             var oldBuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            var oldBuildTargetGroup = oldBuildTarget.GetGroup();
+            var oldBuildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(oldBuildTarget);
 
             if (EditorUserBuildSettings.activeBuildTarget != buildInfo.BuildTarget)
             {
@@ -205,16 +206,12 @@ namespace XRTK.Editor.BuildPipeline
         /// <summary>
         /// Start a build using Unity's command line. Valid arguments:<para/>
         /// -autoIncrement : Increments the build revision number.<para/>
-        /// -sceneList : A csv of a list of scenes to include in the build.<para/>
+        /// -sceneList : A list of scenes to include in the build in CSV format.<para/>
         /// -sceneListFile : A json file with a list of scenes to include in the build.<para/>
         /// -buildOutput : The target directory you'd like the build to go.<para/>
         /// -colorSpace : The <see cref="ColorSpace"/> settings for the build.<para/>
-        /// -x86 / -x64 : The target build platform. (Default is x86)<para/>
+        /// -x86 / -x64 / -ARM / -ARM64 : The target build platform. (Default is x86)<para/>
         /// -debug / -release / -master : The target build configuration. (Default is master)<para/>
-        ///
-        /// UWP Platform Specific arguments:<para/>
-        /// -buildAppx : Builds the appx bundle after the Unity Build step.<para/>
-        /// -rebuildAppx : Rebuild the appx bundle.<para/>
         /// </summary>
         [UsedImplicitly]
         public static void StartCommandLineBuild()
@@ -277,6 +274,11 @@ namespace XRTK.Editor.BuildPipeline
             return true;
         }
 
+        /// <summary>
+        /// Splits the scene list provided in CSV format to an array of scene path strings.
+        /// </summary>
+        /// <param name="sceneList">A CSV list of scenes to split.</param>
+        /// <returns>An array of scene path strings.</returns>
         public static IEnumerable<EditorBuildSettingsScene> SplitSceneList(string sceneList)
         {
             var sceneListArray = sceneList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

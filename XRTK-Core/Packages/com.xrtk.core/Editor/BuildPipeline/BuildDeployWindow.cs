@@ -19,6 +19,7 @@ namespace XRTK.Editor.BuildPipeline
     {
         private int platformIndex = -1;
         private readonly List<Tuple<IMixedRealityPlatform, string>> platforms = new List<Tuple<IMixedRealityPlatform, string>>();
+        private bool isBuilding;
 
         private List<Tuple<IMixedRealityPlatform, string>> Platforms
         {
@@ -154,10 +155,14 @@ namespace XRTK.Editor.BuildPipeline
                 GetWindow(Type.GetType("UnityEditor.BuildPlayerWindow,UnityEditor"));
             }
 
-            if (GUILayout.Button("Build Unity Project"))
+            GUI.enabled = !isBuilding && !Application.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating;
+
+            if (GUILayout.Button(new GUIContent("Build Unity Project", $"{(GUI.enabled ? "Build the unity project" : "Building disabled while project is updating...")}")))
             {
                 EditorApplication.delayCall += BuildUnityProject;
             }
+
+            GUI.enabled = true;
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
@@ -167,6 +172,28 @@ namespace XRTK.Editor.BuildPipeline
 
         private void BuildUnityProject()
         {
+            if (UnityPlayerBuildTools.CheckBuildScenes() == false)
+            {
+                return;
+            }
+
+            Debug.Assert(!isBuilding);
+            isBuilding = true;
+
+            switch (EditorUserBuildSettings.activeBuildTarget)
+            {
+                case BuildTarget.WSAPlayer:
+                    UnityPlayerBuildTools.BuildUnityPlayer(new UwpBuildInfo());
+                    break;
+                case BuildTarget.Lumin:
+                    UnityPlayerBuildTools.BuildUnityPlayer(new LuminBuildInfo());
+                    break;
+                default:
+                    UnityPlayerBuildTools.BuildUnityPlayer(new BuildInfo());
+                    break;
+            }
+
+            isBuilding = false;
         }
     }
 }

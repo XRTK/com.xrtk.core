@@ -29,6 +29,9 @@ namespace XRTK.Definitions.Platforms
         /// <inheritdoc />
         public virtual UnityEditor.BuildTarget[] ValidBuildTargets { get; } = null;
 
+        /// <inheritdoc />
+        public IBuildInfo BuildInfo { get; set; }
+
 #endif // UNITY_EDITOR
     }
 }

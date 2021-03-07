@@ -1,14 +1,15 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+#if UNITY_EDITOR
+
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEngine;
-using XRTK.Interfaces;
 
-namespace XRTK.Editor.BuildPipeline
+namespace XRTK.Interfaces
 {
     /// <summary>
     /// The Build Info defines common properties for a build.
@@ -85,3 +86,4 @@ namespace XRTK.Editor.BuildPipeline
         bool Install { get; set; }
     }
 }
+#endif // UNITY_EDITOR

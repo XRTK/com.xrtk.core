@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using XRTK.Interfaces;
 
 namespace XRTK.Editor.BuildPipeline
 {

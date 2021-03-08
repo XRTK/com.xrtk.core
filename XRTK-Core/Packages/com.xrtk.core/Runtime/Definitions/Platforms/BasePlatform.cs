@@ -14,6 +14,22 @@ namespace XRTK.Definitions.Platforms
     /// </summary>
     public abstract class BasePlatform : IMixedRealityPlatform
     {
+        private string name = null;
+
+        /// <inheritdoc />
+        public string Name
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(name))
+                {
+                    name = GetType().Name.Replace("Platform", string.Empty);
+                }
+
+                return name;
+            }
+        }
+
         /// <inheritdoc />
         public virtual bool IsAvailable => false;
 
@@ -28,9 +44,6 @@ namespace XRTK.Definitions.Platforms
 
         /// <inheritdoc />
         public virtual UnityEditor.BuildTarget[] ValidBuildTargets { get; } = null;
-
-        /// <inheritdoc />
-        public IBuildInfo BuildInfo { get; set; }
 
 #endif // UNITY_EDITOR
     }

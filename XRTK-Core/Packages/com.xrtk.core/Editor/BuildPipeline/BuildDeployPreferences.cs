@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -35,7 +35,7 @@ namespace XRTK.Editor.BuildPipeline
                 if (MixedRealityPreferences.CurrentPlatformTarget != null &&
                     MixedRealityPreferences.CurrentPlatformTarget.GetType() != typeof(AllPlatforms))
                 {
-                    return $"{EditorPreferences.Get(EDITOR_PREF_BUILD_DIR, "Builds")}/{MixedRealityPreferences.CurrentPlatformTarget.GetType().Name.Replace("Platform", string.Empty)}";
+                    return $"{EditorPreferences.Get(EDITOR_PREF_BUILD_DIR, "Builds")}/{MixedRealityPreferences.CurrentPlatformTarget.Name}";
                 }
                 return $"{EditorPreferences.Get(EDITOR_PREF_BUILD_DIR, "Builds")}/{EditorUserBuildSettings.activeBuildTarget}";
             }
@@ -44,7 +44,7 @@ namespace XRTK.Editor.BuildPipeline
                 if (MixedRealityPreferences.CurrentPlatformTarget != null &&
                     MixedRealityPreferences.CurrentPlatformTarget.GetType() != typeof(AllPlatforms))
                 {
-                    EditorPreferences.Set(EDITOR_PREF_BUILD_DIR, value.Replace($"/{MixedRealityPreferences.CurrentPlatformTarget.GetType().Name.Replace("Platform", string.Empty)}", string.Empty));
+                    EditorPreferences.Set(EDITOR_PREF_BUILD_DIR, value.Replace($"/{MixedRealityPreferences.CurrentPlatformTarget.Name}", string.Empty));
                 }
                 else
                 {

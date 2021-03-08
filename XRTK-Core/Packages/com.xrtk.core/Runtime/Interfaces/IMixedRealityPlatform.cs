@@ -9,6 +9,11 @@ namespace XRTK.Interfaces
     public interface IMixedRealityPlatform
     {
         /// <summary>
+        /// The human readable name for this platform.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Is this platform currently available?
         /// </summary>
         bool IsAvailable { get; }
@@ -32,11 +37,6 @@ namespace XRTK.Interfaces
         /// The array of valid <see cref="UnityEditor.BuildTarget"/>s.
         /// </summary>
         UnityEditor.BuildTarget[] ValidBuildTargets { get; }
-
-        /// <summary>
-        /// The <see cref="IBuildInfo"/> for this platform.
-        /// </summary>
-        IBuildInfo BuildInfo { get; set; }
 
 #endif // UNITY_EDITOR
     }

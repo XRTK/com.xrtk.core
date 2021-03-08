@@ -9,6 +9,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Platforms;
+using XRTK.Editor.Utilities;
 using XRTK.Interfaces;
 using XRTK.Services;
 using Debug = UnityEngine.Debug;
@@ -17,11 +18,13 @@ namespace XRTK.Editor.BuildPipeline
 {
     public class BuildDeployWindow : EditorWindow
     {
-        private int platformIndex = -1;
-        private readonly List<Tuple<IMixedRealityPlatform, string>> platforms = new List<Tuple<IMixedRealityPlatform, string>>();
         private bool isBuilding;
+        private int platformIndex = -1;
+        private IBuildInfo buildInfo;
 
-        private List<Tuple<IMixedRealityPlatform, string>> Platforms
+        private readonly List<IMixedRealityPlatform> platforms = new List<IMixedRealityPlatform>();
+
+        private List<IMixedRealityPlatform> Platforms
         {
             get
             {
@@ -36,14 +39,12 @@ namespace XRTK.Editor.BuildPipeline
                             continue;
                         }
 
-                        platforms.Add(new Tuple<IMixedRealityPlatform, string>(availablePlatform, availablePlatform.GetType().Name.Replace("Platform", string.Empty)));
+                        platforms.Add(availablePlatform);
                     }
 
                     for (var i = 0; i < platforms.Count; i++)
                     {
-                        var (platform, platformName) = platforms[i];
-
-                        if (MixedRealityPreferences.CurrentPlatformTarget == platform)
+                        if (MixedRealityPreferences.CurrentPlatformTarget == platforms[i])
                         {
                             platformIndex = i;
                             break;
@@ -79,24 +80,30 @@ namespace XRTK.Editor.BuildPipeline
 
         private void OnGUI()
         {
-            EditorGUILayout.BeginVertical();
-            EditorGUILayout.Space();
-            EditorGUILayout.BeginHorizontal();
-
             for (var i = 0; i < Platforms.Count; i++)
             {
-                var (platform, platformName) = Platforms[i];
-
-                if (MixedRealityPreferences.CurrentPlatformTarget == platform)
+                if (MixedRealityPreferences.CurrentPlatformTarget == Platforms[i])
                 {
                     platformIndex = i;
                     break;
                 }
             }
 
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.Space();
+            EditorGUILayout.BeginVertical();
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("The Mixed Reality Toolkit", MixedRealityInspectorUtility.BoldCenteredHeaderStyle);
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField($"{MixedRealityPreferences.CurrentPlatformTarget.Name} Build Window", MixedRealityInspectorUtility.BoldCenteredHeaderStyle);
+            EditorGUILayout.Space();
+            EditorGUILayout.BeginHorizontal();
             EditorGUI.BeginChangeCheck();
             var prevPlatformIndex = platformIndex;
-            platformIndex = EditorGUILayout.Popup("Platform Target", platformIndex, Platforms.Select(p => p.Item2).ToArray(), GUILayout.Width(256));
+            var prevWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 96;
+            platformIndex = EditorGUILayout.Popup("Platform Target", platformIndex, Platforms.Select(p => p.Name).ToArray(), GUILayout.Width(192));
+            EditorGUIUtility.labelWidth = prevWidth;
 
             if (EditorGUI.EndChangeCheck())
             {
@@ -104,24 +111,31 @@ namespace XRTK.Editor.BuildPipeline
                 {
                     if (i == platformIndex)
                     {
-                        var (platform, platformName) = Platforms[i];
+                        var platform = Platforms[i];
 
                         MixedRealityPreferences.CurrentPlatformTarget = platform;
 
                         var buildTarget = platform.ValidBuildTargets[0]; // For now just get the highest priority one.
 
+                        buildInfo = UnityPlayerBuildTools.GenerateBuildInfo();
+
                         if (!EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.BuildPipeline.GetBuildTargetGroup(buildTarget), buildTarget))
                         {
                             platformIndex = prevPlatformIndex;
-                            Debug.LogWarning($"Failed to switch {platformName} active build target to {buildTarget}");
+                            Debug.LogWarning($"Failed to switch {platform.Name} active build target to {buildTarget}");
                         }
                     }
                 }
             }
 
-            if (GUILayout.Button("Open Player Settings"))
+            if (GUILayout.Button("Open Player Settings", GUILayout.Width(128), GUILayout.ExpandWidth(true)))
             {
                 Selection.activeObject = Unsupported.GetSerializedAssetInterfaceSingleton(nameof(PlayerSettings));
+            }
+
+            if (GUILayout.Button("Open Unity Build Window", GUILayout.Width(176), GUILayout.ExpandWidth(true)))
+            {
+                GetWindow(Type.GetType("UnityEditor.BuildPlayerWindow,UnityEditor"));
             }
 
             EditorGUILayout.EndHorizontal();
@@ -130,7 +144,7 @@ namespace XRTK.Editor.BuildPipeline
 
             var curBuildDirectory = BuildDeployPreferences.BuildDirectory;
             EditorGUILayout.LabelField("Build Directory", GUILayout.Width(96));
-            var newBuildDirectory = EditorGUILayout.TextField(curBuildDirectory, GUILayout.Width(64), GUILayout.ExpandWidth(true));
+            var newBuildDirectory = EditorGUILayout.TextField(curBuildDirectory, GUILayout.Width(224), GUILayout.ExpandWidth(true));
 
             if (newBuildDirectory != curBuildDirectory)
             {
@@ -139,7 +153,7 @@ namespace XRTK.Editor.BuildPipeline
 
             GUI.enabled = Directory.Exists(BuildDeployPreferences.AbsoluteBuildDirectory);
 
-            if (GUILayout.Button("Open Build Directory"))
+            if (GUILayout.Button("Open Build Directory", GUILayout.Width(176), GUILayout.ExpandWidth(true)))
             {
                 EditorApplication.delayCall += () => Process.Start(BuildDeployPreferences.AbsoluteBuildDirectory);
             }
@@ -148,12 +162,20 @@ namespace XRTK.Editor.BuildPipeline
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
-            EditorGUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Open Unity Build Window"))
+            if (buildInfo == null)
             {
-                GetWindow(Type.GetType("UnityEditor.BuildPlayerWindow,UnityEditor"));
+                buildInfo = UnityPlayerBuildTools.GenerateBuildInfo();
             }
+
+            if (buildInfo != null)
+            {
+                UnityEditor.Editor.CreateEditor(buildInfo as ScriptableObject)?.OnInspectorGUI();
+            }
+
+            GUILayout.FlexibleSpace();
+
+            EditorGUILayout.BeginHorizontal();
 
             GUI.enabled = !isBuilding && !Application.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating;
 
@@ -166,6 +188,9 @@ namespace XRTK.Editor.BuildPipeline
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
+            EditorGUILayout.Space();
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space();
         }
 
         #endregion EditorWindow Events
@@ -177,21 +202,10 @@ namespace XRTK.Editor.BuildPipeline
                 return;
             }
 
-            Debug.Assert(!isBuilding);
+            Debug.Assert(!isBuilding, "Build already in progress!");
             isBuilding = true;
 
-            switch (EditorUserBuildSettings.activeBuildTarget)
-            {
-                case BuildTarget.WSAPlayer:
-                    UnityPlayerBuildTools.BuildUnityPlayer(new UwpBuildInfo());
-                    break;
-                case BuildTarget.Lumin:
-                    UnityPlayerBuildTools.BuildUnityPlayer(new LuminBuildInfo());
-                    break;
-                default:
-                    UnityPlayerBuildTools.BuildUnityPlayer(new BuildInfo());
-                    break;
-            }
+            UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
 
             isBuilding = false;
         }

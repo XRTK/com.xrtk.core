@@ -1,6 +1,7 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,14 +9,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using XRTK.Attributes;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Extensions;
-using XRTK.Interfaces;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildPipeline
@@ -31,12 +31,50 @@ namespace XRTK.Editor.BuildPipeline
         public const string BuildSymbolMaster = "master";
 
         /// <summary>
-        /// Starts the build process
+        /// Generates a new instance of the <see cref="IBuildInfo"/> to use when building.
         /// </summary>
-        /// <param name="buildInfo"></param>
+        /// <returns>A new instance of <see cref="IBuildInfo"/>.</returns>
+        public static IBuildInfo GenerateBuildInfo()
+        {
+            var buildInfo = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => typeof(IBuildInfo).IsAssignableFrom(type))
+                .Select(type =>
+                {
+                    var runtimePlatformAttribute = (RuntimePlatformAttribute)type?.GetCustomAttribute(typeof(RuntimePlatformAttribute));
+                    return runtimePlatformAttribute != null &&
+                           runtimePlatformAttribute.Platform == MixedRealityPreferences.CurrentPlatformTarget?.GetType()
+                        ? ScriptableObject.CreateInstance(type) as IBuildInfo
+                        : null;
+                }).FirstOrDefault(instance => instance != null) ?? ScriptableObject.CreateInstance<BuildInfo>();
+
+            Debug.Assert(buildInfo != null);
+
+            return buildInfo;
+        }
+
+        /// <summary>
+        /// Starts the build process.
+        /// </summary>
+        /// <returns>The <see cref="BuildReport"/> from Unity's <see cref="BuildPipeline"/></returns>
+        public static BuildReport BuildUnityPlayer()
+        {
+            return BuildUnityPlayer(GenerateBuildInfo());
+        }
+
+        /// <summary>
+        /// Starts the build process with the provided <see cref="IBuildInfo"/>
+        /// </summary>
+        /// <param name="buildInfo">The <see cref="IBuildInfo"/> to use when building the project.</param>
         /// <returns>The <see cref="BuildReport"/> from Unity's <see cref="BuildPipeline"/></returns>
         public static BuildReport BuildUnityPlayer(IBuildInfo buildInfo)
         {
+            if (buildInfo == null)
+            {
+                buildInfo = GenerateBuildInfo();
+            }
+
             EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
 
             buildInfo.ParseCommandLineArgs();
@@ -87,39 +125,9 @@ namespace XRTK.Editor.BuildPipeline
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            var oldBuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            var oldBuildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(oldBuildTarget);
+            buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{buildInfo.BuildName}{buildInfo.ExecutableFileExtension}";
 
-            if (EditorUserBuildSettings.activeBuildTarget != buildInfo.BuildTarget)
-            {
-                EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildInfo.BuildTarget);
-            }
-
-            buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}";
-
-            var cacheIl2Cpp = true;
-
-            switch (buildInfo.BuildTarget)
-            {
-                case BuildTarget.Lumin:
-                    buildInfo.OutputDirectory += ".mpk";
-
-                    if (Application.isBatchMode &&
-                        Directory.Exists($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu"))
-                    {
-                        Directory.Delete($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu", true);
-                    }
-                    break;
-                case BuildTarget.Android:
-                    buildInfo.OutputDirectory += ".apk";
-                    cacheIl2Cpp = false;
-                    break;
-                case BuildTarget.StandaloneWindows:
-                case BuildTarget.StandaloneWindows64:
-                    buildInfo.OutputDirectory += ".exe";
-                    break;
-            }
-
+            var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
 
             if (cacheIl2Cpp)
@@ -131,7 +139,6 @@ namespace XRTK.Editor.BuildPipeline
                     Directory.CreateDirectory(il2cppCache);
                 }
 
-                File.WriteAllText($"{il2cppCache}\\xrtk.lock", string.Empty);
                 PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
             }
 
@@ -139,9 +146,11 @@ namespace XRTK.Editor.BuildPipeline
 
             if (Application.isBatchMode)
             {
+                Debug.Log("Scenes in build:");
+
                 foreach (var scene in buildInfo.Scenes)
                 {
-                    Debug.Log($"BuildScene->{scene.path}");
+                    Debug.Log($"    {scene.path}");
                 }
             }
 
@@ -158,13 +167,12 @@ namespace XRTK.Editor.BuildPipeline
                 Debug.LogError($"{e.Message}\n{e.StackTrace}");
             }
 
-            PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
-            PlayerSettings.colorSpace = oldColorSpace;
-
-            if (EditorUserBuildSettings.activeBuildTarget != oldBuildTarget)
+            if (cacheIl2Cpp)
             {
-                EditorUserBuildSettings.SwitchActiveBuildTarget(oldBuildTargetGroup, oldBuildTarget);
+                PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
             }
+
+            PlayerSettings.colorSpace = oldColorSpace;
 
             EditorUtility.ClearProgressBar();
 
@@ -218,7 +226,7 @@ namespace XRTK.Editor.BuildPipeline
         {
             // We don't need stack traces on all our logs. Makes things a lot easier to read.
             Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
-            Debug.Log($"Starting command line build for {EditorUserBuildSettings.activeBuildTarget}...");
+            Debug.Log($"Starting command line build for {MixedRealityPreferences.CurrentPlatformTarget.Name}...");
             EditorAssemblyReloadManager.LockReloadAssemblies = true;
 
             BuildReport buildReport = default;
@@ -233,13 +241,7 @@ namespace XRTK.Editor.BuildPipeline
                     Debug.Log($"AndroidSdkRoot: {androidSdkPath}");
                 }
 
-                switch (EditorUserBuildSettings.activeBuildTarget)
-                {
-                    default:
-                        var buildInfo = new BuildInfo(true) as IBuildInfo;
-                        buildReport = BuildUnityPlayer(buildInfo);
-                        break;
-                }
+                buildReport = BuildUnityPlayer();
             }
             catch (Exception e)
             {

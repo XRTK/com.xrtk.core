@@ -13,43 +13,36 @@ using XRTK.Interfaces;
 
 namespace XRTK.Editor.BuildPipeline
 {
-    public class BuildInfo : IBuildInfo
+    public class BuildInfo : ScriptableObject, IBuildInfo
     {
-        public BuildInfo()
+        protected virtual void Awake()
         {
-            IsCommandLine = false;
-            BuildSymbols = string.Empty;
-            BuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled);
-        }
-
-        public BuildInfo(bool isCommandLine)
-        {
-            IsCommandLine = isCommandLine;
+            BuildName = EditorPreferences.ApplicationProductName;
+            IsCommandLine = Application.isBatchMode;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;
             Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled);
         }
 
         /// <inheritdoc />
-        public string Name { get; } = EditorPreferences.ApplicationProductName;
+        public string BuildName { get; private set; }
 
         /// <inheritdoc />
         public virtual Version Version { get; set; }
 
         /// <inheritdoc />
-        public virtual BuildTarget BuildTarget { get; }
+        public virtual BuildTarget BuildTarget { get; private set; }
 
         /// <inheritdoc />
-        public IMixedRealityPlatform BuildPlatform { get; } = null;
+        public IMixedRealityPlatform BuildPlatform { get; }
 
         /// <inheritdoc />
-        public bool IsCommandLine { get; }
+        public bool IsCommandLine { get; private set; }
 
         private string outputDirectory;
 
         /// <inheritdoc />
-        public string OutputDirectory
+        public virtual string OutputDirectory
         {
             get => string.IsNullOrEmpty(outputDirectory)
                 ? outputDirectory = BuildDeployPreferences.BuildDirectory
@@ -57,7 +50,7 @@ namespace XRTK.Editor.BuildPipeline
             set => outputDirectory = value;
         }
 
-        public string AbsoluteOutputDirectory
+        public virtual string AbsoluteOutputDirectory
         {
             get
             {
@@ -74,6 +67,24 @@ namespace XRTK.Editor.BuildPipeline
         }
 
         /// <inheritdoc />
+        public virtual string ExecutableFileExtension
+        {
+            get
+            {
+                switch (BuildTarget)
+                {
+                    case BuildTarget.Android:
+                        return ".apk";
+                    case BuildTarget.StandaloneWindows:
+                    case BuildTarget.StandaloneWindows64:
+                        return ".exe";
+                    default:
+                        return "/";
+                }
+            }
+        }
+
+        /// <inheritdoc />
         public IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
 
         /// <inheritdoc />
@@ -86,7 +97,7 @@ namespace XRTK.Editor.BuildPipeline
         public string BuildSymbols { get; set; }
 
         /// <inheritdoc />
-        public string Architecture { get; set; } = "x86";
+        public string Architecture { get; set; }
 
         /// <inheritdoc />
         public virtual void ParseCommandLineArgs()

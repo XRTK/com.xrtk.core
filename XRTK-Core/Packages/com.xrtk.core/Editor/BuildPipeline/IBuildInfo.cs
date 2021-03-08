@@ -1,15 +1,13 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-#if UNITY_EDITOR
-
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEngine;
 
-namespace XRTK.Interfaces
+namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// The Build Info defines common properties for a build.
@@ -17,10 +15,13 @@ namespace XRTK.Interfaces
     public interface IBuildInfo : IPreprocessBuildWithReport, IPostprocessBuildWithReport
     {
         /// <summary>
-        /// The Name of the player. Same as <see cref="Application.productName"/> but cached for threading safety.
+        /// The Name of the executable. Same as <see cref="Application.productName"/> but cached for threading safety.
         /// </summary>
-        string Name { get; }
+        string BuildName { get; }
 
+        /// <summary>
+        /// The <see cref="Version"/> of the executable.
+        /// </summary>
         Version Version { get; set; }
 
         /// <summary>
@@ -42,6 +43,11 @@ namespace XRTK.Interfaces
         string AbsoluteOutputDirectory { get; }
 
         /// <summary>
+        /// The executable file extension for this build.
+        /// </summary>
+        string ExecutableFileExtension { get; }
+
+        /// <summary>
         /// The list of scenes to include in the build.
         /// </summary>
         IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
@@ -57,9 +63,9 @@ namespace XRTK.Interfaces
         BuildTarget BuildTarget { get; }
 
         /// <summary>
-        /// The <see cref="IMixedRealityPlatform"/> to build to.
+        /// The <see cref="XRTK.Interfaces.IMixedRealityPlatform"/> to build to.
         /// </summary>
-        IMixedRealityPlatform BuildPlatform { get; }
+        XRTK.Interfaces.IMixedRealityPlatform BuildPlatform { get; }
 
         /// <summary>
         /// Optional parameter to set the player's <see cref="ColorSpace"/>
@@ -86,4 +92,3 @@ namespace XRTK.Interfaces
         bool Install { get; set; }
     }
 }
-#endif // UNITY_EDITOR

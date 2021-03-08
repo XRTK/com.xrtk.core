@@ -25,7 +25,10 @@ namespace XRTK.Definitions.Platforms
 #if UNITY_EDITOR
 
         /// <inheritdoc />
-        public override UnityEditor.BuildTarget[] ValidBuildTargets { get; } = { UnityEditor.BuildTarget.WSAPlayer };
+        public override UnityEditor.BuildTarget[] ValidBuildTargets { get; } =
+        {
+            UnityEditor.BuildTarget.WSAPlayer
+        };
 
 #endif // UNITY_EDITOR
     }

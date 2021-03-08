@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Editor.Extensions;
 using XRTK.Extensions;
@@ -293,20 +294,25 @@ namespace XRTK.Editor
                 {
                     isCurrentPlatformPreferenceLoaded = true;
 
-                    TypeExtensions.TryResolveType(EditorPreferences.Get(nameof(CurrentPlatformTarget), Guid.Empty.ToString()), out var platform);
+                    MixedRealityToolkit.CheckPlatforms();
 
-                    foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
+                    if (TypeExtensions.TryResolveType(EditorPreferences.Get(nameof(CurrentPlatformTarget), Guid.Empty.ToString()), out var platform))
                     {
-                        if (availablePlatform.GetType() == platform)
+                        foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
                         {
-                            currentPlatformTarget = availablePlatform;
-                            break;
+                            if (availablePlatform.GetType() == platform)
+                            {
+                                currentPlatformTarget = availablePlatform;
+                                break;
+                            }
                         }
                     }
 
-                    if (currentPlatformTarget == null && MixedRealityToolkit.ActivePlatforms.Count > 0)
+                    if (currentPlatformTarget == null)
                     {
-                        currentPlatformTarget = MixedRealityToolkit.ActivePlatforms[0];
+                        currentPlatformTarget = MixedRealityToolkit.ActivePlatforms.Count > 0
+                            ? MixedRealityToolkit.ActivePlatforms[0]
+                            : new AllPlatforms();
                     }
                 }
 

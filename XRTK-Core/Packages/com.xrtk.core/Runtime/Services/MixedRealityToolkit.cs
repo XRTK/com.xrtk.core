@@ -455,7 +455,10 @@ namespace XRTK.Services
             isInitializing = false;
         }
 
-        private static void EnsureMixedRealityRequirements()
+        /// <summary>
+        /// Check which platforms are active and available.
+        /// </summary>
+        internal static void CheckPlatforms()
         {
             activePlatforms.Clear();
             availablePlatforms.Clear();
@@ -486,9 +489,9 @@ namespace XRTK.Services
 
                 if (platform.IsAvailable
 #if UNITY_EDITOR
-                     || platform.IsBuildTargetAvailable
+                    || platform.IsBuildTargetAvailable
 #endif
-                    )
+                )
                 {
                     foreach (var platformOverride in platform.PlatformOverrides)
                     {
@@ -507,13 +510,18 @@ namespace XRTK.Services
 
                 if (platform.IsAvailable
 #if UNITY_EDITOR
-                     || platform.IsBuildTargetAvailable
+                    || platform.IsBuildTargetAvailable
 #endif
-                    )
+                )
                 {
                     activePlatforms.Add(platform);
                 }
             }
+        }
+
+        private static void EnsureMixedRealityRequirements()
+        {
+            CheckPlatforms();
 
             // There's lots of documented cases that if the camera doesn't start at 0,0,0, things break with the WMR SDK specifically.
             // We'll enforce that here, then tracking can update it to the appropriate position later.

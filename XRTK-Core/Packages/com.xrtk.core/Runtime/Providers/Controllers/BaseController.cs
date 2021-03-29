@@ -225,7 +225,7 @@ namespace XRTK.Providers.Controllers
                         break;
                 }
             }
-
+            
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (!controllerModel.IsNull())
             {

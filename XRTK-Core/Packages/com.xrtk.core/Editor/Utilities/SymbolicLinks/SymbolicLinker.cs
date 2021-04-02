@@ -469,13 +469,16 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                             File.Delete(tempFile);
                         }
                     }
-                    catch (DirectoryNotFoundException)
+                    catch (Exception e)
                     {
-                        return false;
-                    }
-                    catch (AccessViolationException)
-                    {
-                        return true;
+                        switch (e)
+                        {
+                            case AccessViolationException _:
+                            case IOException _:
+                                return true;
+                            default:
+                                return false;
+                        }
                     }
                 }
 

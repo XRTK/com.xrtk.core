@@ -453,13 +453,15 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 }
                 else
                 {
-                    var tempFile = $"{targetAbsolutePath}/temp_test.txt";
+                    var tempFile = $"{targetAbsolutePath}/symlink_temp.txt";
 
                     try
                     {
                         if (!File.Exists(tempFile))
                         {
-                            File.CreateText(tempFile).Dispose();
+                            var stream = File.CreateText(tempFile);
+                            stream.Dispose();
+                            stream.Close();
                         }
 
                         if (File.Exists(tempFile))
@@ -470,6 +472,10 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                     catch (DirectoryNotFoundException)
                     {
                         return false;
+                    }
+                    catch (AccessViolationException)
+                    {
+                        return true;
                     }
                 }
 

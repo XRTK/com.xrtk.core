@@ -472,6 +472,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                         {
                             File.Delete(tempFile);
                         }
+
+                        if (File.Exists($"{tempFile}.meta"))
+                        {
+                            File.Delete($"{tempFile}.meta");
+                        }
                     }
                     catch (Exception e)
                     {

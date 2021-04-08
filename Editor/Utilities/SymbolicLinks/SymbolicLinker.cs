@@ -389,7 +389,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                         return false;
                     }
 
-                    Debug.LogError($"Invalid path: {path}");
+                    if (DebugEnabled)
+                    {
+                        Debug.LogError($"Invalid path: {path}");
+                    }
+
                     return false;
                 }
 
@@ -483,6 +487,10 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 }
 
                 return isValid && Directory.Exists(targetAbsolutePath);
+            }
+            catch (ThreadAbortException)
+            {
+                return false;
             }
             catch (Exception e)
             {

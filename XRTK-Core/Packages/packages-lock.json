@@ -185,7 +185,7 @@
       "source": "embedded",
       "dependencies": {
         "com.xrtk.core": "0.2.10",
-        "com.unity.textmeshpro": "2.1.3"
+        "com.unity.textmeshpro": "2.1.4"
       }
     },
     "com.xrtk.wmr": {

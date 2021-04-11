@@ -213,7 +213,7 @@ namespace XRTK.Providers.Controllers
 
             // If we didn't get an override model, and we didn't load the driver model,
             // then get the global controller model for each hand.
-            if (controllerModel.IsNull())
+            //if (controllerModel.IsNull())
             {
                 switch (ControllerHandedness)
                 {
@@ -225,7 +225,7 @@ namespace XRTK.Providers.Controllers
                         break;
                 }
             }
-            
+
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (!controllerModel.IsNull())
             {

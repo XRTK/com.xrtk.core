@@ -438,7 +438,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 {
                     if (DebugEnabled)
                     {
-                        Debug.LogWarning($"Validated disabled link: {targetAbsolutePath}");
+                        Debug.Log($"Validated disabled link: {targetAbsolutePath}");
                     }
 
                     return false;
@@ -450,7 +450,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 {
                     if (DebugEnabled)
                     {
-                        Debug.LogWarning($"Removing invalid link for {targetAbsolutePath}");
+                        Debug.Log($"Removing invalid link for {targetAbsolutePath}");
                     }
 
                     DeleteSymbolicLink(targetAbsolutePath);

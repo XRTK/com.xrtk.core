@@ -94,5 +94,23 @@ namespace XRTK.Extensions
         {
             return value.Replace(BackSlash, ForwardSlash);
         }
+        
+        /// <summary>
+        /// Returns the URI path, excluding the filename
+        /// </summary>
+        /// <param name="value"></param>
+        public static string PathFromURI(this string value)
+        {
+            return value.Substring(0, value.LastIndexOf("/") + 1);
+        }
+
+        /// <summary>
+        /// Returns the filename from a URI path
+        /// </summary>
+        /// <param name="value"></param>
+        public static string FilenameFromURI(this string value)
+        {
+            return value.Substring(value.LastIndexOf("/") + 1, value.Length - value.LastIndexOf("/") - 1);
+        }
     }
 }

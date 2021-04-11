@@ -389,7 +389,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                         return false;
                     }
 
-                    Debug.LogError($"Invalid path: {path}");
+                    if (DebugEnabled)
+                    {
+                        Debug.LogError($"Invalid path: {path}");
+                    }
+
                     return false;
                 }
 
@@ -468,6 +472,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                         {
                             File.Delete(tempFile);
                         }
+
+                        if (File.Exists($"{tempFile}.meta"))
+                        {
+                            File.Delete($"{tempFile}.meta");
+                        }
                     }
                     catch (Exception e)
                     {
@@ -483,6 +492,10 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 }
 
                 return isValid && Directory.Exists(targetAbsolutePath);
+            }
+            catch (ThreadAbortException)
+            {
+                return false;
             }
             catch (Exception e)
             {

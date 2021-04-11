@@ -16,8 +16,6 @@ using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 using XRTK.Utilities;
-using XRTK.Utilities.Gltf.Schema;
-using XRTK.Utilities.Gltf.Serialization;
 using Object = UnityEngine.Object;
 
 namespace XRTK.Providers.Controllers
@@ -203,15 +201,7 @@ namespace XRTK.Providers.Controllers
         }
 
         /// <inheritdoc />
-        public async void TryRenderControllerModel(byte[] glbData = null, bool useAlternatePoseAction = false) => await TryRenderControllerModelAsync(glbData, useAlternatePoseAction);
-
-        /// <summary>
-        /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
-        /// to render the controllers in the scene.
-        /// </summary>
-        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
-        /// <param name="useAlternatePoseAction">Should the visualizer be assigned the alternate pose actions?</param>
-        public async Task TryRenderControllerModelAsync(byte[] glbData = null, bool useAlternatePoseAction = false)
+        public void TryRenderControllerModel(bool useAlternatePoseAction = false)
         {
             if (visualizationProfile.IsNull())
             {
@@ -219,16 +209,7 @@ namespace XRTK.Providers.Controllers
                 return;
             }
 
-            GltfObject gltfObject = null;
             GameObject controllerModel = null;
-
-            // if we have model data from the platform and the controller has been configured to use the default model, attempt to load the controller model from glbData.
-            if (glbData != null)
-            {
-                gltfObject = GltfUtility.GetGltfObjectFromGlb(glbData);
-                await gltfObject.ConstructAsync();
-                controllerModel = gltfObject.GameObjectReference;
-            }
 
             // If we didn't get an override model, and we didn't load the driver model,
             // then get the global controller model for each hand.
@@ -244,7 +225,7 @@ namespace XRTK.Providers.Controllers
                         break;
                 }
             }
-
+            
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (!controllerModel.IsNull())
             {
@@ -252,23 +233,10 @@ namespace XRTK.Providers.Controllers
                     ? cameraSystem.MainCameraRig.PlayspaceTransform
                     : CameraCache.Main.transform.parent;
 
-                // If the model was loaded from a system template
-                if (gltfObject != null)
-                {
-                    controllerModel.name = $"{GetType().Name}_Visualization";
-                    controllerModel.transform.SetParent(playspaceTransform);
-                    var visualizationType = visualizationProfile.ControllerVisualizationType;
-                    controllerModel.AddComponent(visualizationType.Type);
-                    Visualizer = controllerModel.GetComponent<IMixedRealityControllerVisualizer>();
-                }
-                // If the model was a prefab
-                else
-                {
-                    var controllerObject = Object.Instantiate(controllerModel, playspaceTransform);
-                    Debug.Assert(controllerObject != null);
-                    controllerObject.name = $"{GetType().Name}_Visualization";
-                    Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
-                }
+                var controllerObject = Object.Instantiate(controllerModel, playspaceTransform);
+                Debug.Assert(controllerObject != null);
+                controllerObject.name = $"{GetType().Name}_Visualization";
+                Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
 
                 // If a visualizer exists, set it up and bind it to the controller
                 if (Visualizer != null)

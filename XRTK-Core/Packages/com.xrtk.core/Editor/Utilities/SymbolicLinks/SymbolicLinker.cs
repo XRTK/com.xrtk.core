@@ -389,7 +389,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                         return false;
                     }
 
-                    Debug.LogError($"Invalid path: {path}");
+                    if (DebugEnabled)
+                    {
+                        Debug.LogError($"Invalid path: {path}");
+                    }
+
                     return false;
                 }
 
@@ -434,7 +438,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 {
                     if (DebugEnabled)
                     {
-                        Debug.LogWarning($"Validated disabled link: {targetAbsolutePath}");
+                        Debug.Log($"Validated disabled link: {targetAbsolutePath}");
                     }
 
                     return false;
@@ -446,34 +450,52 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 {
                     if (DebugEnabled)
                     {
-                        Debug.LogWarning($"Removing invalid link for {targetAbsolutePath}");
+                        Debug.Log($"Removing invalid link for {targetAbsolutePath}");
                     }
 
                     DeleteSymbolicLink(targetAbsolutePath);
                 }
                 else
                 {
-                    var tempFile = $"{targetAbsolutePath}/temp_test.txt";
+                    var tempFile = $"{targetAbsolutePath}/symlink_temp.txt";
 
                     try
                     {
                         if (!File.Exists(tempFile))
                         {
-                            File.CreateText(tempFile).Dispose();
+                            var stream = File.CreateText(tempFile);
+                            stream.Dispose();
+                            stream.Close();
                         }
 
                         if (File.Exists(tempFile))
                         {
                             File.Delete(tempFile);
                         }
+
+                        if (File.Exists($"{tempFile}.meta"))
+                        {
+                            File.Delete($"{tempFile}.meta");
+                        }
                     }
-                    catch (DirectoryNotFoundException)
+                    catch (Exception e)
                     {
-                        return false;
+                        switch (e)
+                        {
+                            case AccessViolationException _:
+                            case IOException _:
+                                return true;
+                            default:
+                                return false;
+                        }
                     }
                 }
 
                 return isValid && Directory.Exists(targetAbsolutePath);
+            }
+            catch (ThreadAbortException)
+            {
+                return false;
             }
             catch (Exception e)
             {

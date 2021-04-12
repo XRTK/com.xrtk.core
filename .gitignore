@@ -86,6 +86,7 @@ XRTK-Core/Assets/StreamingAssets.meta
 # ====================== #
 XRTK-Core/Packages/com.xrtk.arcore
 XRTK-Core/Packages/com.xrtk.etee
+XRTK-Core/Packages/com.xrtk.gltf
 XRTK-Core/Packages/com.xrtk.lenovo
 XRTK-Core/Packages/com.xrtk.lumin
 XRTK-Core/Packages/com.xrtk.nreal

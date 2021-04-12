@@ -13,7 +13,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.USB;
-using XRTK.Utilities.Gltf;
 using XRTK.Utilities.WebRequestRest;
 using XRTK.Utilities.WindowsDevicePortal;
 using XRTK.Utilities.WindowsDevicePortal.DataStructures;
@@ -524,17 +523,6 @@ namespace XRTK.Editor.BuildAndDeploy
             GUILayout.BeginHorizontal();
 
             var prevFieldWidth = EditorGUIUtility.fieldWidth;
-
-            EditorGUIUtility.fieldWidth = 120;
-            var appIconAssetObject = AssetDatabase.LoadAssetAtPath<GltfAsset>(UwpBuildDeployPreferences.MixedRealityAppIconPath);
-
-            EditorGUI.BeginChangeCheck();
-            appIconAssetObject = EditorGUILayout.ObjectField(appIconLabel, appIconAssetObject, typeof(GltfAsset), false) as GltfAsset;
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                UwpBuildDeployPreferences.MixedRealityAppIconPath = AssetDatabase.GetAssetPath(appIconAssetObject);
-            }
 
             EditorGUIUtility.fieldWidth = prevFieldWidth;
             GUILayout.FlexibleSpace();

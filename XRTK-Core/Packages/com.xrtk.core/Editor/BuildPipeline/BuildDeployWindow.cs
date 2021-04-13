@@ -205,6 +205,11 @@ namespace XRTK.Editor.BuildPipeline
             Debug.Assert(!isBuilding, "Build already in progress!");
             isBuilding = true;
 
+            if (buildInfo == null)
+            {
+                buildInfo = UnityPlayerBuildTools.GenerateBuildInfo();
+            }
+
             UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
 
             isBuilding = false;

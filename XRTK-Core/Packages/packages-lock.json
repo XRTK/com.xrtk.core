@@ -168,7 +168,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.7"
+        "com.xrtk.core": "0.2.10"
       }
     },
     "com.xrtk.oculus": {
@@ -176,7 +176,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.7"
+        "com.xrtk.core": "0.2.10"
       }
     },
     "com.xrtk.sdk": {
@@ -184,8 +184,8 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.7",
-        "com.unity.textmeshpro": "2.1.3"
+        "com.xrtk.core": "0.2.10",
+        "com.unity.textmeshpro": "2.1.4"
       }
     },
     "com.xrtk.wmr": {

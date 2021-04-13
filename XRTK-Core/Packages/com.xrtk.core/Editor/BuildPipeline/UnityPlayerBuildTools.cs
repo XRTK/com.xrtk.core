@@ -50,8 +50,8 @@ namespace XRTK.Editor.BuildPipeline
                 }).FirstOrDefault(instance => instance != null) ?? ScriptableObject.CreateInstance<BuildInfo>();
 
             Debug.Assert(buildInfo != null);
-            Debug.Log(((BuildInfo)buildInfo).name);
-            Debug.Log(buildInfo.BuildPlatform);
+            Debug.Log($"build info name: {((BuildInfo)buildInfo).name}");
+            Debug.Log($"build platform: {buildInfo.BuildPlatform}");
 
             return buildInfo;
         }

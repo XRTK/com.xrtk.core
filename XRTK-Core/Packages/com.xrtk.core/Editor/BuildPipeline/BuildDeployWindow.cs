@@ -170,7 +170,7 @@ namespace XRTK.Editor.BuildPipeline
 
             if (buildInfo != null)
             {
-                UnityEditor.Editor.CreateEditor(buildInfo as ScriptableObject)?.OnInspectorGUI();
+                UnityEditor.Editor.CreateEditor(buildInfo as ScriptableObject).OnInspectorGUI();
             }
 
             GUILayout.FlexibleSpace();

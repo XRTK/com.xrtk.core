@@ -168,9 +168,9 @@ namespace XRTK.Editor.BuildPipeline
                 buildInfo = UnityPlayerBuildTools.GenerateBuildInfo();
             }
 
-            if (buildInfo != null)
+            if (buildInfo is ScriptableObject buildObject)
             {
-                UnityEditor.Editor.CreateEditor(buildInfo as ScriptableObject).OnInspectorGUI();
+                UnityEditor.Editor.CreateEditor(buildObject).OnInspectorGUI();
             }
 
             GUILayout.FlexibleSpace();

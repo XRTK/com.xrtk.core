@@ -10,9 +10,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Extensions;
@@ -23,58 +25,58 @@ namespace XRTK.Editor.BuildPipeline
     /// <summary>
     /// Cross platform player build tools
     /// </summary>
-    public static class UnityPlayerBuildTools
+    public class UnityPlayerBuildTools : IPreprocessBuildWithReport, IPostprocessBuildWithReport
     {
         // Build configurations. Exactly one of these should be defined for any given build.
         public const string BuildSymbolDebug = "debug";
         public const string BuildSymbolRelease = "release";
         public const string BuildSymbolMaster = "master";
 
+        private static IBuildInfo buildInfo;
+
         /// <summary>
-        /// Generates a new instance of the <see cref="IBuildInfo"/> to use when building.
+        /// Gets or creates an instance of the <see cref="IBuildInfo"/> to use when building.
         /// </summary>
         /// <returns>A new instance of <see cref="IBuildInfo"/>.</returns>
-        public static IBuildInfo GenerateBuildInfo()
+        public static IBuildInfo GetOrCreateBuildInfo()
         {
-            var buildInfo = AppDomain.CurrentDomain
+            buildInfo = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => typeof(IBuildInfo).IsAssignableFrom(type))
                 .Select(type =>
                 {
                     var runtimePlatformAttribute = (RuntimePlatformAttribute)type?.GetCustomAttribute(typeof(RuntimePlatformAttribute));
-                    return runtimePlatformAttribute != null &&
+                    var buildInfoInstance = runtimePlatformAttribute != null &&
                            runtimePlatformAttribute.Platform == MixedRealityPreferences.CurrentPlatformTarget?.GetType()
-                        ? ScriptableObject.CreateInstance(type) as IBuildInfo
+                        ? ScriptableObject.CreateInstance(type)
                         : null;
+
+                    if (buildInfoInstance.IsNull())
+                    {
+                        return null;
+                    }
+
+                    var buildAsset = buildInfoInstance.GetOrCreateAsset(false);
+                    Debug.Assert(!buildAsset.IsNull());
+                    return buildInfoInstance as IBuildInfo;
                 }).FirstOrDefault(instance => instance != null) ?? ScriptableObject.CreateInstance<BuildInfo>();
 
             Debug.Assert(buildInfo != null);
-            Debug.Log($"build info name: {((BuildInfo)buildInfo).name}");
             Debug.Log($"build platform: {buildInfo.BuildPlatform}");
 
             return buildInfo;
         }
 
         /// <summary>
-        /// Starts the build process.
+        /// Starts the build process with the provided <see cref="IBuildInfo"/>
         /// </summary>
         /// <returns>The <see cref="BuildReport"/> from Unity's <see cref="BuildPipeline"/></returns>
         public static BuildReport BuildUnityPlayer()
         {
-            return BuildUnityPlayer(GenerateBuildInfo());
-        }
-
-        /// <summary>
-        /// Starts the build process with the provided <see cref="IBuildInfo"/>
-        /// </summary>
-        /// <param name="buildInfo">The <see cref="IBuildInfo"/> to use when building the project.</param>
-        /// <returns>The <see cref="BuildReport"/> from Unity's <see cref="BuildPipeline"/></returns>
-        public static BuildReport BuildUnityPlayer(IBuildInfo buildInfo)
-        {
             if (buildInfo == null)
             {
-                buildInfo = GenerateBuildInfo();
+                buildInfo = GetOrCreateBuildInfo();
             }
 
             EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
@@ -306,5 +308,30 @@ namespace XRTK.Editor.BuildPipeline
 
             return File.Exists($"{storePath}\\project.lock.json");
         }
+
+        #region IOrderedCallback
+
+        /// <inheritdoc />
+        public int callbackOrder { get; }
+
+        /// <inheritdoc />
+        public void OnPreprocessBuild(BuildReport report)
+        {
+            if (buildInfo != null)
+            {
+                buildInfo.OnPreprocessBuild(report);
+            }
+        }
+
+        /// <inheritdoc />
+        public void OnPostprocessBuild(BuildReport report)
+        {
+            if (buildInfo != null)
+            {
+                buildInfo.OnPreprocessBuild(report);
+            }
+        }
+
+        #endregion IOrderedCallback
     }
 }

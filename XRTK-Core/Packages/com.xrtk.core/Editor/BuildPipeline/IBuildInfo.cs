@@ -5,14 +5,16 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
+using XRTK.Interfaces;
 
 namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// The Build Info defines common properties for a build.
     /// </summary>
-    public interface IBuildInfo : IPreprocessBuildWithReport, IPostprocessBuildWithReport
+    public interface IBuildInfo
     {
         /// <summary>
         /// The Name of the executable. Same as <see cref="Application.productName"/> but cached for threading safety.
@@ -63,9 +65,9 @@ namespace XRTK.Editor.BuildPipeline
         BuildTarget BuildTarget { get; }
 
         /// <summary>
-        /// The <see cref="XRTK.Interfaces.IMixedRealityPlatform"/> to build to.
+        /// The <see cref="IMixedRealityPlatform"/> to build to.
         /// </summary>
-        XRTK.Interfaces.IMixedRealityPlatform BuildPlatform { get; }
+        IMixedRealityPlatform BuildPlatform { get; }
 
         /// <summary>
         /// Optional parameter to set the player's <see cref="ColorSpace"/>
@@ -90,5 +92,17 @@ namespace XRTK.Editor.BuildPipeline
         void ParseCommandLineArgs();
 
         bool Install { get; set; }
+
+        /// <summary>
+        ///   <para>Implement this function to receive a callback before the build is started.</para>
+        /// </summary>
+        /// <param name="report">A report containing information about the build, such as its target platform and output path.</param>
+        void OnPreprocessBuild(BuildReport report);
+
+        /// <summary>
+        ///   <para>Implement this function to receive a callback after the build is complete.</para>
+        /// </summary>
+        /// <param name="report">A BuildReport containing information about the build, such as the target platform and output path.</param>
+        void OnPostprocessBuild(BuildReport report);
     }
 }

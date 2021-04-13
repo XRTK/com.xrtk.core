@@ -10,6 +10,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Editor.Utilities;
 using XRTK.Interfaces;
+using XRTK.Services;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -34,7 +35,7 @@ namespace XRTK.Editor.BuildPipeline
         public virtual BuildTarget BuildTarget { get; private set; }
 
         /// <inheritdoc />
-        public IMixedRealityPlatform BuildPlatform { get; }
+        public virtual IMixedRealityPlatform BuildPlatform { get; }
 
         /// <inheritdoc />
         public bool IsCommandLine { get; private set; }
@@ -172,17 +173,22 @@ namespace XRTK.Editor.BuildPipeline
 
         #region IOrderedCallback
 
-        /// <inheritdoc />
         public int callbackOrder => 0;
 
-        /// <inheritdoc />
-        public virtual void OnPostprocessBuild(BuildReport report)
-        {
-        }
-
-        /// <inheritdoc />
         public virtual void OnPreprocessBuild(BuildReport report)
         {
+            if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
+            {
+                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPreprocessBuild)}");
+            }
+        }
+
+        public virtual void OnPostprocessBuild(BuildReport report)
+        {
+            if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
+            {
+                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPostprocessBuild)}");
+            }
         }
 
         #endregion IOrderedCallback

@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities;
@@ -31,8 +33,10 @@ namespace XRTK.Editor.BuildPipeline
             {
                 if (platforms.Count == 0)
                 {
-                    foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
+                    for (int i = 0; i < MixedRealityToolkit.AvailablePlatforms.Count; i++)
                     {
+                        var availablePlatform = MixedRealityToolkit.AvailablePlatforms[i];
+
                         if (availablePlatform is AllPlatforms ||
                             availablePlatform is EditorPlatform ||
                             availablePlatform is CurrentBuildTargetPlatform)
@@ -118,7 +122,7 @@ namespace XRTK.Editor.BuildPipeline
 
                         var buildTarget = platform.ValidBuildTargets[0]; // For now just get the highest priority one.
 
-                        buildInfo = UnityPlayerBuildTools.GenerateBuildInfo();
+                        buildInfo = UnityPlayerBuildTools.GetOrCreateBuildInfo();
 
                         if (!EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.BuildPipeline.GetBuildTargetGroup(buildTarget), buildTarget))
                         {
@@ -166,7 +170,7 @@ namespace XRTK.Editor.BuildPipeline
 
             if (buildInfo == null)
             {
-                buildInfo = UnityPlayerBuildTools.GenerateBuildInfo();
+                buildInfo = UnityPlayerBuildTools.GetOrCreateBuildInfo();
             }
 
             if (buildInfo is ScriptableObject buildObject)
@@ -213,10 +217,10 @@ namespace XRTK.Editor.BuildPipeline
 
             if (buildInfo == null)
             {
-                buildInfo = UnityPlayerBuildTools.GenerateBuildInfo();
+                buildInfo = UnityPlayerBuildTools.GetOrCreateBuildInfo();
             }
 
-            UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
+            UnityPlayerBuildTools.BuildUnityPlayer();
 
             isBuilding = false;
         }

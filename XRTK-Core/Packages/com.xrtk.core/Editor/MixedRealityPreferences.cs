@@ -243,7 +243,7 @@ namespace XRTK.Editor
 
                 if (autoLoadSymbolicLinks && SymbolicLinker.Settings.IsNull())
                 {
-                    ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings)).CreateAsset();
+                    ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings)).GetOrCreateAsset();
                 }
             }
         }

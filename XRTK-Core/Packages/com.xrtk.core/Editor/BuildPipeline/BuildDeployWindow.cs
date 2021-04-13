@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Services;
 using Debug = UnityEngine.Debug;
@@ -170,7 +171,12 @@ namespace XRTK.Editor.BuildPipeline
 
             if (buildInfo is ScriptableObject buildObject)
             {
-                UnityEditor.Editor.CreateEditor(buildObject).OnInspectorGUI();
+                var editor = UnityEditor.Editor.CreateEditor(buildObject);
+
+                if (!editor.IsNull())
+                {
+                    editor.OnInspectorGUI();
+                }
             }
 
             GUILayout.FlexibleSpace();

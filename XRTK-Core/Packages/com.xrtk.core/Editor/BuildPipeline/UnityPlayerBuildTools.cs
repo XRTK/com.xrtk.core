@@ -85,6 +85,10 @@ namespace XRTK.Editor.BuildPipeline
                 buildInfo = buildInfoInstance;
                 Debug.Assert(buildInfo != null);
 
+                Debug.LogWarning(buildInfo.OutputDirectory);
+
+                Debug.LogWarning(buildInfo.AbsoluteOutputDirectory);
+
                 return buildInfo;
             }
         }

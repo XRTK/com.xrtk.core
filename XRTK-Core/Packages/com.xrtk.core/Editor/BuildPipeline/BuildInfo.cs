@@ -51,12 +51,13 @@ namespace XRTK.Editor.BuildPipeline
             set => outputDirectory = value;
         }
 
+        /// <inheritdoc />
         public virtual string AbsoluteOutputDirectory
         {
             get
             {
-                string rootBuildDirectory = OutputDirectory;
-                int dirCharIndex = rootBuildDirectory.IndexOf("/", StringComparison.Ordinal);
+                var rootBuildDirectory = OutputDirectory;
+                var dirCharIndex = rootBuildDirectory.IndexOf("/", StringComparison.Ordinal);
 
                 if (dirCharIndex != -1)
                 {
@@ -171,10 +172,7 @@ namespace XRTK.Editor.BuildPipeline
             }
         }
 
-        #region IOrderedCallback
-
-        public int callbackOrder => 0;
-
+        /// <inheritdoc />
         public virtual void OnPreprocessBuild(BuildReport report)
         {
             if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
@@ -183,6 +181,7 @@ namespace XRTK.Editor.BuildPipeline
             }
         }
 
+        /// <inheritdoc />
         public virtual void OnPostprocessBuild(BuildReport report)
         {
             if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
@@ -190,7 +189,5 @@ namespace XRTK.Editor.BuildPipeline
                 Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPostprocessBuild)}");
             }
         }
-
-        #endregion IOrderedCallback
     }
 }

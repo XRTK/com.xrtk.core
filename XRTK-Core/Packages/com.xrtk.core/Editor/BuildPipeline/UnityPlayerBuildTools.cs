@@ -38,34 +38,55 @@ namespace XRTK.Editor.BuildPipeline
         /// Gets or creates an instance of the <see cref="IBuildInfo"/> to use when building.
         /// </summary>
         /// <returns>A new instance of <see cref="IBuildInfo"/>.</returns>
-        public static IBuildInfo GetOrCreateBuildInfo()
+        public static IBuildInfo BuildInfo
         {
-            buildInfo = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => typeof(IBuildInfo).IsAssignableFrom(type))
-                .Select(type =>
+            get
+            {
+                BuildInfo buildInfoInstance;
+
+                if (buildInfo == null ||
+                    buildInfo.BuildPlatform != MixedRealityPreferences.CurrentPlatformTarget)
                 {
-                    var runtimePlatformAttribute = (RuntimePlatformAttribute)type?.GetCustomAttribute(typeof(RuntimePlatformAttribute));
-                    var buildInfoInstance = runtimePlatformAttribute != null &&
-                           runtimePlatformAttribute.Platform == MixedRealityPreferences.CurrentPlatformTarget?.GetType()
-                        ? ScriptableObject.CreateInstance(type)
-                        : null;
+                    buildInfoInstance = AppDomain.CurrentDomain
+                        .GetAssemblies()
+                        .SelectMany(assembly => assembly.GetTypes())
+                        .Where(type => typeof(IBuildInfo).IsAssignableFrom(type))
+                        .Select(type =>
+                        {
+                            var runtimePlatformAttribute = (RuntimePlatformAttribute)type?.GetCustomAttribute(typeof(RuntimePlatformAttribute));
+                            var instance = runtimePlatformAttribute != null &&
+                                           runtimePlatformAttribute.Platform == MixedRealityPreferences.CurrentPlatformTarget?.GetType()
+                                ? ScriptableObject.CreateInstance(type)
+                                : null;
+
+                            if (instance.IsNull())
+                            {
+                                return null;
+                            }
+
+                            return instance as BuildInfo;
+                        }).FirstOrDefault(instance => instance != null);
 
                     if (buildInfoInstance.IsNull())
                     {
-                        return null;
+                        buildInfoInstance = ScriptableObject.CreateInstance<BuildInfo>();
                     }
 
-                    var buildAsset = buildInfoInstance.GetOrCreateAsset(false);
-                    Debug.Assert(!buildAsset.IsNull());
-                    return buildInfoInstance as IBuildInfo;
-                }).FirstOrDefault(instance => instance != null) ?? ScriptableObject.CreateInstance<BuildInfo>();
+                    buildInfoInstance.BuildPlatform = MixedRealityPreferences.CurrentPlatformTarget;
+                }
+                else
+                {
+                    buildInfoInstance = buildInfo as BuildInfo;
+                }
 
-            Debug.Assert(buildInfo != null);
-            Debug.Log($"build platform: {buildInfo.BuildPlatform}");
+                Debug.Assert(!buildInfoInstance.IsNull());
+                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\", false);
+                Debug.Assert(!buildAsset.IsNull());
+                buildInfo = buildInfoInstance;
+                Debug.Assert(buildInfo != null);
 
-            return buildInfo;
+                return buildInfo;
+            }
         }
 
         /// <summary>
@@ -74,14 +95,14 @@ namespace XRTK.Editor.BuildPipeline
         /// <returns>The <see cref="BuildReport"/> from Unity's <see cref="BuildPipeline"/></returns>
         public static BuildReport BuildUnityPlayer()
         {
-            if (buildInfo == null)
+            if (BuildInfo == null)
             {
-                buildInfo = GetOrCreateBuildInfo();
+                throw new ArgumentNullException(nameof(BuildInfo));
             }
 
             EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
 
-            buildInfo.ParseCommandLineArgs();
+            BuildInfo.ParseCommandLineArgs();
 
             var buildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(buildInfo.BuildTarget);
             var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);

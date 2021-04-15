@@ -41,7 +41,8 @@ namespace XRTK.Editor.Extensions
         /// <param name="path">Optional path for the new asset.</param>
         /// <param name="fileName">Optional filename for the new asset.</param>
         /// <param name="ping">The new asset should be selected and opened in the inspector.</param>
-        public static T CreateAsset<T>(this T scriptableObject, string path, string fileName, bool ping) where T : ScriptableObject
+        /// <param name="unique">Is the new asset unique, or can we make copies?</param>
+        public static T CreateAsset<T>(this T scriptableObject, string path, string fileName, bool ping, bool unique = true) where T : ScriptableObject
         {
             var name = string.IsNullOrEmpty(fileName) ? $"{scriptableObject.GetType().Name}" : fileName;
 
@@ -60,16 +61,26 @@ namespace XRTK.Editor.Extensions
                 path = path.Replace(subtractedPath, string.Empty);
             }
 
+            path = path.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);
+
             if (!Directory.Exists(Path.GetFullPath(path)))
             {
                 Directory.CreateDirectory(Path.GetFullPath(path));
             }
 
-            path = path.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);
+            path = $"{path}/{name}.asset";
 
-            string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath($"{path}/{name}.asset");
+            if (unique)
+            {
+                AssetDatabase.GenerateUniqueAssetPath(path);
+            }
 
-            AssetDatabase.CreateAsset(scriptableObject, assetPathAndName);
+            if (File.Exists(Path.GetFullPath(path)))
+            {
+                return AssetDatabase.LoadAssetAtPath<T>(path);
+            }
+
+            AssetDatabase.CreateAsset(scriptableObject, path);
             AssetDatabase.SaveAssets();
 
             if (!EditorApplication.isUpdating)
@@ -77,7 +88,7 @@ namespace XRTK.Editor.Extensions
                 AssetDatabase.Refresh();
             }
 
-            scriptableObject = AssetDatabase.LoadAssetAtPath<T>(assetPathAndName);
+            scriptableObject = AssetDatabase.LoadAssetAtPath<T>(path);
 
             if (ping)
             {
@@ -125,7 +136,7 @@ namespace XRTK.Editor.Extensions
         public static T GetOrCreateAsset<T>(this T scriptableObject, string path, string fileName, bool ping) where T : ScriptableObject
         {
             return !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(scriptableObject, out var guid, out long _)
-                ? scriptableObject.CreateAsset(path, fileName, ping)
+                ? scriptableObject.CreateAsset(path, fileName, ping, false)
                 : AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guid));
         }
 

@@ -23,7 +23,6 @@ namespace XRTK.Editor.BuildPipeline
     {
         private bool isBuilding;
         private int platformIndex = -1;
-        private IBuildInfo buildInfo;
 
         private readonly List<IMixedRealityPlatform> platforms = new List<IMixedRealityPlatform>();
 
@@ -122,8 +121,6 @@ namespace XRTK.Editor.BuildPipeline
 
                         var buildTarget = platform.ValidBuildTargets[0]; // For now just get the highest priority one.
 
-                        buildInfo = UnityPlayerBuildTools.GetOrCreateBuildInfo();
-
                         if (!EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.BuildPipeline.GetBuildTargetGroup(buildTarget), buildTarget))
                         {
                             platformIndex = prevPlatformIndex;
@@ -168,12 +165,7 @@ namespace XRTK.Editor.BuildPipeline
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
 
-            if (buildInfo == null)
-            {
-                buildInfo = UnityPlayerBuildTools.GetOrCreateBuildInfo();
-            }
-
-            if (buildInfo is ScriptableObject buildObject)
+            if (UnityPlayerBuildTools.BuildInfo is ScriptableObject buildObject)
             {
                 var editor = UnityEditor.Editor.CreateEditor(buildObject);
 
@@ -214,11 +206,6 @@ namespace XRTK.Editor.BuildPipeline
 
             Debug.Assert(!isBuilding, "Build already in progress!");
             isBuilding = true;
-
-            if (buildInfo == null)
-            {
-                buildInfo = UnityPlayerBuildTools.GetOrCreateBuildInfo();
-            }
 
             UnityPlayerBuildTools.BuildUnityPlayer();
 

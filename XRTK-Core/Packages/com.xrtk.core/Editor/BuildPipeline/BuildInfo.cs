@@ -35,7 +35,7 @@ namespace XRTK.Editor.BuildPipeline
         public virtual BuildTarget BuildTarget { get; private set; }
 
         /// <inheritdoc />
-        public virtual IMixedRealityPlatform BuildPlatform { get; }
+        public virtual IMixedRealityPlatform BuildPlatform { get; internal set; }
 
         /// <inheritdoc />
         public bool IsCommandLine { get; private set; }

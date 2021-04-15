@@ -24,6 +24,5 @@
     "com.unity.modules.unitywebrequest": "1.0.0",
     "com.unity.textmeshpro": "2.1.4",
     "com.unity.xr.legacyinputhelpers": "2.1.7"
-  },
-  "unityRelease": "23f1"
+  }
 }

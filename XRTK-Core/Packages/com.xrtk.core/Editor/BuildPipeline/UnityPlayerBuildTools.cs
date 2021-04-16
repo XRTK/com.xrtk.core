@@ -150,7 +150,7 @@ namespace XRTK.Editor.BuildPipeline
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            Debug.LogWarning(buildInfo.FullOutputPath);
+            Debug.LogWarning($"{buildInfo.GetType().FullName}.{buildInfo.BuildPlatform} :|: {buildInfo.FullOutputPath}");
 
             var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();

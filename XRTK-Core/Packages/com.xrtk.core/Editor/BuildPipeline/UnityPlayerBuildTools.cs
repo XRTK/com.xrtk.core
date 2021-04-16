@@ -73,15 +73,16 @@ namespace XRTK.Editor.BuildPipeline
                     }
 
                     buildInfoInstance.BuildPlatform = MixedRealityPreferences.CurrentPlatformTarget;
+
+                    Debug.Assert(!buildInfoInstance.IsNull());
+                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\", false);
+                    Debug.Assert(!buildAsset.IsNull());
                 }
                 else
                 {
                     buildInfoInstance = buildInfo as BuildInfo;
                 }
 
-                Debug.Assert(!buildInfoInstance.IsNull());
-                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\", false);
-                Debug.Assert(!buildAsset.IsNull());
                 buildInfo = buildInfoInstance;
                 Debug.Assert(buildInfo != null);
 
@@ -150,7 +151,7 @@ namespace XRTK.Editor.BuildPipeline
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            Debug.LogWarning($"{buildInfo.GetType().FullName}.{buildInfo.BuildPlatform} :|: {buildInfo.FullOutputPath}");
+            Debug.LogWarning($"{MixedRealityPreferences.CurrentPlatformTarget} :|: {buildInfo.GetType().FullName} :|: {buildInfo.BuildPlatform} :|: {buildInfo.FullOutputPath}");
 
             var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();

@@ -45,8 +45,15 @@ namespace XRTK.Editor.BuildPipeline
         string AbsoluteOutputDirectory { get; }
 
         /// <summary>
+        /// The full output path for the final build.
+        /// </summary>
+        /// <remarks>May include <see cref="ExecutableFileExtension"/>.</remarks>
+        string FullOutputPath { get; }
+
+        /// <summary>
         /// The executable file extension for this build.
         /// </summary>
+        /// <remarks>If a directory is expected then keep as default.</remarks>
         string ExecutableFileExtension { get; }
 
         /// <summary>

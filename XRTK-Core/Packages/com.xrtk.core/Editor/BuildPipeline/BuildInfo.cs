@@ -69,6 +69,9 @@ namespace XRTK.Editor.BuildPipeline
         }
 
         /// <inheritdoc />
+        public string FullOutputPath => $"{OutputDirectory}/{BuildName}{ExecutableFileExtension}";
+
+        /// <inheritdoc />
         public virtual string ExecutableFileExtension
         {
             get

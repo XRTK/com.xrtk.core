@@ -85,10 +85,6 @@ namespace XRTK.Editor.BuildPipeline
                 buildInfo = buildInfoInstance;
                 Debug.Assert(buildInfo != null);
 
-                Debug.LogWarning(buildInfo.OutputDirectory);
-
-                Debug.LogWarning(buildInfo.AbsoluteOutputDirectory);
-
                 return buildInfo;
             }
         }
@@ -154,7 +150,7 @@ namespace XRTK.Editor.BuildPipeline
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{buildInfo.BuildName}{buildInfo.ExecutableFileExtension}";
+            Debug.LogWarning(buildInfo.FullOutputPath);
 
             var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
@@ -187,7 +183,7 @@ namespace XRTK.Editor.BuildPipeline
             {
                 buildReport = UnityEditor.BuildPipeline.BuildPlayer(
                     buildInfo.Scenes.ToArray(),
-                    buildInfo.OutputDirectory,
+                    buildInfo.FullOutputPath,
                     buildInfo.BuildTarget,
                     buildInfo.BuildOptions);
             }

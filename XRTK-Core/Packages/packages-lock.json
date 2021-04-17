@@ -36,7 +36,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.mobile.android-logcat": {
-      "version": "1.2.0",
+      "version": "1.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -57,7 +57,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.22",
+      "version": "1.1.24",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -68,8 +68,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "2.1.3",
-      "depth": 0,
+      "version": "2.1.4",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
@@ -78,7 +78,7 @@
     },
     "com.unity.ugui": {
       "version": "1.0.0",
-      "depth": 0,
+      "depth": 1,
       "source": "builtin",
       "dependencies": {
         "com.unity.modules.ui": "1.0.0",
@@ -114,7 +114,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.magicleap": {
-      "version": "4.1.3",
+      "version": "4.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -124,16 +124,19 @@
         "com.unity.ugui": "1.0.0",
         "com.unity.xr.arsubsystems": "2.1.2",
         "com.unity.xr.interactionsubsystems": "1.0.1",
-        "com.unity.xr.management": "3.0.6"
+        "com.unity.xr.management": "4.0.1"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.management": {
-      "version": "3.2.17",
+      "version": "4.0.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.legacyinputhelpers": "2.1.2",
+        "com.unity.modules.subsystems": "1.0.0",
+        "com.unity.modules.vr": "1.0.0",
+        "com.unity.modules.xr": "1.0.0",
+        "com.unity.xr.legacyinputhelpers": "2.1.7",
         "com.unity.subsystemregistration": "1.0.6"
       },
       "url": "https://packages.unity.com"
@@ -147,14 +150,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.xrtk.arcore": {
-      "version": "file:com.xrtk.arcore",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.1"
-      }
-    },
     "com.xrtk.core": {
       "version": "file:com.xrtk.core",
       "depth": 0,
@@ -163,24 +158,16 @@
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.vr": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.textmeshpro": "2.1.3",
+        "com.unity.textmeshpro": "2.1.4",
         "com.unity.xr.legacyinputhelpers": "2.1.7"
       }
     },
-    "com.xrtk.etee": {
-      "version": "file:com.xrtk.etee",
+    "com.xrtk.gltf": {
+      "version": "file:com.xrtk.gltf",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.1"
-      }
-    },
-    "com.xrtk.lenovo": {
-      "version": "file:com.xrtk.lenovo",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.1"
+        "com.xrtk.core": "0.2.10"
       }
     },
     "com.xrtk.lumin": {
@@ -188,15 +175,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.6"
-      }
-    },
-    "com.xrtk.nreal": {
-      "version": "file:com.xrtk.nreal",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.1"
+        "com.xrtk.core": "0.2.10"
       }
     },
     "com.xrtk.oculus": {
@@ -204,7 +183,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.6"
+        "com.xrtk.core": "0.2.10"
       }
     },
     "com.xrtk.sdk": {
@@ -212,24 +191,8 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.6",
-        "com.unity.textmeshpro": "2.1.3"
-      }
-    },
-    "com.xrtk.steamvr": {
-      "version": "file:com.xrtk.steamvr",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.1"
-      }
-    },
-    "com.xrtk.ultraleap": {
-      "version": "file:com.xrtk.ultraleap",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.xrtk.core": "0.2.1"
+        "com.xrtk.core": "0.2.10",
+        "com.unity.textmeshpro": "2.1.4"
       }
     },
     "com.xrtk.wmr": {
@@ -237,7 +200,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.5",
+        "com.xrtk.core": "0.2.10",
         "com.unity.xr.windowsmr.metro": "4.2.3"
       }
     },

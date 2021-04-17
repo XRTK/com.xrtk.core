@@ -31,3 +31,6 @@
 [submodule "Submodules/WindowsMixedReality"]
 	path = Submodules/WindowsMixedReality
 	url = https://github.com/XRTK/WindowsMixedReality.git
+[submodule "Submodules/glTF"]
+	path = Submodules/glTF
+	url = https://github.com/XRTK/glTF.git

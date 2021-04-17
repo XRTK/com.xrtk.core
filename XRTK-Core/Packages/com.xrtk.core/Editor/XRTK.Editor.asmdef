@@ -1,11 +1,8 @@
 {
     "name": "XRTK.Editor",
     "references": [
-        "GUID:f3241d040533491e8a1e2714b27c3111",
-        "GUID:b6de896d71a648ec9fa913e154ba8b46",
-        "GUID:395bd8dd25074437ba735310022f8f0a"
+        "GUID:f3241d040533491e8a1e2714b27c3111"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -15,5 +12,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

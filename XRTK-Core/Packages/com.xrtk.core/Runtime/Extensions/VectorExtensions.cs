@@ -34,16 +34,6 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Converts a <see cref="Vector3"/> to a <see cref="System.Numerics.Vector3"/>.
-        /// </summary>
-        /// <param name="v">The <see cref="Vector3"/> to convert.</param>
-        /// <returns></returns>
-        public static System.Numerics.Vector3 ToVector3(this Vector3 v)
-        {
-            return new System.Numerics.Vector3(v.x, v.y, v.z);
-        }
-
-        /// <summary>
         /// Rotate a two dimensional point by the specified angle.
         /// </summary>
         /// <param name="point"></param>

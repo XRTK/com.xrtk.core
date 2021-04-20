@@ -137,7 +137,18 @@ namespace XRTK.Editor.PropertyDrawers
 
             foreach (var assembly in assemblies)
             {
-                var compiledAssembly = Assembly.Load(assembly.name);
+                Assembly compiledAssembly;
+
+                try
+                {
+                    compiledAssembly = Assembly.Load(assembly.name);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                    continue;
+                }
+
                 FilterTypes(compiledAssembly, filter, excludedTypes, types);
             }
 

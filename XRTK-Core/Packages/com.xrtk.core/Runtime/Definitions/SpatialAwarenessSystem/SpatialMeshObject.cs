@@ -20,6 +20,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         {
             Id = id;
             GameObject = gameObject;
+            LastUpdated = DateTimeOffset.MinValue;
         }
 
         /// <summary>
@@ -75,5 +76,10 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// The <see cref="MeshCollider"/> reference for the Spatial Mesh Object.
         /// </summary>
         public MeshCollider Collider { get; private set; }
+
+        /// <summary>
+        /// The last time this object was updated.
+        /// </summary>
+        public DateTimeOffset LastUpdated { get; set; }
     }
 }

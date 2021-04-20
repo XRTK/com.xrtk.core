@@ -265,6 +265,7 @@ namespace XRTK.Providers.SpatialObservers
                 spatialMesh.GameObject.name = "Reclaimed Spatial Mesh Object";
                 spatialMesh.Mesh = null;
                 spatialMesh.Id = Guid.Empty;
+                spatialMesh.LastUpdated = DateTimeOffset.MinValue;
 
                 lock (spatialMeshObjectPool)
                 {
@@ -295,6 +296,7 @@ namespace XRTK.Providers.SpatialObservers
                 {
                     spatialMesh = spatialMeshObjectPool.Pop();
                     spatialMesh.Id = meshId;
+                    spatialMesh.GameObject.name = $"SpatialMesh_{meshId}";
                     spatialMeshObjects.Add(spatialMesh.Id, spatialMesh);
                     return spatialMesh;
                 }

@@ -134,15 +134,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.xr.windowsmr.metro": {
-      "version": "4.2.3",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.xrtk.core": {
       "version": "file:com.xrtk.core",
       "depth": 0,
@@ -193,8 +184,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.10",
-        "com.unity.xr.windowsmr.metro": "4.2.3"
+        "com.xrtk.core": "0.2.7"
       }
     },
     "com.unity.modules.ai": {

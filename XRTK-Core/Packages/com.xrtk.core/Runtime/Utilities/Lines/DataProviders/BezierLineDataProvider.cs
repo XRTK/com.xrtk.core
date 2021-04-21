@@ -145,10 +145,12 @@ namespace XRTK.Utilities.Lines
                     localOffset = Vector3.zero;
                     // If we're using local tangent points, apply this change to control point 2
                     if (useLocalTangentPoints)
+                    {
                         localOffset = point - controlPoints.Point1;
+                    }
 
                     controlPoints.Point1 = point;
-                    controlPoints.Point2 = controlPoints.Point2 + localOffset;
+                    controlPoints.Point2 += localOffset;
                     break;
                 case 1:
                     controlPoints.Point2 = point;
@@ -164,7 +166,7 @@ namespace XRTK.Utilities.Lines
                     }
 
                     controlPoints.Point4 = point;
-                    controlPoints.Point3 = controlPoints.Point3 + localOffset;
+                    controlPoints.Point3 += localOffset;
                     break;
             }
         }

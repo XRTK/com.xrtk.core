@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SpeechInputHandler
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.56.6.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,7 +73,7 @@
   
   <h1 id="XRTK_SDK_Input_Handlers_SpeechInputHandler" data-uid="XRTK.SDK.Input.Handlers.SpeechInputHandler" class="text-break">Class SpeechInputHandler
   </h1>
-  <div class="markdown level0 summary"><p>This component handles the speech input events raised form the <see cref="!:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem"></see>.</p>
+  <div class="markdown level0 summary"><p>This component handles the speech input events raised form the <a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -89,7 +89,7 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">IMixedRealitySpeechHandler</span></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySpeechHandler.html">IMixedRealitySpeechHandler</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -138,7 +138,7 @@
   <h5 id="XRTK_SDK_Input_Handlers_SpeechInputHandler_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[DisallowMultipleComponent]
-public class SpeechInputHandler : BaseInputHandler, IMixedRealitySpeechHandler</code></pre>
+public class SpeechInputHandler : BaseInputHandler, IMixedRealitySpeechHandler, IEventSystemHandler</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -168,7 +168,7 @@ public class SpeechInputHandler : BaseInputHandler, IMixedRealitySpeechHandler</
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">KeywordAndResponse</span>[]</td>
+        <td><a class="xref" href="XRTK.Definitions.InputSystem.KeywordAndResponse.html">KeywordAndResponse</a>[]</td>
         <td></td>
       </tr>
     </tbody>
@@ -192,9 +192,86 @@ public class SpeechInputHandler : BaseInputHandler, IMixedRealitySpeechHandler</
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.BaseInputHandler.html#XRTK_SDK_Input_Handlers_BaseInputHandler_Start">BaseInputHandler.Start()</a></div>
+  <h3 id="eii">Explicit Interface Implementations
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_SpeechInputHandler_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySpeechHandler_OnSpeechKeywordRecognized_XRTK_EventDatum_Input_SpeechEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.SpeechInputHandler.XRTK%23Interfaces%23InputSystem%23Handlers%23IMixedRealitySpeechHandler%23OnSpeechKeywordRecognized(XRTK.EventDatum.Input.SpeechEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/Input/Handlers/SpeechInputHandler.cs/#L69">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_SpeechInputHandler_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySpeechHandler_OnSpeechKeywordRecognized_" data-uid="XRTK.SDK.Input.Handlers.SpeechInputHandler.XRTK#Interfaces#InputSystem#Handlers#IMixedRealitySpeechHandler#OnSpeechKeywordRecognized*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_SpeechInputHandler_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySpeechHandler_OnSpeechKeywordRecognized_XRTK_EventDatum_Input_SpeechEventData_" data-uid="XRTK.SDK.Input.Handlers.SpeechInputHandler.XRTK#Interfaces#InputSystem#Handlers#IMixedRealitySpeechHandler#OnSpeechKeywordRecognized(XRTK.EventDatum.Input.SpeechEventData)">IMixedRealitySpeechHandler.OnSpeechKeywordRecognized(SpeechEventData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void IMixedRealitySpeechHandler.OnSpeechKeywordRecognized(SpeechEventData eventData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.EventDatum.Input.SpeechEventData.html">SpeechEventData</a></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">IMixedRealitySpeechHandler</span>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySpeechHandler.html">IMixedRealitySpeechHandler</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
 </article>
           </div>

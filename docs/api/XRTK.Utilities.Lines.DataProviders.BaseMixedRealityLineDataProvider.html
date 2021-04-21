@@ -1,0 +1,1636 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BaseMixedRealityLineDataProvider
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BaseMixedRealityLineDataProvider
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider">
+  
+  
+  <h1 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider" class="text-break">Class BaseMixedRealityLineDataProvider
+  </h1>
+  <div class="markdown level0 summary"><p>Base class that provides data about a line.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><span class="xref">BaseMixedRealityLineDataProvider</span></div>
+      <div class="level6"><a class="xref" href="XRTK.Utilities.Lines.BezierLineDataProvider.html">BezierLineDataProvider</a></div>
+      <div class="level6"><a class="xref" href="XRTK.Utilities.Lines.DataProviders.EllipseLineDataProvider.html">EllipseLineDataProvider</a></div>
+      <div class="level6"><a class="xref" href="XRTK.Utilities.Lines.DataProviders.ParabolaLineDataProvider.html">ParabolaLineDataProvider</a></div>
+      <div class="level6"><a class="xref" href="XRTK.Utilities.Lines.DataProviders.RectangleLineDataProvider.html">RectangleLineDataProvider</a></div>
+      <div class="level6"><a class="xref" href="XRTK.Utilities.Lines.DataProviders.SimpleLineDataProvider.html">SimpleLineDataProvider</a></div>
+      <div class="level6"><a class="xref" href="XRTK.Utilities.Lines.DataProviders.SplineDataProvider.html">SplineDataProvider</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Utilities.Lines.DataProviders.html">XRTK.Utilities.Lines.DataProviders</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.dll</h6>
+  <h5 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[ExecuteAlways]
+[DisallowMultipleComponent]
+public abstract class BaseMixedRealityLineDataProvider : MonoBehaviour</code></pre>
+  </div>
+  <h5 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Data to be consumed by other classes like the <a class="xref" href="XRTK.Utilities.Lines.Renderers.BaseMixedRealityLineRenderer.html">BaseMixedRealityLineRenderer</a></p>
+</div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UnclampedWorldLengthSearchSteps.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnclampedWorldLengthSearchSteps%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L19">View Source</a>
+  </span>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UnclampedWorldLengthSearchSteps" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnclampedWorldLengthSearchSteps">UnclampedWorldLengthSearchSteps</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int UnclampedWorldLengthSearchSteps = 10</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Distorters.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Distorters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L183">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Distorters_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Distorters*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Distorters" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Distorters">Distorters</h4>
+  <div class="markdown level1 summary"><p>A list of distorters that apply to this line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Distorter&gt; Distorters { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="XRTK.Utilities.Physics.Distorters.Distorter.html">Distorter</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DistortionMode.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DistortionMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L209">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DistortionMode_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DistortionMode*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DistortionMode" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DistortionMode">DistortionMode</h4>
+  <div class="markdown level1 summary"><p>NormalizedLength mode uses the DistortionStrength curve for distortion strength, Uniform uses UniformDistortionStrength along entire line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DistortionMode DistortionMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Lines.DistortionMode.html">DistortionMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DistortionStrength.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DistortionStrength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L218">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DistortionStrength_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DistortionStrength*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DistortionStrength" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DistortionStrength">DistortionStrength</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnimationCurve DistortionStrength { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.AnimationCurve.html">AnimationCurve</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_FirstPoint.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.FirstPoint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L234">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_FirstPoint_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.FirstPoint*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_FirstPoint" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.FirstPoint">FirstPoint</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 FirstPoint { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_FlipUpVector.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.FlipUpVector%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L114">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_FlipUpVector_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.FlipUpVector*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_FlipUpVector" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.FlipUpVector">FlipUpVector</h4>
+  <div class="markdown level1 summary"><p>Reverses up vector when determining rotation along line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool FlipUpVector { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LastPoint.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LastPoint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L240">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LastPoint_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LastPoint*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LastPoint" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LastPoint">LastPoint</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 LastPoint { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineEndClamp.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineEndClamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L48">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineEndClamp_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineEndClamp*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineEndClamp" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineEndClamp">LineEndClamp</h4>
+  <div class="markdown level1 summary"><p>Clamps the line's normalized end point. This setting will affect line renderers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float LineEndClamp { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineStartClamp.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineStartClamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L34">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineStartClamp_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineStartClamp*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineStartClamp" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineStartClamp">LineStartClamp</h4>
+  <div class="markdown level1 summary"><p>Clamps the line's normalized start point. This setting will affect line renderers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float LineStartClamp { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineTransform.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineTransform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L61">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineTransform_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineTransform*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_LineTransform" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.LineTransform">LineTransform</h4>
+  <div class="markdown level1 summary"><p>Transform to use when translating points from local to world space. If null, this object's transform is used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform LineTransform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Loops.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Loops%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L75">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Loops_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Loops*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Loops" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Loops">Loops</h4>
+  <div class="markdown level1 summary"><p>Controls whether this line loops</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool Loops { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Loops_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Some classes override this setting.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_ManualUpVectorBlend.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.ManualUpVectorBlend%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L141">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_ManualUpVectorBlend_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.ManualUpVectorBlend*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_ManualUpVectorBlend" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.ManualUpVectorBlend">ManualUpVectorBlend</h4>
+  <div class="markdown level1 summary"><p>The weight of manual up vectors in Velocity rotation mode</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ManualUpVectorBlend { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_ManualUpVectors.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.ManualUpVectors%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L154">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_ManualUpVectors_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.ManualUpVectors*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_ManualUpVectors" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.ManualUpVectors">ManualUpVectors</h4>
+  <div class="markdown level1 summary"><p>These vectors are used with ManualUpVectorBlend to determine rotation along the line in Velocity rotation mode. Vectors are distributed along the normalized length of the line.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3[] ManualUpVectors { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OriginOffset.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OriginOffset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L127">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OriginOffset_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OriginOffset*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OriginOffset" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OriginOffset">OriginOffset</h4>
+  <div class="markdown level1 summary"><p>Local space offset to transform position. Used to determine rotation along line in RelativeToOrigin rotation mode</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 OriginOffset { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_PointCount.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.PointCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L251">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_PointCount_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.PointCount*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_PointCount" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.PointCount">PointCount</h4>
+  <div class="markdown level1 summary"><p>The number of points this line has.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract int PointCount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_RotationMode.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.RotationMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L101">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_RotationMode_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.RotationMode*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_RotationMode" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.RotationMode">RotationMode</h4>
+  <div class="markdown level1 summary"><p>The rotation mode used in the GetRotation function. You can visualize rotations by checking Draw Rotations under Editor Settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LineRotationMode RotationMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Lines.LineRotationMode.html">LineRotationMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_TransformMode.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.TransformMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L88">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_TransformMode_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.TransformMode*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_TransformMode" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.TransformMode">TransformMode</h4>
+  <div class="markdown level1 summary"><p>Defines how a base line data provider will transform its points</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinePointTransformMode TransformMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Lines.LinePointTransformMode.html">LinePointTransformMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UnClampedWorldLength.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnClampedWorldLength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L24">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UnClampedWorldLength_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnClampedWorldLength*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UnClampedWorldLength" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnClampedWorldLength">UnClampedWorldLength</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float UnClampedWorldLength { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UniformDistortionStrength.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UniformDistortionStrength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L228">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UniformDistortionStrength_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UniformDistortionStrength*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UniformDistortionStrength" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UniformDistortionStrength">UniformDistortionStrength</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float UniformDistortionStrength { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_VelocitySearchRange.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.VelocitySearchRange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L171">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_VelocitySearchRange_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.VelocitySearchRange*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_VelocitySearchRange" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.VelocitySearchRange">VelocitySearchRange</h4>
+  <div class="markdown level1 summary"><p>Used in Velocity rotation mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float VelocitySearchRange { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_VelocitySearchRange_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Smaller values are more accurate but more expensive</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DrawUnselectedGizmosPreview.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DrawUnselectedGizmosPreview%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L682">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DrawUnselectedGizmosPreview_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DrawUnselectedGizmosPreview*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_DrawUnselectedGizmosPreview" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.DrawUnselectedGizmosPreview">DrawUnselectedGizmosPreview()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void DrawUnselectedGizmosPreview()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetClosestPoint_UnityEngine_Vector3_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetClosestPoint(UnityEngine.Vector3%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L498">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetClosestPoint_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetClosestPoint*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetClosestPoint_UnityEngine_Vector3_System_Int32_System_Int32_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetClosestPoint(UnityEngine.Vector3,System.Int32,System.Int32)">GetClosestPoint(Vector3, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Iterates along line until it finds the point closest to worldPosition</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GetClosestPoint(Vector3 worldPosition, int resolution = 5, int maxIterations = 5)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">resolution</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">maxIterations</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetNormalizedLengthFromWorldLength_System_Single_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetNormalizedLengthFromWorldLength(System.Single%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L322">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetNormalizedLengthFromWorldLength_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetNormalizedLengthFromWorldLength*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetNormalizedLengthFromWorldLength_System_Single_System_Int32_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetNormalizedLengthFromWorldLength(System.Single,System.Int32)">GetNormalizedLengthFromWorldLength(Single, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns a normalized length corresponding to a world length
+Useful for determining LineStartClamp / LineEndClamp values</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GetNormalizedLengthFromWorldLength(float worldLength, int searchResolution = 10)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">worldLength</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">searchResolution</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetNormalizedLengthFromWorldPos_UnityEngine_Vector3_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetNormalizedLengthFromWorldPos(UnityEngine.Vector3%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L511">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetNormalizedLengthFromWorldPos_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetNormalizedLengthFromWorldPos*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetNormalizedLengthFromWorldPos_UnityEngine_Vector3_System_Int32_System_Int32_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetNormalizedLengthFromWorldPos(UnityEngine.Vector3,System.Int32,System.Int32)">GetNormalizedLengthFromWorldPos(Vector3, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Iterates along line until it finds the length closest to worldPosition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GetNormalizedLengthFromWorldPos(Vector3 worldPosition, int resolution = 5, int maxIterations = 5)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">resolution</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">maxIterations</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPoint_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPoint(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L463">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPoint_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPoint*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPoint_System_Int32_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPoint(System.Int32)">GetPoint(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets a point along the line at the specified index</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GetPoint(int pointIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">pointIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPoint_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPoint(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L441">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPoint_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPoint*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPoint_System_Single_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPoint(System.Single)">GetPoint(Single)</h4>
+  <div class="markdown level1 summary"><p>Gets a point along the line at the specified normalized length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GetPoint(float normalizedLength)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">normalizedLength</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPointInternal_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPointInternal(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L274">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPointInternal_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPointInternal*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPointInternal_System_Int32_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPointInternal(System.Int32)">GetPointInternal(Int32)</h4>
+  <div class="markdown level1 summary"><p>Get a point based on point index
+Point index will be pre-clamped</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract Vector3 GetPointInternal(int pointIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">pointIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPointInternal_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPointInternal(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L266">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPointInternal_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPointInternal*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetPointInternal_System_Single_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetPointInternal(System.Single)">GetPointInternal(Single)</h4>
+  <div class="markdown level1 summary"><p>Get a point based on normalized distance along line
+Normalized distance will be pre-clamped</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract Vector3 GetPointInternal(float normalizedLength)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">normalizedLength</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetRotation_System_Int32_XRTK_Definitions_Lines_LineRotationMode_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetRotation(System.Int32%2CXRTK.Definitions.Lines.LineRotationMode)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L431">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetRotation_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetRotation*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetRotation_System_Int32_XRTK_Definitions_Lines_LineRotationMode_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetRotation(System.Int32,XRTK.Definitions.Lines.LineRotationMode)">GetRotation(Int32, LineRotationMode)</h4>
+  <div class="markdown level1 summary"><p>Gets the rotation of a point along the line at the specified index</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion GetRotation(int pointIndex, LineRotationMode lineRotationMode = LineRotationMode.None)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">pointIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Lines.LineRotationMode.html">LineRotationMode</a></td>
+        <td><span class="parametername">lineRotationMode</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetRotation_System_Single_XRTK_Definitions_Lines_LineRotationMode_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetRotation(System.Single%2CXRTK.Definitions.Lines.LineRotationMode)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L385">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetRotation_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetRotation*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetRotation_System_Single_XRTK_Definitions_Lines_LineRotationMode_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetRotation(System.Single,XRTK.Definitions.Lines.LineRotationMode)">GetRotation(Single, LineRotationMode)</h4>
+  <div class="markdown level1 summary"><p>Gets the rotation of a point along the line at the specified length</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion GetRotation(float normalizedLength, LineRotationMode lineRotationMode = LineRotationMode.None)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">normalizedLength</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Lines.LineRotationMode.html">LineRotationMode</a></td>
+        <td><span class="parametername">lineRotationMode</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUnClampedPoint_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUnClampedPoint(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L452">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUnClampedPoint_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUnClampedPoint*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUnClampedPoint_System_Single_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUnClampedPoint(System.Single)">GetUnClampedPoint(Single)</h4>
+  <div class="markdown level1 summary"><p>Gets a point along the line at the specified length without using LineStartClamp or LineEndClamp</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GetUnClampedPoint(float normalizedLength)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">normalizedLength</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUnClampedWorldLengthInternal.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUnClampedWorldLengthInternal%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L290">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUnClampedWorldLengthInternal_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUnClampedWorldLengthInternal*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUnClampedWorldLengthInternal" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUnClampedWorldLengthInternal">GetUnClampedWorldLengthInternal()</h4>
+  <div class="markdown level1 summary"><p>Get the UnClamped world length of the line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract float GetUnClampedWorldLengthInternal()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUpVectorInternal_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUpVectorInternal(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L281">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUpVectorInternal_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUpVectorInternal*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetUpVectorInternal_System_Single_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetUpVectorInternal(System.Single)">GetUpVectorInternal(Single)</h4>
+  <div class="markdown level1 summary"><p>Gets the up vector at a normalized length along line (used for rotation)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual Vector3 GetUpVectorInternal(float normalizedLength)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">normalizedLength</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetVelocity_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetVelocity(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L359">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetVelocity_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetVelocity*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_GetVelocity_System_Single_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.GetVelocity(System.Single)">GetVelocity(Single)</h4>
+  <div class="markdown level1 summary"><p>Gets the velocity along the line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GetVelocity(float normalizedLength)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">normalizedLength</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OnEnable.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OnEnable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L302">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OnEnable_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OnEnable*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OnEnable" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OnEnable">OnEnable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnEnable()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OnValidate.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OnValidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L296">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OnValidate_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OnValidate*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_OnValidate" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.OnValidate">OnValidate()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnValidate()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_SetPoint_System_Int32_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.SetPoint(System.Int32%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L480">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_SetPoint_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.SetPoint*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_SetPoint_System_Int32_UnityEngine_Vector3_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.SetPoint(System.Int32,UnityEngine.Vector3)">SetPoint(Int32, Vector3)</h4>
+  <div class="markdown level1 summary"><p>Sets a point in the line
+This function is not guaranteed to have an effect</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPoint(int pointIndex, Vector3 point)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">pointIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">point</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_SetPointInternal_System_Int32_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.SetPointInternal(System.Int32%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L258">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_SetPointInternal_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.SetPointInternal*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_SetPointInternal_System_Int32_UnityEngine_Vector3_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.SetPointInternal(System.Int32,UnityEngine.Vector3)">SetPointInternal(Int32, Vector3)</h4>
+  <div class="markdown level1 summary"><p>Sets the point at index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void SetPointInternal(int pointIndex, Vector3 point)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">pointIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">point</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Update.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L308">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Update_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Update*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_Update" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Update()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UpdateMatrix.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UpdateMatrix%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L542">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UpdateMatrix_" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UpdateMatrix*"></a>
+  <h4 id="XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UpdateMatrix" data-uid="XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UpdateMatrix">UpdateMatrix()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateMatrix()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Lines/DataProviders/BaseMixedRealityLineDataProvider.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

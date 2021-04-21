@@ -18,6 +18,7 @@ namespace XRTK.Extensions
         public static void DontDestroyOnLoad(this Object @object)
         {
 #if UNITY_EDITOR
+            // ReSharper disable once EnforceIfStatementBraces
             if (UnityEditor.EditorApplication.isPlaying)
 #endif
                 Object.DontDestroyOnLoad(@object);

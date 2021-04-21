@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BaseEventSystem
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BaseEventSystem
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Services.BaseEventSystem">
+  
+  
+  <h1 id="XRTK_Services_BaseEventSystem" data-uid="XRTK.Services.BaseEventSystem" class="text-break">Class BaseEventSystem
+  </h1>
+  <div class="markdown level0 summary"><p>Base Event System that can be inherited from to give other system features event capabilities.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="XRTK.Services.BaseService.html">BaseService</a></div>
+    <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
+    <div class="level3"><a class="xref" href="XRTK.Services.BaseSystem.html">BaseSystem</a></div>
+    <div class="level4"><span class="xref">BaseEventSystem</span></div>
+      <div class="level5"><a class="xref" href="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html">MixedRealityDiagnosticsSystem</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Services.InputSystem.MixedRealityInputSystem.html">MixedRealityInputSystem</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.html">MixedRealityNetworkingSystem</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.html">MixedRealitySpatialAwarenessSystem</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Services.Teleportation.MixedRealityTeleportSystem.html">MixedRealityTeleportSystem</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Reset">BaseService.Reset()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Enable">BaseService.Enable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Update">BaseService.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_LateUpdate">BaseService.LateUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_FixedUpdate">BaseService.FixedUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Disable">BaseService.Disable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Destroy">BaseService.Destroy()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationFocus_System_Boolean_">BaseService.OnApplicationFocus(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationPause_System_Boolean_">BaseService.OnApplicationPause(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Dispose">BaseService.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnDispose_System_Boolean_">BaseService.OnDispose(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Services.html">XRTK.Services</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.dll</h6>
+  <h5 id="XRTK_Services_BaseEventSystem_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class BaseEventSystem : BaseSystem, IMixedRealityEventSystem, IMixedRealitySystem, IMixedRealityService, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseEventSystem__ctor_XRTK_Definitions_BaseMixedRealityProfile_.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseEventSystem.%23ctor(XRTK.Definitions.BaseMixedRealityProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseEventSystem.cs/#L23">View Source</a>
+  </span>
+  <a id="XRTK_Services_BaseEventSystem__ctor_" data-uid="XRTK.Services.BaseEventSystem.#ctor*"></a>
+  <h4 id="XRTK_Services_BaseEventSystem__ctor_XRTK_Definitions_BaseMixedRealityProfile_" data-uid="XRTK.Services.BaseEventSystem.#ctor(XRTK.Definitions.BaseMixedRealityProfile)">BaseEventSystem(BaseMixedRealityProfile)</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected BaseEventSystem(BaseMixedRealityProfile profile)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseEventSystem_EventListeners.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseEventSystem.EventListeners%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseEventSystem.cs/#L35">View Source</a>
+  </span>
+  <a id="XRTK_Services_BaseEventSystem_EventListeners_" data-uid="XRTK.Services.BaseEventSystem.EventListeners*"></a>
+  <h4 id="XRTK_Services_BaseEventSystem_EventListeners" data-uid="XRTK.Services.BaseEventSystem.EventListeners">EventListeners</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;GameObject&gt; EventListeners { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseEventSystem_HandleEvent__1_UnityEngine_EventSystems_BaseEventData_UnityEngine_EventSystems_ExecuteEvents_EventFunction___0__.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseEventSystem.HandleEvent%60%601(UnityEngine.EventSystems.BaseEventData%2CUnityEngine.EventSystems.ExecuteEvents.EventFunction%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseEventSystem.cs/#L38">View Source</a>
+  </span>
+  <a id="XRTK_Services_BaseEventSystem_HandleEvent_" data-uid="XRTK.Services.BaseEventSystem.HandleEvent*"></a>
+  <h4 id="XRTK_Services_BaseEventSystem_HandleEvent__1_UnityEngine_EventSystems_BaseEventData_UnityEngine_EventSystems_ExecuteEvents_EventFunction___0__" data-uid="XRTK.Services.BaseEventSystem.HandleEvent``1(UnityEngine.EventSystems.BaseEventData,UnityEngine.EventSystems.ExecuteEvents.EventFunction{``0})">HandleEvent&lt;T&gt;(BaseEventData, ExecuteEvents.EventFunction&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void HandleEvent&lt;T&gt;(BaseEventData eventData, ExecuteEvents.EventFunction&lt;T&gt; eventHandler)
+
+    where T : IEventSystemHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.EventSystems.BaseEventData</span></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.EventSystems.ExecuteEvents.EventFunction</span>&lt;T&gt;</td>
+        <td><span class="parametername">eventHandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseEventSystem_Register_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseEventSystem.Register(UnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseEventSystem.cs/#L54">View Source</a>
+  </span>
+  <a id="XRTK_Services_BaseEventSystem_Register_" data-uid="XRTK.Services.BaseEventSystem.Register*"></a>
+  <h4 id="XRTK_Services_BaseEventSystem_Register_UnityEngine_GameObject_" data-uid="XRTK.Services.BaseEventSystem.Register(UnityEngine.GameObject)">Register(GameObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Register(GameObject listener)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
+        <td><span class="parametername">listener</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseEventSystem_Unregister_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseEventSystem.Unregister(UnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseEventSystem.cs/#L75">View Source</a>
+  </span>
+  <a id="XRTK_Services_BaseEventSystem_Unregister_" data-uid="XRTK.Services.BaseEventSystem.Unregister*"></a>
+  <h4 id="XRTK_Services_BaseEventSystem_Unregister_UnityEngine_GameObject_" data-uid="XRTK.Services.BaseEventSystem.Unregister(UnityEngine.GameObject)">Unregister(GameObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Unregister(GameObject listener)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
+        <td><span class="parametername">listener</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseEventSystem.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseEventSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseEventSystem.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

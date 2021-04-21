@@ -357,7 +357,9 @@ namespace XRTK.Utilities
                     for (int ind = 0; ind < rays.Count; ++ind)
                     {
                         if (DistanceOfPointToLine(rays[ind], testPoint) < ransac_threshold)
+                        {
                             ++numInliersForIteration;
+                        }
                     }
 
                     // remember best

@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SimulatedHandControllerDataProvider
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SimulatedHandControllerDataProvider
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider">
+  
+  
+  <h1 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider" class="text-break">Class SimulatedHandControllerDataProvider
+  </h1>
+  <div class="markdown level0 summary"><p>Hand controller type for simulated hand controllers.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="XRTK.Services.BaseService.html">BaseService</a></div>
+    <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
+    <div class="level3"><a class="xref" href="XRTK.Services.BaseDataProvider.html">BaseDataProvider</a></div>
+    <div class="level4"><a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html">BaseControllerDataProvider</a></div>
+    <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html">BaseSimulatedControllerDataProvider</a></div>
+    <div class="level6"><span class="xref">SimulatedHandControllerDataProvider</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.Hands.ISimulatedHandControllerDataProvider.html">ISimulatedHandControllerDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.ISimulatedControllerDataProvider.html">ISimulatedControllerDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.Hands.IMixedRealityHandControllerDataProvider.html">IMixedRealityHandControllerDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_LeftControllerIsAlwaysVisible">BaseSimulatedControllerDataProvider.LeftControllerIsAlwaysVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_RightControllerIsAlwaysVisible">BaseSimulatedControllerDataProvider.RightControllerIsAlwaysVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_LeftControllerIsTracked">BaseSimulatedControllerDataProvider.LeftControllerIsTracked</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_RightControllerIsTracked">BaseSimulatedControllerDataProvider.RightControllerIsTracked</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_SimulatedUpdateFrequency">BaseSimulatedControllerDataProvider.SimulatedUpdateFrequency</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_ControllerHideTimeout">BaseSimulatedControllerDataProvider.ControllerHideTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_DefaultDistance">BaseSimulatedControllerDataProvider.DefaultDistance</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_DepthMultiplier">BaseSimulatedControllerDataProvider.DepthMultiplier</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_JitterAmount">BaseSimulatedControllerDataProvider.JitterAmount</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_ToggleLeftPersistentKey">BaseSimulatedControllerDataProvider.ToggleLeftPersistentKey</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_LeftControllerTrackedKey">BaseSimulatedControllerDataProvider.LeftControllerTrackedKey</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_ToggleRightPersistentKey">BaseSimulatedControllerDataProvider.ToggleRightPersistentKey</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_RightControllerTrackedKey">BaseSimulatedControllerDataProvider.RightControllerTrackedKey</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_RotationSpeed">BaseSimulatedControllerDataProvider.RotationSpeed</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_Enable">BaseSimulatedControllerDataProvider.Enable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_Update">BaseSimulatedControllerDataProvider.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_Disable">BaseSimulatedControllerDataProvider.Disable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_RemoveAllControllers">BaseSimulatedControllerDataProvider.RemoveAllControllers()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_TryGetController_XRTK_Definitions_Utilities_Handedness_XRTK_Providers_Controllers_BaseController__">BaseSimulatedControllerDataProvider.TryGetController(Handedness, BaseController)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_InputSystem">BaseControllerDataProvider.InputSystem</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_ActiveControllers">BaseControllerDataProvider.ActiveControllers</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_GetControllerMappingProfile_System_Type_XRTK_Definitions_Utilities_Handedness_">BaseControllerDataProvider.GetControllerMappingProfile(Type, Handedness)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_AddController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_">BaseControllerDataProvider.AddController(IMixedRealityController)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_RemoveController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_">BaseControllerDataProvider.RemoveController(IMixedRealityController)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_Priority">BaseDataProvider.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Reset">BaseService.Reset()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_LateUpdate">BaseService.LateUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_FixedUpdate">BaseService.FixedUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Destroy">BaseService.Destroy()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationFocus_System_Boolean_">BaseService.OnApplicationFocus(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationPause_System_Boolean_">BaseService.OnApplicationPause(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Dispose">BaseService.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnDispose_System_Boolean_">BaseService.OnDispose(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Providers.Controllers.Simulation.Hands.html">XRTK.Providers.Controllers.Simulation.Hands</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.dll</h6>
+  <h5 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Guid(&quot;07512FFC-5128-434C-B7BF-5CD7CA8EF853&quot;)]
+public class SimulatedHandControllerDataProvider : BaseSimulatedControllerDataProvider, ISimulatedHandControllerDataProvider, ISimulatedControllerDataProvider, IMixedRealityHandControllerDataProvider, IMixedRealityControllerDataProvider, IMixedRealityInputDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_Simulation_Hands_SimulatedHandControllerDataProviderProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.Controllers.Simulation.Hands.SimulatedHandControllerDataProviderProfile%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L27">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider__ctor_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.#ctor*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_Simulation_Hands_SimulatedHandControllerDataProviderProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.Simulation.Hands.SimulatedHandControllerDataProviderProfile,XRTK.Interfaces.InputSystem.IMixedRealityInputSystem)">SimulatedHandControllerDataProvider(String, UInt32, SimulatedHandControllerDataProviderProfile, IMixedRealityInputSystem)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
+        <td><span class="parametername">priority</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Controllers.Simulation.Hands.SimulatedHandControllerDataProviderProfile.html">SimulatedHandControllerDataProviderProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_BoundsMode.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.BoundsMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L104">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_BoundsMode_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.BoundsMode*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_BoundsMode" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.BoundsMode">BoundsMode</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HandBoundsLOD BoundsMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Controllers.Hands.HandBoundsLOD.html">HandBoundsLOD</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_HandPhysicsEnabled.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.HandPhysicsEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L98">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_HandPhysicsEnabled_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.HandPhysicsEnabled*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_HandPhysicsEnabled" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.HandPhysicsEnabled">HandPhysicsEnabled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HandPhysicsEnabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_HandPoseAnimationSpeed.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.HandPoseAnimationSpeed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L95">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_HandPoseAnimationSpeed_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.HandPoseAnimationSpeed*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_HandPoseAnimationSpeed" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.HandPoseAnimationSpeed">HandPoseAnimationSpeed</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float HandPoseAnimationSpeed { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_RenderingMode.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.RenderingMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L107">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_RenderingMode_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.RenderingMode*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_RenderingMode" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.RenderingMode">RenderingMode</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HandRenderingMode RenderingMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Controllers.Hands.HandRenderingMode.html">HandRenderingMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_UseTriggers.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.UseTriggers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L101">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_UseTriggers_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.UseTriggers*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_UseTriggers" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.UseTriggers">UseTriggers</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseTriggers { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_CreateAndRegisterSimulatedController_XRTK_Definitions_Utilities_Handedness_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.CreateAndRegisterSimulatedController(XRTK.Definitions.Utilities.Handedness)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L138">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_CreateAndRegisterSimulatedController_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.CreateAndRegisterSimulatedController*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_CreateAndRegisterSimulatedController_XRTK_Definitions_Utilities_Handedness_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.CreateAndRegisterSimulatedController(XRTK.Definitions.Utilities.Handedness)">CreateAndRegisterSimulatedController(Handedness)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.Handedness.html">Handedness</a></td>
+        <td><span class="parametername">handedness</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealitySimulatedController.html">IMixedRealitySimulatedController</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_CreateAndRegisterSimulatedController_XRTK_Definitions_Utilities_Handedness_">BaseSimulatedControllerDataProvider.CreateAndRegisterSimulatedController(Handedness)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_RemoveController_XRTK_Definitions_Utilities_Handedness_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.RemoveController(XRTK.Definitions.Utilities.Handedness)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L159">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_RemoveController_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.RemoveController*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_RemoveController_XRTK_Definitions_Utilities_Handedness_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.RemoveController(XRTK.Definitions.Utilities.Handedness)">RemoveController(Handedness)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void RemoveController(Handedness handedness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.Handedness.html">Handedness</a></td>
+        <td><span class="parametername">handedness</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_RemoveController_XRTK_Definitions_Utilities_Handedness_">BaseSimulatedControllerDataProvider.RemoveController(Handedness)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_UpdateSimulatedController_XRTK_Interfaces_Providers_Controllers_IMixedRealitySimulatedController_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.UpdateSimulatedController(XRTK.Interfaces.Providers.Controllers.IMixedRealitySimulatedController)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L112">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_UpdateSimulatedController_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.UpdateSimulatedController*"></a>
+  <h4 id="XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider_UpdateSimulatedController_XRTK_Interfaces_Providers_Controllers_IMixedRealitySimulatedController_" data-uid="XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider.UpdateSimulatedController(XRTK.Interfaces.Providers.Controllers.IMixedRealitySimulatedController)">UpdateSimulatedController(IMixedRealitySimulatedController)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealitySimulatedController.html">IMixedRealitySimulatedController</a></td>
+        <td><span class="parametername">simulatedController</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html#XRTK_Providers_Controllers_Simulation_BaseSimulatedControllerDataProvider_UpdateSimulatedController_XRTK_Interfaces_Providers_Controllers_IMixedRealitySimulatedController_">BaseSimulatedControllerDataProvider.UpdateSimulatedController(IMixedRealitySimulatedController)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.Hands.ISimulatedHandControllerDataProvider.html">ISimulatedHandControllerDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.ISimulatedControllerDataProvider.html">ISimulatedControllerDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.Hands.IMixedRealityHandControllerDataProvider.html">IMixedRealityHandControllerDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_Simulation_Hands_SimulatedHandControllerDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.Simulation.Hands.SimulatedHandControllerDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/Simulation/Hands/SimulatedHandControllerDataProvider.cs/#L23" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

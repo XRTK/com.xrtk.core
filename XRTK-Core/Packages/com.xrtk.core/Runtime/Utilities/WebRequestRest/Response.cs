@@ -31,10 +31,10 @@ namespace XRTK.Utilities.WebRequestRest
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="successful"></param>
-        /// <param name="responseBody"></param>
-        /// <param name="responseData"></param>
-        /// <param name="responseCode"></param>
+        /// <param name="successful">Was the REST call successful?</param>
+        /// <param name="responseBody">Response body from the resource.</param>
+        /// <param name="responseData">Response data from the resource.</param>
+        /// <param name="responseCode">Response code from the resource.</param>
         public Response(bool successful, string responseBody, byte[] responseData, long responseCode)
         {
             Successful = successful;

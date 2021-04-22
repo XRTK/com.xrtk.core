@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -12,7 +12,6 @@ using XRTK.Utilities.Async;
 
 namespace XRTK.Utilities.WebRequestRest
 {
-
     /// <summary>
     /// REST Class for CRUD Transactions.
     /// </summary>
@@ -117,6 +116,7 @@ namespace XRTK.Utilities.WebRequestRest
                 webRequest.downloadHandler = new DownloadHandlerBuffer();
                 webRequest.SetRequestHeader("Content-Type", "application/json");
                 webRequest.SetRequestHeader("Accept", "application/json");
+
                 return await ProcessRequestAsync(webRequest, timeout, headers);
             }
         }
@@ -136,6 +136,7 @@ namespace XRTK.Utilities.WebRequestRest
                 webRequest.uploadHandler = new UploadHandlerRaw(bodyData);
                 webRequest.downloadHandler = new DownloadHandlerBuffer();
                 webRequest.SetRequestHeader("Content-Type", "application/octet-stream");
+
                 return await ProcessRequestAsync(webRequest, timeout, headers);
             }
         }
@@ -157,6 +158,7 @@ namespace XRTK.Utilities.WebRequestRest
             using (var webRequest = UnityWebRequest.Put(query, jsonData))
             {
                 webRequest.SetRequestHeader("Content-Type", "application/json");
+
                 return await ProcessRequestAsync(webRequest, timeout, headers);
             }
         }
@@ -174,6 +176,7 @@ namespace XRTK.Utilities.WebRequestRest
             using (var webRequest = UnityWebRequest.Put(query, bodyData))
             {
                 webRequest.SetRequestHeader("Content-Type", "application/octet-stream");
+
                 return await ProcessRequestAsync(webRequest, timeout, headers);
             }
         }
@@ -219,6 +222,7 @@ namespace XRTK.Utilities.WebRequestRest
                 webRequest.method == UnityWebRequest.kHttpVerbPUT)
             {
                 string contentType = webRequest.GetRequestHeader("Content-Type");
+
                 if (contentType != null)
                 {
                     contentType = contentType.Replace("\"", "");
@@ -230,19 +234,101 @@ namespace XRTK.Utilities.WebRequestRest
 
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                if (webRequest.responseCode == 401) { return new Response(false, "Invalid Credentials", null, webRequest.responseCode); }
+                if (webRequest.responseCode == 401)
+                {
+                    return new Response(false, "Invalid Credentials", null, webRequest.responseCode, webRequest.downloadHandler);
+                }
 
                 if (webRequest.GetResponseHeaders() == null)
                 {
-                    return new Response(false, "Device Unavailable", null, webRequest.responseCode);
+                    return new Response(false, "Invalid Headers", null, webRequest.responseCode, webRequest.downloadHandler);
                 }
 
-                string responseHeaders = webRequest.GetResponseHeaders().Aggregate(string.Empty, (current, header) => $"\n{header.Key}: {header.Value}");
-                Debug.LogError($"REST Error: {webRequest.responseCode}\n{webRequest.downloadHandler?.text}{responseHeaders}");
-                return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", webRequest.downloadHandler?.data, webRequest.responseCode);
+                var responseHeaders = webRequest.GetResponseHeaders().Aggregate(string.Empty, (current, header) => $"\n{header.Key}: {header.Value}");
+
+                Debug.LogError($"REST Error {webRequest.responseCode}:{webRequest.downloadHandler?.text}{responseHeaders}");
+
+                return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", webRequest.downloadHandler?.data, webRequest.responseCode, webRequest.downloadHandler);
             }
 
-            return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode);
+            return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode, webRequest.downloadHandler);
         }
+
+        #region Get Multimedia Content
+
+        /// <summary>
+        /// Download a <see cref="Texture2D"/> from the provided <see cref="url"/>.
+        /// </summary>
+        /// <param name="url">The url to download the <see cref="Texture2D"/> from.</param>
+        /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="timeout">Optional time in seconds before request expires.</param>
+        /// <returns>A new <see cref="Texture2D"/> instance.</returns>
+        public static async Task<Texture2D> DownloadTextureAsync(string url, Dictionary<string, string> headers = null, int timeout = -1)
+        {
+            using (var webRequest = UnityWebRequestTexture.GetTexture(url))
+            {
+                var response = await ProcessRequestAsync(webRequest, timeout, headers);
+
+                if (!response.Successful)
+                {
+                    Debug.LogError($"Failed to download texture from \"{url}\"!");
+
+                    return null;
+                }
+
+                return ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
+            }
+        }
+
+        /// <summary>
+        /// Download a <see cref="AudioClip"/> from the provided <see cref="url"/>.
+        /// </summary>
+        /// <param name="url">The url to download the <see cref="AudioClip"/> from.</param>
+        /// <param name="audioType"><see cref="AudioType"/> to download.</param>
+        /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="timeout">Optional time in seconds before request expires.</param>
+        /// <returns>A new <see cref="AudioClip"/> instance.</returns>
+        public static async Task<AudioClip> DownloadAudioClipAsync(string url, AudioType audioType, Dictionary<string, string> headers = null, int timeout = -1)
+        {
+            using (var webRequest = UnityWebRequestMultimedia.GetAudioClip(url, audioType))
+            {
+                var response = await ProcessRequestAsync(webRequest, timeout, headers);
+
+                if (!response.Successful)
+                {
+                    Debug.LogError($"Failed to download audio clip from \"{url}\"!");
+
+                    return null;
+                }
+
+                return ((DownloadHandlerAudioClip)webRequest.downloadHandler).audioClip;
+            }
+        }
+
+        /// <summary>
+        /// Download a <see cref="AssetBundle"/> from the provided <see cref="url"/>.
+        /// </summary>
+        /// <param name="url">The url to download the <see cref="AssetBundle"/> from.</param>
+        /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="timeout">Optional time in seconds before request expires.</param>
+        /// <returns>A new <see cref="AssetBundle"/> instance.</returns>
+        public static async Task<AssetBundle> DownloadAssetBundleAsync(string url, Dictionary<string, string> headers = null, int timeout = -1)
+        {
+            using (var webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url))
+            {
+                var response = await ProcessRequestAsync(webRequest, timeout, headers);
+
+                if (!response.Successful)
+                {
+                    Debug.LogError($"Failed to download asset bundle from \"{url}\"!");
+
+                    return null;
+                }
+
+                return ((DownloadHandlerAssetBundle)webRequest.downloadHandler).assetBundle;
+            }
+        }
+
+        #endregion Get Multimedia Content
     }
 }

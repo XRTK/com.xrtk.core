@@ -202,56 +202,6 @@ namespace XRTK.Utilities.WebRequestRest
 
         #endregion DELETE
 
-        private static async Task<Response> ProcessRequestAsync(UnityWebRequest webRequest, int timeout, Dictionary<string, string> headers = null)
-        {
-            if (timeout > 0)
-            {
-                webRequest.timeout = timeout;
-            }
-
-            if (headers != null)
-            {
-                foreach (var header in headers)
-                {
-                    webRequest.SetRequestHeader(header.Key, header.Value);
-                }
-            }
-
-            // HACK: Workaround for extra quotes around boundary.
-            if (webRequest.method == UnityWebRequest.kHttpVerbPOST ||
-                webRequest.method == UnityWebRequest.kHttpVerbPUT)
-            {
-                string contentType = webRequest.GetRequestHeader("Content-Type");
-
-                if (contentType != null)
-                {
-                    contentType = contentType.Replace("\"", "");
-                    webRequest.SetRequestHeader("Content-Type", contentType);
-                }
-            }
-
-            await webRequest.SendWebRequest();
-
-            if (webRequest.isNetworkError || webRequest.isHttpError)
-            {
-                if (webRequest.responseCode == 401)
-                {
-                    return new Response(false, "Invalid Credentials", null, webRequest.responseCode);
-                }
-
-                if (webRequest.GetResponseHeaders() == null)
-                {
-                    return new Response(false, "Invalid Headers", null, webRequest.responseCode);
-                }
-
-                var responseHeaders = webRequest.GetResponseHeaders().Aggregate(string.Empty, (current, header) => $"\n{header.Key}: {header.Value}");
-                Debug.LogError($"REST Error {webRequest.responseCode}:{webRequest.downloadHandler?.text}{responseHeaders}");
-                return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", webRequest.downloadHandler?.data, webRequest.responseCode);
-            }
-
-            return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode);
-        }
-
         #region Get Multimedia Content
 
         /// <summary>
@@ -328,5 +278,55 @@ namespace XRTK.Utilities.WebRequestRest
         }
 
         #endregion Get Multimedia Content
+
+        private static async Task<Response> ProcessRequestAsync(UnityWebRequest webRequest, int timeout, Dictionary<string, string> headers = null)
+        {
+            if (timeout > 0)
+            {
+                webRequest.timeout = timeout;
+            }
+
+            if (headers != null)
+            {
+                foreach (var header in headers)
+                {
+                    webRequest.SetRequestHeader(header.Key, header.Value);
+                }
+            }
+
+            // HACK: Workaround for extra quotes around boundary.
+            if (webRequest.method == UnityWebRequest.kHttpVerbPOST ||
+                webRequest.method == UnityWebRequest.kHttpVerbPUT)
+            {
+                string contentType = webRequest.GetRequestHeader("Content-Type");
+
+                if (contentType != null)
+                {
+                    contentType = contentType.Replace("\"", "");
+                    webRequest.SetRequestHeader("Content-Type", contentType);
+                }
+            }
+
+            await webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                if (webRequest.responseCode == 401)
+                {
+                    return new Response(false, "Invalid Credentials", null, webRequest.responseCode);
+                }
+
+                if (webRequest.GetResponseHeaders() == null)
+                {
+                    return new Response(false, "Invalid Headers", null, webRequest.responseCode);
+                }
+
+                var responseHeaders = webRequest.GetResponseHeaders().Aggregate(string.Empty, (current, header) => $"\n{header.Key}: {header.Value}");
+                Debug.LogError($"REST Error {webRequest.responseCode}:{webRequest.downloadHandler?.text}{responseHeaders}");
+                return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", webRequest.downloadHandler?.data, webRequest.responseCode);
+            }
+
+            return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode);
+        }
     }
 }

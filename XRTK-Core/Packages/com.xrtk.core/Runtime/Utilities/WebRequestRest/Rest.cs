@@ -236,22 +236,20 @@ namespace XRTK.Utilities.WebRequestRest
             {
                 if (webRequest.responseCode == 401)
                 {
-                    return new Response(false, "Invalid Credentials", null, webRequest.responseCode, webRequest.downloadHandler);
+                    return new Response(false, "Invalid Credentials", null, webRequest.responseCode);
                 }
 
                 if (webRequest.GetResponseHeaders() == null)
                 {
-                    return new Response(false, "Invalid Headers", null, webRequest.responseCode, webRequest.downloadHandler);
+                    return new Response(false, "Invalid Headers", null, webRequest.responseCode);
                 }
 
                 var responseHeaders = webRequest.GetResponseHeaders().Aggregate(string.Empty, (current, header) => $"\n{header.Key}: {header.Value}");
-
                 Debug.LogError($"REST Error {webRequest.responseCode}:{webRequest.downloadHandler?.text}{responseHeaders}");
-
-                return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", webRequest.downloadHandler?.data, webRequest.responseCode, webRequest.downloadHandler);
+                return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", webRequest.downloadHandler?.data, webRequest.responseCode);
             }
 
-            return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode, webRequest.downloadHandler);
+            return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode);
         }
 
         #region Get Multimedia Content

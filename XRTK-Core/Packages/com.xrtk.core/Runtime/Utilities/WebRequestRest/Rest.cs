@@ -54,15 +54,15 @@ namespace XRTK.Utilities.WebRequestRest
         /// Rest GET.
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> GetAsync(string query, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> GetAsync(string query, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Get(query))
             {
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -74,15 +74,15 @@ namespace XRTK.Utilities.WebRequestRest
         /// Rest POST.
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> PostAsync(string query, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> PostAsync(string query, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Post(query, null as string))
             {
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -91,15 +91,15 @@ namespace XRTK.Utilities.WebRequestRest
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
         /// <param name="formData">Form Data.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> PostAsync(string query, WWWForm formData, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> PostAsync(string query, WWWForm formData, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Post(query, formData))
             {
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -108,11 +108,11 @@ namespace XRTK.Utilities.WebRequestRest
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
         /// <param name="jsonData">JSON data for the request.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> PostAsync(string query, string jsonData, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> PostAsync(string query, string jsonData, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Post(query, "POST"))
             {
@@ -121,7 +121,7 @@ namespace XRTK.Utilities.WebRequestRest
                 webRequest.downloadHandler = new DownloadHandlerBuffer();
                 webRequest.SetRequestHeader("Content-Type", "application/json");
                 webRequest.SetRequestHeader("Accept", "application/json");
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -129,19 +129,19 @@ namespace XRTK.Utilities.WebRequestRest
         /// Rest POST.
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
-        /// <param name="headers">Optional header information for the request.</param>
         /// <param name="bodyData">The raw data to post.</param>
+        /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> PostAsync(string query, byte[] bodyData, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> PostAsync(string query, byte[] bodyData, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Post(query, "POST"))
             {
                 webRequest.uploadHandler = new UploadHandlerRaw(bodyData);
                 webRequest.downloadHandler = new DownloadHandlerBuffer();
                 webRequest.SetRequestHeader("Content-Type", "application/octet-stream");
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -154,16 +154,16 @@ namespace XRTK.Utilities.WebRequestRest
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
         /// <param name="jsonData">Data to be submitted.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> PutAsync(string query, string jsonData, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> PutAsync(string query, string jsonData, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Put(query, jsonData))
             {
                 webRequest.SetRequestHeader("Content-Type", "application/json");
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -172,16 +172,16 @@ namespace XRTK.Utilities.WebRequestRest
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
         /// <param name="bodyData">Data to be submitted.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> PutAsync(string query, byte[] bodyData, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> PutAsync(string query, byte[] bodyData, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Put(query, bodyData))
             {
                 webRequest.SetRequestHeader("Content-Type", "application/octet-stream");
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -193,15 +193,15 @@ namespace XRTK.Utilities.WebRequestRest
         /// Rest DELETE.
         /// </summary>
         /// <param name="query">Finalized Endpoint Query with parameters.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>The response data.</returns>
-        public static async Task<Response> DeleteAsync(string query, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Response> DeleteAsync(string query, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequest.Delete(query))
             {
-                return await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                return await ProcessRequestAsync(webRequest, headers, progress, timeout);
             }
         }
 
@@ -213,15 +213,15 @@ namespace XRTK.Utilities.WebRequestRest
         /// Download a <see cref="Texture2D"/> from the provided <see cref="url"/>.
         /// </summary>
         /// <param name="url">The url to download the <see cref="Texture2D"/> from.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>A new <see cref="Texture2D"/> instance.</returns>
-        public static async Task<Texture2D> DownloadTextureAsync(string url, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<Texture2D> DownloadTextureAsync(string url, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequestTexture.GetTexture(url))
             {
-                var response = await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                var response = await ProcessRequestAsync(webRequest, headers, progress, timeout);
 
                 if (!response.Successful)
                 {
@@ -239,15 +239,15 @@ namespace XRTK.Utilities.WebRequestRest
         /// </summary>
         /// <param name="url">The url to download the <see cref="AudioClip"/> from.</param>
         /// <param name="audioType"><see cref="AudioType"/> to download.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>A new <see cref="AudioClip"/> instance.</returns>
-        public static async Task<AudioClip> DownloadAudioClipAsync(string url, AudioType audioType, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<AudioClip> DownloadAudioClipAsync(string url, AudioType audioType, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequestMultimedia.GetAudioClip(url, audioType))
             {
-                var response = await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                var response = await ProcessRequestAsync(webRequest, headers, progress, timeout);
 
                 if (!response.Successful)
                 {
@@ -264,15 +264,15 @@ namespace XRTK.Utilities.WebRequestRest
         /// Download a <see cref="AssetBundle"/> from the provided <see cref="url"/>.
         /// </summary>
         /// <param name="url">The url to download the <see cref="AssetBundle"/> from.</param>
-        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
         /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>A new <see cref="AssetBundle"/> instance.</returns>
-        public static async Task<AssetBundle> DownloadAssetBundleAsync(string url, IProgress<float> progress = null, Dictionary<string, string> headers = null, int timeout = -1)
+        public static async Task<AssetBundle> DownloadAssetBundleAsync(string url, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
             using (var webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url))
             {
-                var response = await ProcessRequestAsync(webRequest, progress, timeout, headers);
+                var response = await ProcessRequestAsync(webRequest, headers, progress, timeout);
 
                 if (!response.Successful)
                 {
@@ -287,7 +287,7 @@ namespace XRTK.Utilities.WebRequestRest
 
         #endregion Get Multimedia Content
 
-        private static async Task<Response> ProcessRequestAsync(UnityWebRequest webRequest, IProgress<float> progress, int timeout, Dictionary<string, string> headers = null)
+        private static async Task<Response> ProcessRequestAsync(UnityWebRequest webRequest, Dictionary<string, string> headers, IProgress<float> progress, int timeout)
         {
             if (timeout > 0)
             {

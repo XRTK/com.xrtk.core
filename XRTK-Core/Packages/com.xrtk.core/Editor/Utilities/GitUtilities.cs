@@ -36,7 +36,8 @@ namespace XRTK.Editor.Utilities
                     return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
                 }
 
-                return projectRootDir = Directory.GetParent(Application.dataPath).FullName;
+                Debug.LogWarning($"git command failed! Do you have git installed?\n{rootDir}");
+                return projectRootDir = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName;
             }
         }
 

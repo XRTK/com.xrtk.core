@@ -68,7 +68,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "2.1.4",
+      "version": "2.1.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -158,7 +158,7 @@
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.vr": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.textmeshpro": "2.1.4",
+        "com.unity.textmeshpro": "2.1.6",
         "com.unity.xr.legacyinputhelpers": "2.1.7"
       }
     },
@@ -167,7 +167,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.10"
+        "com.xrtk.core": "0.2.11"
       }
     },
     "com.xrtk.lumin": {
@@ -175,7 +175,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.10"
+        "com.xrtk.core": "0.2.11"
       }
     },
     "com.xrtk.oculus": {
@@ -183,7 +183,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.10"
+        "com.xrtk.core": "0.2.11"
       }
     },
     "com.xrtk.sdk": {
@@ -191,8 +191,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.10",
-        "com.unity.textmeshpro": "2.1.4"
+        "com.xrtk.core": "0.2.11"
       }
     },
     "com.xrtk.wmr": {
@@ -200,7 +199,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.10",
+        "com.xrtk.core": "0.2.11",
         "com.unity.xr.windowsmr.metro": "4.2.3"
       }
     },

@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Enum SpatialAwarenessMeshLevelOfDetail
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -73,7 +73,7 @@
   
   <h1 id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail" data-uid="XRTK.Definitions.SpatialAwarenessSystem.SpatialAwarenessMeshLevelOfDetail" class="text-break">Enum SpatialAwarenessMeshLevelOfDetail
   </h1>
-  <div class="markdown level0 summary"><p>Enumeration defining levels of detail for the spatial awareness mesh subsystem.</p>
+  <div class="markdown level0 summary"><p>Enumeration defining levels of detail for the spatial awareness service.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Definitions.SpatialAwarenessSystem.html">XRTK.Definitions.SpatialAwarenessSystem</a></h6>
@@ -82,9 +82,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public enum SpatialAwarenessMeshLevelOfDetail</code></pre>
   </div>
-  <h5 id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>The integral values for these levels of detail generally map to triangle density, in triangles per cubic meter.</p>
-</div>
   <h3 id="fields">Fields
   </h3>
   <table class="table table-bordered table-striped table-condensed">
@@ -96,21 +93,19 @@
     <thead>
     <tbody>
       <tr>
-        <td id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail_Coarse">Coarse</td>
-        <td><p>The coarse level of detail is well suited for identifying large
+        <td id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail_High">High</td>
+        <td><p>The high level of detail is well suited for mesh occlusion for object like hands.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail_Low">Low</td>
+        <td><p>The low level of detail is well suited for identifying large
 environmental features, such as floors and walls.</p>
 </td>
       </tr>
       <tr>
-        <td id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail_Custom">Custom</td>
-        <td><p>The custom level of detail allows specifying a custom value for
-MeshTrianglesPerCubicMeter.</p>
-</td>
-      </tr>
-      <tr>
-        <td id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail_Fine">Fine</td>
-        <td><p>The fine level of detail is well suited for using as an occlusion
-mesh.</p>
+        <td id="XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail_Medium">Medium</td>
+        <td><p>The medium level of detail is suited for fast environmental mesh occlusion.</p>
 </td>
       </tr>
     </tbody>
@@ -118,6 +113,36 @@ mesh.</p>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;SpatialAwarenessMeshLevelOfDetail&gt;()</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_HasFlags__1___0___0_">EnumExtensions.HasFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_SetFlags__1___0___0_">EnumExtensions.SetFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_UnsetFlags__1___0___0_">EnumExtensions.UnsetFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_ToggleFlags__1___0___0_">EnumExtensions.ToggleFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;SpatialAwarenessMeshLevelOfDetail&gt;(Func&lt;SpatialAwarenessMeshLevelOfDetail, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;SpatialAwarenessMeshLevelOfDetail&gt;()</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_HasFlags__1___0___0_">EnumExtensions.HasFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_SetFlags__1___0___0_">EnumExtensions.SetFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_UnsetFlags__1___0___0_">EnumExtensions.UnsetFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_ToggleFlags__1___0___0_">EnumExtensions.ToggleFlags&lt;SpatialAwarenessMeshLevelOfDetail&gt;(SpatialAwarenessMeshLevelOfDetail)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;SpatialAwarenessMeshLevelOfDetail&gt;(Func&lt;SpatialAwarenessMeshLevelOfDetail, Boolean&gt;, Int32)</a>
@@ -133,12 +158,13 @@ mesh.</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_SpatialAwarenessSystem_SpatialAwarenessMeshLevelOfDetail.md&amp;value=---%0Auid%3A%20XRTK.Definitions.SpatialAwarenessSystem.SpatialAwarenessMeshLevelOfDetail%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/SpatialAwarenessSystem/SpatialAwarenessMeshLevelOfDetail.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/SpatialAwarenessSystem/SpatialAwarenessMeshLevelOfDetail.cs/#L9" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

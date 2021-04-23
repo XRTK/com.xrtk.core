@@ -1,0 +1,1337 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MixedRealityInspectorUtility
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MixedRealityInspectorUtility
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility">
+  
+  
+  <h1 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility" class="text-break">Class MixedRealityInspectorUtility
+  </h1>
+  <div class="markdown level0 summary"><p>This class has handy inspector utilities and functions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">MixedRealityInspectorUtility</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Editor.Utilities.html">XRTK.Editor.Utilities</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.Editor.dll</h6>
+  <h5 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class MixedRealityInspectorUtility</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_DarkColor.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.DarkColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L195">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_DarkColor" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.DarkColor">DarkColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color DarkColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_DisabledColor.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.DisabledColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L190">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_DisabledColor" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.DisabledColor">DisabledColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color DisabledColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_DottedLineScreenSpace.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.DottedLineScreenSpace%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L19">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_DottedLineScreenSpace" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.DottedLineScreenSpace">DottedLineScreenSpace</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float DottedLineScreenSpace = 4.65F</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_ErrorColor.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.ErrorColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L192">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_ErrorColor" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.ErrorColor">ErrorColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color ErrorColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorAxis.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorAxis%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L199">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorAxis" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorAxis">HandleColorAxis</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color HandleColorAxis</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorCircle.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorCircle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L197">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorCircle" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorCircle">HandleColorCircle</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color HandleColorCircle</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorRotation.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorRotation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L200">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorRotation" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorRotation">HandleColorRotation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color HandleColorRotation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorSphere.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorSphere%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L198">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorSphere" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorSphere">HandleColorSphere</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color HandleColorSphere</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorSquare.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorSquare%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L196">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorSquare" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorSquare">HandleColorSquare</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color HandleColorSquare</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorTangent.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorTangent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L201">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_HandleColorTangent" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.HandleColorTangent">HandleColorTangent</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color HandleColorTangent</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_LineVelocityColor.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.LineVelocityColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L202">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_LineVelocityColor" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.LineVelocityColor">LineVelocityColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color LineVelocityColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_SectionColor.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.SectionColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L194">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_SectionColor" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.SectionColor">SectionColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color SectionColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_SuccessColor.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.SuccessColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L193">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_SuccessColor" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.SuccessColor">SuccessColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color SuccessColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_WarningColor.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.WarningColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L191">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_WarningColor" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.WarningColor">WarningColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Color WarningColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_DarkThemeLogo.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.DarkThemeLogo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L86">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_DarkThemeLogo_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.DarkThemeLogo*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_DarkThemeLogo" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.DarkThemeLogo">DarkThemeLogo</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Texture2D DarkThemeLogo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Texture2D.html">Texture2D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_LightThemeLogo.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.LightThemeLogo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L101">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_LightThemeLogo_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.LightThemeLogo*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_LightThemeLogo" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.LightThemeLogo">LightThemeLogo</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Texture2D LightThemeLogo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Texture2D.html">Texture2D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_AxisMoveHandle_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.AxisMoveHandle(UnityEngine.Object%2CUnityEngine.Vector3%2CUnityEngine.Vector3%2CSystem.Single%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L219">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_AxisMoveHandle_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.AxisMoveHandle*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_AxisMoveHandle_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_System_Boolean_System_Boolean_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.AxisMoveHandle(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,System.Boolean,System.Boolean)">AxisMoveHandle(Object, Vector3, Vector3, Single, Single, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Draw an axis move handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float AxisMoveHandle(Object target, Vector3 origin, Vector3 direction, float distance, float handleSize = 0.2F, bool autoSize = true, bool recordUndo = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> that is undergoing the transformation. Also used for recording undo.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The initial position of the axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The direction the axis is facing.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">distance</span></td>
+        <td><p>Distance from the axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">handleSize</span></td>
+        <td><p>Optional handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">autoSize</span></td>
+        <td><p>Optional, auto sizes the handles based on position and handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">recordUndo</span></td>
+        <td><p>Optional, records undo state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><p>The new <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a> value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_CenterOnMainWin_UnityEditor_EditorWindow_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.CenterOnMainWin(UnityEditor.EditorWindow)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L73">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_CenterOnMainWin_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.CenterOnMainWin*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_CenterOnMainWin_UnityEditor_EditorWindow_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.CenterOnMainWin(UnityEditor.EditorWindow)">CenterOnMainWin(EditorWindow)</h4>
+  <div class="markdown level1 summary"><p>Centers an editor window on the main display.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CenterOnMainWin(this EditorWindow window)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.EditorWindow.html">EditorWindow</a></td>
+        <td><span class="parametername">window</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_CircleMoveHandle_UnityEngine_Object_UnityEngine_Vector3_System_Single_System_Single_System_Single_System_Single_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.CircleMoveHandle(UnityEngine.Object%2CUnityEngine.Vector3%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L260">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_CircleMoveHandle_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.CircleMoveHandle*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_CircleMoveHandle_UnityEngine_Object_UnityEngine_Vector3_System_Single_System_Single_System_Single_System_Single_System_Boolean_System_Boolean_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.CircleMoveHandle(UnityEngine.Object,UnityEngine.Vector3,System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean)">CircleMoveHandle(Object, Vector3, Single, Single, Single, Single, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Draw a Circle Move Handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3 CircleMoveHandle(Object target, Vector3 position, float xScale = 1F, float yScale = 1F, float zScale = 1F, float handleSize = 0.2F, bool autoSize = true, bool recordUndo = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> that is undergoing the transformation. Also used for recording undo.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position to draw the handle.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">xScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">yScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">zScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">handleSize</span></td>
+        <td><p>Optional handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">autoSize</span></td>
+        <td><p>Optional, auto sizes the handles based on position and handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">recordUndo</span></td>
+        <td><p>Optional, records undo state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><p>The new <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a> value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_DrawWireCapsule_UnityEngine_Vector3_UnityEngine_Quaternion_System_Single_System_Single_UnityEngine_Color_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.DrawWireCapsule(UnityEngine.Vector3%2CUnityEngine.Quaternion%2CSystem.Single%2CSystem.Single%2CUnityEngine.Color)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L150">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_DrawWireCapsule_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.DrawWireCapsule*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_DrawWireCapsule_UnityEngine_Vector3_UnityEngine_Quaternion_System_Single_System_Single_UnityEngine_Color_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.DrawWireCapsule(UnityEngine.Vector3,UnityEngine.Quaternion,System.Single,System.Single,UnityEngine.Color)">DrawWireCapsule(Vector3, Quaternion, Single, Single, Color)</h4>
+  <div class="markdown level1 summary"><p>Renders a capsule wire gizmo.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DrawWireCapsule(Vector3 position, Quaternion rotation, float radius, float height, Color color = default(Color))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>Center position of the capsule.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a></td>
+        <td><span class="parametername">rotation</span></td>
+        <td><p>Center rotation of the capsule.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>Capsule radius.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">height</span></td>
+        <td><p>Capsule height.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>Optional color override, will use <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gizmos.html#UnityEngine_Gizmos_color">color</a> by default.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_GetEditorMainWindowPos.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.GetEditorMainWindowPos%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L24">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_GetEditorMainWindowPos_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.GetEditorMainWindowPos*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_GetEditorMainWindowPos" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.GetEditorMainWindowPos">GetEditorMainWindowPos()</h4>
+  <div class="markdown level1 summary"><p>Found at <a href="https://answers.unity.com/questions/960413/editor-window-how-to-center-a-window.html">https://answers.unity.com/questions/960413/editor-window-how-to-center-a-window.html</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Rect GetEditorMainWindowPos()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Rect.html">Rect</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_RenderInspectorHeader_UnityEngine_Texture2D_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.RenderInspectorHeader(UnityEngine.Texture2D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L132">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_RenderInspectorHeader_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.RenderInspectorHeader*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_RenderInspectorHeader_UnityEngine_Texture2D_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.RenderInspectorHeader(UnityEngine.Texture2D)">RenderInspectorHeader(Texture2D)</h4>
+  <div class="markdown level1 summary"><p>Render a header for the profile inspector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RenderInspectorHeader(Texture2D image)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Texture2D.html">Texture2D</a></td>
+        <td><span class="parametername">image</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_RenderMixedRealityToolkitLogo.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L123">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_RenderMixedRealityToolkitLogo_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_RenderMixedRealityToolkitLogo" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo">RenderMixedRealityToolkitLogo()</h4>
+  <div class="markdown level1 summary"><p>Render the Mixed Reality Toolkit Logo.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RenderMixedRealityToolkitLogo()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_RotationHandle_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_System_Single_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.RotationHandle(UnityEngine.Object%2CUnityEngine.Vector3%2CUnityEngine.Quaternion%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L444">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_RotationHandle_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.RotationHandle*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_RotationHandle_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_System_Single_System_Boolean_System_Boolean_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.RotationHandle(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion,System.Single,System.Boolean,System.Boolean)">RotationHandle(Object, Vector3, Quaternion, Single, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Draw a rotation handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion RotationHandle(Object target, Vector3 position, Quaternion rotation, float handleSize = 0.2F, bool autoSize = true, bool recordUndo = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> that is undergoing the transformation. Also used for recording undo.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position to draw the handle.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a></td>
+        <td><span class="parametername">rotation</span></td>
+        <td><p>The rotation to draw the handle.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">handleSize</span></td>
+        <td><p>Optional, handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">autoSize</span></td>
+        <td><p>Optional, auto sizes the handles based on position and handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">recordUndo</span></td>
+        <td><p>Optional, records undo state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a></td>
+        <td><p>The new <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a> value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_SphereMoveHandle_UnityEngine_Object_UnityEngine_Vector3_System_Single_System_Single_System_Single_System_Single_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.SphereMoveHandle(UnityEngine.Object%2CUnityEngine.Vector3%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L331">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_SphereMoveHandle_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.SphereMoveHandle*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_SphereMoveHandle_UnityEngine_Object_UnityEngine_Vector3_System_Single_System_Single_System_Single_System_Single_System_Boolean_System_Boolean_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.SphereMoveHandle(UnityEngine.Object,UnityEngine.Vector3,System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean)">SphereMoveHandle(Object, Vector3, Single, Single, Single, Single, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Draw a sphere move handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3 SphereMoveHandle(Object target, Vector3 position, float xScale = 1F, float yScale = 1F, float zScale = 1F, float handleSize = 0.2F, bool autoSize = true, bool recordUndo = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> that is undergoing the transformation. Also used for recording undo.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position to draw the handle.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">xScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">yScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">zScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">handleSize</span></td>
+        <td><p>Optional handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">autoSize</span></td>
+        <td><p>Optional, auto sizes the handles based on position and handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">recordUndo</span></td>
+        <td><p>Optional, records undo state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><p>The new <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a> value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_SquareMoveHandle_UnityEngine_Object_UnityEngine_Vector3_System_Single_System_Single_System_Single_System_Single_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.SquareMoveHandle(UnityEngine.Object%2CUnityEngine.Vector3%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L295">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_SquareMoveHandle_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.SquareMoveHandle*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_SquareMoveHandle_UnityEngine_Object_UnityEngine_Vector3_System_Single_System_Single_System_Single_System_Single_System_Boolean_System_Boolean_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.SquareMoveHandle(UnityEngine.Object,UnityEngine.Vector3,System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean)">SquareMoveHandle(Object, Vector3, Single, Single, Single, Single, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Draw a square move handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3 SquareMoveHandle(Object target, Vector3 position, float xScale = 1F, float yScale = 1F, float zScale = 1F, float handleSize = 0.2F, bool autoSize = true, bool recordUndo = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> that is undergoing the transformation. Also used for recording undo.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position to draw the handle.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">xScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">yScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">zScale</span></td>
+        <td><p>Scale the new value on the x axis by this amount.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">handleSize</span></td>
+        <td><p>Optional handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">autoSize</span></td>
+        <td><p>Optional, auto sizes the handles based on position and handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">recordUndo</span></td>
+        <td><p>Optional, records undo state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><p>The new <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a> value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility_VectorHandle_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Vector3_System_Boolean_System_Boolean_System_Single_System_Single_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility.VectorHandle(UnityEngine.Object%2CUnityEngine.Vector3%2CUnityEngine.Vector3%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L368">View Source</a>
+  </span>
+  <a id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_VectorHandle_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.VectorHandle*"></a>
+  <h4 id="XRTK_Editor_Utilities_MixedRealityInspectorUtility_VectorHandle_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Vector3_System_Boolean_System_Boolean_System_Single_System_Single_System_Boolean_System_Boolean_" data-uid="XRTK.Editor.Utilities.MixedRealityInspectorUtility.VectorHandle(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Vector3,System.Boolean,System.Boolean,System.Single,System.Single,System.Boolean,System.Boolean)">VectorHandle(Object, Vector3, Vector3, Boolean, Boolean, Single, Single, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Draw a vector handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3 VectorHandle(Object target, Vector3 origin, Vector3 vector, bool normalize = true, bool clamp = true, float handleLength = 1F, float handleSize = 0.1F, bool recordUndo = true, bool autoSize = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> that is undergoing the transformation. Also used for recording undo.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">vector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">normalize</span></td>
+        <td><p>Optional, Normalize the new vector value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">clamp</span></td>
+        <td><p>Optional, Clamp new vector's value based on the distance to the origin.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">handleLength</span></td>
+        <td><p>Optional, handle length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">handleSize</span></td>
+        <td><p>Optional, handle size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">recordUndo</span></td>
+        <td><p>Optional, records undo state.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">autoSize</span></td>
+        <td><p>Optional, auto sizes the handles based on position and handle size.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><p>The new <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a> value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_Utilities_MixedRealityInspectorUtility.md&amp;value=---%0Auid%3A%20XRTK.Editor.Utilities.MixedRealityInspectorUtility%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/Utilities/MixedRealityInspectorUtility.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealityBoundarySystem
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -82,28 +82,25 @@
     <div class="level1"><a class="xref" href="XRTK.Services.BaseService.html">BaseService</a></div>
     <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
     <div class="level3"><a class="xref" href="XRTK.Services.BaseSystem.html">BaseSystem</a></div>
-    <div class="level4"><a class="xref" href="XRTK.Services.BaseEventSystem.html">BaseEventSystem</a></div>
-    <div class="level5"><span class="xref">MixedRealityBoundarySystem</span></div>
+    <div class="level4"><span class="xref">MixedRealityBoundarySystem</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="XRTK.Interfaces.BoundarySystem.IMixedRealityBoundarySystem.html">IMixedRealityBoundarySystem</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSource.html">IMixedRealityEventSource</a></div>
-    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="XRTK.Services.BaseEventSystem.html#XRTK_Services_BaseEventSystem_EventListeners">BaseEventSystem.EventListeners</a>
-    </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Reset">BaseService.Reset()</a>
@@ -112,16 +109,10 @@
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Enable">BaseService.Enable()</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Update">BaseService.Update()</a>
-    </div>
-    <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_LateUpdate">BaseService.LateUpdate()</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_FixedUpdate">BaseService.FixedUpdate()</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Disable">BaseService.Disable()</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationFocus_System_Boolean_">BaseService.OnApplicationFocus(Boolean)</a>
@@ -161,25 +152,26 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MixedRealityBoundarySystem : BaseEventSystem, IMixedRealityBoundarySystem, IMixedRealityEventSystem, IMixedRealityService, IDisposable, IMixedRealityEventSource, IEqualityComparer</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;FE458876-CC0F-4B6F-9459-544DDF6A9263&quot;)]
+public class MixedRealityBoundarySystem : BaseSystem, IMixedRealityBoundarySystem, IMixedRealitySystem, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem__ctor_XRTK_Definitions_BoundarySystem_MixedRealityBoundaryVisualizationProfile_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.%23ctor(XRTK.Definitions.BoundarySystem.MixedRealityBoundaryVisualizationProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem__ctor_XRTK_Definitions_BoundarySystem_MixedRealityBoundaryProfile_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.%23ctor(XRTK.Definitions.BoundarySystem.MixedRealityBoundaryProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L26">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L27">View Source</a>
   </span>
   <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem__ctor_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.#ctor*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem__ctor_XRTK_Definitions_BoundarySystem_MixedRealityBoundaryVisualizationProfile_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.#ctor(XRTK.Definitions.BoundarySystem.MixedRealityBoundaryVisualizationProfile)">MixedRealityBoundarySystem(MixedRealityBoundaryVisualizationProfile)</h4>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem__ctor_XRTK_Definitions_BoundarySystem_MixedRealityBoundaryProfile_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.#ctor(XRTK.Definitions.BoundarySystem.MixedRealityBoundaryProfile)">MixedRealityBoundarySystem(MixedRealityBoundaryProfile)</h4>
   <div class="markdown level1 summary"><p>Constructor.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MixedRealityBoundarySystem(MixedRealityBoundaryVisualizationProfile profile)</code></pre>
+    <pre><code class="lang-csharp hljs">public MixedRealityBoundarySystem(MixedRealityBoundaryProfile profile)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -192,7 +184,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.BoundarySystem.MixedRealityBoundaryVisualizationProfile.html">MixedRealityBoundaryVisualizationProfile</a></td>
+        <td><a class="xref" href="XRTK.Definitions.BoundarySystem.MixedRealityBoundaryProfile.html">MixedRealityBoundaryProfile</a></td>
         <td><span class="parametername">profile</span></td>
         <td></td>
       </tr>
@@ -202,19 +194,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryCeilingMaterial.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryCeilingMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryBounds.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryBounds%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L578">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L519">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryCeilingMaterial_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryCeilingMaterial*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryCeilingMaterial" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryCeilingMaterial">BoundaryCeilingMaterial</h4>
-  <div class="markdown level1 summary"><p>The material to use for displaying the boundary ceiling.</p>
-</div>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryBounds_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryBounds*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryBounds" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryBounds">BoundaryBounds</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Material BoundaryCeilingMaterial { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Edge[] BoundaryBounds { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -226,7 +217,37 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
+        <td><a class="xref" href="XRTK.Definitions.BoundarySystem.Edge.html">Edge</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L410">View Source</a>
+  </span>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryDataProvider_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryDataProvider*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryDataProvider" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryDataProvider">BoundaryDataProvider</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMixedRealityBoundaryDataProvider BoundaryDataProvider { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.BoundarySystem.IMixedRealityBoundaryDataProvider.html">IMixedRealityBoundaryDataProvider</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -236,12 +257,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryHeight.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryHeight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L307">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L455">View Source</a>
   </span>
   <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryHeight_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryHeight*"></a>
   <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryHeight" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryHeight">BoundaryHeight</h4>
-  <div class="markdown level1 summary"><p>The height of the play space, in meters.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -262,342 +282,20 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryHeight_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This is used to create a three dimensional boundary volume.</p>
-</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryWallMaterial.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryWallMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsConfigured.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsConfigured%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L526">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L452">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryWallMaterial_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryWallMaterial*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryWallMaterial" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryWallMaterial">BoundaryWallMaterial</h4>
-  <div class="markdown level1 summary"><p>The material to use for displaying the boundary geometry walls.</p>
-</div>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsConfigured_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsConfigured*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsConfigured" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsConfigured">IsConfigured</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Material BoundaryWallMaterial { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryWallsPhysicsLayer.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryWallsPhysicsLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L503">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryWallsPhysicsLayer_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryWallsPhysicsLayer*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryWallsPhysicsLayer" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryWallsPhysicsLayer">BoundaryWallsPhysicsLayer</h4>
-  <div class="markdown level1 summary"><p>The physics layer that the generated boundary walls are assigned to.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int BoundaryWallsPhysicsLayer { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Bounds.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Bounds%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L581">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Bounds_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Bounds*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Bounds" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Bounds">Bounds</h4>
-  <div class="markdown level1 summary"><p>Two dimensional representation of the geometry of the boundary, as provided
-by the platform.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Edge[] Bounds { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Definitions.BoundarySystem.Edge.html">Edge</a>[]</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Bounds_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>BoundaryGeometry should be treated as the outline of the player's space, placed
-on the floor.</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_CeilingPhysicsLayer.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.CeilingPhysicsLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L555">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_CeilingPhysicsLayer_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.CeilingPhysicsLayer*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_CeilingPhysicsLayer" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.CeilingPhysicsLayer">CeilingPhysicsLayer</h4>
-  <div class="markdown level1 summary"><p>The physics layer that the generated boundary ceiling is assigned to.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int CeilingPhysicsLayer { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorHeight.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorHeight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L584">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorHeight_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorHeight*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorHeight" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorHeight">FloorHeight</h4>
-  <div class="markdown level1 summary"><p>Indicates the height of the floor, in relation to the coordinate system origin.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float? FloorHeight { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorHeight_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>If a floor has been located, FloorHeight.HasValue will be true, otherwise it will be false.</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorMaterial.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L339">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorMaterial_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorMaterial*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorMaterial" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorMaterial">FloorMaterial</h4>
-  <div class="markdown level1 summary"><p>The material to use for the floor <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> when created by the boundary system.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Material FloorMaterial { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorPhysicsLayer.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorPhysicsLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L346">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorPhysicsLayer_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorPhysicsLayer*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorPhysicsLayer" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorPhysicsLayer">FloorPhysicsLayer</h4>
-  <div class="markdown level1 summary"><p>The physics layer that the generated floor is assigned to.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int FloorPhysicsLayer { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorScale.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorScale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L336">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorScale_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorScale*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_FloorScale" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.FloorScale">FloorScale</h4>
-  <div class="markdown level1 summary"><p>The size at which to display the rectangular floor plane <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector2 FloorScale { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector2.html">Vector2</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_PlayAreaMaterial.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.PlayAreaMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L419">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_PlayAreaMaterial_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.PlayAreaMaterial*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_PlayAreaMaterial" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.PlayAreaMaterial">PlayAreaMaterial</h4>
-  <div class="markdown level1 summary"><p>The material to use for the rectangular play area <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Material PlayAreaMaterial { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_PlayAreaPhysicsLayer.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.PlayAreaPhysicsLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L394">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_PlayAreaPhysicsLayer_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.PlayAreaPhysicsLayer*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_PlayAreaPhysicsLayer" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.PlayAreaPhysicsLayer">PlayAreaPhysicsLayer</h4>
-  <div class="markdown level1 summary"><p>The physics layer that the generated play area is assigned to.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int PlayAreaPhysicsLayer { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundaryCeiling.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundaryCeiling%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L529">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundaryCeiling_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundaryCeiling*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundaryCeiling" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundaryCeiling">ShowBoundaryCeiling</h4>
-  <div class="markdown level1 summary"><p>Enable / disable ceiling rendering.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShowBoundaryCeiling { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsConfigured { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -614,24 +312,80 @@ on the floor.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundaryCeiling_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The ceiling is defined as a <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> positioned <a class="xref" href="XRTK.Interfaces.BoundarySystem.IMixedRealityBoundarySystem.html#XRTK_Interfaces_BoundarySystem_IMixedRealityBoundarySystem_BoundaryHeight">BoundaryHeight</a> above the floor.</p>
-</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundaryWalls.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundaryWalls%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsVisible.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L475">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L417">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundaryWalls_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundaryWalls*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundaryWalls" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundaryWalls">ShowBoundaryWalls</h4>
-  <div class="markdown level1 summary"><p>Enable / disable boundary wall rendering.</p>
-</div>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsVisible_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsVisible*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsVisible" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsVisible">IsVisible</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShowBoundaryWalls { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsVisible { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundary.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundary%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L437">View Source</a>
+  </span>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundary_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundary*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowBoundary" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowBoundary">ShowBoundary</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowBoundary { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowCeiling.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowCeiling%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L502">View Source</a>
+  </span>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowCeiling_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowCeiling*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowCeiling" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowCeiling">ShowCeiling</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowCeiling { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -653,12 +407,11 @@ on the floor.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowFloor.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowFloor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L312">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L462">View Source</a>
   </span>
   <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowFloor_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowFloor*"></a>
   <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowFloor" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowFloor">ShowFloor</h4>
-  <div class="markdown level1 summary"><p>Enable / disable floor rendering.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -681,19 +434,18 @@ on the floor.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowPlayArea.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowPlayArea%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowWalls.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowWalls%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L368">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L483">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowPlayArea_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowPlayArea*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowPlayArea" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowPlayArea">ShowPlayArea</h4>
-  <div class="markdown level1 summary"><p>Enable / disable play area rendering.</p>
-</div>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowWalls_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowWalls*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowWalls" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowWalls">ShowWalls</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShowPlayArea { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool ShowWalls { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -712,19 +464,18 @@ on the floor.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowTrackedArea.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowTrackedArea%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedObjects.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedObjects%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L422">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L405">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowTrackedArea_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowTrackedArea*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_ShowTrackedArea" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.ShowTrackedArea">ShowTrackedArea</h4>
-  <div class="markdown level1 summary"><p>Enable / disable tracked area rendering.</p>
-</div>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedObjects_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedObjects*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedObjects" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedObjects">TrackedObjects</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShowTrackedArea { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;GameObject&gt; TrackedObjects { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -736,131 +487,7 @@ on the floor.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SourceId.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SourceId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L259">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SourceId_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SourceId*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SourceId" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SourceId">SourceId</h4>
-  <div class="markdown level1 summary"><p>The Unique Source Id of this Event Source.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public uint SourceId { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SourceName.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SourceName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L262">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SourceName_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SourceName*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SourceName" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SourceName">SourceName</h4>
-  <div class="markdown level1 summary"><p>The Name of this Event Source.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SourceName { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedAreaMaterial.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedAreaMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L472">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedAreaMaterial_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedAreaMaterial*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedAreaMaterial" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedAreaMaterial">TrackedAreaMaterial</h4>
-  <div class="markdown level1 summary"><p>The material to use for the boundary geometry <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Material TrackedAreaMaterial { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedAreaPhysicsLayer.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedAreaPhysicsLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L449">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedAreaPhysicsLayer_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedAreaPhysicsLayer*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TrackedAreaPhysicsLayer" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TrackedAreaPhysicsLayer">TrackedAreaPhysicsLayer</h4>
-  <div class="markdown level1 summary"><p>The physics layer that the generated tracked area is assigned to.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int TrackedAreaPhysicsLayer { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -869,19 +496,52 @@ on the floor.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Contains_UnityEngine_Vector3_UnityEngine_Experimental_XR_Boundary_Type_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Contains(UnityEngine.Vector3%2CUnityEngine.Experimental.XR.Boundary.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Destroy.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Destroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L587">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L387">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Contains_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Contains*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Contains_UnityEngine_Vector3_UnityEngine_Experimental_XR_Boundary_Type_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Contains(UnityEngine.Vector3,UnityEngine.Experimental.XR.Boundary.Type)">Contains(Vector3, Boundary.Type)</h4>
-  <div class="markdown level1 summary"><p>Determines if a location is within the specified area of the boundary space.</p>
-</div>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Destroy_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Destroy*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Destroy" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Destroy">Destroy()</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Contains(Vector3 location, Boundary.Type boundaryType = Boundary.Type.TrackedArea)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void Destroy()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Destroy">BaseService.Destroy()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Disable.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Disable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L374">View Source</a>
+  </span>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Disable_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Disable*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Disable" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Disable">Disable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Disable()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Disable">BaseService.Disable()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsInsideBoundary_UnityEngine_Vector3_UnityEngine_Space_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsInsideBoundary(UnityEngine.Vector3%2CUnityEngine.Space)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L569">View Source</a>
+  </span>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsInsideBoundary_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsInsideBoundary*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_IsInsideBoundary_UnityEngine_Vector3_UnityEngine_Space_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.IsInsideBoundary(UnityEngine.Vector3,UnityEngine.Space)">IsInsideBoundary(Vector3, Space)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInsideBoundary(Vector3 position, Space referenceSpace = Space.World)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -895,15 +555,13 @@ on the floor.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
-        <td><span class="parametername">location</span></td>
-        <td><p>The location to be checked.</p>
-</td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Experimental.XR.Boundary.Type.html">Boundary.Type</a></td>
-        <td><span class="parametername">boundaryType</span></td>
-        <td><p>The type of boundary space being checked.</p>
-</td>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Space.html">Space</a></td>
+        <td><span class="parametername">referenceSpace</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -918,144 +576,24 @@ on the floor.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True if the location is within the specified area of the boundary space.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Contains_UnityEngine_Vector3_UnityEngine_Experimental_XR_Boundary_Type__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Use:
-Boundary.Type.PlayArea for the inscribed volume
-Boundary.Type.TrackedArea for the area defined by the boundary edges.</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Destroy.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Destroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L93">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Destroy_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Destroy*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Destroy" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Destroy">Destroy()</h4>
-  <div class="markdown level1 summary"><p>Optional Destroy function to perform cleanup of the service before the Mixed Reality Toolkit is destroyed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Destroy()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Destroy">BaseService.Destroy()</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetBoundaryCeilingVisualization.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetBoundaryCeilingVisualization%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L830">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetBoundaryCeilingVisualization_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetBoundaryCeilingVisualization*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetBoundaryCeilingVisualization" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetBoundaryCeilingVisualization">GetBoundaryCeilingVisualization()</h4>
-  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> that represents the upper surface of the user's boundary.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GameObject GetBoundaryCeilingVisualization()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><p>The boundary ceiling visualization object or null if one does not exist.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetBoundaryWallVisualization.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetBoundaryWallVisualization%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_RegisterTrackedObject_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.RegisterTrackedObject(UnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L778">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L619">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetBoundaryWallVisualization_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetBoundaryWallVisualization*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetBoundaryWallVisualization" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetBoundaryWallVisualization">GetBoundaryWallVisualization()</h4>
-  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> that represents the user's boundary walls.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GameObject GetBoundaryWallVisualization()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><p>The boundary wall visualization object or null if one does not exist.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetFloorVisualization.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetFloorVisualization%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L652">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetFloorVisualization_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetFloorVisualization*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetFloorVisualization" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetFloorVisualization">GetFloorVisualization()</h4>
-  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> that represents the user's floor.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GameObject GetFloorVisualization()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><p>The floor visualization object or null if one does not exist.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetHashCode_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetHashCode(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L253">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetHashCode_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetHashCode*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetHashCode_System_Object_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetHashCode(System.Object)">GetHashCode(Object)</h4>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_RegisterTrackedObject_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.RegisterTrackedObject*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_RegisterTrackedObject_UnityEngine_GameObject_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.RegisterTrackedObject(UnityEngine.GameObject)">RegisterTrackedObject(GameObject)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int GetHashCode(object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RegisterTrackedObject(GameObject gameObject)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1068,106 +606,26 @@ Boundary.Type.TrackedArea for the area defined by the boundary edges.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">obj</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
+        <td><span class="parametername">gameObject</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetPlayAreaVisualization.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetPlayAreaVisualization%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SetupBoundary_XRTK_Interfaces_BoundarySystem_IMixedRealityBoundaryDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SetupBoundary(XRTK.Interfaces.BoundarySystem.IMixedRealityBoundaryDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L685">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L522">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetPlayAreaVisualization_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetPlayAreaVisualization*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetPlayAreaVisualization" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetPlayAreaVisualization">GetPlayAreaVisualization()</h4>
-  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> that represents the user's play area.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GameObject GetPlayAreaVisualization()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><p>The play area visualization object or null if one does not exist.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetTrackedAreaVisualization.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetTrackedAreaVisualization%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L723">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetTrackedAreaVisualization_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetTrackedAreaVisualization*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_GetTrackedAreaVisualization" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.GetTrackedAreaVisualization">GetTrackedAreaVisualization()</h4>
-  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> that represents the user's tracked area.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GameObject GetTrackedAreaVisualization()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><p>The tracked area visualization object or null if one does not exist.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_HandleEvent__1_UnityEngine_EventSystems_BaseEventData_UnityEngine_EventSystems_ExecuteEvents_EventFunction___0__.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.HandleEvent%60%601(UnityEngine.EventSystems.BaseEventData%2CUnityEngine.EventSystems.ExecuteEvents.EventFunction%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L218">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_HandleEvent_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.HandleEvent*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_HandleEvent__1_UnityEngine_EventSystems_BaseEventData_UnityEngine_EventSystems_ExecuteEvents_EventFunction___0__" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.HandleEvent``1(UnityEngine.EventSystems.BaseEventData,UnityEngine.EventSystems.ExecuteEvents.EventFunction{``0})">HandleEvent&lt;T&gt;(BaseEventData, ExecuteEvents.EventFunction&lt;T&gt;)</h4>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SetupBoundary_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SetupBoundary*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_SetupBoundary_XRTK_Interfaces_BoundarySystem_IMixedRealityBoundaryDataProvider_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.SetupBoundary(XRTK.Interfaces.BoundarySystem.IMixedRealityBoundaryDataProvider)">SetupBoundary(IMixedRealityBoundaryDataProvider)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void HandleEvent&lt;T&gt;(BaseEventData eventData, ExecuteEvents.EventFunction&lt;T&gt; eventHandler)
-    where T : IEventSystemHandler</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetupBoundary(IMixedRealityBoundaryDataProvider dataProvider)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1180,99 +638,22 @@ Boundary.Type.TrackedArea for the area defined by the boundary edges.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">UnityEngine.EventSystems.BaseEventData</span></td>
-        <td><span class="parametername">eventData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">UnityEngine.EventSystems.ExecuteEvents.EventFunction</span>&lt;T&gt;</td>
-        <td><span class="parametername">eventHandler</span></td>
+        <td><a class="xref" href="XRTK.Interfaces.BoundarySystem.IMixedRealityBoundaryDataProvider.html">IMixedRealityBoundaryDataProvider</a></td>
+        <td><span class="parametername">dataProvider</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">XRTK.Services.BaseEventSystem.HandleEvent&lt;T&gt;(UnityEngine.EventSystems.BaseEventData, UnityEngine.EventSystems.ExecuteEvents.EventFunction&lt;T&gt;)</span></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Initialize.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L53">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Initialize_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Initialize*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Initialize" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Initialize">Initialize()</h4>
-  <div class="markdown level1 summary"><p>The initialize function is used to setup the service once created.
-This method is called once all services have been registered in the Mixed Reality Toolkit.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Register_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Register(UnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L227">View Source</a>
-  </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Register_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Register*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Register_UnityEngine_GameObject_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Register(UnityEngine.GameObject)">Register(GameObject)</h4>
-  <div class="markdown level1 summary"><p>Registers the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> to listen for boundary events.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Register(GameObject listener)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><span class="parametername">listener</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="XRTK.Services.BaseEventSystem.html#XRTK_Services_BaseEventSystem_Register_UnityEngine_GameObject_">BaseEventSystem.Register(GameObject)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TryGetRectangularBoundsParams_UnityEngine_Vector2__System_Single__System_Single__System_Single__.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TryGetRectangularBoundsParams(UnityEngine.Vector2%40%2CSystem.Single%40%2CSystem.Single%40%2CSystem.Single%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L629">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L596">View Source</a>
   </span>
   <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TryGetRectangularBoundsParams_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TryGetRectangularBoundsParams*"></a>
   <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_TryGetRectangularBoundsParams_UnityEngine_Vector2__System_Single__System_Single__System_Single__" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.TryGetRectangularBoundsParams(UnityEngine.Vector2@,System.Single@,System.Single@,System.Single@)">TryGetRectangularBoundsParams(out Vector2, out Single, out Single, out Single)</h4>
-  <div class="markdown level1 summary"><p>Returns the description of the inscribed rectangular bounds.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -1291,26 +672,22 @@ This method is called once all services have been registered in the Mixed Realit
       <tr>
         <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector2.html">Vector2</a></td>
         <td><span class="parametername">center</span></td>
-        <td><p>The center of the rectangle.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
         <td><span class="parametername">angle</span></td>
-        <td><p>The orientation of the rectangle.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
         <td><span class="parametername">width</span></td>
-        <td><p>The width of the rectangle.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
         <td><span class="parametername">height</span></td>
-        <td><p>The height of the rectangle.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -1325,27 +702,24 @@ This method is called once all services have been registered in the Mixed Realit
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True if an inscribed rectangle was found in the boundary geometry, false otherwise.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Unregister_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Unregister(UnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_UnregisterTrackedObject_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.UnregisterTrackedObject(UnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L236">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L630">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Unregister_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Unregister*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Unregister_UnityEngine_GameObject_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Unregister(UnityEngine.GameObject)">Unregister(GameObject)</h4>
-  <div class="markdown level1 summary"><p>UnRegisters the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> to listen for boundary events.
-///</p>
-</div>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_UnregisterTrackedObject_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.UnregisterTrackedObject*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_UnregisterTrackedObject_UnityEngine_GameObject_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.UnregisterTrackedObject(UnityEngine.GameObject)">UnregisterTrackedObject(GameObject)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Unregister(GameObject listener)</code></pre>
+    <pre><code class="lang-csharp hljs">public void UnregisterTrackedObject(GameObject gameObject)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1359,63 +733,55 @@ This method is called once all services have been registered in the Mixed Realit
     <tbody>
       <tr>
         <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><span class="parametername">listener</span></td>
+        <td><span class="parametername">gameObject</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="XRTK.Services.BaseEventSystem.html#XRTK_Services_BaseEventSystem_Unregister_UnityEngine_GameObject_">BaseEventSystem.Unregister(GameObject)</a></div>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.System%23Collections%23IEqualityComparer%23Equals(System.Object%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Update.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L246">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L294">View Source</a>
   </span>
-  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_System_Collections_IEqualityComparer_Equals_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.System#Collections#IEqualityComparer#Equals*"></a>
-  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)">IEqualityComparer.Equals(Object, Object)</h4>
+  <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Update_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Update*"></a>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Update" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Update">Update()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer.Equals(object x, object y)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void Update()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Update">BaseService.Update()</a></div>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryProximityAlert.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryProximityAlert%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L402">View Source</a>
+  </span>
+  <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_BoundaryProximityAlert" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.BoundaryProximityAlert">BoundaryProximityAlert</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;GameObject, ProximityAlert&gt; BoundaryProximityAlert</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">x</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">y</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>, <a class="xref" href="XRTK.Definitions.BoundarySystem.ProximityAlert.html">ProximityAlert</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1425,7 +791,7 @@ This method is called once all services have been registered in the Mixed Realit
       <a class="xref" href="XRTK.Interfaces.BoundarySystem.IMixedRealityBoundarySystem.html">IMixedRealityBoundarySystem</a>
   </div>
   <div>
-      <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>
@@ -1433,13 +799,13 @@ This method is called once all services have been registered in the Mixed Realit
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
-  <div>
-      <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSource.html">IMixedRealityEventSource</a>
-  </div>
-  <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">System.Collections.IEqualityComparer</a>
-  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -1457,12 +823,13 @@ This method is called once all services have been registered in the Mixed Realit
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BoundarySystem/MixedRealityBoundarySystem.cs/#L20" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

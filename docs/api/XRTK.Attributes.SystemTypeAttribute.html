@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SystemTypeAttribute
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -86,11 +86,12 @@ a <a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</
       <div class="level4"><a class="xref" href="XRTK.Attributes.ExtendsAttribute.html">ExtendsAttribute</a></div>
       <div class="level4"><a class="xref" href="XRTK.Attributes.ImplementsAttribute.html">ImplementsAttribute</a></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.runtime.interopservices._attribute">_Attribute</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.PropertyAttribute.html#UnityEngine_PropertyAttribute_order">PropertyAttribute.order</a>
-    </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.equals#System_Attribute_Equals_System_Object_">Attribute.Equals(Object)</a>
     </div>
@@ -200,6 +201,18 @@ a <a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.match#System_Attribute_Match_System_Object_">Attribute.Match(Object)</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-getidsofnames#System_Attribute_System_Runtime_InteropServices__Attribute_GetIDsOfNames_System_Guid__System_IntPtr_System_UInt32_System_UInt32_System_IntPtr_">Attribute._Attribute.GetIDsOfNames(Guid, IntPtr, UInt32, UInt32, IntPtr)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-gettypeinfo#System_Attribute_System_Runtime_InteropServices__Attribute_GetTypeInfo_System_UInt32_System_UInt32_System_IntPtr_">Attribute._Attribute.GetTypeInfo(UInt32, UInt32, IntPtr)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-gettypeinfocount#System_Attribute_System_Runtime_InteropServices__Attribute_GetTypeInfoCount_System_UInt32__">Attribute._Attribute.GetTypeInfoCount(UInt32)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-invoke#System_Attribute_System_Runtime_InteropServices__Attribute_Invoke_System_UInt32_System_Guid__System_UInt32_System_Int16_System_IntPtr_System_IntPtr_System_IntPtr_System_IntPtr_">Attribute._Attribute.Invoke(UInt32, Guid, UInt32, Int16, IntPtr, IntPtr, IntPtr, IntPtr)</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.typeid#System_Attribute_TypeId">Attribute.TypeId</a>
     </div>
     <div>
@@ -222,7 +235,7 @@ a <a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Attributes_SystemTypeAttribute_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SystemTypeAttribute : PropertyAttribute</code></pre>
+    <pre><code class="lang-csharp hljs">public class SystemTypeAttribute : PropertyAttribute, _Attribute</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -231,7 +244,7 @@ a <a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_SystemTypeAttribute__ctor_System_Type_XRTK_Definitions_Utilities_TypeGrouping_.md&amp;value=---%0Auid%3A%20XRTK.Attributes.SystemTypeAttribute.%23ctor(System.Type%2CXRTK.Definitions.Utilities.TypeGrouping)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/SystemTypeAttribute.cs/#L32">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/SystemTypeAttribute.cs/#L32">View Source</a>
   </span>
   <a id="XRTK_Attributes_SystemTypeAttribute__ctor_" data-uid="XRTK.Attributes.SystemTypeAttribute.#ctor*"></a>
   <h4 id="XRTK_Attributes_SystemTypeAttribute__ctor_System_Type_XRTK_Definitions_Utilities_TypeGrouping_" data-uid="XRTK.Attributes.SystemTypeAttribute.#ctor(System.Type,XRTK.Definitions.Utilities.TypeGrouping)">SystemTypeAttribute(Type, TypeGrouping)</h4>
@@ -272,7 +285,7 @@ a <a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_SystemTypeAttribute_AllowAbstract.md&amp;value=---%0Auid%3A%20XRTK.Attributes.SystemTypeAttribute.AllowAbstract%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/SystemTypeAttribute.cs/#L25">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/SystemTypeAttribute.cs/#L25">View Source</a>
   </span>
   <a id="XRTK_Attributes_SystemTypeAttribute_AllowAbstract_" data-uid="XRTK.Attributes.SystemTypeAttribute.AllowAbstract*"></a>
   <h4 id="XRTK_Attributes_SystemTypeAttribute_AllowAbstract" data-uid="XRTK.Attributes.SystemTypeAttribute.AllowAbstract">AllowAbstract</h4>
@@ -304,7 +317,7 @@ Defaults to a value of <code>false</code> unless explicitly specified.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_SystemTypeAttribute_Grouping.md&amp;value=---%0Auid%3A%20XRTK.Attributes.SystemTypeAttribute.Grouping%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/SystemTypeAttribute.cs/#L19">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/SystemTypeAttribute.cs/#L19">View Source</a>
   </span>
   <a id="XRTK_Attributes_SystemTypeAttribute_Grouping_" data-uid="XRTK.Attributes.SystemTypeAttribute.Grouping*"></a>
   <h4 id="XRTK_Attributes_SystemTypeAttribute_Grouping" data-uid="XRTK.Attributes.SystemTypeAttribute.Grouping">Grouping</h4>
@@ -337,7 +350,7 @@ Defaults to a value of <code>false</code> unless explicitly specified.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_SystemTypeAttribute_IsConstraintSatisfied_System_Type_.md&amp;value=---%0Auid%3A%20XRTK.Attributes.SystemTypeAttribute.IsConstraintSatisfied(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/SystemTypeAttribute.cs/#L47">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/SystemTypeAttribute.cs/#L47">View Source</a>
   </span>
   <a id="XRTK_Attributes_SystemTypeAttribute_IsConstraintSatisfied_" data-uid="XRTK.Attributes.SystemTypeAttribute.IsConstraintSatisfied*"></a>
   <h4 id="XRTK_Attributes_SystemTypeAttribute_IsConstraintSatisfied_System_Type_" data-uid="XRTK.Attributes.SystemTypeAttribute.IsConstraintSatisfied(System.Type)">IsConstraintSatisfied(Type)</h4>
@@ -383,7 +396,17 @@ satisfies this constraint and should thus be selectable.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.runtime.interopservices._attribute">System.Runtime.InteropServices._Attribute</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -401,12 +424,13 @@ satisfies this constraint and should thus be selectable.</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_SystemTypeAttribute.md&amp;value=---%0Auid%3A%20XRTK.Attributes.SystemTypeAttribute%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/SystemTypeAttribute.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/SystemTypeAttribute.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

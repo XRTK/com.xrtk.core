@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IDemoCustomExtensionService
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.41.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -93,6 +93,12 @@ This interface is the contract for others to use to make their own implementatio
       <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_Update">IMixedRealityService.Update()</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_LateUpdate">IMixedRealityService.LateUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_FixedUpdate">IMixedRealityService.FixedUpdate()</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_Disable">IMixedRealityService.Disable()</a>
     </div>
     <div>
@@ -115,7 +121,7 @@ This interface is the contract for others to use to make their own implementatio
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Examples.Demos.CustomExtensionServices.html">XRTK.Examples.Demos.CustomExtensionServices</a></h6>
-  <h6><strong>Assembly</strong>: XRTK.Examples-player.dll</h6>
+  <h6><strong>Assembly</strong>: XRTK.Examples.dll</h6>
   <h5 id="XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IDemoCustomExtensionService : IMixedRealityExtensionService, IMixedRealityService, IDisposable</code></pre>
@@ -127,7 +133,7 @@ This interface is the contract for others to use to make their own implementatio
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomData.md&amp;value=---%0Auid%3A%20XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK.Examples/Demos/CustomServices/IDemoCustomExtensionService.cs/#L15">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Assets/XRTK.Examples/Demos/CustomServices/IDemoCustomExtensionService.cs/#L24">View Source</a>
   </span>
   <a id="XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomData_" data-uid="XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomData*"></a>
   <h4 id="XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomData" data-uid="XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomData">MyCustomData</h4>
@@ -136,7 +142,7 @@ This interface is the contract for others to use to make their own implementatio
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">string MyCustomData { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">string MyCustomData { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -153,6 +159,37 @@ This interface is the contract for others to use to make their own implementatio
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomEvent.md&amp;value=---%0Auid%3A%20XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Assets/XRTK.Examples/Demos/CustomServices/IDemoCustomExtensionService.cs/#L19">View Source</a>
+  </span>
+  <a id="XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomEvent_" data-uid="XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomEvent*"></a>
+  <h4 id="XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomEvent" data-uid="XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomEvent">MyCustomEvent</h4>
+  <div class="markdown level1 summary"><p>A custom event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Action MyCustomEvent { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -160,7 +197,7 @@ This interface is the contract for others to use to make their own implementatio
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomMethod.md&amp;value=---%0Auid%3A%20XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomMethod%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK.Examples/Demos/CustomServices/IDemoCustomExtensionService.cs/#L20">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Assets/XRTK.Examples/Demos/CustomServices/IDemoCustomExtensionService.cs/#L29">View Source</a>
   </span>
   <a id="XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomMethod_" data-uid="XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomMethod*"></a>
   <h4 id="XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService_MyCustomMethod" data-uid="XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService.MyCustomMethod">MyCustomMethod()</h4>
@@ -176,7 +213,13 @@ This interface is the contract for others to use to make their own implementatio
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
   <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
 </article>
           </div>
@@ -189,12 +232,13 @@ This interface is the contract for others to use to make their own implementatio
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Examples_Demos_CustomExtensionServices_IDemoCustomExtensionService.md&amp;value=---%0Auid%3A%20XRTK.Examples.Demos.CustomExtensionServices.IDemoCustomExtensionService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK.Examples/Demos/CustomServices/IDemoCustomExtensionService.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Assets/XRTK.Examples/Demos/CustomServices/IDemoCustomExtensionService.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>
@@ -208,7 +252,7 @@ This interface is the contract for others to use to make their own implementatio
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            (c) 2019 XRTK
+            (c) XRTK
             
           </div>
         </div>

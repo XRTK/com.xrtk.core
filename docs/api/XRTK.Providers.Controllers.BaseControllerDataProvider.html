@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BaseControllerDataProvider
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -83,18 +83,19 @@
     <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
     <div class="level3"><a class="xref" href="XRTK.Services.BaseDataProvider.html">BaseDataProvider</a></div>
     <div class="level4"><span class="xref">BaseControllerDataProvider</span></div>
-      <div class="level5"><a class="xref" href="XRTK.Lumin.Controllers.LuminControllerDataProvider.html">LuminControllerDataProvider</a></div>
-      <div class="level5"><a class="xref" href="XRTK.Oculus.Controllers.OculusControllerDataProvider.html">OculusControllerDataProvider</a></div>
-      <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html">BaseDictationDataProvider</a></div>
-      <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html">BaseSpeechDataProvider</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Lumin.Providers.Controllers.LuminControllerDataProvider.html">LuminControllerDataProvider</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Oculus.Providers.Controllers.OculusControllerDataProvider.html">OculusControllerDataProvider</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.Hands.BaseHandControllerDataProvider.html">BaseHandControllerDataProvider</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.Simulation.BaseSimulatedControllerDataProvider.html">BaseSimulatedControllerDataProvider</a></div>
       <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.html">MouseDataProvider</a></div>
       <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.html">UnityJoystickDataProvider</a></div>
       <div class="level5"><a class="xref" href="XRTK.Providers.Controllers.UnityInput.UnityTouchDataProvider.html">UnityTouchDataProvider</a></div>
-      <div class="level5"><a class="xref" href="XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.html">WindowsMixedRealityDataProvider</a></div>
+      <div class="level5"><a class="xref" href="XRTK.WindowsMixedReality.Providers.Controllers.WindowsMixedRealityControllerDataProvider.html">WindowsMixedRealityControllerDataProvider</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
@@ -102,10 +103,13 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_Priority">BaseDataProvider.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
@@ -169,25 +173,24 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Providers_Controllers_BaseControllerDataProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class BaseControllerDataProvider : BaseDataProvider, IMixedRealityControllerDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class BaseControllerDataProvider : BaseDataProvider, IMixedRealityControllerDataProvider, IMixedRealityInputDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/BaseControllerDataProvider.cs/#L26">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/BaseControllerDataProvider.cs/#L22">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseControllerDataProvider__ctor_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.#ctor*"></a>
-  <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)">BaseControllerDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)</h4>
-  <div class="markdown level1 summary"><p>Constructor.</p>
-</div>
+  <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile,XRTK.Interfaces.InputSystem.IMixedRealityInputSystem)">BaseControllerDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile, IMixedRealityInputSystem)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)</code></pre>
+    <pre><code class="lang-csharp hljs">protected BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -214,6 +217,42 @@
         <td><span class="parametername">profile</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider_InputSystem.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.InputSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/BaseControllerDataProvider.cs/#L41">View Source</a>
+  </span>
+  <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider_InputSystem" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.InputSystem">InputSystem</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly IMixedRealityInputSystem InputSystem</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h3 id="properties">Properties
@@ -223,12 +262,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider_ActiveControllers.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.ActiveControllers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/BaseControllerDataProvider.cs/#L74">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/BaseControllerDataProvider.cs/#L48">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseControllerDataProvider_ActiveControllers_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.ActiveControllers*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider_ActiveControllers" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.ActiveControllers">ActiveControllers</h4>
-  <div class="markdown level1 summary"><p>Retrieve all controllers currently registered with this device at runtime (if direct access is required)</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -256,7 +294,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider_AddController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.AddController(XRTK.Interfaces.Providers.Controllers.IMixedRealityController)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/BaseControllerDataProvider.cs/#L76">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/BaseControllerDataProvider.cs/#L80">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseControllerDataProvider_AddController_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.AddController*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider_AddController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.AddController(XRTK.Interfaces.Providers.Controllers.IMixedRealityController)">AddController(IMixedRealityController)</h4>
@@ -285,10 +323,62 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider_GetControllerMappingProfile_System_Type_XRTK_Definitions_Utilities_Handedness_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.GetControllerMappingProfile(System.Type%2CXRTK.Definitions.Utilities.Handedness)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/BaseControllerDataProvider.cs/#L51">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_BaseControllerDataProvider_GetControllerMappingProfile_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.GetControllerMappingProfile*"></a>
+  <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider_GetControllerMappingProfile_System_Type_XRTK_Definitions_Utilities_Handedness_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.GetControllerMappingProfile(System.Type,XRTK.Definitions.Utilities.Handedness)">GetControllerMappingProfile(Type, Handedness)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MixedRealityControllerMappingProfile GetControllerMappingProfile(Type controllerType, Handedness handedness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">controllerType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.Handedness.html">Handedness</a></td>
+        <td><span class="parametername">handedness</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Controllers.MixedRealityControllerMappingProfile.html">MixedRealityControllerMappingProfile</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider_RemoveController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.RemoveController(XRTK.Interfaces.Providers.Controllers.IMixedRealityController)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/BaseControllerDataProvider.cs/#L81">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/BaseControllerDataProvider.cs/#L85">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseControllerDataProvider_RemoveController_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.RemoveController*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider_RemoveController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.RemoveController(XRTK.Interfaces.Providers.Controllers.IMixedRealityController)">RemoveController(IMixedRealityController)</h4>
@@ -315,70 +405,12 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider_RequestPointers_XRTK_Definitions_Utilities_SystemType_XRTK_Definitions_Utilities_Handedness_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider.RequestPointers(XRTK.Definitions.Utilities.SystemType%2CXRTK.Definitions.Utilities.Handedness%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/BaseControllerDataProvider.cs/#L38">View Source</a>
-  </span>
-  <a id="XRTK_Providers_Controllers_BaseControllerDataProvider_RequestPointers_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.RequestPointers*"></a>
-  <h4 id="XRTK_Providers_Controllers_BaseControllerDataProvider_RequestPointers_XRTK_Definitions_Utilities_SystemType_XRTK_Definitions_Utilities_Handedness_System_Boolean_" data-uid="XRTK.Providers.Controllers.BaseControllerDataProvider.RequestPointers(XRTK.Definitions.Utilities.SystemType,XRTK.Definitions.Utilities.Handedness,System.Boolean)">RequestPointers(SystemType, Handedness, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Request an array of pointers for the controller type.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual IMixedRealityPointer[] RequestPointers(SystemType controllerType, Handedness controllingHand, bool useSpecificType = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</a></td>
-        <td><span class="parametername">controllerType</span></td>
-        <td><p>The controller type making the request for pointers.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="XRTK.Definitions.Utilities.Handedness.html">Handedness</a></td>
-        <td><span class="parametername">controllingHand</span></td>
-        <td><p>The handedness of the controller making the request.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">useSpecificType</span></td>
-        <td><p>Only register pointers with a specific type.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a>[]</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
@@ -396,6 +428,12 @@
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
 </article>
           </div>
           
@@ -407,12 +445,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseControllerDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseControllerDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/BaseControllerDataProvider.cs/#L18" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/BaseControllerDataProvider.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

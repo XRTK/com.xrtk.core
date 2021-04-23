@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IMixedRealityCameraSystem
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -122,25 +122,25 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IMixedRealityCameraSystem : IMixedRealityService, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IMixedRealityCameraSystem : IMixedRealitySystem, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraRig.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraDataProviders.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraDataProviders%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L25">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L16">View Source</a>
   </span>
-  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraRig_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig*"></a>
-  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraRig" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig">CameraRig</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a> component used in the current configuration.</p>
+  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraDataProviders_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraDataProviders*"></a>
+  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraDataProviders" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraDataProviders">CameraDataProviders</h4>
+  <div class="markdown level1 summary"><p>The list of <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a>s registered and running with the system.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IMixedRealityCameraRig CameraRig { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">IReadOnlyCollection&lt;IMixedRealityCameraDataProvider&gt; CameraDataProviders { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -152,136 +152,159 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_DefaultHeadHeight.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_MainCameraRig.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.MainCameraRig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L30">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L21">View Source</a>
   </span>
-  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_DefaultHeadHeight_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight*"></a>
-  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_DefaultHeadHeight" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight">DefaultHeadHeight</h4>
-  <div class="markdown level1 summary"><p>The default head height when a platform doesn't automatically set it.</p>
+  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_MainCameraRig_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.MainCameraRig*"></a>
+  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_MainCameraRig" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.MainCameraRig">MainCameraRig</h4>
+  <div class="markdown level1 summary"><p>The reference to the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a> attached to the Main Camera (typically this is the player's camera).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">float DefaultHeadHeight { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">IMixedRealityCameraRig MainCameraRig { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_RegisterCameraDataProvider_XRTK_Interfaces_CameraSystem_IMixedRealityCameraDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.RegisterCameraDataProvider(XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L36">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_RegisterCameraDataProvider_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.RegisterCameraDataProvider*"></a>
+  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_RegisterCameraDataProvider_XRTK_Interfaces_CameraSystem_IMixedRealityCameraDataProvider_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.RegisterCameraDataProvider(XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider)">RegisterCameraDataProvider(IMixedRealityCameraDataProvider)</h4>
+  <div class="markdown level1 summary"><p>Registers the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a> with the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html">IMixedRealityCameraSystem</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a></td>
+        <td><span class="parametername">dataProvider</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_SetHeadHeight_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.SetHeadHeight(System.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L30">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_SetHeadHeight_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.SetHeadHeight*"></a>
+  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_SetHeadHeight_System_Single_System_Boolean_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.SetHeadHeight(System.Single,System.Boolean)">SetHeadHeight(Single, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Sets the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraDataProvider_HeadHeight">HeadHeight</a>. If <see cref="!:setForAllCameraProviders"></see> is true, then it's set
+for all <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraDataProviders">CameraDataProviders</a>, otherwise it only sets the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_MainCameraRig">MainCameraRig</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void SetHeadHeight(float value, bool setForAllCameraProviders = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The height value to set.</p>
+</td>
       </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_HeadHeight.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L35">View Source</a>
-  </span>
-  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_HeadHeight_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight*"></a>
-  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_HeadHeight" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight">HeadHeight</h4>
-  <div class="markdown level1 summary"><p>The current head height of the player</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">float HeadHeight { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsOpaque.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsOpaque%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L15">View Source</a>
-  </span>
-  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsOpaque_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsOpaque*"></a>
-  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsOpaque" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsOpaque">IsOpaque</h4>
-  <div class="markdown level1 summary"><p>Is the current camera displaying on an Opaque (AR) device or a VR / immersive device</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IsOpaque { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
+        <td><span class="parametername">setForAllCameraProviders</span></td>
+        <td><p>If <see cref="!:setForAllCameraProviders"></see> is true, then it's set
+for all <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraDataProviders">CameraDataProviders</a>, otherwise it only sets the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_MainCameraRig">MainCameraRig</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsStereoscopic.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_UnRegisterCameraDataProvider_XRTK_Interfaces_CameraSystem_IMixedRealityCameraDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.UnRegisterCameraDataProvider(XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L20">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L42">View Source</a>
   </span>
-  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsStereoscopic_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic*"></a>
-  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsStereoscopic" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic">IsStereoscopic</h4>
-  <div class="markdown level1 summary"><p>Is the current camera displaying on a traditional 2d screen or a stereoscopic display?</p>
+  <a id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_UnRegisterCameraDataProvider_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.UnRegisterCameraDataProvider*"></a>
+  <h4 id="XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_UnRegisterCameraDataProvider_XRTK_Interfaces_CameraSystem_IMixedRealityCameraDataProvider_" data-uid="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.UnRegisterCameraDataProvider(XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider)">UnRegisterCameraDataProvider(IMixedRealityCameraDataProvider)</h4>
+  <div class="markdown level1 summary"><p>UnRegisters the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a> with the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html">IMixedRealityCameraSystem</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IsStereoscopic { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">void UnRegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a></td>
+        <td><span class="parametername">dataProvider</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -299,12 +322,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/CameraSystem/IMixedRealityCameraSystem.cs/#L11" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

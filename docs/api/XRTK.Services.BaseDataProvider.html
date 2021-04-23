@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BaseDataProvider
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -82,10 +82,17 @@
     <div class="level1"><a class="xref" href="XRTK.Services.BaseService.html">BaseService</a></div>
     <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
     <div class="level3"><span class="xref">BaseDataProvider</span></div>
+      <div class="level4"><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html">BaseCameraDataProvider</a></div>
       <div class="level4"><a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html">BaseControllerDataProvider</a></div>
       <div class="level4"><a class="xref" href="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.html">MixedRealityWebRtcDataProvider</a></div>
       <div class="level4"><a class="xref" href="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.html">BaseMixedRealitySpatialObserverDataProvider</a></div>
+      <div class="level4"><a class="xref" href="XRTK.Providers.Speech.BaseDictationDataProvider.html">BaseDictationDataProvider</a></div>
+      <div class="level4"><a class="xref" href="XRTK.Providers.Speech.BaseSpeechDataProvider.html">BaseSpeechDataProvider</a></div>
+      <div class="level4"><a class="xref" href="XRTK.Services.BaseExtensionDataProvider.html">BaseExtensionDataProvider</a></div>
       <div class="level4"><a class="xref" href="XRTK.Services.DiagnosticsSystem.BaseMixedRealityDiagnosticsDataProvider.html">BaseMixedRealityDiagnosticsDataProvider</a></div>
+      <div class="level4"><a class="xref" href="XRTK.Services.InputSystem.FocusProvider.html">FocusProvider</a></div>
+      <div class="level4"><a class="xref" href="XRTK.Services.Teleportation.MixedRealityTeleportValidationDataProvider.html">MixedRealityTeleportValidationDataProvider</a></div>
+      <div class="level4"><a class="xref" href="XRTK.WindowsMixedReality.Providers.BoundarySystem.WindowsMixedRealityBoundaryDataProvider.html">WindowsMixedRealityBoundaryDataProvider</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -97,9 +104,6 @@
     <h5>Inherited Members</h5>
     <div>
       <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
@@ -165,26 +169,23 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public abstract class BaseDataProvider : BaseServiceWithConstructor, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
   </div>
-  <h5 id="XRTK_Services_BaseDataProvider_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Empty, but reserved for future use, in case additional <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a> properties or methods are assigned.</p>
-</div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseDataProvider__ctor_System_String_System_UInt32_.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseDataProvider.%23ctor(System.String%2CSystem.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_BaseMixedRealityProfile_XRTK_Interfaces_IMixedRealityService_.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.BaseMixedRealityProfile%2CXRTK.Interfaces.IMixedRealityService)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BaseDataProvider.cs/#L21">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseDataProvider.cs/#L22">View Source</a>
   </span>
   <a id="XRTK_Services_BaseDataProvider__ctor_" data-uid="XRTK.Services.BaseDataProvider.#ctor*"></a>
-  <h4 id="XRTK_Services_BaseDataProvider__ctor_System_String_System_UInt32_" data-uid="XRTK.Services.BaseDataProvider.#ctor(System.String,System.UInt32)">BaseDataProvider(String, UInt32)</h4>
+  <h4 id="XRTK_Services_BaseDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_BaseMixedRealityProfile_XRTK_Interfaces_IMixedRealityService_" data-uid="XRTK.Services.BaseDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.BaseMixedRealityProfile,XRTK.Interfaces.IMixedRealityService)">BaseDataProvider(String, UInt32, BaseMixedRealityProfile, IMixedRealityService)</h4>
   <div class="markdown level1 summary"><p>Constructor.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BaseDataProvider(string name, uint priority)</code></pre>
+    <pre><code class="lang-csharp hljs">protected BaseDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityService parentService)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -199,15 +200,93 @@
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>The name of the service.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
         <td><span class="parametername">priority</span></td>
+        <td><p>The priority of the service.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td><p>The optional <a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a> for the data provider.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></td>
+        <td><span class="parametername">parentService</span></td>
+        <td><p>The <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> that this <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a> is assigned to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseDataProvider_ParentService.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseDataProvider.ParentService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseDataProvider.cs/#L28">View Source</a>
+  </span>
+  <a id="XRTK_Services_BaseDataProvider_ParentService_" data-uid="XRTK.Services.BaseDataProvider.ParentService*"></a>
+  <h4 id="XRTK_Services_BaseDataProvider_ParentService" data-uid="XRTK.Services.BaseDataProvider.ParentService">ParentService</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMixedRealityService ParentService { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseDataProvider_Priority.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseDataProvider.Priority%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseDataProvider.cs/#L33">View Source</a>
+  </span>
+  <a id="XRTK_Services_BaseDataProvider_Priority_" data-uid="XRTK.Services.BaseDataProvider.Priority*"></a>
+  <h4 id="XRTK_Services_BaseDataProvider_Priority" data-uid="XRTK.Services.BaseDataProvider.Priority">Priority</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override uint Priority { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
@@ -225,6 +304,12 @@
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
 </article>
           </div>
           
@@ -236,12 +321,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BaseDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Services.BaseDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/BaseDataProvider.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/BaseDataProvider.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

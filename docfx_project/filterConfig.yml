@@ -1,0 +1,13 @@
+apiRules:
+- include:
+    uidRegex: ^XRTK.+
+    type: Namespace
+- exclude:
+    uidRegex: ^Unity.+
+    type: Namespace
+- exclude:
+    uidRegex: ^Leap.+
+    type: Namespace
+- exclude:
+    uidRegex: ^LeapInternal.+
+    type: Namespace

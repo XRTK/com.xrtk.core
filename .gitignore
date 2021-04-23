@@ -8,6 +8,8 @@
 [Bb]uild/
 [Ll]ibrary/
 [Aa]pp/
+[Aa]pp.meta
+UserSettings/
 UWP/
 WindowsStoreApp/
 UnityGenerated/
@@ -52,11 +54,18 @@ obj/
 *.log
 *.idb
 *.opendb
+.vsconfig
 
 # ============================ #
 # Visual Studio Code Generated #
 # ============================ #
 .vscode/
+
+# ========================= #
+# Jetbrains Rider Generated #
+# ========================= #
+.idea/
+_ReSharper.Caches
 
 # ===================== #
 # Project Specific List #
@@ -69,15 +78,42 @@ XRTK-Core/Assets/MagicLeap/
 XRTK-Core/Assets/MagicLeap.meta
 XRTK-Core/Assets/Plugins/Lumin/Editor/
 XRTK-Core/Assets/Plugins/Lumin/Editor.meta
-XRTK-Core/Assets/StreamingAssets/GltfModels/
-XRTK-Core/Assets/StreamingAssets/GltfModels.meta
+XRTK-Core/Assets/StreamingAssets/
 XRTK-Core/Assets/StreamingAssets.meta
 
 # ====================== #
 # Project Symbolic Links #
 # ====================== #
-XRTK-Core/Packages/com.xrtk.upm-git-extension
-XRTK-Core/Packages/com.xrtk.wmr
+XRTK-Core/Packages/com.xrtk.arcore
+XRTK-Core/Packages/com.xrtk.etee
+XRTK-Core/Packages/com.xrtk.gltf
+XRTK-Core/Packages/com.xrtk.lenovo
 XRTK-Core/Packages/com.xrtk.lumin
-XRTK-Core/Packages/com.xrtk.sdk
+XRTK-Core/Packages/com.xrtk.nreal
 XRTK-Core/Packages/com.xrtk.oculus
+XRTK-Core/Packages/com.xrtk.sdk
+XRTK-Core/Packages/com.xrtk.steamvr
+XRTK-Core/Packages/com.xrtk.ultraleap
+XRTK-Core/Packages/com.xrtk.wmr
+XRTK-Core/Assets/XRTK.Examples
+XRTK-Core/Assets/XRTK.Examples.meta
+XRTK-Core/Assets/XRTK.Generated/ARCore
+XRTK-Core/Assets/XRTK.Generated/ARCore.meta
+XRTK-Core/Assets/XRTK.Generated/Etee
+XRTK-Core/Assets/XRTK.Generated/Etee.meta
+XRTK-Core/Assets/XRTK.Generated/Lenovo
+XRTK-Core/Assets/XRTK.Generated/Lenovo.meta
+XRTK-Core/Assets/XRTK.Generated/Lumin
+XRTK-Core/Assets/XRTK.Generated/Lumin.meta
+XRTK-Core/Assets/XRTK.Generated/Nreal
+XRTK-Core/Assets/XRTK.Generated/Nreal.meta
+XRTK-Core/Assets/XRTK.Generated/Oculus
+XRTK-Core/Assets/XRTK.Generated/Oculus.meta
+XRTK-Core/Assets/XRTK.Generated/SDK
+XRTK-Core/Assets/XRTK.Generated/SDK.meta
+XRTK-Core/Assets/XRTK.Generated/SteamVR
+XRTK-Core/Assets/XRTK.Generated/SteamVR.meta
+XRTK-Core/Assets/XRTK.Generated/Ultraleap
+XRTK-Core/Assets/XRTK.Generated/Ultraleap.meta
+XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality
+XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality.meta

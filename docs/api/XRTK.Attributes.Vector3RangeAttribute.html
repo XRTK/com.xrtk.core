@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Vector3RangeAttribute
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -83,11 +83,12 @@
     <div class="level2"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.PropertyAttribute.html">PropertyAttribute</a></div>
     <div class="level3"><span class="xref">Vector3RangeAttribute</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.runtime.interopservices._attribute">_Attribute</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.PropertyAttribute.html#UnityEngine_PropertyAttribute_order">PropertyAttribute.order</a>
-    </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.equals#System_Attribute_Equals_System_Object_">Attribute.Equals(Object)</a>
     </div>
@@ -197,6 +198,18 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.match#System_Attribute_Match_System_Object_">Attribute.Match(Object)</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-getidsofnames#System_Attribute_System_Runtime_InteropServices__Attribute_GetIDsOfNames_System_Guid__System_IntPtr_System_UInt32_System_UInt32_System_IntPtr_">Attribute._Attribute.GetIDsOfNames(Guid, IntPtr, UInt32, UInt32, IntPtr)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-gettypeinfo#System_Attribute_System_Runtime_InteropServices__Attribute_GetTypeInfo_System_UInt32_System_UInt32_System_IntPtr_">Attribute._Attribute.GetTypeInfo(UInt32, UInt32, IntPtr)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-gettypeinfocount#System_Attribute_System_Runtime_InteropServices__Attribute_GetTypeInfoCount_System_UInt32__">Attribute._Attribute.GetTypeInfoCount(UInt32)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.system-runtime-interopservices-_attribute-invoke#System_Attribute_System_Runtime_InteropServices__Attribute_Invoke_System_UInt32_System_Guid__System_UInt32_System_Int16_System_IntPtr_System_IntPtr_System_IntPtr_System_IntPtr_">Attribute._Attribute.Invoke(UInt32, Guid, UInt32, Int16, IntPtr, IntPtr, IntPtr, IntPtr)</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.attribute.typeid#System_Attribute_TypeId">Attribute.TypeId</a>
     </div>
     <div>
@@ -220,7 +233,7 @@
   <h5 id="XRTK_Attributes_Vector3RangeAttribute_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[AttributeUsage(AttributeTargets.Field)]
-public sealed class Vector3RangeAttribute : PropertyAttribute</code></pre>
+public sealed class Vector3RangeAttribute : PropertyAttribute, _Attribute</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -229,7 +242,7 @@ public sealed class Vector3RangeAttribute : PropertyAttribute</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_Vector3RangeAttribute__ctor_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Attributes.Vector3RangeAttribute.%23ctor(System.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/Vector3RangeAttribute.cs/#L30">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/Vector3RangeAttribute.cs/#L30">View Source</a>
   </span>
   <a id="XRTK_Attributes_Vector3RangeAttribute__ctor_" data-uid="XRTK.Attributes.Vector3RangeAttribute.#ctor*"></a>
   <h4 id="XRTK_Attributes_Vector3RangeAttribute__ctor_System_Single_System_Single_" data-uid="XRTK.Attributes.Vector3RangeAttribute.#ctor(System.Single,System.Single)">Vector3RangeAttribute(Single, Single)</h4>
@@ -271,7 +284,7 @@ public sealed class Vector3RangeAttribute : PropertyAttribute</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_Vector3RangeAttribute_Max.md&amp;value=---%0Auid%3A%20XRTK.Attributes.Vector3RangeAttribute.Max%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/Vector3RangeAttribute.cs/#L23">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/Vector3RangeAttribute.cs/#L23">View Source</a>
   </span>
   <h4 id="XRTK_Attributes_Vector3RangeAttribute_Max" data-uid="XRTK.Attributes.Vector3RangeAttribute.Max">Max</h4>
   <div class="markdown level1 summary"><p>Maximum value.</p>
@@ -301,7 +314,7 @@ public sealed class Vector3RangeAttribute : PropertyAttribute</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_Vector3RangeAttribute_Min.md&amp;value=---%0Auid%3A%20XRTK.Attributes.Vector3RangeAttribute.Min%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/Vector3RangeAttribute.cs/#L18">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/Vector3RangeAttribute.cs/#L18">View Source</a>
   </span>
   <h4 id="XRTK_Attributes_Vector3RangeAttribute_Min" data-uid="XRTK.Attributes.Vector3RangeAttribute.Min">Min</h4>
   <div class="markdown level1 summary"><p>Minimum value.</p>
@@ -326,7 +339,17 @@ public sealed class Vector3RangeAttribute : PropertyAttribute</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.runtime.interopservices._attribute">System.Runtime.InteropServices._Attribute</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -344,12 +367,13 @@ public sealed class Vector3RangeAttribute : PropertyAttribute</code></pre>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Attributes_Vector3RangeAttribute.md&amp;value=---%0Auid%3A%20XRTK.Attributes.Vector3RangeAttribute%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/Vector3RangeAttribute.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Attributes/Vector3RangeAttribute.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

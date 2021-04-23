@@ -1,26 +1,19 @@
-# XRTK - Mixed Reality Toolkit Change Request
+# XRTK - Mixed Reality Toolkit Pull Request
 
 ## Overview
+<!-- Please provide a clear and concise description of the pull request. -->
 
-High level overview of this pull request.
+## Changes
+<!-- Brief list of the targeted features that are being changed. -->
 
-## Target of the change:
+- Fixes: <!--issue number or url-->
 
-Is this enhancement for:
+## Breaking Changes
+<!--  Are there any breaking changes included in this change that would prevent or cause issue for existing projects? -->
 
-- Core (core framework, interfaces and definitions)
-- Platform (new or updated platform)
-- Extension
-- Component ported from another framework
+- Breaks
 
-## Changes:
+## Related Submodule Changes
 
-Brief list of the targeted features that are being changed.
-
-- Fixes: #...
-
-## Breaking Changes:
-
-Are there any breaking changes included in this change that would prevent or cause issue for existing projects.
-
-- Breaks...
+<!--  Include any submodule related Pull Request links here -->
+- URL

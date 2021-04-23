@@ -2,19 +2,20 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers;
-using XRTK.Extensions;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
+using XRTK.Editor.Utilities;
+using XRTK.Extensions;
+using XRTK.Providers.Controllers;
 
 namespace XRTK.Editor.Profiles.InputSystem.Controllers
 {
@@ -265,32 +266,41 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
             }
         }
 
+        private static int layoutIndex;
+
         internal void RenderControllerMappingButton(MixedRealityControllerMappingProfile controllerMappingProfile)
         {
             var controllerType = controllerMappingProfile.ControllerType.Type;
 
+            if (controllerType == null)
+            {
+                return;
+            }
+
             var handedness = controllerMappingProfile.Handedness;
 
-            if (handedness != Handedness.Right)
+            if (handedness != Handedness.Right && layoutIndex > 0)
             {
+                layoutIndex = 0;
+                GUILayout.EndHorizontal();
+            }
+
+            if (handedness == Handedness.Left)
+            {
+                layoutIndex++;
                 GUILayout.BeginHorizontal();
             }
 
-            var typeName = controllerType?.Name.ToProperCase();
+            var buttonContent = new GUIContent($"Edit {controllerType.Name.ToProperCase()} Action Mapping", ControllerMappingUtilities.GetControllerTextureScaled(controllerMappingProfile));
 
-            if (controllerType?.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
-            {
-                typeName = "HoloLens 1";
-            }
-
-            var buttonContent = new GUIContent($"Edit {typeName} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
             if (GUILayout.Button(buttonContent, ControllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
             {
                 EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));
             }
 
-            if (handedness != Handedness.Left)
+            if (handedness == Handedness.Right && layoutIndex == 1)
             {
+                layoutIndex--;
                 GUILayout.EndHorizontal();
             }
         }

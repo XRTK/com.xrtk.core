@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.XR;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
@@ -21,11 +22,13 @@ namespace XRTK.Providers.CameraSystem
         public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile, IMixedRealityCameraSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            cameraSystem = MixedRealityToolkit.CameraSystem;
+            cameraSystem = parentService;
 
             if (profile.IsNull())
             {
-                profile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
+                profile = MixedRealityToolkit.TryGetSystemProfile<IMixedRealityCameraSystem, MixedRealityCameraSystemProfile>(out var cameraSystemProfile)
+                    ? cameraSystemProfile.GlobalCameraProfile
+                    : throw new ArgumentException($"Unable to get a valid {nameof(MixedRealityCameraSystemProfile)}!");
             }
 
             if (profile.CameraRigType?.Type == null)
@@ -86,6 +89,9 @@ namespace XRTK.Providers.CameraSystem
         public virtual bool IsStereoscopic => CameraRig.PlayerCamera.stereoEnabled;
 
         /// <inheritdoc />
+        public virtual bool HeadHeightIsManagedByDevice => XRDevice.isPresent;
+
+        /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }
 
         /// <inheritdoc />
@@ -121,7 +127,7 @@ namespace XRTK.Providers.CameraSystem
 
             if (CameraRig == null)
             {
-                // TODO Currently we get always get the main camera. Should we provide a tag to search for alts?
+                // TODO Currently we always get the main camera. Should we provide a tag to search for alts?
                 CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
                 Debug.Assert(CameraRig != null);
             }
@@ -194,8 +200,8 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig.GameObject.IsNull() ||
-                CameraRig == null)
+            if (CameraRig == null ||
+                CameraRig.GameObject.IsNull())
             {
                 return;
             }
@@ -239,7 +245,23 @@ namespace XRTK.Providers.CameraSystem
         /// </summary>
         protected virtual void ApplySettingsForDefaultHeadHeight()
         {
-            HeadHeight = DefaultHeadHeight;
+            // We need to check whether the application is playing or not here.
+            // Since this code is executed even when not in play mode, we want
+            // to definitely apply the head height configured in the editor, when
+            // not in play mode. It helps with working in the editor and visualizing
+            // the user's perspective. When running though, we need to make sure we do
+            // not interfere with any platform provided head pose tracking.
+            if (!Application.isPlaying || !HeadHeightIsManagedByDevice)
+            {
+                HeadHeight = DefaultHeadHeight;
+            }
+            // If we are running and the device/platform provides the head pose,
+            // we need to make sure to reset any applied head height while in edit mode.
+            else if (Application.isPlaying && HeadHeightIsManagedByDevice)
+            {
+                HeadHeight = 0f;
+            }
+
             ResetRigTransforms();
             SyncRigTransforms();
         }
@@ -274,8 +296,10 @@ namespace XRTK.Providers.CameraSystem
         {
             CameraRig.PlayspaceTransform.position = Vector3.zero;
             CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
-            // If the camera is a 2d camera when we can adjust the camera's height to match the head height.
+
+            // If the camera is a 2d camera then we can adjust the camera's height to match the head height.
             CameraRig.CameraTransform.position = IsStereoscopic ? Vector3.zero : new Vector3(0f, HeadHeight, 0f);
+
             CameraRig.CameraTransform.rotation = Quaternion.identity;
             CameraRig.BodyTransform.position = Vector3.zero;
             CameraRig.BodyTransform.rotation = Quaternion.identity;

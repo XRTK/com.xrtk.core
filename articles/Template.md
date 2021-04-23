@@ -15,9 +15,9 @@ List previous steps if needed and a short list of required materials or skills.
 
 ### Related Articles
 
-- [Article 1]()
-- [Article 2]()
-- [Article 3]()
+* [Article 1]()
+* [Article 2]()
+* [Article 3]()
 
 ---
 

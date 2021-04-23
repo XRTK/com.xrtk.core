@@ -21,9 +21,7 @@ namespace XRTK.Definitions
     /// The <see cref="IMixedRealityService"/> type to constrain all of the valid <see cref="IMixedRealityServiceConfiguration.InstancedType"/>s to.
     /// Only types that implement the <see cref="TService"/> will show up in the inspector dropdown for the <see cref="IMixedRealityServiceConfiguration.InstancedType"/>
     /// </typeparam>
-    public abstract class BaseMixedRealityServiceProfile<TService> : BaseMixedRealityProfile,
-        IMixedRealityServiceProfile<TService>
-        where TService : IMixedRealityService
+    public abstract class BaseMixedRealityServiceProfile<TService> : BaseMixedRealityProfile, IMixedRealityServiceProfile<TService> where TService : IMixedRealityService
     {
         [SerializeField]
         private MixedRealityServiceConfiguration[] configurations = new MixedRealityServiceConfiguration[0];
@@ -50,7 +48,7 @@ namespace XRTK.Definitions
                 {
                     var cachedConfig = configurations[i];
                     Debug.Assert(cachedConfig != null);
-                    var serviceConfig = new MixedRealityServiceConfiguration<TService>(cachedConfig.InstancedType, cachedConfig.Name, cachedConfig.Priority, cachedConfig.RuntimePlatforms, cachedConfig.Profile);
+                    var serviceConfig = new MixedRealityServiceConfiguration<TService>(cachedConfig);
                     Debug.Assert(serviceConfig != null);
                     registeredServiceConfigurations[i] = serviceConfig;
                 }
@@ -79,6 +77,25 @@ namespace XRTK.Definitions
                     }
                 }
             }
+        }
+
+        internal void AddConfiguration(IMixedRealityServiceConfiguration<TService> configuration)
+        {
+            var newConfigs = new IMixedRealityServiceConfiguration<TService>[RegisteredServiceConfigurations.Length + 1];
+
+            for (int i = 0; i < newConfigs.Length; i++)
+            {
+                if (i != newConfigs.Length - 1)
+                {
+                    newConfigs[i] = RegisteredServiceConfigurations[i];
+                }
+                else
+                {
+                    newConfigs[i] = configuration;
+                }
+            }
+
+            RegisteredServiceConfigurations = newConfigs;
         }
     }
 }

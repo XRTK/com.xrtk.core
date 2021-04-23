@@ -9,6 +9,7 @@ using UnityEngine;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.BoundarySystem;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
 
 namespace XRTK.Services.BoundarySystem
@@ -23,7 +24,7 @@ namespace XRTK.Services.BoundarySystem
         /// Constructor.
         /// </summary>
         /// <param name="profile"></param>
-        public MixedRealityBoundarySystem(MixedRealityBoundaryVisualizationProfile profile)
+        public MixedRealityBoundarySystem(MixedRealityBoundaryProfile profile)
             : base(profile)
         {
             showBoundary = profile.ShowBoundary;
@@ -67,6 +68,22 @@ namespace XRTK.Services.BoundarySystem
 
         private readonly Dictionary<BoundsCache, ProximityAlert> trackedObjects = new Dictionary<BoundsCache, ProximityAlert>(3);
 
+        private Transform playspaceTransform = null;
+
+        private Transform PlayspaceTransform
+        {
+            get
+            {
+                if (playspaceTransform == null)
+                {
+                    playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                       ? cameraSystem.MainCameraRig.PlayspaceTransform
+                       : CameraCache.Main.transform.parent;
+                }
+                return playspaceTransform;
+            }
+        }
+
         private InscribedRectangle rectangularBounds;
 
         private GameObject boundaryVisualizationRoot = null;
@@ -81,10 +98,7 @@ namespace XRTK.Services.BoundarySystem
                 }
 
                 boundaryVisualizationRoot = new GameObject(nameof(BoundarySystemVisualizationRoot));
-                var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                    : CameraCache.Main.transform.parent;
-                boundaryVisualizationRoot.transform.SetParent(playspaceTransform, false);
+                boundaryVisualizationRoot.transform.SetParent(PlayspaceTransform, false);
 
                 return boundaryVisualizationRoot;
             }
@@ -170,9 +184,7 @@ namespace XRTK.Services.BoundarySystem
                     return floorVisualization;
                 }
 
-                var position = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position
-                    : CameraCache.Main.transform.parent.position;
+                var position = PlayspaceTransform.position;
 
                 // Render the floor.
                 floorVisualization = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -279,49 +291,11 @@ namespace XRTK.Services.BoundarySystem
         #region IMixedRealityService Implementation
 
         /// <inheritdoc/>
-        public override void Enable()
-        {
-            base.Enable();
-
-            BoundaryDataProvider = MixedRealityToolkit.GetService<IMixedRealityBoundaryDataProvider>();
-
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
-
-            // Reset the bounds
-            BoundaryBounds = new Edge[0];
-            rectangularBounds = null;
-
-            // Get the boundary geometry.
-            var boundaryGeometry = new List<Vector3>(0);
-            var boundaryEdges = new List<Edge>(0);
-
-            if (BoundaryDataProvider.TryGetBoundaryGeometry(ref boundaryGeometry) && boundaryGeometry.Count > 0)
-            {
-                for (int i = 0; i < boundaryGeometry.Count; i++)
-                {
-                    var pointA = boundaryGeometry[i];
-                    var pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
-                    boundaryEdges.Add(new Edge(pointA, pointB));
-                }
-
-                BoundaryBounds = boundaryEdges.ToArray();
-                // We always use the same seed so that from run to run, the inscribed bounds are consistent.
-                rectangularBounds = new InscribedRectangle(BoundaryBounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
-            }
-            else
-            {
-                Debug.LogWarning("No Boundary Geometry found");
-            }
-
-            BoundarySystemVisualizationRoot.SetActive(true);
-        }
-
-        /// <inheritdoc/>
         public override void Update()
         {
             base.Update();
 
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+            if (!Application.isPlaying || boundaryDataProvider == null) { return; }
 
             foreach (var trackedObjectStatus in trackedObjects)
             {
@@ -401,7 +375,7 @@ namespace XRTK.Services.BoundarySystem
         {
             base.Disable();
 
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+            if (!Application.isPlaying) { return; }
 
             if (!boundaryVisualizationRoot.IsNull())
             {
@@ -414,7 +388,7 @@ namespace XRTK.Services.BoundarySystem
         {
             base.Destroy();
 
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+            if (!Application.isPlaying) { return; }
 
             // Destroys the parent and all the child objects
             boundaryVisualizationRoot.Destroy();
@@ -430,26 +404,30 @@ namespace XRTK.Services.BoundarySystem
         /// <inheritdoc />
         public IReadOnlyList<GameObject> TrackedObjects => trackedObjects.Keys.Select(cache => cache.gameObject).ToList();
 
+        private IMixedRealityBoundaryDataProvider boundaryDataProvider = null;
+
         /// <inheritdoc />
-        public IMixedRealityBoundaryDataProvider BoundaryDataProvider { get; private set; }
+        public IMixedRealityBoundaryDataProvider BoundaryDataProvider
+        {
+            get => boundaryDataProvider ?? (boundaryDataProvider = MixedRealityToolkit.GetService<IMixedRealityBoundaryDataProvider>());
+            private set => boundaryDataProvider = value;
+        }
 
         /// <inheritdoc />
         public bool IsVisible
         {
-            get => BoundaryDataProvider != null && BoundaryDataProvider.IsPlatformBoundaryVisible ||
-                   BoundarySystemVisualizationRoot.activeInHierarchy &&
+            get => (BoundaryDataProvider != null && BoundaryDataProvider.IsPlatformBoundaryVisible) ||
+                   !BoundarySystemVisualizationRoot.IsNull() && BoundarySystemVisualizationRoot.activeInHierarchy &&
                    (ShowBoundary ||
                     ShowFloor ||
                     ShowWalls ||
                     ShowCeiling);
             set
             {
-                if (BoundaryDataProvider != null)
+                if (!BoundarySystemVisualizationRoot.IsNull())
                 {
-                    BoundaryDataProvider.IsPlatformBoundaryVisible = value;
+                    BoundarySystemVisualizationRoot.SetActive(value);
                 }
-
-                BoundarySystemVisualizationRoot.SetActive(value);
             }
         }
 
@@ -541,6 +519,53 @@ namespace XRTK.Services.BoundarySystem
         public Edge[] BoundaryBounds { get; private set; } = new Edge[0];
 
         /// <inheritdoc />
+        public void SetupBoundary(IMixedRealityBoundaryDataProvider dataProvider)
+        {
+            BoundaryDataProvider = dataProvider;
+
+            if (!BoundaryDataProvider.IsPlatformConfigured) { return; }
+
+            // Reset the bounds
+            BoundaryBounds = new Edge[0];
+            rectangularBounds = null;
+
+            // Get the boundary geometry.
+            var boundaryGeometry = new List<Vector3>(0);
+            var boundaryEdges = new List<Edge>(0);
+
+            if (BoundaryDataProvider.TryGetBoundaryGeometry(ref boundaryGeometry) && boundaryGeometry.Count > 0)
+            {
+                for (int i = 0; i < boundaryGeometry.Count; i++)
+                {
+                    var pointA = boundaryGeometry[i];
+                    var pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
+                    boundaryEdges.Add(new Edge(pointA, pointB));
+                }
+
+                BoundaryBounds = boundaryEdges.ToArray();
+                // We always use the same seed so that from run to run, the inscribed bounds are consistent.
+                rectangularBounds = new InscribedRectangle(BoundaryBounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
+            }
+            else
+            {
+                Debug.LogWarning("No Boundary Geometry found");
+            }
+
+            // Clear the prev visualization objects.
+            if (!BoundarySystemVisualizationRoot.IsNull())
+            {
+                boundaryVisualizationRoot.Destroy();
+            }
+
+            // Initialize the visualization objects.
+            ShowBoundary = showBoundary;
+            ShowCeiling = showCeiling;
+            ShowFloor = showFloor;
+            ShowWalls = showWalls;
+            IsVisible = ShowBoundary || ShowCeiling || ShowFloor || ShowWalls;
+        }
+
+        /// <inheritdoc />
         public bool IsInsideBoundary(Vector3 position, Space referenceSpace = Space.World)
         {
             if (!EdgeUtilities.IsValidPoint(position))
@@ -550,13 +575,9 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                : CameraCache.Main.transform.parent;
-
             if (referenceSpace == Space.World)
             {
-                position = playspaceTransform.InverseTransformPoint(position);
+                position = PlayspaceTransform.InverseTransformPoint(position);
             }
 
             if (position.y < 0 ||
@@ -584,16 +605,13 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                : CameraCache.Main.transform.parent;
-            var transformedCenter = playspaceTransform.TransformPoint(
-                new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
+            var transformedCenter = PlayspaceTransform.TransformPoint(new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
 
             center = new Vector2(transformedCenter.x, transformedCenter.z);
             angle = rectangularBounds.Angle;
             width = rectangularBounds.Width;
             height = rectangularBounds.Height;
+
             return true;
         }
 

@@ -12,22 +12,12 @@ namespace XRTK.Providers.SpatialObservers
     {
         [SerializeField]
         [Tooltip("Level of detail for the mesh")]
-        private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;
+        private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Low;
 
         /// <summary>
         /// The desired Unity Physics Layer on which to set the spatial mesh.
         /// </summary>
         public SpatialAwarenessMeshLevelOfDetail MeshLevelOfDetail => meshLevelOfDetail;
-
-        [SerializeField]
-        [Tooltip("Level of detail, in triangles per cubic meter.\nIgnored unless MeshLevelOfDetail is set to Custom.")]
-        private uint meshTrianglesPerCubicMeter = 0;
-
-        /// <summary>
-        /// The level of detail, in triangles per cubic meter, for the returned spatial mesh.
-        /// </summary>
-        /// <remarks>This value is ignored, unless <see cref="MeshLevelOfDetail"/> is set to Coarse.</remarks>
-        public uint MeshTrianglesPerCubicMeter => meshTrianglesPerCubicMeter;
 
         [SerializeField]
         [Tooltip("Should normals be recalculated when a mesh is added or updated?")]

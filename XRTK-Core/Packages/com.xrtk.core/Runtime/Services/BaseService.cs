@@ -17,7 +17,7 @@ namespace XRTK.Services
         public virtual string Name { get; protected set; }
 
         /// <inheritdoc />
-        public virtual uint Priority { get; protected set; } = 5;
+        public virtual uint Priority { get; protected set; }
 
         /// <inheritdoc />
         public virtual void Initialize() { }
@@ -47,7 +47,7 @@ namespace XRTK.Services
         public virtual void OnApplicationFocus(bool isFocused) { }
 
         /// <inheritdoc />
-        public void OnApplicationPause(bool isPaused) { }
+        public virtual void OnApplicationPause(bool isPaused) { }
 
         #endregion IMixedRealityService Implementation
 

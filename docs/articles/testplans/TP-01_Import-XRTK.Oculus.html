@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>XRTK Testplan: Import XRTK.Oculus into a project | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="XRTK Testplan: Import XRTK.Oculus into a project | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="xrtk-testplan-import-xrtkoculus-into-a-project">XRTK Testplan: Import XRTK.Oculus into a project</h1>
+
+<p>This testplan tests the XRTK import path via UPM where the user installs the <code>XRTK.Oculus</code> package.</p>
+<h2 id="test-preparations">Test Preparations</h2>
+<ul>
+<li>Create a new Unity 2019.4 project using the 3D template using the Unity Hub</li>
+</ul>
+<h2 id="test-1---add-xrtk-scoped-registry">Test 1 - Add XRTK Scoped Registry</h2>
+<h3 id="instructions">Instructions</h3>
+<ul>
+<li>Open the created Unity project</li>
+<li>Open the <code>Package Manager</code> window in the editor</li>
+<li>Click on the &quot;Advanced&quot; drop down and select &quot;Advanced Project Settings&quot;</li>
+<li>Add a new scoped registry with the following details and click &quot;Save&quot;
+<ul>
+<li>Name: XRTK</li>
+<li>URL: <a href="http://upm.xrtk.io:4873/">http://upm.xrtk.io:4873/</a></li>
+<li>Scope(s): com.xrtk</li>
+</ul>
+</li>
+<li>Close the Package Manager Settings window</li>
+<li>Change the Registry drop down from &quot;Unity Registry&quot; to &quot;My Registries&quot;</li>
+<li>In the <code>Package Manager</code> select <code>Advanced -&gt; Show Preview Packages</code></li>
+<li>Wait for the <code>Package Manager</code> to finish loading packages</li>
+</ul>
+<h3 id="expected-result">Expected Result</h3>
+<ul>
+<li>The list of available packages in the Unity Package Manager now includes XRTK modules, such as e.g.
+<ul>
+<li>XRTK.Core</li>
+<li>XRTK.Oculus</li>
+<li>XRTK.SDK</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<h2 id="test-2---import-xrtksdk-and-configure">Test 2 - Import XRTK.SDK and configure</h2>
+<h3 id="instructions-1">Instructions</h3>
+<ul>
+<li>Open the <code>Package Manager</code> window in the editor</li>
+<li>Change the Registry drop down from &quot;Unity Registry&quot; to &quot;My Registries&quot;</li>
+<li>Select the <code>XRTK.SDK</code> package</li>
+<li>Select <code>Install</code> to import the package into the project</li>
+<li>Wait for the import process to complete</li>
+<li>Return to the scene and Select <code>Mixed Reality Toolkit/Configure...</code> in the menu bar</li>
+</ul>
+<h3 id="expected-result-1">Expected Result</h3>
+<ul>
+<li>The SDK and Core projects show as &quot;Installed&quot; with the latest versions</li>
+<li>A GameObject <code>MixedRealityToolkit</code> was added to the scene</li>
+<li>A GameObject <code>MixedRealityPlayspace</code> was added to the scene</li>
+<li>Selecting the <code>MixedRealityToolkit</code> game object shows the toolkit is using the <code>MixedRealityToolkitRootProfile</code></li>
+<li>Running the project produces no errors</li>
+</ul>
+<h2 id="test-3---import-xrtkoculus">Test 3 - Import XRTK.Oculus</h2>
+<h3 id="instructions-2">Instructions</h3>
+<ul>
+<li>Open the <code>Package Manager</code> window in the editor</li>
+<li>Change the Registry drop down from &quot;Unity Registry&quot; to &quot;My Registries&quot;</li>
+<li>Select the <code>XRTK.Oculus</code> package</li>
+<li>Select <code>Install</code> to import the package into the project</li>
+<li>Wait for the import process to complete</li>
+<li>When prompted to install the &quot;Oculus Platform Service Configurations&quot;, select &quot;Later&quot;</li>
+</ul>
+<h3 id="expected-result-2">Expected Result</h3>
+<ul>
+<li>The project compiles without errors</li>
+<li>The project compiles without XRTK specific warnings</li>
+<li>A menu item <code>Mixed Reality Toolkit</code> is now available at the top menu bar</li>
+<li>A folder <code>XRTK.Generated/Oculus</code> was NOT created in the project's <code>Assets</code> folder</li>
+</ul>
+<h2 id="test-4---install-xrtkoculus-package-assets">Test 4 - Install XRTK.Oculus Package Assets</h2>
+<h3 id="instructions-3">Instructions</h3>
+<ul>
+<li>If it already exists, Delete the &quot;XRTK.Generated\Oculus&quot; folder in your project assets</li>
+<li>Select <code>Mixed Reality Toolkit/Packages/Install Oculus Package Assets....</code> in the menu bar</li>
+<li>Wait for the import process to complete</li>
+<li>When prompted to install the &quot;Oculus Platform Service Configurations&quot;, select &quot;Yes, Absolutely&quot;</li>
+<li>Select <code>Mixed Reality Toolkit/Configure...</code> in the menu bar</li>
+</ul>
+<h3 id="expected-result-3">Expected Result</h3>
+<ul>
+<li>A folder <code>XRTK.Generated/Oculus</code> was created in the project's <code>Assets</code> folder</li>
+<li>A GameObject <code>MixedRealityToolkit</code> was added to the scene</li>
+<li>A GameObject <code>MixedRealityPlayspace</code> was added to the scene</li>
+<li>Selecting the <code>MixedRealityToolkit</code> game object shows the toolkit is using the <code>MixedRealityToolkitRootProfile</code></li>
+<li>Opening the 'Camera System Profile' in the <code>MixedRealityToolkitRootProfile</code>, there is a 'Oculus Camera Data Provider' registered in the 'IMixedRealityCameraDataProvider' configuration</li>
+<li>Opening the 'Input System Profile' in the <code>MixedRealityToolkitRootProfile</code>, there is a 'Oculus Controller Data Provider' registered in the 'IMixedRealityInputDataProvider' configuration</li>
+<li>Opening the 'Input System Profile' in the <code>MixedRealityToolkitRootProfile</code>, there is a 'Oculus Hand Controller Data Provider' registered in the 'IMixedRealityInputDataProvider' configuration</li>
+</ul>
+<h2 id="test-5---run-oculus-platform-via-oculus-link-in-windows-standalone-or-alternatively-using-an-oculus-rift">Test 5 - Run Oculus platform via Oculus Link in Windows Standalone (or alternatively, using an Oculus Rift)</h2>
+<h3 id="instructions-4">Instructions</h3>
+<ul>
+<li>Add a floor to your scene using &quot;Mixed Reality Toolkit -&gt; Tools -&gt; Create Floor&quot; in the editor menu</li>
+<li>Add a Cube to the Scene with the &quot;Manipulation Handler&quot; component added and configured for &quot;Select&quot;</li>
+<li>Enable VR settings for the Oculus platform in the Unity project</li>
+<li>Save the current scene and ensure it is registered in the Unity &quot;Build Settings&quot;</li>
+<li>Connect your Oculus Quest via a cable to your PC and start the Oculus Client - Confirm the headset shows as connected</li>
+<li>Run the Project</li>
+</ul>
+<h3 id="expected-result-4">Expected Result</h3>
+<ul>
+<li>The project compiles without errors</li>
+<li>The project compiles without XRTK specific warnings</li>
+<li>The project runs without errors</li>
+<li>The view shows above the floor, relative to the headset's current physical location</li>
+<li>When starting each controller, they appear in the scene and move</li>
+<li>Clicking the trigger causes the Pointer lines to appear</li>
+<li>Using the Thumbsticks enables teleportation and the user can move around the floor</li>
+<li>Clicking on the Cube enables the cube to be dragged relative to the controllers position</li>
+<li>Putting controllers down and raising hands replaces the controller models with hands that move relative to the users hands</li>
+</ul>
+<h2 id="test-6---run-oculus-platform-native-on-device">Test 6 - Run Oculus platform native on device</h2>
+<h3 id="instructions-5">Instructions</h3>
+<ul>
+<li>Switch the current runtime platform to &quot;Android&quot; via the Unity &quot;Build Settings&quot; window</li>
+<li>Open the Unity &quot;Project Settings&quot; window on the &quot;Player&quot; tab</li>
+<li>Update the following settings:
+<ul>
+<li>Other -&gt; &quot;Color space&quot; to &quot;Gamma&quot;</li>
+<li>Other -&gt; Enable &quot;Auto Graphics API&quot;</li>
+<li>Other -&gt; Change &quot;Minimum API level&quot; to 25</li>
+<li>Other -&gt; Set &quot;Scripting Backend&quot; to &quot;IL2CPP&quot;</li>
+</ul>
+</li>
+<li>Add an Android Manifest to the project using &quot;Mixed Reality Toolkit -&gt; Tools -&gt; Oculus -&gt; Create Oculus Quest Compatible AndroidManifest.xml&quot;</li>
+<li>Connect your Oculus Quest via a cable to your PC</li>
+<li>Use &quot;Build and Run&quot; in the Unity Build Window</li>
+</ul>
+<h3 id="expected-result-5">Expected Result</h3>
+<ul>
+<li>The project compiles without errors</li>
+<li>The project compiles without XRTK specific warnings</li>
+<li>The project runs without errors</li>
+<li>In the headset, the view shows above the floor, relative to the headset's current physical location</li>
+<li>When starting each controller, they appear in the scene and move</li>
+<li>Clicking the trigger causes the Pointer lines to appear</li>
+<li>Using the Thumbsticks enables teleportation and the user can move around the floor</li>
+<li>Clicking on the Cube enables the cube to be dragged relative to the controllers position</li>
+<li>Putting controllers down and raising hands replaces the controller models with hands that move relative to the users hands</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/articles/testplans/TP-01_Import-XRTK.Oculus.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

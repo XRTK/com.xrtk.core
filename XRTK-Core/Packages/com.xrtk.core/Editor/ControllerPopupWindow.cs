@@ -8,7 +8,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Data;
 using XRTK.Editor.PropertyDrawers;
@@ -17,7 +16,6 @@ using XRTK.Editor.Utilities;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Providers.Controllers.OpenVR;
 using XRTK.Providers.Controllers.UnityInput;
-using XRTK.Utilities.Editor;
 
 namespace XRTK.Editor
 {
@@ -106,7 +104,7 @@ namespace XRTK.Editor
                 Close();
             }
 
-            currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(controllerDataProviderProfile);
+            currentControllerTexture = ControllerMappingUtilities.GetControllerTexture(controllerDataProviderProfile);
         }
 
         /// <summary>
@@ -130,12 +128,13 @@ namespace XRTK.Editor
             }
 
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
+            window.currentControllerName = profile.ControllerType?.Type?.Name;
 
             window.currentControllerName = profile.ControllerType?.Type?.Name;
             window.titleContent = new GUIContent($"{window.currentControllerName} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;
             window.currentInteractionProfiles = interactionMappingProfiles;
-            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile);
+            window.currentControllerTexture = ControllerMappingUtilities.GetControllerTexture(profile);
 
             isMouseInRects = new bool[interactionMappingProfiles.arraySize];
 
@@ -343,35 +342,9 @@ namespace XRTK.Editor
                 if (useCustomInteractionMapping ||
                     currentControllerTexture.IsNull())
                 {
-                    bool skip = false;
-
-                    if (ControllerType.Name == "WindowsMixedRealityMotionController" && Handedness == Handedness.None)
-                    {
-                        switch (description)
-                        {
-                            case "Grip Press":
-                            case "Trigger Position":
-                            case "Trigger Touched":
-                            case "Touchpad Position":
-                            case "Touchpad Touch":
-                            case "Touchpad Press":
-                            case "Menu Press":
-                            case "Thumbstick Position":
-                            case "Thumbstick Press":
-                                skip = true;
-                                break;
-                            case "Trigger Press (Select)":
-                                description = "Air Tap (Select)";
-                                break;
-                        }
-                    }
-
-                    if (!skip)
-                    {
-                        inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
-                        EditorGUILayout.LabelField(description, GUILayout.ExpandWidth(true));
-                        GUILayout.FlexibleSpace();
-                    }
+                    inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                    EditorGUILayout.LabelField(description, GUILayout.ExpandWidth(true));
+                    GUILayout.FlexibleSpace();
                 }
                 else
                 {

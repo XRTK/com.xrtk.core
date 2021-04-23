@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using XRTK.Attributes;
@@ -99,13 +100,23 @@ namespace XRTK.Definitions.InputSystem
         #region Global Hand Options
 
         [SerializeField]
-        [Tooltip("If set, hand mesh data will be read and available for visualization. Disable for optimized performance.")]
-        private bool handMeshingEnabled = false;
+        [Range(.5f, 1f)]
+        [Tooltip("Threshold in range [0.5, 1] that defines when a hand is considered to be grabing.")]
+        private float gripThreshold = .8f;
 
         /// <summary>
-        /// If set, hand mesh data will be read and available for visualization. Disable for optimized performance.
+        /// Threshold in range [0, 1] that defines when a hand is considered to be grabing.
         /// </summary>
-        public bool HandMeshingEnabled => handMeshingEnabled;
+        public float GripThreshold => gripThreshold;
+
+        [SerializeField]
+        [Tooltip("Defines what kind of data should be aggregated for the hands rendering.")]
+        private HandRenderingMode renderingMode = HandRenderingMode.Joints;
+
+        /// <summary>
+        /// Defines what kind of data should be aggregated for the hands rendering.
+        /// </summary>
+        public HandRenderingMode RenderingMode => renderingMode;
 
         [SerializeField]
         [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]
@@ -127,12 +138,21 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("Set the bounds mode to use for calculating hand bounds.")]
-        private HandBoundsMode boundsMode = HandBoundsMode.Hand;
+        private HandBoundsLOD boundsMode = HandBoundsLOD.Low;
 
         /// <summary>
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
-        public HandBoundsMode BoundsMode => boundsMode;
+        public HandBoundsLOD BoundsMode => boundsMode;
+
+        [SerializeField]
+        [Tooltip("Hand controller poses tracked.")]
+        private HandControllerPoseProfile[] trackedPoses = null;
+
+        /// <summary>
+        /// Hand controller poses tracked.
+        /// </summary>
+        public IReadOnlyList<HandControllerPoseProfile> TrackedPoses => trackedPoses;
 
         #endregion Global Hand Options
 

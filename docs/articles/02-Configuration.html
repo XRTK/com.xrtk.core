@@ -8,13 +8,13 @@
     <title>Configuring your project | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Configuring your project | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -69,59 +69,44 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="configuring-your-project">Configuring your project</h1>
 
+<p>One of the goals of the Mixed Reality Toolkit was to greatly simplify how a project is configured, removing the need to hunt and search for specific objects and tweak configuration to change how a scene works, by consolidating the majority of the projects configuration in to a few top-level screens:</p>
+<p><img src="../images/Configuration/MixedRealityToolkitConfiguration.png" alt="Mixed Reality Toolkit Configuration"></p>
+<p>While initially this may look a little complex, once a basic understanding is known, it is fairly easy to navigate.</p>
 <blockquote>
 <p><strong>Note:</strong> We are currently taking feedback on ways to improve the configuration navigation for the Mixed Reality Toolkit.  Please feel free to suggest options in the XRTK Discord channel or raise an <a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title=">RFI request</a>.</p>
 </blockquote>
-<h2 id="configuation-profiles">Configuation Profiles</h2>
-<p>Configuration Profiles are derived from <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html">scriptable objects</a>, which are only meant to store data, similar to a json structure but instead in Unity yaml.</p>
-<p>The Mixed Reality Toolkit really focused a lot of the <a href="https://unity3d.com/how-to/architect-with-scriptable-objects">architecure</a> around profiles for different systems, services, and data providers.  Profiles provide these objects with the developer's specific application setup, requirements, and conditions.</p>
+<p>When profiles are created by the XRTK, they are then placed in the following folder:</p>
 <blockquote>
-<p><strong>Note:</strong> All of the Mixed Reality Toolkit's Systems and Services require a profile to run. Data Providers and additional custom services defined by developers may optionally include a profile.</p>
-</blockquote>
-<p>When profiles are created by the Toolkit, they are then placed in the following folder:</p>
-<blockquote>
-<p><code>Assets\XRTK.Generated\CustomProfiles</code></p>
+<p><code>Assets\XRTK.Generated</code></p>
 </blockquote>
 <p>This path can be customized by updating your preference in the preferences window.</p>
-<h2 id="master-configuration-profile">Master Configuration Profile</h2>
-<p>The Mixed Reality Toolkit has a single &quot;master&quot; configuration profile which is referenced on the <code>MixedRealityToolkit</code> GameObject in your configured scene.</p>
-<p><img src="../images/Configuation/MixedRealityActiveProfile.png" alt="Active Profile"></p>
-<p>Double clicking on this profile will select and show the main configuration screen for the Mixed Reality Toolkit:</p>
-<p><img src="../images/Configuation/MixedRealityProfileView.png" alt="Main Congiguration Profile"></p>
-<blockquote>
-<p>The &quot;Default&quot; profiles provided by the Mixed Reality Toolkit are locked by default, so when you view these in the inspector they will appear greyed out.  This is to ensure you always have a common default for any project.  We recommend you create your own profiles (see below) when you need to customize the configuration for your project.</p>
-</blockquote>
+<h2 id="overview-of-individual-systems">Overview of individual systems</h2>
+<p>The Mixed Reality Toolkit will only ever have a single active configuration profile running at any time, which is referenced on the <code>MixedRealityToolkit</code> GameObject in your configured scene.</p>
+<p><img src="../images/Configuration/MixedRealityProfileView.png" alt="Main Configuration Profile"></p>
 <p>From here you can configure all the core Systems and their individual profile settings:</p>
 <ul>
-<li><a href="">Camera System Settings</a></li>
-<li><a href="">Input System Settings</a></li>
-<li><a href="">Boundary System Settings</a></li>
-<li><a href="">Teleporting System Settings</a></li>
-<li><a href="">Spatial Awareness System Settings</a></li>
-<li><a href="">Diagnostics System Settings</a></li>
-<li><a href="">Additional Service Providers</a></li>
+<li><a href="systems/01-camera-system.html">Camera System</a></li>
+<li><a href="systems/02-input-system.html">Input System</a></li>
+<li><a href="systems/03-boundary-system.html">Boundary System</a></li>
+<li><a href="systems/04-teleporting-system.html">Teleport System</a></li>
+<li><a href="systems/05-spatial-awareness-system.html">Spatial Awareness System</a></li>
+<li><a href="systems/06-diagnostics-system.html">Diagnostics System</a></li>
+<li><a href="systems/07-additional-serivce-providers.html">Additional Service Providers</a></li>
 </ul>
 <h2 id="customizing-your-project">Customizing your project</h2>
-<p>When you start a new project, we provide a default configuration with every system and service pre-configured and turned on, for a fully cross-platform project. Developers may choose to further customize this default configuration or approach the project from the opposite end and choose to opt out of everything:</p>
-<p><img src="../images/Configuation/MixedRealityProfileClone.png" alt="Profile Options"></p>
-<ul>
-<li><strong>Clone &amp; Customize:</strong> Copies all of the default profile settings for you and enables them to be editable.
+<p>When you start a new project, we provide a copy each packages profiles with every system and service pre-configured and turned on, for a fully platform agnostic project. Each profile can be individually customized to your project's needs.</p>
 <blockquote>
-<p><strong>Note:</strong> This is great for tweaking existing options to fit your edge case needs.</p>
+<p><strong>Note:</strong> If you'd like to make a copy of a profile to test out a specific configuration you can easily clone and assign the profile using the <code>clone</code> button that appears to the right of each profile field.
+<img src="../images/Configuration/MixedRealityProfileCloneButton.png" alt="Clone Profile Button"></p>
 </blockquote>
-</li>
-<li><strong>Create new profiles:</strong> Start with a blank profile with everything turned off by default.
-<blockquote>
-<p><strong>Note:</strong> This is great for slowly integrating the Mixed Reality Toolkit into an existing project.</p>
-</blockquote>
-</li>
-</ul>
-<p>Each profile can be individually cloned and customized to your project's needs:</p>
-<p><img src="../images/Configuation/MixedRealityProfileCloneButton.png" alt="Clone Profile Button"></p>
 <hr>
 <h3 id="related-articles">Related Articles</h3>
 <ul>
-<li><a href="https://github.com/XRTK/XRTK-Core/blob/development/articles/00-GettingStarted.md#build-and-play">Building and running your mixed reality application</a></li>
+<li><a href="00-GettingStarted.html#getting-started-with-the-mixed-reality-toolkit">Getting Started</a>
+<ul>
+<li><a href="00-GettingStarted.html#build-and-play">Building and running your mixed reality application</a></li>
+</ul>
+</li>
 </ul>
 <hr>
 <h3 id="raise-an-information-request"><a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title="><strong>Raise an Information Request</strong></a></h3>
@@ -139,7 +124,8 @@
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

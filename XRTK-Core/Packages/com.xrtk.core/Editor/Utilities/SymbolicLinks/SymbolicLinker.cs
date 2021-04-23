@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -15,19 +16,62 @@ using Debug = UnityEngine.Debug;
 namespace XRTK.Editor.Utilities.SymbolicLinks
 {
     [InitializeOnLoad]
-    internal static class SymbolicLinker
+    public static class SymbolicLinker
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         static SymbolicLinker()
         {
-            RunSync(Application.isBatchMode);
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
+            EditorApplication.projectChanged += OnProjectChanged;
+            RunSync(Application.isBatchMode);
+        }
+
+        private static bool hasProjectUpdated = false;
+
+        private static void OnProjectChanged()
+        {
+            if (hasProjectUpdated) { return; }
+            hasProjectUpdated = true;
+
+            void VerifyLinks(object state)
+            {
+                while (hasProjectUpdated)
+                {
+                    Task.Delay(2500);
+
+                    var anyInvalid = false;
+
+                    foreach (var link in Settings.SymbolicLinks)
+                    {
+                        var path = $"{ProjectRoot}{link.TargetRelativePath}";
+                        var attributes = File.GetAttributes(path);
+                        var isValid = VerifySymbolicLink(path);
+
+                        if (DebugEnabled)
+                        {
+                            Debug.Log($"Checking {path}\nIsValid?{isValid} | {attributes}");
+                        }
+
+                        if (!isValid)
+                        {
+                            DeleteSymbolicLink(path);
+                            anyInvalid = true;
+                        }
+                    }
+
+                    if (anyInvalid)
+                    {
+                        EditorApplication.delayCall += () => RunSync(true);
+                    }
+                }
+            }
+
+            ThreadPool.QueueUserWorkItem(VerifyLinks);
         }
 
         private const string LINK_ICON_TEXT = "<=link=>";
-        private const FileAttributes FOLDER_SYMLINK_ATTRIBUTES = FileAttributes.ReparsePoint;
 
         // Style used to draw the symlink indicator in the project view.
         private static GUIStyle SymlinkMarkerStyle => symbolicLinkMarkerStyle ?? (symbolicLinkMarkerStyle = new GUIStyle(EditorStyles.label)
@@ -48,7 +92,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// <summary>
         /// Debug the symbolic linker utility.
         /// </summary>
-        public static bool DebugEnabled
+        private static bool DebugEnabled
         {
             get => MixedRealityPreferences.DebugSymbolicInfo;
             set => MixedRealityPreferences.DebugSymbolicInfo = value;
@@ -64,6 +108,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 if (settings == null &&
                     !string.IsNullOrEmpty(MixedRealityPreferences.SymbolicLinkSettingsPath))
                 {
+                    if (DebugEnabled)
+                    {
+                        Debug.Log($"Loading symlink settings from :{MixedRealityPreferences.SymbolicLinkSettingsPath}");
+                    }
+
                     settings = AssetDatabase.LoadAssetAtPath<SymbolicLinkSettings>(MixedRealityPreferences.SymbolicLinkSettingsPath);
                 }
 
@@ -83,6 +132,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// <param name="forceUpdate">Bypass the auto load check and force the packages to be updated, even if they're up to date.</param>
         public static void RunSync(bool forceUpdate = false)
         {
+            if (DebugEnabled)
+            {
+                Debug.Log($"{nameof(RunSync)}({nameof(forceUpdate)} = {forceUpdate})");
+            }
+
             if (IsSyncing || EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
@@ -114,6 +168,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             }
 
             IsSyncing = true;
+            AssetDatabase.ReleaseCachedFileHandles();
             EditorApplication.LockReloadAssemblies();
 
             if (DebugEnabled)
@@ -128,17 +183,16 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             {
                 if (string.IsNullOrEmpty(link.SourceRelativePath)) { continue; }
 
-                bool isValid = false;
                 var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
                 var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
 
-                if (link.IsActive)
+                if (VerifySymbolicLink(targetAbsolutePath))
                 {
-                    isValid = VerifySymbolicLink(targetAbsolutePath);
-                }
+                    if (DebugEnabled)
+                    {
+                        Debug.Log($"Is Link Active? {link.IsActive} : {link.TargetRelativePath}");
+                    }
 
-                if (isValid)
-                {
                     // If we already have the directory in our project, then skip.
                     if (link.IsActive) { continue; }
 
@@ -202,7 +256,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// </summary>
         /// <param name="sourceAbsolutePath"></param>
         /// <param name="targetAbsolutePath"></param>
-        public static bool AddLink(string sourceAbsolutePath, string targetAbsolutePath)
+        internal static bool AddLink(string sourceAbsolutePath, string targetAbsolutePath)
         {
             if (string.IsNullOrEmpty(sourceAbsolutePath) || string.IsNullOrEmpty(targetAbsolutePath))
             {
@@ -256,7 +310,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// Disables a symbolic link in the settings.
         /// </summary>
         /// <param name="targetRelativePath"></param>
-        public static bool DisableLink(string targetRelativePath)
+        internal static bool DisableLink(string targetRelativePath)
         {
             var symbolicLink = Settings.SymbolicLinks.Find(link => link.TargetRelativePath == targetRelativePath);
 
@@ -282,7 +336,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// </summary>
         /// <param name="sourceRelativePath"></param>
         /// <param name="targetRelativePath"></param>
-        public static bool RemoveLink(string sourceRelativePath, string targetRelativePath)
+        internal static bool RemoveLink(string sourceRelativePath, string targetRelativePath)
         {
             if (!DisableLink(targetRelativePath))
             {
@@ -308,26 +362,145 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
 
-                if (string.IsNullOrEmpty(path)) { return; }
+                if (!string.IsNullOrEmpty(path) &&
+                    IsSymbolicPath(path) &&
+                    VerifySymbolicLink(path))
+                {
+                    GUI.Label(rect, LINK_ICON_TEXT, SymlinkMarkerStyle);
+                }
+            }
+            catch (Exception e)
+            {
+                if (DebugEnabled)
+                {
+                    Debug.LogError(e);
+                }
+            }
+        }
+
+        private static bool IsSymbolicPath(string path)
+        {
+            try
+            {
+                if (!Directory.Exists(path))
+                {
+                    if (File.Exists(path))
+                    {
+                        return false;
+                    }
+
+                    if (DebugEnabled)
+                    {
+                        Debug.LogError($"Invalid path: {path}");
+                    }
+
+                    return false;
+                }
 
                 var attributes = File.GetAttributes(path);
 
-                if ((attributes & FOLDER_SYMLINK_ATTRIBUTES) != FOLDER_SYMLINK_ATTRIBUTES) { return; }
-
-                GUI.Label(rect, LINK_ICON_TEXT, SymlinkMarkerStyle);
-
-                if (Settings.SymbolicLinks.Any(link => link.TargetRelativePath.Contains(path))) { return; }
-
-                var fullPath = Path.GetFullPath(path);
-
-                if (DeleteSymbolicLink(fullPath))
+                if (attributes == (FileAttributes)(-1))
                 {
-                    Debug.Log($"Removed \"{fullPath}\" symbolic link from project.");
+                    Debug.LogError($"Invalid file attributes found for {path}!");
+
+                    if (Directory.Exists(path))
+                    {
+                        Directory.Delete(path);
+                    }
+
+                    return false;
                 }
+
+                if ((attributes & FileAttributes.Directory) != FileAttributes.Directory)
+                {
+                    return false;
+                }
+
+                return (attributes & FileAttributes.ReparsePoint) == FileAttributes.ReparsePoint;
             }
-            catch
+            catch (Exception e)
             {
-                // ignored
+                Debug.LogError(e);
+                return false;
+            }
+        }
+
+        private static bool VerifySymbolicLink(string targetAbsolutePath)
+        {
+            try
+            {
+                if (DebugEnabled)
+                {
+                    Debug.Log($"Attempting to validate {targetAbsolutePath}");
+                }
+
+                if (!Directory.Exists(targetAbsolutePath))
+                {
+                    if (DebugEnabled)
+                    {
+                        Debug.Log($"Validated disabled link: {targetAbsolutePath}");
+                    }
+
+                    return false;
+                }
+
+                var isValid = IsSymbolicPath(targetAbsolutePath);
+
+                if (!isValid)
+                {
+                    if (DebugEnabled)
+                    {
+                        Debug.Log($"Removing invalid link for {targetAbsolutePath}");
+                    }
+
+                    DeleteSymbolicLink(targetAbsolutePath);
+                }
+                else
+                {
+                    var tempFile = $"{targetAbsolutePath}/symlink_temp.txt";
+
+                    try
+                    {
+                        if (!File.Exists(tempFile))
+                        {
+                            var stream = File.CreateText(tempFile);
+                            stream.Dispose();
+                            stream.Close();
+                        }
+
+                        if (File.Exists(tempFile))
+                        {
+                            File.Delete(tempFile);
+                        }
+
+                        if (File.Exists($"{tempFile}.meta"))
+                        {
+                            File.Delete($"{tempFile}.meta");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        switch (e)
+                        {
+                            case AccessViolationException _:
+                            case IOException _:
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                }
+
+                return isValid && Directory.Exists(targetAbsolutePath);
+            }
+            catch (ThreadAbortException)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
             }
         }
 
@@ -435,35 +608,6 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             }
 
             return true;
-        }
-
-        private static bool VerifySymbolicLink(string targetAbsolutePath)
-        {
-            if (DebugEnabled)
-            {
-                Debug.Log($"Attempting to validate {targetAbsolutePath}");
-            }
-
-            var isValid = IsSymbolicPath(targetAbsolutePath);
-
-            if (!isValid &&
-                Directory.Exists(targetAbsolutePath))
-            {
-                if (DebugEnabled)
-                {
-                    Debug.LogWarning($"Removing invalid link for {targetAbsolutePath}");
-                }
-
-                DeleteSymbolicLink(targetAbsolutePath);
-            }
-
-            return isValid && Directory.Exists(targetAbsolutePath);
-        }
-
-        private static bool IsSymbolicPath(string path)
-        {
-            var pathInfo = new FileInfo(path);
-            return pathInfo.Attributes.HasFlag(FileAttributes.ReparsePoint);
         }
 
         private static string AddSubfolderPathToTarget(string sourcePath, string targetPath)

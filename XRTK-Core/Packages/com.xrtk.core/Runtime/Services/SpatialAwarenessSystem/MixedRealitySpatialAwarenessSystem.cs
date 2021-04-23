@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.EventDatum.SpatialAwarenessSystem;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
@@ -48,8 +49,8 @@ namespace XRTK.Services.SpatialAwarenessSystem
             get
             {
                 var spatialAwarenessSystemObject = new GameObject("Spatial Awareness System");
-                var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
+                var playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                    ? cameraSystem.MainCameraRig.PlayspaceTransform
                     : CameraCache.Main.transform.parent;
                 spatialAwarenessSystemObject.transform.SetParent(playspaceTransform, false);
                 return spatialAwarenessSystemObject;
@@ -202,25 +203,22 @@ namespace XRTK.Services.SpatialAwarenessSystem
             if (spatialAwarenessParent != null)
             {
                 spatialAwarenessParent.transform.DetachChildren();
+                spatialAwarenessParent.Destroy();
             }
-
-            spatialAwarenessParent.Destroy();
 
             // Detach the mesh objects (they are to be cleaned up by the observer) and cleanup the parent
             if (meshParent != null)
             {
                 meshParent.transform.DetachChildren();
+                meshParent.Destroy();
             }
-
-            meshParent.Destroy();
 
             // Detach the surface objects (they are to be cleaned up by the observer) and cleanup the parent
             if (surfaceParent != null)
             {
                 surfaceParent.transform.DetachChildren();
+                surfaceParent.Destroy();
             }
-
-            surfaceParent.Destroy();
         }
 
         #region Mesh Events

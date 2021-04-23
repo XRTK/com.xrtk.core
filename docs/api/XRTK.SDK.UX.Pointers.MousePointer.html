@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MousePointer
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -90,7 +90,7 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a></div>
@@ -99,8 +99,7 @@
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a>&gt;</div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a>&gt;</div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="XRTK.Definitions.Utilities.MixedRealityPose.html">MixedRealityPose</a>&gt;</div>
-    <div><a class="xref" href="XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a></div>
-    <div><span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span></div>
+    <div><a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityMousePointer.html">IMixedRealityMousePointer</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></div>
@@ -109,6 +108,9 @@
     <h5>Inherited Members</h5>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_DisableCursorOnStart">BaseControllerPointer.DisableCursorOnStart</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_RaycastOrigin">BaseControllerPointer.RaycastOrigin</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsSelectPressed">BaseControllerPointer.IsSelectPressed</a>
@@ -123,13 +125,31 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTeleportRequestActive">BaseControllerPointer.IsTeleportRequestActive</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_CapturedNearInteractionObject">BaseControllerPointer.CapturedNearInteractionObject</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerDirection">BaseControllerPointer.PointerDirection</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SetCursor_UnityEngine_GameObject_">BaseControllerPointer.SetCursor(GameObject)</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TeleportSystem">BaseControllerPointer.TeleportSystem</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_CameraSystem">BaseControllerPointer.CameraSystem</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnEnable">BaseControllerPointer.OnEnable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerEnter_UnityEngine_Collider_">BaseControllerPointer.OnTriggerEnter(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerStay_UnityEngine_Collider_">BaseControllerPointer.OnTriggerStay(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerExit_UnityEngine_Collider_">BaseControllerPointer.OnTriggerExit(Collider)</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnDisable">BaseControllerPointer.OnDisable()</a>
@@ -153,6 +173,12 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TeleportHotSpot">BaseControllerPointer.TeleportHotSpot</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_InteractionMode">BaseControllerPointer.InteractionMode</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_NearInteractionCollider">BaseControllerPointer.NearInteractionCollider</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsFocusLocked">BaseControllerPointer.IsFocusLocked</a>
     </div>
     <div>
@@ -171,7 +197,7 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Rays">BaseControllerPointer.Rays</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PrioritizedLayerMasksOverride">BaseControllerPointer.PrioritizedLayerMasksOverride</a>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerRaycastLayerMasksOverride">BaseControllerPointer.PointerRaycastLayerMasksOverride</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_FocusHandler">BaseControllerPointer.FocusHandler</a>
@@ -193,18 +219,6 @@
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerOrientation">BaseControllerPointer.PointerOrientation</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnPostRaycast">BaseControllerPointer.OnPostRaycast()</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointerPosition_UnityEngine_Vector3__">BaseControllerPointer.TryGetPointerPosition(Vector3)</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointingRay_UnityEngine_Ray__">BaseControllerPointer.TryGetPointingRay(Ray)</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointerRotation_UnityEngine_Quaternion__">BaseControllerPointer.TryGetPointerRotation(Quaternion)</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_">BaseControllerPointer.IEqualityComparer.Equals(Object, Object)</a>
@@ -276,271 +290,10 @@
       <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;MixedRealityPose&gt;)</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_InputSystem">InputSystemGlobalListener.InputSystem</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDestroy">InputSystemGlobalListener.OnDestroy()</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_ValidateInputSystemAsync">InputSystemGlobalListener.ValidateInputSystemAsync()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_CancelInvoke">MonoBehaviour.CancelInvoke()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_Invoke_System_String_System_Single_">MonoBehaviour.Invoke(String, Single)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_InvokeRepeating_System_String_System_Single_System_Single_">MonoBehaviour.InvokeRepeating(String, Single, Single)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_CancelInvoke_System_String_">MonoBehaviour.CancelInvoke(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking_System_String_">MonoBehaviour.IsInvoking(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_String_">MonoBehaviour.StartCoroutine(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_String_System_Object_">MonoBehaviour.StartCoroutine(String, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_Collections_IEnumerator_">MonoBehaviour.StartCoroutine(IEnumerator)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_Auto_System_Collections_IEnumerator_">MonoBehaviour.StartCoroutine_Auto(IEnumerator)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_System_Collections_IEnumerator_">MonoBehaviour.StopCoroutine(IEnumerator)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_UnityEngine_Coroutine_">MonoBehaviour.StopCoroutine(Coroutine)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_System_String_">MonoBehaviour.StopCoroutine(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopAllCoroutines">MonoBehaviour.StopAllCoroutines()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_print_System_Object_">MonoBehaviour.print(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_useGUILayout">MonoBehaviour.useGUILayout</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_runInEditMode">MonoBehaviour.runInEditMode</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html#UnityEngine_Behaviour_enabled">Behaviour.enabled</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html#UnityEngine_Behaviour_isActiveAndEnabled">Behaviour.isActiveAndEnabled</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_Type_">Component.GetComponent(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren_System_Type_System_Boolean_">Component.GetComponentInChildren(Type, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren_System_Type_">Component.GetComponentInChildren(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren__1_System_Boolean_">Component.GetComponentInChildren&lt;T&gt;(Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren__1">Component.GetComponentInChildren&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren_System_Type_System_Boolean_">Component.GetComponentsInChildren(Type, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren_System_Type_">Component.GetComponentsInChildren(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Boolean_">Component.GetComponentsInChildren&lt;T&gt;(Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Boolean_System_Collections_Generic_List___0__">Component.GetComponentsInChildren&lt;T&gt;(Boolean, List&lt;T&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1">Component.GetComponentsInChildren&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Collections_Generic_List___0__">Component.GetComponentsInChildren&lt;T&gt;(List&lt;T&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInParent_System_Type_">Component.GetComponentInParent(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInParent__1">Component.GetComponentInParent&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent_System_Type_System_Boolean_">Component.GetComponentsInParent(Type, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent_System_Type_">Component.GetComponentsInParent(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1_System_Boolean_">Component.GetComponentsInParent&lt;T&gt;(Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1_System_Boolean_System_Collections_Generic_List___0__">Component.GetComponentsInParent&lt;T&gt;(Boolean, List&lt;T&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1">Component.GetComponentsInParent&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents_System_Type_">Component.GetComponents(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents_System_Type_System_Collections_Generic_List_UnityEngine_Component__">Component.GetComponents(Type, List&lt;Component&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents__1_System_Collections_Generic_List___0__">Component.GetComponents&lt;T&gt;(List&lt;T&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents__1">Component.GetComponents&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_CompareTag_System_String_">Component.CompareTag(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.SendMessageUpwards(String, Object, SendMessageOptions)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_System_Object_">Component.SendMessageUpwards(String, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_">Component.SendMessageUpwards(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_UnityEngine_SendMessageOptions_">Component.SendMessageUpwards(String, SendMessageOptions)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_System_Object_">Component.SendMessage(String, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_">Component.SendMessage(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.SendMessage(String, Object, SendMessageOptions)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_UnityEngine_SendMessageOptions_">Component.SendMessage(String, SendMessageOptions)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.BroadcastMessage(String, Object, SendMessageOptions)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_System_Object_">Component.BroadcastMessage(String, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_">Component.BroadcastMessage(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_UnityEngine_SendMessageOptions_">Component.BroadcastMessage(String, SendMessageOptions)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_transform">Component.transform</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_gameObject">Component.gameObject</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_tag">Component.tag</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_GetInstanceID">Object.GetInstanceID()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_">Object.Instantiate(Object, Vector3, Quaternion)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform_">Object.Instantiate(Object, Vector3, Quaternion, Transform)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_">Object.Instantiate(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Transform_">Object.Instantiate(Object, Transform)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Transform_System_Boolean_">Object.Instantiate(Object, Transform, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_">Object.Instantiate&lt;T&gt;(T)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Vector3_UnityEngine_Quaternion_">Object.Instantiate&lt;T&gt;(T, Vector3, Quaternion)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform_">Object.Instantiate&lt;T&gt;(T, Vector3, Quaternion, Transform)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Transform_">Object.Instantiate&lt;T&gt;(T, Transform)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Transform_System_Boolean_">Object.Instantiate&lt;T&gt;(T, Transform, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Destroy_UnityEngine_Object_System_Single_">Object.Destroy(Object, Single)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Destroy_UnityEngine_Object_">Object.Destroy(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyImmediate_UnityEngine_Object_System_Boolean_">Object.DestroyImmediate(Object, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyImmediate_UnityEngine_Object_">Object.DestroyImmediate(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfType_System_Type_">Object.FindObjectsOfType(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DontDestroyOnLoad_UnityEngine_Object_">Object.DontDestroyOnLoad(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyObject_UnityEngine_Object_System_Single_">Object.DestroyObject(Object, Single)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyObject_UnityEngine_Object_">Object.DestroyObject(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindSceneObjectsOfType_System_Type_">Object.FindSceneObjectsOfType(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfTypeIncludingAssets_System_Type_">Object.FindObjectsOfTypeIncludingAssets(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfType__1">Object.FindObjectsOfType&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectOfType__1">Object.FindObjectOfType&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfTypeAll_System_Type_">Object.FindObjectsOfTypeAll(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectOfType_System_Type_">Object.FindObjectOfType(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_ToString">Object.ToString()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_name">Object.name</a>
-    </div>
-    <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_hideFlags">Object.hideFlags</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
@@ -553,6 +306,9 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.SDK.UX.Pointers.html">XRTK.SDK.UX.Pointers</a></h6>
@@ -568,12 +324,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_Controller.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.Controller%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L69">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L74">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_Controller_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.Controller*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_Controller" data-uid="XRTK.SDK.UX.Pointers.MousePointer.Controller">Controller</h4>
-  <div class="markdown level1 summary"><p>Mixed Reality Toolkit controller definition, used to manage a specific controller type</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -601,12 +356,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_IsInteractionEnabled.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.IsInteractionEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L64">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L69">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_IsInteractionEnabled_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.IsInteractionEnabled*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_IsInteractionEnabled" data-uid="XRTK.SDK.UX.Pointers.MousePointer.IsInteractionEnabled">IsInteractionEnabled</h4>
-  <div class="markdown level1 summary"><p>Has the conditions for the interaction been satisfied to enable the interaction?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -636,12 +390,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BUnityEngine.Vector2%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L191">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L240">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_OnInputChanged_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2})">OnInputChanged(InputEventData&lt;Vector2&gt;)</h4>
-  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -666,20 +419,16 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Vector2&gt;)</a></div>
-  <h5 id="XRTK_SDK_UX_Pointers_MousePointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
-</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnInputDown_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnInputDown(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L160">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L209">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_OnInputDown_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnInputDown*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnInputDown_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnInputDown(XRTK.EventDatum.Input.InputEventData)">OnInputDown(InputEventData)</h4>
-  <div class="markdown level1 summary"><p>Input Down updates from Interactions, Keys, or any other simple input.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -709,12 +458,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnInputUp(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L179">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L228">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_OnInputUp_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnInputUp*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnInputUp(XRTK.EventDatum.Input.InputEventData)">OnInputUp(InputEventData)</h4>
-  <div class="markdown level1 summary"><p>Input Up updates from Interactions, Keys, or any other simple input.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -741,15 +489,31 @@
   <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_">BaseControllerPointer.OnInputUp(InputEventData)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnPostRaycast.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnPostRaycast%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L139">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_MousePointer_OnPostRaycast_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnPostRaycast*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnPostRaycast" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnPostRaycast">OnPostRaycast()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnPostRaycast()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnPostRaycast">BaseControllerPointer.OnPostRaycast()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnPreRaycast.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnPreRaycast%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L83">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L115">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_OnPreRaycast_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnPreRaycast*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnPreRaycast" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnPreRaycast">OnPreRaycast()</h4>
-  <div class="markdown level1 summary"><p>Called before all rays have casted.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -762,12 +526,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L113">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L150">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_OnSourceDetected_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnSourceDetected*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)">OnSourceDetected(SourceStateEventData)</h4>
-  <div class="markdown level1 summary"><p>Raised when a source is detected.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -797,12 +560,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L129">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L172">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_OnSourceLost_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnSourceLost*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)">OnSourceLost(SourceStateEventData)</h4>
-  <div class="markdown level1 summary"><p>Raised when a source is lost.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -832,12 +594,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_UnityEngine_Vector2__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.OnSourcePoseChanged(XRTK.EventDatum.Input.SourcePoseEventData%7BUnityEngine.Vector2%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L140">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L189">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_OnSourcePoseChanged_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnSourcePoseChanged*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_UnityEngine_Vector2__" data-uid="XRTK.SDK.UX.Pointers.MousePointer.OnSourcePoseChanged(XRTK.EventDatum.Input.SourcePoseEventData{UnityEngine.Vector2})">OnSourcePoseChanged(SourcePoseEventData&lt;Vector2&gt;)</h4>
-  <div class="markdown level1 summary"><p>Raised when the source position is changed.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -867,7 +628,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_Start.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.Start%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L207">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L258">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_Start_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.Start*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_Start" data-uid="XRTK.SDK.UX.Pointers.MousePointer.Start">Start()</h4>
@@ -879,6 +640,153 @@
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Start">BaseControllerPointer.Start()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_TryGetPointerPosition_UnityEngine_Vector3__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.TryGetPointerPosition(UnityEngine.Vector3%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L101">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_MousePointer_TryGetPointerPosition_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.TryGetPointerPosition*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_MousePointer_TryGetPointerPosition_UnityEngine_Vector3__" data-uid="XRTK.SDK.UX.Pointers.MousePointer.TryGetPointerPosition(UnityEngine.Vector3@)">TryGetPointerPosition(out Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool TryGetPointerPosition(out Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointerPosition_UnityEngine_Vector3__">BaseControllerPointer.TryGetPointerPosition(out Vector3)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_TryGetPointerRotation_UnityEngine_Quaternion__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.TryGetPointerRotation(UnityEngine.Quaternion%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L108">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_MousePointer_TryGetPointerRotation_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.TryGetPointerRotation*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_MousePointer_TryGetPointerRotation_UnityEngine_Quaternion__" data-uid="XRTK.SDK.UX.Pointers.MousePointer.TryGetPointerRotation(UnityEngine.Quaternion@)">TryGetPointerRotation(out Quaternion)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool TryGetPointerRotation(out Quaternion rotation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointerRotation_UnityEngine_Quaternion__">BaseControllerPointer.TryGetPointerRotation(out Quaternion)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_TryGetPointingRay_UnityEngine_Ray__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.TryGetPointingRay(UnityEngine.Ray%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L91">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_MousePointer_TryGetPointingRay_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.TryGetPointingRay*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_MousePointer_TryGetPointingRay_UnityEngine_Ray__" data-uid="XRTK.SDK.UX.Pointers.MousePointer.TryGetPointingRay(UnityEngine.Ray@)">TryGetPointingRay(out Ray)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool TryGetPointingRay(out Ray pointingRay)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Ray.html">Ray</a></td>
+        <td><span class="parametername">pointingRay</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointingRay_UnityEngine_Ray__">BaseControllerPointer.TryGetPointingRay(out Ray)</a></div>
   <h3 id="eii">Explicit Interface Implementations
   </h3>
   <span class="small pull-right mobile-hide">
@@ -886,12 +794,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_HideCursorWhenInactive.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.XRTK%23Interfaces%23InputSystem%23IMixedRealityMousePointer%23HideCursorWhenInactive%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L34">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L39">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_HideCursorWhenInactive_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#HideCursorWhenInactive*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_HideCursorWhenInactive" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#HideCursorWhenInactive">IMixedRealityMousePointer.HideCursorWhenInactive</h4>
-  <div class="markdown level1 summary"><p>Should the mouse cursor be hidden when no active input is received?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -917,12 +824,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_HideTimeout.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.XRTK%23Interfaces%23InputSystem%23IMixedRealityMousePointer%23HideTimeout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L50">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L55">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_HideTimeout_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#HideTimeout*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_HideTimeout" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#HideTimeout">IMixedRealityMousePointer.HideTimeout</h4>
-  <div class="markdown level1 summary"><p>How long should it take before the mouse cursor is hidden?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -948,12 +854,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_MovementThresholdToUnHide.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.XRTK%23Interfaces%23InputSystem%23IMixedRealityMousePointer%23MovementThresholdToUnHide%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L42">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L47">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_MovementThresholdToUnHide_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#MovementThresholdToUnHide*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_MovementThresholdToUnHide" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#MovementThresholdToUnHide">IMixedRealityMousePointer.MovementThresholdToUnHide</h4>
-  <div class="markdown level1 summary"><p>What is the movement threshold to reach before un-hiding mouse cursor?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -979,7 +884,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_Speed.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer.XRTK%23Interfaces%23InputSystem%23IMixedRealityMousePointer%23Speed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L57">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L62">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_Speed_" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#Speed*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_MousePointer_XRTK_Interfaces_InputSystem_IMixedRealityMousePointer_Speed" data-uid="XRTK.SDK.UX.Pointers.MousePointer.XRTK#Interfaces#InputSystem#IMixedRealityMousePointer#Speed">IMixedRealityMousePointer.Speed</h4>
@@ -1006,7 +911,7 @@
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a>
@@ -1033,10 +938,7 @@
       <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler&lt;T&gt;</a>
   </div>
   <div>
-      <a class="xref" href="XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a>
-  </div>
-  <div>
-      <span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span>
+      <a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityMousePointer.html">IMixedRealityMousePointer</a>
@@ -1061,6 +963,33 @@
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
   </div>
   <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
 </article>
@@ -1074,12 +1003,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_MousePointer.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.MousePointer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/MousePointer.cs/#L17" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/MousePointer.cs/#L20" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

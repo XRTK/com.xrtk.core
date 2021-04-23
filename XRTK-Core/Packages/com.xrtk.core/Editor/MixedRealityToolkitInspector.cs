@@ -19,9 +19,15 @@ namespace XRTK.Editor
     [CustomEditor(typeof(MixedRealityToolkit))]
     public class MixedRealityToolkitInspector : UnityEditor.Editor
     {
+        private const string ObjectSelectorClosed = "ObjectSelectorClosed";
+        private const string ObjectSelectorUpdated = "ObjectSelectorUpdated";
+
         private SerializedProperty activeProfile;
+
         private int currentPickerWindow = -1;
         private bool checkChange;
+
+        private UnityEditor.Editor profileInspector;
 
         private void Awake()
         {
@@ -36,6 +42,11 @@ namespace XRTK.Editor
             activeProfile = serializedObject.FindProperty(nameof(activeProfile));
             currentPickerWindow = -1;
             checkChange = activeProfile.objectReferenceValue.IsNull();
+        }
+
+        private void OnDestroy()
+        {
+            profileInspector.Destroy();
         }
 
         public override void OnInspectorGUI()
@@ -70,7 +81,10 @@ namespace XRTK.Editor
                 {
                     case 0:
                         EditorGUIUtility.PingObject(target);
-                        EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one.", "OK");
+                        EditorApplication.delayCall += () =>
+                        {
+                            EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one.", "OK");
+                        };
                         break;
                     case 1:
                         var rootProfilePath = AssetDatabase.GetAssetPath(rootProfiles[0]);
@@ -78,8 +92,7 @@ namespace XRTK.Editor
                         EditorApplication.delayCall += () =>
                         {
                             changed = true;
-                            var rootProfile =
-                                AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
+                            var rootProfile = AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
                             Debug.Assert(rootProfile != null);
                             activeProfile.objectReferenceValue = rootProfile;
                             EditorGUIUtility.PingObject(rootProfile);
@@ -88,7 +101,6 @@ namespace XRTK.Editor
                         };
                         break;
                     default:
-                        EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
                         currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
                         EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(null, false, string.Empty, currentPickerWindow);
                         break;
@@ -101,11 +113,11 @@ namespace XRTK.Editor
             {
                 switch (commandName)
                 {
-                    case "ObjectSelectorUpdated":
+                    case ObjectSelectorUpdated:
                         activeProfile.objectReferenceValue = EditorGUIUtility.GetObjectPickerObject();
                         changed = true;
                         break;
-                    case "ObjectSelectorClosed":
+                    case ObjectSelectorClosed:
                         activeProfile.objectReferenceValue = EditorGUIUtility.GetObjectPickerObject();
                         currentPickerWindow = -1;
                         changed = true;
@@ -118,17 +130,21 @@ namespace XRTK.Editor
                 }
             }
 
-            if (activeProfile.objectReferenceValue != null)
+            if (!activeProfile.objectReferenceValue.IsNull())
             {
                 var rootProfile = activeProfile.objectReferenceValue as MixedRealityToolkitRootProfile;
-                var profileInspector = CreateEditor(rootProfile);
+
+                if (profileInspector.IsNull())
+                {
+                    profileInspector = CreateEditor(rootProfile);
+                }
 
                 if (profileInspector is MixedRealityToolkitRootProfileInspector rootProfileInspector)
                 {
                     EditorGUILayout.Space();
                     EditorGUILayout.Space();
                     EditorGUILayout.Space();
-                    Rect rect = new Rect(GUILayoutUtility.GetLastRect()) { height = 0.75f };
+                    var rect = new Rect(GUILayoutUtility.GetLastRect()) { height = 0.75f };
                     EditorGUI.DrawRect(rect, Color.gray);
                     EditorGUILayout.Space();
 
@@ -196,13 +212,13 @@ namespace XRTK.Editor
                 void SetStartScene()
                 {
                     var activeScene = SceneManager.GetActiveScene();
-                    Debug.Assert(!string.IsNullOrEmpty(activeScene.path), "Configured Scene must be saved in order to set it as the Start Scene!\n" + "Please save your scene and set it as the Start Scene in the XRTK preferences.");
+                    Debug.Assert(!string.IsNullOrWhiteSpace(activeScene.path), "Configured Scene must be saved in order to set it as the Start Scene!\n" + "Please save your scene and set it as the Start Scene in the XRTK preferences.");
                     MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(activeScene.path);
                 }
             }
             catch (Exception e)
             {
-                Debug.LogError(e.ToString());
+                Debug.LogError(e);
             }
         }
     }

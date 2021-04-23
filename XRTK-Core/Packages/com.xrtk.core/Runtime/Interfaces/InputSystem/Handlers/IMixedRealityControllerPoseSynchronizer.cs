@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
@@ -18,8 +17,7 @@ namespace XRTK.Interfaces.InputSystem.Handlers
         IMixedRealityInputHandler<Vector2>,
         IMixedRealityInputHandler<Vector3>,
         IMixedRealityInputHandler<Quaternion>,
-        IMixedRealityInputHandler<MixedRealityPose>,
-        IMixedRealityInputHandler<HandData>
+        IMixedRealityInputHandler<MixedRealityPose>
     {
         /// <summary>
         /// The <see cref="Transform"/> that will be synchronized with the controller data.

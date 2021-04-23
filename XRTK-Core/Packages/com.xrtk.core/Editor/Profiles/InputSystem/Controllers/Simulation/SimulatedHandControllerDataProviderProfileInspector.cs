@@ -4,6 +4,7 @@
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Editor.Extensions;
 
@@ -13,45 +14,42 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
     public class SimulatedHandControllerDataProviderProfileInspector : SimulatedControllerDataProviderProfileInspector
     {
         private static readonly GUIContent SimulatedHandSettingsFoldoutHeader = new GUIContent("Simulated Hand Tracking Settings");
+        private static readonly GUIContent handPoseAnimationSpeedLabel = new GUIContent("Hand Pose Animation Speed");
 
-        private SerializedProperty handMeshingEnabled;
+        private SerializedProperty gripThreshold;
+        private SerializedProperty renderingMode;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
-
+        private SerializedProperty trackedPoses;
         private SerializedProperty handPoseAnimationSpeed;
-        private SerializedProperty poseDefinitions;
-
-        private ReorderableList poseList;
-        private int currentlySelectedPoseElement;
 
         private bool showSimulatedHandTrackingSettings = true;
+        private ReorderableList poseProfilesList;
+        private int currentlySelectedPoseElement;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
+            gripThreshold = serializedObject.FindProperty(nameof(gripThreshold));
+            renderingMode = serializedObject.FindProperty(nameof(renderingMode));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
 
-            poseDefinitions = serializedObject.FindProperty(nameof(poseDefinitions));
-            handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
+            trackedPoses = serializedObject.FindProperty(nameof(trackedPoses));
 
-            poseList = new ReorderableList(serializedObject, poseDefinitions, true, false, true, true)
+            poseProfilesList = new ReorderableList(serializedObject, trackedPoses, true, false, true, true)
             {
                 elementHeight = EditorGUIUtility.singleLineHeight * 1.5f
             };
-            poseList.drawHeaderCallback += DrawHeaderCallback;
-            poseList.drawElementCallback += DrawConfigurationOptionElement;
-            poseList.onAddCallback += OnConfigurationOptionAdded;
-            poseList.onRemoveCallback += OnConfigurationOptionRemoved;
-        }
+            poseProfilesList.drawHeaderCallback += PoseProfilesList_DrawHeaderCallback;
+            poseProfilesList.drawElementCallback += PoseProfilesList_DrawConfigurationOptionElement;
+            poseProfilesList.onAddCallback += PoseProfilesList_OnConfigurationOptionAdded;
+            poseProfilesList.onRemoveCallback += PoseProfilesList_OnConfigurationOptionRemoved;
 
-        private void DrawHeaderCallback(Rect rect)
-        {
-            EditorGUI.LabelField(rect, "Pose Definitions");
+            handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
         }
 
         public override void OnInspectorGUI()
@@ -62,34 +60,53 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
 
             EditorGUILayout.Space();
 
-            showSimulatedHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulatedHandTrackingSettings, SimulatedHandSettingsFoldoutHeader, true);
+            showSimulatedHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulatedHandTrackingSettings, SimulatedHandSettingsFoldoutHeader);
+
             if (showSimulatedHandTrackingSettings)
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.LabelField("Hand Rendering Settings");
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(handMeshingEnabled);
-                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField("General Hand Settings", EditorStyles.boldLabel);
+                EditorGUILayout.PropertyField(gripThreshold);
                 EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Hand Physics Settings");
+
+                EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(renderingMode);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(handPhysicsEnabled);
                 EditorGUILayout.PropertyField(useTriggers);
                 EditorGUILayout.PropertyField(boundsMode);
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
-                EditorGUILayout.LabelField("Simulated Poses");
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(handPoseAnimationSpeed);
-                poseList.DoLayoutList();
-                EditorGUI.indentLevel--;
-                EditorGUI.indentLevel--;
-            }
 
-            serializedObject.ApplyModifiedProperties();
+                EditorGUI.indentLevel++;
+                poseProfilesList.DoLayoutList();
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField("Simulated Poses", EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+                handPoseAnimationSpeed.floatValue = EditorGUILayout.Slider(handPoseAnimationSpeedLabel, handPoseAnimationSpeed.floatValue, 1, 10);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
+                EditorGUI.indentLevel--;
+
+                serializedObject.ApplyModifiedProperties();
+            }
         }
 
-        private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
+        private void PoseProfilesList_DrawHeaderCallback(Rect rect)
+        {
+            EditorGUI.LabelField(rect, "Tracked Hand Poses");
+        }
+
+        private void PoseProfilesList_DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             if (isFocused)
             {
@@ -98,8 +115,8 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
 
             rect.height = EditorGUIUtility.singleLineHeight;
             rect.y += 3;
-            var poseDataProperty = poseDefinitions.GetArrayElementAtIndex(index);
-            var selectedPoseData = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(SimulatedHandControllerPoseData), false) as SimulatedHandControllerPoseData;
+            var poseDataProperty = trackedPoses.GetArrayElementAtIndex(index);
+            var selectedPoseData = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(HandControllerPoseProfile), false) as HandControllerPoseProfile;
 
             if (selectedPoseData != null)
             {
@@ -109,21 +126,21 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
             poseDataProperty.objectReferenceValue = selectedPoseData;
         }
 
-        private void OnConfigurationOptionAdded(ReorderableList list)
+        private void PoseProfilesList_OnConfigurationOptionAdded(ReorderableList list)
         {
-            poseDefinitions.arraySize += 1;
-            var index = poseDefinitions.arraySize - 1;
+            trackedPoses.arraySize += 1;
+            var index = trackedPoses.arraySize - 1;
 
-            var mappingProfileProperty = poseDefinitions.GetArrayElementAtIndex(index);
+            var mappingProfileProperty = trackedPoses.GetArrayElementAtIndex(index);
             mappingProfileProperty.objectReferenceValue = null;
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void OnConfigurationOptionRemoved(ReorderableList list)
+        private void PoseProfilesList_OnConfigurationOptionRemoved(ReorderableList list)
         {
             if (currentlySelectedPoseElement >= 0)
             {
-                poseDefinitions.DeleteArrayElementAtIndex(currentlySelectedPoseElement);
+                trackedPoses.DeleteArrayElementAtIndex(currentlySelectedPoseElement);
             }
 
             serializedObject.ApplyModifiedProperties();

@@ -6,28 +6,33 @@ using UnityEngine;
 namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
-    /// Snapshot of hand mesh information.
+    /// Snapshot of hand mesh information for use with <see cref="HandRenderingMode.Mesh"/>.
     /// </summary>
     public struct HandMeshData
     {
         /// <summary>
         /// Constructs a new hand mesh data snapshot.
         /// </summary>
-        /// <param name="vertices"></param>
-        /// <param name="triangles"></param>
-        /// <param name="normals"></param>
-        /// <param name="uvs"></param>
-        /// <param name="position"></param>
-        /// <param name="rotation"></param>
-        public HandMeshData(Vector3[] vertices, int[] triangles, Vector3[] normals, Vector2[] uvs, Vector3 position, Quaternion rotation)
+        /// <param name="vertices">The vertices of the hand mesh in the initial coordinate system.</param>
+        /// <param name="triangles">Mesh triangle indices.</param>
+        /// <param name="normals">Hand mesh normals, in initial coordinate system.</param>
+        /// <param name="uvs">UV mapping of the hand.</param>
+        public HandMeshData(
+            Vector3[] vertices,
+            int[] triangles,
+            Vector3[] normals,
+            Vector2[] uvs)
         {
             Vertices = vertices;
             Triangles = triangles;
             Normals = normals;
             Uvs = uvs;
-            Position = position;
-            Rotation = rotation;
         }
+
+        /// <summary>
+        /// The default value for hand mesh data.
+        /// </summary>
+        public static HandMeshData Empty { get; } = new HandMeshData(null, null, null, null);
 
         /// <summary>
         /// The vertices of the hand mesh in the initial coordinate system.
@@ -45,23 +50,13 @@ namespace XRTK.Definitions.Controllers.Hands
         public Vector3[] Normals { get; }
 
         /// <summary>
-        /// UV mapping of the hand. 
+        /// UV mapping of the hand.
         /// </summary>
         public Vector2[] Uvs { get; }
 
         /// <summary>
-        /// Translation to apply to mesh to go from initial coordinates to world coordinates.
-        /// </summary>
-        public Vector3 Position { get; }
-
-        /// <summary>
-        /// Rotation to apply to mesh to go from initial coordinates to world coordinates.
-        /// </summary>
-        public Quaternion Rotation { get; }
-
-        /// <summary>
         /// Returns true, if the mesh data is empty.
         /// </summary>
-        public bool Empty => Vertices == null || Vertices.Length == 0;
+        public bool IsEmpty => Vertices == null || Vertices.Length == 0;
     }
 }

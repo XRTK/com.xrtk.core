@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
@@ -31,9 +30,16 @@ namespace XRTK.Services.InputSystem
         /// <param name="profile"></param>
         public MixedRealityInputSystem(MixedRealityInputSystemProfile profile) : base(profile)
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeProviderType?.Type == null)
+            if (profile.GazeProviderType?.Type == null)
             {
-                throw new Exception("The Input system is missing the required GazeProviderType!");
+                throw new Exception($"The {nameof(IMixedRealityInputSystem)} is missing the required {nameof(profile.GazeProviderType)}!");
+            }
+
+            gazeProviderType = profile.GazeProviderType.Type;
+
+            if (!MixedRealityToolkit.TryCreateAndRegisterService(profile.FocusProviderType?.Type, out focusProvider, profile.FocusProviderType?.Type.Name, 2u, profile, this))
+            {
+                throw new Exception($"The {nameof(IMixedRealityInputSystem)} failed to start the {nameof(IMixedRealityFocusProvider)}!");
             }
         }
 
@@ -53,14 +59,15 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public IReadOnlyCollection<IMixedRealityController> DetectedControllers => detectedControllers;
 
-        private IMixedRealityFocusProvider focusProvider = null;
+        private readonly IMixedRealityFocusProvider focusProvider = null;
 
         /// <inheritdoc />
-        public IMixedRealityFocusProvider FocusProvider => focusProvider ?? (focusProvider = MixedRealityToolkit.GetService<IMixedRealityFocusProvider>());
+        public IMixedRealityFocusProvider FocusProvider => focusProvider;
 
         /// <inheritdoc />
         public IMixedRealityGazeProvider GazeProvider { get; private set; }
 
+        private readonly Type gazeProviderType;
         private readonly Stack<GameObject> modalInputStack = new Stack<GameObject>();
         private readonly Stack<GameObject> fallbackInputStack = new Stack<GameObject>();
 
@@ -88,7 +95,6 @@ namespace XRTK.Services.InputSystem
         private InputEventData<Vector3> positionInputEventData;
         private InputEventData<Quaternion> rotationInputEventData;
         private InputEventData<MixedRealityPose> poseInputEventData;
-        private InputEventData<HandData> handDataInputEventData;
 
         private SpeechEventData speechEventData;
         private DictationEventData dictationEventData;
@@ -163,7 +169,6 @@ namespace XRTK.Services.InputSystem
                 positionInputEventData = new InputEventData<Vector3>(eventSystem);
                 rotationInputEventData = new InputEventData<Quaternion>(eventSystem);
                 poseInputEventData = new InputEventData<MixedRealityPose>(eventSystem);
-                handDataInputEventData = new InputEventData<HandData>(eventSystem);
 
                 speechEventData = new SpeechEventData(eventSystem);
                 dictationEventData = new DictationEventData(eventSystem);
@@ -174,40 +179,46 @@ namespace XRTK.Services.InputSystem
                 CameraCache.Main.gameObject.EnsureComponent<StandaloneInputModule>();
             }
 
-            // ReSharper disable once SuspiciousTypeConversion.Global
-            GazeProvider = CameraCache.Main.gameObject.EnsureComponent(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeProviderType.Type) as IMixedRealityGazeProvider;
+            GazeProvider = CameraCache.Main.gameObject.EnsureComponent(gazeProviderType) as IMixedRealityGazeProvider;
         }
 
         /// <inheritdoc />
         public override void Enable()
         {
+            base.Enable();
+
             InputEnabled?.Invoke();
         }
 
         /// <inheritdoc />
         public override void Disable()
         {
-            GazeProvider = null;
+            base.Disable();
 
-            if (!Application.isPlaying)
+            InputDisabled?.Invoke();
+        }
+
+        /// <inheritdoc />
+        protected override void OnDispose(bool finalizing)
+        {
+            base.OnDispose(finalizing);
+
+            if (finalizing)
             {
-                // ReSharper disable once SuspiciousTypeConversion.Global
                 var component = CameraCache.Main.GetComponent<IMixedRealityGazeProvider>() as Component;
 
                 if (!component.IsNull())
                 {
-                    UnityEngine.Object.DestroyImmediate(component);
+                    component.Destroy();
                 }
 
                 var inputModule = CameraCache.Main.GetComponent<StandaloneInputModule>();
 
                 if (!inputModule.IsNull())
                 {
-                    UnityEngine.Object.DestroyImmediate(inputModule);
+                    inputModule.Destroy();
                 }
             }
-
-            InputDisabled?.Invoke();
         }
 
         #endregion IMixedRealityManager Implementation
@@ -1223,23 +1234,6 @@ namespace XRTK.Services.InputSystem
         }
 
         #endregion Input Pose Changed
-
-        #region Hand Data Input Changed
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityInputHandler<HandData>> OnHandDataInputChanged =
-            delegate (IMixedRealityInputHandler<HandData> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<HandData>>(eventData);
-                handler.OnInputChanged(casted);
-            };
-
-        public void RaiseHandDataInputChanged(IMixedRealityInputSource source, Handedness handedness, HandData handData)
-        {
-            handDataInputEventData.Initialize(source, handedness, MixedRealityInputAction.None, handData);
-            HandleEvent(handDataInputEventData, OnHandDataInputChanged);
-        }
-
-        #endregion
 
         #endregion Generic Input Events
 

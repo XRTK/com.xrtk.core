@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -38,7 +38,10 @@ namespace XRTK.Providers.Networking.WebRTC
         public MixedRealityWebRtcDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityNetworkingSystem parentService)
             : base(name, priority, profile, parentService)
         {
+            networkingSystem = parentService;
         }
+
+        private readonly IMixedRealityNetworkingSystem networkingSystem;
 
         #region IMixedRealityEventSource Implementation
 
@@ -150,7 +153,7 @@ namespace XRTK.Providers.Networking.WebRTC
         /// <summary>
         /// TODO: probably won't be this method but I wanted to provide a way to show how network data providers could call into the network system to raise when data has been received
         /// </summary>
-        private static void RaiseWebRtcDataArrived<T>(T type, byte[] data)
+        private void RaiseWebRtcDataArrived<T>(T type, byte[] data)
         {
             T message;
 
@@ -172,7 +175,7 @@ namespace XRTK.Providers.Networking.WebRTC
                 return;
             }
 
-            MixedRealityToolkit.NetworkingSystem.RaiseDataReceived(message);
+            networkingSystem.RaiseDataReceived(message);
         }
 
         #endregion IMixedRealityNetworkDataProvider Implementation

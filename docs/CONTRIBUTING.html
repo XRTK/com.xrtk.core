@@ -8,13 +8,13 @@
     <title>Contribution Guidelines | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Contribution Guidelines | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="favicon.png">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
     <link rel="stylesheet" href="styles/docfx.css">
     <link rel="stylesheet" href="styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -65,10 +65,54 @@
 <p>Mixed Reality Toolkit is under the <a href="https://github.com/nunit/nunit/blob/master/LICENSE.txt">MIT license</a>. By contributing to the Mixed Reality Toolkit, you assert that:</p>
 <ul>
 <li>The contribution is your own original work.</li>
-<li>The contribution adheres to the <a href="articles/A01-CodingGuidelines.html">Coding Guidelines</a></li>
+<li>The contribution adheres to the <a href="articles/appendices/A01-CodingGuidelines.html">Coding Guidelines</a></li>
 <li>You have the right to assign the copyright for the work (it is not owned by your employer, or
 you have been given copyright assignment in writing).</li>
 </ul>
+<h2 id="how-to-contribute">How to contribute</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>A GitHub Account</li>
+<li>Familiarization with projects with Git Source control versioning. Atlassian has a wonderful guide for <a href="https://www.atlassian.com/git">getting started with Git</a>.</li>
+<li>Install Git on your local machine and have git assigned as an environment variable.</li>
+<li>Install a Git client like <a href="https://git-fork.com/">Fork</a> or <a href="https://desktop.github.com/">GitHub for Desktop</a> for staging and committing code to source control</li>
+<li>Follow any <a href="articles/00-GettingStarted.html#prerequisites">Getting Started Guidelines</a> for setting up your development environment not covered here.</li>
+</ul>
+<h3 id="steps">Steps</h3>
+<ol>
+<li>Fork the repository you'd like to open a pull request for.</li>
+<li>Clone or sync any changes from the source repository to your local disk.
+<blockquote>
+<p><strong>Note:</strong> When initially cloning the repository be sure to recursively check out all submodules!</p>
+</blockquote>
+</li>
+<li>Create a new branch based on the last source development commit.</li>
+<li>Make the changes you'd like to contribute.</li>
+<li>Stage and commit your changes with thoughtful messages detailing the work.</li>
+<li>Push your local changes to your fork's remote server.</li>
+<li>Navigate to the repository's source repository on GitHub.
+<blockquote>
+<p><strong>Note:</strong> by now a prompt to open a new pull request should be available on the repository's main landing page.</p>
+</blockquote>
+</li>
+<li>Open a pull request detailing the changes and fill out the Pull Request Template.</li>
+<li>Typically Code Reviews are performed in around 24-48 hours.</li>
+<li>Iterate on any feedback from reviews.
+<blockquote>
+<p><strong>Note:</strong> Typically you can push the changes directly to the branch you've opened the pull request for.</p>
+</blockquote>
+</li>
+<li>Once the pull request is accepted and the build validation passes, changes are then squashed and merged into the target branch, and the process is repeated.</li>
+</ol>
+<h3 id="branching-strategies">Branching Strategies</h3>
+<p>The master, development, and any feature branches are all protected by branch policies. Each branch must be up to date and pass test and build validation before it can be merged.</p>
+<ul>
+<li>All merges to the feature and development branches are squashed and merged into a single commit to keep the history clean and focused on specific pull request changes.</li>
+<li>All merges from the master and development branches are just traditionally merged together to ensure they stay in sync and share the same histories.</li>
+</ul>
+<hr>
+<h3 id="raise-an-information-request"><a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title="><strong>Raise an Information Request</strong></a></h3>
+<p>If there is anything not mentioned in this document or you simply want to know more, raise an <a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title=">RFI (Request for Information) request here</a>.</p>
 </article>
           </div>
           
@@ -82,7 +126,8 @@ you have been given copyright assignment in writing).</li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

@@ -16,10 +16,22 @@ namespace XRTK.Definitions
         where T : IMixedRealityService
     {
         /// <inheritdoc />
+        public MixedRealityServiceConfiguration(IMixedRealityServiceConfiguration configuration)
+            : base(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile)
+        {
+        }
+
+        /// <inheritdoc />
         public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile profile)
             : base(instancedType, name, priority, runtimePlatforms, profile)
         {
         }
+
+        /// <inheritdoc />
+        public override bool Enabled
+            => typeof(IMixedRealitySystem).IsAssignableFrom(typeof(T))
+                ? Profile != null && base.Enabled // All IMixedRealitySystems require a profile
+                : base.Enabled;
     }
 
     /// <summary>
@@ -56,6 +68,9 @@ namespace XRTK.Definitions
 
             this.profile = profile;
         }
+
+        /// <inheritdoc />
+        public virtual bool Enabled => instancedType.Type != null;
 
         [SerializeField]
         [Implements(typeof(IMixedRealityService), TypeGrouping.ByNamespaceFlat)]
@@ -105,25 +120,28 @@ namespace XRTK.Definitions
                 {
                     runtimePlatforms = new List<IMixedRealityPlatform>();
 
-                    for (int i = 0; i < MixedRealityToolkit.AvailablePlatforms.Count; i++)
+                    for (int i = 0; i < platformEntries?.RuntimePlatforms?.Length; i++)
                     {
-                        var availablePlatform = MixedRealityToolkit.AvailablePlatforms[i];
-                        var availablePlatformType = availablePlatform.GetType();
+                        var platformType = platformEntries.RuntimePlatforms[i]?.Type;
 
-                        for (int j = 0; j < platformEntries?.RuntimePlatforms?.Length; j++)
+                        if (platformType == null)
                         {
-                            var platformType = platformEntries.RuntimePlatforms[j]?.Type;
-
-                            if (platformType == null)
-                            {
-                                continue;
-                            }
-
-                            if (availablePlatformType == platformType)
-                            {
-                                runtimePlatforms.Add(availablePlatform);
-                            }
+                            continue;
                         }
+
+                        IMixedRealityPlatform platformInstance;
+
+                        try
+                        {
+                            platformInstance = Activator.CreateInstance(platformType) as IMixedRealityPlatform;
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e);
+                            continue;
+                        }
+
+                        runtimePlatforms.Add(platformInstance);
                     }
                 }
 

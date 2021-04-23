@@ -23,6 +23,7 @@ namespace XRTK.Editor.Utilities
             "*.guiskin",
             "*.fontsettings",
             "*.controller",
+            "*.json"
         };
 
         /// <summary>

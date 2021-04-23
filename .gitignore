@@ -9,6 +9,7 @@
 [Ll]ibrary/
 [Aa]pp/
 [Aa]pp.meta
+UserSettings/
 UWP/
 WindowsStoreApp/
 UnityGenerated/
@@ -53,11 +54,18 @@ obj/
 *.log
 *.idb
 *.opendb
+.vsconfig
 
 # ============================ #
 # Visual Studio Code Generated #
 # ============================ #
 .vscode/
+
+# ========================= #
+# Jetbrains Rider Generated #
+# ========================= #
+.idea/
+_ReSharper.Caches
 
 # ===================== #
 # Project Specific List #
@@ -78,6 +86,7 @@ XRTK-Core/Assets/StreamingAssets.meta
 # ====================== #
 XRTK-Core/Packages/com.xrtk.arcore
 XRTK-Core/Packages/com.xrtk.etee
+XRTK-Core/Packages/com.xrtk.gltf
 XRTK-Core/Packages/com.xrtk.lenovo
 XRTK-Core/Packages/com.xrtk.lumin
 XRTK-Core/Packages/com.xrtk.nreal

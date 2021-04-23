@@ -36,11 +36,20 @@ namespace XRTK.Editor.Utilities
                     return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
                 }
 
-                return projectRootDir = Directory.GetParent(Application.dataPath).FullName;
+                Debug.LogWarning($"git command failed! Do you have git installed?\n{rootDir}");
+                return projectRootDir = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName;
             }
         }
 
         private static string projectRootDir;
+
+        internal static bool HasSubmodules => File.Exists($"{RepositoryRootDir}/.gitmodules");
+
+        [MenuItem("Assets/Submodules/Force update all submodules", true, 23)]
+        public static bool ForceUpdateSubmodulesValidation()
+        {
+            return HasSubmodules;
+        }
 
         [MenuItem("Assets/Submodules/Force update all submodules", false, 23)]
         public static void ForceUpdateSubmodules()
@@ -119,20 +128,24 @@ namespace XRTK.Editor.Utilities
         /// <returns>True, if update was successful.</returns>
         internal static bool UpdateSubmodules()
         {
-            EditorUtility.DisplayProgressBar("Updating Submodules...", "Please wait...", 0.5f);
-
-            var isGitInstalled = new Process().Run("git --version", out var message) && !message.Contains("'git' is not recognized");
-
-            if (isGitInstalled)
+            if (HasSubmodules)
             {
-                var success = new Process().Run($@"cd ""{RepositoryRootDir}"" && git submodule update --init --all", out _);
+                EditorUtility.DisplayProgressBar("Updating Submodules...", "Please wait...", 0.5f);
+
+                var isGitInstalled = new Process().Run("git --version", out var message) && !message.Contains("'git' is not recognized");
+
+                if (isGitInstalled)
+                {
+                    var success = new Process().Run($@"cd ""{RepositoryRootDir}"" && git submodule update --init --all", out _);
+
+                    EditorUtility.ClearProgressBar();
+                    return success;
+                }
 
                 EditorUtility.ClearProgressBar();
-                return success;
+                Debug.LogError(message);
             }
 
-            EditorUtility.ClearProgressBar();
-            Debug.LogError(message);
             return true;
         }
 

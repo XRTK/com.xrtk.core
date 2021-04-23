@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
 
@@ -10,13 +11,8 @@ namespace XRTK.Editor.Profiles.InputSystem
     [CustomEditor(typeof(MixedRealityInputActionsProfile))]
     public class MixedRealityInputActionsProfileInspector : BaseMixedRealityProfileInspector
     {
-        private static readonly GUIContent MinusButtonContent = new GUIContent("-", "Remove Action");
-        private static readonly GUIContent AddButtonContent = new GUIContent("+ Add a New Action", "Add New Action");
-        private static readonly GUIContent ActionContent = new GUIContent("Action", "The Name of the Action.");
-        private static readonly GUIContent AxisConstraintContent = new GUIContent("Axis Constraint", "Optional Axis Constraint for this input source.");
-
-        private static Vector2 scrollPosition = Vector2.zero;
-
+        private ReorderableList inputActionsList;
+        private int currentlySelectedInputActionElement;
         private SerializedProperty inputActions;
 
         protected override void OnEnable()
@@ -24,6 +20,14 @@ namespace XRTK.Editor.Profiles.InputSystem
             base.OnEnable();
 
             inputActions = serializedObject.FindProperty(nameof(inputActions));
+            inputActionsList = new ReorderableList(serializedObject, inputActions, true, false, true, true)
+            {
+                elementHeight = EditorGUIUtility.singleLineHeight * 1.5f
+            };
+            inputActionsList.drawHeaderCallback += InputActionsList_DrawHeaderCallback;
+            inputActionsList.drawElementCallback += InputActionsList_DrawConfigurationOptionElement;
+            inputActionsList.onAddCallback += InputActionsList_OnConfigurationOptionAdded;
+            inputActionsList.onRemoveCallback += InputActionsList_OnConfigurationOptionRemoved;
         }
 
         public override void OnInspectorGUI()
@@ -31,69 +35,63 @@ namespace XRTK.Editor.Profiles.InputSystem
             RenderHeader("Input Actions are any/all actions your users will be able to make when interacting with your application.\n\nAfter defining all your actions, you can then wire up these actions to hardware sensors, controllers, and other input devices.");
 
             serializedObject.Update();
-            RenderList(inputActions);
+            inputActionsList.DoLayoutList();
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void RenderList(SerializedProperty list)
+        private void InputActionsList_DrawHeaderCallback(Rect rect) => EditorGUI.LabelField(rect, "Input Actions");
+
+        private void InputActionsList_DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
         {
-            GUILayout.BeginVertical();
-
-            if (GUILayout.Button(AddButtonContent, EditorStyles.miniButton))
+            if (isFocused)
             {
-                list.arraySize += 1;
-                var inputAction = list.GetArrayElementAtIndex(list.arraySize - 1);
-                var inputActionId = inputAction.FindPropertyRelative("id");
-                var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
-                var inputActionDescription = inputAction.FindPropertyRelative("description");
-                var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
-
-                inputActionConstraint.intValue = 0;
-                profileGuidProperty.stringValue = ThisProfileGuidString;
-                inputActionDescription.stringValue = $"New Action {inputActionId.intValue = list.arraySize}";
+                currentlySelectedInputActionElement = index;
             }
 
-            GUILayout.Space(12f);
-            GUILayout.BeginVertical();
+            rect.height = 1 * EditorGUIUtility.singleLineHeight;
+            rect.y += 3f;
 
-            GUILayout.BeginHorizontal();
-            var labelWidth = EditorGUIUtility.labelWidth;
-            EditorGUIUtility.labelWidth = 36f;
-            EditorGUILayout.LabelField(ActionContent, GUILayout.ExpandWidth(true));
-            EditorGUILayout.LabelField(AxisConstraintContent, GUILayout.Width(96f));
-            EditorGUILayout.LabelField(string.Empty, GUILayout.Width(24f));
-            EditorGUIUtility.labelWidth = labelWidth;
-            GUILayout.EndHorizontal();
+            var constraintWidth = 128f;
+            var descriptionRect = new Rect(rect.x, rect.y, rect.width - constraintWidth - 8f, EditorGUIUtility.singleLineHeight);
+            var constraintRect = new Rect(rect.x + rect.width - constraintWidth, descriptionRect.y, constraintWidth, EditorGUIUtility.singleLineHeight);
 
-            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+            var inputAction = inputActions.GetArrayElementAtIndex(index);
+            var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
+            var inputActionDescription = inputAction.FindPropertyRelative("description");
+            var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
 
-            for (int i = 0; i < list.arraySize; i++)
+            profileGuidProperty.stringValue = ThisProfileGuidString;
+
+            EditorGUI.PropertyField(descriptionRect, inputActionDescription, GUIContent.none);
+            EditorGUI.PropertyField(constraintRect, inputActionConstraint, GUIContent.none);
+        }
+
+        private void InputActionsList_OnConfigurationOptionAdded(ReorderableList list)
+        {
+            serializedObject.Update();
+
+            inputActions.arraySize += 1;
+            var inputAction = inputActions.GetArrayElementAtIndex(inputActions.arraySize - 1);
+            var inputActionId = inputAction.FindPropertyRelative("id");
+            var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
+            var inputActionDescription = inputAction.FindPropertyRelative("description");
+            var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
+
+            inputActionConstraint.intValue = 0;
+            profileGuidProperty.stringValue = ThisProfileGuidString;
+            inputActionDescription.stringValue = $"New Action {inputActionId.intValue = inputActions.arraySize}";
+
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void InputActionsList_OnConfigurationOptionRemoved(ReorderableList list)
+        {
+            if (currentlySelectedInputActionElement >= 0)
             {
-                EditorGUILayout.BeginHorizontal();
-                var previousLabelWidth = EditorGUIUtility.labelWidth;
-                EditorGUIUtility.labelWidth = 64f;
-                var inputAction = list.GetArrayElementAtIndex(i);
-                var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
-                var inputActionDescription = inputAction.FindPropertyRelative("description");
-                var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
-
-                profileGuidProperty.stringValue = ThisProfileGuidString;
-
-                EditorGUILayout.PropertyField(inputActionDescription, GUIContent.none);
-                EditorGUILayout.PropertyField(inputActionConstraint, GUIContent.none, GUILayout.Width(96f));
-                EditorGUIUtility.labelWidth = previousLabelWidth;
-
-                if (GUILayout.Button(MinusButtonContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
-                {
-                    list.DeleteArrayElementAtIndex(i);
-                }
-
-                EditorGUILayout.EndHorizontal();
+                inputActions.DeleteArrayElementAtIndex(currentlySelectedInputActionElement);
             }
 
-            EditorGUILayout.EndScrollView();
-            GUILayout.EndVertical();
-            GUILayout.EndVertical();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

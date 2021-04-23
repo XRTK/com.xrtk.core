@@ -8,13 +8,13 @@
     <title>How to download the Mixed Reality Toolkit | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="How to download the Mixed Reality Toolkit | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -71,26 +71,43 @@
 
 <p>The Mixed Reality Toolkit provides many ways for users and developers to get access to the Mixed Reality Toolkit and the various extensions/platforms it supports.  These methods are tuned to use the common patterns most familiar to Unity developers, these include:</p>
 <ul>
-<li><p><a href="#automatic-upm-installation">Automatic UPM installation</a> - Registers the Mixed Reality Toolkit's upm server in Unity's Package Manager and automatically installs the XRTK-Core and SDK packages.</p>
+<li><a href="#register-upm-server-in-project-settings">Unity Package Manager</a> - Use the Unity Package Manager interface to register and install the XRTK.</li>
+<li><a href="#automatic-upm-installation">Automatic UPM installation</a> - Automatically register the Mixed Reality Toolkit's upm server and install selected packages using the package seed found in the <a href="https://github.com/XRTK/XRTK-Core/releases">release assets dropdown</a>.</li>
+<li><a href="#manual-upm-installation">Manual UPM installation</a> - Register the Mixed Reality Toolkit upm server in your manifest and manually download modules al la carte.</li>
+<li><a href="https://docs.unity3d.com/Manual/upm-ui-giturl.html">UPM via GitHub</a> - The Unity Package Manager can load a package from GitHub using the git url.
 <blockquote>
-<p><strong>Note:</strong> developers are expected to <a href="#install-platform-packages">add the platform support</a> they need by searching for the modules in the Unity Pacakge Manger.</p>
+<p><strong>Note:</strong> To utilize this method, use the <code>upm</code> branch for each respective project. For Example:</p>
+<p><code>https://github.com/XRTK/XRTK-Core.git#upm</code></p>
 </blockquote>
 </li>
-<li><p><a href="#manual-upm-installation">Manual UPM installation</a> - Register the Mixed Reality Toolkit upm server in your manifest and manually download modules al la carte.</p>
-</li>
-<li><p><a href="#git-submodules">GIT Submodules</a> - For advanced developers, simply clone the project into your solution and update its submodules to get access to all platforms.</p>
-</li>
+<li><a href="#git-submodules">GIT Submodules</a> - For advanced developers who want to use the Mixed Reality Toolkit in their live project and contribute direcly back to the project in real time.</li>
 </ul>
 <p>In this article, we will walk through each approach to get you up and running, starting with the simplest first.</p>
+<h2 id="register-upm-server-in-project-settings">Register UPM Server in Project Settings</h2>
+<p>Unity has now enabled the ability to register scoped registries through the Unity Editor and is now the recommended way to add custom solutions to your project, giving you visibility of the assets you have registered in your solution and where they come from.</p>
+<p>To start, you will need to register the XRTK Scoped registry in the Unity Package Manager, which you will find in the Package Manager Window (Window -&gt; Package Manager) Advanced dropdown, as shown below:</p>
+<p><img src="../images/DownloadingTheXRTK/UnityPackageManager-Advanced.jpg" alt="Unity Package Manager Advanced options"></p>
+<p>Once opened, you will see the Scoped Registry configuration (which is also available via the Project Settings window), from here, you can add the XRTK scoped registry using the details below:</p>
+<p><img src="../images/DownloadingTheXRTK/UnityPackageManager-ScopedRegistries.jpg" alt="Unity Package Manager Scoped Registries"></p>
+<pre><code class="lang-text">Name: XRTK
+URL: http://upm.xrtk.io:4873
+Scope(s): com.xrtk
+</code></pre>
+<p>Once entered, simply click &quot;Save&quot; and close the window. Upon returning to the Unity Package Manager, you can now select &quot;My Registries&quot; in the package filter on the left hand side drop down, as shown here:</p>
+<p><img src="../images/DownloadingTheXRTK/UnityPackageManager-MyRegistries.jpg" alt="Unity Package Manager My Registries"></p>
+<p>Which will list all the current XRTK packages available for install.  If you also wish to check out the latest &quot;Preview packages&quot;, then simply check the &quot;Show Preview Packages&quot; option in the &quot;Advanced&quot; dropdown to display them, as shown here:</p>
+<p><img src="../images/DownloadingTheXRTK/UnityPackageManager-XRTKRegistries.jpg" alt="Unity Package Manager My Registries"></p>
+<p>Once you are ready, simply install the XRTK and any platforms you wish to use in your project to get started.</p>
+<blockquote>
+<p>We recommend starting with the <strong>XRTK.SDK</strong> package to begin with, which will also install the Core XRTK package, for the simplest path to begin with.</p>
+</blockquote>
 <h2 id="automatic-upm-installation">Automatic UPM Installation</h2>
 <p>Our preferred deployment approach is to fully utilize <a href="https://docs.unity3d.com/Manual/upm-ui.html">Unity's native package manager</a> to incorporate the Mixed Reality Toolkit in your solution, akin to the other modules Unity provides out of the box.  This is the quickest and safest way to get Mixed Reality Toolkit in your solution and is automatically updated as new releases are published.</p>
-<p>Download the <a href="https://github.com/XRTK/XRTK-Core/releases">XRTK-Core.unitypackage</a> asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically registers the Mixed Reality Toolkit's upm server with the Unity package manager and starts the download and installation of the Core and SDK packages.</p>
+<p>Download the <a href="https://github.com/XRTK/XRTK-Core/releases">XRTK-Core.unitypackage</a> asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's scoped registry with the Unity package manager, then starts searching for the latest release packages on the upm server.</p>
 <p><img src="../images/DownloadingTheXRTK/XRTKAutoInstallAsset.png" alt="Seed Package"></p>
 <h3 id="install-platform-packages">Install platform packages</h3>
-<p>The Mixed Reality Toolkit doesn't automatically download all of the various platform support packages by default.  You'll need to add these additional packages via the Unity Package Manager via <code>Unity -&gt; Windows -&gt; Package Manager</code>.</p>
-<p><img src="../images/DownloadingTheXRTK/PackageManagerMenu.png" alt="Package Manager"></p>
-<p>Next, use the search box to filter out the platform specific packages your project needs by typing in <code>XRTK</code> to filter out all of the pacakges availible in scope.</p>
-<p><img src="../images/DownloadingTheXRTK/PackageManager.png" alt="Search Package Manager"></p>
+<p>The Mixed Reality Toolkit will pull all of the known packages under <code>com.xrtk.*</code> and will dispaly them for you to easily install using the package picker window. The latest release pacakges are installed for you by default.</p>
+<p><img src="../images/DownloadingTheXRTK/XRTKPackageList.png" alt="Package List"></p>
 <h2 id="manual-upm-installation">Manual UPM Installation</h2>
 <p>If you prefer to do things yourself, you can simply edit the <em><strong>manifest.json</strong></em> file in your Unity project and add an entry to register the Mixed Reality Toolkit and begin the download and installation into your project.</p>
 <p>To locate the folder the manifest is in, simply right-click in your Unity project folder on the &quot;Packages&quot; folder as shown below, then select the &quot;Show in Explorer&quot; option:</p>
@@ -119,24 +136,35 @@
 <h2 id="git-submodules">GIT Submodules</h2>
 <p>Advanced developers and those wishing to contribute to the Mixed Reality Toolkit also have the option to directly import and edit the framework in their live projects using GIT Submodules.</p>
 <blockquote>
-<p><strong>Note:</strong> The XRTK-Core repository is setup to utilize this GIT Submodule workflow and is a great example of how to utilize this workflow.</p>
+<p><strong>Note:</strong> The XRTK-Core repository is setup to utilize submodules and is a great example of how to utilize this workflow.</p>
 </blockquote>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Each contributor to the project will need to have <a href="https://git-scm.com/">git installed</a> on their machines with the proper envionment variable set so the symbolic linker can find and execute git commands via the terminal.</li>
+<li>You'll need to install the core pacakge via one of the <a href="#automatic-upm-installation">traditional installation</a> paths before you can create symbolic links in your project using the editor context menu in later setup steps.</li>
+</ul>
+<h3 id="setup-steps">Setup Steps</h3>
 <ol>
-<li>Initialize your project's repository with the XRTK-Core submodule.</li>
-<li>Checkout the <strong>development</strong> branch of the XRTK-Core submodule and make sure it's up to date and synced with any upstream changes.</li>
-<li>Create Symbolic links for each package you wish to directly modify in your project by using the project window context menu
+<li>Initialize your project's repository with the XRTK-Core submodule.
+<blockquote>
+<p><font color="red"><strong>Warning!</strong></font> Don't recursively checkout submodules! Each package will need to be added as a submodule and replaced using the same steps listed below.</p>
+</blockquote>
+</li>
+<li>Checkout the <code>development</code> branch of the XRTK-Core submodule and make sure it's up to date and synced with any upstream changes.
+<blockquote>
+<p><font color="red"><strong>Warning!</strong></font> We strongly recommend you use do not use the <strong>upm</strong> branch to avoid breaking the symbolic links when switching between branches.</p>
+</blockquote>
+</li>
+<li>Create Symbolic links for each package you wish to directly modify in your project by using the project window context menu: <code>Symbolic Links/Create Link</code>
 <img src="../images/DownloadingTheXRTK/SymbolicLinks.png" alt="Symbolic Link Context Menu"></li>
 <li>Using the symbolic link wizard, choose the source folder for the package you wish you replace with the editable version, and the target path for your project, then import the package.
 <img src="../images/DownloadingTheXRTK/SymbolicLinkWizard.png" alt="Symbolic Link Wizard">
 <blockquote>
-<p><strong>Note:</strong> it's strongly advised to use the Packages as your target path for upm packages.</p>
+<p><font color="orange"><strong>Important:</strong></font> It's strongly advised to use the <code>Packages</code> folder as your target path for all symbolically linked packages.</p>
 </blockquote>
 </li>
-<li>Repeat step 4 for each package you'd like to directly modify.</li>
+<li>Repeat step 4 for each additoinal package you'd like to directly modify.</li>
 </ol>
-<blockquote>
-<p><em><strong>Warning!</strong></em> We strongly recommend you use do not use the <strong>upm</strong> branch to avoid breaking the symbolic links when switching between branches.</p>
-</blockquote>
 <p>This workflow works with any project using GIT and the symbolically linked folders can be customized to utilize any path availible under source control.</p>
 <hr>
 <h3 id="related-articles">Related Articles</h3>
@@ -163,7 +191,8 @@
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

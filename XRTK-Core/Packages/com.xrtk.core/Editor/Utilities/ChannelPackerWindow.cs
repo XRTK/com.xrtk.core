@@ -5,7 +5,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace XRTK.Editor
+namespace XRTK.Editor.Utilities
 {
     public class ChannelPackerWindow : EditorWindow
     {

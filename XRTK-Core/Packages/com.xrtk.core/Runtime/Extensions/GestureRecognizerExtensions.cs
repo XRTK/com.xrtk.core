@@ -6,6 +6,7 @@ namespace XRTK.Extensions
 #if UNITY_WSA
     public static class GestureRecognizerExtensions
     {
+        [System.Obsolete]
         public static void UpdateAndResetGestures(this UnityEngine.XR.WSA.Input.GestureRecognizer recognizer, UnityEngine.XR.WSA.Input.GestureSettings gestureSettings)
         {
             bool reset = recognizer.IsCapturingGestures();

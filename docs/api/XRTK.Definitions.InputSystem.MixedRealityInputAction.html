@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Struct MixedRealityInputAction
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -73,7 +73,7 @@
   
   <h1 id="XRTK_Definitions_InputSystem_MixedRealityInputAction" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction" class="text-break">Struct MixedRealityInputAction
   </h1>
-  <div class="markdown level0 summary"><p>An Input Action for mapping an action to an Input Sources Button, Joystick, Sensor, etc.</p>
+  <div class="markdown level0 summary"><p>An Input Action for mapping an action to an Input Control like a Button, Joystick, Sensor, etc.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div classs="implements">
@@ -100,16 +100,64 @@
   <h5 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Serializable]
-public struct MixedRealityInputAction : IEqualityComparer</code></pre>
+public struct MixedRealityInputAction : IEqualityComparer, ISerializationCallbackReceiver</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction__ctor_System_Guid_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.%23ctor(System.Guid%2CSystem.UInt32%2CSystem.String%2CXRTK.Definitions.Utilities.AxisType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L58">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction__ctor_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.#ctor*"></a>
+  <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction__ctor_System_Guid_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.#ctor(System.Guid,System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType)">MixedRealityInputAction(Guid, UInt32, String, AxisType)</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
+        <td><span class="parametername">profileGuid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">description</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.AxisType.html">AxisType</a></td>
+        <td><span class="parametername">axisConstraint</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.%23ctor(System.UInt32%2CSystem.String%2CXRTK.Definitions.Utilities.AxisType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L23">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L40">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction__ctor_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.#ctor*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType)">MixedRealityInputAction(UInt32, String, AxisType)</h4>
@@ -147,6 +195,41 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_None.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.None%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L70">View Source</a>
+  </span>
+  <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_None" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.None">None</h4>
+  <div class="markdown level1 summary"><p>Default input action that doesn't represent any defined action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly MixedRealityInputAction None</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_None_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Any action that has an id of 0 is considered the same as &quot;None&quot;.</p>
+</div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -154,7 +237,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_AxisConstraint.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.AxisConstraint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L54">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L118">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_AxisConstraint_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.AxisConstraint*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_AxisConstraint" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.AxisConstraint">AxisConstraint</h4>
@@ -185,7 +268,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_Description.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.Description%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L46">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L110">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Description_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Description*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Description" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Description">Description</h4>
@@ -216,7 +299,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_Id.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L38">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L102">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Id_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Id*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Id" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Id">Id</h4>
@@ -244,19 +327,19 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_None.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.None%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_ProfileGuid.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.ProfileGuid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L33">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L94">View Source</a>
   </span>
-  <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_None_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.None*"></a>
-  <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_None" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.None">None</h4>
-  <div class="markdown level1 summary"><p>Default input action that doesn't represent any defined action.</p>
+  <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_ProfileGuid_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.ProfileGuid*"></a>
+  <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_ProfileGuid" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.ProfileGuid">ProfileGuid</h4>
+  <div class="markdown level1 summary"><p>The guid reference to the <a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputActionsProfile.html">MixedRealityInputActionsProfile</a> this action belongs to.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static MixedRealityInputAction None { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Guid ProfileGuid { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -268,7 +351,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -280,7 +363,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_Equals_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L84">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L158">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Equals_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Equals*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Equals_System_Object_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Equals(System.Object)">Equals(Object)</h4>
@@ -329,11 +412,12 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_Equals_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.Equals(XRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L78">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L143">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Equals_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Equals*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_Equals_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.Equals(XRTK.Definitions.InputSystem.MixedRealityInputAction)">Equals(MixedRealityInputAction)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether the specified objects are equal.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -376,7 +460,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_GetHashCode.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L95">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L170">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_GetHashCode_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.GetHashCode*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_GetHashCode" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.GetHashCode">GetHashCode()</h4>
@@ -403,6 +487,36 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.gethashcode#System_ValueType_GetHashCode">ValueType.GetHashCode()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_OnAfterDeserialize.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.OnAfterDeserialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L186">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_OnAfterDeserialize_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.OnAfterDeserialize*"></a>
+  <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_OnAfterDeserialize" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.OnAfterDeserialize">OnAfterDeserialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnAfterDeserialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_OnBeforeSerialize.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.OnBeforeSerialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L180">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_OnBeforeSerialize_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.OnBeforeSerialize*"></a>
+  <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_OnBeforeSerialize" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.OnBeforeSerialize">OnBeforeSerialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnBeforeSerialize()</code></pre>
+  </div>
   <h3 id="operators">Operators
   </h3>
   <span class="small pull-right mobile-hide">
@@ -410,7 +524,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_op_Equality_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.op_Equality(XRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L59">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L120">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_op_Equality_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.op_Equality*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_op_Equality_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.op_Equality(XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Definitions.InputSystem.MixedRealityInputAction)">Equality(MixedRealityInputAction, MixedRealityInputAction)</h4>
@@ -462,7 +576,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_op_Inequality_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.op_Inequality(XRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L64">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L125">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_op_Inequality_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.op_Inequality*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_op_Inequality_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.op_Inequality(XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Definitions.InputSystem.MixedRealityInputAction)">Inequality(MixedRealityInputAction, MixedRealityInputAction)</h4>
@@ -516,7 +630,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.System%23Collections%23IEqualityComparer%23Equals(System.Object%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L71">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L133">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Collections_IEqualityComparer_Equals_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.System#Collections#IEqualityComparer#Equals*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)">IEqualityComparer.Equals(Object, Object)</h4>
@@ -568,7 +682,7 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Collections_IEqualityComparer_GetHashCode_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction.System%23Collections%23IEqualityComparer%23GetHashCode(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L90">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L164">View Source</a>
   </span>
   <a id="XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Collections_IEqualityComparer_GetHashCode_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.System#Collections#IEqualityComparer#GetHashCode*"></a>
   <h4 id="XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Collections_IEqualityComparer_GetHashCode_System_Object_" data-uid="XRTK.Definitions.InputSystem.MixedRealityInputAction.System#Collections#IEqualityComparer#GetHashCode(System.Object)">IEqualityComparer.GetHashCode(Object)</h4>
@@ -621,6 +735,12 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
 </article>
           </div>
           
@@ -632,12 +752,13 @@ public struct MixedRealityInputAction : IEqualityComparer</code></pre>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_InputSystem_MixedRealityInputAction.md&amp;value=---%0Auid%3A%20XRTK.Definitions.InputSystem.MixedRealityInputAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/InputSystem/MixedRealityInputAction.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/InputSystem/MixedRealityInputAction.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

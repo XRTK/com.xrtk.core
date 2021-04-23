@@ -33,7 +33,14 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         public bool IsActive
         {
             get => isActive;
-            internal set => isActive = value;
+            set
+            {
+                if (isActive != value)
+                {
+                    isActive = value;
+                    SymbolicLinker.RunSync(true);
+                }
+            }
         }
     }
 }

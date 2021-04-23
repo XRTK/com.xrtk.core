@@ -93,19 +93,9 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Attempts to load the controller model render settings from the <see cref="Definitions.Controllers.MixedRealityControllerVisualizationProfile"/>
         /// to render the controllers in the scene.
         /// </summary>
-        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
         /// <param name="useAlternatePoseAction">Should the rendered controller use the alternate pose action?</param>
         /// <returns>True, if controller model is being properly rendered.</returns>
-        void TryRenderControllerModel(byte[] glbData = null, bool useAlternatePoseAction = false);
-
-        /// <summary>
-        /// Attempts to load the controller model render settings from the <see cref="Definitions.Controllers.MixedRealityControllerVisualizationProfile"/>
-        /// to render the controllers in the scene.
-        /// </summary>
-        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
-        /// <param name="useAlternatePoseAction">Should the rendered controller use the alternate pose action?</param>
-        /// <returns>True, if controller model is being properly rendered.</returns>
-        Task TryRenderControllerModelAsync(byte[] glbData = null, bool useAlternatePoseAction = false);
+        void TryRenderControllerModel(bool useAlternatePoseAction = false);
 
         /// <summary>
         /// Updates the controller's state.

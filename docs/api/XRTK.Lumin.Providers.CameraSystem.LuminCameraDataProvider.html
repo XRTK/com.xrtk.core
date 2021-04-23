@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class LuminCameraDataProvider
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class LuminCameraDataProvider
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider">
+  
+  
+  <h1 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider" class="text-break">Class LuminCameraDataProvider
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="XRTK.Services.BaseService.html">BaseService</a></div>
+    <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
+    <div class="level3"><a class="xref" href="XRTK.Services.BaseDataProvider.html">BaseDataProvider</a></div>
+    <div class="level4"><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html">BaseCameraDataProvider</a></div>
+    <div class="level5"><span class="xref">LuminCameraDataProvider</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_Enable">BaseCameraDataProvider.Enable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_LateUpdate">BaseCameraDataProvider.LateUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_Disable">BaseCameraDataProvider.Disable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_ApplySettingsForDefaultHeadHeight">BaseCameraDataProvider.ApplySettingsForDefaultHeadHeight()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_ApplySettingsForOpaqueDisplay">BaseCameraDataProvider.ApplySettingsForOpaqueDisplay()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_ApplySettingsForTransparentDisplay">BaseCameraDataProvider.ApplySettingsForTransparentDisplay()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_SyncRigTransforms">BaseCameraDataProvider.SyncRigTransforms()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_IsStereoscopic">BaseCameraDataProvider.IsStereoscopic</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_HeadHeightIsManagedByDevice">BaseCameraDataProvider.HeadHeightIsManagedByDevice</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_CameraRig">BaseCameraDataProvider.CameraRig</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_DefaultHeadHeight">BaseCameraDataProvider.DefaultHeadHeight</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_Priority">BaseCameraDataProvider.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Reset">BaseService.Reset()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_FixedUpdate">BaseService.FixedUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationFocus_System_Boolean_">BaseService.OnApplicationFocus(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationPause_System_Boolean_">BaseService.OnApplicationPause(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Dispose">BaseService.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnDispose_System_Boolean_">BaseService.OnDispose(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Lumin.Providers.CameraSystem.html">XRTK.Lumin.Providers.CameraSystem</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.Lumin.dll</h6>
+  <h5 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[RuntimePlatform(typeof(LuminPlatform))]
+[Guid(&quot;49E17DAC-C786-4B1A-A66A-54DA654923D5&quot;)]
+public class LuminCameraDataProvider : BaseCameraDataProvider, IMixedRealityCameraDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_CameraSystem_BaseMixedRealityCameraDataProviderProfile_XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.CameraSystem.BaseMixedRealityCameraDataProviderProfile%2CXRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L19">View Source</a>
+  </span>
+  <a id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider__ctor_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.#ctor*"></a>
+  <h4 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_CameraSystem_BaseMixedRealityCameraDataProviderProfile_XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.CameraSystem.BaseMixedRealityCameraDataProviderProfile,XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem)">LuminCameraDataProvider(String, UInt32, BaseMixedRealityCameraDataProviderProfile, IMixedRealityCameraSystem)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuminCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile, IMixedRealityCameraSystem parentService)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
+        <td><span class="parametername">priority</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.CameraSystem.BaseMixedRealityCameraDataProviderProfile.html">BaseMixedRealityCameraDataProviderProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html">IMixedRealityCameraSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_HeadHeight.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.HeadHeight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L32">View Source</a>
+  </span>
+  <a id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_HeadHeight_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.HeadHeight*"></a>
+  <h4 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_HeadHeight" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.HeadHeight">HeadHeight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override float HeadHeight { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_HeadHeight">BaseCameraDataProvider.HeadHeight</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_IsOpaque.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.IsOpaque%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L27">View Source</a>
+  </span>
+  <a id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_IsOpaque_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.IsOpaque*"></a>
+  <h4 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_IsOpaque" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.IsOpaque">IsOpaque</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsOpaque { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_IsOpaque">BaseCameraDataProvider.IsOpaque</a></div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Destroy.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Destroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L147">View Source</a>
+  </span>
+  <a id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Destroy_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Destroy*"></a>
+  <h4 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Destroy" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Destroy">Destroy()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Destroy()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_Destroy">BaseCameraDataProvider.Destroy()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Initialize.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L68">View Source</a>
+  </span>
+  <a id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Initialize_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Initialize*"></a>
+  <h4 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Initialize" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_Initialize">BaseCameraDataProvider.Initialize()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_ResetRigTransforms.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.ResetRigTransforms%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L47">View Source</a>
+  </span>
+  <a id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_ResetRigTransforms_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.ResetRigTransforms*"></a>
+  <h4 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_ResetRigTransforms" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.ResetRigTransforms">ResetRigTransforms()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ResetRigTransforms()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_ResetRigTransforms">BaseCameraDataProvider.ResetRigTransforms()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Update.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L98">View Source</a>
+  </span>
+  <a id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Update_" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Update*"></a>
+  <h4 id="XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider_Update" data-uid="XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Update()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Providers.CameraSystem.BaseCameraDataProvider.html#XRTK_Providers_CameraSystem_BaseCameraDataProvider_Update">BaseCameraDataProvider.Update()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html">IMixedRealityCameraDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Lumin_Providers_CameraSystem_LuminCameraDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.lumin/Runtime/Providers/CameraSystem/LuminCameraDataProvider.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

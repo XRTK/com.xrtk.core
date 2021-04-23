@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealityNetworkingSystem
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -89,6 +89,7 @@
     <h5>Implements</h5>
     <div><a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkingSystem.html">IMixedRealityNetworkingSystem</a></div>
     <div><a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
@@ -174,7 +175,8 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MixedRealityNetworkingSystem : BaseEventSystem, IMixedRealityNetworkingSystem, IMixedRealityEventSystem, IMixedRealityService, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;6CB7110B-058B-4AA6-B81D-792FE443191A&quot;)]
+public class MixedRealityNetworkingSystem : BaseEventSystem, IMixedRealityNetworkingSystem, IMixedRealityEventSystem, IMixedRealitySystem, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -183,7 +185,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem__ctor_XRTK_Definitions_NetworkingSystem_MixedRealityNetworkSystemProfile_.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.%23ctor(XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L19">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L20">View Source</a>
   </span>
   <a id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem__ctor_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.#ctor*"></a>
   <h4 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem__ctor_XRTK_Definitions_NetworkingSystem_MixedRealityNetworkSystemProfile_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.#ctor(XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile)">MixedRealityNetworkingSystem(MixedRealityNetworkSystemProfile)</h4>
@@ -218,12 +220,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_NetworkDataProviders.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.NetworkDataProviders%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L27">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L28">View Source</a>
   </span>
   <a id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_NetworkDataProviders_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.NetworkDataProviders*"></a>
   <h4 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_NetworkDataProviders" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.NetworkDataProviders">NetworkDataProviders</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider.html">IMixedRealityNetworkDataProvider</a>s detected by the system.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -251,12 +252,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseDataReceived__1___0_.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseDataReceived%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L56">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L57">View Source</a>
   </span>
   <a id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseDataReceived_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseDataReceived*"></a>
   <h4 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseDataReceived__1___0_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseDataReceived``1(``0)">RaiseDataReceived&lt;T&gt;(T)</h4>
-  <div class="markdown level1 summary"><p>Raise when data has been received from an <a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider.html">IMixedRealityNetworkDataProvider</a>. It's up to the <a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkingSystem.html">IMixedRealityNetworkingSystem</a> to forward this data to whomever needs it.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -299,12 +299,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseNetworkDataProviderDetected_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseNetworkDataProviderDetected(XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L36">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L37">View Source</a>
   </span>
   <a id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseNetworkDataProviderDetected_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseNetworkDataProviderDetected*"></a>
   <h4 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseNetworkDataProviderDetected_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseNetworkDataProviderDetected(XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider)">RaiseNetworkDataProviderDetected(IMixedRealityNetworkDataProvider)</h4>
-  <div class="markdown level1 summary"><p>Raise that a <a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider.html">IMixedRealityNetworkDataProvider</a> has been detected by the system.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -332,12 +331,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseNetworkDataProviderLost_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseNetworkDataProviderLost(XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L41">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L42">View Source</a>
   </span>
   <a id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseNetworkDataProviderLost_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseNetworkDataProviderLost*"></a>
   <h4 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RaiseNetworkDataProviderLost_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RaiseNetworkDataProviderLost(XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider)">RaiseNetworkDataProviderLost(IMixedRealityNetworkDataProvider)</h4>
-  <div class="markdown level1 summary"><p>Raise that a <a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider.html">IMixedRealityNetworkDataProvider</a> has been lost by the system.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -365,12 +363,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RequestNetworkDataProviderSourceId.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RequestNetworkDataProviderSourceId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L30">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L31">View Source</a>
   </span>
   <a id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RequestNetworkDataProviderSourceId_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RequestNetworkDataProviderSourceId*"></a>
   <h4 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_RequestNetworkDataProviderSourceId" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.RequestNetworkDataProviderSourceId">RequestNetworkDataProviderSourceId()</h4>
-  <div class="markdown level1 summary"><p>Request a new <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSource.html#XRTK_Interfaces_Events_IMixedRealityEventSource_SourceId">SourceId</a> for the <a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider.html">IMixedRealityNetworkDataProvider</a></p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -387,8 +384,7 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
-        <td><p>A new unique source id for the data provider.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -397,12 +393,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_SendData__1___0_.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.SendData%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L46">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L47">View Source</a>
   </span>
   <a id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_SendData_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.SendData*"></a>
   <h4 id="XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem_SendData__1___0_" data-uid="XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.SendData``1(``0)">SendData&lt;T&gt;(T)</h4>
-  <div class="markdown level1 summary"><p>Send data out over the wire to whomever is listening.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -448,12 +443,21 @@
       <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a>
   </div>
   <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -471,12 +475,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_NetworkingSystem_MixedRealityNetworkingSystem.md&amp;value=---%0Auid%3A%20XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/NetworkingSystem/MixedRealityNetworkingSystem.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

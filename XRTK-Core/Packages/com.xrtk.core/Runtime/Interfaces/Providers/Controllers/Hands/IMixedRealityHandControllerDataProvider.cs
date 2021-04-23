@@ -8,23 +8,23 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
     public interface IMixedRealityHandControllerDataProvider : IMixedRealityControllerDataProvider
     {
         /// <summary>
-        /// Should hand mesh data be read if the platform provides it?
+        /// Gets the current rendering mode for hand controllers.
         /// </summary>
-        bool HandMeshingEnabled { get; }
+        HandRenderingMode RenderingMode { get; set; }
 
         /// <summary>
         /// Are hand physics enabled?
         /// </summary>
-        bool HandPhysicsEnabled { get; }
+        bool HandPhysicsEnabled { get; set; }
 
         /// <summary>
         /// Shall hand colliders be triggers?
         /// </summary>
-        bool UseTriggers { get; }
+        bool UseTriggers { get; set; }
 
         /// <summary>
         /// Gets the configured hand bounds mode to be used with hand physics.
         /// </summary>
-        HandBoundsMode BoundsMode { get; }
+        HandBoundsLOD BoundsMode { get; set; }
     }
 }

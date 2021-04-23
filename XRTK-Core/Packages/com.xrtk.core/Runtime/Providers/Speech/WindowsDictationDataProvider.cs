@@ -28,7 +28,21 @@ namespace XRTK.Providers.Speech
 #if UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
             if (dictationRecognizer == null)
             {
-                dictationRecognizer = new DictationRecognizer();
+                try
+                {
+                    dictationRecognizer = new DictationRecognizer();
+                }
+                catch (UnityException e)
+                {
+                    switch (e.Message)
+                    {
+                        case string message when message.Contains("Speech recognition is not supported on this machine."):
+                            Debug.LogWarning($"Skipping {nameof(WindowsDictationDataProvider)} registration.\n{e.Message}");
+                            break;
+                        default:
+                            throw;
+                    }
+                }
             }
 #endif // UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
         }
@@ -40,9 +54,9 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override void Enable()
         {
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying || dictationRecognizer == null) { return; }
 
-            inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource(Name);
+            inputSource = InputSystem.RequestNewGenericInputSource(Name);
             dictationResult = string.Empty;
 
             dictationRecognizer.DictationHypothesis += DictationRecognizer_DictationHypothesis;
@@ -56,7 +70,7 @@ namespace XRTK.Providers.Speech
         {
             base.Update();
 
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying || dictationRecognizer == null) { return; }
 
             if (!isTransitioning && IsListening && !Microphone.IsRecording(deviceName) && dictationRecognizer.Status == SpeechSystemStatus.Running)
             {
@@ -67,7 +81,7 @@ namespace XRTK.Providers.Speech
             if (!hasFailed && dictationRecognizer.Status == SpeechSystemStatus.Failed)
             {
                 hasFailed = true;
-                MixedRealityToolkit.InputSystem.RaiseDictationError(inputSource, "Dictation recognizer has failed!");
+                InputSystem.RaiseDictationError(inputSource, "Dictation recognizer has failed!");
             }
         }
 
@@ -76,7 +90,7 @@ namespace XRTK.Providers.Speech
         {
             base.Disable();
 
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying || dictationRecognizer == null) { return; }
 
             if (!isTransitioning && IsListening) { await StopRecordingAsync(); }
 
@@ -90,7 +104,8 @@ namespace XRTK.Providers.Speech
         {
             if (finalizing)
             {
-                dictationRecognizer.Dispose();
+                dictationRecognizer?.Dispose();
+                dictationRecognizer = null;
             }
 
             base.OnDispose(finalizing);
@@ -149,7 +164,11 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override async Task StartRecordingAsync(GameObject listener = null, float initialSilenceTimeout = 5f, float autoSilenceTimeout = 20f, int recordingTime = 10, string micDeviceName = "")
         {
-            if (IsListening || isTransitioning || MixedRealityToolkit.InputSystem == null || !Application.isPlaying)
+            if (IsListening ||
+                isTransitioning ||
+                !Application.isPlaying ||
+                dictationRecognizer == null ||
+                InputSystem == null)
             {
                 Debug.LogWarning("Unable to start recording");
                 return;
@@ -162,7 +181,7 @@ namespace XRTK.Providers.Speech
             if (listener != null)
             {
                 hasListener = true;
-                MixedRealityToolkit.InputSystem.PushModalInputHandler(listener);
+                InputSystem.PushModalInputHandler(listener);
             }
 
             if (PhraseRecognitionSystem.Status == SpeechSystemStatus.Running)
@@ -186,7 +205,7 @@ namespace XRTK.Providers.Speech
 
             if (dictationRecognizer.Status == SpeechSystemStatus.Failed)
             {
-                MixedRealityToolkit.InputSystem.RaiseDictationError(inputSource, "Dictation recognizer failed to start!");
+                InputSystem.RaiseDictationError(inputSource, "Dictation recognizer failed to start!");
                 return;
             }
 
@@ -205,7 +224,10 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override async Task<AudioClip> StopRecordingAsync()
         {
-            if (!IsListening || isTransitioning || !Application.isPlaying)
+            if (!IsListening ||
+                isTransitioning ||
+                !Application.isPlaying ||
+                dictationRecognizer == null)
             {
                 Debug.LogWarning("Unable to stop recording");
                 return null;
@@ -216,7 +238,7 @@ namespace XRTK.Providers.Speech
 
             if (hasListener)
             {
-                MixedRealityToolkit.InputSystem.PopModalInputHandler();
+                InputSystem.PopModalInputHandler();
                 hasListener = false;
             }
 
@@ -248,7 +270,7 @@ namespace XRTK.Providers.Speech
             // We don't want to append to textSoFar yet, because the hypothesis may have changed on the next event.
             dictationResult = $"{textSoFar} {text}...";
 
-            MixedRealityToolkit.InputSystem.RaiseDictationHypothesis(inputSource, dictationResult);
+            InputSystem.RaiseDictationHypothesis(inputSource, dictationResult);
         }
 
         /// <summary>
@@ -262,7 +284,7 @@ namespace XRTK.Providers.Speech
 
             dictationResult = textSoFar.ToString();
 
-            MixedRealityToolkit.InputSystem.RaiseDictationResult(inputSource, dictationResult);
+            InputSystem.RaiseDictationResult(inputSource, dictationResult);
         }
 
         /// <summary>
@@ -280,7 +302,7 @@ namespace XRTK.Providers.Speech
                 dictationResult = "Dictation has timed out. Please try again.";
             }
 
-            MixedRealityToolkit.InputSystem.RaiseDictationComplete(inputSource, dictationResult, dictationAudioClip);
+            InputSystem.RaiseDictationComplete(inputSource, dictationResult, dictationAudioClip);
             textSoFar = null;
             dictationResult = string.Empty;
         }
@@ -294,7 +316,7 @@ namespace XRTK.Providers.Speech
         {
             dictationResult = $"{error}\nHRESULT: {hresult}";
 
-            MixedRealityToolkit.InputSystem.RaiseDictationError(inputSource, dictationResult);
+            InputSystem.RaiseDictationError(inputSource, dictationResult);
             textSoFar = null;
             dictationResult = string.Empty;
         }

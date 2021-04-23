@@ -39,7 +39,10 @@ namespace XRTK.Editor.PropertyDrawers
                 {
                     if (Selection.activeObject.name.Equals(nameof(MixedRealityToolkit)))
                     {
-                        parent = MixedRealityToolkit.Instance.ActiveProfile;
+                        if (!MixedRealityToolkit.Instance.IsNull())
+                        {
+                            parent = MixedRealityToolkit.Instance.ActiveProfile;
+                        }
                     }
                     else
                     {
@@ -117,8 +120,7 @@ namespace XRTK.Editor.PropertyDrawers
                     }
                 }
 
-                Debug.Assert(!selectedProfile.ParentProfile.IsNull());
-                Debug.Assert(selectedProfile.ParentProfile != selectedProfile);
+                Debug.Assert(selectedProfile.ParentProfile != selectedProfile, $"{selectedProfile} cannot be a parent of itself!");
             }
 
             DrawCloneButtons = true;

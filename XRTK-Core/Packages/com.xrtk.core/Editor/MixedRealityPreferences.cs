@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -10,7 +10,7 @@ using UnityEngine;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Editor.Extensions;
 using XRTK.Extensions;
-using XRTK.Utilities.Editor;
+using XRTK.Editor.Utilities;
 
 namespace XRTK.Editor
 {
@@ -154,8 +154,29 @@ namespace XRTK.Editor
             }
             set
             {
-                sceneAsset = value != null ? GetSceneObject(value) : null;
-                var scenePath = value != null ? AssetDatabase.GetAssetOrScenePath(value) : string.Empty;
+                string scenePath;
+
+                if (value == null)
+                {
+                    scenePath = EditorPreferences.Get(START_SCENE_KEY, string.Empty);
+
+                    if (!string.IsNullOrWhiteSpace(scenePath))
+                    {
+                        var oldScenePath = AssetDatabase.GetAssetOrScenePath(GetSceneObject(scenePath));
+                        var buildScenes = EditorBuildSettings.scenes.ToList();
+                        buildScenes.Remove(buildScenes.FirstOrDefault(buildScene => buildScene.path.Equals(oldScenePath)));
+                        EditorBuildSettings.scenes = buildScenes.ToArray();
+                    }
+
+                    scenePath = string.Empty;
+                    sceneAsset = null;
+                }
+                else
+                {
+                    sceneAsset = GetSceneObject(value);
+                    scenePath = AssetDatabase.GetAssetOrScenePath(value);
+                }
+
                 EditorPreferences.Set(START_SCENE_KEY, scenePath);
             }
         }
@@ -184,7 +205,7 @@ namespace XRTK.Editor
                     string.IsNullOrEmpty(symbolicLinkSettingsPath))
                 {
                     symbolicLinkSettingsPath = AssetDatabase
-                        .FindAssets($"t:{typeof(SymbolicLinkSettings).Name}")
+                        .FindAssets($"t:{nameof(SymbolicLinkSettings)}")
                         .Select(AssetDatabase.GUIDToAssetPath)
                         .OrderBy(x => x)
                         .FirstOrDefault();
@@ -392,7 +413,7 @@ namespace XRTK.Editor
 
         private static SceneAsset GetSceneObject(string sceneName, SceneAsset asset = null)
         {
-            if (string.IsNullOrEmpty(sceneName) ||
+            if (string.IsNullOrWhiteSpace(sceneName) ||
                 EditorBuildSettings.scenes == null)
             {
                 return null;
@@ -411,6 +432,7 @@ namespace XRTK.Editor
                 editorScene = new EditorBuildSettingsScene
                 {
                     path = AssetDatabase.GetAssetOrScenePath(asset),
+                    enabled = true
                 };
 
                 editorScene.guid = new GUID(AssetDatabase.AssetPathToGUID(editorScene.path));

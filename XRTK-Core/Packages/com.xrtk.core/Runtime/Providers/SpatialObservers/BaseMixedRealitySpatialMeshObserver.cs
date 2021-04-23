@@ -25,7 +25,9 @@ namespace XRTK.Providers.SpatialObservers
         {
             if (profile.IsNull())
             {
-                profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalMeshObserverProfile;
+                profile = MixedRealityToolkit.TryGetSystemProfile<IMixedRealitySpatialAwarenessSystem, MixedRealitySpatialAwarenessSystemProfile>(out var spatialAwarenessSystemProfile)
+                    ? spatialAwarenessSystemProfile.GlobalMeshObserverProfile
+                    : throw new ArgumentException($"Unable to get a valid {nameof(MixedRealitySpatialAwarenessSystemProfile)}!");
             }
 
             if (profile.IsNull())
@@ -34,9 +36,8 @@ namespace XRTK.Providers.SpatialObservers
             }
 
             MeshLevelOfDetail = profile.MeshLevelOfDetail;
-            MeshTrianglesPerCubicMeter = profile.MeshTrianglesPerCubicMeter;
             MeshRecalculateNormals = profile.MeshRecalculateNormals;
-            meshDisplayOption = MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshVisibility;
+            meshDisplayOption = parentService.SpatialMeshVisibility;
             MeshVisibleMaterial = profile.MeshVisibleMaterial;
             MeshOcclusionMaterial = profile.MeshOcclusionMaterial;
             ObservationExtents = profile.ObservationExtents;
@@ -134,10 +135,8 @@ namespace XRTK.Providers.SpatialObservers
             // Disable any spatial meshes we might have.
             foreach (var meshObject in spatialMeshObjects.Values)
             {
-                if (meshObject.GameObject != null)
-                {
-                    meshObject.GameObject.SetActive(false);
-                }
+                Debug.Assert(meshObject.GameObject != null);
+                meshObject.GameObject.SetActive(false);
             }
         }
 
@@ -146,11 +145,7 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Destroy();
 
-            // Cleanup the spatial meshes that are being managed by this observer.
-            foreach (var meshObject in spatialMeshObjects.Values)
-            {
-                meshObject.GameObject.Destroy();
-            }
+            if (!Application.isPlaying) { return; }
 
             spatialMeshObjects.Clear();
 
@@ -161,6 +156,8 @@ namespace XRTK.Providers.SpatialObservers
                     var meshObject = spatialMeshObjectPool.Pop();
                     meshObject.GameObject.Destroy();
                 }
+
+                Debug.Assert(spatialMeshObjectPool.Count == 0);
             }
         }
 
@@ -168,29 +165,8 @@ namespace XRTK.Providers.SpatialObservers
 
         #region IMixedRealitySpatialMeshObserver Implementation
 
-        private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;
-
         /// <inheritdoc />
-        public SpatialAwarenessMeshLevelOfDetail MeshLevelOfDetail
-        {
-            get => meshLevelOfDetail;
-            set
-            {
-                if (meshLevelOfDetail != value)
-                {
-                    // Non-custom values automatically modify MeshTrianglesPerCubicMeter
-                    if (value != SpatialAwarenessMeshLevelOfDetail.Custom)
-                    {
-                        MeshTrianglesPerCubicMeter = (uint)value;
-                    }
-
-                    meshLevelOfDetail = value;
-                }
-            }
-        }
-
-        /// <inheritdoc />
-        public uint MeshTrianglesPerCubicMeter { get; private set; }
+        public SpatialAwarenessMeshLevelOfDetail MeshLevelOfDetail { get; set; }
 
         /// <inheritdoc />
         public bool MeshRecalculateNormals { get; }
@@ -260,13 +236,13 @@ namespace XRTK.Providers.SpatialObservers
         /// <inheritdoc />
         public virtual void RaiseMeshAdded(SpatialMeshObject spatialMeshObject)
         {
-            MixedRealityToolkit.SpatialAwarenessSystem.RaiseMeshAdded(this, spatialMeshObject);
+            SpatialAwarenessSystem.RaiseMeshAdded(this, spatialMeshObject);
         }
 
         /// <inheritdoc />
         public virtual void RaiseMeshUpdated(SpatialMeshObject spatialMeshObject)
         {
-            MixedRealityToolkit.SpatialAwarenessSystem.RaiseMeshUpdated(this, spatialMeshObject);
+            SpatialAwarenessSystem.RaiseMeshUpdated(this, spatialMeshObject);
         }
 
         /// <inheritdoc />
@@ -281,7 +257,7 @@ namespace XRTK.Providers.SpatialObservers
                 // If it's disabled then likely the mesh was removed before cooking completed.
                 if (spatialMesh.GameObject.activeInHierarchy)
                 {
-                    MixedRealityToolkit.SpatialAwarenessSystem.RaiseMeshRemoved(this, spatialMeshObject);
+                    SpatialAwarenessSystem.RaiseMeshRemoved(this, spatialMeshObject);
                 }
 
                 spatialMesh.GameObject.SetActive(false);
@@ -351,7 +327,7 @@ namespace XRTK.Providers.SpatialObservers
                 newGameObject.layer = PhysicsLayer;
             }
 
-            newGameObject.transform.SetParent(MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshesParent.transform, false);
+            newGameObject.transform.SetParent(SpatialAwarenessSystem.SpatialMeshesParent.transform, false);
             newGameObject.SetActive(false);
             return newGameObject;
         }

@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The Input System | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The Input System | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="the-input-system">The Input System</h1>
+
+<p>The Input System may look daunting, however, it is easy to master once the principles for how the system works.
+In short, the Input System manages the flow of data from inputs such as controllers, headsets and more, then organizes all the data in to XRTK components for distributing through your project.  This greatly reduces the complexity of dealing with cross-platform input from many sources.</p>
+<p>In short, the only thing your project needs to handle are:</p>
+<ul>
+<li>What things can happen in your project (what we call Input Actions)</li>
+<li>And, what should happen then those things happen</li>
+</ul>
+<blockquote>
+<p>For a shortcut to the activities you might want to configure in the Input System, check the <a href="#conclusion">Conclusion</a> section below.</p>
+</blockquote>
+<h2 id="mixed-reality-root-configuration-system">Mixed Reality Root configuration system</h2>
+<p>In the Root configuration, the specific implementation for the camera system is selected, which defaults to the XRTK implementation for the Input System.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.</p>
+<p><img src="../../images/Configuration/InputSystem/InputSystemProfile.png" alt=""></p>
+<h2 id="input-system-platform-configuration">Input System platform configuration</h2>
+<p>The core settings for the Input System allow the configuration of various elements which alter the behavior of the Input System, these include:</p>
+<ul>
+<li><a href="#global-pointer-settings">Global Pointer Settings</a></li>
+<li><a href="#global-hand-settings">Global Hand Settings</a></li>
+<li><a href="#input-actions">Input Actions</a></li>
+<li>Speech Commands</li>
+<li>Gestures</li>
+<li><a href="#controller-actions">Controller Actions</a></li>
+<li><a href="#controller-definitions">Controller Definitions</a></li>
+</ul>
+<p>These are all grouped together under a singe Input System profile for easy reuse between projects.</p>
+<p><img src="../../images/Configuration/InputSystem/InputSystemSettings.png" alt=""></p>
+<h2 id="global-pointer-settings">Global Pointer Settings</h2>
+<p>Pointers provide an invisible line between your controller (or head) in to a scene to interact with other objects. These default settings provide the global defaults for the Distance, Physics layer masks and colours users by the pointers, as well as whether they are drawn in the scene or not.</p>
+<p><img src="../../images/Configuration/InputSystem/GlobalPointerSettings.png" alt=""></p>
+<h2 id="global-hand-settings">Global Hand Settings</h2>
+<p>Providing default settings that control both the rendering and physical nature of hands. This also holds the default pose configuration available to hands while in use in the environment.</p>
+<p><img src="../../images/Configuration/InputSystem/GlobalHandSettings.png" alt=""></p>
+<h2 id="input-actions">Input Actions</h2>
+<p>Input Actions are a crucial element of cross-platform XR development.  With the increasing number of controllers, inputs, buttons and sensors being made available to devices, it is not practical to keep adding more complexity within your Mixed Reality solution.</p>
+<p>Input Actions solve this by simply defining logical actions or events that can happen in your solution, e.g. Grabbing, clicking, tapping, pulling, etc and using them within your project so that when that event is received, you can perform the action related to that action.</p>
+<p>The list here simply defines what actions are available in your solution and the kind of data expected when that action occurs, e.g. A boolean for a button (on/off), a range from a trigger or a full 6dof movement.</p>
+<blockquote>
+<p>See <a href="#controller-actions">Controller Actions</a> for how these Actions are then mapped to the various controllers you wish to support.</p>
+</blockquote>
+<p><img src="../../images/Configuration/InputSystem/InputActions.png" alt=""></p>
+<h2 id="controller-actions">Controller Actions</h2>
+<p>With your actions defined for your project, the next logical step is to decide which inputs on which controllers would provide those actions. Through the XRTK's Input System, there are two ways to achieve this, the fist being the simpler <code>Controller Actions</code> list, which highlights all the currently known controllers that have been configured for your project.  From here you can select each type of controller and which hand the controller is used in to assign what input does what.</p>
+<p>You can also see the individual controllers view in the <a href="#controller-profile">Controller Profile</a> section below.</p>
+<p><img src="../../images/Configuration/InputSystem/ShortcutControllerActionMappings.png" alt=""></p>
+<h2 id="controller-definitions">Controller Definitions</h2>
+<p>For a more detailed look at what controllers and inputs are configured, and to also add or remove controllers from your current configuration, the IMixedRealityInputDataProvider Configuration Options list out in detail what is currently available and for which platform they are available on.</p>
+<p><img src="../../images/Configuration/InputSystem/ConfiguredControllerDataProviders.png" alt=""></p>
+<p>Expanding a profile shows the details for each provider, including:</p>
+<ul>
+<li>Its name</li>
+<li>The concrete implementation for the controller provider</li>
+<li>The configuration profile for the controller provider</li>
+<li>The platforms the provider is registered for.</li>
+</ul>
+<p><img src="../../images/Configuration/InputSystem/ControllerDataProvider.png" alt=""></p>
+<blockquote>
+<p>Check out all the <a href="../platforms/platforms.html">Platforms that are available to configure</a>.</p>
+</blockquote>
+<p>From here you can either remove a controller profile completely, or change which platforms it is active for.</p>
+<blockquote>
+<p>Be aware, the XRTK will do exactly as it is told in regards to the configuration applied, so if you have two competing controllers active for a specific platform at the same time, you will get multiple controllers in the scene, e.g. OpenVR and Oculus controllers.</p>
+</blockquote>
+<h2 id="controller-data-profile-configuration">Controller Data Profile configuration</h2>
+<p>Looking at the configuration for an individual Controller Profile will show you two views:</p>
+<ul>
+<li>Basic (default) - the same simple controller button view as <a href="#controller-actions">Controller Actions</a> showing only those specific to this provider.</li>
+<li>Advanced - More detailed views of the configuration behind the controllers.</li>
+</ul>
+<p><img src="../../images/Configuration/InputSystem/ControllerDataProviderProfile.png" alt=""></p>
+<h2 id="controller-profile">Controller Profile</h2>
+<p>When you open a Controller Profile, you will get a nice graphical view of the controller and the inputs available for the device based on its hardware and the SDK of the vendor.  Here you can chose from the list of <a href="#input-actions">Input Actions</a> you have configured for the project, with each input filtering those Actions by what the Input on the controller can support, for example:</p>
+<ul>
+<li>Buttons can support only <code>Digitial</code> actions (boolean), button down and button up.</li>
+<li>Triggers support <code>Single Axis</code> or <code>float</code> data, giving a range, usually between 0 and 1 for how uch the input is pressed.</li>
+<li>Touch pads and ThumbSticks support <code>Dual Axis</code> or <code>Vector2</code> data, giving two coordinates in the X and Y planes based on how the input is manipulated</li>
+<li>We also allow assigning an action to the pose (6dof, position and rotation) of the controller, which relates to the controllers position and rotation in relation to the headset.  An alternate pose is also available for grip, or offset position provided by the vendor for where the user grips the controller.</li>
+</ul>
+<p>You may also see a mix of other options where the vendor provides more capabilities, such as Near and Touched events that will show up on those controllers, e.g. Oculus.  Some inputs also have dual options, such as thumbsticks, which can also be pressed, allowing for an alternate action to be assigned.</p>
+<p><img src="../../images/Configuration/InputSystem/ControllerProfile.png" alt=""></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There is a lot of configuration available in the Input System, most of which will not need to be touched, but here are some common tasks which can be achieved easily.</p>
+<ul>
+<li>Changing the list of actions specific to your project in the <a href="#input-actions">Input Actions</a> configuration</li>
+<li>Altering the Input Action mappings for the registered controllers in <a href="#controller-actions">Controller Actions</a></li>
+<li>Removing controllers that are not needed in <a href="#controller-definitions">Controller Definitions</a></li>
+</ul>
+<hr>
+<h3 id="related-articles">Related Articles</h3>
+<ul>
+<li><a href="../00-GettingStarted.html#getting-started-with-the-mixed-reality-toolkit">Getting Started</a></li>
+<li><a href="../02-Configuration.html">Configuration</a></li>
+<li><a href="../platforms/platforms.html">XRTK Platforms</a></li>
+</ul>
+<hr>
+<h3 id="raise-an-information-request"><a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title="><strong>Raise an Information Request</strong></a></h3>
+<p>If there is anything not mentioned in this document or you simply want to know more, raise an <a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title=">RFI (Request for Information) request here</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/articles/systems/02-input-system.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

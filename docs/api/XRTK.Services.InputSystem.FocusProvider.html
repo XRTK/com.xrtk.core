@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class FocusProvider
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -80,19 +80,23 @@
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="XRTK.Services.BaseService.html">BaseService</a></div>
-    <div class="level2"><span class="xref">FocusProvider</span></div>
+    <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
+    <div class="level3"><a class="xref" href="XRTK.Services.BaseDataProvider.html">BaseDataProvider</a></div>
+    <div class="level4"><span class="xref">FocusProvider</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.html">IMixedRealityFocusProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a></div>
-    <div><span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
+    </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Reset">BaseService.Reset()</a>
     </div>
@@ -146,28 +150,77 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Services_InputSystem_FocusProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class FocusProvider : BaseService, IMixedRealityFocusProvider, IMixedRealitySourceStateHandler, IEventSystemHandler, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;249D4D78-CADD-45BA-9438-DB9FC2509213&quot;)]
+public class FocusProvider : BaseDataProvider, IMixedRealityFocusProvider, IMixedRealitySourceStateHandler, IEventSystemHandler, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h5 id="XRTK_Services_InputSystem_FocusProvider_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>There are convenience properties for getting only Gaze Pointer if needed.</p>
 </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider__ctor_System_String_System_UInt32_XRTK_Definitions_BaseMixedRealityProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.BaseMixedRealityProfile%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L27">View Source</a>
+  </span>
+  <a id="XRTK_Services_InputSystem_FocusProvider__ctor_" data-uid="XRTK.Services.InputSystem.FocusProvider.#ctor*"></a>
+  <h4 id="XRTK_Services_InputSystem_FocusProvider__ctor_System_String_System_UInt32_XRTK_Definitions_BaseMixedRealityProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_" data-uid="XRTK.Services.InputSystem.FocusProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.BaseMixedRealityProfile,XRTK.Interfaces.InputSystem.IMixedRealityInputSystem)">FocusProvider(String, UInt32, BaseMixedRealityProfile, IMixedRealityInputSystem)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FocusProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityInputSystem parentService)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
+        <td><span class="parametername">priority</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_FocusLayerMasks.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.FocusLayerMasks%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_GlobalPointerRaycastLayerMasks.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.GlobalPointerRaycastLayerMasks%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L57">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L71">View Source</a>
   </span>
-  <a id="XRTK_Services_InputSystem_FocusProvider_FocusLayerMasks_" data-uid="XRTK.Services.InputSystem.FocusProvider.FocusLayerMasks*"></a>
-  <h4 id="XRTK_Services_InputSystem_FocusProvider_FocusLayerMasks" data-uid="XRTK.Services.InputSystem.FocusProvider.FocusLayerMasks">FocusLayerMasks</h4>
-  <div class="markdown level1 summary"><p>The layer masks for the focus pointers to raycast against.</p>
-</div>
+  <a id="XRTK_Services_InputSystem_FocusProvider_GlobalPointerRaycastLayerMasks_" data-uid="XRTK.Services.InputSystem.FocusProvider.GlobalPointerRaycastLayerMasks*"></a>
+  <h4 id="XRTK_Services_InputSystem_FocusProvider_GlobalPointerRaycastLayerMasks" data-uid="XRTK.Services.InputSystem.FocusProvider.GlobalPointerRaycastLayerMasks">GlobalPointerRaycastLayerMasks</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LayerMask[] FocusLayerMasks { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public LayerMask[] GlobalPointerRaycastLayerMasks { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -186,15 +239,44 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_InputSystem.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.InputSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L52">View Source</a>
+  </span>
+  <a id="XRTK_Services_InputSystem_FocusProvider_InputSystem_" data-uid="XRTK.Services.InputSystem.FocusProvider.InputSystem*"></a>
+  <h4 id="XRTK_Services_InputSystem_FocusProvider_InputSystem" data-uid="XRTK.Services.InputSystem.FocusProvider.InputSystem">InputSystem</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IMixedRealityInputSystem InputSystem { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_Name.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L33">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L58">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_Name_" data-uid="XRTK.Services.InputSystem.FocusProvider.Name*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_Name" data-uid="XRTK.Services.InputSystem.FocusProvider.Name">Name</h4>
-  <div class="markdown level1 summary"><p>The service display name.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -216,18 +298,17 @@
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Name">BaseService.Name</a></div>
+  <div><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_Priority.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.Priority%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L36">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L61">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_Priority_" data-uid="XRTK.Services.InputSystem.FocusProvider.Priority*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_Priority" data-uid="XRTK.Services.InputSystem.FocusProvider.Priority">Priority</h4>
-  <div class="markdown level1 summary"><p>Optional Priority to reorder registered managers based on their respective priority, reduces the risk of race conditions by prioritizing the order in which services are evaluated.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -249,18 +330,17 @@
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Priority">BaseService.Priority</a></div>
+  <div><a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_Priority">BaseDataProvider.Priority</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_UIRaycastCamera.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.UIRaycastCamera%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L80">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L76">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_UIRaycastCamera_" data-uid="XRTK.Services.InputSystem.FocusProvider.UIRaycastCamera*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_UIRaycastCamera" data-uid="XRTK.Services.InputSystem.FocusProvider.UIRaycastCamera">UIRaycastCamera</h4>
-  <div class="markdown level1 summary"><p>The Camera the <span class="xref">UnityEngine.EventSystems.EventSystem</span> uses to raycast against.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -281,9 +361,6 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_InputSystem_FocusProvider_UIRaycastCamera_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Every uGUI <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Canvas.html">Canvas</a> in your scene should use this camera as its event camera.</p>
-</div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -291,12 +368,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_Destroy.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.Destroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L537">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L498">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_Destroy_" data-uid="XRTK.Services.InputSystem.FocusProvider.Destroy*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_Destroy" data-uid="XRTK.Services.InputSystem.FocusProvider.Destroy">Destroy()</h4>
-  <div class="markdown level1 summary"><p>Optional Destroy function to perform cleanup of the service before the Mixed Reality Toolkit is destroyed.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -309,12 +385,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_GenerateNewPointerId.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.GenerateNewPointerId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L602">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L552">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_GenerateNewPointerId_" data-uid="XRTK.Services.InputSystem.FocusProvider.GenerateNewPointerId*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_GenerateNewPointerId" data-uid="XRTK.Services.InputSystem.FocusProvider.GenerateNewPointerId">GenerateNewPointerId()</h4>
-  <div class="markdown level1 summary"><p>Generate a new unique pointer id.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -340,12 +415,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_GetFocusedObject_XRTK_Interfaces_InputSystem_IMixedRealityPointer_.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.GetFocusedObject(XRTK.Interfaces.InputSystem.IMixedRealityPointer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L559">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L509">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_GetFocusedObject_" data-uid="XRTK.Services.InputSystem.FocusProvider.GetFocusedObject*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_GetFocusedObject_XRTK_Interfaces_InputSystem_IMixedRealityPointer_" data-uid="XRTK.Services.InputSystem.FocusProvider.GetFocusedObject(XRTK.Interfaces.InputSystem.IMixedRealityPointer)">GetFocusedObject(IMixedRealityPointer)</h4>
-  <div class="markdown level1 summary"><p>Gets the currently focused object for the pointing source.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -379,26 +453,20 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
-        <td><p>Currently Focused Object.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_InputSystem_FocusProvider_GetFocusedObject_XRTK_Interfaces_InputSystem_IMixedRealityPointer__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>If the pointing source is not registered, then the Gaze's Focused <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> is returned.</p>
-</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_Initialize.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L508">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L473">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_Initialize_" data-uid="XRTK.Services.InputSystem.FocusProvider.Initialize*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_Initialize" data-uid="XRTK.Services.InputSystem.FocusProvider.Initialize">Initialize()</h4>
-  <div class="markdown level1 summary"><p>The initialize function is used to setup the service once created.
-This method is called once all services have been registered in the Mixed Reality Toolkit.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -411,12 +479,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_IsPointerRegistered_XRTK_Interfaces_InputSystem_IMixedRealityPointer_.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.IsPointerRegistered(XRTK.Interfaces.InputSystem.IMixedRealityPointer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L672">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L622">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_IsPointerRegistered_" data-uid="XRTK.Services.InputSystem.FocusProvider.IsPointerRegistered*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_IsPointerRegistered_XRTK_Interfaces_InputSystem_IMixedRealityPointer_" data-uid="XRTK.Services.InputSystem.FocusProvider.IsPointerRegistered(XRTK.Interfaces.InputSystem.IMixedRealityPointer)">IsPointerRegistered(IMixedRealityPointer)</h4>
-  <div class="markdown level1 summary"><p>Checks if the pointer is registered with the Focus Manager.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -450,8 +517,7 @@ This method is called once all services have been registered in the Mixed Realit
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True, if registered, otherwise false.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -460,12 +526,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L1140">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L1085">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_OnSourceDetected_" data-uid="XRTK.Services.InputSystem.FocusProvider.OnSourceDetected*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.Services.InputSystem.FocusProvider.OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)">OnSourceDetected(SourceStateEventData)</h4>
-  <div class="markdown level1 summary"><p>Raised when a source is detected.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -493,12 +558,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L1146">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L1091">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_OnSourceLost_" data-uid="XRTK.Services.InputSystem.FocusProvider.OnSourceLost*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.Services.InputSystem.FocusProvider.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)">OnSourceLost(SourceStateEventData)</h4>
-  <div class="markdown level1 summary"><p>Raised when a source is lost.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -526,12 +590,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_RegisterPointer_XRTK_Interfaces_InputSystem_IMixedRealityPointer_.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.RegisterPointer(XRTK.Interfaces.InputSystem.IMixedRealityPointer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L679">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L629">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_RegisterPointer_" data-uid="XRTK.Services.InputSystem.FocusProvider.RegisterPointer*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_RegisterPointer_XRTK_Interfaces_InputSystem_IMixedRealityPointer_" data-uid="XRTK.Services.InputSystem.FocusProvider.RegisterPointer(XRTK.Interfaces.InputSystem.IMixedRealityPointer)">RegisterPointer(IMixedRealityPointer)</h4>
-  <div class="markdown level1 summary"><p>Registers the pointer with the Focus Manager.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -565,8 +628,7 @@ This method is called once all services have been registered in the Mixed Realit
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True, if the pointer was registered, false if the pointer was previously registered.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -575,12 +637,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_TryGetFocusDetails_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Interfaces_InputSystem_IPointerResult__.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.TryGetFocusDetails(XRTK.Interfaces.InputSystem.IMixedRealityPointer%2CXRTK.Interfaces.InputSystem.IPointerResult%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L571">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L521">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_TryGetFocusDetails_" data-uid="XRTK.Services.InputSystem.FocusProvider.TryGetFocusDetails*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_TryGetFocusDetails_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Interfaces_InputSystem_IPointerResult__" data-uid="XRTK.Services.InputSystem.FocusProvider.TryGetFocusDetails(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Interfaces.InputSystem.IPointerResult@)">TryGetFocusDetails(IMixedRealityPointer, out IPointerResult)</h4>
-  <div class="markdown level1 summary"><p>Gets the currently focused object for the pointing source.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -628,12 +689,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_TryGetSpecificPointerGraphicEventData_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_EventDatum_Input_GraphicInputEventData__.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.TryGetSpecificPointerGraphicEventData(XRTK.Interfaces.InputSystem.IMixedRealityPointer%2CXRTK.EventDatum.Input.GraphicInputEventData%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L584">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L534">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_TryGetSpecificPointerGraphicEventData_" data-uid="XRTK.Services.InputSystem.FocusProvider.TryGetSpecificPointerGraphicEventData*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_TryGetSpecificPointerGraphicEventData_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_EventDatum_Input_GraphicInputEventData__" data-uid="XRTK.Services.InputSystem.FocusProvider.TryGetSpecificPointerGraphicEventData(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.EventDatum.Input.GraphicInputEventData@)">TryGetSpecificPointerGraphicEventData(IMixedRealityPointer, out GraphicInputEventData)</h4>
-  <div class="markdown level1 summary"><p>Get the Graphic Event Data for the specified pointing source.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -652,14 +712,12 @@ This method is called once all services have been registered in the Mixed Realit
       <tr>
         <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a></td>
         <td><span class="parametername">pointer</span></td>
-        <td><p>The pointer who's graphic event data we're looking for.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="XRTK.EventDatum.Input.GraphicInputEventData.html">GraphicInputEventData</a></td>
         <td><span class="parametername">graphicInputEventData</span></td>
-        <td><p>The graphic event data for the specified pointer</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -674,8 +732,7 @@ This method is called once all services have been registered in the Mixed Realit
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True, if graphic event data exists.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -684,12 +741,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_UnregisterPointer_XRTK_Interfaces_InputSystem_IMixedRealityPointer_.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.UnregisterPointer(XRTK.Interfaces.InputSystem.IMixedRealityPointer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L710">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L660">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_UnregisterPointer_" data-uid="XRTK.Services.InputSystem.FocusProvider.UnregisterPointer*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_UnregisterPointer_XRTK_Interfaces_InputSystem_IMixedRealityPointer_" data-uid="XRTK.Services.InputSystem.FocusProvider.UnregisterPointer(XRTK.Interfaces.InputSystem.IMixedRealityPointer)">UnregisterPointer(IMixedRealityPointer)</h4>
-  <div class="markdown level1 summary"><p>Unregisters the pointer with the Focus Manager.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -723,8 +779,7 @@ This method is called once all services have been registered in the Mixed Realit
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True, if the pointer was unregistered, false if the pointer was not registered.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -733,12 +788,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_Update.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L526">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L489">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_Update_" data-uid="XRTK.Services.InputSystem.FocusProvider.Update*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_Update" data-uid="XRTK.Services.InputSystem.FocusProvider.Update">Update()</h4>
-  <div class="markdown level1 summary"><p>Optional Update function to perform per-frame updates of the service.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -751,7 +805,7 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_UpdateCanvasEventSystems.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.UpdateCanvasEventSystems%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L654">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L604">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_UpdateCanvasEventSystems_" data-uid="XRTK.Services.InputSystem.FocusProvider.UpdateCanvasEventSystems*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_UpdateCanvasEventSystems" data-uid="XRTK.Services.InputSystem.FocusProvider.UpdateCanvasEventSystems">UpdateCanvasEventSystems()</h4>
@@ -772,12 +826,11 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider_XRTK_Interfaces_InputSystem_IMixedRealityFocusProvider_GlobalPointingExtent.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider.XRTK%23Interfaces%23InputSystem%23IMixedRealityFocusProvider%23GlobalPointingExtent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L39">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L66">View Source</a>
   </span>
   <a id="XRTK_Services_InputSystem_FocusProvider_XRTK_Interfaces_InputSystem_IMixedRealityFocusProvider_GlobalPointingExtent_" data-uid="XRTK.Services.InputSystem.FocusProvider.XRTK#Interfaces#InputSystem#IMixedRealityFocusProvider#GlobalPointingExtent*"></a>
   <h4 id="XRTK_Services_InputSystem_FocusProvider_XRTK_Interfaces_InputSystem_IMixedRealityFocusProvider_GlobalPointingExtent" data-uid="XRTK.Services.InputSystem.FocusProvider.XRTK#Interfaces#InputSystem#IMixedRealityFocusProvider#GlobalPointingExtent">IMixedRealityFocusProvider.GlobalPointingExtent</h4>
-  <div class="markdown level1 summary"><p>Maximum distance at which all pointers can collide with a <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>, unless it has an override extent.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -806,9 +859,6 @@ This method is called once all services have been registered in the Mixed Realit
       <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a>
   </div>
   <div>
-      <span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span>
-  </div>
-  <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
   </div>
   <div>
@@ -818,6 +868,12 @@ This method is called once all services have been registered in the Mixed Realit
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -835,12 +891,13 @@ This method is called once all services have been registered in the Mixed Realit
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_InputSystem_FocusProvider.md&amp;value=---%0Auid%3A%20XRTK.Services.InputSystem.FocusProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/InputSystem/FocusProvider.cs/#L21" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/InputSystem/FocusProvider.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

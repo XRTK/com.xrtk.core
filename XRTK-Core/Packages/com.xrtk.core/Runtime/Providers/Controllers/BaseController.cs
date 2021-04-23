@@ -10,13 +10,12 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 using XRTK.Utilities;
-using XRTK.Utilities.Gltf.Schema;
-using XRTK.Utilities.Gltf.Serialization;
 using Object = UnityEngine.Object;
 
 namespace XRTK.Providers.Controllers
@@ -68,11 +67,16 @@ namespace XRTK.Providers.Controllers
                 throw new Exception($"No Controller interaction mappings found for {controllerMappingProfile.name}!");
             }
 
-            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource(Name, pointers);
-
-            for (int i = 0; i < InputSource?.Pointers?.Length; i++)
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityInputSystem>(out var inputSystem))
             {
-                InputSource.Pointers[i].Controller = this;
+                Debug.Assert(ReferenceEquals(inputSystem, controllerDataProvider.ParentService));
+                InputSystem = inputSystem;
+                InputSource = InputSystem.RequestNewGenericInputSource(Name, pointers);
+
+                for (int i = 0; i < InputSource?.Pointers?.Length; i++)
+                {
+                    InputSource.Pointers[i].Controller = this;
+                }
             }
 
             IsPositionAvailable = false;
@@ -81,6 +85,8 @@ namespace XRTK.Providers.Controllers
 
             Enabled = true;
         }
+
+        protected readonly IMixedRealityInputSystem InputSystem;
 
         private readonly MixedRealityControllerVisualizationProfile visualizationProfile;
 
@@ -98,6 +104,12 @@ namespace XRTK.Providers.Controllers
         /// The Default Right Handed interactions for this controller.
         /// </summary>
         public virtual MixedRealityInteractionMapping[] DefaultRightHandedInteractions { get; } = new MixedRealityInteractionMapping[0];
+
+        /// <summary>
+        /// Local offset from the controller position defining where the grip pose is.
+        /// The grip pose may be used to attach things to the controller when grabbing objects.
+        /// </summary>
+        protected virtual MixedRealityPose GripPoseOffset => MixedRealityPose.ZeroIdentity;
 
         #region IMixedRealityController Implementation
 
@@ -164,7 +176,10 @@ namespace XRTK.Providers.Controllers
                 for (int j = 0; j < interactionProfile.PointerProfiles.Length; j++)
                 {
                     var pointerProfile = interactionProfile.PointerProfiles[j];
-                    var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform);
+                    var playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                        ? cameraSystem.MainCameraRig.PlayspaceTransform
+                        : CameraCache.Main.transform.parent;
+                    var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, playspaceTransform);
                     var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
 
                     if (pointer != null)
@@ -186,15 +201,7 @@ namespace XRTK.Providers.Controllers
         }
 
         /// <inheritdoc />
-        public async void TryRenderControllerModel(byte[] glbData = null, bool useAlternatePoseAction = false) => await TryRenderControllerModelAsync(glbData, useAlternatePoseAction);
-
-        /// <summary>
-        /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
-        /// to render the controllers in the scene.
-        /// </summary>
-        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
-        /// <param name="useAlternatePoseAction">Should the visualizer be assigned the alternate pose actions?</param>
-        public async Task TryRenderControllerModelAsync(byte[] glbData = null, bool useAlternatePoseAction = false)
+        public void TryRenderControllerModel(bool useAlternatePoseAction = false)
         {
             if (visualizationProfile.IsNull())
             {
@@ -202,20 +209,11 @@ namespace XRTK.Providers.Controllers
                 return;
             }
 
-            GltfObject gltfObject = null;
             GameObject controllerModel = null;
-
-            // if we have model data from the platform and the controller has been configured to use the default model, attempt to load the controller model from glbData.
-            if (glbData != null)
-            {
-                gltfObject = GltfUtility.GetGltfObjectFromGlb(glbData);
-                await gltfObject.ConstructAsync();
-                controllerModel = gltfObject.GameObjectReference;
-            }
 
             // If we didn't get an override model, and we didn't load the driver model,
             // then get the global controller model for each hand.
-            if (controllerModel.IsNull())
+            //if (controllerModel.IsNull())
             {
                 switch (ControllerHandedness)
                 {
@@ -231,27 +229,14 @@ namespace XRTK.Providers.Controllers
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (!controllerModel.IsNull())
             {
-                var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
+                var playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                    ? cameraSystem.MainCameraRig.PlayspaceTransform
                     : CameraCache.Main.transform.parent;
 
-                // If the model was loaded from a system template
-                if (gltfObject != null)
-                {
-                    controllerModel.name = $"{GetType().Name}_Visualization";
-                    controllerModel.transform.SetParent(playspaceTransform);
-                    var visualizationType = visualizationProfile.ControllerVisualizationType;
-                    controllerModel.AddComponent(visualizationType.Type);
-                    Visualizer = controllerModel.GetComponent<IMixedRealityControllerVisualizer>();
-                }
-                // If the model was a prefab
-                else
-                {
-                    var controllerObject = Object.Instantiate(controllerModel, playspaceTransform) as GameObject;
-                    Debug.Assert(controllerObject != null);
-                    controllerObject.name = $"{GetType().Name}_Visualization";
-                    Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
-                }
+                var controllerObject = Object.Instantiate(controllerModel, playspaceTransform);
+                Debug.Assert(controllerObject != null);
+                controllerObject.name = $"{GetType().Name}_Visualization";
+                Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
 
                 // If a visualizer exists, set it up and bind it to the controller
                 if (Visualizer != null)

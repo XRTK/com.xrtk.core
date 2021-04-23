@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SystemType
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -81,10 +81,6 @@
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">SystemType</span></div>
   </div>
-  <div classs="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ISerializationCallbackReceiver.html">ISerializationCallbackReceiver</a></div>
-  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -117,10 +113,44 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType__ctor_System_Guid_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.%23ctor(System.Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L39">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Utilities_SystemType__ctor_" data-uid="XRTK.Definitions.Utilities.SystemType.#ctor*"></a>
+  <h4 id="XRTK_Definitions_Utilities_SystemType__ctor_System_Guid_" data-uid="XRTK.Definitions.Utilities.SystemType.#ctor(System.Guid)">SystemType(Guid)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SystemType(Guid guid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
+        <td><span class="parametername">guid</span></td>
+        <td><p><span class="xref">Type.GUID</span> reference of the type to instantiate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType__ctor_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L36">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L29">View Source</a>
   </span>
   <a id="XRTK_Definitions_Utilities_SystemType__ctor_" data-uid="XRTK.Definitions.Utilities.SystemType.#ctor*"></a>
   <h4 id="XRTK_Definitions_Utilities_SystemType__ctor_System_String_" data-uid="XRTK.Definitions.Utilities.SystemType.#ctor(System.String)">SystemType(String)</h4>
@@ -129,7 +159,7 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SystemType(string assemblyQualifiedClassName)</code></pre>
+    <pre><code class="lang-csharp hljs">public SystemType(string typeGuid)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -143,8 +173,8 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">assemblyQualifiedClassName</span></td>
-        <td><p>Assembly qualified class name.</p>
+        <td><span class="parametername">typeGuid</span></td>
+        <td><p><span class="xref">Type.GUID</span> reference as <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -154,7 +184,7 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType__ctor_System_Type_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.%23ctor(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L57">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L20">View Source</a>
   </span>
   <a id="XRTK_Definitions_Utilities_SystemType__ctor_" data-uid="XRTK.Definitions.Utilities.SystemType.#ctor*"></a>
   <h4 id="XRTK_Definitions_Utilities_SystemType__ctor_System_Type_" data-uid="XRTK.Definitions.Utilities.SystemType.#ctor(System.Type)">SystemType(Type)</h4>
@@ -187,10 +217,41 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_Guid.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.Guid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L126">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Utilities_SystemType_Guid_" data-uid="XRTK.Definitions.Utilities.SystemType.Guid*"></a>
+  <h4 id="XRTK_Definitions_Utilities_SystemType_Guid" data-uid="XRTK.Definitions.Utilities.SystemType.Guid">Guid</h4>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a> associated with the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Guid Guid { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_Type.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L76">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L66">View Source</a>
   </span>
   <a id="XRTK_Definitions_Utilities_SystemType_Type_" data-uid="XRTK.Definitions.Utilities.SystemType.Type*"></a>
   <h4 id="XRTK_Definitions_Utilities_SystemType_Type" data-uid="XRTK.Definitions.Utilities.SystemType.Type">Type</h4>
@@ -220,57 +281,10 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_GetReference_System_Type_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.GetReference(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L20">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Utilities_SystemType_GetReference_" data-uid="XRTK.Definitions.Utilities.SystemType.GetReference*"></a>
-  <h4 id="XRTK_Definitions_Utilities_SystemType_GetReference_System_Type_" data-uid="XRTK.Definitions.Utilities.SystemType.GetReference(System.Type)">GetReference(Type)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string GetReference(Type type)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_ToString.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L111">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L140">View Source</a>
   </span>
   <a id="XRTK_Definitions_Utilities_SystemType_ToString_" data-uid="XRTK.Definitions.Utilities.SystemType.ToString*"></a>
   <h4 id="XRTK_Definitions_Utilities_SystemType_ToString" data-uid="XRTK.Definitions.Utilities.SystemType.ToString">ToString()</h4>
@@ -301,10 +315,57 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_op_Implicit_System_Guid__XRTK_Definitions_Utilities_SystemType.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.op_Implicit(System.Guid)~XRTK.Definitions.Utilities.SystemType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L116">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Utilities_SystemType_op_Implicit_" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit*"></a>
+  <h4 id="XRTK_Definitions_Utilities_SystemType_op_Implicit_System_Guid__XRTK_Definitions_Utilities_SystemType" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit(System.Guid)~XRTK.Definitions.Utilities.SystemType">Implicit(Guid to SystemType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator SystemType(Guid guid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
+        <td><span class="parametername">guid</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_op_Implicit_System_Type__XRTK_Definitions_Utilities_SystemType.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.op_Implicit(System.Type)~XRTK.Definitions.Utilities.SystemType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L106">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L111">View Source</a>
   </span>
   <a id="XRTK_Definitions_Utilities_SystemType_op_Implicit_" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit*"></a>
   <h4 id="XRTK_Definitions_Utilities_SystemType_op_Implicit_System_Type__XRTK_Definitions_Utilities_SystemType" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit(System.Type)~XRTK.Definitions.Utilities.SystemType">Implicit(Type to SystemType)</h4>
@@ -348,10 +409,57 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_op_Implicit_XRTK_Definitions_Utilities_SystemType__System_Guid.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.op_Implicit(XRTK.Definitions.Utilities.SystemType)~System.Guid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L96">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Utilities_SystemType_op_Implicit_" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit*"></a>
+  <h4 id="XRTK_Definitions_Utilities_SystemType_op_Implicit_XRTK_Definitions_Utilities_SystemType__System_Guid" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit(XRTK.Definitions.Utilities.SystemType)~System.Guid">Implicit(SystemType to Guid)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Guid(SystemType type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_op_Implicit_XRTK_Definitions_Utilities_SystemType__System_String.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.op_Implicit(XRTK.Definitions.Utilities.SystemType)~System.String%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L96">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L101">View Source</a>
   </span>
   <a id="XRTK_Definitions_Utilities_SystemType_op_Implicit_" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit*"></a>
   <h4 id="XRTK_Definitions_Utilities_SystemType_op_Implicit_XRTK_Definitions_Utilities_SystemType__System_String" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit(XRTK.Definitions.Utilities.SystemType)~System.String">Implicit(SystemType to String)</h4>
@@ -398,7 +506,7 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_op_Implicit_XRTK_Definitions_Utilities_SystemType__System_Type.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.op_Implicit(XRTK.Definitions.Utilities.SystemType)~System.Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L101">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L106">View Source</a>
   </span>
   <a id="XRTK_Definitions_Utilities_SystemType_op_Implicit_" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit*"></a>
   <h4 id="XRTK_Definitions_Utilities_SystemType_op_Implicit_XRTK_Definitions_Utilities_SystemType__System_Type" data-uid="XRTK.Definitions.Utilities.SystemType.op_Implicit(XRTK.Definitions.Utilities.SystemType)~System.Type">Implicit(SystemType to Type)</h4>
@@ -440,43 +548,13 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
       </tr>
     </tbody>
   </table>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.UnityEngine%23ISerializationCallbackReceiver%23OnAfterDeserialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L64">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Utilities_SystemType_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize_" data-uid="XRTK.Definitions.Utilities.SystemType.UnityEngine#ISerializationCallbackReceiver#OnAfterDeserialize*"></a>
-  <h4 id="XRTK_Definitions_Utilities_SystemType_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize" data-uid="XRTK.Definitions.Utilities.SystemType.UnityEngine#ISerializationCallbackReceiver#OnAfterDeserialize">ISerializationCallbackReceiver.OnAfterDeserialize()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ISerializationCallbackReceiver.OnAfterDeserialize()</code></pre>
-  </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType.UnityEngine%23ISerializationCallbackReceiver%23OnBeforeSerialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L69">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Utilities_SystemType_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize_" data-uid="XRTK.Definitions.Utilities.SystemType.UnityEngine#ISerializationCallbackReceiver#OnBeforeSerialize*"></a>
-  <h4 id="XRTK_Definitions_Utilities_SystemType_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize" data-uid="XRTK.Definitions.Utilities.SystemType.UnityEngine#ISerializationCallbackReceiver#OnBeforeSerialize">ISerializationCallbackReceiver.OnBeforeSerialize()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ISerializationCallbackReceiver.OnBeforeSerialize()</code></pre>
-  </div>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ISerializationCallbackReceiver.html">ISerializationCallbackReceiver</a>
-  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -494,12 +572,13 @@ public sealed class SystemType : ISerializationCallbackReceiver</code></pre>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Utilities_SystemType.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Utilities.SystemType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Utilities/SystemType.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Utilities/SystemType.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

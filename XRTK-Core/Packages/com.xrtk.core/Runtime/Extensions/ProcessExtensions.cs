@@ -23,9 +23,10 @@ namespace XRTK.Extensions
         /// <param name="args">The passed arguments.</param>
         /// <param name="output">The output of the process.</param>
         /// <param name="application">The Application to run through the command line. Default application is "cmd.exe"</param>
+        /// <param name="usePlatformArgs">Add the platform command switch to the arguments?</param>
         /// <returns>Output string.</returns>
-        /// <remarks>This process will block the main thread of the editor if command takes too long to run. Use <see cref="RunAsync(Process,string,string,bool,CancellationToken)"/> for a background process.</remarks>
-        public static bool Run(this Process process, string args, out string output, string application = "")
+        /// <remarks>This process will block the main thread of the editor if command takes too long to run. Use <see cref="RunAsync(Process,string,string,bool,CancellationToken,bool)"/> for a background process.</remarks>
+        public static bool Run(this Process process, string args, out string output, string application = "", bool usePlatformArgs = true)
         {
             if (string.IsNullOrEmpty(args))
             {
@@ -34,7 +35,10 @@ namespace XRTK.Extensions
                 return false;
             }
 
-            SetupPlatformArgs(ref args, ref application);
+            if (usePlatformArgs)
+            {
+                SetupPlatformArgs(ref args, ref application);
+            }
 
             process.StartInfo = new ProcessStartInfo
             {
@@ -100,10 +104,14 @@ namespace XRTK.Extensions
         /// <param name="args">The Process arguments.</param>
         /// <param name="showDebug">Should output debug code to Editor Console?</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="setPlatformArgs">Add the command platform switch to the arguments?</param>
         /// <returns><see cref="ProcessResult"/></returns>
-        public static async Task<ProcessResult> RunAsync(this Process process, string args, string application = "", bool showDebug = false, CancellationToken cancellationToken = default)
+        public static async Task<ProcessResult> RunAsync(this Process process, string args, string application = "", bool showDebug = false, CancellationToken cancellationToken = default, bool setPlatformArgs = true)
         {
-            SetupPlatformArgs(ref args, ref application);
+            if (setPlatformArgs)
+            {
+                SetupPlatformArgs(ref args, ref application);
+            }
 
             return await RunAsync(process, new ProcessStartInfo
             {

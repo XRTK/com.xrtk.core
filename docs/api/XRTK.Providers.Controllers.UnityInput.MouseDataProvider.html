@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MouseDataProvider
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.57.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -88,6 +88,7 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
@@ -95,10 +96,13 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_RequestPointers_XRTK_Definitions_Utilities_SystemType_XRTK_Definitions_Utilities_Handedness_System_Boolean_">BaseControllerDataProvider.RequestPointers(SystemType, Handedness, Boolean)</a>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_InputSystem">BaseControllerDataProvider.InputSystem</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_ActiveControllers">BaseControllerDataProvider.ActiveControllers</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_GetControllerMappingProfile_System_Type_XRTK_Definitions_Utilities_Handedness_">BaseControllerDataProvider.GetControllerMappingProfile(Type, Handedness)</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_AddController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_">BaseControllerDataProvider.AddController(IMixedRealityController)</a>
@@ -107,10 +111,13 @@
       <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_RemoveController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_">BaseControllerDataProvider.RemoveController(IMixedRealityController)</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_Priority">BaseDataProvider.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
@@ -126,9 +133,6 @@
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Destroy">BaseService.Destroy()</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationFocus_System_Boolean_">BaseService.OnApplicationFocus(Boolean)</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationPause_System_Boolean_">BaseService.OnApplicationPause(Boolean)</a>
@@ -165,25 +169,25 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MouseDataProvider : BaseControllerDataProvider, IMixedRealityControllerDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;067CE7D4-8277-4E18-834E-3DC712074B72&quot;)]
+public class MouseDataProvider : BaseControllerDataProvider, IMixedRealityControllerDataProvider, IMixedRealityInputDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_UnityInput_Profiles_MouseControllerDataProviderProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.Controllers.UnityInput.Profiles.MouseControllerDataProviderProfile%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L25">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L21">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider__ctor_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.#ctor*"></a>
-  <h4 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)">MouseDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)</h4>
-  <div class="markdown level1 summary"><p>Constructor.</p>
-</div>
+  <h4 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_UnityInput_Profiles_MouseControllerDataProviderProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.UnityInput.Profiles.MouseControllerDataProviderProfile,XRTK.Interfaces.InputSystem.IMixedRealityInputSystem)">MouseDataProvider(String, UInt32, MouseControllerDataProviderProfile, IMixedRealityInputSystem)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MouseDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)</code></pre>
+    <pre><code class="lang-csharp hljs">public MouseDataProvider(string name, uint priority, MouseControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -206,8 +210,13 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile.html">BaseMixedRealityControllerDataProviderProfile</a></td>
+        <td><a class="xref" href="XRTK.Definitions.Controllers.UnityInput.Profiles.MouseControllerDataProviderProfile.html">MouseControllerDataProviderProfile</a></td>
         <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -219,7 +228,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Controller.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Controller%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L33">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L29">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Controller_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Controller*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Controller" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Controller">Controller</h4>
@@ -252,12 +261,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Disable.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Disable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L95">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L59">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Disable_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Disable*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Disable" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Disable">Disable()</h4>
-  <div class="markdown level1 summary"><p>Optional Disable function to pause the service.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -270,12 +278,11 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Enable.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Enable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L36">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L32">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Enable_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Enable*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Enable" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Enable">Enable()</h4>
-  <div class="markdown level1 summary"><p>Optional Enable function to enable / re-enable the service.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -285,15 +292,48 @@
   <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Enable">BaseService.Enable()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider_OnApplicationFocus_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider.OnApplicationFocus(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L48">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_OnApplicationFocus_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.OnApplicationFocus*"></a>
+  <h4 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_OnApplicationFocus_System_Boolean_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.OnApplicationFocus(System.Boolean)">OnApplicationFocus(Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnApplicationFocus(bool isFocused)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">isFocused</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationFocus_System_Boolean_">BaseService.OnApplicationFocus(Boolean)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Update.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L85">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L41">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Update_" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Update*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_MouseDataProvider_Update" data-uid="XRTK.Providers.Controllers.UnityInput.MouseDataProvider.Update">Update()</h4>
-  <div class="markdown level1 summary"><p>Optional Update function to perform per-frame updates of the service.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -304,6 +344,9 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
@@ -321,6 +364,12 @@
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
 </article>
           </div>
           
@@ -332,12 +381,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_MouseDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.MouseDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L17" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/MouseDataProvider.cs/#L17" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

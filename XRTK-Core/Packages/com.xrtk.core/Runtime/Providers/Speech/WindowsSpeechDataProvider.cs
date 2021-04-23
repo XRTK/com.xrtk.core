@@ -3,7 +3,6 @@
 
 using System;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -22,24 +21,9 @@ namespace XRTK.Providers.Speech
     public class WindowsSpeechDataProvider : BaseSpeechDataProvider
     {
         /// <inheritdoc />
-        public WindowsSpeechDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+        public WindowsSpeechDataProvider(string name, uint priority, MixedRealitySpeechCommandsProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile == null)
-            {
-                throw new Exception("Missing required input system profile!");
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.SpeechCommandsProfile == null)
-            {
-                throw new Exception("Missing required speech commands profile!");
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.SpeechCommandsProfile.SpeechCommands == null)
-            {
-                throw new Exception("Null speech commands in the speech commands profile!");
-            }
-
 #if UNITY_WSA && UNITY_EDITOR
             if (!UnityEditor.PlayerSettings.WSA.GetCapability(UnityEditor.PlayerSettings.WSACapability.Microphone))
             {
@@ -48,23 +32,53 @@ namespace XRTK.Providers.Speech
 #endif
 
 #if UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
-            var newKeywords = new string[Commands.Length];
 
-            for (int i = 0; i < Commands.Length; i++)
+            if (!MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
             {
-                newKeywords[i] = Commands[i].Keyword;
+                throw new ArgumentException($"Unable to get a valid {nameof(MixedRealityInputSystemProfile)}!");
             }
 
-            RecognitionConfidenceLevel = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.SpeechCommandsProfile.SpeechRecognitionConfidenceLevel;
+            autoStartBehavior = inputSystemProfile.SpeechCommandsProfile.SpeechRecognizerStartBehavior;
+            RecognitionConfidenceLevel = inputSystemProfile.SpeechCommandsProfile.SpeechRecognitionConfidenceLevel;
+            commands = inputSystemProfile.SpeechCommandsProfile.SpeechCommands;
+
+            var newKeywords = new string[commands.Length];
+
+            for (int i = 0; i < commands.Length; i++)
+            {
+                newKeywords[i] = commands[i].Keyword;
+            }
 
             if (keywordRecognizer == null)
             {
-                keywordRecognizer = new KeywordRecognizer(newKeywords, (ConfidenceLevel)RecognitionConfidenceLevel);
+                try
+                {
+                    keywordRecognizer = new KeywordRecognizer(newKeywords, (ConfidenceLevel)RecognitionConfidenceLevel);
+                }
+                catch (UnityException e)
+                {
+                    switch (e.Message)
+                    {
+                        case string message when message.Contains("Speech recognition is not supported on this machine."):
+                            Debug.LogWarning($"Skipping {nameof(WindowsSpeechDataProvider)} registration.\n{e.Message}");
+                            break;
+                        default:
+                            throw;
+                    }
+                }
             }
 #endif // UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
         }
 
 #if UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
+
+        private static AutoStartBehavior autoStartBehavior;
+
+        private static SpeechCommands[] commands;
+
+        private static IMixedRealityInputSource inputSource;
+
+        private static KeywordRecognizer keywordRecognizer;
 
         #region IMixedRealityService Implementation
 
@@ -73,13 +87,13 @@ namespace XRTK.Providers.Speech
         {
             base.Enable();
 
-            if (!Application.isPlaying || Commands.Length == 0) { return; }
+            if (!Application.isPlaying || commands.Length == 0 || keywordRecognizer == null) { return; }
 
-            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource("Windows Speech Input Source");
+            inputSource = InputSystem?.RequestNewGenericInputSource("Windows Speech Input Source");
 
             keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
 
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.SpeechCommandsProfile.SpeechRecognizerStartBehavior == AutoStartBehavior.AutoStart)
+            if (autoStartBehavior == AutoStartBehavior.AutoStart)
             {
                 StartRecognition();
             }
@@ -90,13 +104,13 @@ namespace XRTK.Providers.Speech
         {
             base.Update();
 
-            if (!keywordRecognizer.IsRunning) { return; }
+            if (keywordRecognizer == null || !keywordRecognizer.IsRunning) { return; }
 
-            for (int i = 0; i < Commands.Length; i++)
+            for (int i = 0; i < commands.Length; i++)
             {
-                if (Input.GetKeyDown(Commands[i].KeyCode))
+                if (Input.GetKeyDown(commands[i].KeyCode))
                 {
-                    OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.UtcNow, Commands[i].Keyword);
+                    OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.UtcNow, commands[i].Keyword);
                 }
             }
         }
@@ -106,7 +120,7 @@ namespace XRTK.Providers.Speech
         {
             base.Disable();
 
-            if (!Application.isPlaying || Commands.Length == 0) { return; }
+            if (!Application.isPlaying || commands.Length == 0 || keywordRecognizer == null) { return; }
 
             StopRecognition();
 
@@ -117,7 +131,8 @@ namespace XRTK.Providers.Speech
         {
             if (finalizing)
             {
-                keywordRecognizer.Dispose();
+                keywordRecognizer?.Dispose();
+                keywordRecognizer = null;
             }
 
             base.OnDispose(finalizing);
@@ -127,20 +142,8 @@ namespace XRTK.Providers.Speech
 
         #region IMixedRealitySpeechDataProvider Implementation
 
-        /// <summary>
-        /// The keywords to be recognized and optional keyboard shortcuts.
-        /// </summary>
-        private static SpeechCommands[] Commands => MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.SpeechCommandsProfile.SpeechCommands;
-
-        /// <summary>
-        /// The Input Source for Windows Speech Input.
-        /// </summary>
-        public IMixedRealityInputSource InputSource = null;
-
-        private static KeywordRecognizer keywordRecognizer;
-
         /// <inheritdoc />
-        public override bool IsRecognitionActive => keywordRecognizer.IsRunning;
+        public override bool IsRecognitionActive => keywordRecognizer != null && keywordRecognizer.IsRunning;
 
         /// <summary>
         /// The <see cref="RecognitionConfidenceLevel"/> that the <see cref="KeywordRecognizer"/> is using.
@@ -150,7 +153,7 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override void StartRecognition()
         {
-            if (!keywordRecognizer.IsRunning)
+            if (keywordRecognizer != null && !keywordRecognizer.IsRunning)
             {
                 keywordRecognizer.Start();
             }
@@ -159,7 +162,7 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override void StopRecognition()
         {
-            if (keywordRecognizer.IsRunning)
+            if (keywordRecognizer != null && keywordRecognizer.IsRunning)
             {
                 keywordRecognizer.Stop();
             }
@@ -172,11 +175,11 @@ namespace XRTK.Providers.Speech
 
         private void OnPhraseRecognized(ConfidenceLevel confidence, TimeSpan phraseDuration, DateTime phraseStartTime, string text)
         {
-            for (int i = 0; i < Commands.Length; i++)
+            for (int i = 0; i < commands.Length; i++)
             {
-                if (Commands[i].Keyword == text)
+                if (commands[i].Keyword == text)
                 {
-                    MixedRealityToolkit.InputSystem.RaiseSpeechCommandRecognized(InputSource, Commands[i].Action, (RecognitionConfidenceLevel)confidence, phraseDuration, phraseStartTime, text);
+                    InputSystem.RaiseSpeechCommandRecognized(inputSource, commands[i].Action, (RecognitionConfidenceLevel)confidence, phraseDuration, phraseStartTime, text);
                     break;
                 }
             }

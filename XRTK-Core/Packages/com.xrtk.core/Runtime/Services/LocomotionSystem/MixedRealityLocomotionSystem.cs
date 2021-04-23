@@ -31,6 +31,7 @@ namespace XRTK.Services.LocomotionSystem
             teleportProvider = profile.TeleportProvider?.Type == null ? null : teleportProvider = profile.TeleportProvider;
             TeleportAction = profile.TeleportAction;
             CancelTeleportAction = profile.CancelTeleportAction;
+            StartupBehavior = profile.StartupBehavior;
 
             // Teleportation Methods:
             // - Instant Teleportation
@@ -47,17 +48,22 @@ namespace XRTK.Services.LocomotionSystem
         private TeleportEventData teleportEventData;
         private bool isTeleporting = false;
 
+        /// <summary>
+        /// Gets the configured startup behaviour for the system.
+        /// </summary>
+        private AutoStartBehavior StartupBehavior { get; }
+
         /// <inheritdoc />
-        public bool CanTeleport { get; set; } = true;
+        public bool TeleportationEnabled { get; set; }
+
+        /// <inheritdoc />
+        public bool LocomotionEnabled { get; set; }
 
         /// <inheritdoc />
         public MixedRealityInputAction TeleportAction { get; private set; }
 
         /// <inheritdoc />
         public MixedRealityInputAction CancelTeleportAction { get; private set; }
-
-        /// <inheritdoc />
-        public bool CanMove { get; set; } = true;
 
         #region IMixedRealityService Implementation
 
@@ -70,6 +76,9 @@ namespace XRTK.Services.LocomotionSystem
             {
                 teleportEventData = new TeleportEventData(EventSystem.current);
             }
+
+            LocomotionEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
+            TeleportationEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
 
             if (teleportProvider == null)
             {
@@ -113,22 +122,6 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         #endregion IMixedRealityService Implementation
-
-        #region IEventSystemManager Implementation
-
-        /// <inheritdoc />
-        public override void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler)
-        {
-            Debug.Assert(eventData != null);
-            var teleportData = ExecuteEvents.ValidateEventData<TeleportEventData>(eventData);
-            Debug.Assert(teleportData != null);
-            Debug.Assert(!teleportData.used);
-
-            // Process all the event listeners
-            base.HandleEvent(teleportData, eventHandler);
-        }
-
-        #endregion IEventSystemManager Implementation
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportRequestHandler =
             delegate (IMixedRealityTeleportHandler handler, BaseEventData eventData)
@@ -253,5 +246,21 @@ namespace XRTK.Services.LocomotionSystem
 
             RaiseTeleportComplete(eventData.Pointer, eventData.HotSpot);
         }
+
+        #region IEventSystemManager Implementation
+
+        /// <inheritdoc />
+        public override void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler)
+        {
+            Debug.Assert(eventData != null);
+            var teleportData = ExecuteEvents.ValidateEventData<TeleportEventData>(eventData);
+            Debug.Assert(teleportData != null);
+            Debug.Assert(!teleportData.used);
+
+            // Process all the event listeners
+            base.HandleEvent(teleportData, eventHandler);
+        }
+
+        #endregion IEventSystemManager Implementation
     }
 }

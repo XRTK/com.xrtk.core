@@ -15,6 +15,23 @@ namespace XRTK.Definitions.LocomotionSystem
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Locomotion System Profile", fileName = "MixedRealityLocomotionSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class MixedRealityLocomotionSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityLocomotionDataProvider>
     {
+        #region General Settings
+
+        [SerializeField]
+        [Tooltip("Configures startup behaviour for locomotion.")]
+        private AutoStartBehavior startupBehavior = AutoStartBehavior.AutoStart;
+
+        /// <summary>
+        /// Gets the configured locomotion startup behaviour.
+        /// </summary>
+        public AutoStartBehavior StartupBehavior
+        {
+            get => startupBehavior;
+            internal set => startupBehavior = value;
+        }
+
+        #endregion
+
         #region Teleporting
 
         [SerializeField]

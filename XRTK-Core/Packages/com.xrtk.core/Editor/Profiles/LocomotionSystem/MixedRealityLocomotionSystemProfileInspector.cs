@@ -10,13 +10,12 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     [CustomEditor(typeof(MixedRealityLocomotionSystemProfile))]
     public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        // Teleporting
+        private const string noTeleportProviderAssignedMessage = @"When no Teleport Provider is assigned, the system will revert to default behvaiour and perform an instant teleport to the target location. ";
+
+        private SerializedProperty startupBehavior;
         private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
         private SerializedProperty cancelTeleportAction;
-        private const string noTeleportProviderAssignedMessage = @"When no Teleport Provider is assigned, the system will revert to default behvaiour and perform an instant teleport to the target location. ";
-
-        // Movement
         private SerializedProperty movementProvider;
         private SerializedProperty moveAction;
 
@@ -24,12 +23,10 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         {
             base.OnEnable();
 
-            // Teleporting
+            startupBehavior = serializedObject.FindProperty(nameof(startupBehavior));
             teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
             cancelTeleportAction = serializedObject.FindProperty(nameof(cancelTeleportAction));
-
-            // Movement
             movementProvider = serializedObject.FindProperty(nameof(movementProvider));
             moveAction = serializedObject.FindProperty(nameof(moveAction));
         }
@@ -42,7 +39,13 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             EditorGUI.BeginChangeCheck();
 
+            EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(startupBehavior);
+            EditorGUI.indentLevel--;
+
             // Teleporting
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Teleportation", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(teleportProvider);

@@ -10,7 +10,7 @@
     "Mixed Reality",
     "DI"
   ],
-  "version": "0.2.10",
+  "version": "0.2.11",
   "unity": "2019.4",
   "license": "MIT",
   "repository": {
@@ -22,8 +22,7 @@
     "com.unity.ugui": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.unitywebrequest": "1.0.0",
-    "com.unity.textmeshpro": "2.1.4",
+    "com.unity.textmeshpro": "2.1.6",
     "com.unity.xr.legacyinputhelpers": "2.1.7"
-  },
-  "unityRelease": "23f1"
+  }
 }

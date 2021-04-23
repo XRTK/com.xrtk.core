@@ -1,0 +1,833 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AwaiterExtensions
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AwaiterExtensions
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Utilities.Async.AwaiterExtensions">
+  
+  
+  <h1 id="XRTK_Utilities_Async_AwaiterExtensions" data-uid="XRTK.Utilities.Async.AwaiterExtensions" class="text-break">Class AwaiterExtensions
+  </h1>
+  <div class="markdown level0 summary"><p>We could just add a generic GetAwaiter to YieldInstruction and CustomYieldInstruction
+but instead we add specific methods to each derived class to allow for return values
+that make the most sense for the specific instruction type.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">AwaiterExtensions</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Utilities.Async.html">XRTK.Utilities.Async</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.dll</h6>
+  <h5 id="XRTK_Utilities_Async_AwaiterExtensions_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class AwaiterExtensions</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_System_Collections_IEnumerator_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(System.Collections.IEnumerator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L124">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_System_Collections_IEnumerator_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(System.Collections.IEnumerator)">GetAwaiter(IEnumerator)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter&lt;object&gt; GetAwaiter(this IEnumerator coroutine)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerator">IEnumerator</a></td>
+        <td><span class="parametername">coroutine</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter-1.html">AwaiterExtensions.SimpleCoroutineAwaiter</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_AssetBundleCreateRequest_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.AssetBundleCreateRequest)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L100">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_AssetBundleCreateRequest_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.AssetBundleCreateRequest)">GetAwaiter(AssetBundleCreateRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter&lt;AssetBundle&gt; GetAwaiter(this AssetBundleCreateRequest instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.AssetBundleCreateRequest.html">AssetBundleCreateRequest</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter-1.html">AwaiterExtensions.SimpleCoroutineAwaiter</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.AssetBundle.html">AssetBundle</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_AssetBundleRequest_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.AssetBundleRequest)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L108">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_AssetBundleRequest_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.AssetBundleRequest)">GetAwaiter(AssetBundleRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter&lt;Object&gt; GetAwaiter(this AssetBundleRequest instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.AssetBundleRequest.html">AssetBundleRequest</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter-1.html">AwaiterExtensions.SimpleCoroutineAwaiter</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_AsyncOperation_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.AsyncOperation)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L87">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_AsyncOperation_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.AsyncOperation)">GetAwaiter(AsyncOperation)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter&lt;AsyncOperation&gt; GetAwaiter(this AsyncOperation instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.AsyncOperation.html">AsyncOperation</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter-1.html">AwaiterExtensions.SimpleCoroutineAwaiter</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.AsyncOperation.html">AsyncOperation</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_ResourceRequest_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.ResourceRequest)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L92">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_ResourceRequest_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.ResourceRequest)">GetAwaiter(ResourceRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter&lt;Object&gt; GetAwaiter(this ResourceRequest instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ResourceRequest.html">ResourceRequest</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter-1.html">AwaiterExtensions.SimpleCoroutineAwaiter</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForEndOfFrame_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForEndOfFrame)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L62">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForEndOfFrame_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForEndOfFrame)">GetAwaiter(WaitForEndOfFrame)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this WaitForEndOfFrame instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.WaitForEndOfFrame.html">WaitForEndOfFrame</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForFixedUpdate_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForFixedUpdate)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L67">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForFixedUpdate_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForFixedUpdate)">GetAwaiter(WaitForFixedUpdate)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this WaitForFixedUpdate instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.WaitForFixedUpdate.html">WaitForFixedUpdate</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForSeconds_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForSeconds)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L47">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForSeconds_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForSeconds)">GetAwaiter(WaitForSeconds)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this WaitForSeconds instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.WaitForSeconds.html">WaitForSeconds</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForSecondsRealtime_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForSecondsRealtime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L72">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitForSecondsRealtime_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitForSecondsRealtime)">GetAwaiter(WaitForSecondsRealtime)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this WaitForSecondsRealtime instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.WaitForSecondsRealtime.html">WaitForSecondsRealtime</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitUntil_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitUntil)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L77">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitUntil_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitUntil)">GetAwaiter(WaitUntil)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this WaitUntil instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.WaitUntil.html">WaitUntil</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitWhile_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitWhile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L82">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_UnityEngine_WaitWhile_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitWhile)">GetAwaiter(WaitWhile)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this WaitWhile instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.WaitWhile.html">WaitWhile</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_XRTK_Utilities_Async_AwaitYieldInstructions_BackgroundThread_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L57">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_XRTK_Utilities_Async_AwaitYieldInstructions_BackgroundThread_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread)">GetAwaiter(BackgroundThread)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this BackgroundThread instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.html">BackgroundThread</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_XRTK_Utilities_Async_AwaitYieldInstructions_UnityMainThread_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.UnityMainThread)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L52">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_XRTK_Utilities_Async_AwaitYieldInstructions_UnityMainThread_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.UnityMainThread)">GetAwaiter(UnityMainThread)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter GetAwaiter(this UnityMainThread instruction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaitYieldInstructions.UnityMainThread.html">UnityMainThread</a></td>
+        <td><span class="parametername">instruction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter.html">AwaiterExtensions.SimpleCoroutineAwaiter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter__1_System_Collections_Generic_IEnumerator___0__.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter%60%601(System.Collections.Generic.IEnumerator%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L116">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter*"></a>
+  <h4 id="XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter__1_System_Collections_Generic_IEnumerator___0__" data-uid="XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter``1(System.Collections.Generic.IEnumerator{``0})">GetAwaiter&lt;T&gt;(IEnumerator&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AwaiterExtensions.SimpleCoroutineAwaiter&lt;T&gt; GetAwaiter&lt;T&gt;(this IEnumerator&lt;T&gt; coroutine)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;T&gt;</td>
+        <td><span class="parametername">coroutine</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter-1.html">AwaiterExtensions.SimpleCoroutineAwaiter</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Async_AwaiterExtensions.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Async.AwaiterExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Async/AwaiterExtensions.cs/#L45" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -5,23 +5,21 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using XRTK.EventDatum.Teleport;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
+using XRTK.Utilities;
 
 namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
-    /// This <see cref="Interfaces.LocomotionSystem.IMixedRealityLocomotionSystem"/> provider implementation will
-    /// fade out the camera when teleporting and fade it back in when done.
+    /// This <see cref="Interfaces.LocomotionSystem.IMixedRealityTeleportProvider"/> implementation will
+    /// fade out the camera when teleporting and fade it back in when done, simulating blink of an eye.
     /// </summary>
     [System.Runtime.InteropServices.Guid("0db5b0fd-9ac3-487a-abfd-754963f4e2a3")]
-    public class FadingTeleportProvider : BaseTeleportProvider
+    public class BlinkTeleportProvider : BaseTeleportProvider
     {
-        private static readonly int SrcBlend = Shader.PropertyToID("_SrcBlend");
-        private static readonly int DstBlend = Shader.PropertyToID("_DstBlend");
-        private static readonly int ZWrite = Shader.PropertyToID("_ZWrite");
-
-        [SerializeField]
-        [Tooltip("Assign the transform with the camera component attached. If not set, the component uses its own transform.")]
-        private Transform cameraTransform = null;
+        private static readonly int sourceBlend = Shader.PropertyToID("_SrcBlend");
+        private static readonly int destinationBlend = Shader.PropertyToID("_DstBlend");
+        private static readonly int zWrite = Shader.PropertyToID("_ZWrite");
 
         [SerializeField]
         [Tooltip("Assign the transform being teleported to the target location. If not set, the component game object's parent transform is used.")]
@@ -47,20 +45,26 @@ namespace XRTK.Services.LocomotionSystem
         /// </summary>
         private void Awake()
         {
-            if (cameraTransform.IsNull())
-            {
-                cameraTransform = transform;
-            }
-
             if (teleportTransform.IsNull())
             {
-                teleportTransform = cameraTransform.parent;
+                teleportTransform = LocomotionTarget.parent;
                 Debug.Assert(teleportTransform != null,
-                    $"{nameof(FadingTeleportProvider)} requires that the camera be parented under another object " +
+                    $"{nameof(BlinkTeleportProvider)} requires that the camera be parented under another object " +
                     $"or a parent transform was assigned in editor.");
             }
 
             InitiailzeFadeSphere();
+        }
+
+        /// <summary>
+        /// OnDestroy is called whent he instance is being destroyed.
+        /// </summary>
+        private void OnDestroy()
+        {
+            if (!fadeSphere.IsNull())
+            {
+                fadeSphere.Destroy();
+            }
         }
 
         /// <summary>
@@ -97,12 +101,6 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnTeleportCanceled(TeleportEventData eventData) => fadeSphere.SetActive(false);
-
-        /// <inheritdoc />
-        public override void OnTeleportCompleted(TeleportEventData eventData) => FadeIn();
-
-        /// <inheritdoc />
         public override void OnTeleportStarted(TeleportEventData eventData)
         {
             if (eventData.used)
@@ -129,13 +127,19 @@ namespace XRTK.Services.LocomotionSystem
             FadeOut();
         }
 
+        /// <inheritdoc />
+        public override void OnTeleportCompleted(TeleportEventData eventData) => FadeIn();
+
+        /// <inheritdoc />
+        public override void OnTeleportCanceled(TeleportEventData eventData) => fadeSphere.SetActive(false);
+
         private void PerformTeleport()
         {
             var height = targetPosition.y;
-            targetPosition -= cameraTransform.position - teleportTransform.position;
+            targetPosition -= LocomotionTarget.position - teleportTransform.position;
             targetPosition.y = height;
             teleportTransform.position = targetPosition;
-            teleportTransform.RotateAround(cameraTransform.position, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
+            teleportTransform.RotateAround(LocomotionTarget.position, Vector3.up, targetRotation.y - LocomotionTarget.eulerAngles.y);
 
             LocomotionSystem.RaiseTeleportComplete(teleportEventData.Pointer, teleportEventData.HotSpot);
         }
@@ -160,10 +164,14 @@ namespace XRTK.Services.LocomotionSystem
         {
             if (fadeSphere.IsNull())
             {
+                var cameraTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                    ? cameraSystem.MainCameraRig.CameraTransform
+                    : CameraCache.Main.transform;
+
                 // We use a simple sphere around the camera / head, which
                 // we can fade in/out to simulate the camera fading to black.
                 fadeSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                fadeSphere.name = $"{nameof(FadingTeleportProvider)}_Fade";
+                fadeSphere.name = $"{nameof(BlinkTeleportProvider)}_Fade";
                 fadeSphere.transform.SetParent(cameraTransform);
                 fadeSphere.transform.localPosition = Vector3.zero;
                 fadeSphere.transform.localRotation = Quaternion.identity;
@@ -209,9 +217,9 @@ namespace XRTK.Services.LocomotionSystem
                 if (GraphicsSettings.renderPipelineAsset.IsNull())
                 {
                     // Unity standard shader can be assumed since we created a primitive.
-                    fadeMaterial.SetInt(SrcBlend, (int)BlendMode.One);
-                    fadeMaterial.SetInt(DstBlend, (int)BlendMode.OneMinusSrcAlpha);
-                    fadeMaterial.SetInt(ZWrite, 0);
+                    fadeMaterial.SetInt(sourceBlend, (int)BlendMode.One);
+                    fadeMaterial.SetInt(destinationBlend, (int)BlendMode.OneMinusSrcAlpha);
+                    fadeMaterial.SetInt(zWrite, 0);
                     fadeMaterial.DisableKeyword("_ALPHATEST_ON");
                     fadeMaterial.DisableKeyword("_ALPHABLEND_ON");
                     fadeMaterial.EnableKeyword("_ALPHAPREMULTIPLY_ON");
@@ -219,7 +227,7 @@ namespace XRTK.Services.LocomotionSystem
                 }
                 else
                 {
-                    Debug.LogError($"{nameof(FadingTeleportProvider)} does not support render pipelines. The handler won't be able to fade in and out.");
+                    Debug.LogError($"{nameof(BlinkTeleportProvider)} does not support render pipelines. The handler won't be able to fade in and out.");
                 }
 
                 fadeSphereRenderer.material = fadeMaterial;

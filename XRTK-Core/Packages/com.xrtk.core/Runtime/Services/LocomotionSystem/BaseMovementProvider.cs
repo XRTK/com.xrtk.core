@@ -16,11 +16,12 @@ namespace XRTK.Services.LocomotionSystem
     {
         private bool lateInitialize = true;
 
-        private IMixedRealityLocomotionSystem locomotionSystem;
+        private MixedRealityLocomotionSystem locomotionSystem = null;
         /// <summary>
-        /// Gets the active <see cref="IMixedRealityLocomotionSystem"/> implementation instance.
+        /// Gets the currently active <see cref="MixedRealityLocomotionSystem"/> instance.
         /// </summary>
-        protected IMixedRealityLocomotionSystem LocomotionSystem => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetService<IMixedRealityLocomotionSystem>());
+        protected MixedRealityLocomotionSystem LocomotionSystem
+            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<IMixedRealityLocomotionSystem>() as MixedRealityLocomotionSystem);
 
         private IMixedRealityInputSystem inputSystem = null;
         /// <summary>

@@ -10,8 +10,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     [CustomEditor(typeof(MixedRealityLocomotionSystemProfile))]
     public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private const string noTeleportProviderAssignedMessage = @"When no Teleport Provider is assigned, the system will revert to default behvaiour and perform an instant teleport to the target location. ";
-
         private SerializedProperty startupBehavior;
         private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
@@ -33,7 +31,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader("The locomotion system profile defines behaviour for the locomotion system and how your users will be able to move around in the application.");
+            RenderHeader("The locomotion system profile defines behaviour for the locomotion system and how your users will be able to move around in your application.");
 
             serializedObject.Update();
 
@@ -49,13 +47,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUILayout.LabelField("Teleportation", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(teleportProvider);
-            var referenceProperty = teleportProvider.FindPropertyRelative("reference");
-            if (!XRTK.Extensions.TypeExtensions.TryResolveType(referenceProperty.stringValue, out var referenceType))
-            {
-                EditorGUILayout.HelpBox(noTeleportProviderAssignedMessage, MessageType.Info);
-                EditorGUILayout.Space();
-            }
-
             EditorGUILayout.PropertyField(teleportAction);
             EditorGUILayout.PropertyField(cancelTeleportAction);
             EditorGUI.indentLevel--;

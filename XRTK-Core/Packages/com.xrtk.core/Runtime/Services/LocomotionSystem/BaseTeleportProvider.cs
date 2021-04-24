@@ -3,20 +3,43 @@
 
 using UnityEngine;
 using XRTK.EventDatum.Teleport;
+using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Utilities;
 
 namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
-    /// Base implementation for handling <see cref="IMixedRealityTeleportSystem"/> events in a
-    /// <see cref="MonoBehaviour"/> component.
+    /// Base implementation for teleport providers working with the <see cref="MixedRealityLocomotionSystem"/>.
+    /// Teleport providers perform the actual teleportation when requested.
     /// </summary>
     public abstract class BaseTeleportProvider : MonoBehaviour, IMixedRealityTeleportProvider
     {
-        private IMixedRealityLocomotionSystem locomotionSystem = null;
+        private MixedRealityLocomotionSystem locomotionSystem = null;
+        /// <summary>
+        /// Gets the currently active <see cref="MixedRealityLocomotionSystem"/> instance.
+        /// </summary>
+        protected MixedRealityLocomotionSystem LocomotionSystem
+            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<IMixedRealityLocomotionSystem>() as MixedRealityLocomotionSystem);
 
-        protected IMixedRealityLocomotionSystem LocomotionSystem
-            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<IMixedRealityLocomotionSystem>());
+        /// <summary>
+        /// Gets the target <see cref="Transform"/> for locomotion.
+        /// </summary>
+        protected virtual Transform LocomotionTarget
+        {
+            get
+            {
+                if (LocomotionSystem.LocomotionTargetOverride.IsNull())
+                {
+                    return MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                        ? cameraSystem.MainCameraRig.CameraTransform
+                        : CameraCache.Main.transform;
+                }
+
+                return LocomotionSystem.LocomotionTargetOverride.transform;
+            }
+        }
 
         /// <summary>
         /// This method is called when the behaviour becomes enabled and active.
@@ -35,15 +58,15 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public virtual void OnTeleportCanceled(TeleportEventData eventData) { }
+        public virtual void OnTeleportRequest(TeleportEventData eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnTeleportStarted(TeleportEventData eventData) { }
 
         /// <inheritdoc />
         public virtual void OnTeleportCompleted(TeleportEventData eventData) { }
 
         /// <inheritdoc />
-        public virtual void OnTeleportRequest(TeleportEventData eventData) { }
-
-        /// <inheritdoc />
-        public virtual void OnTeleportStarted(TeleportEventData eventData) { }
+        public virtual void OnTeleportCanceled(TeleportEventData eventData) { }
     }
 }

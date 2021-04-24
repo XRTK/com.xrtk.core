@@ -4,8 +4,8 @@
 namespace XRTK.Interfaces.LocomotionSystem
 {
     /// <summary>
-    /// Interface to implement for handling teleport events by the <see cref="IMixedRealityLocomotionSystem"/>
-    /// in <see cref="UnityEngine.MonoBehaviour"/> components.
+    /// Interface to implement for teleport providers working with the <see cref="Services.LocomotionSystem.MixedRealityLocomotionSystem"/>.
+    /// Teleport providers perform the actual teleportation when requested.
     /// </summary>
     public interface IMixedRealityTeleportProvider : IMixedRealityTeleportHandler { }
 }

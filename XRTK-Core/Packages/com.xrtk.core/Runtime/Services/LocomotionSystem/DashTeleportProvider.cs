@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Rendering;
 using XRTK.EventDatum.Teleport;
-using XRTK.Extensions;
 
 namespace XRTK.Services.LocomotionSystem
 {

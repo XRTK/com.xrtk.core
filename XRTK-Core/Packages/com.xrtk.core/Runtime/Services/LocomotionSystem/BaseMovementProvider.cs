@@ -12,16 +12,9 @@ namespace XRTK.Services.LocomotionSystem
     /// Base implementation for handling <see cref="IMixedRealityLocomotionSystem"/> movement events in a
     /// <see cref="MonoBehaviour"/> component.
     /// </summary>
-    public abstract class BaseMovementProvider : MonoBehaviour, IMixedRealityMovementProvider
+    public abstract class BaseMovementProvider : BaseLocomotionProvider, IMixedRealityMovementProvider
     {
         private bool lateInitialize = true;
-
-        private MixedRealityLocomotionSystem locomotionSystem = null;
-        /// <summary>
-        /// Gets the currently active <see cref="MixedRealityLocomotionSystem"/> instance.
-        /// </summary>
-        protected MixedRealityLocomotionSystem LocomotionSystem
-            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<IMixedRealityLocomotionSystem>() as MixedRealityLocomotionSystem);
 
         private IMixedRealityInputSystem inputSystem = null;
         /// <summary>

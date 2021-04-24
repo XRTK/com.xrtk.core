@@ -4,8 +4,8 @@
 namespace XRTK.Interfaces.LocomotionSystem
 {
     /// <summary>
-    /// Interface to implement for handling movement using the <see cref="IMixedRealityLocomotionSystem"/>
-    /// in <see cref="UnityEngine.MonoBehaviour"/> components.
+    /// Interface to implement for movement providers working with the <see cref="Services.LocomotionSystem.MixedRealityLocomotionSystem"/>.
+    /// Movement providers move the locomotion target transform as requested.
     /// </summary>
     public interface IMixedRealityMovementProvider { }
 }

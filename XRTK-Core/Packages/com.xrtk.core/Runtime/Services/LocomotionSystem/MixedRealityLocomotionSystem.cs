@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.InputSystem;
@@ -8,6 +9,7 @@ using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Teleport;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Utilities;
@@ -27,7 +29,7 @@ namespace XRTK.Services.LocomotionSystem
         public MixedRealityLocomotionSystem(MixedRealityLocomotionSystemProfile profile)
             : base(profile)
         {
-            teleportProvider = profile.TeleportProvider?.Type == null ? null : teleportProvider = profile.TeleportProvider;
+            teleportProviderType = profile.TeleportProvider?.Type;
             TeleportAction = profile.TeleportAction;
             CancelTeleportAction = profile.CancelTeleportAction;
             StartupBehavior = profile.StartupBehavior;
@@ -38,7 +40,7 @@ namespace XRTK.Services.LocomotionSystem
             // - On-Rails Locomotion
         }
 
-        private readonly SystemType teleportProvider;
+        private readonly Type teleportProviderType;
         private TeleportEventData teleportEventData;
         private bool isTeleporting = false;
 
@@ -77,45 +79,39 @@ namespace XRTK.Services.LocomotionSystem
             LocomotionEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
             TeleportationEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
 
-            if (teleportProvider == null)
+            // Make sure to clean up any leftovers that may still be attached to the camera.
+            var camera = CameraCache.Main.gameObject;
+            var existingTeleportProviders = camera.GetComponents<IMixedRealityTeleportProvider>() as Component[];
+            if (existingTeleportProviders != null)
             {
-                // No provider selected, we'll be using default teleport.
-                // Make sure to remove any leftover provider attached to the camera.
-                var component = CameraCache.Main.GetComponent(typeof(IMixedRealityTeleportProvider));
-
-                if (!component.IsNull())
+                for (var i = 0; i < existingTeleportProviders.Length; i++)
                 {
-                    if (Application.isPlaying)
+                    var existingTeleportProvider = existingTeleportProviders[i];
+                    if (!existingTeleportProvider.IsNull())
                     {
-                        Object.Destroy(component);
-                    }
-                    else
-                    {
-                        Object.DestroyImmediate(component);
+                        existingTeleportProvider.Destroy();
                     }
                 }
             }
-            else
-            {
-                // A provider is set, make sure it's attached to the camera.
-                CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
-            }
+
+            Debug.Assert(teleportProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a teleportation provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve.");
+            camera.EnsureComponent(teleportProviderType);
         }
 
         /// <inheritdoc />
-        public override void Disable()
+        public override void Destroy()
         {
-            base.Disable();
-
             if (!Application.isPlaying)
             {
-                var component = CameraCache.Main.GetComponent(typeof(IMixedRealityTeleportProvider));
+                var component = CameraCache.Main.gameObject.GetComponent(typeof(IMixedRealityTeleportProvider));
 
                 if (!component.IsNull())
                 {
-                    Object.DestroyImmediate(component);
+                    component.Destroy();
                 }
             }
+
+            base.Destroy();
         }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportRequestHandler =

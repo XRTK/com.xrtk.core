@@ -23,8 +23,10 @@ namespace XRTK.Services.LocomotionSystem
         protected IMixedRealityInputSystem InputSystem
             => inputSystem ?? (inputSystem = MixedRealityToolkit.GetSystem<IMixedRealityInputSystem>());
 
-        protected virtual void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+
             if (!lateInitialize &&
                 MixedRealityToolkit.IsInitialized)
             {
@@ -54,9 +56,10 @@ namespace XRTK.Services.LocomotionSystem
             }
         }
 
-        protected virtual void OnDisable()
+        protected override void OnDisable()
         {
             InputSystem?.Unregister(gameObject);
+            base.OnDisable();
         }
 
         protected virtual void OnDestroy()

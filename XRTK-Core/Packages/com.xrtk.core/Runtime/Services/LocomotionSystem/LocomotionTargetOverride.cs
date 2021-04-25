@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Extensions;
 using XRTK.Interfaces.LocomotionSystem;
 
 namespace XRTK.Services.LocomotionSystem
@@ -35,14 +36,14 @@ namespace XRTK.Services.LocomotionSystem
             if (LocomotionSystem == null)
             {
                 Debug.LogError($"No active {nameof(MixedRealityLocomotionSystem)} found. {nameof(LocomotionTargetOverride)} can only work with the system enabled.");
-                Destroy(this);
+                this.Destroy();
                 return;
             }
 
             if (LocomotionSystem.LocomotionTargetOverride != null)
             {
                 Debug.LogError($"There can only be one instance of {nameof(LocomotionTargetOverride)} in the scene!");
-                Destroy(this);
+                this.Destroy();
                 return;
             }
 

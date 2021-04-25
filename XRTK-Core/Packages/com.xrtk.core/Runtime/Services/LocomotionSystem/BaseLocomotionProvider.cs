@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.EventDatum.Teleport;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.LocomotionSystem;
@@ -12,7 +13,7 @@ namespace XRTK.Services.LocomotionSystem
     /// <summary>
     /// Base implementation for locomotion providers working with the <see cref="MixedRealityLocomotionSystem"/>.
     /// </summary>
-    public abstract class BaseLocomotionProvider : MonoBehaviour
+    public abstract class BaseLocomotionProvider : MonoBehaviour, IMixedRealityTeleportHandler
     {
         private MixedRealityLocomotionSystem locomotionSystem = null;
         /// <summary>
@@ -55,5 +56,33 @@ namespace XRTK.Services.LocomotionSystem
                 return LocomotionSystem.LocomotionTargetOverride.transform;
             }
         }
+
+        /// <summary>
+        /// This method is called when the behaviour becomes enabled and active.
+        /// </summary>
+        protected virtual void OnEnable()
+        {
+            LocomotionSystem?.Register(gameObject);
+        }
+
+        /// <summary>
+        /// This method is called when the behaviour becomes disabled and inactive.
+        /// </summary>
+        protected virtual void OnDisable()
+        {
+            LocomotionSystem?.Unregister(gameObject);
+        }
+
+        /// <inheritdoc />
+        public virtual void OnTeleportRequest(TeleportEventData eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnTeleportStarted(TeleportEventData eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnTeleportCompleted(TeleportEventData eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnTeleportCanceled(TeleportEventData eventData) { }
     }
 }

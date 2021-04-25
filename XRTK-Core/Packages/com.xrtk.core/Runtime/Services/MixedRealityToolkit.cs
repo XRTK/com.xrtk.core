@@ -1642,7 +1642,7 @@ namespace XRTK.Services
         /// </summary>
         /// <param name="interfaceType">The interface type for the system to be retrieved.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <returns>The instance of the service that is registered.</returns>
+        /// <returns>The instance of the <see cref="IMixedRealityService"/> that is registered.</returns>
         private static IMixedRealityService GetService(Type interfaceType, bool showLogs = true)
             => GetService(interfaceType, string.Empty, showLogs);
 
@@ -1652,7 +1652,7 @@ namespace XRTK.Services
         /// <param name="interfaceType">The interface type for the system to be retrieved.</param>
         /// <param name="serviceName">Name of the specific service.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <returns>The instance of the service that is registered.</returns>
+        /// <returns>The instance of the <see cref="IMixedRealityService"/> that is registered.</returns>
         private static IMixedRealityService GetService(Type interfaceType, string serviceName, bool showLogs = true)
         {
             if (!GetServiceByNameInternal(interfaceType, serviceName, out var serviceInstance) && showLogs)

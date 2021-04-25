@@ -1593,38 +1593,38 @@ namespace XRTK.Services
         #region Service Utilities
 
         /// <summary>
-        /// Generic function used to interrogate the Mixed Reality Toolkit registered services registry for the existence of a service.
+        /// Query the <see cref="RegisteredMixedRealityServices"/> for the existence of a <see cref="IMixedRealityService"/>.
         /// </summary>
         /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
-        /// <remarks>
-        /// Note: type should be the Interface of the system to be retrieved and not the concrete class itself.
-        /// </remarks>
-        /// <returns>True, there is a service registered with the selected interface, False, no service found for that interface</returns>
+        /// <returns>Returns true, if there is a <see cref="IMixedRealityService"/> registered, otherwise false.</returns>
         public static bool IsServiceRegistered<T>() where T : IMixedRealityService
-        {
-            return GetService(typeof(T)) != null;
-        }
+            => GetService(typeof(T)) != null;
 
         /// <summary>
-        /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
         /// </summary>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.
-        /// *Note type should be the Interface of the system to be retrieved and not the class itself</typeparam>
-        /// <returns>The instance of the service class that is registered with the selected Interface</returns>
+        /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
+        /// <returns>The instance of the <see cref="IMixedRealityService"/> that is registered.</returns>
         public static T GetService<T>(bool showLogs = true) where T : IMixedRealityService
-        {
-            return (T)GetService(typeof(T), showLogs);
-        }
+            => (T)GetService(typeof(T), showLogs);
 
         /// <summary>
-        /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
         /// </summary>
-        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.
-        /// *Note type should be the Interface of the system to be retrieved and not the class itself</typeparam>
-        /// <param name="service">The instance of the service class that is registered with the selected Interface</param>
+        /// <param name="timeout">Optional, time out in seconds to wait before giving up search.</param>
+        /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
+        /// <returns>The instance of the <see cref="IMixedRealityService"/> that is registered.</returns>
+        public static async Task<T> GetServiceAsync<T>(int timeout = 10) where T : IMixedRealityService
+            => await GetService<T>().WaitUntil(system => system != null, timeout);
+
+        /// <summary>
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
+        /// </summary>
+        /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
+        /// <param name="service">The instance of the service class that is registered.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <returns>Returns true if the service was found</returns>
+        /// <returns>Returns true if the <see cref="IMixedRealityService"/> was found, otherwise false.</returns>
         public static bool TryGetService<T>(out T service, bool showLogs = true) where T : IMixedRealityService
         {
             service = GetService<T>(showLogs);
@@ -1632,25 +1632,22 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Retrieve a service from the Mixed Reality Toolkit active service registry
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> by name.
         /// </summary>
-        /// <param name="serviceName">Name of the specific service to search for</param>
+        /// <param name="serviceName">Name of the specific service to search for.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <returns>The Mixed Reality Toolkit of the specified type</returns>
+        /// <returns>The instance of the <see cref="IMixedRealityService"/> that is registered.</returns>
         public static T GetService<T>(string serviceName, bool showLogs = true) where T : IMixedRealityService
-        {
-            return (T)GetService(typeof(T), serviceName, showLogs);
-        }
+            => (T)GetService(typeof(T), serviceName, showLogs);
 
         /// <summary>
-        /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> by name.
         /// </summary>
-        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.
-        /// *Note type should be the Interface of the system to be retrieved and not the class itself</typeparam>
-        /// <param name="serviceName">Name of the specific service to search for</param>
-        /// <param name="service">The instance of the service class that is registered with the selected Interface</param>
+        /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
+        /// <param name="serviceName">Name of the specific service to search for.</param>
+        /// <param name="service">The instance of the service class that is registered.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <returns>Returns true if the service was found</returns>
+        /// <returns>Returns true if the <see cref="IMixedRealityService"/> was found, otherwise false.</returns>
         public static bool TryGetService<T>(string serviceName, out T service, bool showLogs = true) where T : IMixedRealityService
         {
             service = (T)GetService(typeof(T), serviceName, showLogs);
@@ -1658,23 +1655,21 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Retrieve a service from the Mixed Reality Toolkit active service registry
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> by type.
         /// </summary>
-        /// <param name="interfaceType">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem</param>
+        /// <param name="interfaceType">The interface type for the system to be retrieved.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <returns>The Mixed Reality Toolkit of the specified type</returns>
+        /// <returns>The instance of the <see cref="IMixedRealityService"/> that is registered.</returns>
         private static IMixedRealityService GetService(Type interfaceType, bool showLogs = true)
-        {
-            return GetService(interfaceType, string.Empty, showLogs);
-        }
+            => GetService(interfaceType, string.Empty, showLogs);
 
         /// <summary>
-        /// Retrieve a service from the Mixed Reality Toolkit active service registry
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
         /// </summary>
-        /// <param name="interfaceType">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem</param>
-        /// <param name="serviceName">Name of the specific service</param>
+        /// <param name="interfaceType">The interface type for the system to be retrieved.</param>
+        /// <param name="serviceName">Name of the specific service.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
-        /// <returns>The Mixed Reality Toolkit of the specified type</returns>
+        /// <returns>The instance of the <see cref="IMixedRealityService"/> that is registered.</returns>
         private static IMixedRealityService GetService(Type interfaceType, string serviceName, bool showLogs = true)
         {
             if (!GetServiceByNameInternal(interfaceType, serviceName, out var serviceInstance) && showLogs)
@@ -1686,11 +1681,11 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Retrieve the first service from the registry that meets the selected type and name
+        /// Retrieve the first <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> that meets the selected type and name.
         /// </summary>
-        /// <param name="interfaceType">Interface type of the service being requested</param>
-        /// <param name="serviceName">Name of the specific service</param>
-        /// <param name="serviceInstance">return parameter of the function</param>
+        /// <param name="interfaceType">Interface type of the service being requested.</param>
+        /// <param name="serviceName">Name of the specific service.</param>
+        /// <param name="serviceInstance">return parameter of the function.</param>
         private static bool GetServiceByNameInternal(Type interfaceType, string serviceName, out IMixedRealityService serviceInstance)
         {
             serviceInstance = null;
@@ -1732,7 +1727,7 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Gets all services by type.
+        /// Gets all <see cref="IMixedRealityService"/>s by type.
         /// </summary>
         /// <param name="interfaceType">The interface type to search for.</param>
         /// <param name="services">Memory reference value of the service list to update.</param>
@@ -1742,7 +1737,7 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Gets all services by type and name.
+        /// Gets all <see cref="IMixedRealityService"/>s by type and name.
         /// </summary>
         /// <param name="interfaceType">The interface type to search for.</param>
         /// <param name="serviceName">The name of the service to search for. If the string is empty than any matching <see cref="interfaceType"/> will be added to the <see cref="services"/> list.</param>
@@ -1813,13 +1808,10 @@ namespace XRTK.Services
         #region System Utilities
 
         /// <summary>
-        /// Generic function used to interrogate the Mixed Reality Toolkit active system registry for the existence of a core system.
+        /// Query <see cref="RegisteredMixedRealityServices"/> for the existence of a <see cref="IMixedRealitySystem"/>.
         /// </summary>
-        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.</typeparam>
-        /// <remarks>
-        /// Note: type should be the Interface of the system to be retrieved and not the concrete class itself.
-        /// </remarks>
-        /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface.</returns>
+        /// <typeparam name="T">The interface type for the <see cref="IMixedRealitySystem"/> to be retrieved.</typeparam>
+        /// <returns>Returns true, if there is a <see cref="IMixedRealitySystem"/> registered, otherwise false.</returns>
         public static bool IsSystemRegistered<T>() where T : IMixedRealitySystem
         {
             try
@@ -1909,6 +1901,11 @@ namespace XRTK.Services
         private static readonly HashSet<Type> SearchedSystemTypes = new HashSet<Type>();
         private static readonly Dictionary<Type, IMixedRealitySystem> SystemCache = new Dictionary<Type, IMixedRealitySystem>();
 
+        /// <summary>
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystems"/>.
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.</typeparam>
+        /// <returns>The instance of the <see cref="IMixedRealitySystem"/> that is registered.</returns>
         public static T GetSystem<T>() where T : IMixedRealitySystem
         {
             if (!IsInitialized ||
@@ -1947,9 +1944,21 @@ namespace XRTK.Services
             return system;
         }
 
+        /// <summary>
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystems"/>.
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.</typeparam>
+        /// <param name="timeout">Optional, time out in seconds to wait before giving up search.</param>
+        /// <returns>The instance of the <see cref="IMixedRealitySystem"/> that is registered.</returns>
         public static async Task<T> GetSystemAsync<T>(int timeout = 10) where T : IMixedRealitySystem
             => await GetSystem<T>().WaitUntil(system => system != null, timeout);
 
+        /// <summary>
+        /// Retrieve a <see cref="IMixedRealitySystem"/> from the <see cref="ActiveSystems"/>.
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.</typeparam>
+        /// <param name="system">The instance of the system class that is registered.</param>
+        /// <returns>Returns true if the <see cref="IMixedRealitySystem"/> was found, otherwise false.</returns>
         public static bool TryGetSystem<T>(out T system) where T : IMixedRealitySystem
         {
             system = GetSystem<T>();

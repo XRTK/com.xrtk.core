@@ -22,18 +22,34 @@ namespace XRTK.Services.LocomotionSystem
             => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<IMixedRealityLocomotionSystem>() as MixedRealityLocomotionSystem);
 
         /// <summary>
+        /// Gets the player camera <see cref="Transform"/>.
+        /// </summary>
+        protected virtual Transform CameraTransform
+        {
+            get
+            {
+                return MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                    ? cameraSystem.MainCameraRig.CameraTransform
+                    : CameraCache.Main.transform;
+            }
+        }
+
+        /// <summary>
         /// Gets the target <see cref="Transform"/> for locomotion.
         /// </summary>
-        protected virtual Transform LocomotionTarget
+        protected virtual Transform LocomotionTargetTransform
         {
             get
             {
                 if (LocomotionSystem.LocomotionTargetOverride.IsNull() ||
                     !LocomotionSystem.LocomotionTargetOverride.enabled)
                 {
-                    return MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
-                        ? cameraSystem.MainCameraRig.CameraTransform
-                        : CameraCache.Main.transform;
+                    if (Debug.isDebugBuild)
+                    {
+                        Debug.Assert(!CameraTransform.parent.IsNull(), $"The {nameof(MixedRealityLocomotionSystem)} expects the camera to be parented under another transform!");
+                    }
+
+                    return CameraTransform.parent;
                 }
 
                 return LocomotionSystem.LocomotionTargetOverride.transform;

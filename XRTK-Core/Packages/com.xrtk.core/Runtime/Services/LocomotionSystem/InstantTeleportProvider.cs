@@ -16,8 +16,6 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public override void OnTeleportStarted(TeleportEventData eventData)
         {
-            var teleportTransform = LocomotionTarget.parent;
-
             var targetRotation = Vector3.zero;
             var targetPosition = eventData.Pointer.Result.EndPoint;
             targetRotation.y = eventData.Pointer.PointerOrientation;
@@ -32,10 +30,10 @@ namespace XRTK.Services.LocomotionSystem
             }
 
             var height = targetPosition.y;
-            targetPosition -= LocomotionTarget.position - teleportTransform.position;
+            targetPosition -= CameraTransform.position - LocomotionTargetTransform.position;
             targetPosition.y = height;
-            teleportTransform.position = targetPosition;
-            teleportTransform.RotateAround(LocomotionTarget.position, Vector3.up, targetRotation.y - LocomotionTarget.eulerAngles.y);
+            LocomotionTargetTransform.position = targetPosition;
+            LocomotionTargetTransform.RotateAround(CameraTransform.position, Vector3.up, targetRotation.y - CameraTransform.eulerAngles.y);
 
             LocomotionSystem.RaiseTeleportComplete(eventData.Pointer, eventData.HotSpot);
         }

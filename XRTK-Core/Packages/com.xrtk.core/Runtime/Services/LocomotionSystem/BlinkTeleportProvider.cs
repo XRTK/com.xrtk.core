@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using XRTK.EventDatum.Teleport;
 using XRTK.Extensions;
-using XRTK.Interfaces.CameraSystem;
-using XRTK.Utilities;
 
 namespace XRTK.Services.LocomotionSystem
 {
@@ -20,10 +18,6 @@ namespace XRTK.Services.LocomotionSystem
         private static readonly int sourceBlend = Shader.PropertyToID("_SrcBlend");
         private static readonly int destinationBlend = Shader.PropertyToID("_DstBlend");
         private static readonly int zWrite = Shader.PropertyToID("_ZWrite");
-
-        [SerializeField]
-        [Tooltip("Assign the transform being teleported to the target location. If not set, the component game object's parent transform is used.")]
-        private Transform teleportTransform = null;
 
         [SerializeField]
         [Tooltip("Duration of the fade in / fade out in seconds.")]
@@ -43,18 +37,7 @@ namespace XRTK.Services.LocomotionSystem
         /// <summary>
         /// Awake is called when the instance is being loaded.
         /// </summary>
-        private void Awake()
-        {
-            if (teleportTransform.IsNull())
-            {
-                teleportTransform = LocomotionTarget.parent;
-                Debug.Assert(teleportTransform != null,
-                    $"{nameof(BlinkTeleportProvider)} requires that the camera be parented under another object " +
-                    $"or a parent transform was assigned in editor.");
-            }
-
-            InitiailzeFadeSphere();
-        }
+        private void Awake() => InitiailzeFadeSphere();
 
         /// <summary>
         /// OnDestroy is called whent he instance is being destroyed.
@@ -136,10 +119,10 @@ namespace XRTK.Services.LocomotionSystem
         private void PerformTeleport()
         {
             var height = targetPosition.y;
-            targetPosition -= LocomotionTarget.position - teleportTransform.position;
+            targetPosition -= LocomotionTargetTransform.position - LocomotionTargetTransform.position;
             targetPosition.y = height;
-            teleportTransform.position = targetPosition;
-            teleportTransform.RotateAround(LocomotionTarget.position, Vector3.up, targetRotation.y - LocomotionTarget.eulerAngles.y);
+            LocomotionTargetTransform.position = targetPosition;
+            LocomotionTargetTransform.RotateAround(LocomotionTargetTransform.position, Vector3.up, targetRotation.y - LocomotionTargetTransform.eulerAngles.y);
 
             LocomotionSystem.RaiseTeleportComplete(teleportEventData.Pointer, teleportEventData.HotSpot);
         }
@@ -164,15 +147,11 @@ namespace XRTK.Services.LocomotionSystem
         {
             if (fadeSphere.IsNull())
             {
-                var cameraTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
-                    ? cameraSystem.MainCameraRig.CameraTransform
-                    : CameraCache.Main.transform;
-
                 // We use a simple sphere around the camera / head, which
                 // we can fade in/out to simulate the camera fading to black.
                 fadeSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 fadeSphere.name = $"{nameof(BlinkTeleportProvider)}_Fade";
-                fadeSphere.transform.SetParent(cameraTransform);
+                fadeSphere.transform.SetParent(CameraTransform);
                 fadeSphere.transform.localPosition = Vector3.zero;
                 fadeSphere.transform.localRotation = Quaternion.identity;
                 fadeSphere.transform.localScale = new Vector3(.5f, .5f, .5f);

@@ -15,7 +15,7 @@ namespace XRTK.Services.LocomotionSystem
     /// <see cref="MixedRealityLocomotionSystem"/> will target the active
     /// <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.CameraTransform"/> if the
     /// <see cref="Interfaces.CameraSystem.IMixedRealityCameraSystem"/> is active or fallback to
-    /// <see cref="Utilities.CameraCache.Main"/> ultimately.
+    /// <see cref="Utilities.CameraCache.Main"/> parent ultimately.
     /// </summary>
     public class LocomotionTargetOverride : MonoBehaviour
     {

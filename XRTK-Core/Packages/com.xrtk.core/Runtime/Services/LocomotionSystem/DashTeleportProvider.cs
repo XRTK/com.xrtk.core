@@ -31,6 +31,9 @@ namespace XRTK.Services.LocomotionSystem
             {
                 var t = dashTime / dashDuration;
 
+                LocomotionTargetTransform.position = Vector3.Slerp(startPosition, targetPosition, t);
+                LocomotionTargetTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+
                 if (t >= 1f)
                 {
                     LocomotionSystem.RaiseTeleportComplete(teleportEventData.Pointer, teleportEventData.HotSpot);

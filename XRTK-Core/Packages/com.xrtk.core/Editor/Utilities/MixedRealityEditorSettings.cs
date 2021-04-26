@@ -1,6 +1,8 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.IO;
+using TMPro.EditorUtilities;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEngine;
@@ -43,6 +45,16 @@ namespace XRTK.Editor.Utilities
             }
 
             SessionState.SetBool(sessionKey, false);
+
+            if (!Directory.Exists($"{Application.dataPath}/TextMesh Pro"))
+            {
+                if (EditorUtility.DisplayDialog("Missing Package!",
+                    "The project requires the Text Mesh Pro essential resources, would you like to import them now?",
+                    "OK", "Later"))
+                {
+                    ImportTMProEssentialResources();
+                }
+            }
 
             var message = "The Mixed Reality Toolkit needs to apply the following settings to your project:\n\n";
 
@@ -113,5 +125,37 @@ namespace XRTK.Editor.Utilities
         }
 
         #endregion IActiveBuildTargetChanged Implementation
+
+        private static string settingsFilePath;
+        private static byte[] settingsBackup;
+
+        // Copied straight from the TMP_PackageUtilities.cs but we needed to import the assets if in batch mode.
+        private static void ImportTMProEssentialResources()
+        {
+            // Check if the TMP Settings asset is already present in the project.
+            var settings = AssetDatabase.FindAssets("t:TMP_Settings");
+
+            if (settings.Length > 0)
+            {
+                // Save assets just in case the TMP Setting were modified before import.
+                AssetDatabase.SaveAssets();
+
+                // Copy existing TMP Settings asset to a byte[]
+                settingsFilePath = AssetDatabase.GUIDToAssetPath(settings[0]);
+                settingsBackup = File.ReadAllBytes(settingsFilePath);
+
+                AssetDatabase.importPackageCompleted += ImportCallback;
+            }
+
+            AssetDatabase.ImportPackage($"{TMP_EditorUtility.packageFullPath}/Package Resources/TMP Essential Resources.unitypackage", Application.isBatchMode);
+        }
+
+        private static void ImportCallback(string packageName)
+        {
+            // Restore backup of TMP Settings from byte[]
+            File.WriteAllBytes(settingsFilePath, settingsBackup);
+            AssetDatabase.Refresh();
+            AssetDatabase.importPackageCompleted -= ImportCallback;
+        }
     }
 }

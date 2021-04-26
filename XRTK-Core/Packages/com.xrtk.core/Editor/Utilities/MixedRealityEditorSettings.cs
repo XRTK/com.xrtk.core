@@ -45,7 +45,7 @@ namespace XRTK.Editor.Utilities
 
             SessionState.SetBool(SessionKey, false);
 
-            if (!Directory.Exists($"{Application.dataPath}/Assets/TextMesh Pro"))
+            if (!Directory.Exists($"{Application.dataPath}/TextMesh Pro"))
             {
                 if (EditorUtility.DisplayDialog("Missing Package!",
                     "The project requires the Text Mesh Pro essential resources, would you like to import them now?",

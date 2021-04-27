@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.Rendering;
-using XRTK.EventDatum.Teleport;
+using XRTK.EventDatum.Locomotion;
 using XRTK.Extensions;
 
 namespace XRTK.Services.LocomotionSystem
@@ -25,7 +25,7 @@ namespace XRTK.Services.LocomotionSystem
 
         private Vector3 targetPosition;
         private Vector3 targetRotation;
-        private TeleportEventData teleportEventData;
+        private LocomotionEventData locomotionEventData;
         private GameObject fadeSphere;
         private MeshRenderer fadeSphereRenderer;
         private Color fadeInColor = Color.clear;
@@ -84,7 +84,7 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnTeleportStarted(TeleportEventData eventData)
+        public override void OnLocomotionStarted(LocomotionEventData eventData)
         {
             if (eventData.used)
             {
@@ -93,7 +93,7 @@ namespace XRTK.Services.LocomotionSystem
 
             eventData.Use();
 
-            teleportEventData = eventData;
+            locomotionEventData = eventData;
             targetRotation = Vector3.zero;
             targetPosition = eventData.Pointer.Result.EndPoint;
             targetRotation.y = eventData.Pointer.PointerOrientation;
@@ -111,10 +111,10 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnTeleportCompleted(TeleportEventData eventData) => FadeIn();
+        public override void OnLocomotionCompleted(LocomotionEventData eventData) => FadeIn();
 
         /// <inheritdoc />
-        public override void OnTeleportCanceled(TeleportEventData eventData) => fadeSphere.SetActive(false);
+        public override void OnLocomotionCanceled(LocomotionEventData eventData) => fadeSphere.SetActive(false);
 
         private void PerformTeleport()
         {
@@ -124,7 +124,7 @@ namespace XRTK.Services.LocomotionSystem
             LocomotionTargetTransform.position = targetPosition;
             LocomotionTargetTransform.RotateAround(LocomotionTargetTransform.position, Vector3.up, targetRotation.y - LocomotionTargetTransform.eulerAngles.y);
 
-            LocomotionSystem.RaiseTeleportComplete(teleportEventData.Pointer, teleportEventData.HotSpot);
+            LocomotionSystem.RaiseTeleportComplete(locomotionEventData.Pointer, locomotionEventData.HotSpot);
         }
 
         private void FadeOut()

@@ -5,12 +5,12 @@ using UnityEngine.EventSystems;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 
-namespace XRTK.EventDatum.Teleport
+namespace XRTK.EventDatum.Locomotion
 {
     /// <summary>
-    /// Describes a Teleportation Event.
+    /// Describes a locomotion event raised by the <see cref="IMixedRealityLocomotionSystem"/>.
     /// </summary>
-    public class TeleportEventData : GenericBaseEventData
+    public class LocomotionEventData : GenericBaseEventData
     {
         /// <summary>
         /// The pointer that raised the event.
@@ -26,7 +26,7 @@ namespace XRTK.EventDatum.Teleport
         /// Constructor.
         /// </summary>
         /// <param name="eventSystem">Typically will be <see cref="EventSystem.current"/></param>
-        public TeleportEventData(EventSystem eventSystem) : base(eventSystem) { }
+        public LocomotionEventData(EventSystem eventSystem) : base(eventSystem) { }
 
         /// <summary>
         /// Used to initialize/reset the event and populate the data.

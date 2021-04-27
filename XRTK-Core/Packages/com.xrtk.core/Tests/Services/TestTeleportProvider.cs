@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.EventDatum.Teleport;
+using XRTK.EventDatum.Locomotion;
 using XRTK.Interfaces.LocomotionSystem;
 
 public class TestTeleportProvider : MonoBehaviour, IMixedRealityTeleportProvider
@@ -10,25 +10,25 @@ public class TestTeleportProvider : MonoBehaviour, IMixedRealityTeleportProvider
     #region Implementation of IMixedRealityTeleportHandler
 
     /// <inheritdoc />
-    public void OnTeleportRequest(TeleportEventData eventData)
+    public void OnLocomotionRequest(LocomotionEventData eventData)
     {
         throw new System.NotImplementedException();
     }
 
     /// <inheritdoc />
-    public void OnTeleportStarted(TeleportEventData eventData)
+    public void OnLocomotionStarted(LocomotionEventData eventData)
     {
         throw new System.NotImplementedException();
     }
 
     /// <inheritdoc />
-    public void OnTeleportCompleted(TeleportEventData eventData)
+    public void OnLocomotionCompleted(LocomotionEventData eventData)
     {
         throw new System.NotImplementedException();
     }
 
     /// <inheritdoc />
-    public void OnTeleportCanceled(TeleportEventData eventData)
+    public void OnLocomotionCanceled(LocomotionEventData eventData)
     {
         throw new System.NotImplementedException();
     }

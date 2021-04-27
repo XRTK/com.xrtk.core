@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.EventDatum.Teleport;
+using XRTK.EventDatum.Locomotion;
 
 namespace XRTK.Services.LocomotionSystem
 {
@@ -14,7 +14,7 @@ namespace XRTK.Services.LocomotionSystem
     public class InstantTeleportProvider : BaseTeleportProvider
     {
         /// <inheritdoc />
-        public override void OnTeleportStarted(TeleportEventData eventData)
+        public override void OnLocomotionStarted(LocomotionEventData eventData)
         {
             var targetRotation = Vector3.zero;
             var targetPosition = eventData.Pointer.Result.EndPoint;

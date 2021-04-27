@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.EventDatum.Teleport;
+using XRTK.EventDatum.Locomotion;
 
 namespace XRTK.Services.LocomotionSystem
 {
@@ -22,7 +22,7 @@ namespace XRTK.Services.LocomotionSystem
         private Quaternion startRotation;
         private Vector3 targetPosition;
         private Quaternion targetRotation;
-        private TeleportEventData teleportEventData;
+        private LocomotionEventData locomotionEventData;
         private float dashTime;
 
         private void Update()
@@ -36,7 +36,7 @@ namespace XRTK.Services.LocomotionSystem
 
                 if (t >= 1f)
                 {
-                    LocomotionSystem.RaiseTeleportComplete(teleportEventData.Pointer, teleportEventData.HotSpot);
+                    LocomotionSystem.RaiseTeleportComplete(locomotionEventData.Pointer, locomotionEventData.HotSpot);
                     isDashing = false;
                 }
 
@@ -45,7 +45,7 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnTeleportStarted(TeleportEventData eventData)
+        public override void OnLocomotionStarted(LocomotionEventData eventData)
         {
             if (eventData.used)
             {
@@ -54,7 +54,7 @@ namespace XRTK.Services.LocomotionSystem
 
             eventData.Use();
 
-            teleportEventData = eventData;
+            locomotionEventData = eventData;
             var targetRotation = Vector3.zero;
             targetPosition = eventData.Pointer.Result.EndPoint;
             targetRotation.y = eventData.Pointer.PointerOrientation;
@@ -77,9 +77,9 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnTeleportCompleted(TeleportEventData eventData) => isDashing = false;
+        public override void OnLocomotionCompleted(LocomotionEventData eventData) => isDashing = false;
 
         /// <inheritdoc />
-        public override void OnTeleportCanceled(TeleportEventData eventData) => isDashing = false;
+        public override void OnLocomotionCanceled(LocomotionEventData eventData) => isDashing = false;
     }
 }

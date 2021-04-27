@@ -9,7 +9,6 @@ using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Teleport;
 using XRTK.Extensions;
-using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Utilities;
@@ -76,25 +75,26 @@ namespace XRTK.Services.LocomotionSystem
                 teleportEventData = new TeleportEventData(EventSystem.current);
             }
 
+            Debug.Assert(teleportProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a teleportation provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve.");
+
             LocomotionEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
             TeleportationEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
 
             // Make sure to clean up any leftovers that may still be attached to the camera.
             var camera = CameraCache.Main.gameObject;
-            var existingTeleportProviders = camera.GetComponents<IMixedRealityTeleportProvider>() as Component[];
+            var existingTeleportProviders = camera.GetComponents(typeof(IMixedRealityTeleportProvider));
             if (existingTeleportProviders != null)
             {
                 for (var i = 0; i < existingTeleportProviders.Length; i++)
                 {
                     var existingTeleportProvider = existingTeleportProviders[i];
-                    if (!existingTeleportProvider.IsNull())
+                    if (!existingTeleportProvider.IsNull() && existingTeleportProvider.GetType() != teleportProviderType)
                     {
                         existingTeleportProvider.Destroy();
                     }
                 }
             }
 
-            Debug.Assert(teleportProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a teleportation provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve.");
             camera.EnsureComponent(teleportProviderType);
         }
 
@@ -104,7 +104,6 @@ namespace XRTK.Services.LocomotionSystem
             if (!Application.isPlaying)
             {
                 var component = CameraCache.Main.gameObject.GetComponent(typeof(IMixedRealityTeleportProvider));
-
                 if (!component.IsNull())
                 {
                     component.Destroy();

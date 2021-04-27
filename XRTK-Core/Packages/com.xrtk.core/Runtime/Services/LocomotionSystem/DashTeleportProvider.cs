@@ -31,8 +31,8 @@ namespace XRTK.Services.LocomotionSystem
             {
                 var t = dashTime / dashDuration;
 
-                LocomotionTargetTransform.position = Vector3.Slerp(startPosition, targetPosition, t);
-                LocomotionTargetTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+                LocomotionTargetTransform.position = Vector3.Lerp(startPosition, targetPosition, t);
+                LocomotionTargetTransform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
 
                 if (t >= 1f)
                 {
@@ -70,6 +70,8 @@ namespace XRTK.Services.LocomotionSystem
 
             this.targetRotation = Quaternion.Euler(targetRotation);
 
+            startPosition = LocomotionTargetTransform.position;
+            startRotation = LocomotionTargetTransform.rotation;
             dashTime = 0f;
             isDashing = true;
         }

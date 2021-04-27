@@ -58,17 +58,30 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <summary>
-        /// This method is called when the behaviour becomes enabled and active.
+        /// This method is called just before any of the update methods is called the first time.
         /// </summary>
-        protected virtual void OnEnable()
+        protected virtual async void Start()
         {
+            try
+            {
+                locomotionSystem = (await MixedRealityToolkit.GetSystemAsync<IMixedRealityLocomotionSystem>()) as MixedRealityLocomotionSystem;
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError(e);
+                return;
+            }
+
+            // We've been destroyed during the await.
+            if (this == null) { return; }
+
             LocomotionSystem?.Register(gameObject);
         }
 
         /// <summary>
-        /// This method is called when the behaviour becomes disabled and inactive.
+        /// This method is called when the behaviour will be destroyed.
         /// </summary>
-        protected virtual void OnDisable()
+        protected virtual void OnDestroy()
         {
             LocomotionSystem?.Unregister(gameObject);
         }

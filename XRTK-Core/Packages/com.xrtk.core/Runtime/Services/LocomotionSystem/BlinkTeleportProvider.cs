@@ -39,15 +39,15 @@ namespace XRTK.Services.LocomotionSystem
         /// </summary>
         private void Awake() => InitiailzeFadeSphere();
 
-        /// <summary>
-        /// OnDestroy is called whent he instance is being destroyed.
-        /// </summary>
-        private void OnDestroy()
+        /// <inheritdoc />
+        protected override void OnDestroy()
         {
             if (!fadeSphere.IsNull())
             {
                 fadeSphere.Destroy();
             }
+
+            base.OnDestroy();
         }
 
         /// <summary>

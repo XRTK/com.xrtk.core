@@ -10,9 +10,10 @@ The Magic Leap platform provides a wide range of capabilities able to run on Mag
 To develop for the Windows Mixed Reality platform, you will need:
 
 * A Windows 10 PC
-* Visual Studio 2019 community edition or greater
-* The Magic Leap Lab installed
-* The XRTK.SDK package installed (first)
+* Visual Studio 2019 community edition or later
+* The Magic Leap Lab
+  * Magic Leap SDK 0.24.1
+* The XRTK.SDK package (installed first!)
 * The XRTK.Lumin package
 
 It is advantageous to also have a Magic Leap headset, however the Magic Leap Developer Lab also provides simulation capabilities for testing.
@@ -20,6 +21,13 @@ It is advantageous to also have a Magic Leap headset, however the Magic Leap Dev
 ## Platform considerations
 
 * Please check the Magic Leap Developer Lab guidance for correctly setting up your machine for Unity development
+* Add `mlsdk` to your system environment variables with the path to your magic leap folder install
+* Add the magic leap sdk path to your systems `path` environment variables
+
+|Variable|Value|
+|---|---|
+|`mlsdk`|`C:\users\<>\MagicLeap\mlsdk`|
+|`path`|`C:\Users\<>\MagicLeap\mlsdk\v0.24.1`|
 
 ## Capabilities
 

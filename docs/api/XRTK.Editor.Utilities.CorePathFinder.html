@@ -117,6 +117,9 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class CorePathFinder : ScriptableObject, IPathFinder</code></pre>
   </div>
+  <h5 id="XRTK_Editor_Utilities_CorePathFinder_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Required to be a standalone class in a separate file or else <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.MonoScript.html#UnityEditor_MonoScript_FromScriptableObject_UnityEngine_ScriptableObject_">FromScriptableObject(ScriptableObject)</a> returns an empty string path.</p>
+</div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -128,7 +131,8 @@
   </span>
   <a id="XRTK_Editor_Utilities_CorePathFinder_Location_" data-uid="XRTK.Editor.Utilities.CorePathFinder.Location*"></a>
   <h4 id="XRTK_Editor_Utilities_CorePathFinder_Location" data-uid="XRTK.Editor.Utilities.CorePathFinder.Location">Location</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The relative path to this <a class="xref" href="XRTK.Editor.Utilities.IPathFinder.html">IPathFinder</a> class from either the Assets or Packages folder.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">

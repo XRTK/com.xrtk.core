@@ -416,7 +416,7 @@ namespace XRTK.Services.BoundarySystem
         /// <inheritdoc />
         public bool IsVisible
         {
-            get => (BoundaryDataProvider != null && BoundaryDataProvider.IsPlatformBoundaryVisible) ||
+            get => (BoundaryDataProvider != null && BoundaryDataProvider.Visibility == BoundaryVisibility.Visible) ||
                    !BoundarySystemVisualizationRoot.IsNull() && BoundarySystemVisualizationRoot.activeInHierarchy &&
                    (ShowBoundary ||
                     ShowFloor ||

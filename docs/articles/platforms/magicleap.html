@@ -78,16 +78,40 @@ However, you can still build the project for other platforms and simply copy the
 <p>To develop for the Windows Mixed Reality platform, you will need:</p>
 <ul>
 <li>A Windows 10 PC</li>
-<li>Visual Studio 2019 community edition or greater</li>
-<li>The Magic Leap Lab installed</li>
-<li>The XRTK.SDK package installed (first)</li>
+<li>Visual Studio 2019 community edition or later</li>
+<li>The Magic Leap Lab
+<ul>
+<li>Magic Leap SDK 0.24.1</li>
+</ul>
+</li>
+<li>The XRTK.SDK package (installed first!)</li>
 <li>The XRTK.Lumin package</li>
 </ul>
 <p>It is advantageous to also have a Magic Leap headset, however the Magic Leap Developer Lab also provides simulation capabilities for testing.</p>
 <h2 id="platform-considerations">Platform considerations</h2>
 <ul>
 <li>Please check the Magic Leap Developer Lab guidance for correctly setting up your machine for Unity development</li>
+<li>Add <code>mlsdk</code> to your system environment variables with the path to your magic leap folder install</li>
+<li>Add the magic leap sdk path to your systems <code>path</code> environment variables</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mlsdk</code></td>
+<td><code>C:\users\&lt;&gt;\MagicLeap\mlsdk</code></td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>C:\Users\&lt;&gt;\MagicLeap\mlsdk\v0.24.1</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="capabilities">Capabilities</h2>
 <p>The following capabilities are currently available for the Windows Mixed Reality platform</p>
 <ol>

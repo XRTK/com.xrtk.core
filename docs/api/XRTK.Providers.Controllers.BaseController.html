@@ -233,7 +233,9 @@
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_AngularVelocity_" data-uid="XRTK.Providers.Controllers.BaseController.AngularVelocity*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_AngularVelocity" data-uid="XRTK.Providers.Controllers.BaseController.AngularVelocity">AngularVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets how fast the controller rotates or revolves relative to its
+pivot point.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -263,7 +265,8 @@
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_ControllerDataProvider_" data-uid="XRTK.Providers.Controllers.BaseController.ControllerDataProvider*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_ControllerDataProvider" data-uid="XRTK.Providers.Controllers.BaseController.ControllerDataProvider">ControllerDataProvider</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The data provider service this controller belongs to.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -293,7 +296,8 @@
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_ControllerHandedness_" data-uid="XRTK.Providers.Controllers.BaseController.ControllerHandedness*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_ControllerHandedness" data-uid="XRTK.Providers.Controllers.BaseController.ControllerHandedness">ControllerHandedness</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The designated hand that the Input Source is managing, as defined by the SDK / Unity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -416,7 +420,8 @@
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_Enabled_" data-uid="XRTK.Providers.Controllers.BaseController.Enabled*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_Enabled" data-uid="XRTK.Providers.Controllers.BaseController.Enabled">Enabled</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Is the controller enabled?</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -478,7 +483,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_InputSource_" data-uid="XRTK.Providers.Controllers.BaseController.InputSource*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_InputSource" data-uid="XRTK.Providers.Controllers.BaseController.InputSource">InputSource</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The registered Input Source for this controller</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -508,7 +514,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_Interactions_" data-uid="XRTK.Providers.Controllers.BaseController.Interactions*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_Interactions" data-uid="XRTK.Providers.Controllers.BaseController.Interactions">Interactions</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Mapping definition for this controller, linking the Physical inputs to logical Input System Actions</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -538,7 +545,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_IsPositionApproximate_" data-uid="XRTK.Providers.Controllers.BaseController.IsPositionApproximate*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_IsPositionApproximate" data-uid="XRTK.Providers.Controllers.BaseController.IsPositionApproximate">IsPositionApproximate</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Indicates the accuracy of the position data being reported.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -568,7 +576,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_IsPositionAvailable_" data-uid="XRTK.Providers.Controllers.BaseController.IsPositionAvailable*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_IsPositionAvailable" data-uid="XRTK.Providers.Controllers.BaseController.IsPositionAvailable">IsPositionAvailable</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Indicates that this controller is currently providing position data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -589,6 +598,10 @@ The grip pose may be used to attach things to the controller when grabbing objec
       </tr>
     </tbody>
   </table>
+  <h5 id="XRTK_Providers_Controllers_BaseController_IsPositionAvailable_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This value may change during usage for some controllers. As a best practice,
+be sure to check this value before using position data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseController_IsRotationAvailable.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseController.IsRotationAvailable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -598,7 +611,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_IsRotationAvailable_" data-uid="XRTK.Providers.Controllers.BaseController.IsRotationAvailable*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_IsRotationAvailable" data-uid="XRTK.Providers.Controllers.BaseController.IsRotationAvailable">IsRotationAvailable</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Indicates that this controller is currently providing rotation data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -619,6 +633,10 @@ The grip pose may be used to attach things to the controller when grabbing objec
       </tr>
     </tbody>
   </table>
+  <h5 id="XRTK_Providers_Controllers_BaseController_IsRotationAvailable_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This value may change during usage for some controllers. As a best practice,
+be sure to check this value before using rotation data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseController_Name.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseController.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -628,7 +646,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_Name_" data-uid="XRTK.Providers.Controllers.BaseController.Name*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_Name" data-uid="XRTK.Providers.Controllers.BaseController.Name">Name</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The name of the controller.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -658,7 +677,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_TrackingState_" data-uid="XRTK.Providers.Controllers.BaseController.TrackingState*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_TrackingState" data-uid="XRTK.Providers.Controllers.BaseController.TrackingState">TrackingState</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Outputs the current state of the Input Source, whether it is tracked or not. As defined by the SDK / Unity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -688,7 +708,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_Velocity_" data-uid="XRTK.Providers.Controllers.BaseController.Velocity*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_Velocity" data-uid="XRTK.Providers.Controllers.BaseController.Velocity">Velocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the controller's current movement speed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -718,7 +739,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_Visualizer_" data-uid="XRTK.Providers.Controllers.BaseController.Visualizer*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_Visualizer" data-uid="XRTK.Providers.Controllers.BaseController.Visualizer">Visualizer</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The controller's &quot;Visual&quot; <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html">Component</a> in the scene.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -783,7 +805,9 @@ The grip pose may be used to attach things to the controller when grabbing objec
   </span>
   <a id="XRTK_Providers_Controllers_BaseController_TryRenderControllerModel_" data-uid="XRTK.Providers.Controllers.BaseController.TryRenderControllerModel*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseController_TryRenderControllerModel_System_Boolean_" data-uid="XRTK.Providers.Controllers.BaseController.TryRenderControllerModel(System.Boolean)">TryRenderControllerModel(Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Attempts to load the controller model render settings from the <a class="xref" href="XRTK.Definitions.Controllers.MixedRealityControllerVisualizationProfile.html">MixedRealityControllerVisualizationProfile</a>
+to render the controllers in the scene.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -802,7 +826,8 @@ The grip pose may be used to attach things to the controller when grabbing objec
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">useAlternatePoseAction</span></td>
-        <td></td>
+        <td><p>Should the rendered controller use the alternate pose action?</p>
+</td>
       </tr>
     </tbody>
   </table>

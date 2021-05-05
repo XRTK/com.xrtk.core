@@ -57,6 +57,9 @@ namespace XRTK.Editor.BuildAndDeploy
         public string BuildPlatform { get; set; } = "x86";
 
         /// <inheritdoc />
+        public string BundleIdentifier { get; set; }
+
+        /// <inheritdoc />
         public string Configuration
         {
             get

@@ -42,6 +42,13 @@ namespace XRTK.Editor.BuildAndDeploy
             buildInfo.PreBuildAction?.Invoke(buildInfo);
 
             var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
+            var oldBuildIdentifier = PlayerSettings.GetApplicationIdentifier(buildTargetGroup);
+
+            if (!string.IsNullOrWhiteSpace(buildInfo.BundleIdentifier))
+            {
+                PlayerSettings.SetApplicationIdentifier(buildTargetGroup, buildInfo.BundleIdentifier);
+            }
+
             var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
             if (!string.IsNullOrEmpty(playerBuildSymbols))
@@ -163,6 +170,11 @@ namespace XRTK.Editor.BuildAndDeploy
             if (EditorUserBuildSettings.activeBuildTarget != oldBuildTarget)
             {
                 EditorUserBuildSettings.SwitchActiveBuildTarget(oldBuildTargetGroup, oldBuildTarget);
+            }
+
+            if (PlayerSettings.GetApplicationIdentifier(oldBuildTargetGroup) != oldBuildIdentifier)
+            {
+                PlayerSettings.SetApplicationIdentifier(oldBuildTargetGroup, oldBuildIdentifier);
             }
 
             // Call the post-build action, if any
@@ -328,6 +340,9 @@ namespace XRTK.Editor.BuildAndDeploy
                     case "-master":
                     case "-release":
                         buildInfo.Configuration = arguments[i].Substring(1).ToLower();
+                        break;
+                    case "-bundleIdentifier":
+                        buildInfo.BundleIdentifier = arguments[++i];
                         break;
                 }
             }

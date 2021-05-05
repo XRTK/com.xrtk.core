@@ -73,5 +73,10 @@ namespace XRTK.Editor.BuildAndDeploy
         /// The build platform (i.e. x86, x64)
         /// </summary>
         string BuildPlatform { get; set; }
+
+        /// <summary>
+        /// The build Bundle Identifier
+        /// </summary>
+        string BundleIdentifier { get; set; }
     }
 }

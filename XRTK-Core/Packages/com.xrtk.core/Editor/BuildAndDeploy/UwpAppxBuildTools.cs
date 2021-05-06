@@ -309,7 +309,7 @@ namespace XRTK.Editor.BuildAndDeploy
             // According to https://msdn.microsoft.com/en-us/library/windows/apps/br211441.aspx
             // Package versions are always of the form Major.Minor.Build.Revision.
             // Note: Revision number reserved for Windows Store, and a value other than 0 will fail WACK.
-            versionAttr.Value = PlayerSettings.WSA.packageVersion.ToString(4);
+            versionAttr.Value = PlayerSettings.WSA.packageVersion.ToString();
             rootNode.Save(manifests[0]);
             return true;
         }

@@ -45,11 +45,11 @@ namespace XRTK.Editor.BuildAndDeploy
             // major.minor.build
             Version version = new Version(
                 (buildInfo.Version == null || buildInfo.AutoIncrement)
-                    ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
-                        ? string.IsNullOrWhiteSpace(Application.version)
+                    ? string.IsNullOrWhiteSpace(Application.version)
+                        ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
                             ? "1.0.0"
-                            : Application.version
-                        : PlayerSettings.bundleVersion
+                            : PlayerSettings.bundleVersion
+                        : Application.version
                     : buildInfo.Version.ToString(3));
 
             // Only auto incitement if the version wasn't specified in the build info.
@@ -64,7 +64,7 @@ namespace XRTK.Editor.BuildAndDeploy
             // Update Lumin bc the Application.version isn't synced like Android & iOS
             PlayerSettings.Lumin.versionName = PlayerSettings.bundleVersion;
             // Update WSA bc the Application.version isn't synced line Android & iOS
-            PlayerSettings.WSA.packageVersion = new Version(version.ToString(4));
+            PlayerSettings.WSA.packageVersion = new Version(version.Major, version.Minor, version.Build, 0);
 
             var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
             var oldBuildIdentifier = PlayerSettings.GetApplicationIdentifier(buildTargetGroup);

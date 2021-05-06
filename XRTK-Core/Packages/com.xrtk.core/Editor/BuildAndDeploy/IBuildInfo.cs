@@ -57,6 +57,9 @@ namespace XRTK.Editor.BuildAndDeploy
         /// <summary>
         /// Should the build auto increment the build version number?
         /// </summary>
+        /// <remarks>
+        /// If <see cref="Version"/> is assigned then this flag is ignored.
+        /// </remarks>
         bool AutoIncrement { get; set; }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace XRTK.Editor.BuildAndDeploy
         /// The build version number
         /// </summary>
         /// <remarks>
-        /// Overridden by <see cref="AutoIncrement"/>
+        /// If set will override <see cref="AutoIncrement"/>
         /// </remarks>
         Version Version { get; set; }
 

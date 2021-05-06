@@ -57,7 +57,7 @@ namespace XRTK.Editor.BuildAndDeploy
                 OutputDirectory = buildDirectory,
                 Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled),
                 BuildAppx = !showDialog,
-
+                Version = new Version(PlayerSettings.WSA.packageVersion.ToString(3)),
                 // Configure a post build action that will compile the generated solution
                 PostBuildAction = PostBuildAction
             };

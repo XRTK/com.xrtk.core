@@ -41,7 +41,39 @@ namespace XRTK.Editor.BuildAndDeploy
             // Call the pre-build action, if any
             buildInfo.PreBuildAction?.Invoke(buildInfo);
 
+            // use https://semver.org/
+            // major.minor.build
+            Version version = new Version(
+                (buildInfo.Version == null || buildInfo.AutoIncrement)
+                    ? string.IsNullOrWhiteSpace(Application.version)
+                        ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
+                            ? "1.0.0"
+                            : PlayerSettings.bundleVersion
+                        : Application.version
+                    : buildInfo.Version.ToString(3));
+
+            // Only auto incitement if the version wasn't specified in the build info.
+            if (buildInfo.Version == null &&
+                buildInfo.AutoIncrement)
+            {
+                version = new Version(version.Major, version.Minor, version.Build + 1);
+            }
+
+            // Updates the Application.version and syncs Android and iOS bundle version strings
+            PlayerSettings.bundleVersion = version.ToString(3);
+            // Update Lumin bc the Application.version isn't synced like Android & iOS
+            PlayerSettings.Lumin.versionName = PlayerSettings.bundleVersion;
+            // Update WSA bc the Application.version isn't synced line Android & iOS
+            PlayerSettings.WSA.packageVersion = new Version(version.Major, version.Minor, version.Build, 0);
+
             var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
+            var oldBuildIdentifier = PlayerSettings.GetApplicationIdentifier(buildTargetGroup);
+
+            if (!string.IsNullOrWhiteSpace(buildInfo.BundleIdentifier))
+            {
+                PlayerSettings.SetApplicationIdentifier(buildTargetGroup, buildInfo.BundleIdentifier);
+            }
+
             var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
             if (!string.IsNullOrEmpty(playerBuildSymbols))
@@ -102,6 +134,23 @@ namespace XRTK.Editor.BuildAndDeploy
             switch (buildInfo.BuildTarget)
             {
                 case BuildTarget.Lumin:
+
+                    if (buildInfo.VersionCode.HasValue)
+                    {
+                        PlayerSettings.Lumin.versionCode = buildInfo.VersionCode.Value;
+                    }
+                    else
+                    {
+                        // Usually version codes are unique and not tied to the usual semver versions
+                        // see https://developer.android.com/studio/publish/versioning#appversioning
+                        // versionCode - A positive integer used as an internal version number.
+                        // This number is used only to determine whether one version is more recent than another,
+                        // with higher numbers indicating more recent versions. The Android system uses the
+                        // versionCode value to protect against downgrades by preventing users from installing
+                        // an APK with a lower versionCode than the version currently installed on their device.
+                        PlayerSettings.Lumin.versionCode++;
+                    }
+
                     buildInfo.OutputDirectory += ".mpk";
 
                     if (Directory.Exists($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu"))
@@ -110,6 +159,22 @@ namespace XRTK.Editor.BuildAndDeploy
                     }
                     break;
                 case BuildTarget.Android:
+                    if (buildInfo.VersionCode.HasValue)
+                    {
+                        PlayerSettings.Android.bundleVersionCode = buildInfo.VersionCode.Value;
+                    }
+                    else
+                    {
+                        // Usually version codes are unique and not tied to the usual semver versions
+                        // see https://developer.android.com/studio/publish/versioning#appversioning
+                        // versionCode - A positive integer used as an internal version number.
+                        // This number is used only to determine whether one version is more recent than another,
+                        // with higher numbers indicating more recent versions. The Android system uses the
+                        // versionCode value to protect against downgrades by preventing users from installing
+                        // an APK with a lower versionCode than the version currently installed on their device.
+                        PlayerSettings.Android.bundleVersionCode++;
+                    }
+
                     buildInfo.OutputDirectory += ".apk";
                     cacheIl2Cpp = false;
                     break;
@@ -163,6 +228,11 @@ namespace XRTK.Editor.BuildAndDeploy
             if (EditorUserBuildSettings.activeBuildTarget != oldBuildTarget)
             {
                 EditorUserBuildSettings.SwitchActiveBuildTarget(oldBuildTargetGroup, oldBuildTarget);
+            }
+
+            if (PlayerSettings.GetApplicationIdentifier(oldBuildTargetGroup) != oldBuildIdentifier)
+            {
+                PlayerSettings.SetApplicationIdentifier(oldBuildTargetGroup, oldBuildIdentifier);
             }
 
             // Call the post-build action, if any
@@ -306,6 +376,26 @@ namespace XRTK.Editor.BuildAndDeploy
                     case "-autoIncrement":
                         buildInfo.AutoIncrement = true;
                         break;
+                    case "-version":
+                        if (Version.TryParse(arguments[++i], out var version))
+                        {
+                            buildInfo.Version = version;
+                        }
+                        else
+                        {
+                            Debug.LogError($"Failed to parse -version \"{arguments[i]}\"");
+                        }
+                        break;
+                    case "-versionCode":
+                        if (int.TryParse(arguments[++i], out var versionCode))
+                        {
+                            buildInfo.VersionCode = versionCode;
+                        }
+                        else
+                        {
+                            Debug.LogError($"Failed to parse -versionCode \"{arguments[i]}\"");
+                        }
+                        break;
                     case "-sceneList":
                         buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(arguments[++i]));
                         break;
@@ -328,6 +418,9 @@ namespace XRTK.Editor.BuildAndDeploy
                     case "-master":
                     case "-release":
                         buildInfo.Configuration = arguments[i].Substring(1).ToLower();
+                        break;
+                    case "-bundleIdentifier":
+                        buildInfo.BundleIdentifier = arguments[++i];
                         break;
                 }
             }

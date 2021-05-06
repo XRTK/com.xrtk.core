@@ -75,8 +75,21 @@ namespace XRTK.Editor.BuildAndDeploy
         string BuildPlatform { get; set; }
 
         /// <summary>
-        /// The build Bundle Identifier
+        /// The build Bundle Identifier (i.e. 'com.xrtk.core')
         /// </summary>
         string BundleIdentifier { get; set; }
+
+        /// <summary>
+        /// The build version number
+        /// </summary>
+        /// <remarks>
+        /// Overridden by <see cref="AutoIncrement"/>
+        /// </remarks>
+        Version Version { get; set; }
+
+        /// <summary>
+        /// The version code (usually a single integer for platforms like iOS, Android, and Magic Leap)
+        /// </summary>
+        int? VersionCode { get; set; }
     }
 }

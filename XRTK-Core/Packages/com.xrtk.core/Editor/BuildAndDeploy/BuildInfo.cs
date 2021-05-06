@@ -60,6 +60,12 @@ namespace XRTK.Editor.BuildAndDeploy
         public string BundleIdentifier { get; set; }
 
         /// <inheritdoc />
+        public Version Version { get; set; }
+
+        /// <inheritdoc />
+        public int? VersionCode { get; set; } = null;
+
+        /// <inheritdoc />
         public string Configuration
         {
             get

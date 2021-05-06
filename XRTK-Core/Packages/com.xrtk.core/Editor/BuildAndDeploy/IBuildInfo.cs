@@ -57,6 +57,9 @@ namespace XRTK.Editor.BuildAndDeploy
         /// <summary>
         /// Should the build auto increment the build version number?
         /// </summary>
+        /// <remarks>
+        /// If <see cref="Version"/> is assigned then this flag is ignored.
+        /// </remarks>
         bool AutoIncrement { get; set; }
 
         /// <summary>
@@ -73,5 +76,23 @@ namespace XRTK.Editor.BuildAndDeploy
         /// The build platform (i.e. x86, x64)
         /// </summary>
         string BuildPlatform { get; set; }
+
+        /// <summary>
+        /// The build Bundle Identifier (i.e. 'com.xrtk.core')
+        /// </summary>
+        string BundleIdentifier { get; set; }
+
+        /// <summary>
+        /// The build version number
+        /// </summary>
+        /// <remarks>
+        /// If set will override <see cref="AutoIncrement"/>
+        /// </remarks>
+        Version Version { get; set; }
+
+        /// <summary>
+        /// The version code (usually a single integer for platforms like iOS, Android, and Magic Leap)
+        /// </summary>
+        int? VersionCode { get; set; }
     }
 }

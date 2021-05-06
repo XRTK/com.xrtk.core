@@ -558,10 +558,6 @@ namespace XRTK.Editor.BuildAndDeploy
                 PlayerSettings.WSA.packageVersion = new Version((int)newVersion.x, (int)newVersion.y, (int)newVersion.z, 0);
             }
 
-            GUI.enabled = false;
-            EditorGUILayout.IntField(PlayerSettings.WSA.packageVersion.Revision);
-            GUI.enabled = true;
-
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();

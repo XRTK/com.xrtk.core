@@ -64,7 +64,7 @@ namespace XRTK.Editor.BuildAndDeploy
             // Update Lumin bc the Application.version isn't synced like Android & iOS
             PlayerSettings.Lumin.versionName = PlayerSettings.bundleVersion;
             // Update WSA bc the Application.version isn't synced line Android & iOS
-            PlayerSettings.WSA.packageVersion = version;
+            PlayerSettings.WSA.packageVersion = new Version(version.ToString(4));
 
             var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
             var oldBuildIdentifier = PlayerSettings.GetApplicationIdentifier(buildTargetGroup);

@@ -58,6 +58,8 @@ namespace XRTK.Editor.BuildAndDeploy
             }
 
             PlayerSettings.bundleVersion = version.ToString(3);
+            // Update Lumin bc the Application.version isn't synced like Android & iOS
+            PlayerSettings.Lumin.versionName = PlayerSettings.bundleVersion;
 
             var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
             var oldBuildIdentifier = PlayerSettings.GetApplicationIdentifier(buildTargetGroup);
@@ -143,8 +145,6 @@ namespace XRTK.Editor.BuildAndDeploy
                         // an APK with a lower versionCode than the version currently installed on their device.
                         PlayerSettings.Lumin.versionCode++;
                     }
-
-                    PlayerSettings.Lumin.versionName = PlayerSettings.bundleVersion;
 
                     buildInfo.OutputDirectory += ".mpk";
 

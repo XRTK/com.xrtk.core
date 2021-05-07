@@ -20,6 +20,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         {
             Id = id;
             GameObject = gameObject;
+            LastUpdated = DateTimeOffset.MinValue;
         }
 
         /// <summary>

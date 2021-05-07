@@ -8,12 +8,14 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers;
@@ -267,6 +269,19 @@ namespace XRTK.Editor
                                 Debug.Log($"Added {configuration.Name} to {rootProfile.name}");
                                 spatialAwarenessSystemProfile.RegisteredServiceConfigurations = spatialAwarenessSystemProfile.RegisteredServiceConfigurations.AddItem(spatialObserverConfiguration);
                                 EditorUtility.SetDirty(spatialAwarenessSystemProfile);
+                            }
+                        }
+                        break;
+                    case Type _ when typeof(IMixedRealityBoundaryDataProvider).IsAssignableFrom(configurationType):
+                        if (MixedRealityToolkit.TryGetSystemProfile<IMixedRealityBoundarySystem, MixedRealityBoundaryProfile>(out var boundarySystemProfile, rootProfile))
+                        {
+                            var boundarySystemConfiguration = new MixedRealityServiceConfiguration<IMixedRealityBoundaryDataProvider>(configuration);
+
+                            if (boundarySystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != boundarySystemConfiguration.InstancedType.Type))
+                            {
+                                Debug.Log($"Added {configuration.Name} to {rootProfile.name}");
+                                boundarySystemProfile.RegisteredServiceConfigurations = boundarySystemProfile.RegisteredServiceConfigurations.AddItem(boundarySystemConfiguration);
+                                EditorUtility.SetDirty(boundarySystemProfile);
                             }
                         }
                         break;

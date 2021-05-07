@@ -14,7 +14,6 @@ using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
 using XRTK.Providers.SpatialObservers;
 using XRTK.Utilities;
-using Random = UnityEngine.Random;
 
 namespace XRTK.Services.SpatialAwarenessSystem
 {
@@ -124,7 +123,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         /// <inheritdoc />
         public uint GenerateNewObserverId()
         {
-            var newId = (uint)Random.Range(1, int.MaxValue);
+            var newId = (uint)UnityEngine.Random.Range(1, int.MaxValue);
 
             foreach (var observer in DetectedSpatialObservers)
             {

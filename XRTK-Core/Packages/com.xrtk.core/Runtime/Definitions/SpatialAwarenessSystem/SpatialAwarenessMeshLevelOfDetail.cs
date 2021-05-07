@@ -22,6 +22,11 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// <summary>
         /// The high level of detail is well suited for mesh occlusion for object like hands.
         /// </summary>
-        High = 2
+        High = 2,
+
+        /// <summary>
+        /// A custom level of detail which is overridden by the platform specific profile.
+        /// </summary>
+        Custom = 3
     }
 }

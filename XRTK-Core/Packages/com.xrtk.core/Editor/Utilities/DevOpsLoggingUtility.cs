@@ -16,8 +16,10 @@ namespace XRTK.Editor.Utilities
         public static List<string> IgnoredLogs = new List<string>()
         {
             "Using symlinks in Unity projects may cause your project to become corrupted",
+            ".android\repositories.cfg could not be loaded",
             "Assembly 'Newtonsoft.Json' has non matching file name:",
             "Skipping WindowsDictationDataProvider registration",
+            "Skipping WindowsSpeechDataProvider registration",
             "Cancelling DisplayDialog: Built in VR Detected XR Plug-in Management has detected that this project is using built in VR.",
             "Reference rewriter: Error: method `System.Numerics.Vector3[] Windows.Perception.Spatial.SpatialStageFrameOfReference::TryGetMovementBounds(Windows.Perception.Spatial.SpatialCoordinateSystem)` doesn't exist in target framework. It is referenced from XRTK.WindowsMixedReality.dll at System.Boolean XRTK.WindowsMixedReality.Providers.BoundarySystem.WindowsMixedRealityBoundaryDataProvider::TryGetBoundaryGeometry"
         };

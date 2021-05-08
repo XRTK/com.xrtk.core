@@ -13,6 +13,40 @@ using XRTK.Services;
 
 namespace XRTK.Editor.BuildPipeline
 {
+    [CustomEditor(typeof(BuildInfo), true)]
+    public class BuildInfoInspector : UnityEditor.Editor
+    {
+        private SerializedProperty autoIncrement;
+        private SerializedProperty bundleIdentifier;
+        private SerializedProperty install;
+
+        protected void OnEnable()
+        {
+            autoIncrement = serializedObject.FindProperty(nameof(autoIncrement));
+            bundleIdentifier = serializedObject.FindProperty(nameof(bundleIdentifier));
+            install = serializedObject.FindProperty(nameof(install));
+        }
+
+        /// <inheritdoc />
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.PropertyField(bundleIdentifier);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                PlayerSettings.applicationIdentifier = bundleIdentifier.stringValue;
+            }
+
+            EditorGUILayout.PropertyField(autoIncrement);
+            EditorGUILayout.PropertyField(install);
+
+            serializedObject.ApplyModifiedProperties();
+        }
+    }
+
     public class BuildInfo : ScriptableObject, IBuildInfo
     {
         protected virtual void Awake()
@@ -24,11 +58,30 @@ namespace XRTK.Editor.BuildPipeline
             Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled);
         }
 
-        /// <inheritdoc />
-        public bool AutoIncrement { get; set; }
+        [SerializeField]
+        private bool autoIncrement = false;
 
         /// <inheritdoc />
-        public string BundleIdentifier { get; set; }
+        public bool AutoIncrement
+        {
+            get => autoIncrement;
+            set => autoIncrement = value;
+        }
+
+        [SerializeField]
+        [Tooltip("The bundle or application identifier\n(i.e. 'com.xrtk.core')")]
+        private string bundleIdentifier;
+
+        /// <inheritdoc />
+        public string BundleIdentifier
+        {
+            get => bundleIdentifier;
+            set
+            {
+                bundleIdentifier = value;
+                PlayerSettings.applicationIdentifier = bundleIdentifier;
+            }
+        }
 
         /// <inheritdoc />
         public virtual Version Version { get; set; }
@@ -191,8 +244,16 @@ namespace XRTK.Editor.BuildPipeline
             }
         }
 
+        [SerializeField]
+        [Tooltip("Should the executable be installed OnPostProcessBuild?")]
+        private bool install = false;
+
         /// <inheritdoc />
-        public virtual bool Install { get; set; }
+        public virtual bool Install
+        {
+            get => install;
+            set => install = value;
+        }
 
         /// <inheritdoc />
         public string Configuration

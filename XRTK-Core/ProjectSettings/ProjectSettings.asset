@@ -173,6 +173,7 @@ PlayerSettings:
     Android: com.xrtk.core
     Lumin: com.xrtk.core
     Standalone: com.xrtk.core
+    Windows Store Apps: com.xrtk.core
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 25

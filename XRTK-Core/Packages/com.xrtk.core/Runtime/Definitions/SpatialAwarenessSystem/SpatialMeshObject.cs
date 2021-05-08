@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 
 namespace XRTK.Definitions.SpatialAwarenessSystem
@@ -15,16 +16,17 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// </summary>
         /// <param name="id"></param>
         /// <param name="gameObject"></param>
-        public SpatialMeshObject(int id, GameObject gameObject) : this()
+        public SpatialMeshObject(Guid id, GameObject gameObject) : this()
         {
             Id = id;
             GameObject = gameObject;
+            LastUpdated = DateTimeOffset.MinValue;
         }
 
         /// <summary>
         /// The id of the spatial mesh object.
         /// </summary>
-        public int Id { get; internal set; }
+        public Guid Id { get; internal set; }
 
         private GameObject gameObject;
 
@@ -74,5 +76,10 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// The <see cref="MeshCollider"/> reference for the Spatial Mesh Object.
         /// </summary>
         public MeshCollider Collider { get; private set; }
+
+        /// <summary>
+        /// The last time this object was updated.
+        /// </summary>
+        public DateTimeOffset LastUpdated { get; set; }
     }
 }

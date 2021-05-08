@@ -159,7 +159,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.13-preview.2"
+        "com.xrtk.core": "0.2.13"
       }
     },
     "com.xrtk.oculus": {
@@ -183,7 +183,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.13-preview.2"
+        "com.xrtk.core": "0.2.13"
       }
     },
     "com.unity.modules.ai": {

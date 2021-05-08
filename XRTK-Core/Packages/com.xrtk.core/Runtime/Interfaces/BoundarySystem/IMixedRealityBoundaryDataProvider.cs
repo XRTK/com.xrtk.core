@@ -1,28 +1,30 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+using XRTK.Definitions.BoundarySystem;
 
 namespace XRTK.Interfaces.BoundarySystem
 {
     /// <summary>
-    /// Mixed Reality Toolkit boundary data provider definition, used to instantiate and manage low level api access specific devices, SDKs, and libraries.
+    /// Boundary data providers provide low level data access for the <see cref="IMixedRealityBoundarySystem"/> to query
+    /// platform boundary state.
     /// </summary>
     public interface IMixedRealityBoundaryDataProvider : IMixedRealityDataProvider
     {
         /// <summary>
-        /// Is the platform's boundary visible?
+        /// Gets the current boundary visibility.
         /// </summary>
-        bool IsPlatformBoundaryVisible { get; set; }
+        BoundaryVisibility Visibility { get; }
 
         /// <summary>
-        /// The the platform's boundary configured?
+        /// Gets whether boundaries have been configured and are active.
         /// </summary>
         bool IsPlatformConfigured { get; }
 
         /// <summary>
-        /// Try to get the boundary geometry from the library api.
+        /// Tries to retrieve up to date boundary points in world space.
         /// </summary>
         /// <param name="geometry">The list of points associated with the boundary geometry.</param>
         /// <returns>True, if valid geometry was successfully returned, otherwise false.</returns>

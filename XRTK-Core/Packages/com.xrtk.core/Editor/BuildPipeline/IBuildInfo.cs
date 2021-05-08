@@ -114,6 +114,19 @@ namespace XRTK.Editor.BuildPipeline
         /// <summary>
         /// Parses command line args via <see cref="Environment.GetCommandLineArgs"/>
         /// </summary>
+        /// <remarks>
+        /// Supported arguments:<para/>
+        /// -autoIncrement<para/>
+        /// -versionName "0.1.0"<para/>
+        /// -versionCode "1"<para/>
+        /// -bundleIdentifier "com.xrtk.core"<para/>
+        /// -sceneList (CSV format)<para/>
+        /// -sceneListFile (CSV format)<para/>
+        /// -buildOutputDirectory <para/>
+        /// -colorSpace (see <see cref="UnityEngine.ColorSpace"/>)<para/>
+        /// -buildArchitecture (x86, x64, ARM, ARM64)<para/>
+        /// -buildConfiguration (debug, master, release)<para/>
+        /// </remarks>
         void ParseCommandLineArgs();
 
         /// <summary>

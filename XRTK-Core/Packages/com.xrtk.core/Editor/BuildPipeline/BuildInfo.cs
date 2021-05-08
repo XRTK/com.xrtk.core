@@ -119,14 +119,14 @@ namespace XRTK.Editor.BuildPipeline
                     case "-autoIncrement":
                         AutoIncrement = true;
                         break;
-                    case "-version":
+                    case "-versionName":
                         if (Version.TryParse(arguments[++i], out var version))
                         {
                             Version = version;
                         }
                         else
                         {
-                            Debug.LogError($"Failed to parse -version \"{arguments[i]}\"");
+                            Debug.LogError($"Failed to parse -versionName \"{arguments[i]}\"");
                         }
                         break;
                     case "-versionCode":
@@ -148,22 +148,44 @@ namespace XRTK.Editor.BuildPipeline
                     case "-sceneListFile":
                         Scenes = Scenes.Union(UnityPlayerBuildTools.SplitSceneList(File.ReadAllText(arguments[++i])));
                         break;
-                    case "-buildOutput":
+                    case "-buildOutputDirectory":
                         OutputDirectory = arguments[++i];
                         break;
                     case "-colorSpace":
                         ColorSpace = (ColorSpace)Enum.Parse(typeof(ColorSpace), arguments[++i]);
                         break;
-                    case "-x86":
-                    case "-x64":
-                    case "-ARM":
-                    case "-ARM64":
-                        Architecture = arguments[i].Substring(1);
+                    case "-buildArchitecture":
+                        var architecture = arguments[++i].Substring(1);
+
+                        switch (architecture)
+                        {
+                            case "x86":
+                            case "x64":
+                            case "ARM":
+                            case "ARM64":
+                                Architecture = architecture;
+                                break;
+                            default:
+                                Debug.LogError($"Failed to parse -buildArchitecture: {architecture}");
+                                break;
+                        }
+
                         break;
-                    case "-debug":
-                    case "-master":
-                    case "-release":
-                        Configuration = arguments[i].Substring(1).ToLower();
+                    case "-buildConfiguration":
+                        var configuration = arguments[++i].Substring(1).ToLower();
+
+                        switch (configuration)
+                        {
+                            case "debug":
+                            case "master":
+                            case "release":
+                                Configuration = configuration;
+                                break;
+                            default:
+                                Debug.LogError($"Failed to parse -buildConfiguration: {configuration}");
+                                break;
+                        }
+
                         break;
                 }
             }

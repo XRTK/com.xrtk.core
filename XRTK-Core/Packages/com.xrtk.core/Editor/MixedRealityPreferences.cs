@@ -290,7 +290,7 @@ namespace XRTK.Editor
         {
             get
             {
-                if (!isCurrentPlatformPreferenceLoaded)
+                if (!isCurrentPlatformPreferenceLoaded || currentPlatformTarget == null)
                 {
                     isCurrentPlatformPreferenceLoaded = true;
 
@@ -300,6 +300,13 @@ namespace XRTK.Editor
                     {
                         foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
                         {
+                            if (availablePlatform is AllPlatforms ||
+                                availablePlatform is EditorPlatform ||
+                                availablePlatform is CurrentBuildTargetPlatform)
+                            {
+                                continue;
+                            }
+
                             if (availablePlatform.GetType() == platform)
                             {
                                 currentPlatformTarget = availablePlatform;
@@ -310,9 +317,24 @@ namespace XRTK.Editor
 
                     if (currentPlatformTarget == null)
                     {
-                        currentPlatformTarget = MixedRealityToolkit.ActivePlatforms.Count > 0
-                            ? MixedRealityToolkit.ActivePlatforms[0]
-                            : new AllPlatforms();
+                        foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
+                        {
+                            if (availablePlatform is AllPlatforms ||
+                                availablePlatform is EditorPlatform ||
+                                availablePlatform is CurrentBuildTargetPlatform)
+                            {
+                                continue;
+                            }
+
+                            foreach (var buildTarget in availablePlatform.ValidBuildTargets)
+                            {
+                                if (EditorUserBuildSettings.activeBuildTarget == buildTarget)
+                                {
+                                    currentPlatformTarget = availablePlatform;
+                                    return currentPlatformTarget;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -320,6 +342,13 @@ namespace XRTK.Editor
             }
             set
             {
+                if (value is AllPlatforms ||
+                    value is EditorPlatform ||
+                    value is CurrentBuildTargetPlatform)
+                {
+                    return;
+                }
+
                 currentPlatformTarget = value;
 
                 EditorPreferences.Set(nameof(CurrentPlatformTarget),

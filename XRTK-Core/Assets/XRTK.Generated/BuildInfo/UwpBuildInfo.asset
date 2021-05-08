@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 704a4b1a0d41bd74dbcbb0dd5193dd45, type: 3}
   m_Name: UwpBuildInfo
   m_EditorClassIdentifier: 
+  autoIncrement: 0
+  bundleIdentifier: com.xrtk.core
+  install: 0

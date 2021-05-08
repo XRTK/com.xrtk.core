@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b688e0ce804506ada7fcccd6956e4e, type: 3}
   m_Name: AndroidBuildInfo
   m_EditorClassIdentifier: 
+  autoIncrement: 0
+  bundleIdentifier: com.xrtk.core
+  install: 0

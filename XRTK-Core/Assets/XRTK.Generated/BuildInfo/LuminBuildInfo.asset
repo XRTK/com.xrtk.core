@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381696c5d2b029348b62e696d4daf2b9, type: 3}
   m_Name: LuminBuildInfo
   m_EditorClassIdentifier: 
+  autoIncrement: 0
+  bundleIdentifier: com.xrtk.core
+  install: 0

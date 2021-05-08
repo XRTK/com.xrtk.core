@@ -5,10 +5,13 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using XRTK.Attributes;
+using XRTK.Definitions.Platforms;
 using XRTK.Services;
 
 namespace XRTK.Editor.BuildPipeline
 {
+    [RuntimePlatform(typeof(AndroidPlatform))]
     public class AndroidBuildInfo : BuildInfo
     {
         /// <inheritdoc />

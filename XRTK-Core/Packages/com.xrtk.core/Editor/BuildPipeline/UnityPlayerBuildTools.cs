@@ -105,7 +105,10 @@ namespace XRTK.Editor.BuildPipeline
 
             EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
 
-            BuildInfo.ParseCommandLineArgs();
+            if (BuildInfo.IsCommandLine)
+            {
+                BuildInfo.ParseCommandLineArgs();
+            }
 
             // use https://semver.org/
             // major.minor.build

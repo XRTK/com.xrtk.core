@@ -224,7 +224,7 @@ namespace XRTK.Editor.BuildPipeline
             }
             catch (Exception e)
             {
-                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                Debug.LogError(e);
             }
 
             if (cacheIl2Cpp)
@@ -376,22 +376,10 @@ namespace XRTK.Editor.BuildPipeline
         public int callbackOrder { get; }
 
         /// <inheritdoc />
-        public void OnPreprocessBuild(BuildReport report)
-        {
-            if (buildInfo != null)
-            {
-                buildInfo.OnPreProcessBuild(report);
-            }
-        }
+        public void OnPreprocessBuild(BuildReport report) => buildInfo?.OnPreProcessBuild(report);
 
         /// <inheritdoc />
-        public void OnPostprocessBuild(BuildReport report)
-        {
-            if (buildInfo != null)
-            {
-                buildInfo.OnPreProcessBuild(report);
-            }
-        }
+        public void OnPostprocessBuild(BuildReport report) => buildInfo?.OnPreProcessBuild(report);
 
         #endregion IOrderedCallback
     }

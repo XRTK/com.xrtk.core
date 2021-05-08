@@ -17,7 +17,7 @@ namespace XRTK.Editor.BuildPipeline
     {
         protected virtual void Awake()
         {
-            BundleIdentifier = Application.identifier;
+            BundleIdentifier = PlayerSettings.applicationIdentifier;
             IsCommandLine = Application.isBatchMode;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;

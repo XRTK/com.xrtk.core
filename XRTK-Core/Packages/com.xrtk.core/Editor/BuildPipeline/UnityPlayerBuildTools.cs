@@ -13,13 +13,13 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
-using UnityEngine.Assertions;
 using XRTK.Attributes;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -54,30 +54,51 @@ namespace XRTK.Editor.BuildPipeline
                         .Where(type => typeof(IBuildInfo).IsAssignableFrom(type))
                         .Select(type =>
                         {
-                            var runtimePlatformAttribute = (RuntimePlatformAttribute)type?.GetCustomAttribute(typeof(RuntimePlatformAttribute));
-                            var instance = runtimePlatformAttribute != null &&
-                                           runtimePlatformAttribute.Platform == MixedRealityPreferences.CurrentPlatformTarget?.GetType()
-                                ? ScriptableObject.CreateInstance(type)
-                                : null;
+                            BuildInfo instance = null;
+                            var runtimePlatformAttributes = type.GetCustomAttributes<RuntimePlatformAttribute>();
 
-                            if (instance.IsNull())
+                            if (runtimePlatformAttributes.All(runtimePlatformAttribute => runtimePlatformAttribute.Platform != MixedRealityPreferences.CurrentPlatformTarget.GetType()))
                             {
                                 return null;
                             }
 
-                            return instance as BuildInfo;
+                            var assetGuids = AssetDatabase.FindAssets($"t:{type}");
+
+                            foreach (var guid in assetGuids)
+                            {
+                                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                                var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
+                                var currentPlatform = MixedRealityPreferences.CurrentPlatformTarget;
+
+                                if (asset?.BuildPlatform == currentPlatform)
+                                {
+                                    instance = asset as BuildInfo;
+                                    break;
+                                }
+                            }
+
+                            if (instance.IsNull())
+                            {
+                                instance = ScriptableObject.CreateInstance(type) as BuildInfo;
+                            }
+
+                            if (instance.IsNull())
+                            {
+                                Debug.LogError($"Failed to find or create a valid {nameof(IBuildInfo)} for {MixedRealityPreferences.CurrentPlatformTarget}!");
+                                return null;
+                            }
+
+                            return instance;
                         }).FirstOrDefault(instance => instance != null);
 
                     if (buildInfoInstance.IsNull())
                     {
-                        buildInfoInstance = ScriptableObject.CreateInstance<BuildInfo>();
+                        Debug.LogError($"Failed to find or create a valid {nameof(IBuildInfo)} instance!");
+                        return null;
                     }
 
-                    Assert.IsNotNull(buildInfoInstance);
-                    buildInfoInstance.BuildPlatform = MixedRealityPreferences.CurrentPlatformTarget;
-
-                    Debug.Assert(!buildInfoInstance.IsNull());
-                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\", false);
+                    Debug.Assert(buildInfoInstance.IsNotNull());
+                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\", true);
                     Debug.Assert(!buildAsset.IsNull());
                 }
                 else

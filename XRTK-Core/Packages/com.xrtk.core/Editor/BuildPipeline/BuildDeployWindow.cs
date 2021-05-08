@@ -7,9 +7,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Build;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
+using UnityEngine.Assertions;
 using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
@@ -75,6 +74,7 @@ namespace XRTK.Editor.BuildPipeline
         {
             titleContent = new GUIContent("Build Window");
             minSize = new Vector2(512, 256);
+            Assert.IsNotNull(UnityPlayerBuildTools.BuildInfo);
         }
 
         private void OnFocus()

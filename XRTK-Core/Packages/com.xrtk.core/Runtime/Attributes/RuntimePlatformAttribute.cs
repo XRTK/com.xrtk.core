@@ -4,7 +4,7 @@ using XRTK.Interfaces;
 
 namespace XRTK.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class RuntimePlatformAttribute : PropertyAttribute
     {
         public Type Platform { get; }

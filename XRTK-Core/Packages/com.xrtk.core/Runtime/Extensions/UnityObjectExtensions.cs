@@ -67,5 +67,13 @@ namespace XRTK.Extensions
                 return true;
             }
         }
+
+        /// <summary>
+        /// Checks if a Unity <see cref="Object"/> is not null.
+        /// </summary>
+        /// <param name="object"></param>
+        /// <remarks>Checks both the managed object and the underling Unity-managed native object.</remarks>
+        /// <returns>True if not null, otherwise false.</returns>
+        public static bool IsNotNull(this Object @object) => !@object.IsNull();
     }
 }

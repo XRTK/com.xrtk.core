@@ -8,6 +8,8 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using XRTK.Attributes;
+using XRTK.Definitions.Platforms;
 using XRTK.Interfaces;
 using XRTK.Services;
 
@@ -52,6 +54,8 @@ namespace XRTK.Editor.BuildPipeline
         }
     }
 
+    [RuntimePlatform(typeof(WebGlPlatform))]
+    [RuntimePlatform(typeof(WindowsStandalonePlatform))]
     public class BuildInfo : ScriptableObject, IBuildInfo
     {
         protected virtual void Awake()
@@ -98,7 +102,7 @@ namespace XRTK.Editor.BuildPipeline
         public virtual BuildTarget BuildTarget { get; private set; }
 
         /// <inheritdoc />
-        public virtual IMixedRealityPlatform BuildPlatform { get; internal set; }
+        public virtual IMixedRealityPlatform BuildPlatform => MixedRealityPreferences.CurrentPlatformTarget;
 
         /// <inheritdoc />
         public bool IsCommandLine { get; private set; }

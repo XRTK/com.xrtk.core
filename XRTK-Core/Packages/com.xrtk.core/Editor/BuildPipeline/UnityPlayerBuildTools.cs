@@ -19,7 +19,6 @@ using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
-using Object = UnityEngine.Object;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -208,8 +207,6 @@ namespace XRTK.Editor.BuildPipeline
             {
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
-
-            Debug.LogWarning($"{MixedRealityPreferences.CurrentPlatformTarget} :|: {buildInfo.GetType().FullName} :|: {buildInfo.BuildPlatform} :|: {buildInfo.FullOutputPath}");
 
             var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();

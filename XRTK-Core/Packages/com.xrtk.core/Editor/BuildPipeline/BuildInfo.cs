@@ -20,11 +20,15 @@ namespace XRTK.Editor.BuildPipeline
         private SerializedProperty bundleIdentifier;
         private SerializedProperty install;
 
+        private BuildInfo buildInfo;
+
         protected void OnEnable()
         {
             autoIncrement = serializedObject.FindProperty(nameof(autoIncrement));
             bundleIdentifier = serializedObject.FindProperty(nameof(bundleIdentifier));
             install = serializedObject.FindProperty(nameof(install));
+
+            buildInfo = (BuildInfo)target;
         }
 
         /// <inheritdoc />
@@ -37,7 +41,8 @@ namespace XRTK.Editor.BuildPipeline
 
             if (EditorGUI.EndChangeCheck())
             {
-                PlayerSettings.applicationIdentifier = bundleIdentifier.stringValue;
+                var buildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(buildInfo.BuildTarget);
+                PlayerSettings.SetApplicationIdentifier(buildTargetGroup, bundleIdentifier.stringValue);
             }
 
             EditorGUILayout.PropertyField(autoIncrement);
@@ -51,7 +56,7 @@ namespace XRTK.Editor.BuildPipeline
     {
         protected virtual void Awake()
         {
-            BundleIdentifier = PlayerSettings.applicationIdentifier;
+            bundleIdentifier = PlayerSettings.applicationIdentifier;
             IsCommandLine = Application.isBatchMode;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Interfaces;
@@ -17,14 +16,30 @@ namespace XRTK.Editor.BuildPipeline
     public interface IBuildInfo
     {
         /// <summary>
-        /// The Name of the executable. Same as <see cref="Application.productName"/> but cached for threading safety.
+        /// Should the build auto increment the build version number?
         /// </summary>
-        string BuildName { get; }
+        /// <remarks>
+        /// If <see cref="Version"/> is assigned then this flag is ignored.
+        /// </remarks>
+        bool AutoIncrement { get; set; }
 
         /// <summary>
-        /// The <see cref="Version"/> of the executable.
+        /// The build Bundle Identifier (i.e. 'com.xrtk.core')
         /// </summary>
+        string BundleIdentifier { get; set; }
+
+        /// <summary>
+        /// The build version number
+        /// </summary>
+        /// <remarks>
+        /// If set will override <see cref="AutoIncrement"/>
+        /// </remarks>
         Version Version { get; set; }
+
+        /// <summary>
+        /// The version code (usually a single integer for platforms like iOS, Android, and Magic Leap)
+        /// </summary>
+        int? VersionCode { get; set; }
 
         /// <summary>
         /// Is this build being issued from the command line?
@@ -96,20 +111,26 @@ namespace XRTK.Editor.BuildPipeline
         /// </summary>
         string Architecture { get; set; }
 
+        /// <summary>
+        /// Parses command line args via <see cref="Environment.GetCommandLineArgs"/>
+        /// </summary>
         void ParseCommandLineArgs();
 
+        /// <summary>
+        /// Should the executable be installed on <see cref="OnPostProcessBuild"/>?
+        /// </summary>
         bool Install { get; set; }
 
         /// <summary>
         ///   <para>Implement this function to receive a callback before the build is started.</para>
         /// </summary>
         /// <param name="report">A report containing information about the build, such as its target platform and output path.</param>
-        void OnPreprocessBuild(BuildReport report);
+        void OnPreProcessBuild(BuildReport report);
 
         /// <summary>
         ///   <para>Implement this function to receive a callback after the build is complete.</para>
         /// </summary>
         /// <param name="report">A BuildReport containing information about the build, such as the target platform and output path.</param>
-        void OnPostprocessBuild(BuildReport report);
+        void OnPostProcessBuild(BuildReport report);
     }
 }

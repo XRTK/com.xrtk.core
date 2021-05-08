@@ -18,7 +18,7 @@ namespace XRTK.Editor.BuildPipeline
     {
         protected virtual void Awake()
         {
-            BuildName = EditorPreferences.ApplicationProductName;
+            BundleIdentifier = Application.identifier;
             IsCommandLine = Application.isBatchMode;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;
@@ -26,10 +26,16 @@ namespace XRTK.Editor.BuildPipeline
         }
 
         /// <inheritdoc />
-        public string BuildName { get; private set; }
+        public bool AutoIncrement { get; set; }
+
+        /// <inheritdoc />
+        public string BundleIdentifier { get; set; }
 
         /// <inheritdoc />
         public virtual Version Version { get; set; }
+
+        /// <inheritdoc />
+        public int? VersionCode { get; set; }
 
         /// <inheritdoc />
         public virtual BuildTarget BuildTarget { get; private set; }
@@ -69,7 +75,7 @@ namespace XRTK.Editor.BuildPipeline
         }
 
         /// <inheritdoc />
-        public string FullOutputPath => $"{OutputDirectory}/{BuildName}{ExecutableFileExtension}";
+        public string FullOutputPath => $"{OutputDirectory}/{BundleIdentifier}{ExecutableFileExtension}";
 
         /// <inheritdoc />
         public virtual string ExecutableFileExtension
@@ -78,8 +84,6 @@ namespace XRTK.Editor.BuildPipeline
             {
                 switch (BuildTarget)
                 {
-                    case BuildTarget.Android:
-                        return ".apk";
                     case BuildTarget.StandaloneWindows:
                     case BuildTarget.StandaloneWindows64:
                         return ".exe";
@@ -113,6 +117,32 @@ namespace XRTK.Editor.BuildPipeline
             {
                 switch (arguments[i])
                 {
+                    case "-autoIncrement":
+                        AutoIncrement = true;
+                        break;
+                    case "-version":
+                        if (Version.TryParse(arguments[++i], out var version))
+                        {
+                            Version = version;
+                        }
+                        else
+                        {
+                            Debug.LogError($"Failed to parse -version \"{arguments[i]}\"");
+                        }
+                        break;
+                    case "-versionCode":
+                        if (int.TryParse(arguments[++i], out var versionCode))
+                        {
+                            VersionCode = versionCode;
+                        }
+                        else
+                        {
+                            Debug.LogError($"Failed to parse -versionCode \"{arguments[i]}\"");
+                        }
+                        break;
+                    case "-bundleIdentifier":
+                        BundleIdentifier = arguments[++i];
+                        break;
                     case "-sceneList":
                         Scenes = Scenes.Union(UnityPlayerBuildTools.SplitSceneList(arguments[++i]));
                         break;
@@ -176,20 +206,20 @@ namespace XRTK.Editor.BuildPipeline
         }
 
         /// <inheritdoc />
-        public virtual void OnPreprocessBuild(BuildReport report)
+        public virtual void OnPreProcessBuild(BuildReport report)
         {
             if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
             {
-                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPreprocessBuild)}");
+                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPreProcessBuild)}");
             }
         }
 
         /// <inheritdoc />
-        public virtual void OnPostprocessBuild(BuildReport report)
+        public virtual void OnPostProcessBuild(BuildReport report)
         {
             if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
             {
-                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPostprocessBuild)}");
+                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPostProcessBuild)}");
             }
         }
     }

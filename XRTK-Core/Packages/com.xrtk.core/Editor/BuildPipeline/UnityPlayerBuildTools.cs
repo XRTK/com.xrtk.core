@@ -13,6 +13,7 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using UnityEngine.Assertions;
 using XRTK.Attributes;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
@@ -72,6 +73,7 @@ namespace XRTK.Editor.BuildPipeline
                         buildInfoInstance = ScriptableObject.CreateInstance<BuildInfo>();
                     }
 
+                    Assert.IsNotNull(buildInfoInstance);
                     buildInfoInstance.BuildPlatform = MixedRealityPreferences.CurrentPlatformTarget;
 
                     Debug.Assert(!buildInfoInstance.IsNull());
@@ -105,7 +107,39 @@ namespace XRTK.Editor.BuildPipeline
 
             BuildInfo.ParseCommandLineArgs();
 
+            // use https://semver.org/
+            // major.minor.build
+            Version version = new Version(
+                (buildInfo.Version == null || buildInfo.AutoIncrement)
+                    ? string.IsNullOrWhiteSpace(Application.version)
+                        ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
+                            ? "1.0.0"
+                            : PlayerSettings.bundleVersion
+                        : Application.version
+                    : buildInfo.Version.ToString(3));
+
+            // Only auto incitement if the version wasn't specified in the build info.
+            if (buildInfo.Version == null &&
+                buildInfo.AutoIncrement)
+            {
+                version = new Version(version.Major, version.Minor, version.Build + 1);
+            }
+
+            // Updates the Application.version and syncs Android and iOS bundle version strings
+            PlayerSettings.bundleVersion = version.ToString(3);
+            // Update Lumin bc the Application.version isn't synced like Android & iOS
+            PlayerSettings.Lumin.versionName = PlayerSettings.bundleVersion;
+            // Update WSA bc the Application.version isn't synced line Android & iOS
+            PlayerSettings.WSA.packageVersion = new Version(version.Major, version.Minor, version.Build, 0);
+
             var buildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(buildInfo.BuildTarget);
+            var oldBuildIdentifier = PlayerSettings.GetApplicationIdentifier(buildTargetGroup);
+
+            if (!string.IsNullOrWhiteSpace(buildInfo.BundleIdentifier))
+            {
+                PlayerSettings.SetApplicationIdentifier(buildTargetGroup, buildInfo.BundleIdentifier);
+            }
+
             var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
             if (!string.IsNullOrEmpty(playerBuildSymbols))
@@ -196,6 +230,11 @@ namespace XRTK.Editor.BuildPipeline
             if (cacheIl2Cpp)
             {
                 PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
+            }
+
+            if (PlayerSettings.GetApplicationIdentifier(buildTargetGroup) != oldBuildIdentifier)
+            {
+                PlayerSettings.SetApplicationIdentifier(buildTargetGroup, oldBuildIdentifier);
             }
 
             PlayerSettings.colorSpace = oldColorSpace;
@@ -341,7 +380,7 @@ namespace XRTK.Editor.BuildPipeline
         {
             if (buildInfo != null)
             {
-                buildInfo.OnPreprocessBuild(report);
+                buildInfo.OnPreProcessBuild(report);
             }
         }
 
@@ -350,10 +389,75 @@ namespace XRTK.Editor.BuildPipeline
         {
             if (buildInfo != null)
             {
-                buildInfo.OnPreprocessBuild(report);
+                buildInfo.OnPreProcessBuild(report);
             }
         }
 
         #endregion IOrderedCallback
+
+        /// <summary>
+        /// Parses the command like arguments.
+        /// </summary>
+        /// <param name="buildInfo"></param>
+        public static void ParseBuildCommandLine(ref IBuildInfo buildInfo)
+        {
+            var arguments = Environment.GetCommandLineArgs();
+
+            for (int i = 0; i < arguments.Length; ++i)
+            {
+                switch (arguments[i])
+                {
+                    case "-autoIncrement":
+                        buildInfo.AutoIncrement = true;
+                        break;
+                    case "-version":
+                        if (Version.TryParse(arguments[++i], out var version))
+                        {
+                            buildInfo.Version = version;
+                        }
+                        else
+                        {
+                            Debug.LogError($"Failed to parse -version \"{arguments[i]}\"");
+                        }
+                        break;
+                    case "-versionCode":
+                        if (int.TryParse(arguments[++i], out var versionCode))
+                        {
+                            buildInfo.VersionCode = versionCode;
+                        }
+                        else
+                        {
+                            Debug.LogError($"Failed to parse -versionCode \"{arguments[i]}\"");
+                        }
+                        break;
+                    case "-sceneList":
+                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(arguments[++i]));
+                        break;
+                    case "-sceneListFile":
+                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(File.ReadAllText(arguments[++i])));
+                        break;
+                    case "-buildOutput":
+                        buildInfo.OutputDirectory = arguments[++i];
+                        break;
+                    case "-colorSpace":
+                        buildInfo.ColorSpace = (ColorSpace)Enum.Parse(typeof(ColorSpace), arguments[++i]);
+                        break;
+                    case "-x86":
+                    case "-x64":
+                    case "-ARM":
+                    case "-ARM64":
+                        buildInfo.Architecture = arguments[i].Substring(1);
+                        break;
+                    case "-debug":
+                    case "-master":
+                    case "-release":
+                        buildInfo.Configuration = arguments[i].Substring(1).ToLower();
+                        break;
+                    case "-bundleIdentifier":
+                        buildInfo.BundleIdentifier = arguments[++i];
+                        break;
+                }
+            }
+        }
     }
 }

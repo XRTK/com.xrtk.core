@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine.EventSystems;
 using XRTK.Interfaces.Providers.SpatialObservers;
 
@@ -14,7 +15,7 @@ namespace XRTK.EventDatum.SpatialAwareness
         /// <summary>
         /// Identifier of the object associated with this event.
         /// </summary>
-        public int Id { get; private set; }
+        public Guid Id { get; private set; }
 
         /// <summary>
         /// The spatial object managed by the spatial awareness system, representing the data in this event.
@@ -33,7 +34,7 @@ namespace XRTK.EventDatum.SpatialAwareness
         /// <param name="spatialAwarenessObserver"></param>
         /// <param name="id"></param>
         /// <param name="spatialObject"></param>
-        public void Initialize(IMixedRealitySpatialAwarenessDataProvider spatialAwarenessObserver, int id, T spatialObject)
+        public void Initialize(IMixedRealitySpatialAwarenessDataProvider spatialAwarenessObserver, Guid id, T spatialObject)
         {
             BaseInitialize(spatialAwarenessObserver);
             Id = id;

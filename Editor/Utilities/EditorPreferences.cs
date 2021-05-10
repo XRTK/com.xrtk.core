@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
@@ -11,6 +11,10 @@ namespace XRTK.Editor.Utilities
     /// </summary>
     public static class EditorPreferences
     {
+        private static string applicationProductName = null;
+
+        public static string ApplicationProductName => applicationProductName ?? (applicationProductName = Application.productName);
+
         /// <summary>
         /// Set the saved <see cref="string"/> from to <see cref="EditorPrefs"/>.
         /// </summary>
@@ -19,7 +23,7 @@ namespace XRTK.Editor.Utilities
         public static void Set(string key, string value)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
-            EditorPrefs.SetString($"{Application.productName}_{key}", value);
+            EditorPrefs.SetString($"{ApplicationProductName}_{key}", value);
         }
 
         /// <summary>
@@ -30,7 +34,7 @@ namespace XRTK.Editor.Utilities
         public static void Set(string key, bool value)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
-            EditorPrefs.SetBool($"{Application.productName}_{key}", value);
+            EditorPrefs.SetBool($"{ApplicationProductName}_{key}", value);
         }
 
         /// <summary>
@@ -41,7 +45,7 @@ namespace XRTK.Editor.Utilities
         public static void Set(string key, float value)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
-            EditorPrefs.SetFloat($"{Application.productName}_{key}", value);
+            EditorPrefs.SetFloat($"{ApplicationProductName}_{key}", value);
         }
 
         /// <summary>
@@ -52,7 +56,7 @@ namespace XRTK.Editor.Utilities
         public static void Set(string key, int value)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
-            EditorPrefs.SetInt($"{Application.productName}_{key}", value);
+            EditorPrefs.SetInt($"{ApplicationProductName}_{key}", value);
         }
 
         /// <summary>
@@ -64,12 +68,12 @@ namespace XRTK.Editor.Utilities
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
 
-            if (EditorPrefs.HasKey($"{Application.productName}_{key}"))
+            if (EditorPrefs.HasKey($"{ApplicationProductName}_{key}"))
             {
-                return EditorPrefs.GetString($"{Application.productName}_{key}");
+                return EditorPrefs.GetString($"{ApplicationProductName}_{key}");
             }
 
-            EditorPrefs.SetString($"{Application.productName}_{key}", defaultValue);
+            EditorPrefs.SetString($"{ApplicationProductName}_{key}", defaultValue);
             return defaultValue;
         }
 
@@ -82,12 +86,12 @@ namespace XRTK.Editor.Utilities
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
 
-            if (EditorPrefs.HasKey($"{Application.productName}_{key}"))
+            if (EditorPrefs.HasKey($"{ApplicationProductName}_{key}"))
             {
-                return EditorPrefs.GetBool($"{Application.productName}_{key}");
+                return EditorPrefs.GetBool($"{ApplicationProductName}_{key}");
             }
 
-            EditorPrefs.SetBool($"{Application.productName}_{key}", defaultValue);
+            EditorPrefs.SetBool($"{ApplicationProductName}_{key}", defaultValue);
             return defaultValue;
         }
 
@@ -100,12 +104,12 @@ namespace XRTK.Editor.Utilities
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
 
-            if (EditorPrefs.HasKey($"{Application.productName}_{key}"))
+            if (EditorPrefs.HasKey($"{ApplicationProductName}_{key}"))
             {
-                return EditorPrefs.GetFloat($"{Application.productName}_{key}");
+                return EditorPrefs.GetFloat($"{ApplicationProductName}_{key}");
             }
 
-            EditorPrefs.SetFloat($"{Application.productName}_{key}", defaultValue);
+            EditorPrefs.SetFloat($"{ApplicationProductName}_{key}", defaultValue);
             return defaultValue;
         }
 
@@ -118,12 +122,12 @@ namespace XRTK.Editor.Utilities
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
 
-            if (EditorPrefs.HasKey($"{Application.productName}_{key}"))
+            if (EditorPrefs.HasKey($"{ApplicationProductName}_{key}"))
             {
-                return EditorPrefs.GetInt($"{Application.productName}_{key}");
+                return EditorPrefs.GetInt($"{ApplicationProductName}_{key}");
             }
 
-            EditorPrefs.SetInt($"{Application.productName}_{key}", defaultValue);
+            EditorPrefs.SetInt($"{ApplicationProductName}_{key}", defaultValue);
             return defaultValue;
         }
     }

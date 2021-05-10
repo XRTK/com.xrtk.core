@@ -1,10 +1,13 @@
-﻿using System;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
 using UnityEngine;
 using XRTK.Interfaces;
 
 namespace XRTK.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class RuntimePlatformAttribute : PropertyAttribute
     {
         public Type Platform { get; }

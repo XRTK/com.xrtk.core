@@ -125,7 +125,7 @@ namespace XRTK.Extensions
         /// <typeparam name="T">Component Type</typeparam>
         /// <param name="gameObject">this gameObject</param>
         /// <param name="action">Action to perform.</param>
-        public static void ForEachComponent<T>(this GameObject gameObject, Action<T> action)
+        public static void ForEachComponent<T>(this GameObject gameObject, Action<T> action) where T : Component
         {
             foreach (T i in gameObject.GetComponents<T>())
             {

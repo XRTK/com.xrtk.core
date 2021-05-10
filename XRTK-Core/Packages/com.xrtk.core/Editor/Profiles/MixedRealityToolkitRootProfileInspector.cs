@@ -1,11 +1,15 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
@@ -24,35 +28,46 @@ namespace XRTK.Editor.Profiles
         private bool didPromptToConfigure = false;
 
         private readonly GUIContent profileLabel = new GUIContent("Profile");
-        private GUIStyle headerStyle;
 
-        private GUIStyle HeaderStyle
+        private int platformIndex;
+        private readonly List<IMixedRealityPlatform> platforms = new List<IMixedRealityPlatform>();
+
+        private List<IMixedRealityPlatform> Platforms
         {
             get
             {
-                if (headerStyle == null)
+                if (platforms.Count == 0)
                 {
-                    var editorStyle = EditorGUIUtility.isProSkin ? EditorStyles.whiteLargeLabel : EditorStyles.largeLabel;
-
-                    if (editorStyle != null)
+                    foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
                     {
-                        headerStyle = new GUIStyle(editorStyle)
+                        if (availablePlatform is AllPlatforms ||
+                            availablePlatform is EditorPlatform ||
+                            availablePlatform is CurrentBuildTargetPlatform)
                         {
-                            alignment = TextAnchor.MiddleCenter,
-                            fontSize = 18,
-                            padding = new RectOffset(0, 0, -8, -8)
-                        };
+                            continue;
+                        }
+
+                        platforms.Add(availablePlatform);
+                    }
+
+                    for (var i = 0; i < platforms.Count; i++)
+                    {
+                        if (MixedRealityPreferences.CurrentPlatformTarget == platforms[i])
+                        {
+                            platformIndex = i;
+                            break;
+                        }
                     }
                 }
 
-                return headerStyle;
+                return platforms;
             }
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            headerStyle = null;
+
             rootProfile = target as MixedRealityToolkitRootProfile;
 
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
@@ -111,12 +126,14 @@ namespace XRTK.Editor.Profiles
 
             // Additional registered components configuration
             registeredServiceProvidersProfile = serializedObject.FindProperty(nameof(registeredServiceProvidersProfile));
+
+            platforms.Clear();
         }
 
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-            EditorGUILayout.LabelField("The Mixed Reality Toolkit", HeaderStyle);
+            EditorGUILayout.LabelField("The Mixed Reality Toolkit", MixedRealityInspectorUtility.BoldCenteredHeaderStyle);
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             RenderSystemFields();
@@ -124,6 +141,43 @@ namespace XRTK.Editor.Profiles
 
         internal void RenderSystemFields()
         {
+
+            for (var i = 0; i < Platforms.Count; i++)
+            {
+                if (MixedRealityPreferences.CurrentPlatformTarget == Platforms[i])
+                {
+                    platformIndex = i;
+                    break;
+                }
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var prevPlatformIndex = platformIndex;
+            platformIndex = EditorGUILayout.Popup("Platform Target", platformIndex, Platforms.Select(p => p.Name).ToArray());
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                for (int i = 0; i < Platforms.Count; i++)
+                {
+                    if (i == platformIndex)
+                    {
+                        var platform = Platforms[i];
+
+                        var buildTarget = platform.ValidBuildTargets[0]; // For now just get the highest priority one.
+
+                        if (!EditorUserBuildSettings.SwitchActiveBuildTarget(BuildPipeline.GetBuildTargetGroup(buildTarget), buildTarget))
+                        {
+                            platformIndex = prevPlatformIndex;
+                            Debug.LogWarning($"Failed to switch {platform.Name} active build target to {buildTarget}");
+                        }
+                        else
+                        {
+                            MixedRealityPreferences.CurrentPlatformTarget = platform;
+                        }
+                    }
+                }
+            }
+
             RenderConfigurationOptions();
 
             serializedObject.Update();

@@ -16,8 +16,5 @@ namespace XRTK.Definitions.Platforms
     {
         /// <inheritdoc />
         public override bool IsAvailable => Application.isEditor;
-
-        /// <inheritdoc />
-        public override bool IsBuildTargetAvailable => false;
     }
 }

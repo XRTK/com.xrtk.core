@@ -10,36 +10,125 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using XRTK.Attributes;
+using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// Cross platform player build tools
     /// </summary>
-    public static class UnityPlayerBuildTools
+    public class UnityPlayerBuildTools : IPreprocessBuildWithReport, IPostprocessBuildWithReport
     {
         // Build configurations. Exactly one of these should be defined for any given build.
         public const string BuildSymbolDebug = "debug";
         public const string BuildSymbolRelease = "release";
         public const string BuildSymbolMaster = "master";
 
+        private static IBuildInfo buildInfo;
+
         /// <summary>
-        /// Starts the build process
+        /// Gets or creates an instance of the <see cref="IBuildInfo"/> to use when building.
         /// </summary>
-        /// <param name="buildInfo"></param>
-        /// <returns>The <see cref="BuildReport"/> from Unity's <see cref="BuildPipeline"/></returns>
-        public static BuildReport BuildUnityPlayer(IBuildInfo buildInfo)
+        /// <returns>A new instance of <see cref="IBuildInfo"/>.</returns>
+        public static IBuildInfo BuildInfo
         {
+            get
+            {
+                BuildInfo buildInfoInstance;
+
+                if (buildInfo == null ||
+                    buildInfo.BuildPlatform != MixedRealityPreferences.CurrentPlatformTarget)
+                {
+                    buildInfoInstance = AppDomain.CurrentDomain
+                        .GetAssemblies()
+                        .SelectMany(assembly => assembly.GetTypes())
+                        .Where(type => typeof(IBuildInfo).IsAssignableFrom(type))
+                        .Select(type =>
+                        {
+                            BuildInfo instance = null;
+                            var runtimePlatformAttributes = type.GetCustomAttributes<RuntimePlatformAttribute>();
+
+                            if (runtimePlatformAttributes.All(runtimePlatformAttribute => runtimePlatformAttribute.Platform != MixedRealityPreferences.CurrentPlatformTarget.GetType()))
+                            {
+                                return null;
+                            }
+
+                            var assetGuids = AssetDatabase.FindAssets($"t:{type}");
+
+                            foreach (var guid in assetGuids)
+                            {
+                                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                                var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
+                                var currentPlatform = MixedRealityPreferences.CurrentPlatformTarget;
+
+                                if (asset?.BuildPlatform == currentPlatform)
+                                {
+                                    instance = asset as BuildInfo;
+                                    break;
+                                }
+                            }
+
+                            if (instance.IsNull())
+                            {
+                                instance = ScriptableObject.CreateInstance(type) as BuildInfo;
+                            }
+
+                            if (instance.IsNull())
+                            {
+                                Debug.LogError($"Failed to find or create a valid {nameof(IBuildInfo)} for {MixedRealityPreferences.CurrentPlatformTarget}!");
+                                return null;
+                            }
+
+                            return instance;
+                        }).FirstOrDefault(instance => instance != null);
+
+                    if (buildInfoInstance.IsNull())
+                    {
+                        Debug.LogError($"Failed to find or create a valid {nameof(IBuildInfo)} instance!");
+                        return null;
+                    }
+
+                    Debug.Assert(buildInfoInstance.IsNotNull());
+                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\", true);
+                    Debug.Assert(!buildAsset.IsNull());
+                }
+                else
+                {
+                    buildInfoInstance = buildInfo as BuildInfo;
+                }
+
+                buildInfo = buildInfoInstance;
+                Debug.Assert(buildInfo != null);
+
+                return buildInfo;
+            }
+        }
+
+        /// <summary>
+        /// Starts the build process with the provided <see cref="IBuildInfo"/>
+        /// </summary>
+        /// <returns>The <see cref="BuildReport"/> from Unity's <see cref="BuildPipeline"/></returns>
+        public static BuildReport BuildUnityPlayer()
+        {
+            if (BuildInfo == null)
+            {
+                throw new ArgumentNullException(nameof(BuildInfo));
+            }
+
             EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
 
-            // Call the pre-build action, if any
-            buildInfo.PreBuildAction?.Invoke(buildInfo);
+            if (BuildInfo.IsCommandLine)
+            {
+                BuildInfo.ParseCommandLineArgs();
+            }
 
             // use https://semver.org/
             // major.minor.build
@@ -66,7 +155,7 @@ namespace XRTK.Editor.BuildAndDeploy
             // Update WSA bc the Application.version isn't synced line Android & iOS
             PlayerSettings.WSA.packageVersion = new Version(version.Major, version.Minor, version.Build, 0);
 
-            var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
+            var buildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(buildInfo.BuildTarget);
             var oldBuildIdentifier = PlayerSettings.GetApplicationIdentifier(buildTargetGroup);
 
             if (!string.IsNullOrWhiteSpace(buildInfo.BundleIdentifier))
@@ -119,71 +208,7 @@ namespace XRTK.Editor.BuildAndDeploy
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            var oldBuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            var oldBuildTargetGroup = oldBuildTarget.GetGroup();
-
-            if (EditorUserBuildSettings.activeBuildTarget != buildInfo.BuildTarget)
-            {
-                EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildInfo.BuildTarget);
-            }
-
-            buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}";
-
-            var cacheIl2Cpp = true;
-
-            switch (buildInfo.BuildTarget)
-            {
-                case BuildTarget.Lumin:
-
-                    if (buildInfo.VersionCode.HasValue)
-                    {
-                        PlayerSettings.Lumin.versionCode = buildInfo.VersionCode.Value;
-                    }
-                    else
-                    {
-                        // Usually version codes are unique and not tied to the usual semver versions
-                        // see https://developer.android.com/studio/publish/versioning#appversioning
-                        // versionCode - A positive integer used as an internal version number.
-                        // This number is used only to determine whether one version is more recent than another,
-                        // with higher numbers indicating more recent versions. The Android system uses the
-                        // versionCode value to protect against downgrades by preventing users from installing
-                        // an APK with a lower versionCode than the version currently installed on their device.
-                        PlayerSettings.Lumin.versionCode++;
-                    }
-
-                    buildInfo.OutputDirectory += ".mpk";
-
-                    if (Directory.Exists($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu"))
-                    {
-                        Directory.Delete($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu", true);
-                    }
-                    break;
-                case BuildTarget.Android:
-                    if (buildInfo.VersionCode.HasValue)
-                    {
-                        PlayerSettings.Android.bundleVersionCode = buildInfo.VersionCode.Value;
-                    }
-                    else
-                    {
-                        // Usually version codes are unique and not tied to the usual semver versions
-                        // see https://developer.android.com/studio/publish/versioning#appversioning
-                        // versionCode - A positive integer used as an internal version number.
-                        // This number is used only to determine whether one version is more recent than another,
-                        // with higher numbers indicating more recent versions. The Android system uses the
-                        // versionCode value to protect against downgrades by preventing users from installing
-                        // an APK with a lower versionCode than the version currently installed on their device.
-                        PlayerSettings.Android.bundleVersionCode++;
-                    }
-
-                    buildInfo.OutputDirectory += ".apk";
-                    cacheIl2Cpp = false;
-                    break;
-                case BuildTarget.StandaloneWindows:
-                case BuildTarget.StandaloneWindows64:
-                    buildInfo.OutputDirectory += ".exe";
-                    break;
-            }
-
+            var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
 
             if (cacheIl2Cpp)
@@ -195,7 +220,6 @@ namespace XRTK.Editor.BuildAndDeploy
                     Directory.CreateDirectory(il2cppCache);
                 }
 
-                File.WriteAllText($"{il2cppCache}\\xrtk.lock", string.Empty);
                 PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
             }
 
@@ -203,40 +227,40 @@ namespace XRTK.Editor.BuildAndDeploy
 
             if (Application.isBatchMode)
             {
+                Debug.Log("Scenes in build:");
+
                 foreach (var scene in buildInfo.Scenes)
                 {
-                    Debug.Log($"BuildScene->{scene.path}");
+                    Debug.Log($"    {scene.path}");
                 }
             }
 
             try
             {
-                buildReport = BuildPipeline.BuildPlayer(
+                buildReport = UnityEditor.BuildPipeline.BuildPlayer(
                     buildInfo.Scenes.ToArray(),
-                    buildInfo.OutputDirectory,
+                    buildInfo.FullOutputPath,
                     buildInfo.BuildTarget,
                     buildInfo.BuildOptions);
             }
             catch (Exception e)
             {
-                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                Debug.LogError(e);
             }
 
-            PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
+            if (cacheIl2Cpp)
+            {
+                PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
+            }
+
+            if (PlayerSettings.GetApplicationIdentifier(buildTargetGroup) != oldBuildIdentifier)
+            {
+                PlayerSettings.SetApplicationIdentifier(buildTargetGroup, oldBuildIdentifier);
+            }
+
             PlayerSettings.colorSpace = oldColorSpace;
 
-            if (EditorUserBuildSettings.activeBuildTarget != oldBuildTarget)
-            {
-                EditorUserBuildSettings.SwitchActiveBuildTarget(oldBuildTargetGroup, oldBuildTarget);
-            }
-
-            if (PlayerSettings.GetApplicationIdentifier(oldBuildTargetGroup) != oldBuildIdentifier)
-            {
-                PlayerSettings.SetApplicationIdentifier(oldBuildTargetGroup, oldBuildIdentifier);
-            }
-
-            // Call the post-build action, if any
-            buildInfo.PostBuildAction?.Invoke(buildInfo, buildReport);
+            EditorUtility.ClearProgressBar();
 
             return buildReport;
         }
@@ -276,23 +300,19 @@ namespace XRTK.Editor.BuildAndDeploy
         /// <summary>
         /// Start a build using Unity's command line. Valid arguments:<para/>
         /// -autoIncrement : Increments the build revision number.<para/>
-        /// -sceneList : A csv of a list of scenes to include in the build.<para/>
+        /// -sceneList : A list of scenes to include in the build in CSV format.<para/>
         /// -sceneListFile : A json file with a list of scenes to include in the build.<para/>
         /// -buildOutput : The target directory you'd like the build to go.<para/>
         /// -colorSpace : The <see cref="ColorSpace"/> settings for the build.<para/>
-        /// -x86 / -x64 : The target build platform. (Default is x86)<para/>
+        /// -x86 / -x64 / -ARM / -ARM64 : The target build platform. (Default is x86)<para/>
         /// -debug / -release / -master : The target build configuration. (Default is master)<para/>
-        ///
-        /// UWP Platform Specific arguments:<para/>
-        /// -buildAppx : Builds the appx bundle after the Unity Build step.<para/>
-        /// -rebuildAppx : Rebuild the appx bundle.<para/>
         /// </summary>
         [UsedImplicitly]
-        public static async void StartCommandLineBuild()
+        public static void StartCommandLineBuild()
         {
             // We don't need stack traces on all our logs. Makes things a lot easier to read.
             Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
-            Debug.Log($"Starting command line build for {EditorUserBuildSettings.activeBuildTarget}...");
+            Debug.Log($"Starting command line build for {MixedRealityPreferences.CurrentPlatformTarget.Name}...");
             EditorAssemblyReloadManager.LockReloadAssemblies = true;
 
             BuildReport buildReport = default;
@@ -307,17 +327,7 @@ namespace XRTK.Editor.BuildAndDeploy
                     Debug.Log($"AndroidSdkRoot: {androidSdkPath}");
                 }
 
-                switch (EditorUserBuildSettings.activeBuildTarget)
-                {
-                    case BuildTarget.WSAPlayer:
-                        buildReport = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
-                        break;
-                    default:
-                        var buildInfo = new BuildInfo(true) as IBuildInfo;
-                        ParseBuildCommandLine(ref buildInfo);
-                        buildReport = BuildUnityPlayer(buildInfo);
-                        break;
-                }
+                buildReport = BuildUnityPlayer();
             }
             catch (Exception e)
             {
@@ -353,80 +363,11 @@ namespace XRTK.Editor.BuildAndDeploy
         }
 
         /// <summary>
-        /// Get the Unity Project Root Path.
+        /// Splits the scene list provided in CSV format to an array of scene path strings.
         /// </summary>
-        /// <returns>The full path to the project's root.</returns>
-        public static string GetProjectPath()
-        {
-            return Path.GetDirectoryName(Path.GetFullPath(Application.dataPath));
-        }
-
-        /// <summary>
-        /// Parses the command like arguments.
-        /// </summary>
-        /// <param name="buildInfo"></param>
-        public static void ParseBuildCommandLine(ref IBuildInfo buildInfo)
-        {
-            var arguments = Environment.GetCommandLineArgs();
-
-            for (int i = 0; i < arguments.Length; ++i)
-            {
-                switch (arguments[i])
-                {
-                    case "-autoIncrement":
-                        buildInfo.AutoIncrement = true;
-                        break;
-                    case "-version":
-                        if (Version.TryParse(arguments[++i], out var version))
-                        {
-                            buildInfo.Version = version;
-                        }
-                        else
-                        {
-                            Debug.LogError($"Failed to parse -version \"{arguments[i]}\"");
-                        }
-                        break;
-                    case "-versionCode":
-                        if (int.TryParse(arguments[++i], out var versionCode))
-                        {
-                            buildInfo.VersionCode = versionCode;
-                        }
-                        else
-                        {
-                            Debug.LogError($"Failed to parse -versionCode \"{arguments[i]}\"");
-                        }
-                        break;
-                    case "-sceneList":
-                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(arguments[++i]));
-                        break;
-                    case "-sceneListFile":
-                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(File.ReadAllText(arguments[++i])));
-                        break;
-                    case "-buildOutput":
-                        buildInfo.OutputDirectory = arguments[++i];
-                        break;
-                    case "-colorSpace":
-                        buildInfo.ColorSpace = (ColorSpace)Enum.Parse(typeof(ColorSpace), arguments[++i]);
-                        break;
-                    case "-x86":
-                    case "-x64":
-                    case "-ARM":
-                    case "-ARM64":
-                        buildInfo.BuildPlatform = arguments[i].Substring(1);
-                        break;
-                    case "-debug":
-                    case "-master":
-                    case "-release":
-                        buildInfo.Configuration = arguments[i].Substring(1).ToLower();
-                        break;
-                    case "-bundleIdentifier":
-                        buildInfo.BundleIdentifier = arguments[++i];
-                        break;
-                }
-            }
-        }
-
-        private static IEnumerable<EditorBuildSettingsScene> SplitSceneList(string sceneList)
+        /// <param name="sceneList">A CSV list of scenes to split.</param>
+        /// <returns>An array of scene path strings.</returns>
+        public static IEnumerable<EditorBuildSettingsScene> SplitSceneList(string sceneList)
         {
             var sceneListArray = sceneList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             return sceneListArray
@@ -449,5 +390,18 @@ namespace XRTK.Editor.BuildAndDeploy
 
             return File.Exists($"{storePath}\\project.lock.json");
         }
+
+        #region IOrderedCallback
+
+        /// <inheritdoc />
+        public int callbackOrder { get; }
+
+        /// <inheritdoc />
+        public void OnPreprocessBuild(BuildReport report) => buildInfo?.OnPreProcessBuild(report);
+
+        /// <inheritdoc />
+        public void OnPostprocessBuild(BuildReport report) => buildInfo?.OnPreProcessBuild(report);
+
+        #endregion IOrderedCallback
     }
 }

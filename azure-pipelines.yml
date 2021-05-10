@@ -6,7 +6,6 @@ resources:
       type: github
       name: XRTK/AzurePipelines
       endpoint: XRTK
-      ref: dev/build-system-refactor
 
 variables:
   project.name: 'XRTK-Core'

@@ -32,11 +32,6 @@ namespace XRTK.Editor.BuildPipeline
                 return;
             }
 
-            if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
-            {
-                Debug.Log($"{nameof(AndroidBuildInfo)}.{nameof(OnPreProcessBuild)}");
-            }
-
             if (VersionCode.HasValue)
             {
                 PlayerSettings.Android.bundleVersionCode = VersionCode.Value;

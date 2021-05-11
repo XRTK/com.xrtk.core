@@ -314,7 +314,7 @@ namespace XRTK.Editor.BuildPipeline
         {
             if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
             {
-                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPreProcessBuild)}");
+                // Do a thing.
             }
         }
 
@@ -323,7 +323,7 @@ namespace XRTK.Editor.BuildPipeline
         {
             if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
             {
-                Debug.Log($"{nameof(BuildInfo)}.{nameof(OnPostProcessBuild)}");
+                // Do a thing.
             }
         }
     }

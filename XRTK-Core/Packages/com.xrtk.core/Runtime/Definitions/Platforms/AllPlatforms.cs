@@ -12,7 +12,11 @@ namespace XRTK.Definitions.Platforms
         /// <inheritdoc />
         public override bool IsAvailable => true;
 
+#if UNITY_EDITOR
+
         /// <inheritdoc />
         public override bool IsBuildTargetAvailable => true;
+
+#endif // UNITY_EDITOR
     }
 }

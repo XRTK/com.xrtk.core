@@ -43,9 +43,10 @@ namespace XRTK.Editor.BuildPipeline
             get
             {
                 BuildInfo buildInfoInstance;
+                var currentPlatformTarget = MixedRealityPreferences.CurrentPlatformTarget.GetType();
 
                 if (buildInfo == null ||
-                    buildInfo.BuildPlatform.GetType() != MixedRealityPreferences.CurrentPlatformTarget.GetType())
+                    buildInfo.BuildPlatform.GetType() != currentPlatformTarget)
                 {
                     buildInfoInstance = AppDomain.CurrentDomain
                         .GetAssemblies()
@@ -56,7 +57,7 @@ namespace XRTK.Editor.BuildPipeline
                             BuildInfo instance = null;
                             var runtimePlatformAttributes = type.GetCustomAttributes<RuntimePlatformAttribute>();
 
-                            if (runtimePlatformAttributes.All(runtimePlatformAttribute => runtimePlatformAttribute.Platform != MixedRealityPreferences.CurrentPlatformTarget.GetType()))
+                            if (runtimePlatformAttributes.All(runtimePlatformAttribute => runtimePlatformAttribute.Platform != currentPlatformTarget))
                             {
                                 return null;
                             }
@@ -67,9 +68,8 @@ namespace XRTK.Editor.BuildPipeline
                             {
                                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
                                 var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
-                                var currentPlatform = MixedRealityPreferences.CurrentPlatformTarget;
 
-                                if (asset?.BuildPlatform.GetType() == currentPlatform.GetType())
+                                if (asset?.BuildPlatform.GetType() == currentPlatformTarget)
                                 {
                                     instance = asset as BuildInfo;
                                     break;

@@ -43,8 +43,14 @@ namespace XRTK.Definitions.Platforms
                                                       ValidBuildTargets.Any(buildTarget => UnityEditor.EditorUserBuildSettings.activeBuildTarget == buildTarget);
 
         /// <inheritdoc />
-        public virtual UnityEditor.BuildTarget[] ValidBuildTargets { get; } = null;
+        public virtual UnityEditor.BuildTarget[] ValidBuildTargets => null;
 
 #endif // UNITY_EDITOR
+
+        /// <inheritdoc />
+        public override bool Equals(object other) => other?.GetType() == GetType();
+
+        /// <inheritdoc />
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 }

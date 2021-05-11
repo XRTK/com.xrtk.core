@@ -1,0 +1,581 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class UnityPlayerBuildTools
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class UnityPlayerBuildTools
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools">
+  
+  
+  <h1 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools" class="text-break">Class UnityPlayerBuildTools
+  </h1>
+  <div class="markdown level0 summary"><p>Cross platform player build tools</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">UnityPlayerBuildTools</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Editor.BuildPipeline.html">XRTK.Editor.BuildPipeline</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.Editor.BuildPipeline.dll</h6>
+  <h5 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class UnityPlayerBuildTools : IPreprocessBuildWithReport, IPostprocessBuildWithReport, IOrderedCallback</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildSymbolDebug.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildSymbolDebug%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L31">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildSymbolDebug" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildSymbolDebug">BuildSymbolDebug</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BuildSymbolDebug = &quot;debug&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildSymbolMaster.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildSymbolMaster%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L33">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildSymbolMaster" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildSymbolMaster">BuildSymbolMaster</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BuildSymbolMaster = &quot;master&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildSymbolRelease.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildSymbolRelease%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L32">View Source</a>
+  </span>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildSymbolRelease" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildSymbolRelease">BuildSymbolRelease</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BuildSymbolRelease = &quot;release&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildInfo.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildInfo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L41">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildInfo_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildInfo*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildInfo" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildInfo">BuildInfo</h4>
+  <div class="markdown level1 summary"><p>Gets or creates an instance of the <a class="xref" href="XRTK.Editor.BuildPipeline.IBuildInfo.html">IBuildInfo</a> to use when building.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IBuildInfo BuildInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Editor.BuildPipeline.IBuildInfo.html">IBuildInfo</a></td>
+        <td><p>A new instance of <a class="xref" href="XRTK.Editor.BuildPipeline.IBuildInfo.html">IBuildInfo</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_callbackOrder.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.callbackOrder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L397">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_callbackOrder_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.callbackOrder*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_callbackOrder" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.callbackOrder">callbackOrder</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int callbackOrder { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildUnityPlayer.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildUnityPlayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L119">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildUnityPlayer_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildUnityPlayer*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_BuildUnityPlayer" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.BuildUnityPlayer">BuildUnityPlayer()</h4>
+  <div class="markdown level1 summary"><p>Starts the build process with the provided <a class="xref" href="XRTK.Editor.BuildPipeline.IBuildInfo.html">IBuildInfo</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BuildReport BuildUnityPlayer()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.Build.Reporting.BuildReport.html">BuildReport</a></td>
+        <td><p>The <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.Build.Reporting.BuildReport.html">BuildReport</a> from Unity's <a class="xref" href="XRTK.Editor.BuildPipeline.html">XRTK.Editor.BuildPipeline</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_OnPostprocessBuild_UnityEditor_Build_Reporting_BuildReport_.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.OnPostprocessBuild(UnityEditor.Build.Reporting.BuildReport)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L403">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_OnPostprocessBuild_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.OnPostprocessBuild*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_OnPostprocessBuild_UnityEditor_Build_Reporting_BuildReport_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.OnPostprocessBuild(UnityEditor.Build.Reporting.BuildReport)">OnPostprocessBuild(BuildReport)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnPostprocessBuild(BuildReport report)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.Build.Reporting.BuildReport.html">BuildReport</a></td>
+        <td><span class="parametername">report</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_OnPreprocessBuild_UnityEditor_Build_Reporting_BuildReport_.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.OnPreprocessBuild(UnityEditor.Build.Reporting.BuildReport)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L400">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_OnPreprocessBuild_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.OnPreprocessBuild*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_OnPreprocessBuild_UnityEditor_Build_Reporting_BuildReport_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.OnPreprocessBuild(UnityEditor.Build.Reporting.BuildReport)">OnPreprocessBuild(BuildReport)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnPreprocessBuild(BuildReport report)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.Build.Reporting.BuildReport.html">BuildReport</a></td>
+        <td><span class="parametername">report</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_RestoreNugetPackagesAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.RestoreNugetPackagesAsync(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L384">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_RestoreNugetPackagesAsync_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.RestoreNugetPackagesAsync*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_RestoreNugetPackagesAsync_System_String_System_String_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.RestoreNugetPackagesAsync(System.String,System.String)">RestoreNugetPackagesAsync(String, String)</h4>
+  <div class="markdown level1 summary"><p>Restores any nuget packages at the path specified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;bool&gt; RestoreNugetPackagesAsync(string nugetPath, string storePath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">nugetPath</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">storePath</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
+        <td><p>True, if the nuget packages were successfully restored.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_SplitSceneList_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.SplitSceneList(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L370">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_SplitSceneList_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.SplitSceneList*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_SplitSceneList_System_String_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.SplitSceneList(System.String)">SplitSceneList(String)</h4>
+  <div class="markdown level1 summary"><p>Splits the scene list provided in CSV format to an array of scene path strings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;EditorBuildSettingsScene&gt; SplitSceneList(string sceneList)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">sceneList</span></td>
+        <td><p>A CSV list of scenes to split.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.EditorBuildSettingsScene.html">EditorBuildSettingsScene</a>&gt;</td>
+        <td><p>An array of scene path strings.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_StartCommandLineBuild.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L310">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_StartCommandLineBuild_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_StartCommandLineBuild" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild">StartCommandLineBuild()</h4>
+  <div class="markdown level1 summary"><p>Start a build using Unity's command line. Valid arguments:<p>
+-autoIncrement : Increments the build revision number.<p>
+-sceneList : A list of scenes to include in the build in CSV format.<p>
+-sceneListFile : A json file with a list of scenes to include in the build.<p>
+-buildOutput : The target directory you'd like the build to go.<p>
+-colorSpace : The <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ColorSpace.html">ColorSpace</a> settings for the build.<p>
+-x86 / -x64 / -ARM / -ARM64 : The target build platform. (Default is x86)<p>
+-debug / -release / -master : The target build configuration. (Default is master)<p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[UsedImplicitly]
+public static void StartCommandLineBuild()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_SyncSolution.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.SyncSolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L291">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_SyncSolution_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.SyncSolution*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_SyncSolution" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.SyncSolution">SyncSolution()</h4>
+  <div class="markdown level1 summary"><p>Force Unity To Write Project Files</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SyncSolution()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_ValidateProject.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L271">View Source</a>
+  </span>
+  <a id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_ValidateProject_" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject*"></a>
+  <h4 id="XRTK_Editor_BuildPipeline_UnityPlayerBuildTools_ValidateProject" data-uid="XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject">ValidateProject()</h4>
+  <div class="markdown level1 summary"><p>Validates the Unity Project assets by forcing a symbolic link sync and creates solution files.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[UsedImplicitly]
+public static void ValidateProject()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Editor_BuildPipeline_UnityPlayerBuildTools.md&amp;value=---%0Auid%3A%20XRTK.Editor.BuildPipeline.UnityPlayerBuildTools%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/XRTK-Core/Packages/com.xrtk.core/Editor/BuildPipeline/UnityPlayerBuildTools.cs/#L28" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

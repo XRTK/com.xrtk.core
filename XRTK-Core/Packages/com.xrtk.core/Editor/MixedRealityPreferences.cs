@@ -7,10 +7,13 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Editor.Extensions;
 using XRTK.Extensions;
 using XRTK.Editor.Utilities;
+using XRTK.Interfaces;
+using XRTK.Services;
 
 namespace XRTK.Editor
 {
@@ -240,7 +243,7 @@ namespace XRTK.Editor
 
                 if (autoLoadSymbolicLinks && SymbolicLinker.Settings.IsNull())
                 {
-                    ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings)).CreateAsset();
+                    ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings)).GetOrCreateAsset();
                 }
             }
         }
@@ -273,6 +276,89 @@ namespace XRTK.Editor
         }
 
         #endregion Debug Symbolic Links
+
+        #region Current Platform Target
+
+        private static bool isCurrentPlatformPreferenceLoaded;
+
+        private static IMixedRealityPlatform currentPlatformTarget = null;
+
+        /// <summary>
+        /// The current <see cref="IMixedRealityPlatform"/> target.
+        /// </summary>
+        public static IMixedRealityPlatform CurrentPlatformTarget
+        {
+            get
+            {
+                if (!isCurrentPlatformPreferenceLoaded || currentPlatformTarget == null)
+                {
+                    isCurrentPlatformPreferenceLoaded = true;
+
+                    MixedRealityToolkit.CheckPlatforms();
+
+                    if (TypeExtensions.TryResolveType(EditorPreferences.Get(nameof(CurrentPlatformTarget), Guid.Empty.ToString()), out var platform))
+                    {
+                        foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
+                        {
+                            if (availablePlatform is AllPlatforms ||
+                                availablePlatform is EditorPlatform ||
+                                availablePlatform is CurrentBuildTargetPlatform)
+                            {
+                                continue;
+                            }
+
+                            if (availablePlatform.GetType() == platform)
+                            {
+                                currentPlatformTarget = availablePlatform;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (currentPlatformTarget == null)
+                    {
+                        foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
+                        {
+                            if (availablePlatform is AllPlatforms ||
+                                availablePlatform is EditorPlatform ||
+                                availablePlatform is CurrentBuildTargetPlatform)
+                            {
+                                continue;
+                            }
+
+                            foreach (var buildTarget in availablePlatform.ValidBuildTargets)
+                            {
+                                if (EditorUserBuildSettings.activeBuildTarget == buildTarget)
+                                {
+                                    currentPlatformTarget = availablePlatform;
+                                    return currentPlatformTarget;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return currentPlatformTarget;
+            }
+            set
+            {
+                if (value is AllPlatforms ||
+                    value is EditorPlatform ||
+                    value is CurrentBuildTargetPlatform)
+                {
+                    return;
+                }
+
+                currentPlatformTarget = value;
+
+                EditorPreferences.Set(nameof(CurrentPlatformTarget),
+                    currentPlatformTarget != null
+                        ? currentPlatformTarget.GetType().GUID.ToString()
+                        : Guid.Empty.ToString());
+            }
+        }
+
+        #endregion Current Platform Target
 
         [SettingsProvider]
         private static SettingsProvider Preferences()

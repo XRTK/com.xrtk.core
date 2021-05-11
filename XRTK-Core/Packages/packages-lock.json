@@ -160,7 +160,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.11"
+        "com.xrtk.core": "0.2.14"
       }
     },
     "com.xrtk.lumin": {
@@ -168,7 +168,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.13"
+        "com.xrtk.core": "0.2.14"
       }
     },
     "com.xrtk.oculus": {
@@ -176,7 +176,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.11"
+        "com.xrtk.core": "0.2.14"
       }
     },
     "com.xrtk.sdk": {
@@ -184,7 +184,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.11"
+        "com.xrtk.core": "0.2.14"
       }
     },
     "com.xrtk.wmr": {
@@ -192,7 +192,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.13",
+        "com.xrtk.core": "0.2.14",
         "com.unity.xr.windowsmr.metro": "4.2.3"
       }
     },

@@ -21,7 +21,7 @@ variables:
   isReleaseBuild: $[ and( eq(variables['Build.SourceBranchName'], 'main'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) ]
   isPreviewBuild: $[ and( eq(variables['System.PullRequest.TargetBranch'], 'main'), eq(variables['build.reason'], 'PullRequest') ) ]
 
-name: $(package.name) ${{ coalesce( variables['date'], '$(System.PullRequest.PullRequestNumber)', '$(Date:yyyyMMdd)' ) }}$(Rev:.r)
+name: ${{ coalesce( variables['package.name'], variables['project.name'] ) }} ${{ coalesce( variables['date'], '$(System.PullRequest.PullRequestNumber)', '$(Date:yyyyMMdd)' ) }}$(Rev:.r)
 
 pr:
   autoCancel: true

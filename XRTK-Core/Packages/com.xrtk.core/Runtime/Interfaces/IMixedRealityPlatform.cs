@@ -9,9 +9,21 @@ namespace XRTK.Interfaces
     public interface IMixedRealityPlatform
     {
         /// <summary>
+        /// The human readable name for this platform.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Is this platform currently available?
         /// </summary>
         bool IsAvailable { get; }
+
+        /// <summary>
+        /// The list of platforms that this specific platform will override and make the others return not available.
+        /// </summary>
+        IMixedRealityPlatform[] PlatformOverrides { get; }
+
+#if UNITY_EDITOR
 
         /// <summary>
         /// The this platform build target available?
@@ -22,8 +34,10 @@ namespace XRTK.Interfaces
         bool IsBuildTargetAvailable { get; }
 
         /// <summary>
-        /// The list of platforms that this specific platform will override and make the others return not available.
+        /// The array of valid <see cref="UnityEditor.BuildTarget"/>s.
         /// </summary>
-        IMixedRealityPlatform[] PlatformOverrides { get; }
+        UnityEditor.BuildTarget[] ValidBuildTargets { get; }
+
+#endif // UNITY_EDITOR
     }
 }

@@ -59,7 +59,7 @@ namespace XRTK.Editor.BuildPipeline
     public class BuildInfo : ScriptableObject, IBuildInfo
     {
         [SerializeField]
-        private bool autoIncrement = false;
+        private bool autoIncrement;
 
         /// <inheritdoc />
         public bool AutoIncrement
@@ -70,12 +70,20 @@ namespace XRTK.Editor.BuildPipeline
 
         [SerializeField]
         [Tooltip("The bundle or application identifier\n(i.e. 'com.xrtk.core')")]
-        private string bundleIdentifier = PlayerSettings.applicationIdentifier;
+        private string bundleIdentifier;
 
         /// <inheritdoc />
         public string BundleIdentifier
         {
-            get => bundleIdentifier;
+            get
+            {
+                if (string.IsNullOrWhiteSpace(bundleIdentifier))
+                {
+                    bundleIdentifier = PlayerSettings.applicationIdentifier;
+                }
+
+                return bundleIdentifier;
+            }
             set
             {
                 bundleIdentifier = value;
@@ -90,7 +98,7 @@ namespace XRTK.Editor.BuildPipeline
         public int? VersionCode { get; set; }
 
         /// <inheritdoc />
-        public virtual BuildTarget BuildTarget { get; private set; } = EditorUserBuildSettings.activeBuildTarget;
+        public virtual BuildTarget BuildTarget => EditorUserBuildSettings.activeBuildTarget;
 
         /// <inheritdoc />
         public virtual IMixedRealityPlatform BuildPlatform => MixedRealityPreferences.CurrentPlatformTarget;
@@ -260,7 +268,7 @@ namespace XRTK.Editor.BuildPipeline
 
         [SerializeField]
         [Tooltip("Should the executable be installed OnPostProcessBuild?")]
-        private bool install = false;
+        private bool install;
 
         /// <inheritdoc />
         public virtual bool Install

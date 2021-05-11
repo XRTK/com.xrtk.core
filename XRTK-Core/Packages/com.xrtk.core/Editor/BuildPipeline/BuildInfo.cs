@@ -58,15 +58,6 @@ namespace XRTK.Editor.BuildPipeline
     [RuntimePlatform(typeof(WindowsStandalonePlatform))]
     public class BuildInfo : ScriptableObject, IBuildInfo
     {
-        protected virtual void Awake()
-        {
-            bundleIdentifier = PlayerSettings.applicationIdentifier;
-            IsCommandLine = Application.isBatchMode;
-            BuildSymbols = string.Empty;
-            BuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled);
-        }
-
         [SerializeField]
         private bool autoIncrement = false;
 
@@ -79,7 +70,7 @@ namespace XRTK.Editor.BuildPipeline
 
         [SerializeField]
         [Tooltip("The bundle or application identifier\n(i.e. 'com.xrtk.core')")]
-        private string bundleIdentifier;
+        private string bundleIdentifier = PlayerSettings.applicationIdentifier;
 
         /// <inheritdoc />
         public string BundleIdentifier
@@ -99,13 +90,13 @@ namespace XRTK.Editor.BuildPipeline
         public int? VersionCode { get; set; }
 
         /// <inheritdoc />
-        public virtual BuildTarget BuildTarget { get; private set; }
+        public virtual BuildTarget BuildTarget { get; private set; } = EditorUserBuildSettings.activeBuildTarget;
 
         /// <inheritdoc />
         public virtual IMixedRealityPlatform BuildPlatform => MixedRealityPreferences.CurrentPlatformTarget;
 
         /// <inheritdoc />
-        public bool IsCommandLine { get; private set; }
+        public bool IsCommandLine { get; private set; } = Application.isBatchMode;
 
         private string outputDirectory;
 
@@ -154,8 +145,22 @@ namespace XRTK.Editor.BuildPipeline
             }
         }
 
+        private List<EditorBuildSettingsScene> scenes;
+
         /// <inheritdoc />
-        public IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
+        public IEnumerable<EditorBuildSettingsScene> Scenes
+        {
+            get
+            {
+                if (scenes == null || !scenes.Any())
+                {
+                    scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled).ToList();
+                }
+
+                return scenes;
+            }
+            set => scenes = value.ToList();
+        }
 
         /// <inheritdoc />
         public BuildOptions BuildOptions { get; set; }
@@ -164,7 +169,7 @@ namespace XRTK.Editor.BuildPipeline
         public ColorSpace? ColorSpace { get; set; }
 
         /// <inheritdoc />
-        public string BuildSymbols { get; set; }
+        public string BuildSymbols { get; set; } = string.Empty;
 
         /// <inheritdoc />
         public string Architecture { get; set; }

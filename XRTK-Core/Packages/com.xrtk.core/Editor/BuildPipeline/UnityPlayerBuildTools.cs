@@ -112,6 +112,28 @@ namespace XRTK.Editor.BuildPipeline
             }
         }
 
+        private static string GetValidVersionString(string version)
+        {
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                return "1.0.0";
+            }
+
+            var parts = version.Split('.');
+
+            switch (parts.Length)
+            {
+                case 0:
+                    return "1.0.0";
+                case 1:
+                    return $"{parts[0]}.0.0";
+                case 2:
+                    return $"{parts[0]}.{parts[1]}.0";
+                default:
+                    return $"{parts[0]}.{parts[1]}.{parts[2]}";
+            }
+        }
+
         /// <summary>
         /// Starts the build process with the provided <see cref="IBuildInfo"/>
         /// </summary>
@@ -134,12 +156,10 @@ namespace XRTK.Editor.BuildPipeline
             // major.minor.build
             Version version = new Version(
                 (buildInfo.Version == null || buildInfo.AutoIncrement)
-                    ? string.IsNullOrWhiteSpace(Application.version)
-                        ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
-                            ? "1.0.0"
-                            : PlayerSettings.bundleVersion
-                        : Application.version
-                    : buildInfo.Version.ToString(3));
+                    ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
+                        ? GetValidVersionString(Application.version)
+                        : GetValidVersionString(PlayerSettings.bundleVersion)
+                    : GetValidVersionString(buildInfo.Version.ToString()));
 
             // Only auto incitement if the version wasn't specified in the build info.
             if (buildInfo.Version == null &&

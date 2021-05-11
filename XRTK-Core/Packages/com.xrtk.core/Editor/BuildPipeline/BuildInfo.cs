@@ -104,7 +104,7 @@ namespace XRTK.Editor.BuildPipeline
         public virtual IMixedRealityPlatform BuildPlatform => MixedRealityPreferences.CurrentPlatformTarget;
 
         /// <inheritdoc />
-        public bool IsCommandLine { get; private set; } = Application.isBatchMode;
+        public bool IsCommandLine => Application.isBatchMode;
 
         private string outputDirectory;
 

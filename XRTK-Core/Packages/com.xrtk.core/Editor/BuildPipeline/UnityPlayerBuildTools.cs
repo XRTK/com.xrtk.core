@@ -45,7 +45,7 @@ namespace XRTK.Editor.BuildPipeline
                 BuildInfo buildInfoInstance;
 
                 if (buildInfo == null ||
-                    buildInfo.BuildPlatform != MixedRealityPreferences.CurrentPlatformTarget)
+                    buildInfo.BuildPlatform.GetType() != MixedRealityPreferences.CurrentPlatformTarget.GetType())
                 {
                     buildInfoInstance = AppDomain.CurrentDomain
                         .GetAssemblies()
@@ -69,7 +69,7 @@ namespace XRTK.Editor.BuildPipeline
                                 var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
                                 var currentPlatform = MixedRealityPreferences.CurrentPlatformTarget;
 
-                                if (asset?.BuildPlatform == currentPlatform)
+                                if (asset?.BuildPlatform.GetType() == currentPlatform.GetType())
                                 {
                                     instance = asset as BuildInfo;
                                     break;
@@ -97,7 +97,7 @@ namespace XRTK.Editor.BuildPipeline
                     }
 
                     Debug.Assert(buildInfoInstance.IsNotNull());
-                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\", true);
+                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
                     Debug.Assert(!buildAsset.IsNull());
                 }
                 else

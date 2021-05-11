@@ -97,14 +97,15 @@ namespace XRTK.Editor.BuildPipeline
                     }
 
                     Debug.Assert(buildInfoInstance.IsNotNull());
-                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
-                    Debug.Assert(!buildAsset.IsNull());
                 }
                 else
                 {
                     buildInfoInstance = buildInfo as BuildInfo;
                 }
 
+                Debug.Assert(buildInfoInstance.IsNotNull());
+                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
+                Debug.Assert(buildAsset.IsNotNull());
                 buildInfo = buildInfoInstance;
                 Debug.Assert(buildInfo != null);
 
@@ -145,7 +146,7 @@ namespace XRTK.Editor.BuildPipeline
                 throw new ArgumentNullException(nameof(BuildInfo));
             }
 
-            EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
+            EditorUtility.DisplayProgressBar("Build Pipeline", $"Gathering Build Data for {BuildInfo.BuildPlatform.Name} Platform...", 0.25f);
 
             if (BuildInfo.IsCommandLine)
             {

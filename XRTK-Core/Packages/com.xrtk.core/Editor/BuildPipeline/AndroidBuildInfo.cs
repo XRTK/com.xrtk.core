@@ -7,6 +7,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Platforms;
+using XRTK.Interfaces;
 using XRTK.Services;
 
 namespace XRTK.Editor.BuildPipeline
@@ -16,6 +17,8 @@ namespace XRTK.Editor.BuildPipeline
     {
         /// <inheritdoc />
         public override BuildTarget BuildTarget => BuildTarget.Android;
+
+        public override IMixedRealityPlatform BuildPlatform => new AndroidPlatform();
 
         /// <inheritdoc />
         public override string ExecutableFileExtension => ".apk";
@@ -27,11 +30,6 @@ namespace XRTK.Editor.BuildPipeline
                 EditorUserBuildSettings.activeBuildTarget != BuildTarget)
             {
                 return;
-            }
-
-            if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
-            {
-                Debug.Log($"{nameof(AndroidBuildInfo)}.{nameof(OnPreProcessBuild)}");
             }
 
             if (VersionCode.HasValue)

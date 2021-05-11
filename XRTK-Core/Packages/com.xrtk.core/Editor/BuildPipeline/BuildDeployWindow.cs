@@ -47,7 +47,7 @@ namespace XRTK.Editor.BuildPipeline
 
                     for (var i = 0; i < platforms.Count; i++)
                     {
-                        if (MixedRealityPreferences.CurrentPlatformTarget == platforms[i])
+                        if (MixedRealityPreferences.CurrentPlatformTarget.GetType() == platforms[i].GetType())
                         {
                             platformIndex = i;
                             break;
@@ -86,7 +86,7 @@ namespace XRTK.Editor.BuildPipeline
         {
             for (var i = 0; i < Platforms.Count; i++)
             {
-                if (MixedRealityPreferences.CurrentPlatformTarget == Platforms[i])
+                if (MixedRealityPreferences.CurrentPlatformTarget.GetType() == Platforms[i].GetType())
                 {
                     platformIndex = i;
                     break;
@@ -207,7 +207,15 @@ namespace XRTK.Editor.BuildPipeline
             Debug.Assert(!isBuilding, "Build already in progress!");
             isBuilding = true;
 
-            UnityPlayerBuildTools.BuildUnityPlayer();
+            try
+            {
+                UnityPlayerBuildTools.BuildUnityPlayer();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                EditorUtility.ClearProgressBar();
+            }
 
             isBuilding = false;
         }

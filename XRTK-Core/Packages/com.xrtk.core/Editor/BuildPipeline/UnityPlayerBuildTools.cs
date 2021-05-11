@@ -43,9 +43,10 @@ namespace XRTK.Editor.BuildPipeline
             get
             {
                 BuildInfo buildInfoInstance;
+                var currentPlatformTarget = MixedRealityPreferences.CurrentPlatformTarget.GetType();
 
                 if (buildInfo == null ||
-                    buildInfo.BuildPlatform.GetType() != MixedRealityPreferences.CurrentPlatformTarget.GetType())
+                    buildInfo.BuildPlatform.GetType() != currentPlatformTarget)
                 {
                     buildInfoInstance = AppDomain.CurrentDomain
                         .GetAssemblies()
@@ -56,7 +57,7 @@ namespace XRTK.Editor.BuildPipeline
                             BuildInfo instance = null;
                             var runtimePlatformAttributes = type.GetCustomAttributes<RuntimePlatformAttribute>();
 
-                            if (runtimePlatformAttributes.All(runtimePlatformAttribute => runtimePlatformAttribute.Platform != MixedRealityPreferences.CurrentPlatformTarget.GetType()))
+                            if (runtimePlatformAttributes.All(runtimePlatformAttribute => runtimePlatformAttribute.Platform != currentPlatformTarget))
                             {
                                 return null;
                             }
@@ -67,9 +68,8 @@ namespace XRTK.Editor.BuildPipeline
                             {
                                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
                                 var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
-                                var currentPlatform = MixedRealityPreferences.CurrentPlatformTarget;
 
-                                if (asset?.BuildPlatform.GetType() == currentPlatform.GetType())
+                                if (asset?.BuildPlatform.GetType() == currentPlatformTarget)
                                 {
                                     instance = asset as BuildInfo;
                                     break;
@@ -97,18 +97,41 @@ namespace XRTK.Editor.BuildPipeline
                     }
 
                     Debug.Assert(buildInfoInstance.IsNotNull());
-                    var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
-                    Debug.Assert(!buildAsset.IsNull());
                 }
                 else
                 {
                     buildInfoInstance = buildInfo as BuildInfo;
                 }
 
+                Debug.Assert(buildInfoInstance.IsNotNull());
+                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
+                Debug.Assert(buildAsset.IsNotNull());
                 buildInfo = buildInfoInstance;
                 Debug.Assert(buildInfo != null);
 
                 return buildInfo;
+            }
+        }
+
+        private static string GetValidVersionString(string version)
+        {
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                return "1.0.0";
+            }
+
+            var parts = version.Split('.');
+
+            switch (parts.Length)
+            {
+                case 0:
+                    return "1.0.0";
+                case 1:
+                    return $"{parts[0]}.0.0";
+                case 2:
+                    return $"{parts[0]}.{parts[1]}.0";
+                default:
+                    return $"{parts[0]}.{parts[1]}.{parts[2]}";
             }
         }
 
@@ -123,7 +146,7 @@ namespace XRTK.Editor.BuildPipeline
                 throw new ArgumentNullException(nameof(BuildInfo));
             }
 
-            EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
+            EditorUtility.DisplayProgressBar($"{BuildInfo.BuildPlatform.Name} Build Pipeline", "Gathering Build Data...", 0.25f);
 
             if (BuildInfo.IsCommandLine)
             {
@@ -134,12 +157,10 @@ namespace XRTK.Editor.BuildPipeline
             // major.minor.build
             Version version = new Version(
                 (buildInfo.Version == null || buildInfo.AutoIncrement)
-                    ? string.IsNullOrWhiteSpace(Application.version)
-                        ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
-                            ? "1.0.0"
-                            : PlayerSettings.bundleVersion
-                        : Application.version
-                    : buildInfo.Version.ToString(3));
+                    ? string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion)
+                        ? GetValidVersionString(Application.version)
+                        : GetValidVersionString(PlayerSettings.bundleVersion)
+                    : GetValidVersionString(buildInfo.Version.ToString()));
 
             // Only auto incitement if the version wasn't specified in the build info.
             if (buildInfo.Version == null &&

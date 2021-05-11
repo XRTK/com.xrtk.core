@@ -146,7 +146,7 @@ namespace XRTK.Editor.BuildPipeline
                 throw new ArgumentNullException(nameof(BuildInfo));
             }
 
-            EditorUtility.DisplayProgressBar("Build Pipeline", $"Gathering Build Data for {BuildInfo.BuildPlatform.Name} Platform...", 0.25f);
+            EditorUtility.DisplayProgressBar($"{BuildInfo.BuildPlatform.Name} Build Pipeline", "Gathering Build Data...", 0.25f);
 
             if (BuildInfo.IsCommandLine)
             {

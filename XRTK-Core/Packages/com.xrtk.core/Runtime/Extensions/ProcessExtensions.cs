@@ -158,6 +158,7 @@ namespace XRTK.Extensions
                 processResult.TrySetResult(new ProcessResult(process.ExitCode, await errorCodeResult.Task, await outputCodeResult.Task));
                 process.Close();
                 process.Dispose();
+                process = null;
             }
 
             void OnErrorDataReceived(object sender, DataReceivedEventArgs args)
@@ -211,34 +212,28 @@ namespace XRTK.Extensions
             {
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
-                CancellationWatcher(process);
+                CancellationWatcher();
             }
 
-            async void CancellationWatcher(Process runningProcess)
+            async void CancellationWatcher()
             {
                 // ReSharper disable once MethodSupportsCancellation
                 // We utilize the cancellation token in the loop
-                await Task.Run(ProcessWatcher);
-
-                void ProcessWatcher()
+                await Task.Run(() =>
                 {
-                    try
+                    while (process != null &&
+                           !process.HasExited)
                     {
-                        while (!runningProcess.HasExited)
+                        if (cancellationToken.IsCancellationRequested)
                         {
-                            if (cancellationToken.IsCancellationRequested)
-                            {
-                                runningProcess.Kill();
-                                runningProcess.Close();
-                                runningProcess.Dispose();
-                            }
+                            processResult.TrySetResult(new ProcessResult(1223, new[] { "The operation was canceled by the user." }, new[] { "The operation was canceled by the user." }));
+                            process.Kill();
+                            process.Close();
+                            process.Dispose();
+                            break;
                         }
                     }
-                    catch
-                    {
-                        // ignored
-                    }
-                }
+                });
             }
 
             return await processResult.Task;

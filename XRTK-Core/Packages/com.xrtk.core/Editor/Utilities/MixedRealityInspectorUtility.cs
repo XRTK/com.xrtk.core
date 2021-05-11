@@ -81,6 +81,35 @@ namespace XRTK.Editor.Utilities
             window.position = pos;
         }
 
+        #region Styles
+
+        private static GUIStyle boldCenteredHeaderStyle = null;
+
+        public static GUIStyle BoldCenteredHeaderStyle
+        {
+            get
+            {
+                if (boldCenteredHeaderStyle == null)
+                {
+                    var editorStyle = EditorGUIUtility.isProSkin ? EditorStyles.whiteLargeLabel : EditorStyles.largeLabel;
+
+                    if (editorStyle != null)
+                    {
+                        boldCenteredHeaderStyle = new GUIStyle(editorStyle)
+                        {
+                            alignment = TextAnchor.MiddleCenter,
+                            fontSize = 18,
+                            padding = new RectOffset(0, 0, -8, -8)
+                        };
+                    }
+                }
+
+                return boldCenteredHeaderStyle;
+            }
+        }
+
+        #endregion
+
         #region Logos
 
         public static Texture2D DarkThemeLogo

@@ -455,7 +455,10 @@ namespace XRTK.Services
             isInitializing = false;
         }
 
-        private static void EnsureMixedRealityRequirements()
+        /// <summary>
+        /// Check which platforms are active and available.
+        /// </summary>
+        internal static void CheckPlatforms()
         {
             activePlatforms.Clear();
             availablePlatforms.Clear();
@@ -484,8 +487,11 @@ namespace XRTK.Services
 
                 availablePlatforms.Add(platform);
 
-                if (platform.IsAvailable ||
-                    platform.IsBuildTargetAvailable)
+                if (platform.IsAvailable
+#if UNITY_EDITOR
+                    || platform.IsBuildTargetAvailable
+#endif
+                )
                 {
                     foreach (var platformOverride in platform.PlatformOverrides)
                     {
@@ -496,17 +502,26 @@ namespace XRTK.Services
 
             foreach (var platform in availablePlatforms)
             {
-                if (platformOverrides.Contains(platform.GetType()))
+                if (Application.isPlaying &&
+                    platformOverrides.Contains(platform.GetType()))
                 {
                     continue;
                 }
 
-                if (platform.IsAvailable ||
-                    platform.IsBuildTargetAvailable)
+                if (platform.IsAvailable
+#if UNITY_EDITOR
+                    || platform.IsBuildTargetAvailable
+#endif
+                )
                 {
                     activePlatforms.Add(platform);
                 }
             }
+        }
+
+        private static void EnsureMixedRealityRequirements()
+        {
+            CheckPlatforms();
 
             // There's lots of documented cases that if the camera doesn't start at 0,0,0, things break with the WMR SDK specifically.
             // We'll enforce that here, then tracking can update it to the appropriate position later.
@@ -847,9 +862,11 @@ namespace XRTK.Services
                     }
                 }
 
-                if (platforms.Count == 0 ||
-                    Application.isEditor &&
-                    !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
+                if (platforms.Count == 0
+#if UNITY_EDITOR
+                    || !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms)
+#endif
+                    )
                 {
                     if (runtimePlatforms == null ||
                         runtimePlatforms.Count == 0)

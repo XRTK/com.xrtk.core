@@ -52,7 +52,7 @@ namespace XRTK.Editor.Profiles
 
                     for (var i = 0; i < platforms.Count; i++)
                     {
-                        if (MixedRealityPreferences.CurrentPlatformTarget == platforms[i])
+                        if (MixedRealityPreferences.CurrentPlatformTarget.GetType() == platforms[i].GetType())
                         {
                             platformIndex = i;
                             break;
@@ -141,10 +141,11 @@ namespace XRTK.Editor.Profiles
 
         internal void RenderSystemFields()
         {
+            var currentPlatform = MixedRealityPreferences.CurrentPlatformTarget;
 
             for (var i = 0; i < Platforms.Count; i++)
             {
-                if (MixedRealityPreferences.CurrentPlatformTarget == Platforms[i])
+                if (currentPlatform.GetType() == Platforms[i].GetType())
                 {
                     platformIndex = i;
                     break;

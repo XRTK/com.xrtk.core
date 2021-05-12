@@ -421,7 +421,7 @@ namespace XRTK.Editor.BuildPipeline
         public void OnPreprocessBuild(BuildReport report) => buildInfo?.OnPreProcessBuild(report);
 
         /// <inheritdoc />
-        public void OnPostprocessBuild(BuildReport report) => buildInfo?.OnPreProcessBuild(report);
+        public void OnPostprocessBuild(BuildReport report) => buildInfo?.OnPostProcessBuild(report);
 
         #endregion IOrderedCallback
     }

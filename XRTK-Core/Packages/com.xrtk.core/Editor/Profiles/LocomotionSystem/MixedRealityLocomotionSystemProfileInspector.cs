@@ -4,6 +4,7 @@
 using UnityEditor;
 using XRTK.Services;
 using XRTK.Definitions.LocomotionSystem;
+using UnityEngine;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
@@ -13,9 +14,10 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         private SerializedProperty startupBehavior;
         private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
-        private SerializedProperty cancelTeleportAction;
+        private SerializedProperty movementCancelsTeleport;
         private SerializedProperty movementProvider;
         private SerializedProperty moveAction;
+        private static readonly GUIContent movementCancelsTeleportLabel = new GUIContent("Cancels Teleport");
 
         protected override void OnEnable()
         {
@@ -24,7 +26,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             startupBehavior = serializedObject.FindProperty(nameof(startupBehavior));
             teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
-            cancelTeleportAction = serializedObject.FindProperty(nameof(cancelTeleportAction));
+            movementCancelsTeleport = serializedObject.FindProperty(nameof(movementCancelsTeleport));
             movementProvider = serializedObject.FindProperty(nameof(movementProvider));
             moveAction = serializedObject.FindProperty(nameof(moveAction));
         }
@@ -48,13 +50,13 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(teleportProvider);
             EditorGUILayout.PropertyField(teleportAction);
-            EditorGUILayout.PropertyField(cancelTeleportAction);
             EditorGUI.indentLevel--;
 
             // Movement
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Movement", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(movementCancelsTeleport, movementCancelsTeleportLabel);
             EditorGUILayout.PropertyField(movementProvider);
             EditorGUILayout.PropertyField(moveAction);
             EditorGUI.indentLevel--;

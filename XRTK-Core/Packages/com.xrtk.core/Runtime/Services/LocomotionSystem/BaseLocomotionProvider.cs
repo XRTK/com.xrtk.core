@@ -81,10 +81,7 @@ namespace XRTK.Services.LocomotionSystem
         /// <summary>
         /// This method is called when the behaviour will be destroyed.
         /// </summary>
-        protected virtual void OnDestroy()
-        {
-            LocomotionSystem?.Unregister(gameObject);
-        }
+        protected virtual void OnDestroy() => LocomotionSystem?.Unregister(gameObject);
 
         /// <inheritdoc />
         public virtual void OnLocomotionRequest(LocomotionEventData eventData) { }

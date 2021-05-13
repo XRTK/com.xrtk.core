@@ -41,11 +41,6 @@ namespace XRTK.Interfaces.LocomotionSystem
         MixedRealityInputAction TeleportAction { get; }
 
         /// <summary>
-        /// Gets the <see cref="MixedRealityInputAction"/> used to cancel a teleport request.
-        /// </summary>
-        MixedRealityInputAction CancelTeleportAction { get; }
-
-        /// <summary>
         /// Raise a teleportation request event.
         /// </summary>
         /// <param name="pointer">The pointer that raised the event.</param>

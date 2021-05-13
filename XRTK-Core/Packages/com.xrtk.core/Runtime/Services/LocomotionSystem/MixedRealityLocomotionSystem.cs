@@ -29,17 +29,15 @@ namespace XRTK.Services.LocomotionSystem
             : base(profile)
         {
             teleportProviderType = profile.TeleportProvider?.Type;
-            TeleportAction = profile.TeleportAction;
-            CancelTeleportAction = profile.CancelTeleportAction;
-            StartupBehavior = profile.StartupBehavior;
+            movementProviderType = profile.MovementProvider?.Type;
 
-            // Locomotion Methods:
-            // - Cloudstep
-            // - Smooth Artificial Locomotion
-            // - On-Rails Locomotion
+            TeleportAction = profile.TeleportAction;
+            MovementCancelsTeleport = profile.MovementCancelsTeleport;
+            StartupBehavior = profile.StartupBehavior;
         }
 
         private readonly Type teleportProviderType;
+        private readonly Type movementProviderType;
         private LocomotionEventData teleportEventData;
         private bool isTeleporting = false;
 
@@ -57,8 +55,10 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public MixedRealityInputAction TeleportAction { get; private set; }
 
-        /// <inheritdoc />
-        public MixedRealityInputAction CancelTeleportAction { get; private set; }
+        /// <summary>
+        /// If set, movement will cancel any teleportation in progress.
+        /// </summary>
+        public bool MovementCancelsTeleport { get; private set; }
 
         /// <summary>
         /// Gets the currently active locomotion target override, if any.
@@ -75,7 +75,8 @@ namespace XRTK.Services.LocomotionSystem
                 teleportEventData = new LocomotionEventData(EventSystem.current);
             }
 
-            Debug.Assert(teleportProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a teleportation provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve.");
+            Debug.Assert(teleportProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a teleportation provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve the issue.");
+            Debug.Assert(movementProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a movement provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve the issue.");
 
             LocomotionEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
             TeleportationEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
@@ -96,6 +97,21 @@ namespace XRTK.Services.LocomotionSystem
             }
 
             camera.EnsureComponent(teleportProviderType);
+
+            var existingMovementProviders = camera.GetComponents(typeof(IMixedRealityMovementProvider));
+            if (existingMovementProviders != null)
+            {
+                for (var i = 0; i < existingMovementProviders.Length; i++)
+                {
+                    var existingMovementProvider = existingMovementProviders[i];
+                    if (!existingMovementProvider.IsNull() && existingMovementProvider.GetType() != movementProviderType)
+                    {
+                        existingMovementProvider.Destroy();
+                    }
+                }
+            }
+
+            camera.EnsureComponent(movementProviderType);
         }
 
         /// <inheritdoc />
@@ -104,6 +120,12 @@ namespace XRTK.Services.LocomotionSystem
             if (!Application.isPlaying)
             {
                 var component = CameraCache.Main.gameObject.GetComponent(typeof(IMixedRealityTeleportProvider));
+                if (!component.IsNull())
+                {
+                    component.Destroy();
+                }
+
+                component = CameraCache.Main.gameObject.GetComponent(typeof(IMixedRealityMovementProvider));
                 if (!component.IsNull())
                 {
                     component.Destroy();

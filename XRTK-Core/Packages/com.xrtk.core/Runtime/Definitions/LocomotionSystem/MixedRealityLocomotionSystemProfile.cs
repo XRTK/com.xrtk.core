@@ -61,22 +61,22 @@ namespace XRTK.Definitions.LocomotionSystem
             internal set => teleportAction = value;
         }
 
-        [SerializeField]
-        [Tooltip("Input action to cancel a teleport request.")]
-        private MixedRealityInputAction cancelTeleportAction = MixedRealityInputAction.None;
-
-        /// <summary>
-        /// Input action to cancel a teleport request.
-        /// </summary>
-        public MixedRealityInputAction CancelTeleportAction
-        {
-            get => cancelTeleportAction;
-            internal set => cancelTeleportAction = value;
-        }
-
         #endregion Teleporting
 
         #region Movement
+
+        [SerializeField]
+        [Tooltip("If set, movement will cancel any teleportation in progress.")]
+        private bool movementCancelsTeleport = true;
+
+        /// <summary>
+        /// If set, movement will cancel any teleportation in progress.
+        /// </summary>
+        public bool MovementCancelsTeleport
+        {
+            get => movementCancelsTeleport;
+            internal set => movementCancelsTeleport = value;
+        }
 
         [SerializeField]
         [Tooltip("The concrete movement provider to use for moving around.")]

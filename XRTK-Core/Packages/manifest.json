@@ -2,14 +2,14 @@
   "scopedRegistries": [
     {
       "name": "XRTK",
-      "url": "http://upm.xrtk.io:4873/",
+      "url": "http://upm.xrtk.io:4873",
       "scopes": [
         "com.xrtk"
       ]
     },
     {
       "name": "OpenUPM",
-      "url": "https://package.openupm.com/",
+      "url": "https://package.openupm.com",
       "scopes": [
         "com.needle.compilation-visualizer"
       ]

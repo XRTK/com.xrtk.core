@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("XRTK.Editor")]
 [assembly: InternalsVisibleTo("XRTK.Tests")]
-[assembly: InternalsVisibleTo("XRTK.Utilities.Gltf.Importers")]
 [assembly: InternalsVisibleTo("XRTK.WindowsMixedReality")]
 [assembly: InternalsVisibleTo("XRTK.WindowsMixedReality.Player")]
 [assembly: InternalsVisibleTo("XRTK.Oculus")]

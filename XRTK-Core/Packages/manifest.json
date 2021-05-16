@@ -6,9 +6,17 @@
       "scopes": [
         "com.xrtk"
       ]
+    },
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com/",
+      "scopes": [
+        "com.needle.compilation-visualizer"
+      ]
     }
   ],
   "dependencies": {
+    "com.needle.compilation-visualizer": "1.4.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.ide.rider": "3.0.6",

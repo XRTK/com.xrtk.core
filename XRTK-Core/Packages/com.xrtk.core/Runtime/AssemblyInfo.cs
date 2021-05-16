@@ -3,10 +3,14 @@
 
 #define XRTK
 
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
-// Note: these are the names of the assembly definitions themselves, not necessarily the actual namespace the class is in.
+[assembly: AssemblyTitle("com.xrtk.core")]
+[assembly: AssemblyCompany("XRTK")]
+[assembly: AssemblyCopyright("Copyright (c) XRTK. All rights reserved.")]
 
+// Note: these are the names of the assembly definitions themselves, not necessarily the actual namespace the class is in.
 [assembly: InternalsVisibleTo("XRTK.Editor")]
 [assembly: InternalsVisibleTo("XRTK.Tests")]
 [assembly: InternalsVisibleTo("XRTK.WindowsMixedReality")]

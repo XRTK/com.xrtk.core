@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -2005,5 +2006,25 @@ namespace XRTK.Services
         }
 
         #endregion IDisposable Implementation
+
+        private static List<Tuple<string, Version>> modules = null;
+
+        /// <summary>
+        /// The list of active xrtk modules/packages currently loaded into runtime.
+        /// </summary>
+        public static List<Tuple<string, Version>> Modules
+        {
+            get
+            {
+                return modules ?? (modules = AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(assembly =>
+                    {
+                        var titleAttribute = assembly.GetCustomAttribute<AssemblyTitleAttribute>();
+                        return titleAttribute != null && titleAttribute.Title.Contains("xrtk");
+                    })
+                    .Select(assembly => new Tuple<string, Version>(assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title, assembly.GetName().Version))
+                    .ToList());
+            }
+        }
     }
 }

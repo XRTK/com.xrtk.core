@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace XRTK.Editor.Utilities
 {
-    public class AssemblyDefinitionPreProcessor : AssetPostprocessor
+    internal class AssemblyDefinitionPreProcessor : AssetPostprocessor
     {
         private const string VersionRegexPattern = "\\[assembly: AssemblyVersion\\(\"(.*)\"\\)\\]";
 

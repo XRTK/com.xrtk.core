@@ -82,3 +82,9 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/glTF/XRTK.glTF/Packages/com.xrtk.gltf
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.gltf
     isActive: 1
+  - sourceRelativePath: /Submodules/WebXR/XRTK.WebXR/Packages/com.xrtk.webxr
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.webxr
+    isActive: 1
+  - sourceRelativePath: /Submodules/WebXR/XRTK.WebXR/Packages/com.xrtk.webxr/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/WebXR/Profiles
+    isActive: 1

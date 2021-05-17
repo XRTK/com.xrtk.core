@@ -61,7 +61,7 @@ namespace XRTK.Definitions.Controllers.Hands
 
         [SerializeField]
         [Tooltip("Tracked hand poses for pose detection.")]
-        private HandControllerPoseProfile[] trackedPoses = null;
+        private HandControllerPoseProfile[] trackedPoses = new HandControllerPoseProfile[0];
 
         /// <summary>
         /// Tracked hand poses for pose detection.

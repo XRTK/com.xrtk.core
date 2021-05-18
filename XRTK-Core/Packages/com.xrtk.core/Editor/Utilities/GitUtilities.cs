@@ -136,7 +136,7 @@ namespace XRTK.Editor.Utilities
 
                 if (isGitInstalled)
                 {
-                    var success = new Process().Run($@"cd ""{RepositoryRootDir}"" && git submodule update --init --all", out _);
+                    var success = new Process().Run($@"cd ""{RepositoryRootDir}"" && git submodule update --init --recursive", out _);
 
                     EditorUtility.ClearProgressBar();
                     return success;

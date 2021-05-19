@@ -18,7 +18,6 @@ namespace XRTK.Editor.Utilities
             {
                 if (Path.GetFullPath(assetPath).Contains("PackageCache"))
                 {
-                    Debug.Log($"Skipped {assetPath}");
                     return;
                 }
 

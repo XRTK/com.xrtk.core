@@ -446,6 +446,10 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             if (!Directory.Exists(link.TargetAbsolutePath))
             {
                 Directory.CreateDirectory(link.TargetAbsolutePath);
+            }
+
+            if (Directory.Exists(link.TargetAbsolutePath))
+            {
                 Directory.Delete(link.TargetAbsolutePath);
             }
 

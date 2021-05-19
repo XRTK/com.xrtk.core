@@ -179,7 +179,7 @@ namespace XRTK.Editor.Utilities
                 outputPath = EditorUtility.OpenFolderPanel("Generation Location", outputPath, string.Empty);
                 var namespaceRoot = $"{Application.productName.Replace("-Core", string.Empty)}";
 
-                @namespace = outputPath.Replace($"{Directory.GetParent(Application.dataPath).FullName.ToBackSlashes()}/", string.Empty);
+                @namespace = outputPath.Replace($"{Directory.GetParent(Application.dataPath).FullName.ForwardSlashes()}/", string.Empty);
 
                 if (@namespace.StartsWith("Assets/"))
                 {

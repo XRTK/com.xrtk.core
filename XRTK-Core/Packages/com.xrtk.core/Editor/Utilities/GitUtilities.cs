@@ -19,6 +19,26 @@ namespace XRTK.Editor.Utilities
 {
     public static class GitUtilities
     {
+        private static bool? isGitInstalled = null;
+
+        public static bool IsGitInstalled
+        {
+            get
+            {
+                if (!isGitInstalled.HasValue)
+                {
+                    isGitInstalled = new Process().Run("git --version", out var message) && !message.Contains("'git' is not recognized");
+                }
+
+                if (!isGitInstalled.Value)
+                {
+                    Debug.LogWarning("Git installation not found on this machine! Please validate your git installation or environment variables.");
+                }
+
+                return isGitInstalled.Value;
+            }
+        }
+
         /// <summary>
         /// Returns the root directory of this repository.
         /// </summary>
@@ -31,25 +51,28 @@ namespace XRTK.Editor.Utilities
             {
                 if (!string.IsNullOrEmpty(projectRootDir)) { return projectRootDir; }
 
-                if (new Process().Run($@"cd ""{Application.dataPath}"" && git rev-parse --show-toplevel", out var rootDir))
+                if (!IsGitInstalled)
                 {
-                    return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
+                    projectRootDir = Directory.GetParent(Directory.GetParent(EditorPreferences.ApplicationDataPath).FullName).FullName;
+                }
+                else
+                {
+                    if (new Process().Run($@"cd ""{Application.dataPath}"" && git rev-parse --show-toplevel", out var rootDir))
+                    {
+                        projectRootDir = rootDir.ForwardSlashes().Replace("\n", string.Empty);
+                    }
                 }
 
-                Debug.LogWarning($"git command failed! Do you have git installed?\n{rootDir}");
-                return projectRootDir = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName;
+                return projectRootDir;
             }
         }
 
         private static string projectRootDir;
 
-        internal static bool HasSubmodules => File.Exists($"{RepositoryRootDir}/.gitmodules");
+        internal static bool HasSubmodules => IsGitInstalled && File.Exists($"{RepositoryRootDir}/.gitmodules");
 
         [MenuItem("Assets/Submodules/Force update all submodules", true, 23)]
-        public static bool ForceUpdateSubmodulesValidation()
-        {
-            return HasSubmodules;
-        }
+        public static bool ForceUpdateSubmodulesValidation() => HasSubmodules;
 
         [MenuItem("Assets/Submodules/Force update all submodules", false, 23)]
         public static void ForceUpdateSubmodules()
@@ -64,6 +87,11 @@ namespace XRTK.Editor.Utilities
         /// <param name="ignoredPath"></param>
         public static void WritePathToGitIgnore(string ignoredPath)
         {
+            if (!IsGitInstalled)
+            {
+                return;
+            }
+
             if (string.IsNullOrEmpty(ignoredPath))
             {
                 Debug.LogError("You cannot pass null or empty parameter.");
@@ -71,7 +99,7 @@ namespace XRTK.Editor.Utilities
             }
 
             var rootDir = RepositoryRootDir;
-            ignoredPath = ignoredPath.Replace($"{rootDir.ToBackSlashes()}/", string.Empty);
+            ignoredPath = ignoredPath.Replace($"{rootDir.ForwardSlashes()}/", string.Empty);
             var directory = ignoredPath.Replace(Path.GetFileName(ignoredPath), Path.GetFileNameWithoutExtension(ignoredPath));
             directory = directory.Substring(0, directory.LastIndexOf("/", StringComparison.Ordinal));
             var gitIgnoreFilePath = $"{rootDir}\\.gitignore";
@@ -130,20 +158,23 @@ namespace XRTK.Editor.Utilities
         {
             if (HasSubmodules)
             {
+                bool success = false;
                 EditorUtility.DisplayProgressBar("Updating Submodules...", "Please wait...", 0.5f);
 
-                var isGitInstalled = new Process().Run("git --version", out var message) && !message.Contains("'git' is not recognized");
-
-                if (isGitInstalled)
+                try
                 {
-                    var success = new Process().Run($@"cd ""{RepositoryRootDir}"" && git submodule update --init --all", out _);
-
+                    success = new Process().Run($@"cd ""{RepositoryRootDir}"" && git submodule update --init --recursive", out _);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
+                finally
+                {
                     EditorUtility.ClearProgressBar();
-                    return success;
                 }
 
-                EditorUtility.ClearProgressBar();
-                Debug.LogError(message);
+                return success;
             }
 
             return true;
@@ -156,6 +187,11 @@ namespace XRTK.Editor.Utilities
         /// <returns>A list of tags from the remote repository.</returns>
         public static async Task<IEnumerable<string>> GetAllTagsFromRemoteAsync(string url)
         {
+            if (!IsGitInstalled)
+            {
+                return new List<string>(0);
+            }
+
             var result = await new Process().RunAsync($"git ls-remote --tags {url}");
 
             if (result.ExitCode != 0 || !(result.Output.Length > 0))

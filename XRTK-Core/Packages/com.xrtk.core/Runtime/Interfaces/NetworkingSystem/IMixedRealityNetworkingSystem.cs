@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
@@ -15,6 +15,11 @@ namespace XRTK.Interfaces.NetworkingSystem
         /// The <see cref="IMixedRealityNetworkDataProvider"/>s detected by the system.
         /// </summary>
         HashSet<IMixedRealityNetworkDataProvider> NetworkDataProviders { get; }
+
+        /// <summary>
+        /// Is the device connected to the internet?
+        /// </summary>
+        bool HasInternetConnection { get; }
 
         /// <summary>
         /// Request a new <see cref="IMixedRealityEventSource.SourceId"/> for the <see cref="IMixedRealityNetworkDataProvider"/>

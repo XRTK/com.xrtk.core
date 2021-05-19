@@ -1,0 +1,1 @@
+Get-ChildItem -Path $PSScriptRoot -Force -Recurse -ErrorAction 'silentlycontinue' -Attributes ReparsePoint | ForEach-Object { $_.delete() }

@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.IO;
 using System.Text;
+using UnityEngine;
 
 namespace XRTK.Extensions
 {
@@ -13,9 +15,9 @@ namespace XRTK.Extensions
     {
         public const string WhiteSpace = " ";
 
-        public const string ForwardSlash = "\\";
+        public const string BackSlash = "\\";
 
-        public const string BackSlash = "/";
+        public const string ForwardSlash = "/";
 
         /// <summary>
         /// Encodes the string to base 64 ASCII.
@@ -81,27 +83,27 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string ToBackSlashes(this string value)
+        public static string ToBackSlashes(this string value) // TODO FIX -> ToForwardSlashes
         {
-            return value.Replace(ForwardSlash, BackSlash);
+            return value.Replace(BackSlash, ForwardSlash);
         }
 
         /// <summary>
         /// Replaces all back slashes in the string with forward slashes.
         /// </summary>
         /// <param name="value"></param>
-        public static string ToForwardSlashes(this string value)
+        public static string ToForwardSlashes(this string value) // TODO FIX -> ToBackSlashes
         {
-            return value.Replace(BackSlash, ForwardSlash);
+            return value.Replace(ForwardSlash, BackSlash);
         }
-        
+
         /// <summary>
         /// Returns the URI path, excluding the filename
         /// </summary>
         /// <param name="value"></param>
         public static string PathFromURI(this string value)
         {
-            return value.Substring(0, value.LastIndexOf("/") + 1);
+            return value.Substring(0, value.LastIndexOf("/", StringComparison.Ordinal) + 1);
         }
 
         /// <summary>
@@ -110,7 +112,51 @@ namespace XRTK.Extensions
         /// <param name="value"></param>
         public static string FilenameFromURI(this string value)
         {
-            return value.Substring(value.LastIndexOf("/") + 1, value.Length - value.LastIndexOf("/") - 1);
+            return value.Substring(value.LastIndexOf("/", StringComparison.Ordinal) + 1, value.Length - value.LastIndexOf("/", StringComparison.Ordinal) - 1);
+        }
+
+        /// <summary>
+        /// Creates a relative path from one file or folder to another.
+        /// </summary>
+        /// <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
+        /// <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
+        /// <param name="relativePath"></param>
+        /// <returns>The relative path from the start directory to the end path or <c>toPath</c> if the paths are not related.</returns>
+        public static bool TryMakeRelativePath(this string fromPath, string toPath, out string relativePath)
+        {
+            relativePath = string.Empty;
+
+            try
+            {
+                if (string.IsNullOrEmpty(fromPath)) { throw new ArgumentNullException(nameof(fromPath)); }
+                if (string.IsNullOrEmpty(toPath)) { throw new ArgumentNullException(nameof(toPath)); }
+
+                var toUri = new Uri(toPath);
+                var fromUri = new Uri(fromPath);
+
+                if (fromUri.Scheme != toUri.Scheme)
+                {
+                    // path can't be made relative.
+                    relativePath = Uri.UnescapeDataString(toUri.ToString());
+                    return false;
+                }
+
+                var relativeUri = fromUri.MakeRelativeUri(toUri);
+                relativePath = Uri.UnescapeDataString(relativeUri.ToString());
+
+                if (toUri.Scheme.Equals("file", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    relativePath = relativePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+
+            return false;
         }
     }
 }

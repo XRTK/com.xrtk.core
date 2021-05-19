@@ -23,14 +23,14 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
         public string SourceRelativePath
         {
-            get => sourceRelativePath.ToBackSlashes();
-            internal set => sourceRelativePath = value.ToBackSlashes();
+            get => sourceRelativePath.ForwardSlashes();
+            internal set => sourceRelativePath = value.ForwardSlashes();
         }
 
         public string SourceAbsolutePath
         {
-            get => $"{SymbolicLinker.ProjectRoot}{sourceRelativePath}".ToBackSlashes();
-            internal set => sourceRelativePath = value.ToBackSlashes().Replace(SymbolicLinker.ProjectRoot, string.Empty);
+            get => $"{SymbolicLinker.ProjectRoot}{sourceRelativePath}".ForwardSlashes();
+            internal set => sourceRelativePath = value.ForwardSlashes().Replace(SymbolicLinker.ProjectRoot, string.Empty);
         }
 
         [SerializeField]
@@ -38,13 +38,13 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
         public string TargetRelativePath
         {
-            get => targetRelativePath.ToBackSlashes();
-            internal set => targetRelativePath = value.ToBackSlashes();
+            get => targetRelativePath.ForwardSlashes();
+            internal set => targetRelativePath = value.ForwardSlashes();
         }
         public string TargetAbsolutePath
         {
-            get => $"{SymbolicLinker.ProjectRoot}{targetRelativePath}".ToBackSlashes();
-            internal set => targetRelativePath = value.ToBackSlashes().Replace(SymbolicLinker.ProjectRoot, string.Empty);
+            get => $"{SymbolicLinker.ProjectRoot}{targetRelativePath}".ForwardSlashes();
+            internal set => targetRelativePath = value.ForwardSlashes().Replace(SymbolicLinker.ProjectRoot, string.Empty);
         }
 
         [SerializeField]

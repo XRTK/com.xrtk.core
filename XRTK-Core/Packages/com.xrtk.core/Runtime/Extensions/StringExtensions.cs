@@ -15,10 +15,6 @@ namespace XRTK.Extensions
     {
         public const string WhiteSpace = " ";
 
-        public const string BackSlash = "\\";
-
-        public const string ForwardSlash = "/";
-
         /// <summary>
         /// Encodes the string to base 64 ASCII.
         /// </summary>
@@ -79,28 +75,24 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Replaces all forward slashes in the string with back slashes.
+        /// Replaces all back slashes in the string with forward slashes.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string ToBackSlashes(this string value) // TODO FIX -> ToForwardSlashes
+        public static string ForwardSlashes(this string value)
         {
-            return value.Replace(BackSlash, ForwardSlash);
+            return value.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         }
 
         /// <summary>
-        /// Replaces all back slashes in the string with forward slashes.
+        /// Replaces all forward slashes in the string with back slashes.
         /// </summary>
-        /// <param name="value"></param>
-        public static string ToForwardSlashes(this string value) // TODO FIX -> ToBackSlashes
+        public static string BackSlashes(this string value)
         {
-            return value.Replace(ForwardSlash, BackSlash);
+            return value.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
         }
 
         /// <summary>
         /// Returns the URI path, excluding the filename
         /// </summary>
-        /// <param name="value"></param>
         public static string PathFromURI(this string value)
         {
             return value.Substring(0, value.LastIndexOf("/", StringComparison.Ordinal) + 1);
@@ -109,7 +101,6 @@ namespace XRTK.Extensions
         /// <summary>
         /// Returns the filename from a URI path
         /// </summary>
-        /// <param name="value"></param>
         public static string FilenameFromURI(this string value)
         {
             return value.Substring(value.LastIndexOf("/", StringComparison.Ordinal) + 1, value.Length - value.LastIndexOf("/", StringComparison.Ordinal) - 1);

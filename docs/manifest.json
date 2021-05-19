@@ -5,18 +5,6 @@
   "files": [
     {
       "type": "Conceptual",
-      "source_relative_path": "../CHANGELOG.md",
-      "output": {
-        ".html": {
-          "relative_path": "CHANGELOG.html",
-          "hash": "J/NUtMzv8NBlG5PVh7UzzyPT7kNUEoI0AlEFXmk20/E="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "../CODE_OF_CONDUCT.md",
       "output": {
         ".html": {
@@ -81,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.AxisConstraintAttribute.html",
-          "hash": "6C/sK3rGSXsCyCRAKnlUIb7rjalwlhB7T/H5ia20buo="
+          "hash": "PASNaqCLjTHnrFe2BraUNweCXAysJTmh22tKWbeijyM="
         }
       },
       "is_incremental": false,
@@ -93,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.EnumFlagsAttribute.html",
-          "hash": "iR0e5y88ATOi0DubP3FeJ9ujJb5A0oCGSZuDkPxDc7k="
+          "hash": "oCR1UEOMqFWy1xtPVOOlcqeq+6IsIkW3ZIv/iI4h3o0="
         }
       },
       "is_incremental": false,
@@ -105,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.ExtendsAttribute.html",
-          "hash": "3tJoTbmzeH8cdNmVJejOzyXWY76cnNncAwkhB6fxvow="
+          "hash": "KVfNFCzF8fSRhekxSZrGAdGzHWTpQU1vYJ02B2MJJ44="
         }
       },
       "is_incremental": false,
@@ -117,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.ImplementsAttribute.html",
-          "hash": "IOkLqaei2XN+y852qwir1iWe1avPvgiODZM/LZ9QSEo="
+          "hash": "0MvfDs6IumaDfgENomLUQMwK0wN5f4k7ssFkIXvBLc8="
         }
       },
       "is_incremental": false,
@@ -129,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.PhysicsLayerAttribute.html",
-          "hash": "ElsDW+sp2dVDa621323zieWP+jiwxhw0WQbPzRWAQ2I="
+          "hash": "532s00zVhiFR18VdEiQ4EipyewLCmSAwGLd77KAE/Yg="
         }
       },
       "is_incremental": false,
@@ -141,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.PrefabAttribute.html",
-          "hash": "N51SP7JWhtOCi24VXWSJavAo5HHXucD2XTvmIVj1m5M="
+          "hash": "h8e89wEKSPpy38Gvu0eSSuG4XtWYgEGMpn3A1fB8KR0="
         }
       },
       "is_incremental": false,
@@ -153,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.RuntimePlatformAttribute.html",
-          "hash": "wMcBXALgRUKuqjJg/T4fPYnga297rCY0PSRLmku5lOI="
+          "hash": "M3BXXTJBcK8rnFWr/3Ilpv9ulaJFxQ9t6/A1Mv7XwTE="
         }
       },
       "is_incremental": false,
@@ -165,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.SystemTypeAttribute.html",
-          "hash": "31+oyJg6foowKO+IiCcARNvLItQtRBF7Ny/6CdLzINs="
+          "hash": "t1ZzaYu+M75vwB+iW01afzHo+fwVtWtRAszsEY7SyNU="
         }
       },
       "is_incremental": false,
@@ -177,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Attributes.Vector3RangeAttribute.html",
-          "hash": "7Yt9Vs3cX1wzdTDx27soWrxH2TUQ5tv/qQOvyrSXfoI="
+          "hash": "6j8JOmCS3Y/qQFEdXafjVWywg9FYCxIrapZz4RpMYng="
         }
       },
       "is_incremental": false,
@@ -1341,7 +1329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.AllPlatforms.html",
-          "hash": "MnWPRd/vSxqwMcdLIu9i4s2kBI9aHqQBxTDjoz/z43w="
+          "hash": "ral3+qHGaQFFdfp5xmeuap1hqrMjL5FTwY7bnUQtZFI="
         }
       },
       "is_incremental": false,
@@ -1353,7 +1341,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.AndroidPlatform.html",
-          "hash": "s2AXoyQauHxSgPcZdGiMV2Q1BOjq9fKawbB0Al1OjT8="
+          "hash": "C8H/IniGD7iHRfpcVFyQVfiSbBptJeD7n46LrYPjMg8="
         }
       },
       "is_incremental": false,
@@ -1365,7 +1353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.BasePlatform.html",
-          "hash": "wQPx5W/9YqVVkvJqPreN0JHk0nUZMMYR4WqUUB/7Y20="
+          "hash": "XoWNizWAX9WUW4IVRFmRvp5i9sGoEyUPByIT9XD3MHY="
         }
       },
       "is_incremental": false,
@@ -1377,7 +1365,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.CurrentBuildTargetPlatform.html",
-          "hash": "bv1+PDny1ZMybMIxvQtxoAnOBKCS+8UfUdst/c0heiQ="
+          "hash": "JnRse6DVJLIBtMJhaMrOXX9BtkdFBA1pr/5geAuvV/M="
         }
       },
       "is_incremental": false,
@@ -1389,7 +1377,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.EditorPlatform.html",
-          "hash": "Ml1P7b4Ddn8BZ7EORu4U1PQOpcewJzrbRVm8WdBbj0w="
+          "hash": "WHfsB8sVPjhVUELsqgg3aGJdF+T01iPtoh1YLg9zSnM="
         }
       },
       "is_incremental": false,
@@ -1401,7 +1389,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.IOSPlatform.html",
-          "hash": "fd+bcIHXz74hh5zNSFjBOmfGq57008cLrxecLrWXMW8="
+          "hash": "MBoLhJwYFbcuVGW3105RgHCdh9WPN7pzJYLXBEX3WtI="
         }
       },
       "is_incremental": false,
@@ -1413,7 +1401,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.LuminPlatform.html",
-          "hash": "F5Fs38JsMBKbXNR9EPddX/CKzFkJ4iiXlWSma1V1vOU="
+          "hash": "shYks0WjcuiqiQ8zHu4264gw0p/Sq3ITeVqGlZXfJss="
         }
       },
       "is_incremental": false,
@@ -1425,7 +1413,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.OSXPlatform.html",
-          "hash": "ZS2rs5WkyEvsRvVenGod9tjmua+rdN5uo8NenNC6A9I="
+          "hash": "gQ/7ieb+mObVbppnlqmscHJPX/Xdg2DWwviJfss5108="
         }
       },
       "is_incremental": false,
@@ -1437,7 +1425,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.UniversalWindowsPlatform.html",
-          "hash": "zluXLEe8CY2NylgDKufQixlGw6oT84NLXw2xL+ouAik="
+          "hash": "Kv/jcNN89K6dfhhCU363FKgJtS+wQqeU3D1itOP8lBg="
         }
       },
       "is_incremental": false,
@@ -1449,7 +1437,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.WebGlPlatform.html",
-          "hash": "RAH50a8EJUf43VcMaj09UPyXymsZ/31cr92s9PC1CEA="
+          "hash": "oGsnQEca8ZsvDuIO+nv7tvEmNaKE03obKbUb69F2Mfg="
         }
       },
       "is_incremental": false,
@@ -1461,7 +1449,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.WindowsStandalonePlatform.html",
-          "hash": "uGELQX5XutBeEijJz0imtiUBfDba8RIu0JY2R+mWc6I="
+          "hash": "8MMOofm5OHJXsMg0oTz+8UwYiDoHeXxq3V6x8wN5y+0="
         }
       },
       "is_incremental": false,
@@ -1917,7 +1905,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.BuildPipeline.AndroidBuildInfo.html",
-          "hash": "nVK6YuBylxOPF3SnbEBh+puNpg61aVkU03zq64PDtLw="
+          "hash": "XB1IE8k+WZBPGdC3011Z6wLvZ0CiU21YRGQlGff5bZE="
         }
       },
       "is_incremental": false,
@@ -1953,7 +1941,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.BuildPipeline.BuildInfo.html",
-          "hash": "OGoJJdJJlA0cizxtSEJ+1TbCSkBvaSO+1hPtma8x3ew="
+          "hash": "maW4dwzbpvsXMaCB/xLsaYqSDEzk2C0Y0N3219Nusuc="
         }
       },
       "is_incremental": false,
@@ -2001,7 +1989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.BuildPipeline.LuminBuildInfo.html",
-          "hash": "xfi6Xhyhj4q39AzB7NOKb7JPmx5N7dvMfyIwS0OBDiU="
+          "hash": "7srV0ad/zxsmccH4LLaOTVVXbAeggdZogq2xLyUGQd4="
         }
       },
       "is_incremental": false,
@@ -2025,7 +2013,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.BuildPipeline.OculusBuildInfo.html",
-          "hash": "lH0+EPqe6AvpCLhdRubYq847KPlxQfIHw6AWakeu1LQ="
+          "hash": "WayA+UlPrOE6R6wJ5DzBpIV0H7UnrerRvnvAeyRCatU="
         }
       },
       "is_incremental": false,
@@ -2037,7 +2025,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.html",
-          "hash": "Lo2U398f11xiP9s7TWdBQSg2+MkLfed+ixB1sLam4FA="
+          "hash": "HbL4krCUGKFE5uV/Z3Fgc341NpRmazBiuXw1FH25vIE="
         }
       },
       "is_incremental": false,
@@ -2073,7 +2061,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.BuildPipeline.UwpBuildInfo.html",
-          "hash": "p+FUTyICm7FIec0cveGFYx7wv7XiFaAveV02rQKCjds="
+          "hash": "eMCOhi2wN9ldmpv2uiqygtek3ENNkXFkWI+GE2lB2r8="
         }
       },
       "is_incremental": false,
@@ -3033,7 +3021,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.Utilities.AssemblyDefinitionEditorExtension.html",
-          "hash": "A/yNKdlU2Ky1i1URTuDMbT7zAp+lCwklmruxcKCLZGM="
+          "hash": "Qsw4RFE5vrPHu2a1R5Pbiw5YU8Rb3mpIO4XwJPYAG4k="
         }
       },
       "is_incremental": false,
@@ -3141,7 +3129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.Utilities.EditorPreferences.html",
-          "hash": "BNhMRJ0a7FQTQ4+053M6WitTw0Czw3yOvnjhXjwXjpc="
+          "hash": "hla8AyY0EM7tnbH0EK+vPb4XiYbYFUGcxIHyLSEsHpg="
         }
       },
       "is_incremental": false,
@@ -3153,7 +3141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.Utilities.GitUtilities.html",
-          "hash": "wA5boHq7fvc/LUZr/6hp2xVVUnXHdpuQw/P8u5MMhxc="
+          "hash": "d6HOuUKRNS8dIDZpm1xxIEsj5h8/+uG6UjEuXHrRYzw="
         }
       },
       "is_incremental": false,
@@ -3429,7 +3417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.Utilities.SymbolicLinks.SymbolicLink.html",
-          "hash": "QRf5EEvpAeDG58+d03Zur9EAgKQN7C6hGLUGEeh7Zv8="
+          "hash": "NuY/FX/eMybBSzgkFZk1ncusSzbyAe25c8kHagHOx+g="
         }
       },
       "is_incremental": false,
@@ -3465,7 +3453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Editor.Utilities.SymbolicLinks.SymbolicLinker.html",
-          "hash": "sjkKs3/WUT2ub1Inr2ZmHE/bZg2UA+D6Ev1lw4oV5fY="
+          "hash": "RMFkxyPxhMREgOe0bFwtniSq3wlm9B7mnGJoYFoSn0Y="
         }
       },
       "is_incremental": false,
@@ -4557,7 +4545,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Extensions.StringExtensions.html",
-          "hash": "lfbTNb0sxfamCMZ99VOoPUU65KxoVJJKM8BLJA2+1Gc="
+          "hash": "8AY/y9q7F1OnMEGkbAGNb+P50T9rFzC2sFmN57GL1Cg="
         }
       },
       "is_incremental": false,
@@ -5397,7 +5385,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkingSystem.html",
-          "hash": "7lLrl1Kk9oXZ3F2r8+qIXlH33L3iiTBoOjoOfPwfutM="
+          "hash": "blt5JrDAMJXNbu2EUHiq/STVRv7f441AlXwSU7zJwWc="
         }
       },
       "is_incremental": false,
@@ -5961,7 +5949,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Profiles.LuminHandControllerDataProviderProfile.html",
-          "hash": "fJ6oVykmNoqXX64LYKJwGvyjwbD13ZxFRIIw1XyUJ90="
+          "hash": "grG+VUycGTArI9K0No/oscLUrmzkVp6aISleXqY7h3E="
         }
       },
       "is_incremental": false,
@@ -5997,7 +5985,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Providers.CameraSystem.LuminCameraDataProvider.html",
-          "hash": "56WGYXPYcGvYV4FdQVjOgrbJDs5I0jPwg0OBmYyn66Y="
+          "hash": "Ju+1nyFfzOJp7b1iBfvbwWidqoippE7ARRiL7DZnfaM="
         }
       },
       "is_incremental": false,
@@ -6021,7 +6009,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Providers.Controllers.LuminController.html",
-          "hash": "meFitVgUGwTt3/HFfvEaNlDclQq3o3JXSxHUIPjTQXM="
+          "hash": "jLjatUs5e65gBvl0iWaIm4gd5s5pKy8bwMdi1oABQco="
         }
       },
       "is_incremental": false,
@@ -6033,7 +6021,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Providers.Controllers.LuminControllerDataProvider.html",
-          "hash": "IP3SIaAbd0bnPPl7HXW2hOC0c46DztIC5Le/ylbTMYg="
+          "hash": "zPHbvNwYSk++iG6niRmGTCDAPrR6kei9D5H7CcAap9Y="
         }
       },
       "is_incremental": false,
@@ -6045,7 +6033,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Providers.Controllers.LuminHandControllerDataProvider.html",
-          "hash": "LA322QuqOt7HNjfFGo8/morht8dnclwac4WvmXUI7ko="
+          "hash": "FU7PjDi95pFawtwJ11HYekA1AFbekthzH0+FzFACWng="
         }
       },
       "is_incremental": false,
@@ -6069,7 +6057,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Providers.SpatialAwareness.SpatialObservers.LuminSpatialMeshObserver.html",
-          "hash": "YxtM191EznkRl0sULqsasLbHqhxB1yShRhYcNlCpieY="
+          "hash": "ZIcHL/4yDWfX4khys++VhOcoCiNL+OqpjN1la6QdLrs="
         }
       },
       "is_incremental": false,
@@ -6161,59 +6149,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Oculus.Extensions.ControllerExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Oculus.Extensions.ControllerExtensions.html",
-          "hash": "/HpC61q8zoEapaH3MNutG5LnSibSE4FIKMkrc3B2qS4="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Oculus.Extensions.HandednessExtensions.yml",
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Extensions.HandednessExtensions.html",
-          "hash": "Kfma40rzIIeA5etTHfh2nrCBj+RnfYHRndasl4mmYXs="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Oculus.Extensions.MixedRealityPoseExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Oculus.Extensions.MixedRealityPoseExtensions.html",
-          "hash": "N3BRu9u1o2JjLg3dwwjEnWku4uVKjlOAbDbpWJzR/ro="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Oculus.Extensions.QuaternionExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Oculus.Extensions.QuaternionExtensions.html",
-          "hash": "3Gho3imIgCn146GECSXMrZY/w2Z6R7IG+LTdKZht8tU="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Oculus.Extensions.Vector3Extensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Oculus.Extensions.Vector3Extensions.html",
-          "hash": "USl/+f6lPXLooKyeZ1JLvfmxvSGhI6ETIu1wNv9FzGg="
+          "hash": "D5xwlDs84Kz4ME7Em1G2L9wqtJBuFYMAQVZKUadV1pk="
         }
       },
       "is_incremental": false,
@@ -6225,7 +6165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Extensions.html",
-          "hash": "rdeA9kgDnziBcAfv2F0HaAev/+tlVnLwx03/mvghBdA="
+          "hash": "VnXDUl4Q+H8DAdvdknUnIQMJtUm3vUbICD293onrbXg="
         }
       },
       "is_incremental": false,
@@ -6237,7 +6177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusPlatform.html",
-          "hash": "Oy04luD702Y2wi64y7SbyYLmxfnk3ZHa58LtrFPQDpw="
+          "hash": "ihlWGIibZdXTKJ6k34DYm9t6ZS4mUPZHrcpEHAVhixM="
         }
       },
       "is_incremental": false,
@@ -6249,7 +6189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.BatteryStatus.html",
-          "hash": "SGWOSOQsKL++ygwSJK1DqEMKU1C3jJMdrB7UXHWYSRs="
+          "hash": "angwPXY+OB0JIMT8iBXNxJocOoOg0JHniZvlN76A6b8="
         }
       },
       "is_incremental": false,
@@ -6261,7 +6201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Bone.html",
-          "hash": "UkyRoJKbyAxHGrSRw7D8rxGWoLcqkYtnwLmT1VrWRLc="
+          "hash": "nNb187Ne/K2AzATgqNxKNn9kCDLyDKhYAeZJN7VyuPk="
         }
       },
       "is_incremental": false,
@@ -6273,7 +6213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.BoneCapsule.html",
-          "hash": "icYsAnf13lE06T5ALXHnkazCThN6KQhxaLlHHX5OgeU="
+          "hash": "HLhkSm7LFd5IF3Fz2yONKj7BFIcnQoo9nqbPwGeg/tM="
         }
       },
       "is_incremental": false,
@@ -6285,7 +6225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.BoneId.html",
-          "hash": "E+cPU0j+uybG8f8OAf82USBIbsigAESU2CpLHS8YkZ4="
+          "hash": "eDzMPNYTT8KbHcEh6F7Mf/oII6aOcsvbNmNM10DO24M="
         }
       },
       "is_incremental": false,
@@ -6297,7 +6237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Bool.html",
-          "hash": "kYK7ZLtUHezsMORPIpZe4/nQPgmwsQAySvHXGdX38RY="
+          "hash": "SCrwCekcTCJ6UWtfFja60LEG7Zha4sYvsWjruSShScg="
         }
       },
       "is_incremental": false,
@@ -6309,7 +6249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.BoundaryGeometry.html",
-          "hash": "4qXaaUAOBib6jJh/7bU35mcGoEohQZr2ixZjwf0exXQ="
+          "hash": "ZWKDR/gHtu8DiL3HSs1g4O+pX5vV69mw9KtxJaYOCsI="
         }
       },
       "is_incremental": false,
@@ -6321,7 +6261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.BoundaryTestResult.html",
-          "hash": "CbzJYa52oqipIyyAu7bjh4IfGZyLCek8ClXnAaz3epg="
+          "hash": "Y5+ioDApG9YG1zXRufgJEy2+e6lQKJ7pfP4a/q7xWII="
         }
       },
       "is_incremental": false,
@@ -6333,7 +6273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.BoundaryType.html",
-          "hash": "vdjtWGvxY5TLP6LARfCwr/lmrOvDTk/BLW/QYgczXEM="
+          "hash": "UXVLWKtLIMeCo4cLPL+LSzPYoRs4wwXF0xvzKjxKrLc="
         }
       },
       "is_incremental": false,
@@ -6345,7 +6285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.CameraAnchorType.html",
-          "hash": "NgTU8jEkHHD+XB0khmfMfCnE2CGKGgieIN391u8+itE="
+          "hash": "qrVBHxAbbsRMg9ayQoE2krmuYo/C/2hvDQeTkjbTEgQ="
         }
       },
       "is_incremental": false,
@@ -6357,7 +6297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.CameraExtrinsics.html",
-          "hash": "sFvPAZ8oD4KygOyNK2pSDKx5Y4HPLZxY65TfO28tlI0="
+          "hash": "k/2AGWgy9aee4r1IhRKRy6Trz2KbqCDBDjrMkR/OxHU="
         }
       },
       "is_incremental": false,
@@ -6369,7 +6309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.CameraIntrinsics.html",
-          "hash": "LuAHrW0isrBUbnjX8YdBwbYCQMYzfWvV8ZiZodnGC6w="
+          "hash": "8NVoKkfjug9iBceD6UtCPORmI6Cee6Eo2WzidHHQ4GM="
         }
       },
       "is_incremental": false,
@@ -6381,7 +6321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.CameraStatus.html",
-          "hash": "NJubciBN3OTSOld6w7FmsdklwpdbTG/6vI2+BS/JePI="
+          "hash": "CP+k3Urjx1pv/+wwwF5f8/4hdpFJSHSfNpxeie0ZGcc="
         }
       },
       "is_incremental": false,
@@ -6393,7 +6333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.ColorSpace.html",
-          "hash": "L2n057GDrbTCbkYrEVN71d3NiyAQ+8XuQiM1qinUinQ="
+          "hash": "jbd9N3gdYi0LrX184tru7yVKk62K3PMqSVC/2jHJeR0="
         }
       },
       "is_incremental": false,
@@ -6405,7 +6345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Colorf.html",
-          "hash": "qyM9/s5sTPGUUxJJfE3VWXcPX6DGpHZqnSMpZVGiNOQ="
+          "hash": "0ZPP/D94bfwsdh7ZDI6W+LAvXhBfm0bQBRbtt3rdn28="
         }
       },
       "is_incremental": false,
@@ -6417,7 +6357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Controller.html",
-          "hash": "bYTlPsVrrLN/jKFzT6w7gFwQPhUbMcxO1LwIXUfCEKY="
+          "hash": "PbjkdfmsdFc5ATmN04cUFVn6fH2H6xHTOMR3CGYHVMU="
         }
       },
       "is_incremental": false,
@@ -6429,7 +6369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.ControllerState4.html",
-          "hash": "LJiC6hnAUdxGlgSG/ULifPg8RXVb+Xqvseiq3+I5rLg="
+          "hash": "5KGXd9e7yA9myfDwlENau/pjJCze5SEe7VK1J/cLqHM="
         }
       },
       "is_incremental": false,
@@ -6441,7 +6381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.EventDataBuffer.html",
-          "hash": "8/e9ZH1eXxlRKOmGvhVDAH4NIY3vregT8VFPjxKhi/w="
+          "hash": "l/Lhd5XhuCGvGQpS7BcoyVKWPG+pTrc0Nvq5QRIGNr0="
         }
       },
       "is_incremental": false,
@@ -6453,7 +6393,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.EventType.html",
-          "hash": "V81fiV2VbLFgk013Ab4gScKwXfsa8GozaDseIjO3TD0="
+          "hash": "I1QR7zr9INFsLx8PSBjSHp2CT58mbHhsIiHwO7C481A="
         }
       },
       "is_incremental": false,
@@ -6465,7 +6405,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.FixedFoveatedRenderingLevel.html",
-          "hash": "QL3O0jXWyRDWoik9FzVtR20PjAFjgA0Jf16g6btbSY0="
+          "hash": "TYJUZ3WuKhkvS7X5P4rg+MuzovogvOyaTVjq8Stv7AY="
         }
       },
       "is_incremental": false,
@@ -6477,7 +6417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Fovf.html",
-          "hash": "6vdWeEnz+G3V5P4pAhkyi0Pde+lquz6Vsf7IZvIDbss="
+          "hash": "pJUFeb6B/s/ETQb5asTzKsiYNdLdW6kDXMDN1eokovA="
         }
       },
       "is_incremental": false,
@@ -6489,7 +6429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Frustumf.html",
-          "hash": "ZTNRCpMHsoLSPA6dhTR1d4N9W9KrPc/jKJvmoWff8ng="
+          "hash": "Q7WB5QZV1DTnwZC8lBGA/uuSlfU41XkSaLCfuQwDEds="
         }
       },
       "is_incremental": false,
@@ -6501,7 +6441,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Frustumf2.html",
-          "hash": "8wt3S1zkwM+qfgYO59LenV4Ec6G66McMAnTHoC5Dppo="
+          "hash": "5h3sstyY4sdUmkfZsMmfhC4ldIkMBxtvYQzO0kp0EvI="
         }
       },
       "is_incremental": false,
@@ -6513,7 +6453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Hand.html",
-          "hash": "xyLs2CJwpiEnle5bB7Rf1oKn2voV5pppTGt1C5g8Hxs="
+          "hash": "SZ9Tww2sBPqLQNk5zz0WZM6VzXCnmUi1rc8/WOU/h5A="
         }
       },
       "is_incremental": false,
@@ -6525,7 +6465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.HandFinger.html",
-          "hash": "xFKlV2dkrMUupN5paS4P0J9rMK0w8+dJD+uPpnuff6U="
+          "hash": "NK8ByxzoFipzEWxKAuPzwYLDZPd7XdIGnknZS8u7EWY="
         }
       },
       "is_incremental": false,
@@ -6537,7 +6477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.HandFingerPinch.html",
-          "hash": "p4A0lEH1BFAolB6OoYEOBVoLl3giVFiUjuHPjn0tbXA="
+          "hash": "DiJYax6FxvIWnjCEhgmcWYlu1NqjwkvpI6YubQgogk8="
         }
       },
       "is_incremental": false,
@@ -6549,7 +6489,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.HandState.html",
-          "hash": "RzgBxKfjsQwP2c9QMy5oHfqET6pz0ri/J2iG9GR1d0Q="
+          "hash": "FceLrTXxCOO5bxZQk9worhT0+kbLRjzQ+Tj4a5YUpJU="
         }
       },
       "is_incremental": false,
@@ -6561,7 +6501,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.HandStatus.html",
-          "hash": "EYZcDHPQ49Bz3Fz7doH+32P3gQRhdJPUy6vBtymVIAA="
+          "hash": "vaKWC8GLd229hjqHvD5EHhrdG6Rd8u9pBuyQ9a92AVk="
         }
       },
       "is_incremental": false,
@@ -6573,7 +6513,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Handedness.html",
-          "hash": "YY4eiK35TIzjHXSjvMnEM/QLJK9R/MZS85bL8UuL1uE="
+          "hash": "GbThsITamJ2TmXGh1JS4tVRO72tIv1CDRH7muB8DpUg="
         }
       },
       "is_incremental": false,
@@ -6585,7 +6525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.HapticsBuffer.html",
-          "hash": "34vrR6yGTh2UTbdXFOkqYWZeEUhIGyr38peBPx043fA="
+          "hash": "7mFIXTF5my4tOkvU3f4vVsFDkHxaMNGnZs3sCX0GXS8="
         }
       },
       "is_incremental": false,
@@ -6597,7 +6537,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.HapticsDesc.html",
-          "hash": "DgJRxPKw82QpfZqMcvA7vQb5IEh2IIPQY+AHN5VOb6A="
+          "hash": "lohnh3BpZOQKHEoraIFryFxu+bMmWnKkhrNhgohZKMM="
         }
       },
       "is_incremental": false,
@@ -6609,7 +6549,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.HapticsState.html",
-          "hash": "bYrO+VgkmKJdvwKoN4O0UDJ4IEeHyVZrY8XQ/NtLaYQ="
+          "hash": "C9zO4C+QuSAhl0TRSI0A0qtdOdRHIwZw56e+//74Urg="
         }
       },
       "is_incremental": false,
@@ -6621,7 +6561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Mesh.html",
-          "hash": "6xFmqO59N+cERraUBhBZ2wyjh5L5FRZ//hDj+zl5uC8="
+          "hash": "CEfqQLa+NTQZ4KCA9MS7fpxmptHCrbase8jYCXRsbdQ="
         }
       },
       "is_incremental": false,
@@ -6633,7 +6573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.MeshConstants.html",
-          "hash": "Zavmkt6y5WcrINWduXcLvZ/faCswtTpTVak++bqZk4k="
+          "hash": "9/6vsxMkEi7EhWUOsK8nNzVJ3PgqHPgExRcgcp12q+Y="
         }
       },
       "is_incremental": false,
@@ -6645,7 +6585,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.MeshType.html",
-          "hash": "8Okf+eIq6s/2McIf74Xbm8qZoq6F18xo3zQ1w/XPn7s="
+          "hash": "LrLQVDOIjsXkXIQpNZ+nalhLqJNDnvRzs8Ei+syBdH0="
         }
       },
       "is_incremental": false,
@@ -6657,7 +6597,19 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Node.html",
-          "hash": "3UUNLNAaoeO3Fm6laGCaM3s5evLelW9oSKB48rKlBYU="
+          "hash": "AFSF2RRkMtNo3iHxlrWEKYwGLizw2AuoMdJxkmgtixI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Plugins.OculusApi.OVRNativeBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.OVRNativeBuffer.html",
+          "hash": "hdc9+xRoWxeYXBH0G/cfHOteB26UpQiPvamEmWrT2z4="
         }
       },
       "is_incremental": false,
@@ -6669,7 +6621,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.PoseStatef.html",
-          "hash": "dKdf0RLocqHGYhrBbAd3fusfZfLCP41ToKWMKUcRGc8="
+          "hash": "g08V+oCXg+L8P+0gZmNSK9ndfnIGWKN7ej5rvkwA8yk="
         }
       },
       "is_incremental": false,
@@ -6681,7 +6633,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Posef.html",
-          "hash": "QLIolJQcNM5yYrTJwnrFfzJACQbEvUVNTStXys/x8NI="
+          "hash": "LNOqJPRamrrRpb8L+9LU9Ml1Rt2QX+Os2n2Elq7oQDI="
         }
       },
       "is_incremental": false,
@@ -6693,7 +6645,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Quatf.html",
-          "hash": "gYVoGl7UkAsPrknk89rPHjF72oC4Gv8AGHKuIcp+0gA="
+          "hash": "xpjrsdjzlBIKSW03qX/LN4FrOvcRyvE9rQf+mH3C9q4="
         }
       },
       "is_incremental": false,
@@ -6705,7 +6657,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.RawAxis1D.html",
-          "hash": "w2dHy1D2h37oZx3y0gIlx7+/bqY8C6qSIoKpSiG4Ygo="
+          "hash": "9bkKMVDqRWmgyUKxEF7p8gK/xyKee+2K7uFSPar8nTQ="
         }
       },
       "is_incremental": false,
@@ -6717,7 +6669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.RawAxis2D.html",
-          "hash": "2c6lcCHv/G4RBNGltkEm50GvWA6O6IZJgeE5QU3BD6s="
+          "hash": "/eiegAqRxkbJAnTeE3AdS+PiMFbENnTCpXdo+DwLqRQ="
         }
       },
       "is_incremental": false,
@@ -6729,7 +6681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.RawButton.html",
-          "hash": "kTMaelS1nBYJ/ATrfw5aPnI94UTXDN2AjWNXluQWC50="
+          "hash": "/oWY60Gdq2ENU0oP93zTuVKYKZequOrnuMW5nuId2Wc="
         }
       },
       "is_incremental": false,
@@ -6741,7 +6693,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.RawNearTouch.html",
-          "hash": "DoidoeJOFm6dLxHYrSkpCuUWYdVSu0yKVDluwEVa/yY="
+          "hash": "ACEGknbyGmaXrTy77YLm+U5WnYg3qc9DnNz+bRb+beg="
         }
       },
       "is_incremental": false,
@@ -6753,7 +6705,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.RawTouch.html",
-          "hash": "v5YnqPAZyrJe0LTGEFvumwm+P2V+3z17HPdeItw8eII="
+          "hash": "e+GtyDnbmyI60vTTq9QHUyN5fYl4dUJrUkEvRZIWJJc="
         }
       },
       "is_incremental": false,
@@ -6765,7 +6717,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.RecenterFlags.html",
-          "hash": "YUPt7SIPhZqFlroE/Lb/rCWgyuFdsH597OUiVvDrF1A="
+          "hash": "8FK+Hc/6Xml0jVLdoKwsj2YRxT9r1xxjLLoi0QAnIGk="
         }
       },
       "is_incremental": false,
@@ -6777,7 +6729,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Rectf.html",
-          "hash": "zST1uipAqbK929F8DSKOZ4VZkIj9xNPhXgde+d6pZPU="
+          "hash": "1gwMzGzMln+yNHy9ROh3UMbSwfrEZmZT7C0ybOOtS/A="
         }
       },
       "is_incremental": false,
@@ -6789,7 +6741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Recti.html",
-          "hash": "8wCwb1gMoRW5hyyVBpxTVGibF40Qazy+e7Gv4ZrtOrw="
+          "hash": "eZEQHXyh0eTarP8SRqyBzbRmEMF7t3ZU0Ofe4wCK1UI="
         }
       },
       "is_incremental": false,
@@ -6801,7 +6753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Result.html",
-          "hash": "f2tDEEZFPc2wmH961R6bN0eHiMkXdT3KtsosuM9RZgY="
+          "hash": "MMc/w/fuUghQ0ghm+aNzcoF9OwVqisspVI+srn8zpxI="
         }
       },
       "is_incremental": false,
@@ -6813,7 +6765,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Sizef.html",
-          "hash": "7XY/GPdzmb8/6ZTwMH4PaKSK3V3KlqwvD3x2EiwngOQ="
+          "hash": "OiYKgyPhoJcui6FV0y6YCC15LW1A3nOedN0Fe6Xubic="
         }
       },
       "is_incremental": false,
@@ -6825,7 +6777,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Sizei.html",
-          "hash": "PsOwR3y7Ka1GEgInnl6WK+wPiLCyw49M5Cb4zQWxeoc="
+          "hash": "RFemGsZeHh0MVbdIYs2/6XcW79IU+1t74OFlx3laAW4="
         }
       },
       "is_incremental": false,
@@ -6837,7 +6789,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Skeleton.html",
-          "hash": "MkxXo4b5Im2Bdj87o6nhP/WoW8uqJTqtE5TL//o4aWc="
+          "hash": "4R28N5l3doNo1ahW9SDhRpYXNojXYFnqz6qolcF8XHQ="
         }
       },
       "is_incremental": false,
@@ -6849,7 +6801,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Skeleton2.html",
-          "hash": "tNGKJCvsGoyw56SQOx+hC4PSPgO/SKUon/H7EvoESes="
+          "hash": "stYttisHueqZl2Xx5Df0sj9z/Occg8afr/lpbmlBm6k="
         }
       },
       "is_incremental": false,
@@ -6861,7 +6813,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.SkeletonConstants.html",
-          "hash": "PtDW92GOXqu/d/LDSEtyxJetz/C5DsrDmagGqiO/puU="
+          "hash": "rX+GotOHePZNWHNe1mbjz8cI576c+S1K4Nhn7WSulIA="
         }
       },
       "is_incremental": false,
@@ -6873,7 +6825,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.SkeletonType.html",
-          "hash": "K7R5v7aczChoOm8bayghc3r70yt1QojNLEKN3CudxP8="
+          "hash": "MuEcVnx2dF2CPCusRNgM8Cczx27+LJtltDA70fpzUXE="
         }
       },
       "is_incremental": false,
@@ -6885,7 +6837,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Step.html",
-          "hash": "tLJ+nioGofN+Rqb34azX2IvlJLVfitFfc8RNTM75G30="
+          "hash": "hly475yPBodUJgUY4xhrLAAFG8cCmQQC5RnbQr9hPJg="
         }
       },
       "is_incremental": false,
@@ -6897,7 +6849,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.SystemHeadset.html",
-          "hash": "RFps+xpoe3uDzZd9M0Y+d3xZiKR2RA8s20jf1jRFmYg="
+          "hash": "K3zG2xJvmWtSxL14/fVeU4j64q3RNKirAWqJ4YqWs6g="
         }
       },
       "is_incremental": false,
@@ -6909,7 +6861,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.TrackingConfidence.html",
-          "hash": "kq7rIxcVQRn06kSPE1P48/GTjcoCde13AmSayw6ER6U="
+          "hash": "/+curcGL4Q7WQlNFDzurVmfwuFqO+voiQtpeQaASyYs="
         }
       },
       "is_incremental": false,
@@ -6921,7 +6873,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.TrackingOrigin.html",
-          "hash": "PgtOwl9Zico/iRhLdI9mftSakm9Urf/drhtm0unGDbs="
+          "hash": "elzgox6rHMS8Dh9aRNbg5e5ysGn8GvSSOvyjYdYWFZA="
         }
       },
       "is_incremental": false,
@@ -6933,7 +6885,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Vector2f.html",
-          "hash": "ETp0RxLO/phXRHCXCvQT968OzqoZDEYGxPpLoyo/6P8="
+          "hash": "8cMPHT48ZCRbnzYRf85fxqBAl9efofV91ZDAThAf5Uw="
         }
       },
       "is_incremental": false,
@@ -6945,7 +6897,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Vector2i.html",
-          "hash": "21f8H6IzcM6ep+HKJL8QLPbfkRdKuHGfl88rsvEn7dA="
+          "hash": "Zlq1nq94HZK7ufDVRj7UOXAMRi657flfUuWsdhSQQKg="
         }
       },
       "is_incremental": false,
@@ -6957,7 +6909,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Vector3f.html",
-          "hash": "On7xJgAB5sisgT0leSt0zAUpliEEIjHKkvj1m75ucRY="
+          "hash": "ja0mOwCnQ5+z4vRSQyHcFLwUIRl5X78UrNeZOcKez9s="
         }
       },
       "is_incremental": false,
@@ -6969,7 +6921,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Vector4f.html",
-          "hash": "ZCHOvKhvzZs5cz4dbp510EKIT08V3n1NpoKVgfZfEkY="
+          "hash": "YFRQmqYw9HI5Ogkdo2G/CoEoOKF9WVi4BtiOqbQ4Bq4="
         }
       },
       "is_incremental": false,
@@ -6981,7 +6933,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.Vector4s.html",
-          "hash": "2hjZDtRa2lLDJFMU6ADtb41jI4Ox0uLv5MyN2pOMyMw="
+          "hash": "CNQSw8FDVANzrmjGGLZtsyqE0HlX3J7mGvsy9WlSJpQ="
         }
       },
       "is_incremental": false,
@@ -6993,7 +6945,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.XrApi.html",
-          "hash": "Nlj82PR+S7fHXXW05MK99exL0Of8+Kjq0f6TCvMhVBk="
+          "hash": "9PsiinOauuGvZChqYxG13ABo/AsTNV4qAxQLh7U4huE="
         }
       },
       "is_incremental": false,
@@ -7005,7 +6957,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.OculusApi.html",
-          "hash": "7VqmuMnTLBg+2LvZc+Fmni1HO8AdwyT+hmEmUnOx+us="
+          "hash": "4zrA7U3FyOxGUjvBSvYK3GLZ0AYPl+z1lfDtZ5ojfLw="
         }
       },
       "is_incremental": false,
@@ -7017,7 +6969,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Plugins.html",
-          "hash": "qMmQKugQmVd4oq3T9yKsB+w03MJ1J25KK2IKOSj/kiM="
+          "hash": "7OkBLC6sdq/9Tk6er1FHFcTArX5hNt35H9NdY1ndYx8="
         }
       },
       "is_incremental": false,
@@ -7041,7 +6993,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Profiles.OculusHandControllerDataProviderProfile.html",
-          "hash": "diEhz+i+xXT52fdiFhZIoo8PpkyCY0HwJ5i5tOf4Uhk="
+          "hash": "qe8Xi/tAN5kiF6cQggpmNYujvszp6SP5pav/k3eH2ZA="
         }
       },
       "is_incremental": false,
@@ -7061,11 +7013,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Providers.BoundarySystem.OculusBoundaryDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Providers.BoundarySystem.OculusBoundaryDataProvider.html",
+          "hash": "r6/c051nuXruNI8OhQ/KsBov68WgNdHZqi245DixeKo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Providers.BoundarySystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Providers.BoundarySystem.html",
+          "hash": "zpA8tvsH1ZPfa55+38GcNKfAQ39LVyjGF/zCz411RNc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Oculus.Providers.CameraSystem.OculusCameraDataProvider.yml",
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Providers.CameraSystem.OculusCameraDataProvider.html",
-          "hash": "ObwSQttJ2YIyf0Go2pXI45D9j89QiyY+aJffA7TqWF4="
+          "hash": "2WEuGWZ2vfEiDdgOKXEAPBdFsBB/BA8AAHLxdZGhcN4="
         }
       },
       "is_incremental": false,
@@ -7089,7 +7065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Providers.Controllers.BaseOculusController.html",
-          "hash": "At9zV3QJAmdTG86fiZY4MjzbVccy6efRRbHNY0048PA="
+          "hash": "HGVMYPw/723LDjQUvuqYZMquMjteLLdU2sQHuBpDpmo="
         }
       },
       "is_incremental": false,
@@ -7101,7 +7077,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Providers.Controllers.OculusControllerDataProvider.html",
-          "hash": "Sxe/FE0Y6YNFliG3lQpIZFwwXS3myxh6nRc8R21u+uk="
+          "hash": "RHST0BFsW9f7SAXcFZSjOsgaw2AvGQU0OLjXFfmN0+M="
         }
       },
       "is_incremental": false,
@@ -7113,7 +7089,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Providers.Controllers.OculusHandControllerDataProvider.html",
-          "hash": "GXluw9v0zQI6+n5r5YT4HUnGhWk5qv+LG4hfwoarwQc="
+          "hash": "iC2A+co8GwGJMRbfkclaknJPnDflgMkGay9+kNaD33w="
         }
       },
       "is_incremental": false,
@@ -7125,7 +7101,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Providers.Controllers.OculusRemoteController.html",
-          "hash": "ebxLkRwkiWFtvuwi8Skz+ShQv/s+olyWednqkDodDbw="
+          "hash": "oiqrF09/haEVvUodavt+DbqIbo8DJlYFBa42M/SFUmY="
         }
       },
       "is_incremental": false,
@@ -7137,7 +7113,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Providers.Controllers.OculusTouchController.html",
-          "hash": "jRfol4Y6yrNKdyUgcgwO51nBc0AF4rIIX8H+vRbgr+Y="
+          "hash": "xASuHgIlA/VHf7bcUemf4uV8L+wEeT96Mt4L0mizi0M="
         }
       },
       "is_incremental": false,
@@ -7245,7 +7221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.Hands.BaseHandControllerDataProvider.html",
-          "hash": "t//1Sbvp+r7IvVRbraceFLbS8bL1meXWFyrCbOy5euk="
+          "hash": "2SutPToavj5GDNl/5y3OC2IFMTJ5j/EpUFoCOWITgY8="
         }
       },
       "is_incremental": false,
@@ -8769,7 +8745,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.MousePointer.html",
-          "hash": "S2n9JQamXwJItZJLTL0K6U5rhm+cF3N2ASwBYhP+6zI="
+          "hash": "3RnCZcG5i/Ofq1gffaszI+KPqmqs0wkn7u8NfkwGDIs="
         }
       },
       "is_incremental": false,
@@ -9273,7 +9249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.BaseDataProvider.html",
-          "hash": "hz7zn/tADryVxAl1eKO2VcGguid6PQdTfdla03SEoDA="
+          "hash": "ZR5AiLBUgPjpHmBc5qn1zm0UjfgWzL+RBEoByIZQbrQ="
         }
       },
       "is_incremental": false,
@@ -9597,7 +9573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.MixedRealityToolkit.html",
-          "hash": "XvoLeoXc/DyBnkFORwiwPPCxCAls4uIg67nqjISt/8I="
+          "hash": "3JMrA/0lgkhg+v6Oz8nQ9HKMiFf3HhVvGPY9P0WLkKE="
         }
       },
       "is_incremental": false,
@@ -9609,7 +9585,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem.html",
-          "hash": "iqz9Sg+x/jsYYjSio70lk1Kf9FXirE0aI+EkGU1pzR0="
+          "hash": "K/zHpQfD+Bo2IUqrqg80Cb8xzJrgfj+MsiA1e8Y5n/U="
         }
       },
       "is_incremental": false,
@@ -12141,7 +12117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "D6U4RAWhigHRgjpujRjngvMpzoQwVllOzygGp9lbIB0="
+          "hash": "sfmBsbIG+YTOw9OR0Iu5vSQ2RTw4pgbgYQKpHYcLVs0="
         }
       },
       "is_incremental": false,
@@ -13569,13 +13545,13 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 37,
+          "total_file_count": 36,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 1004,
+          "total_file_count": 1003,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

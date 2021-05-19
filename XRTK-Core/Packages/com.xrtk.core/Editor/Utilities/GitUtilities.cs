@@ -59,7 +59,7 @@ namespace XRTK.Editor.Utilities
                 {
                     if (new Process().Run($@"cd ""{Application.dataPath}"" && git rev-parse --show-toplevel", out var rootDir))
                     {
-                        projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
+                        projectRootDir = rootDir.ForwardSlashes().Replace("\n", string.Empty);
                     }
                 }
 
@@ -99,7 +99,7 @@ namespace XRTK.Editor.Utilities
             }
 
             var rootDir = RepositoryRootDir;
-            ignoredPath = ignoredPath.Replace($"{rootDir.ToBackSlashes()}/", string.Empty);
+            ignoredPath = ignoredPath.Replace($"{rootDir.ForwardSlashes()}/", string.Empty);
             var directory = ignoredPath.Replace(Path.GetFileName(ignoredPath), Path.GetFileNameWithoutExtension(ignoredPath));
             directory = directory.Substring(0, directory.LastIndexOf("/", StringComparison.Ordinal));
             var gitIgnoreFilePath = $"{rootDir}\\.gitignore";

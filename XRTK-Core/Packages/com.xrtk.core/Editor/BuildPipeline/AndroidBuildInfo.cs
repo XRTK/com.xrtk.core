@@ -4,7 +4,6 @@
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Platforms;
 using XRTK.Interfaces;
@@ -18,6 +17,7 @@ namespace XRTK.Editor.BuildPipeline
         /// <inheritdoc />
         public override BuildTarget BuildTarget => BuildTarget.Android;
 
+        /// <inheritdoc />
         public override IMixedRealityPlatform BuildPlatform => new AndroidPlatform();
 
         /// <inheritdoc />
@@ -46,6 +46,11 @@ namespace XRTK.Editor.BuildPipeline
                 // versionCode value to protect against downgrades by preventing users from installing
                 // an APK with a lower versionCode than the version currently installed on their device.
                 PlayerSettings.Android.bundleVersionCode++;
+            }
+
+            if (BuildPlatform.GetType() == typeof(AndroidPlatform))
+            {
+                // TODO generate manifest
             }
         }
     }

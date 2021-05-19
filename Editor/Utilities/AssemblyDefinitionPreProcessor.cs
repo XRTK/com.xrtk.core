@@ -16,6 +16,12 @@ namespace XRTK.Editor.Utilities
         {
             if (assetPath.Contains("package.json") && !Application.isBatchMode)
             {
+                if (Path.GetFullPath(assetPath).Contains("PackageCache"))
+                {
+                    Debug.Log($"Skipped {assetPath}");
+                    return;
+                }
+
                 var text = File.ReadAllText(assetPath);
                 var asmdef = AssemblyDefinitionEditorExtension.AssemblyDefinition.FromJson(text);
 

@@ -195,7 +195,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
                 if (!EditorApplication.isUpdating)
                 {
-                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                    EditorApplication.delayCall += () => AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 }
             }
 
@@ -439,7 +439,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 return false;
             }
 
-            // TODO Make target path relative
+            // If pulling from git we may have "fake" symlinks that need to be cleaned up.
+            if (File.Exists(link.TargetAbsolutePath))
+            {
+                File.Delete(link.TargetAbsolutePath);
+            }
 
             // Check if the directory exists to ensure the parent directory paths are also setup
             // then delete the target directory as the mklink command will create it for us.
@@ -477,7 +481,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
             if (!EditorApplication.isUpdating)
             {
-                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                EditorApplication.delayCall += () => AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
             }
 
             return true;
@@ -509,7 +513,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
                 if (!EditorApplication.isUpdating)
                 {
-                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                    EditorApplication.delayCall += () => AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 }
             }
 

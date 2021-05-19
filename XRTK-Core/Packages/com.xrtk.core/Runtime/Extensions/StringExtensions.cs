@@ -15,9 +15,9 @@ namespace XRTK.Extensions
     {
         public const string WhiteSpace = " ";
 
-        public const string ForwardSlash = "\\";
+        public const string BackSlash = "\\";
 
-        public const string BackSlash = "/";
+        public const string ForwardSlash = "/";
 
         /// <summary>
         /// Encodes the string to base 64 ASCII.
@@ -83,18 +83,18 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string ToBackSlashes(this string value)
+        public static string ToBackSlashes(this string value) // TODO FIX -> ToForwardSlashes
         {
-            return value.Replace(ForwardSlash, BackSlash);
+            return value.Replace(BackSlash, ForwardSlash);
         }
 
         /// <summary>
         /// Replaces all back slashes in the string with forward slashes.
         /// </summary>
         /// <param name="value"></param>
-        public static string ToForwardSlashes(this string value)
+        public static string ToForwardSlashes(this string value) // TODO FIX -> ToBackSlashes
         {
-            return value.Replace(BackSlash, ForwardSlash);
+            return value.Replace(ForwardSlash, BackSlash);
         }
 
         /// <summary>

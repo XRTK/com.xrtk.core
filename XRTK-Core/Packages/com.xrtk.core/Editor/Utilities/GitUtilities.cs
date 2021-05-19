@@ -53,7 +53,7 @@ namespace XRTK.Editor.Utilities
 
                 if (!IsGitInstalled)
                 {
-                    projectRootDir = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName;
+                    projectRootDir = Directory.GetParent(Directory.GetParent(EditorPreferences.ApplicationDataPath).FullName).FullName;
                 }
                 else
                 {

@@ -112,7 +112,7 @@ namespace XRTK.Editor
             set
             {
                 var newPath = value;
-                var root = Path.GetFullPath(Application.dataPath).ToBackSlashes();
+                var root = Path.GetFullPath(Application.dataPath).ForwardSlashes();
 
                 if (!newPath.Contains(root))
                 {

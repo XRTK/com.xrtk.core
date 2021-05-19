@@ -297,7 +297,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 var path = AssetDatabase.GUIDToAssetPath(guid);
 
                 if (!string.IsNullOrEmpty(path) &&
-                    ValidateSymbolicPath(Path.GetFullPath(path).ToBackSlashes()))
+                    ValidateSymbolicPath(Path.GetFullPath(path).ForwardSlashes()))
                 {
                     GUI.Label(rect, LINK_ICON_TEXT, SymlinkMarkerStyle);
                 }

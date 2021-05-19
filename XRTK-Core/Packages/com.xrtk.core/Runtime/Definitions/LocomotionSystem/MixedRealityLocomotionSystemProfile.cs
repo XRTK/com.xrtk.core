@@ -79,6 +79,20 @@ namespace XRTK.Definitions.LocomotionSystem
         }
 
         [SerializeField]
+        [Tooltip("Speed in meters per second for movement.")]
+        [Range(1f, 100f)]
+        private float movementSpeed = 5f;
+
+        /// <summary>
+        /// Speed in meters per second for movement.
+        /// </summary>
+        public float MovementSpeed
+        {
+            get => movementSpeed;
+            internal set => movementSpeed = value;
+        }
+
+        [SerializeField]
         [Tooltip("The concrete movement provider to use for moving around.")]
         [Implements(typeof(IMixedRealityMovementProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType movementProvider;

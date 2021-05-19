@@ -15,9 +15,12 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
         private SerializedProperty movementCancelsTeleport;
+        private SerializedProperty movementSpeed;
         private SerializedProperty movementProvider;
         private SerializedProperty moveAction;
+
         private static readonly GUIContent movementCancelsTeleportLabel = new GUIContent("Cancels Teleport");
+        private static readonly GUIContent movementSpeedLabel = new GUIContent("Speed (m/s)");
 
         protected override void OnEnable()
         {
@@ -27,6 +30,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
             movementCancelsTeleport = serializedObject.FindProperty(nameof(movementCancelsTeleport));
+            movementSpeed = serializedObject.FindProperty(nameof(movementSpeed));
             movementProvider = serializedObject.FindProperty(nameof(movementProvider));
             moveAction = serializedObject.FindProperty(nameof(moveAction));
         }
@@ -57,6 +61,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUILayout.LabelField("Movement", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(movementCancelsTeleport, movementCancelsTeleportLabel);
+            EditorGUILayout.PropertyField(movementSpeed, movementSpeedLabel);
             EditorGUILayout.PropertyField(movementProvider);
             EditorGUILayout.PropertyField(moveAction);
             EditorGUI.indentLevel--;

@@ -315,18 +315,8 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         {
             try
             {
-                if (!Directory.Exists(path))
+                if (!Directory.Exists(path) || File.Exists(path))
                 {
-                    if (File.Exists(path))
-                    {
-                        return false;
-                    }
-
-                    if (DebugEnabled)
-                    {
-                        Debug.LogError($"Invalid path: {path}");
-                    }
-
                     return false;
                 }
 

@@ -41,9 +41,17 @@ namespace XRTK.Providers.Controllers.Hands
                 ? profile.BoundsMode
                 : inputSystemProfile.BoundsMode;
 
-            TrackedPoses = profile.TrackedPoses != null && profile.TrackedPoses.Count > 0
-                ? profile.TrackedPoses
-                : inputSystemProfile.TrackedPoses;
+            if (profile.TrackedPoses != null &&
+                profile.TrackedPoses.Count > 0)
+            {
+                TrackedPoses = profile.TrackedPoses.Count != inputSystemProfile.TrackedPoses.Count
+                    ? profile.TrackedPoses
+                    : inputSystemProfile.TrackedPoses;
+            }
+            else
+            {
+                TrackedPoses = inputSystemProfile.TrackedPoses;
+            }
         }
 
         /// <inheritdoc />

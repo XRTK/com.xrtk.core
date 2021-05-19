@@ -27,7 +27,7 @@ namespace XRTK.Editor
 {
     public static class PackageInstaller
     {
-        private static string ProjectRootPath => Directory.GetParent(Application.dataPath).FullName.ToForwardSlashes();
+        private static string ProjectRootPath => Directory.GetParent(Application.dataPath).FullName.BackSlashes();
 
         /// <summary>
         /// Attempt to copy any assets found in the source path into the project.
@@ -56,8 +56,8 @@ namespace XRTK.Editor
 
             foreach (var installationPath in installationPaths)
             {
-                var sourcePath = installationPath.Key.ToForwardSlashes();
-                var destinationPath = installationPath.Value.ToForwardSlashes();
+                var sourcePath = installationPath.Key.BackSlashes();
+                var destinationPath = installationPath.Value.BackSlashes();
                 installedDirectories.Add(destinationPath);
 
                 if (Directory.Exists(destinationPath))
@@ -70,7 +70,7 @@ namespace XRTK.Editor
                     for (int i = 0; i < installedAssets.Count; i++)
                     {
                         EditorUtility.DisplayProgressBar("Verifying assets...", Path.GetFileNameWithoutExtension(installedAssets[i]), i / (float)installedAssets.Count);
-                        installedAssets[i] = installedAssets[i].Replace($"{ProjectRootPath}\\", string.Empty).ToForwardSlashes();
+                        installedAssets[i] = installedAssets[i].Replace($"{ProjectRootPath}\\", string.Empty).BackSlashes();
                     }
 
                     EditorUtility.ClearProgressBar();
@@ -187,9 +187,9 @@ namespace XRTK.Editor
 
         private static string CopyAsset(this string rootPath, string sourceAssetPath, string destinationPath)
         {
-            sourceAssetPath = sourceAssetPath.ToForwardSlashes();
-            destinationPath = $"{destinationPath}{sourceAssetPath.Replace(Path.GetFullPath(rootPath), string.Empty)}".ToForwardSlashes();
-            destinationPath = Path.Combine(ProjectRootPath, destinationPath).ToForwardSlashes();
+            sourceAssetPath = sourceAssetPath.BackSlashes();
+            destinationPath = $"{destinationPath}{sourceAssetPath.Replace(Path.GetFullPath(rootPath), string.Empty)}".BackSlashes();
+            destinationPath = Path.Combine(ProjectRootPath, destinationPath).BackSlashes();
 
             if (!File.Exists(destinationPath))
             {

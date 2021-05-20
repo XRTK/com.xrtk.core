@@ -9,8 +9,19 @@ namespace XRTK.Editor.Utilities
     /// <summary>
     /// Convenience class for setting Editor Preferences with <see cref="Application.productName"/> as key prefix.
     /// </summary>
+    [InitializeOnLoad]
     public static class EditorPreferences
     {
+        static EditorPreferences()
+        {
+            applicationProductName = Application.productName;
+            applicationDataPath = Application.dataPath;
+        }
+
+        private static string applicationDataPath;
+
+        public static string ApplicationDataPath = applicationDataPath ?? (applicationDataPath = Application.dataPath);
+
         private static string applicationProductName = null;
 
         public static string ApplicationProductName => applicationProductName ?? (applicationProductName = Application.productName);

@@ -52,11 +52,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
             if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
             {
-                targetPath = $"{Application.dataPath}/ThirdParty".ToBackSlashes();
+                targetPath = $"{Application.dataPath}/ThirdParty".ForwardSlashes();
             }
             else
             {
-                targetPath = Path.GetFullPath(path).ToBackSlashes();
+                targetPath = Path.GetFullPath(path).ForwardSlashes();
             }
 
             window.titleContent = new GUIContent("Import Module");
@@ -79,11 +79,11 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 return false;
             }
 
-            path = Path.GetFullPath(path).ToBackSlashes();
+            path = Path.GetFullPath(path).ForwardSlashes();
 
             if (SymbolicLinker.Settings == null) { return false; }
 
-            var symbolicLink = SymbolicLinker.Settings.SymbolicLinks.Find(link => $"{SymbolicLinker.ProjectRoot}{link.TargetRelativePath}" == path);
+            var symbolicLink = SymbolicLinker.Settings.SymbolicLinks.Find(link => link.TargetAbsolutePath == path);
 
             return symbolicLink != null && symbolicLink.IsActive;
         }
@@ -97,18 +97,18 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
             var path = AssetDatabase.GUIDToAssetPath(guids[0]);
 
-            path = Path.GetFullPath(path).ToBackSlashes();
-            var symbolicLink = SymbolicLinker.Settings.SymbolicLinks.Find(link => $"{SymbolicLinker.ProjectRoot}{link.TargetRelativePath}" == path);
+            path = Path.GetFullPath(path).ForwardSlashes();
+            var symbolicLink = SymbolicLinker.Settings.SymbolicLinks.Find(link => link.TargetAbsolutePath == path);
 
             if (symbolicLink == null) { return; }
 
             switch (EditorUtility.DisplayDialogComplex("Delete this Symbolically linked path?", path, "Disable Link", "Delete Link", "Cancel"))
             {
                 case 0:
-                    SymbolicLinker.DisableLink(symbolicLink.TargetRelativePath);
+                    symbolicLink.Disable();
                     break;
                 case 1:
-                    SymbolicLinker.RemoveLink(symbolicLink.SourceRelativePath, symbolicLink.TargetRelativePath);
+                    symbolicLink.Remove();
                     break;
             }
 
@@ -133,7 +133,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
             if (GUILayout.Button("Choose Source Path"))
             {
-                sourcePath = EditorUtility.OpenFolderPanel("Source Path", Application.dataPath, string.Empty).ToBackSlashes();
+                sourcePath = EditorUtility.OpenFolderPanel("Source Path", Application.dataPath, string.Empty).ForwardSlashes();
             }
 
             GUILayout.Space(10);
@@ -141,7 +141,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
             if (GUILayout.Button("Choose Target Path"))
             {
-                targetPath = EditorUtility.OpenFolderPanel("Target Path", targetPath, string.Empty).ToBackSlashes();
+                targetPath = EditorUtility.OpenFolderPanel("Target Path", targetPath, string.Empty).ForwardSlashes();
             }
 
             GUILayout.Space(8);
@@ -165,7 +165,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                     }
 
                     MixedRealityPreferences.AutoLoadSymbolicLinks = true;
-                    SymbolicLinker.AddLink(sourcePath, targetPath);
+                    SymbolicLinker.Add(new SymbolicLink(sourcePath, targetPath));
                     EditorUtility.SetDirty(SymbolicLinker.Settings);
                     AssetDatabase.SaveAssets();
 

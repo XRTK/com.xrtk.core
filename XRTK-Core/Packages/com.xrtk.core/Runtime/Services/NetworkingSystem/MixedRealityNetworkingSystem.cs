@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
+using System.Net;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Interfaces.NetworkingSystem;
 
@@ -26,6 +27,25 @@ namespace XRTK.Services.NetworkingSystem
 
         /// <inheritdoc />
         public HashSet<IMixedRealityNetworkDataProvider> NetworkDataProviders { get; } = new HashSet<IMixedRealityNetworkDataProvider>();
+
+        /// <inheritdoc />
+        public bool HasInternetConnection
+        {
+            get
+            {
+                try
+                {
+                    using (new WebClient().OpenRead("https://www.google.com"))
+                    {
+                        return true;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
 
         /// <inheritdoc />
         public uint RequestNetworkDataProviderSourceId()

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -28,9 +28,10 @@ namespace XRTK.Editor.Utilities
         }
 
         [Serializable]
-        internal class CustomScriptAssemblyData
+        internal class AssemblyDefinition
         {
             public string name = null;
+            public string version = null;
             public string[] references = null;
             public string[] optionalUnityReferences = null;
             public string[] includePlatforms = null;
@@ -39,9 +40,9 @@ namespace XRTK.Editor.Utilities
 
             public AsmDefSourceFiles Source { get; set; } = new AsmDefSourceFiles();
 
-            public static CustomScriptAssemblyData FromJson(string json)
+            public static AssemblyDefinition FromJson(string json)
             {
-                var scriptAssemblyData = JsonUtility.FromJson<CustomScriptAssemblyData>(json);
+                var scriptAssemblyData = JsonUtility.FromJson<AssemblyDefinition>(json);
                 if (scriptAssemblyData == null) { throw new Exception("Json file does not contain an assembly definition"); }
                 if (string.IsNullOrEmpty(scriptAssemblyData.name)) { throw new Exception("Required property 'name' not set"); }
                 if (scriptAssemblyData.excludePlatforms != null && scriptAssemblyData.excludePlatforms.Length > 0 &&
@@ -53,9 +54,9 @@ namespace XRTK.Editor.Utilities
                 return scriptAssemblyData;
             }
 
-            public static string ToJson(CustomScriptAssemblyData data)
+            public static string ToJson(AssemblyDefinition definition)
             {
-                return JsonUtility.ToJson(data, true);
+                return JsonUtility.ToJson(definition, true);
             }
         }
 
@@ -78,7 +79,7 @@ namespace XRTK.Editor.Utilities
             var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
             var directoryPath = new FileInfo(assetPath).Directory?.FullName;
             var assemblyDefinitionText = AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath).text;
-            var scriptAssemblyData = CustomScriptAssemblyData.FromJson(assemblyDefinitionText);
+            var scriptAssemblyData = AssemblyDefinition.FromJson(assemblyDefinitionText);
             var fromAssemblyName = CompilationPipeline.GetAssemblyDefinitionFilePathFromAssemblyName(scriptAssemblyData.name);
 
             Debug.Assert(!string.IsNullOrEmpty(scriptAssemblyData.name));
@@ -88,7 +89,7 @@ namespace XRTK.Editor.Utilities
                 CompilationPipeline.GetAssemblies(AssembliesType.Player).ReplaceSourceWithAssembly(ref scriptAssemblyData, directoryPath))
             {
                 EditorUtility.DisplayProgressBar("Replacing source with assembly", "Saving source meta data for later...", 0.95f);
-                File.WriteAllText(assetPath, CustomScriptAssemblyData.ToJson(scriptAssemblyData));
+                File.WriteAllText(assetPath, AssemblyDefinition.ToJson(scriptAssemblyData));
                 File.WriteAllText($"{Path.GetFullPath(assetPath).Hide()}{JSON}", JsonUtility.ToJson(scriptAssemblyData.Source, true));
             }
             else
@@ -104,7 +105,7 @@ namespace XRTK.Editor.Utilities
             EditorUtility.ClearProgressBar();
         }
 
-        private static bool ReplaceSourceWithAssembly(this Assembly[] assemblies, ref CustomScriptAssemblyData assemblyData, string directoryPath)
+        private static bool ReplaceSourceWithAssembly(this Assembly[] assemblies, ref AssemblyDefinition assemblyDefinition, string directoryPath)
         {
             EditorUtility.DisplayProgressBar("Replacing source with assembly", "Gathering assembly information...", 0.1f);
 
@@ -113,13 +114,13 @@ namespace XRTK.Editor.Utilities
                 Assembly assembly = assemblies[i];
                 EditorUtility.DisplayProgressBar("Replacing source with assembly", $"Processing assembly {assembly.name}", i / (float)assemblies.Length);
 
-                if (assembly.name != assemblyData.name) { continue; }
+                if (assembly.name != assemblyDefinition.name) { continue; }
 
                 Debug.Assert(assembly.sourceFiles != null);
                 Debug.Assert(assembly.sourceFiles.Length > 0);
                 Debug.Assert(File.Exists(assembly.outputPath));
 
-                assemblyData.Source.Files = assembly.sourceFiles;
+                assemblyDefinition.Source.Files = assembly.sourceFiles;
                 AssetDatabase.ReleaseCachedFileHandles();
 
                 for (var j = 0; j < assembly.sourceFiles.Length; j++)
@@ -153,8 +154,8 @@ namespace XRTK.Editor.Utilities
                     return true;
                 }
 
-                if (assemblyData.excludePlatforms != null && assemblyData.excludePlatforms.Length > 0 &&
-                    assemblyData.includePlatforms != null && assemblyData.includePlatforms.Length > 0)
+                if (assemblyDefinition.excludePlatforms != null && assemblyDefinition.excludePlatforms.Length > 0 &&
+                    assemblyDefinition.includePlatforms != null && assemblyDefinition.includePlatforms.Length > 0)
                 {
                     Selection.activeObject = importedAssembly;
                     Debug.LogError("Unable to update plugin import settings, as both exclude and include platforms have been enabled.");
@@ -162,28 +163,28 @@ namespace XRTK.Editor.Utilities
                 }
 
                 BuildTarget buildTarget;
-                importedAssembly.SetCompatibleWithAnyPlatform(assemblyData.includePlatforms == null || assemblyData.includePlatforms.Length == 0);
+                importedAssembly.SetCompatibleWithAnyPlatform(assemblyDefinition.includePlatforms == null || assemblyDefinition.includePlatforms.Length == 0);
 
-                if (assemblyData.includePlatforms != null && assemblyData.includePlatforms.Length > 0)
+                if (assemblyDefinition.includePlatforms != null && assemblyDefinition.includePlatforms.Length > 0)
                 {
-                    importedAssembly.SetCompatibleWithEditor(assemblyData.includePlatforms.Contains("Editor"));
+                    importedAssembly.SetCompatibleWithEditor(assemblyDefinition.includePlatforms.Contains("Editor"));
 
-                    for (int j = 0; j < assemblyData.includePlatforms?.Length; j++)
+                    for (int j = 0; j < assemblyDefinition.includePlatforms?.Length; j++)
                     {
-                        if (assemblyData.includePlatforms[j].TryGetBuildTarget(out buildTarget))
+                        if (assemblyDefinition.includePlatforms[j].TryGetBuildTarget(out buildTarget))
                         {
                             importedAssembly.SetCompatibleWithPlatform(buildTarget, true);
                         }
                     }
                 }
 
-                if (assemblyData.excludePlatforms != null && assemblyData.excludePlatforms.Length > 0)
+                if (assemblyDefinition.excludePlatforms != null && assemblyDefinition.excludePlatforms.Length > 0)
                 {
-                    importedAssembly.SetCompatibleWithEditor(!assemblyData.excludePlatforms.Contains("Editor"));
+                    importedAssembly.SetCompatibleWithEditor(!assemblyDefinition.excludePlatforms.Contains("Editor"));
 
-                    for (int j = 0; j < assemblyData.excludePlatforms?.Length; j++)
+                    for (int j = 0; j < assemblyDefinition.excludePlatforms?.Length; j++)
                     {
-                        if (assemblyData.excludePlatforms[j].TryGetBuildTarget(out buildTarget))
+                        if (assemblyDefinition.excludePlatforms[j].TryGetBuildTarget(out buildTarget))
                         {
                             importedAssembly.SetExcludeFromAnyPlatform(buildTarget, true);
                         }
@@ -241,7 +242,7 @@ namespace XRTK.Editor.Utilities
             var assemblyDefinitionAsset = AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assemblyDefinitionPath);
             Debug.Assert(assemblyDefinitionAsset != null, $"Failed to load assembly def asset at {assemblyDefinitionPath}");
             var assemblyDefinitionText = assemblyDefinitionAsset.text;
-            var scriptAssemblyData = CustomScriptAssemblyData.FromJson(assemblyDefinitionText);
+            var scriptAssemblyData = AssemblyDefinition.FromJson(assemblyDefinitionText);
             var assemblySourcePath = $"{Path.GetFullPath(assemblyDefinitionPath).Hide()}{JSON}";
             Debug.Assert(File.Exists(assemblySourcePath), "Fatal Error: Missing meta data to re-import source files. You'll need to manually do it by removing the '.' in front of each file.");
             string sourceFilesText = File.ReadAllText(assemblySourcePath);

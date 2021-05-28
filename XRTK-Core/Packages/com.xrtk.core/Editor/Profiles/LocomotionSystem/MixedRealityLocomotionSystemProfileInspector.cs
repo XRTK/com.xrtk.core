@@ -5,15 +5,17 @@ using UnityEditor;
 using XRTK.Services;
 using XRTK.Definitions.LocomotionSystem;
 using UnityEngine;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
     [CustomEditor(typeof(MixedRealityLocomotionSystemProfile))]
     public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private SerializedProperty startupBehavior;
+        private SerializedProperty teleportStartupBehaviour;
         private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
+        private SerializedProperty movementStartupBehaviour;
         private SerializedProperty movementCancelsTeleport;
         private SerializedProperty movementSpeed;
         private SerializedProperty movementProvider;
@@ -21,14 +23,17 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
         private static readonly GUIContent movementCancelsTeleportLabel = new GUIContent("Cancels Teleport");
         private static readonly GUIContent movementSpeedLabel = new GUIContent("Speed (m/s)");
+        private static readonly GUIContent teleportStartupBehaviourLabel = new GUIContent("Startup Behaviour");
+        private static readonly GUIContent movementStartupBehaviourLabel = new GUIContent("Startup Behaviour");
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            startupBehavior = serializedObject.FindProperty(nameof(startupBehavior));
+            teleportStartupBehaviour = serializedObject.FindProperty(nameof(teleportStartupBehaviour));
             teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
+            movementStartupBehaviour = serializedObject.FindProperty(nameof(movementStartupBehaviour));
             movementCancelsTeleport = serializedObject.FindProperty(nameof(movementCancelsTeleport));
             movementSpeed = serializedObject.FindProperty(nameof(movementSpeed));
             movementProvider = serializedObject.FindProperty(nameof(movementProvider));
@@ -43,15 +48,17 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(startupBehavior);
-            EditorGUI.indentLevel--;
-
             // Teleporting
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Teleportation", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
+
+            if (((AutoStartBehavior)movementStartupBehaviour.intValue) == AutoStartBehavior.ManualStart)
+            {
+                EditorGUILayout.HelpBox("Movement is currently disabled. Teleportation will only work once movement has been enabled programmatically at runtime.", MessageType.Info);
+            }
+
+            EditorGUILayout.PropertyField(teleportStartupBehaviour, teleportStartupBehaviourLabel);
             EditorGUILayout.PropertyField(teleportProvider);
             EditorGUILayout.PropertyField(teleportAction);
             EditorGUI.indentLevel--;
@@ -60,6 +67,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Movement", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(movementStartupBehaviour, movementStartupBehaviourLabel);
             EditorGUILayout.PropertyField(movementCancelsTeleport, movementCancelsTeleportLabel);
             EditorGUILayout.PropertyField(movementSpeed, movementSpeedLabel);
             EditorGUILayout.PropertyField(movementProvider);

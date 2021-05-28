@@ -32,19 +32,16 @@ namespace XRTK.Services.LocomotionSystem
             movementProviderType = profile.MovementProvider?.Type;
 
             TeleportAction = profile.TeleportAction;
+            MovementSpeed = profile.MovementSpeed;
             MovementCancelsTeleport = profile.MovementCancelsTeleport;
-            StartupBehavior = profile.StartupBehavior;
+            TeleportationEnabled = profile.TeleportStartupBehaviour == AutoStartBehavior.AutoStart;
+            LocomotionEnabled = profile.MovementStartupBehaviour == AutoStartBehavior.AutoStart;
         }
 
         private readonly Type teleportProviderType;
         private readonly Type movementProviderType;
         private LocomotionEventData teleportEventData;
         private bool isTeleporting = false;
-
-        /// <summary>
-        /// Gets the configured startup behaviour for the system.
-        /// </summary>
-        private AutoStartBehavior StartupBehavior { get; }
 
         /// <inheritdoc />
         public bool TeleportationEnabled { get; set; }
@@ -65,6 +62,11 @@ namespace XRTK.Services.LocomotionSystem
         /// </summary>
         public LocomotionTargetOverride LocomotionTargetOverride { get; set; }
 
+        /// <summary>
+        /// Speed in meters per second for movement.
+        /// </summary>
+        public float MovementSpeed { get; set; }
+
         /// <inheritdoc />
         public override void Initialize()
         {
@@ -77,9 +79,6 @@ namespace XRTK.Services.LocomotionSystem
 
             Debug.Assert(teleportProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a teleportation provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve the issue.");
             Debug.Assert(movementProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a movement provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve the issue.");
-
-            LocomotionEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
-            TeleportationEnabled = StartupBehavior == AutoStartBehavior.AutoStart;
 
             // Make sure to clean up any leftovers that may still be attached to the camera.
             var camera = CameraCache.Main.gameObject;

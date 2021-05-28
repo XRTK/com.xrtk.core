@@ -15,24 +15,20 @@ namespace XRTK.Definitions.LocomotionSystem
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Locomotion System Profile", fileName = "MixedRealityLocomotionSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class MixedRealityLocomotionSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityLocomotionDataProvider>
     {
-        #region General Settings
+        #region Teleporting
 
         [SerializeField]
-        [Tooltip("Configures startup behaviour for locomotion.")]
-        private AutoStartBehavior startupBehavior = AutoStartBehavior.AutoStart;
+        [Tooltip("Sets startup behaviour for teleport.")]
+        private AutoStartBehavior teleportStartupBehaviour = AutoStartBehavior.AutoStart;
 
         /// <summary>
-        /// Gets the configured locomotion startup behaviour.
+        /// Gets startup behaviour for teleport.
         /// </summary>
-        public AutoStartBehavior StartupBehavior
+        public AutoStartBehavior TeleportStartupBehaviour
         {
-            get => startupBehavior;
-            internal set => startupBehavior = value;
+            get => teleportStartupBehaviour;
+            internal set => teleportStartupBehaviour = value;
         }
-
-        #endregion
-
-        #region Teleporting
 
         [SerializeField]
         [Tooltip("The concrete teleport provider to use for teleportation.")]
@@ -64,6 +60,19 @@ namespace XRTK.Definitions.LocomotionSystem
         #endregion Teleporting
 
         #region Movement
+
+        [SerializeField]
+        [Tooltip("Sets startup behaviour for movement.")]
+        private AutoStartBehavior movementStartupBehaviour = AutoStartBehavior.AutoStart;
+
+        /// <summary>
+        /// Gets startup behaviour for movement.
+        /// </summary>
+        public AutoStartBehavior MovementStartupBehaviour
+        {
+            get => movementStartupBehaviour;
+            internal set => movementStartupBehaviour = value;
+        }
 
         [SerializeField]
         [Tooltip("If set, movement will cancel any teleportation in progress.")]

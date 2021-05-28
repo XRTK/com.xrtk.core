@@ -2,18 +2,25 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.EventDatum.Locomotion;
 using XRTK.Interfaces.LocomotionSystem;
-using XRTK.Utilities;
+using XRTK.Interfaces.InputSystem.Handlers;
+using XRTK.EventDatum.Input;
 
 namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
     /// Base implementation for locomotion providers working with the <see cref="MixedRealityLocomotionSystem"/>.
     /// </summary>
-    public abstract class BaseLocomotionProvider : MonoBehaviour, IMixedRealityLocomotionHandler
+    public abstract class BaseLocomotionProvider : MonoBehaviour,
+        IMixedRealityLocomotionHandler,
+        IMixedRealityTeleportProvider,
+        IMixedRealityInputHandler,
+        IMixedRealityInputHandler<float>,
+        IMixedRealityInputHandler<Vector2>
     {
         private MixedRealityLocomotionSystem locomotionSystem = null;
         /// <summary>
@@ -94,5 +101,17 @@ namespace XRTK.Services.LocomotionSystem
 
         /// <inheritdoc />
         public virtual void OnLocomotionCanceled(LocomotionEventData eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnInputChanged(InputEventData<float> eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnInputChanged(InputEventData<Vector2> eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnInputDown(InputEventData eventData) { }
+
+        /// <inheritdoc />
+        public virtual void OnInputUp(InputEventData eventData) { }
     }
 }

@@ -2,17 +2,32 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.EventDatum.Locomotion;
+using XRTK.Services;
+using XRTK.Definitions;
+using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Interfaces.InputSystem.Handlers;
+using XRTK.Services.LocomotionSystem;
 
-namespace XRTK.Services.LocomotionSystem
+namespace XRTK.Providers.LocomotionSystem
 {
-    /// <summary>
-    /// This <see cref="Interfaces.LocomotionSystem.IMixedRealityTeleportProvider"/> implementation will
-    /// instantly teleport to the target location.
-    /// </summary>
-    [System.Runtime.InteropServices.Guid("34f7d57f-c3d2-448b-83cf-0ccccca4306c")]
-    public class InstantTeleportProvider : BaseTeleportProvider
+    [System.Runtime.InteropServices.Guid("790cdfd8-89c7-41c9-8dab-6b32e1e9d0a9")]
+    public class MixedRealityInstantTeleportLocomotionProvider : BaseLocomotionProvider,
+        IMixedRealityLocomotionProvider,
+        IMixedRealityLocomotionHandler,
+        IMixedRealityInputHandler,
+        IMixedRealityInputHandler<float>,
+        IMixedRealityInputHandler<Vector2>
     {
+        /// <inheritdoc />
+        public MixedRealityInstantTeleportLocomotionProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityLocomotionSystem parentService)
+            : base(name, priority, profile, parentService)
+        {
+
+        }
+
+        /// <inheritdoc />
+        public override LocomotionType Type => LocomotionType.Teleport;
+
         /// <inheritdoc />
         public override void OnLocomotionStarted(LocomotionEventData eventData)
         {

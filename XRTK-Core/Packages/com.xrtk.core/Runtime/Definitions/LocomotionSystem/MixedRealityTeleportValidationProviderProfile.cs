@@ -2,15 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile for the <see cref="MixedRealityTeleportValidationDataProvider"/>.
+    /// Configuration profile for the <see cref="Providers.LocomotionSystem.MixedRealityTeleportValidationProvider"/>.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Locomotion System/Teleport Validation Data Provider Profile", fileName = "MixedRealityTeleportValidationDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class MixedRealityTeleportValidationDataProviderProfile : BaseMixedRealityProfile
+    public class MixedRealityTeleportValidationProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("Should teleportation only be allowed if the target is a hotspot?")]

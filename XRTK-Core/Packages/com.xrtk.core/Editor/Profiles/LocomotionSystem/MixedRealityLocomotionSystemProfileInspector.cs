@@ -13,16 +13,12 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty teleportStartupBehaviour;
-        private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
         private SerializedProperty movementStartupBehaviour;
         private SerializedProperty movementCancelsTeleport;
-        private SerializedProperty movementSpeed;
-        private SerializedProperty movementProvider;
         private SerializedProperty moveAction;
 
         private static readonly GUIContent movementCancelsTeleportLabel = new GUIContent("Cancels Teleport");
-        private static readonly GUIContent movementSpeedLabel = new GUIContent("Speed (m/s)");
         private static readonly GUIContent teleportStartupBehaviourLabel = new GUIContent("Startup Behaviour");
         private static readonly GUIContent movementStartupBehaviourLabel = new GUIContent("Startup Behaviour");
 
@@ -31,12 +27,9 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             base.OnEnable();
 
             teleportStartupBehaviour = serializedObject.FindProperty(nameof(teleportStartupBehaviour));
-            teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
             movementStartupBehaviour = serializedObject.FindProperty(nameof(movementStartupBehaviour));
             movementCancelsTeleport = serializedObject.FindProperty(nameof(movementCancelsTeleport));
-            movementSpeed = serializedObject.FindProperty(nameof(movementSpeed));
-            movementProvider = serializedObject.FindProperty(nameof(movementProvider));
             moveAction = serializedObject.FindProperty(nameof(moveAction));
         }
 
@@ -59,7 +52,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             }
 
             EditorGUILayout.PropertyField(teleportStartupBehaviour, teleportStartupBehaviourLabel);
-            EditorGUILayout.PropertyField(teleportProvider);
             EditorGUILayout.PropertyField(teleportAction);
             EditorGUI.indentLevel--;
 
@@ -69,8 +61,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(movementStartupBehaviour, movementStartupBehaviourLabel);
             EditorGUILayout.PropertyField(movementCancelsTeleport, movementCancelsTeleportLabel);
-            EditorGUILayout.PropertyField(movementSpeed, movementSpeedLabel);
-            EditorGUILayout.PropertyField(movementProvider);
             EditorGUILayout.PropertyField(moveAction);
             EditorGUI.indentLevel--;
 

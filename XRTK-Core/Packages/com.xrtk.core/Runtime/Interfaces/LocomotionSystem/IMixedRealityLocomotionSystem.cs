@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using XRTK.Definitions.InputSystem;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.InputSystem;
@@ -14,26 +15,31 @@ namespace XRTK.Interfaces.LocomotionSystem
     public interface IMixedRealityLocomotionSystem : IMixedRealityEventSystem
     {
         /// <summary>
-        /// Gets or sets whether the <see cref="IMixedRealityLocomotionSystem"/> should allow any teleportation
-        /// requested using <see cref="RaiseTeleportRequest(IMixedRealityPointer, IMixedRealityTeleportHotSpot)"/>.
-        /// Use this property to temporarily disable teleportation. Note that teleportation requires locomotion to be enabled.
+        /// Gets or sets whether the <see cref="IMixedRealityLocomotionSystem"/> should allow any locomotion
+        /// of type <see cref="Services.LocomotionSystem.LocomotionType.Teleport"/>.
+        /// Use this property e.g. to temporarily disable teleportation. Note that teleportation requires <see cref="LocomotionIsEnabled"/> to be set.
         /// </summary>
         /// <example>
-        /// TeleportationEnabled = false; // Disables teleportation.
-        /// TeleportationEnabled = true; // Enables teleportation.
+        /// <see cref="TeleportationIsEnabled"/> = false;
+        /// <see cref="TeleportationIsEnabled"/> = true;
         /// </example>
-        bool TeleportationEnabled { get; set; }
+        bool TeleportationIsEnabled { get; set; }
 
         /// <summary>
-        /// Gets or sets whether the <see cref="IMixedRealityLocomotionSystem"/> should allow any locomotion.
-        /// Use this property to temporarily disable locomotion. Note that disabling locomotion will also
-        /// disable teleportation.
+        /// Gets or sets whether the <see cref="IMixedRealityLocomotionSystem"/> should allow locomotion of
+        /// any <see cref="Services.LocomotionSystem.LocomotionType"/> to happen.
+        /// Use this property e.g. to temporarily disable locomotion.
         /// </summary>
         /// <example>
-        /// LocomotionEnabled = false; // Disables locomotion.
-        /// LocomotionEnabled = true; // Enables locomotion.
+        /// <see cref="LocomotionIsEnabled"/> = false;
+        /// <see cref="LocomotionIsEnabled"/> = true;
         /// </example>
-        bool LocomotionEnabled { get; set; }
+        bool LocomotionIsEnabled { get; set; }
+
+        /// <summary>
+        /// Gets a list of currently enabled <see cref="IMixedRealityLocomotionProvider"/>s.
+        /// </summary>
+        IReadOnlyCollection<IMixedRealityLocomotionProvider> EnabledLocomotionProviders { get; }
 
         /// <summary>
         /// Gets the <see cref="MixedRealityInputAction"/> used to trigger a teleport request.

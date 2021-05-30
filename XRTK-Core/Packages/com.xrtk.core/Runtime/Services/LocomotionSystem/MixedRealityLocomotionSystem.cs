@@ -1,17 +1,16 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
+using XRTK.Extensions;
+using XRTK.Utilities;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.EventDatum.Locomotion;
-using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
-using XRTK.Utilities;
 
 namespace XRTK.Services.LocomotionSystem
 {
@@ -28,26 +27,30 @@ namespace XRTK.Services.LocomotionSystem
         public MixedRealityLocomotionSystem(MixedRealityLocomotionSystemProfile profile)
             : base(profile)
         {
-            teleportProviderType = profile.TeleportProvider?.Type;
-            movementProviderType = profile.MovementProvider?.Type;
-
             TeleportAction = profile.TeleportAction;
-            MovementSpeed = profile.MovementSpeed;
             MovementCancelsTeleport = profile.MovementCancelsTeleport;
-            TeleportationEnabled = profile.TeleportStartupBehaviour == AutoStartBehavior.AutoStart;
-            LocomotionEnabled = profile.MovementStartupBehaviour == AutoStartBehavior.AutoStart;
+            TeleportationIsEnabled = profile.TeleportStartupBehaviour == AutoStartBehavior.AutoStart;
+            LocomotionIsEnabled = profile.MovementStartupBehaviour == AutoStartBehavior.AutoStart;
         }
 
-        private readonly Type teleportProviderType;
-        private readonly Type movementProviderType;
+        private readonly HashSet<IMixedRealityLocomotionProvider> locomotionProviders = new HashSet<IMixedRealityLocomotionProvider>();
         private LocomotionEventData teleportEventData;
         private bool isTeleporting = false;
 
         /// <inheritdoc />
-        public bool TeleportationEnabled { get; set; }
+        public IReadOnlyCollection<IMixedRealityLocomotionProvider> EnabledLocomotionProviders
+        {
+            get
+            {
+
+            }
+        }
 
         /// <inheritdoc />
-        public bool LocomotionEnabled { get; set; }
+        public bool TeleportationIsEnabled { get; set; }
+
+        /// <inheritdoc />
+        public bool LocomotionIsEnabled { get; set; }
 
         /// <inheritdoc />
         public MixedRealityInputAction TeleportAction { get; private set; }
@@ -62,11 +65,6 @@ namespace XRTK.Services.LocomotionSystem
         /// </summary>
         public LocomotionTargetOverride LocomotionTargetOverride { get; set; }
 
-        /// <summary>
-        /// Speed in meters per second for movement.
-        /// </summary>
-        public float MovementSpeed { get; set; }
-
         /// <inheritdoc />
         public override void Initialize()
         {
@@ -76,41 +74,6 @@ namespace XRTK.Services.LocomotionSystem
             {
                 teleportEventData = new LocomotionEventData(EventSystem.current);
             }
-
-            Debug.Assert(teleportProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a teleportation provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve the issue.");
-            Debug.Assert(movementProviderType != null, $"The {nameof(MixedRealityLocomotionSystem)} requires a movement provider to be set. Check the active {nameof(MixedRealityLocomotionSystemProfile)} to resolve the issue.");
-
-            // Make sure to clean up any leftovers that may still be attached to the camera.
-            var camera = CameraCache.Main.gameObject;
-            var existingTeleportProviders = camera.GetComponents(typeof(IMixedRealityTeleportProvider));
-            if (existingTeleportProviders != null)
-            {
-                for (var i = 0; i < existingTeleportProviders.Length; i++)
-                {
-                    var existingTeleportProvider = existingTeleportProviders[i];
-                    if (!existingTeleportProvider.IsNull() && existingTeleportProvider.GetType() != teleportProviderType)
-                    {
-                        existingTeleportProvider.Destroy();
-                    }
-                }
-            }
-
-            camera.EnsureComponent(teleportProviderType);
-
-            var existingMovementProviders = camera.GetComponents(typeof(IMixedRealityMovementProvider));
-            if (existingMovementProviders != null)
-            {
-                for (var i = 0; i < existingMovementProviders.Length; i++)
-                {
-                    var existingMovementProvider = existingMovementProviders[i];
-                    if (!existingMovementProvider.IsNull() && existingMovementProvider.GetType() != movementProviderType)
-                    {
-                        existingMovementProvider.Destroy();
-                    }
-                }
-            }
-
-            camera.EnsureComponent(movementProviderType);
         }
 
         /// <inheritdoc />

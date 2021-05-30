@@ -5,19 +5,14 @@ using UnityEngine;
 using XRTK.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.EventDatum.Locomotion;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.EventDatum.Input;
 
 namespace XRTK.Services.LocomotionSystem
 {
-    /// <summary>
-    /// Base implementation for locomotion providers working with the <see cref="MixedRealityLocomotionSystem"/>.
-    /// </summary>
-    public abstract class BaseLocomotionProvider : MonoBehaviour,
+    public class LocomotionProvider : MonoBehaviour,
         IMixedRealityLocomotionHandler,
-        IMixedRealityTeleportProvider,
         IMixedRealityInputHandler,
         IMixedRealityInputHandler<float>,
         IMixedRealityInputHandler<Vector2>

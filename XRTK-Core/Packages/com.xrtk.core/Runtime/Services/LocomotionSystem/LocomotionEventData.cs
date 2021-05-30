@@ -2,10 +2,11 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine.EventSystems;
+using XRTK.EventDatum;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 
-namespace XRTK.EventDatum.Locomotion
+namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
     /// Describes a locomotion event raised by the <see cref="IMixedRealityLocomotionSystem"/>.

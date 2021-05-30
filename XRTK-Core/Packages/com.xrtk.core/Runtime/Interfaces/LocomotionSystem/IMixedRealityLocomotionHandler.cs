@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine.EventSystems;
-using XRTK.EventDatum.Locomotion;
+using XRTK.Services.LocomotionSystem;
 
 namespace XRTK.Interfaces.LocomotionSystem
 {

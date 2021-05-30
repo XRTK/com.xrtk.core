@@ -2,15 +2,16 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Services.LocomotionSystem;
 
 namespace XRTK.Interfaces.LocomotionSystem
 {
     /// <summary>
-    /// Interface to define teleportation validation data providers.
+    /// Interface to define teleportation validation data providers. A <see cref="IMixedRealityTeleportValidationProvider"/>
+    /// is responsible for validating whether a given teleportation target position is valid or not.
     /// </summary>
-    public interface IMixedRealityTeleportValidationDataProvider : IMixedRealityLocomotionDataProvider
+    public interface IMixedRealityTeleportValidationProvider : IMixedRealityLocomotionProvider
     {
         /// <summary>
         /// Validates a <see cref="IPointerResult"/> and returns whether the <see cref="RaycastHit"/>

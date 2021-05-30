@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Attributes;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.LocomotionSystem;
@@ -13,7 +12,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// Configuration profile settings for <see cref="Services.LocomotionSystem.MixedRealityLocomotionSystem"/>.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Locomotion System Profile", fileName = "MixedRealityLocomotionSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class MixedRealityLocomotionSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityLocomotionDataProvider>
+    public class MixedRealityLocomotionSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityLocomotionProvider>
     {
         #region Teleporting
 
@@ -28,20 +27,6 @@ namespace XRTK.Definitions.LocomotionSystem
         {
             get => teleportStartupBehaviour;
             internal set => teleportStartupBehaviour = value;
-        }
-
-        [SerializeField]
-        [Tooltip("The concrete teleport provider to use for teleportation.")]
-        [Implements(typeof(IMixedRealityTeleportProvider), TypeGrouping.ByNamespaceFlat)]
-        private SystemType teleportProvider;
-
-        /// <summary>
-        /// The concrete teleport provider to use for teleportation.
-        /// </summary>
-        public SystemType TeleportProvider
-        {
-            get => teleportProvider;
-            internal set => teleportProvider = value;
         }
 
         [SerializeField]
@@ -85,34 +70,6 @@ namespace XRTK.Definitions.LocomotionSystem
         {
             get => movementCancelsTeleport;
             internal set => movementCancelsTeleport = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Speed in meters per second for movement.")]
-        [Range(1f, 100f)]
-        private float movementSpeed = 5f;
-
-        /// <summary>
-        /// Speed in meters per second for movement.
-        /// </summary>
-        public float MovementSpeed
-        {
-            get => movementSpeed;
-            internal set => movementSpeed = value;
-        }
-
-        [SerializeField]
-        [Tooltip("The concrete movement provider to use for moving around.")]
-        [Implements(typeof(IMixedRealityMovementProvider), TypeGrouping.ByNamespaceFlat)]
-        private SystemType movementProvider;
-
-        /// <summary>
-        /// The concrete movement provider to use for moving around.
-        /// </summary>
-        public SystemType MovementProvider
-        {
-            get => movementProvider;
-            internal set => movementProvider = value;
         }
 
         [SerializeField]

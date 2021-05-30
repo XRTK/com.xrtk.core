@@ -10,7 +10,6 @@ using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Editor.Extensions;
 using XRTK.Services;
-using XRTK.Services.LocomotionSystem;
 
 namespace XRTK.Tests
 {
@@ -47,7 +46,6 @@ namespace XRTK.Tests
                 configuration = GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>();
                 MixedRealityToolkit.TryGetSystemProfile<IMixedRealityLocomotionSystem, MixedRealityLocomotionSystemProfile>(out var locomotionSystemProfile);
                 Debug.Assert(locomotionSystemProfile != null);
-                locomotionSystemProfile.TeleportProvider = typeof(InstantTeleportProvider);
             }
             else
             {

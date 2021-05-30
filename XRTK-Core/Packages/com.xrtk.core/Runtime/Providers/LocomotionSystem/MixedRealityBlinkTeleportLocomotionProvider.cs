@@ -2,27 +2,28 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Rendering;
-using XRTK.EventDatum.Locomotion;
-using XRTK.Extensions;
+using XRTK.Services;
+using XRTK.Definitions.LocomotionSystem;
+using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Services.LocomotionSystem;
 
-namespace XRTK.Services.LocomotionSystem
+namespace XRTK.Providers.LocomotionSystem
 {
-    /// <summary>
-    /// This <see cref="Interfaces.LocomotionSystem.IMixedRealityTeleportProvider"/> implementation will
-    /// fade out the camera when teleporting and fade it back in when done, simulating blink of an eye.
-    /// </summary>
-    [System.Runtime.InteropServices.Guid("0db5b0fd-9ac3-487a-abfd-754963f4e2a3")]
-    public class BlinkTeleportProvider : BaseTeleportProvider
+    [System.Runtime.InteropServices.Guid("497d2054-a467-4d6d-9d79-bd01aa6b4c22")]
+    public class MixedRealityBlinkTeleportLocomotionProvider : BaseLocomotionProvider
     {
+        /// <inheritdoc />
+        public MixedRealityBlinkTeleportLocomotionProvider(string name, uint priority, MixedRealityBlinkTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+            : base(name, priority, profile, parentService)
+        {
+            fadeDuration = profile.FadeDuration;
+        }
+
         private static readonly int sourceBlend = Shader.PropertyToID("_SrcBlend");
         private static readonly int destinationBlend = Shader.PropertyToID("_DstBlend");
         private static readonly int zWrite = Shader.PropertyToID("_ZWrite");
 
-        [SerializeField]
-        [Tooltip("Duration of the fade in / fade out in seconds.")]
-        private float fadeDuration = .25f;
-
+        private readonly float fadeDuration;
         private Vector3 targetPosition;
         private Vector3 targetRotation;
         private LocomotionEventData locomotionEventData;
@@ -34,27 +35,21 @@ namespace XRTK.Services.LocomotionSystem
         private bool isFadingIn;
         private float fadeTime;
 
-        /// <summary>
-        /// Awake is called when the instance is being loaded.
-        /// </summary>
-        private void Awake() => InitiailzeFadeSphere();
+        /// <inheritdoc />
+        public override LocomotionType Type => LocomotionType.Teleport;
 
         /// <inheritdoc />
-        protected override void OnDestroy()
+        public override void Initialize()
         {
-            if (!fadeSphere.IsNull())
-            {
-                fadeSphere.Destroy();
-            }
-
-            base.OnDestroy();
+            base.Initialize();
+            InitiailzeFadeSphere();
         }
 
-        /// <summary>
-        /// Update is called every frame, if the behaviour is enabled.
-        /// </summary>
-        private void Update()
+        /// <inheritdoc />
+        public override void Update()
         {
+            base.Update();
+
             if (isFadingOut)
             {
                 fadeTime += Time.deltaTime;
@@ -81,6 +76,17 @@ namespace XRTK.Services.LocomotionSystem
                     fadeSphere.SetActive(false);
                 }
             }
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            if (!fadeSphere.IsNull())
+            {
+                fadeSphere.Destroy();
+            }
+
+            base.Destroy();
         }
 
         /// <inheritdoc />

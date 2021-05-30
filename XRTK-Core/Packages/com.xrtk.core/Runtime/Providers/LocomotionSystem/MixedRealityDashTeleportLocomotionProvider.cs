@@ -2,21 +2,24 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.EventDatum.Locomotion;
+using XRTK.Services;
+using XRTK.Definitions.LocomotionSystem;
+using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Services.LocomotionSystem;
 
-namespace XRTK.Services.LocomotionSystem
+namespace XRTK.Providers.LocomotionSystem
 {
-    /// <summary>
-    /// This <see cref="Interfaces.LocomotionSystem.IMixedRealityTeleportProvider"/> implementation will
-    /// dash to the target location.
-    /// </summary>
-    [System.Runtime.InteropServices.Guid("52f6c2d4-97f9-44c3-b88e-99ba8ecdc07f")]
-    public class DashTeleportProvider : BaseTeleportProvider
+    [System.Runtime.InteropServices.Guid("b3156486-94f3-4a02-98a9-a1c26fbf92d8")]
+    public class MixedRealityDashTeleportLocomotionProvider : BaseLocomotionProvider
     {
-        [SerializeField]
-        [Tooltip("Duration of the dash in seconds.")]
-        private float dashDuration = .25f;
+        /// <inheritdoc />
+        public MixedRealityDashTeleportLocomotionProvider(string name, uint priority, MixedRealityDashTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+            : base(name, priority, profile, parentService)
+        {
+            dashDuration = profile.DashDuration;
+        }
 
+        private readonly float dashDuration = .25f;
         private bool isDashing;
         private Vector3 startPosition;
         private Quaternion startRotation;
@@ -25,8 +28,14 @@ namespace XRTK.Services.LocomotionSystem
         private LocomotionEventData locomotionEventData;
         private float dashTime;
 
-        private void Update()
+        /// <inheritdoc />
+        public override LocomotionType Type => LocomotionType.Teleport;
+
+        /// <inheritdoc />
+        public override void Update()
         {
+            base.Update();
+
             if (isDashing)
             {
                 var t = dashTime / dashDuration;

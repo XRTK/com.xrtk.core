@@ -5,19 +5,20 @@ using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Services.LocomotionSystem;
 using XRTK.Services;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.LocomotionSystem
 {
     /// <summary>
-    /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityTeleportValidationDataProvider"/>.
+    /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityTeleportValidationProvider"/>.
     /// </summary>
     [System.Runtime.InteropServices.Guid("14199fd8-1636-4147-bb08-6475e76ed1cd")]
-    public class MixedRealityTeleportValidationDataProvider : BaseDataProvider, IMixedRealityTeleportValidationDataProvider
+    public class MixedRealityTeleportValidationProvider : BaseDataProvider, IMixedRealityLocomotionDataProvider
     {
         /// <inheritdoc />
-        public MixedRealityTeleportValidationDataProvider(string name, uint priority, MixedRealityTeleportValidationDataProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public MixedRealityTeleportValidationProvider(string name, uint priority, MixedRealityTeleportValidationProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             hotSpotsOnly = profile.HotSpotsOnly;
@@ -38,9 +39,9 @@ namespace XRTK.Providers.LocomotionSystem
         /// <inheritdoc />
         public TeleportValidationResult IsValid(IPointerResult pointerResult, IMixedRealityTeleportHotSpot teleportHotSpot = null)
         {
-            TeleportValidationResult teleportValidationResult;
+            TeleportValidationResult teleportValidationResult = TeleportValidationResult.Valid;
 
-            // Check hotspots only
+            // Check hotspots only.
             if (hotSpotsOnly && (teleportHotSpot == null || !teleportHotSpot.IsActive))
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
@@ -51,30 +52,22 @@ namespace XRTK.Providers.LocomotionSystem
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }
-            // Check if it's in our valid layers
-            else if (((1 << pointerResult.CurrentPointerTarget.layer) & validLayers.value) != 0)
+            // Check if it's in valid layers.
+            else if (((1 << pointerResult.CurrentPointerTarget.layer) & validLayers.value) == 0)
             {
-                // See if it's a hot spot
-                if (teleportHotSpot != null && teleportHotSpot.IsActive)
-                {
-                    teleportValidationResult = TeleportValidationResult.HotSpot;
-                }
-                else
-                {
-                    // If it's NOT a hotspot, check if the hit normal is too steep 
-                    // (Hotspots override dot requirements)
-                    teleportValidationResult = Vector3.Dot(pointerResult.LastRaycastHit.normal, Vector3.up) > upDirectionThreshold
-                        ? TeleportValidationResult.Valid
-                        : TeleportValidationResult.Invalid;
-                }
+                teleportValidationResult = TeleportValidationResult.Invalid;
             }
+            // Check if it's in invalid layers.
             else if (((1 << pointerResult.CurrentPointerTarget.layer) & invalidLayers) != 0)
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }
-            else
+            // If it's NOT a hotspot, check if the hit normal is too steep (Hotspots override dot requirements).
+            else if (teleportHotSpot == null || !teleportHotSpot.IsActive)
             {
-                teleportValidationResult = TeleportValidationResult.None;
+                teleportValidationResult = Vector3.Dot(pointerResult.LastRaycastHit.normal, Vector3.up) > upDirectionThreshold
+                    ? TeleportValidationResult.Valid
+                    : TeleportValidationResult.Invalid;
             }
 
             return teleportValidationResult;

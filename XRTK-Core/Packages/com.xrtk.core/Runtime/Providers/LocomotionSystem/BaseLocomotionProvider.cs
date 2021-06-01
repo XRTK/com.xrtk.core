@@ -4,7 +4,6 @@
 using XRTK.Services;
 using XRTK.Definitions;
 using XRTK.Interfaces.LocomotionSystem;
-using XRTK.Services.LocomotionSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -16,9 +15,6 @@ namespace XRTK.Providers.LocomotionSystem
 
         /// <inheritdoc />
         public bool IsEnabled { get; protected set; }
-
-        /// <inheritdoc />
-        public abstract LocomotionType Type { get; }
 
         /// <inheritdoc />
         public override void Enable()

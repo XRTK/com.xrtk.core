@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Services;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
@@ -10,7 +9,7 @@ using XRTK.Services.LocomotionSystem;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("497d2054-a467-4d6d-9d79-bd01aa6b4c22")]
-    public class MixedRealityBlinkTeleportLocomotionProvider : BaseLocomotionProvider
+    public class MixedRealityBlinkTeleportLocomotionProvider : BaseLocomotionProvider, IMixedRealityTeleportLocomotionProvider
     {
         /// <inheritdoc />
         public MixedRealityBlinkTeleportLocomotionProvider(string name, uint priority, MixedRealityBlinkTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
@@ -34,9 +33,6 @@ namespace XRTK.Providers.LocomotionSystem
         private bool isFadingOut;
         private bool isFadingIn;
         private float fadeTime;
-
-        /// <inheritdoc />
-        public override LocomotionType Type => LocomotionType.Teleport;
 
         /// <inheritdoc />
         public override void Initialize()

@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Services;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
@@ -10,7 +9,7 @@ using XRTK.Services.LocomotionSystem;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("b3156486-94f3-4a02-98a9-a1c26fbf92d8")]
-    public class MixedRealityDashTeleportLocomotionProvider : BaseLocomotionProvider
+    public class MixedRealityDashTeleportLocomotionProvider : BaseLocomotionProvider, IMixedRealityTeleportLocomotionProvider
     {
         /// <inheritdoc />
         public MixedRealityDashTeleportLocomotionProvider(string name, uint priority, MixedRealityDashTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
@@ -27,9 +26,6 @@ namespace XRTK.Providers.LocomotionSystem
         private Quaternion targetRotation;
         private LocomotionEventData locomotionEventData;
         private float dashTime;
-
-        /// <inheritdoc />
-        public override LocomotionType Type => LocomotionType.Teleport;
 
         /// <inheritdoc />
         public override void Update()

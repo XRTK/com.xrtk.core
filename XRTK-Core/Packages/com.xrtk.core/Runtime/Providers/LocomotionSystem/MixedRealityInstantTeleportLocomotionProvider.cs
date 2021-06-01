@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Services;
 using XRTK.Definitions;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
@@ -12,7 +11,7 @@ namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("790cdfd8-89c7-41c9-8dab-6b32e1e9d0a9")]
     public class MixedRealityInstantTeleportLocomotionProvider : BaseLocomotionProvider,
-        IMixedRealityLocomotionProvider,
+        IMixedRealityTeleportLocomotionProvider,
         IMixedRealityLocomotionHandler,
         IMixedRealityInputHandler,
         IMixedRealityInputHandler<float>,
@@ -24,9 +23,6 @@ namespace XRTK.Providers.LocomotionSystem
         {
 
         }
-
-        /// <inheritdoc />
-        public override LocomotionType Type => LocomotionType.Teleport;
 
         /// <inheritdoc />
         public override void OnLocomotionStarted(LocomotionEventData eventData)

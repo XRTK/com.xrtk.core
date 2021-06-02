@@ -202,7 +202,27 @@ namespace XRTK.Editor.Profiles
             }
             else
             {
-                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, nameProperty.stringValue, true);
+                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, GUIContent.none, false);
+
+                if (!configurationProfileProperty.isExpanded)
+                {
+                    if (GUI.Button(nameRect, nameProperty.stringValue))
+                    {
+                        if (configurationProfileProperty.objectReferenceValue != null)
+                        {
+                            var profile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+                            Debug.Assert(profile != null);
+
+                            if (profile.ParentProfile.IsNull() ||
+                                profile.ParentProfile != ThisProfile)
+                            {
+                                profile.ParentProfile = ThisProfile;
+                            }
+
+                            Selection.activeObject = profile;
+                        }
+                    }
+                }
             }
 
             if (configurationProperty.isExpanded)

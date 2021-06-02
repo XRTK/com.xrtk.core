@@ -12,9 +12,14 @@ namespace XRTK.Services.LocomotionSystem
     public enum TeleportValidationResult
     {
         /// <summary>
+        /// The teleport validation result is unknown. That is the case
+        /// when teleport has no target.
+        /// </summary>
+        Unknown = 0,
+        /// <summary>
         /// The teleportation target is invalid.
         /// </summary>
-        Invalid = 0,
+        Invalid,
         /// <summary>
         /// The teleportation target is valid.
         /// </summary>

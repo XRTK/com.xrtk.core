@@ -4,25 +4,17 @@
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Interfaces.LocomotionSystem;
-using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Services.LocomotionSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("790cdfd8-89c7-41c9-8dab-6b32e1e9d0a9")]
     public class MixedRealityInstantTeleportLocomotionProvider : BaseLocomotionProvider,
-        IMixedRealityTeleportLocomotionProvider,
-        IMixedRealityLocomotionHandler,
-        IMixedRealityInputHandler,
-        IMixedRealityInputHandler<float>,
-        IMixedRealityInputHandler<Vector2>
+        IMixedRealityTeleportLocomotionProvider
     {
         /// <inheritdoc />
         public MixedRealityInstantTeleportLocomotionProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityLocomotionSystem parentService)
-            : base(name, priority, profile, parentService)
-        {
-
-        }
+            : base(name, priority, profile, parentService) { }
 
         /// <inheritdoc />
         public override void OnLocomotionStarted(LocomotionEventData eventData)

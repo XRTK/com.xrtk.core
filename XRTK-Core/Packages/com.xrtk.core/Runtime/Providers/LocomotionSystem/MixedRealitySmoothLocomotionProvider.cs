@@ -4,6 +4,8 @@
 using XRTK.Extensions;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
+using UnityEngine;
+using XRTK.EventDatum.Input;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -20,16 +22,11 @@ namespace XRTK.Providers.LocomotionSystem
         private readonly float speed;
 
         /// <inheritdoc />
-        public override void Destroy()
-        {
-            base.Destroy();
-            proxy.Destroy();
-        }
-
-        /// <inheritdoc />
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
-            if (LocomotionSystem == null || !LocomotionSystem.LocomotionEnabled)
+            base.OnInputChanged(eventData);
+
+            if (LocomotionSystem == null || !LocomotionSystem.LocomotionIsEnabled)
             {
                 return;
             }
@@ -41,7 +38,7 @@ namespace XRTK.Providers.LocomotionSystem
                 var angle = Mathf.Atan2(eventData.InputData.x, eventData.InputData.y) * Mathf.Rad2Deg;
                 var direction = Quaternion.Euler(0f, angle, 0f);
 
-                //LocomotionTargetTransform.position += direction * LocomotionTargetTransform.forward * LocomotionSystem.MovementSpeed;
+                LocomotionTargetTransform.position += direction * LocomotionTargetTransform.forward * speed;
             }
         }
     }

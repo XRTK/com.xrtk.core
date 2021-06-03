@@ -21,6 +21,7 @@ namespace XRTK.Editor.Profiles.InputSystem
     {
         private static readonly GUIContent FocusProviderContent = new GUIContent("Focus Provider");
         private static readonly GUIContent GazeProviderContent = new GUIContent("Gaze Provider");
+        private static readonly GUIContent GazeCursorPrefabContent = new GUIContent("Gaze Cursor Prefab");
         private static readonly GUIContent GlobalPointerSettingsContent = new GUIContent("Global Pointer Settings");
         private static readonly GUIContent GlobalHandSettingsContent = new GUIContent("Global Hand Settings");
         private static readonly GUIContent ShowControllerMappingsContent = new GUIContent("Controller Action Mappings");
@@ -126,7 +127,7 @@ namespace XRTK.Editor.Profiles.InputSystem
 
             EditorGUILayout.PropertyField(focusProviderType, FocusProviderContent);
             EditorGUILayout.PropertyField(gazeProviderType, GazeProviderContent);
-            EditorGUILayout.PropertyField(gazeCursorPrefab);
+            EditorGUILayout.PropertyField(gazeCursorPrefab, GazeCursorPrefabContent);
 
             EditorGUILayout.Space();
 

@@ -14,7 +14,7 @@ namespace XRTK.Definitions.LocomotionSystem
     {
         [SerializeField]
         [Tooltip("Sets startup behaviour for this provider.")]
-        private AutoStartBehavior startupBehaviour = AutoStartBehavior.AutoStart;
+        private AutoStartBehavior startupBehaviour = AutoStartBehavior.ManualStart;
 
         /// <summary>
         /// Gets startup behaviour for this provider.

@@ -211,25 +211,35 @@ namespace XRTK.Editor.Profiles
             }
             else
             {
-                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, GUIContent.none, false);
+                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, GUIContent.none, false) ||
+                                                   hasProfile && configurationProfileProperty.objectReferenceValue == null;
 
                 if (!configurationProfileProperty.isExpanded)
                 {
-                    if (GUI.Button(nameRect, nameProperty.stringValue, ButtonGuiStyle))
+                    if (hasProfile)
                     {
-                        if (configurationProfileProperty.objectReferenceValue != null)
+                        if (GUI.Button(nameRect, nameProperty.stringValue, ButtonGuiStyle))
                         {
-                            var profile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
-                            Debug.Assert(profile != null);
-
-                            if (profile.ParentProfile.IsNull() ||
-                                profile.ParentProfile != ThisProfile)
+                            if (configurationProfileProperty.objectReferenceValue != null)
                             {
-                                profile.ParentProfile = ThisProfile;
-                            }
+                                var profile =
+                                    configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
 
-                            Selection.activeObject = profile;
+                                Debug.Assert(profile != null);
+
+                                if (profile.ParentProfile.IsNull() ||
+                                    profile.ParentProfile != ThisProfile)
+                                {
+                                    profile.ParentProfile = ThisProfile;
+                                }
+
+                                Selection.activeObject = profile;
+                            }
                         }
+                    }
+                    else
+                    {
+                        GUI.Label(nameRect, nameProperty.stringValue, ButtonGuiStyle);
                     }
                 }
             }

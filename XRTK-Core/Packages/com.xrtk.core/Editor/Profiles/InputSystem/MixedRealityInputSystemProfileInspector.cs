@@ -84,10 +84,10 @@ namespace XRTK.Editor.Profiles.InputSystem
             {
                 var configurationProperty = Configurations.GetArrayElementAtIndex(i);
                 var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
-                if (configurationProfileProperty != null)
-                {
-                    var controllerDataProviderProfile = (BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue;
 
+                if (configurationProfileProperty != null &&
+                    configurationProfileProperty.objectReferenceValue is BaseHandControllerDataProviderProfile controllerDataProviderProfile)
+                {
                     if (controllerDataProviderProfile.IsNull() ||
                         controllerDataProviderProfile.ControllerMappingProfiles == null)
                     {

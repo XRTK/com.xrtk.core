@@ -8,7 +8,7 @@ using XRTK.Definitions.LocomotionSystem;
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
     [CustomEditor(typeof(MixedRealitySmoothLocomotionProviderProfile))]
-    public class MixedRealitySmoothLocomotionProviderProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealitySmoothLocomotionProviderProfileInspector : MixedRealityLocomotionProviderProfileInspector
     {
         private SerializedProperty speed;
 
@@ -23,7 +23,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader("This profile defines behaviour for the smooth locomotion implementation of XRTK.");
+            base.OnInspectorGUI();
 
             serializedObject.Update();
 

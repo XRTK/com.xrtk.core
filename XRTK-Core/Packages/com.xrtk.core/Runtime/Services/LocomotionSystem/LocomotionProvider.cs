@@ -48,27 +48,75 @@ namespace XRTK.Services.LocomotionSystem
         protected virtual void OnDestroy() => LocomotionSystem?.Unregister(gameObject);
 
         /// <inheritdoc />
-        public virtual void OnLocomotionRequest(LocomotionEventData eventData) { }
+        public virtual void OnLocomotionRequest(LocomotionEventData eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionRequest(eventData);
+            }
+        }
 
         /// <inheritdoc />
-        public virtual void OnLocomotionStarted(LocomotionEventData eventData) { }
+        public virtual void OnLocomotionStarted(LocomotionEventData eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionStarted(eventData);
+            }
+        }
 
         /// <inheritdoc />
-        public virtual void OnLocomotionCompleted(LocomotionEventData eventData) { }
+        public virtual void OnLocomotionCompleted(LocomotionEventData eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionCompleted(eventData);
+            }
+        }
 
         /// <inheritdoc />
-        public virtual void OnLocomotionCanceled(LocomotionEventData eventData) { }
+        public virtual void OnLocomotionCanceled(LocomotionEventData eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionCanceled(eventData);
+            }
+        }
 
         /// <inheritdoc />
-        public virtual void OnInputChanged(InputEventData<float> eventData) { }
+        public virtual void OnInputChanged(InputEventData<float> eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnInputChanged(eventData);
+            }
+        }
 
         /// <inheritdoc />
-        public virtual void OnInputChanged(InputEventData<Vector2> eventData) { }
+        public virtual void OnInputChanged(InputEventData<Vector2> eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnInputChanged(eventData);
+            }
+        }
 
         /// <inheritdoc />
-        public virtual void OnInputDown(InputEventData eventData) { }
+        public virtual void OnInputDown(InputEventData eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnInputDown(eventData);
+            }
+        }
 
         /// <inheritdoc />
-        public virtual void OnInputUp(InputEventData eventData) { }
+        public virtual void OnInputUp(InputEventData eventData)
+        {
+            for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
+            {
+                LocomotionSystem.EnabledLocomotionProviders[i].OnInputUp(eventData);
+            }
+        }
     }
 }

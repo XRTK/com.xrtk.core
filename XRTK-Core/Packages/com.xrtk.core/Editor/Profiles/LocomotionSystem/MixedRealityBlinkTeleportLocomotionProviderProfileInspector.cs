@@ -7,7 +7,7 @@ using XRTK.Definitions.LocomotionSystem;
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
     [CustomEditor(typeof(MixedRealityBlinkTeleportLocomotionProviderProfile))]
-    public class MixedRealityBlinkTeleportLocomotionProviderProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityBlinkTeleportLocomotionProviderProfileInspector : MixedRealityLocomotionProviderProfileInspector
     {
         private SerializedProperty fadeDuration;
 
@@ -20,7 +20,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader("This profile defines behaviour for the blink teleport locomotion implementation of XRTK.");
+            base.OnInspectorGUI();
 
             serializedObject.Update();
 

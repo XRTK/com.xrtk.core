@@ -8,7 +8,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="Providers.LocomotionSystem.MixedRealitySmoothLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealitySmoothLocomotionProviderProfile : BaseMixedRealityProfile
+    public class MixedRealitySmoothLocomotionProviderProfile : BaseLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Speed in meters per second for movement.")]

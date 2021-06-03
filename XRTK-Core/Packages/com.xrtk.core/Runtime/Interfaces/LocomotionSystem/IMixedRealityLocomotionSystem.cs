@@ -39,7 +39,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <summary>
         /// Gets a list of currently enabled <see cref="IMixedRealityLocomotionProvider"/>s.
         /// </summary>
-        IReadOnlyCollection<IMixedRealityLocomotionProvider> EnabledLocomotionProviders { get; }
+        IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders { get; }
 
         /// <summary>
         /// Gets the <see cref="MixedRealityInputAction"/> used to trigger a teleport request.

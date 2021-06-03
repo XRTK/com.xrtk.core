@@ -8,7 +8,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="Providers.LocomotionSystem.MixedRealityBlinkTeleportLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealityBlinkTeleportLocomotionProviderProfile : BaseMixedRealityProfile
+    public class MixedRealityBlinkTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Duration of the fade in / fade out in seconds.")]

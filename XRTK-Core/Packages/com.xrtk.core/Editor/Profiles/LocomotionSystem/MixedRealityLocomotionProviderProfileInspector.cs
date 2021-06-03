@@ -6,25 +6,25 @@ using XRTK.Definitions.LocomotionSystem;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
-    [CustomEditor(typeof(MixedRealityDashTeleportLocomotionProviderProfile))]
-    public class MixedRealityDashTeleportLocomotionProviderProfileInspector : MixedRealityLocomotionProviderProfileInspector
+    [CustomEditor(typeof(BaseLocomotionProviderProfile))]
+    public class MixedRealityLocomotionProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty dashDuration;
+        private SerializedProperty startupBehaviour;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            dashDuration = serializedObject.FindProperty(nameof(dashDuration));
+            startupBehaviour = serializedObject.FindProperty(nameof(startupBehaviour));
         }
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            RenderHeader("This profile defines behaviour for the locomotion provider.");
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(dashDuration);
+            EditorGUILayout.PropertyField(startupBehaviour);
 
             serializedObject.ApplyModifiedProperties();
         }

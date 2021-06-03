@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.Rendering;
+using XRTK.Extensions;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
@@ -35,9 +37,9 @@ namespace XRTK.Providers.LocomotionSystem
         private float fadeTime;
 
         /// <inheritdoc />
-        public override void Initialize()
+        public override void Enable()
         {
-            base.Initialize();
+            base.Enable();
             InitiailzeFadeSphere();
         }
 
@@ -152,12 +154,12 @@ namespace XRTK.Providers.LocomotionSystem
                 // We use a simple sphere around the camera / head, which
                 // we can fade in/out to simulate the camera fading to black.
                 fadeSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                fadeSphere.name = $"{nameof(BlinkTeleportProvider)}_Fade";
+                fadeSphere.name = $"{nameof(MixedRealityBlinkTeleportLocomotionProvider)}_Fade";
                 fadeSphere.transform.SetParent(CameraTransform);
                 fadeSphere.transform.localPosition = Vector3.zero;
                 fadeSphere.transform.localRotation = Quaternion.identity;
                 fadeSphere.transform.localScale = new Vector3(.5f, .5f, .5f);
-                Destroy(fadeSphere.GetComponent<SphereCollider>());
+                fadeSphere.GetComponent<SphereCollider>().Destroy();
 
                 // Invert the sphere normals to point inwards
                 // (towards camera, so we can see the darkness in our life).
@@ -208,7 +210,7 @@ namespace XRTK.Providers.LocomotionSystem
                 }
                 else
                 {
-                    Debug.LogError($"{nameof(BlinkTeleportProvider)} does not support render pipelines. The handler won't be able to fade in and out.");
+                    Debug.LogError($"{nameof(MixedRealityBlinkTeleportLocomotionProvider)} does not support render pipelines. The provider won't be able to fade in and out.");
                 }
 
                 fadeSphereRenderer.material = fadeMaterial;

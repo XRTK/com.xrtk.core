@@ -33,18 +33,11 @@ namespace XRTK.Services.LocomotionSystem
             LocomotionIsEnabled = profile.MovementStartupBehaviour == AutoStartBehavior.AutoStart;
         }
 
-        private readonly HashSet<IMixedRealityLocomotionProvider> locomotionProviders = new HashSet<IMixedRealityLocomotionProvider>();
         private LocomotionEventData teleportEventData;
         private bool isTeleporting = false;
 
         /// <inheritdoc />
-        public IReadOnlyCollection<IMixedRealityLocomotionProvider> EnabledLocomotionProviders
-        {
-            get
-            {
-
-            }
-        }
+        public IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders => null;
 
         /// <inheritdoc />
         public bool TeleportationIsEnabled { get; set; }
@@ -74,6 +67,8 @@ namespace XRTK.Services.LocomotionSystem
             {
                 teleportEventData = new LocomotionEventData(EventSystem.current);
             }
+
+            CameraCache.Main.gameObject.EnsureComponent<LocomotionProvider>();
         }
 
         /// <inheritdoc />
@@ -81,13 +76,7 @@ namespace XRTK.Services.LocomotionSystem
         {
             if (!Application.isPlaying)
             {
-                var component = CameraCache.Main.gameObject.GetComponent(typeof(IMixedRealityTeleportProvider));
-                if (!component.IsNull())
-                {
-                    component.Destroy();
-                }
-
-                component = CameraCache.Main.gameObject.GetComponent(typeof(IMixedRealityMovementProvider));
+                var component = CameraCache.Main.gameObject.GetComponent(typeof(LocomotionProvider));
                 if (!component.IsNull())
                 {
                     component.Destroy();

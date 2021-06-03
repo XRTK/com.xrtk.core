@@ -8,7 +8,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="Providers.LocomotionSystem.MixedRealityDashTeleportLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealityDashTeleportLocomotionProviderProfile : BaseMixedRealityProfile
+    public class MixedRealityDashTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Duration of the dash in seconds.")]

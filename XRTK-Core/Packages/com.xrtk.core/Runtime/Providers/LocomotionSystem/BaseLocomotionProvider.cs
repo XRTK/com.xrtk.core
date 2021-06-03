@@ -3,20 +3,20 @@
 
 using UnityEngine;
 using XRTK.Services;
-using XRTK.Definitions;
+using XRTK.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.EventDatum.Input;
 using XRTK.Services.LocomotionSystem;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Utilities;
-using XRTK.Extensions;
+using XRTK.Definitions.LocomotionSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
     public abstract class BaseLocomotionProvider : BaseDataProvider, IMixedRealityLocomotionProvider
     {
         /// <inheritdoc />
-        public BaseLocomotionProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityLocomotionSystem parentService)
+        public BaseLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService) { }
 
         /// <inheritdoc />

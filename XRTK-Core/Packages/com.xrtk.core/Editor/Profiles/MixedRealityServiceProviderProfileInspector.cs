@@ -42,6 +42,15 @@ namespace XRTK.Editor.Profiles
 
         private List<Tuple<bool, bool>> configListHeightFlags;
 
+        private GUIStyle buttonGuiStyle = null;
+
+        private GUIStyle ButtonGuiStyle => buttonGuiStyle ?? (buttonGuiStyle =
+            new GUIStyle(EditorStyles.toolbarButton)
+            {
+                alignment = TextAnchor.MiddleLeft,
+                fontStyle = FontStyle.Bold
+            });
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -206,7 +215,7 @@ namespace XRTK.Editor.Profiles
 
                 if (!configurationProfileProperty.isExpanded)
                 {
-                    if (GUI.Button(nameRect, nameProperty.stringValue))
+                    if (GUI.Button(nameRect, nameProperty.stringValue, ButtonGuiStyle))
                     {
                         if (configurationProfileProperty.objectReferenceValue != null)
                         {

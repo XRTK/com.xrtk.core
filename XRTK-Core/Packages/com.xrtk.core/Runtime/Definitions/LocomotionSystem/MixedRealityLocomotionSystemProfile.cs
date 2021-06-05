@@ -17,19 +17,6 @@ namespace XRTK.Definitions.LocomotionSystem
         #region Teleporting
 
         [SerializeField]
-        [Tooltip("Sets startup behaviour for teleport.")]
-        private AutoStartBehavior teleportStartupBehaviour = AutoStartBehavior.AutoStart;
-
-        /// <summary>
-        /// Gets startup behaviour for teleport.
-        /// </summary>
-        public AutoStartBehavior TeleportStartupBehaviour
-        {
-            get => teleportStartupBehaviour;
-            internal set => teleportStartupBehaviour = value;
-        }
-
-        [SerializeField]
         [Tooltip("Input action to trigger a teleport request.")]
         private MixedRealityInputAction teleportAction = MixedRealityInputAction.None;
 
@@ -45,19 +32,6 @@ namespace XRTK.Definitions.LocomotionSystem
         #endregion Teleporting
 
         #region Movement
-
-        [SerializeField]
-        [Tooltip("Sets startup behaviour for movement.")]
-        private AutoStartBehavior movementStartupBehaviour = AutoStartBehavior.AutoStart;
-
-        /// <summary>
-        /// Gets startup behaviour for movement.
-        /// </summary>
-        public AutoStartBehavior MovementStartupBehaviour
-        {
-            get => movementStartupBehaviour;
-            internal set => movementStartupBehaviour = value;
-        }
 
         [SerializeField]
         [Tooltip("If set, movement will cancel any teleportation in progress.")]

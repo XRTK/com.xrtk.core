@@ -1,10 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Extensions;
+using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
-using UnityEngine;
 using XRTK.EventDatum.Input;
 
 namespace XRTK.Providers.LocomotionSystem
@@ -25,11 +24,6 @@ namespace XRTK.Providers.LocomotionSystem
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
             base.OnInputChanged(eventData);
-
-            if (LocomotionSystem == null || !LocomotionSystem.LocomotionIsEnabled)
-            {
-                return;
-            }
 
             if (eventData.MixedRealityInputAction == LocomotionSystem.TeleportAction)
             {

@@ -15,28 +15,6 @@ namespace XRTK.Interfaces.LocomotionSystem
     public interface IMixedRealityLocomotionSystem : IMixedRealityEventSystem
     {
         /// <summary>
-        /// Gets or sets whether the <see cref="IMixedRealityLocomotionSystem"/> should allow any locomotion
-        /// of type <see cref="Services.LocomotionSystem.LocomotionType.Teleport"/>.
-        /// Use this property e.g. to temporarily disable teleportation. Note that teleportation requires <see cref="LocomotionIsEnabled"/> to be set.
-        /// </summary>
-        /// <example>
-        /// <see cref="TeleportationIsEnabled"/> = false;
-        /// <see cref="TeleportationIsEnabled"/> = true;
-        /// </example>
-        bool TeleportationIsEnabled { get; set; }
-
-        /// <summary>
-        /// Gets or sets whether the <see cref="IMixedRealityLocomotionSystem"/> should allow locomotion of
-        /// any <see cref="Services.LocomotionSystem.LocomotionType"/> to happen.
-        /// Use this property e.g. to temporarily disable locomotion.
-        /// </summary>
-        /// <example>
-        /// <see cref="LocomotionIsEnabled"/> = false;
-        /// <see cref="LocomotionIsEnabled"/> = true;
-        /// </example>
-        bool LocomotionIsEnabled { get; set; }
-
-        /// <summary>
         /// Gets a list of currently enabled <see cref="IMixedRealityLocomotionProvider"/>s.
         /// </summary>
         IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders { get; }

@@ -10,6 +10,7 @@ using XRTK.EventDatum.Input;
 using XRTK.Services.LocomotionSystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Definitions.LocomotionSystem;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -17,7 +18,12 @@ namespace XRTK.Providers.LocomotionSystem
     {
         /// <inheritdoc />
         public BaseLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
-            : base(name, priority, profile, parentService) { }
+            : base(name, priority, profile, parentService)
+        {
+            startupBehaviour = profile.StartupBehaviour;
+        }
+
+        private readonly AutoStartBehavior startupBehaviour;
 
         /// <inheritdoc />
         public bool IsEnabled { get; protected set; }
@@ -66,7 +72,15 @@ namespace XRTK.Providers.LocomotionSystem
         public override void Enable()
         {
             base.Enable();
-            IsEnabled = true;
+
+            if (startupBehaviour == AutoStartBehavior.AutoStart)
+            {
+                IsEnabled = true;
+            }
+            else
+            {
+                Disable();
+            }
         }
 
         /// <inheritdoc />

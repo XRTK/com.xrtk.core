@@ -64,5 +64,34 @@ namespace XRTK.Extensions
             var foundComponent = gameObject.GetComponent(component);
             return foundComponent.IsNull() ? gameObject.AddComponent(component) : foundComponent;
         }
+
+        /// <summary>
+        /// Ensure that a component of type <typeparamref name="T"/> is removed and destroyed if it
+        /// exists on the game object.
+        /// </summary>
+        /// <param name="gameObject">The <see cref="GameObject"/> to remove the component from.</param>
+        public static void EnsureComponentDestroyed<T>(this GameObject gameObject) where T : Component
+        {
+            T foundComponent = gameObject.GetComponent<T>();
+            if (foundComponent.IsNotNull())
+            {
+                foundComponent.Destroy();
+            }
+        }
+
+        /// <summary>
+        /// Ensure that a component of type <paramref name="component"/> is removed and destroyed if it
+        /// exists on the game object.
+        /// </summary>
+        /// <param name="gameObject">The <see cref="GameObject"/> to remove the component from.</param>
+        /// <param name="component">A component on the game object for which a component of type should be removed.</param>
+        public static void EnsureComponentDestroyed(this GameObject gameObject, Type component)
+        {
+            var foundComponent = gameObject.GetComponent(component);
+            if (foundComponent.IsNotNull())
+            {
+                foundComponent.Destroy();
+            }
+        }
     }
 }

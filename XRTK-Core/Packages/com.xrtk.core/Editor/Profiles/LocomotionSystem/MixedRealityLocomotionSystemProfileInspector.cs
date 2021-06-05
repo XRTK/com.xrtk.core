@@ -12,9 +12,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     [CustomEditor(typeof(MixedRealityLocomotionSystemProfile))]
     public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private SerializedProperty teleportStartupBehaviour;
         private SerializedProperty teleportAction;
-        private SerializedProperty movementStartupBehaviour;
         private SerializedProperty movementCancelsTeleport;
         private SerializedProperty moveAction;
 
@@ -26,9 +24,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         {
             base.OnEnable();
 
-            teleportStartupBehaviour = serializedObject.FindProperty(nameof(teleportStartupBehaviour));
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
-            movementStartupBehaviour = serializedObject.FindProperty(nameof(movementStartupBehaviour));
             movementCancelsTeleport = serializedObject.FindProperty(nameof(movementCancelsTeleport));
             moveAction = serializedObject.FindProperty(nameof(moveAction));
         }
@@ -45,13 +41,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Teleportation", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-
-            if (((AutoStartBehavior)movementStartupBehaviour.intValue) == AutoStartBehavior.ManualStart)
-            {
-                EditorGUILayout.HelpBox("Movement is currently disabled. Teleportation will only work once movement has been enabled programmatically at runtime.", MessageType.Info);
-            }
-
-            EditorGUILayout.PropertyField(teleportStartupBehaviour, teleportStartupBehaviourLabel);
             EditorGUILayout.PropertyField(teleportAction);
             EditorGUI.indentLevel--;
 
@@ -59,7 +48,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Movement", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(movementStartupBehaviour, movementStartupBehaviourLabel);
             EditorGUILayout.PropertyField(movementCancelsTeleport, movementCancelsTeleportLabel);
             EditorGUILayout.PropertyField(moveAction);
             EditorGUI.indentLevel--;

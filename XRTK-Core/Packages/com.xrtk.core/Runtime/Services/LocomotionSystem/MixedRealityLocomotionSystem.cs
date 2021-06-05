@@ -8,7 +8,6 @@ using XRTK.Extensions;
 using XRTK.Utilities;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.LocomotionSystem;
-using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 
@@ -29,8 +28,6 @@ namespace XRTK.Services.LocomotionSystem
         {
             TeleportAction = profile.TeleportAction;
             MovementCancelsTeleport = profile.MovementCancelsTeleport;
-            TeleportationIsEnabled = profile.TeleportStartupBehaviour == AutoStartBehavior.AutoStart;
-            LocomotionIsEnabled = profile.MovementStartupBehaviour == AutoStartBehavior.AutoStart;
         }
 
         private LocomotionEventData teleportEventData;
@@ -38,12 +35,6 @@ namespace XRTK.Services.LocomotionSystem
 
         /// <inheritdoc />
         public IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders => null;
-
-        /// <inheritdoc />
-        public bool TeleportationIsEnabled { get; set; }
-
-        /// <inheritdoc />
-        public bool LocomotionIsEnabled { get; set; }
 
         /// <inheritdoc />
         public MixedRealityInputAction TeleportAction { get; private set; }
@@ -68,21 +59,27 @@ namespace XRTK.Services.LocomotionSystem
                 teleportEventData = new LocomotionEventData(EventSystem.current);
             }
 
-            CameraCache.Main.gameObject.EnsureComponent<LocomotionProvider>();
+            CameraCache.Main.gameObject.EnsureComponent<LocomotionProviderEventDriver>();
+        }
+
+        /// <inheritdoc />
+        public override void Enable()
+        {
+            base.Enable();
+            CameraCache.Main.gameObject.EnsureComponent<LocomotionProviderEventDriver>().enabled = true;
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            CameraCache.Main.EnsureComponent<LocomotionProviderEventDriver>().enabled = false;
+            base.Disable();
         }
 
         /// <inheritdoc />
         public override void Destroy()
         {
-            if (!Application.isPlaying)
-            {
-                var component = CameraCache.Main.gameObject.GetComponent(typeof(LocomotionProvider));
-                if (!component.IsNull())
-                {
-                    component.Destroy();
-                }
-            }
-
+            CameraCache.Main.gameObject.EnsureComponentDestroyed<LocomotionProviderEventDriver>();
             base.Destroy();
         }
 

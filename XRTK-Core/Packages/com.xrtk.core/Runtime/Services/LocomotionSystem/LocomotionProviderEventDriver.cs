@@ -5,10 +5,19 @@ using UnityEngine;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.EventDatum.Input;
+using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.Services.LocomotionSystem
 {
-    public class LocomotionProvider : MonoBehaviour,
+    /// <summary>
+    /// This component is attached to the main <see cref="Camera"/> by the <see cref="IMixedRealityLocomotionSystem"/>
+    /// and provides an event bridge to active <see cref="IMixedRealityLocomotionProvider"/> implementations.
+    /// It has a hard dependency on the <see cref="IMixedRealityLocomotionSystem"/> as well as the <see cref="IMixedRealityInputSystem"/>
+    /// and cannot work without both being active and enabled in the application.
+    /// Furthermore it expects that the <see cref="GameObject"/> it is attached to is a global <see cref="IMixedRealityInputSystem"/> listener. It will
+    /// not take care of registration itself.
+    /// </summary>
+    public class LocomotionProviderEventDriver : MonoBehaviour,
         IMixedRealityLocomotionHandler,
         IMixedRealityInputHandler,
         IMixedRealityInputHandler<float>,

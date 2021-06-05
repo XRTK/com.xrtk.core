@@ -35,7 +35,7 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 parent = ParentProfileOverride;
 
-                if (parent.IsNull())
+                if (parent.IsNull() && Selection.activeObject.IsNotNull())
                 {
                     if (Selection.activeObject.name.Equals(nameof(MixedRealityToolkit)))
                     {

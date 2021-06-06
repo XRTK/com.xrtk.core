@@ -42,6 +42,15 @@ namespace XRTK.Editor.Profiles
 
         private List<Tuple<bool, bool>> configListHeightFlags;
 
+        private GUIStyle buttonGuiStyle = null;
+
+        private GUIStyle ButtonGuiStyle => buttonGuiStyle ?? (buttonGuiStyle =
+            new GUIStyle(EditorStyles.toolbarButton)
+            {
+                alignment = TextAnchor.MiddleLeft,
+                fontStyle = FontStyle.Bold
+            });
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -183,17 +192,20 @@ namespace XRTK.Editor.Profiles
 
             var rectX = rect.x + 12;
             var rectWidth = rect.width - 12;
-            var nameRect = new Rect(rectX, rect.y + halfFieldHeight, rectWidth, EditorGUIUtility.singleLineHeight);
-            var typeRect = new Rect(rectX, rect.y + halfFieldHeight * 6, rectWidth, EditorGUIUtility.singleLineHeight);
-            var profileRect = new Rect(rectX, rect.y + halfFieldHeight * 11, rectWidth, EditorGUIUtility.singleLineHeight);
-            var runtimeRect = new Rect(rectX, rect.y + halfFieldHeight * (hasProfile ? 16 : 11), rectWidth, EditorGUIUtility.singleLineHeight);
+            var elementX = rectX + 6;
+            var elementWidth = rectWidth - 6;
+            var dropdownRect = new Rect(rectX, rect.y + halfFieldHeight, rectWidth, EditorGUIUtility.singleLineHeight);
+            var labelRect = new Rect(elementX, rect.y + halfFieldHeight, elementWidth, EditorGUIUtility.singleLineHeight);
+            var typeRect = new Rect(elementX, rect.y + halfFieldHeight * 6, elementWidth, EditorGUIUtility.singleLineHeight);
+            var profileRect = new Rect(elementX, rect.y + halfFieldHeight * 11, elementWidth, EditorGUIUtility.singleLineHeight);
+            var runtimeRect = new Rect(elementX, rect.y + halfFieldHeight * (hasProfile ? 16 : 11), elementWidth, EditorGUIUtility.singleLineHeight);
 
             EditorGUI.BeginChangeCheck();
 
             if (configurationProperty.isExpanded)
             {
-                EditorGUI.PropertyField(nameRect, nameProperty);
-                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, GUIContent.none, true);
+                EditorGUI.PropertyField(labelRect, nameProperty);
+                configurationProperty.isExpanded = EditorGUI.Foldout(dropdownRect, configurationProperty.isExpanded, GUIContent.none, true);
 
                 if (!configurationProperty.isExpanded)
                 {
@@ -202,7 +214,34 @@ namespace XRTK.Editor.Profiles
             }
             else
             {
-                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, nameProperty.stringValue, true);
+                configurationProperty.isExpanded = EditorGUI.Foldout(dropdownRect, configurationProperty.isExpanded, GUIContent.none, false) ||
+                                                   hasProfile && configurationProfileProperty.objectReferenceValue == null;
+
+                if (!configurationProfileProperty.isExpanded)
+                {
+                    if (hasProfile)
+                    {
+                        if (GUI.Button(labelRect, nameProperty.stringValue, ButtonGuiStyle) &&
+                            configurationProfileProperty.objectReferenceValue != null)
+                        {
+                            var profile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+
+                            Debug.Assert(profile != null);
+
+                            if (profile.ParentProfile.IsNull() ||
+                                profile.ParentProfile != ThisProfile)
+                            {
+                                profile.ParentProfile = ThisProfile;
+                            }
+
+                            Selection.activeObject = profile;
+                        }
+                    }
+                    else
+                    {
+                        GUI.Label(labelRect, nameProperty.stringValue, ButtonGuiStyle);
+                    }
+                }
             }
 
             if (configurationProperty.isExpanded)

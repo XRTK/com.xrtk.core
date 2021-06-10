@@ -13,6 +13,17 @@ namespace XRTK.Definitions.Utilities
     [Serializable]
     public sealed class SystemType : ISerializationCallbackReceiver
     {
+#if UNITY_EDITOR
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemType"/> class.
+        /// </summary>
+        /// <param name="property">The serialized property of the type reference.</param>
+        public SystemType(UnityEditor.SerializedProperty property)
+        {
+            TypeExtensions.TryResolveType(property.FindPropertyRelative(nameof(reference)).stringValue, out var resolvedType);
+            Type = resolvedType;
+        }
+#endif
         /// <summary>
         /// Initializes a new instance of the <see cref="SystemType"/> class.
         /// </summary>

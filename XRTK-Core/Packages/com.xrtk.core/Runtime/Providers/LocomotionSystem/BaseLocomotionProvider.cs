@@ -24,9 +24,10 @@ namespace XRTK.Providers.LocomotionSystem
         }
 
         private readonly AutoStartBehavior startupBehaviour;
+        private bool isInitialized;
 
         /// <inheritdoc />
-        public bool IsEnabled { get; protected set; }
+        public bool IsEnabled { get; private set; }
 
         /// <summary>
         /// Gets the active <see cref="MixedRealityLocomotionSystem"/> instance.
@@ -73,21 +74,40 @@ namespace XRTK.Providers.LocomotionSystem
         {
             base.Enable();
 
-            if (startupBehaviour == AutoStartBehavior.AutoStart)
+            if (IsEnabled)
+            {
+                return;
+            }
+
+            if (startupBehaviour == AutoStartBehavior.AutoStart || isInitialized)
             {
                 IsEnabled = true;
+                LocomotionSystem.OnLocomotionProviderEnabled(this);
+
+                Debug.Log($"Enabled {GetType().Name}");
             }
             else
             {
                 Disable();
             }
+
+            isInitialized = true;
         }
 
         /// <inheritdoc />
         public override void Disable()
         {
             base.Disable();
+
+            if (!IsEnabled)
+            {
+                return;
+            }
+
             IsEnabled = false;
+            LocomotionSystem.OnLocomotionProviderDisabled(this);
+
+            Debug.Log($"Disabled {GetType().Name}");
         }
 
         /// <inheritdoc />

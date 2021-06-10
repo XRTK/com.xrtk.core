@@ -88,8 +88,13 @@ namespace XRTK.Editor.Profiles
             RenderConfigurationOptions();
         }
 
-        protected void RenderConfigurationOptions()
+        protected void RenderConfigurationOptions(bool forceExpanded = false)
         {
+            if (forceExpanded)
+            {
+                configurations.isExpanded = true;
+            }
+
             configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
             if (configurations.isExpanded)

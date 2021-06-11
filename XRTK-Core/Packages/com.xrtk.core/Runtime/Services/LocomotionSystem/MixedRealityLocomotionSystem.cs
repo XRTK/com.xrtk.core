@@ -265,7 +265,7 @@ namespace XRTK.Services.LocomotionSystem
             delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
-                handler.OnTeleportRequest(casted);
+                handler.OnTeleportTargetRequested(casted);
             };
 
         /// <inheritdoc />

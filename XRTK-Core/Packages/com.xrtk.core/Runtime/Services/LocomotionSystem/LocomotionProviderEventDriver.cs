@@ -57,11 +57,11 @@ namespace XRTK.Services.LocomotionSystem
         protected virtual void OnDestroy() => LocomotionSystem?.Unregister(gameObject);
 
         /// <inheritdoc />
-        public virtual void OnTeleportRequest(LocomotionEventData eventData)
+        public virtual void OnTeleportTargetRequested(LocomotionEventData eventData)
         {
             for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
             {
-                LocomotionSystem.EnabledLocomotionProviders[i].OnTeleportRequest(eventData);
+                LocomotionSystem.EnabledLocomotionProviders[i].OnTeleportTargetRequested(eventData);
             }
         }
 

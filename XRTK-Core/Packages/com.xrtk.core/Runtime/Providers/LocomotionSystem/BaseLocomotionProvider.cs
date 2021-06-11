@@ -111,7 +111,7 @@ namespace XRTK.Providers.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public virtual void OnTeleportRequest(LocomotionEventData eventData) { }
+        public virtual void OnTeleportTargetRequested(LocomotionEventData eventData) { }
 
         /// <inheritdoc />
         public virtual void OnTeleportStarted(LocomotionEventData eventData) { }

@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
+using XRTK.EventDatum.Input;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
 
@@ -12,8 +13,32 @@ namespace XRTK.Providers.LocomotionSystem
     public class InstantTeleportLocomotionProvider : BaseLocomotionProvider, IMixedRealityTeleportLocomotionProvider
     {
         /// <inheritdoc />
-        public InstantTeleportLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public InstantTeleportLocomotionProvider(string name, uint priority, InstantTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService) { }
+
+        /// <inheritdoc />
+        public override void OnInputDown(InputEventData eventData)
+        {
+            base.OnInputDown(eventData);
+        }
+
+        /// <inheritdoc />
+        public override void OnInputUp(InputEventData eventData)
+        {
+            base.OnInputUp(eventData);
+        }
+
+        /// <inheritdoc />
+        public override void OnInputChanged(InputEventData<float> eventData)
+        {
+            base.OnInputChanged(eventData);
+        }
+
+        /// <inheritdoc />
+        public override void OnInputChanged(InputEventData<Vector2> eventData)
+        {
+            base.OnInputChanged(eventData);
+        }
 
         /// <inheritdoc />
         public override void OnLocomotionStarted(LocomotionEventData eventData)

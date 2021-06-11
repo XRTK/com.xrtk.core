@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using XRTK.Definitions.InputSystem;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.InputSystem;
 
@@ -21,16 +20,27 @@ namespace XRTK.Interfaces.LocomotionSystem
         IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders { get; }
 
         /// <summary>
-        /// Gets the <see cref="MixedRealityInputAction"/> used to trigger a teleport request.
+        /// Enables a locomotion provider of type <typeparamref name="T"/>.
         /// </summary>
-        MixedRealityInputAction TeleportAction { get; }
-
+        /// <typeparam name="T">Type of the <see cref="IMixedRealityLocomotionProvider"/> to enable.</typeparam>
         void EnableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider;
 
+        /// <summary>
+        /// Enables a locomotion provider of type <paramref name="locomotionProviderType"/>.
+        /// </summary>
+        /// <paramref name="locomotionProviderType">Type of the <see cref="IMixedRealityLocomotionProvider"/> to enable.</typeparam>
         void EnableLocomotionProvider(Type locomotionProviderType);
 
+        /// <summary>
+        /// Disables a locomotion provider of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the <see cref="IMixedRealityLocomotionProvider"/> to disable.</typeparam>
         void DisableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider;
 
+        /// <summary>
+        /// Disables a locomotion provider of type <paramref name="locomotionProviderType"/>.
+        /// </summary>
+        /// <paramref name="locomotionProviderType">Type of the <see cref="IMixedRealityLocomotionProvider"/> to disable.</typeparam>
         void DisableLocomotionProvider(Type locomotionProviderType);
 
         /// <summary>

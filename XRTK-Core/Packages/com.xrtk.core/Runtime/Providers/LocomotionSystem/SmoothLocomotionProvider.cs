@@ -5,6 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.EventDatum.Input;
+using XRTK.Definitions.InputSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -16,16 +17,18 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             speed = profile.Speed;
+            inputAction = profile.InputAction;
         }
 
         private readonly float speed;
+        private readonly MixedRealityInputAction inputAction;
 
         /// <inheritdoc />
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
             base.OnInputChanged(eventData);
 
-            if (eventData.MixedRealityInputAction == LocomotionSystem.TeleportAction)
+            if (eventData.MixedRealityInputAction == inputAction)
             {
                 eventData.Use();
 

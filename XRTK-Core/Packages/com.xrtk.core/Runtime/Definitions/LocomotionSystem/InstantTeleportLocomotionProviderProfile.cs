@@ -8,9 +8,9 @@ using XRTK.Definitions.InputSystem;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile for the <see cref="Providers.LocomotionSystem.BlinkTeleportLocomotionProvider"/>.
+    /// Configuration profile for the <see cref="Providers.LocomotionSystem.InstantTeleportLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealityBlinkTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
+    public class InstantTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Input action to perform locomotion the player.")]
@@ -24,19 +24,6 @@ namespace XRTK.Definitions.LocomotionSystem
         {
             get => inputAction;
             internal set => inputAction = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Duration of the fade in / fade out in seconds.")]
-        private float fadeDuration = .25f;
-
-        /// <summary>
-        /// Duration of the fade in / fade out in seconds.
-        /// </summary>
-        public float FadeDuration
-        {
-            get => fadeDuration;
-            internal set => fadeDuration = value;
         }
     }
 }

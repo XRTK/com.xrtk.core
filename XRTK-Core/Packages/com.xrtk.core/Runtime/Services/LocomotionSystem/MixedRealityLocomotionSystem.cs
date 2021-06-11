@@ -1,17 +1,16 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections.Generic;
 using XRTK.Extensions;
 using XRTK.Utilities;
-using XRTK.Definitions.InputSystem;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
-using System;
-using System.Linq;
 
 namespace XRTK.Services.LocomotionSystem
 {
@@ -28,7 +27,6 @@ namespace XRTK.Services.LocomotionSystem
         public MixedRealityLocomotionSystem(MixedRealityLocomotionSystemProfile profile)
             : base(profile)
         {
-            TeleportAction = profile.TeleportAction;
             MovementCancelsTeleport = profile.MovementCancelsTeleport;
         }
 
@@ -43,9 +41,6 @@ namespace XRTK.Services.LocomotionSystem
 
         /// <inheritdoc />
         public IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders => enabledLocomotionProviders.SelectMany(kv => kv.Value).ToList();
-
-        /// <inheritdoc />
-        public MixedRealityInputAction TeleportAction { get; private set; }
 
         /// <summary>
         /// If set, movement will cancel any teleportation in progress.
@@ -115,7 +110,10 @@ namespace XRTK.Services.LocomotionSystem
         public void EnableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider
         {
             var provider = MixedRealityToolkit.GetService<T>();
-            provider.Enable();
+            if (!provider.IsEnabled)
+            {
+                provider.Enable();
+            }
         }
 
         /// <inheritdoc />
@@ -127,7 +125,7 @@ namespace XRTK.Services.LocomotionSystem
             for (var i = 0; i < locomotionProviders.Count; i++)
             {
                 var provider = locomotionProviders[i];
-                if (provider.GetType() == locomotionProviderType)
+                if (provider.GetType() == locomotionProviderType && !provider.IsEnabled)
                 {
                     provider.Enable();
                 }
@@ -138,7 +136,10 @@ namespace XRTK.Services.LocomotionSystem
         public void DisableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider
         {
             var provider = MixedRealityToolkit.GetService<T>();
-            provider.Disable();
+            if (provider.IsEnabled)
+            {
+                provider.Disable();
+            }
         }
 
         /// <inheritdoc />
@@ -150,7 +151,7 @@ namespace XRTK.Services.LocomotionSystem
             for (var i = 0; i < locomotionProviders.Count; i++)
             {
                 var provider = locomotionProviders[i];
-                if (provider.GetType() == locomotionProviderType)
+                if (provider.GetType() == locomotionProviderType && provider.IsEnabled)
                 {
                     provider.Disable();
                 }

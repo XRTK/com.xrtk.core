@@ -15,45 +15,6 @@ using XRTK.Services;
 
 namespace XRTK.Editor.BuildPipeline
 {
-    [CustomEditor(typeof(BuildInfo), true)]
-    public class BuildInfoInspector : UnityEditor.Editor
-    {
-        private SerializedProperty autoIncrement;
-        private SerializedProperty bundleIdentifier;
-        private SerializedProperty install;
-
-        private BuildInfo buildInfo;
-
-        protected void OnEnable()
-        {
-            autoIncrement = serializedObject.FindProperty(nameof(autoIncrement));
-            bundleIdentifier = serializedObject.FindProperty(nameof(bundleIdentifier));
-            install = serializedObject.FindProperty(nameof(install));
-
-            buildInfo = (BuildInfo)target;
-        }
-
-        /// <inheritdoc />
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-
-            EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(bundleIdentifier);
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                var buildTargetGroup = UnityEditor.BuildPipeline.GetBuildTargetGroup(buildInfo.BuildTarget);
-                PlayerSettings.SetApplicationIdentifier(buildTargetGroup, bundleIdentifier.stringValue);
-            }
-
-            EditorGUILayout.PropertyField(autoIncrement);
-            EditorGUILayout.PropertyField(install);
-
-            serializedObject.ApplyModifiedProperties();
-        }
-    }
-
     [RuntimePlatform(typeof(WebGlPlatform))]
     [RuntimePlatform(typeof(WindowsStandalonePlatform))]
     public class BuildInfo : ScriptableObject, IBuildInfo

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile for the <see cref="Providers.LocomotionSystem.MixedRealitySmoothLocomotionProvider"/>.
+    /// Configuration profile for the <see cref="Providers.LocomotionSystem.SmoothLocomotionProvider"/>.
     /// </summary>
     public class MixedRealitySmoothLocomotionProviderProfile : BaseLocomotionProviderProfile
     {

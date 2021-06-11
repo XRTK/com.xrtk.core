@@ -9,10 +9,10 @@ using XRTK.EventDatum.Input;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("1be53dfa-b8ae-4eb8-8459-17a5df87ade5")]
-    public class MixedRealitySmoothLocomotionProvider : BaseLocomotionProvider, IMixedRealityFreeLocomotionProvider
+    public class SmoothLocomotionProvider : BaseLocomotionProvider, IMixedRealityFreeLocomotionProvider
     {
         /// <inheritdoc />
-        public MixedRealitySmoothLocomotionProvider(string name, uint priority, MixedRealitySmoothLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public SmoothLocomotionProvider(string name, uint priority, MixedRealitySmoothLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             speed = profile.Speed;

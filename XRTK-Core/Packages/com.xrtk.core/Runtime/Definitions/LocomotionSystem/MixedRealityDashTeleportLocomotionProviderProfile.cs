@@ -6,7 +6,7 @@ using UnityEngine;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile for the <see cref="Providers.LocomotionSystem.MixedRealityDashTeleportLocomotionProvider"/>.
+    /// Configuration profile for the <see cref="Providers.LocomotionSystem.DashTeleportLocomotionProvider"/>.
     /// </summary>
     public class MixedRealityDashTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
     {

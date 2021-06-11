@@ -15,10 +15,10 @@ namespace XRTK.Providers.LocomotionSystem
     /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityTeleportValidationProvider"/>.
     /// </summary>
     [System.Runtime.InteropServices.Guid("14199fd8-1636-4147-bb08-6475e76ed1cd")]
-    public class MixedRealityTeleportValidationProvider : BaseDataProvider, IMixedRealityTeleportValidationProvider
+    public class TeleportValidationProvider : BaseDataProvider, IMixedRealityTeleportValidationProvider
     {
         /// <inheritdoc />
-        public MixedRealityTeleportValidationProvider(string name, uint priority, MixedRealityTeleportValidationProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public TeleportValidationProvider(string name, uint priority, MixedRealityTeleportValidationProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             hotSpotsOnly = profile.HotSpotsOnly;

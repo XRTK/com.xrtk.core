@@ -81,15 +81,19 @@ namespace XRTK.Services.LocomotionSystem
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                EnableLocomotionProvider<Providers.LocomotionSystem.MixedRealityBlinkTeleportLocomotionProvider>();
+                EnableLocomotionProvider<Providers.LocomotionSystem.BlinkTeleportLocomotionProvider>();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                EnableLocomotionProvider<Providers.LocomotionSystem.MixedRealityDashTeleportLocomotionProvider>();
+                EnableLocomotionProvider<Providers.LocomotionSystem.DashTeleportLocomotionProvider>();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                EnableLocomotionProvider<Providers.LocomotionSystem.MixedRealityInstantTeleportLocomotionProvider>();
+                EnableLocomotionProvider<Providers.LocomotionSystem.InstantTeleportLocomotionProvider>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                EnableLocomotionProvider<Providers.LocomotionSystem.TransformPathOnRailsLocomotionProvider>();
             }
         }
 

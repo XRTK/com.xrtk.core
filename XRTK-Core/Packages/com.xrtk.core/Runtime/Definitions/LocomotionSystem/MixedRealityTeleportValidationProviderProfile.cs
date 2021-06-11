@@ -6,7 +6,7 @@ using UnityEngine;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile for the <see cref="Providers.LocomotionSystem.MixedRealityTeleportValidationProvider"/>.
+    /// Configuration profile for the <see cref="Providers.LocomotionSystem.TeleportValidationProvider"/>.
     /// </summary>
     public class MixedRealityTeleportValidationProviderProfile : BaseMixedRealityProfile
     {

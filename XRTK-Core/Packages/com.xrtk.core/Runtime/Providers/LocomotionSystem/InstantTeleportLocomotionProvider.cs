@@ -9,11 +9,10 @@ using XRTK.Services.LocomotionSystem;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("790cdfd8-89c7-41c9-8dab-6b32e1e9d0a9")]
-    public class MixedRealityInstantTeleportLocomotionProvider : BaseLocomotionProvider,
-        IMixedRealityTeleportLocomotionProvider
+    public class InstantTeleportLocomotionProvider : BaseLocomotionProvider, IMixedRealityTeleportLocomotionProvider
     {
         /// <inheritdoc />
-        public MixedRealityInstantTeleportLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public InstantTeleportLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService) { }
 
         /// <inheritdoc />

@@ -5,7 +5,6 @@ using UnityEditor;
 using XRTK.Services;
 using XRTK.Definitions.LocomotionSystem;
 using UnityEngine;
-using XRTK.Definitions.Utilities;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
@@ -14,11 +13,8 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     {
         private SerializedProperty teleportAction;
         private SerializedProperty movementCancelsTeleport;
-        private SerializedProperty moveAction;
 
         private static readonly GUIContent movementCancelsTeleportLabel = new GUIContent("Cancels Teleport");
-        private static readonly GUIContent teleportStartupBehaviourLabel = new GUIContent("Startup Behaviour");
-        private static readonly GUIContent movementStartupBehaviourLabel = new GUIContent("Startup Behaviour");
 
         protected override void OnEnable()
         {
@@ -26,7 +22,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
             movementCancelsTeleport = serializedObject.FindProperty(nameof(movementCancelsTeleport));
-            moveAction = serializedObject.FindProperty(nameof(moveAction));
         }
 
         public override void OnInspectorGUI()
@@ -49,7 +44,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             EditorGUILayout.LabelField("Movement", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(movementCancelsTeleport, movementCancelsTeleportLabel);
-            EditorGUILayout.PropertyField(moveAction);
             EditorGUI.indentLevel--;
 
             serializedObject.ApplyModifiedProperties();

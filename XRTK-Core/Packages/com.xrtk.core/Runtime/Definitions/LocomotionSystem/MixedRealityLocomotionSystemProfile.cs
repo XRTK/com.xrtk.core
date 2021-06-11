@@ -46,19 +46,6 @@ namespace XRTK.Definitions.LocomotionSystem
             internal set => movementCancelsTeleport = value;
         }
 
-        [SerializeField]
-        [Tooltip("Input action to move the player.")]
-        private MixedRealityInputAction moveAction = MixedRealityInputAction.None;
-
-        /// <summary>
-        /// Input action to move the player.
-        /// </summary>
-        public MixedRealityInputAction MoveAction
-        {
-            get => moveAction;
-            internal set => moveAction = value;
-        }
-
         #endregion
     }
 }

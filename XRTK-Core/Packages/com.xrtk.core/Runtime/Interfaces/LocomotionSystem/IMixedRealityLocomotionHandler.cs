@@ -15,24 +15,24 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// Raised when a pointer requests a locomotion target, but no locomotion has started.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
-        void OnLocomotionRequest(LocomotionEventData eventData);
+        void OnTeleportRequest(LocomotionEventData eventData);
 
         /// <summary>
         /// Raised when a locomotion has started.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
-        void OnLocomotionStarted(LocomotionEventData eventData);
+        void OnTeleportStarted(LocomotionEventData eventData);
 
         /// <summary>
         /// Raised when a locomotion has successfully completed.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
-        void OnLocomotionCompleted(LocomotionEventData eventData);
+        void OnTeleportCompleted(LocomotionEventData eventData);
 
         /// <summary>
         /// Raised when a locomotion request has been canceled.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
-        void OnLocomotionCanceled(LocomotionEventData eventData);
+        void OnTeleportCanceled(LocomotionEventData eventData);
     }
 }

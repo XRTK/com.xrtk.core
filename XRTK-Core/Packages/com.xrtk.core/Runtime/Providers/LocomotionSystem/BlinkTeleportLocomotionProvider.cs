@@ -88,7 +88,7 @@ namespace XRTK.Providers.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnLocomotionStarted(LocomotionEventData eventData)
+        public override void OnTeleportStarted(LocomotionEventData eventData)
         {
             if (eventData.used)
             {
@@ -115,10 +115,10 @@ namespace XRTK.Providers.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnLocomotionCompleted(LocomotionEventData eventData) => FadeIn();
+        public override void OnTeleportCompleted(LocomotionEventData eventData) => FadeIn();
 
         /// <inheritdoc />
-        public override void OnLocomotionCanceled(LocomotionEventData eventData) => fadeSphere.SetActive(false);
+        public override void OnTeleportCanceled(LocomotionEventData eventData) => fadeSphere.SetActive(false);
 
         private void PerformTeleport()
         {

@@ -265,7 +265,7 @@ namespace XRTK.Services.LocomotionSystem
             delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
-                handler.OnLocomotionRequest(casted);
+                handler.OnTeleportRequest(casted);
             };
 
         /// <inheritdoc />
@@ -279,7 +279,7 @@ namespace XRTK.Services.LocomotionSystem
             delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
-                handler.OnLocomotionStarted(casted);
+                handler.OnTeleportStarted(casted);
             };
 
         /// <inheritdoc />
@@ -300,7 +300,7 @@ namespace XRTK.Services.LocomotionSystem
             delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
-                handler.OnLocomotionCompleted(casted);
+                handler.OnTeleportCompleted(casted);
             };
 
         /// <inheritdoc />
@@ -321,7 +321,7 @@ namespace XRTK.Services.LocomotionSystem
             delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
-                handler.OnLocomotionCanceled(casted);
+                handler.OnTeleportCanceled(casted);
             };
 
         /// <inheritdoc />

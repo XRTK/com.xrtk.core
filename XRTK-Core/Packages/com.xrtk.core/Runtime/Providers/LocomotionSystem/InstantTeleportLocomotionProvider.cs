@@ -1,9 +1,11 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.EventDatum.Input;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
 
@@ -15,6 +17,8 @@ namespace XRTK.Providers.LocomotionSystem
         /// <inheritdoc />
         public InstantTeleportLocomotionProvider(string name, uint priority, InstantTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService) { }
+
+        private readonly Dictionary<uint, IMixedRealityInputSource> teleportInProgressDict = new Dictionary<uint, IMixedRealityInputSource>();
 
         /// <inheritdoc />
         public override void OnInputDown(InputEventData eventData)
@@ -38,10 +42,19 @@ namespace XRTK.Providers.LocomotionSystem
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
             base.OnInputChanged(eventData);
+
+            if (teleportInProgressDict.ContainsKey(eventData.SourceId))
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         /// <inheritdoc />
-        public override void OnLocomotionStarted(LocomotionEventData eventData)
+        public override void OnTeleportStarted(LocomotionEventData eventData)
         {
             var targetRotation = Vector3.zero;
             var targetPosition = eventData.Pointer.Result.EndPoint;

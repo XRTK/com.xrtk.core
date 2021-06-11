@@ -57,38 +57,38 @@ namespace XRTK.Services.LocomotionSystem
         protected virtual void OnDestroy() => LocomotionSystem?.Unregister(gameObject);
 
         /// <inheritdoc />
-        public virtual void OnLocomotionRequest(LocomotionEventData eventData)
+        public virtual void OnTeleportRequest(LocomotionEventData eventData)
         {
             for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
             {
-                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionRequest(eventData);
+                LocomotionSystem.EnabledLocomotionProviders[i].OnTeleportRequest(eventData);
             }
         }
 
         /// <inheritdoc />
-        public virtual void OnLocomotionStarted(LocomotionEventData eventData)
+        public virtual void OnTeleportStarted(LocomotionEventData eventData)
         {
             for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
             {
-                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionStarted(eventData);
+                LocomotionSystem.EnabledLocomotionProviders[i].OnTeleportStarted(eventData);
             }
         }
 
         /// <inheritdoc />
-        public virtual void OnLocomotionCompleted(LocomotionEventData eventData)
+        public virtual void OnTeleportCompleted(LocomotionEventData eventData)
         {
             for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
             {
-                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionCompleted(eventData);
+                LocomotionSystem.EnabledLocomotionProviders[i].OnTeleportCompleted(eventData);
             }
         }
 
         /// <inheritdoc />
-        public virtual void OnLocomotionCanceled(LocomotionEventData eventData)
+        public virtual void OnTeleportCanceled(LocomotionEventData eventData)
         {
             for (int i = 0; i < LocomotionSystem.EnabledLocomotionProviders.Count; i++)
             {
-                LocomotionSystem.EnabledLocomotionProviders[i].OnLocomotionCanceled(eventData);
+                LocomotionSystem.EnabledLocomotionProviders[i].OnTeleportCanceled(eventData);
             }
         }
 

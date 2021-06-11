@@ -50,7 +50,7 @@ namespace XRTK.Providers.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnLocomotionStarted(LocomotionEventData eventData)
+        public override void OnTeleportStarted(LocomotionEventData eventData)
         {
             if (eventData.used)
             {
@@ -82,9 +82,9 @@ namespace XRTK.Providers.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public override void OnLocomotionCompleted(LocomotionEventData eventData) => isDashing = false;
+        public override void OnTeleportCompleted(LocomotionEventData eventData) => isDashing = false;
 
         /// <inheritdoc />
-        public override void OnLocomotionCanceled(LocomotionEventData eventData) => isDashing = false;
+        public override void OnTeleportCanceled(LocomotionEventData eventData) => isDashing = false;
     }
 }

@@ -77,10 +77,7 @@ namespace XRTK.Editor.BuildPipeline
             Assert.IsNotNull(UnityPlayerBuildTools.BuildInfo);
         }
 
-        private void OnFocus()
-        {
-            platforms.Clear();
-        }
+        private void OnFocus() => platforms.Clear();
 
         private void OnGUI()
         {
@@ -137,7 +134,7 @@ namespace XRTK.Editor.BuildPipeline
 
             if (GUILayout.Button("Open Unity Build Window", GUILayout.Width(176), GUILayout.ExpandWidth(true)))
             {
-                GetWindow(Type.GetType("UnityEditor.BuildPlayerWindow,UnityEditor"));
+                GetWindow(Type.GetType($"{nameof(UnityEditor)}.{nameof(BuildPlayerWindow)},{nameof(UnityEditor)}"));
             }
 
             EditorGUILayout.EndHorizontal();

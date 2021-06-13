@@ -43,6 +43,36 @@ namespace XRTK.Editor.PropertyDrawers
         private static int selectionControlId;
         private static int arraySize = 0;
 
+        private class SerializedTypeProperty
+        {
+            private readonly SerializedProperty reference;
+
+            public Type ReferenceType
+            {
+                get
+                {
+                    TypeExtensions.TryResolveType(reference.stringValue, out Type referenceType);
+                    return referenceType;
+                }
+            }
+
+            public Guid TypeReference
+            {
+                get => Guid.TryParse(reference.stringValue, out var guid) ? guid : Guid.Empty;
+                set => reference.stringValue = value.ToString();
+            }
+
+            public SerializedTypeProperty(SerializedProperty property)
+            {
+                reference = property.FindPropertyRelative(nameof(reference));
+            }
+
+            public void ApplyModifiedProperties()
+            {
+                reference.serializedObject.ApplyModifiedProperties();
+            }
+        }
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             position = EditorGUI.PrefixLabel(position, RuntimePlatformContent);
@@ -162,20 +192,18 @@ namespace XRTK.Editor.PropertyDrawers
 
                 for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
                 {
-                    var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                    var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                    TypeExtensions.TryResolveType(referenceProperty.stringValue, out var referenceType);
+                    var serializedType = new SerializedTypeProperty(runtimePlatformsProperty.GetArrayElementAtIndex(i));
 
                     // Clean up any broken references
-                    if (referenceType == null)
+                    if (serializedType.ReferenceType == null)
                     {
-                        Debug.LogError($"Failed to resolve {referenceProperty.stringValue}! Removing from runtime platform entry...");
+                        Debug.LogError($"Failed to resolve {serializedType.TypeReference}! Removing from runtime platform entry...");
                         runtimePlatformsProperty.DeleteArrayElementAtIndex(i);
                         runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
                         continue;
                     }
 
-                    if (platformType == referenceType)
+                    if (platformType == serializedType.ReferenceType)
                     {
                         isActive = true;
                     }
@@ -203,11 +231,10 @@ namespace XRTK.Editor.PropertyDrawers
                         return EditorOnly;
                     }
 
-                    var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(0);
-                    var classRefProperty = systemTypeProperty.FindPropertyRelative("reference");
+                    var systemTypeProperty = new SerializedTypeProperty(runtimePlatformsProperty.GetArrayElementAtIndex(0));
 
-                    return TypeExtensions.TryResolveType(classRefProperty.stringValue, out var resolvedType)
-                        ? resolvedType.Name.Replace(Platform, string.Empty).ToProperCase()
+                    return systemTypeProperty.ReferenceType != null
+                        ? systemTypeProperty.ReferenceType.Name.Replace(Platform, string.Empty).ToProperCase()
                         : Nothing;
                 }
 
@@ -221,13 +248,11 @@ namespace XRTK.Editor.PropertyDrawers
 
                         for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
                         {
-                            var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                            var classRefProperty = systemTypeProperty.FindPropertyRelative("reference");
+                            var systemTypeProperty = new SerializedTypeProperty(runtimePlatformsProperty.GetArrayElementAtIndex(i));
 
-                            if (TypeExtensions.TryResolveType(classRefProperty.stringValue, out var resolvedType) &&
-                                resolvedType != EditorBuildTargetType)
+                            if (systemTypeProperty.ReferenceType != EditorBuildTargetType)
                             {
-                                type = resolvedType;
+                                type = systemTypeProperty.ReferenceType;
                                 break;
                             }
                         }
@@ -265,16 +290,14 @@ namespace XRTK.Editor.PropertyDrawers
 
                 for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
                 {
-                    var typeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                    var refProperty = typeProperty.FindPropertyRelative("reference");
-                    TypeExtensions.TryResolveType(refProperty.stringValue, out var referenceType);
+                    var typeProperty = new SerializedTypeProperty(runtimePlatformsProperty.GetArrayElementAtIndex(i));
 
-                    if (referenceType == EditorBuildTargetType)
+                    if (typeProperty.ReferenceType == EditorBuildTargetType)
                     {
                         isCurrentBuildTargetPlatformActive = true;
                     }
 
-                    if (referenceType == AllPlatformsType)
+                    if (typeProperty.ReferenceType == AllPlatformsType)
                     {
                         isAllPlatformsActive = true;
                     }
@@ -340,17 +363,17 @@ namespace XRTK.Editor.PropertyDrawers
 
             void OnSelectedTypeName(object typeRef)
             {
-                var selectedPlatformType = typeRef as Type;
+                if (!(typeRef is Type selectedPlatformType)) { return; }
 
-                if (selectedPlatformType == null) { return; }
+                var selectedTypeGuid = selectedPlatformType.GUID;
 
-                if (selectedPlatformType.GUID == Guid.Empty)
+                if (selectedTypeGuid == Guid.Empty)
                 {
                     Debug.LogError($"{selectedPlatformType.Name} does not implement a required {nameof(GuidAttribute)}");
                     return;
                 }
 
-                if (!TryRemovePlatformReference(selectedPlatformType.GUID))
+                if (!TryRemovePlatformReference(selectedTypeGuid))
                 {
                     if (runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count - 3)
                     {
@@ -358,7 +381,7 @@ namespace XRTK.Editor.PropertyDrawers
                     }
                     else
                     {
-                        TryAddPlatformReference(selectedPlatformType.GUID);
+                        TryAddPlatformReference(selectedTypeGuid);
                     }
                 }
 
@@ -376,11 +399,10 @@ namespace XRTK.Editor.PropertyDrawers
 
                 for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
                 {
-                    var existingSystemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                    var existingReferenceProperty = existingSystemTypeProperty.FindPropertyRelative("reference");
+                    var existingSystemTypeProperty = new SerializedTypeProperty(runtimePlatformsProperty.GetArrayElementAtIndex(i));
 
-                    if (!TypeExtensions.TryResolveType(existingReferenceProperty.stringValue, out var existingPlatformType) ||
-                        selectedPlatformType == existingPlatformType)
+                    if (existingSystemTypeProperty.ReferenceType == null ||
+                        existingSystemTypeProperty.ReferenceType == selectedPlatformType)
                     {
                         return;
                     }
@@ -389,9 +411,11 @@ namespace XRTK.Editor.PropertyDrawers
                 var index = runtimePlatformsProperty.arraySize;
                 runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
                 runtimePlatformsProperty.InsertArrayElementAtIndex(index);
-                var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(index);
-                var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                referenceProperty.stringValue = classReference.ToString();
+                var systemTypeProperty = new SerializedTypeProperty(runtimePlatformsProperty.GetArrayElementAtIndex(index))
+                {
+                    TypeReference = classReference
+                };
+                systemTypeProperty.ApplyModifiedProperties();
                 runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
             }
 
@@ -420,11 +444,9 @@ namespace XRTK.Editor.PropertyDrawers
 
                 for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
                 {
-                    var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                    var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
+                    var systemTypeProperty = new SerializedTypeProperty(runtimePlatformsProperty.GetArrayElementAtIndex(i));
 
-                    if (TypeExtensions.TryResolveType(referenceProperty.stringValue, out var referenceType) &&
-                        selectedPlatformType == referenceType)
+                    if (systemTypeProperty.ReferenceType == selectedPlatformType)
                     {
                         if (runtimePlatformsProperty.arraySize == 2 &&
                             IsPlatformActive(EditorBuildTargetType) &&

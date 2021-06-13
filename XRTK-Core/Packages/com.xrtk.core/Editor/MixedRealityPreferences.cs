@@ -317,6 +317,8 @@ namespace XRTK.Editor
 
                     if (currentPlatformTarget == null)
                     {
+                        var possibleBuildTargets = new List<IMixedRealityPlatform>();
+
                         foreach (var availablePlatform in MixedRealityToolkit.AvailablePlatforms)
                         {
                             if (availablePlatform is AllPlatforms ||
@@ -330,11 +332,18 @@ namespace XRTK.Editor
                             {
                                 if (EditorUserBuildSettings.activeBuildTarget == buildTarget)
                                 {
-                                    currentPlatformTarget = availablePlatform;
-                                    return currentPlatformTarget;
+                                    possibleBuildTargets.Add(availablePlatform);
                                 }
                             }
                         }
+
+                        Debug.Assert(possibleBuildTargets.Count > 0);
+
+                        currentPlatformTarget = possibleBuildTargets.Count == 1
+                            ? possibleBuildTargets[0]
+                            : possibleBuildTargets.FirstOrDefault(p => p.PlatformOverrides == null ||
+                                                                       p.PlatformOverrides.Length == 0);
+                        return currentPlatformTarget;
                     }
                 }
 

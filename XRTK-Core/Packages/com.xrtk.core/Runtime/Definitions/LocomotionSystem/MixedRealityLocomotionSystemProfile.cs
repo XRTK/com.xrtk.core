@@ -11,19 +11,20 @@ namespace XRTK.Definitions.LocomotionSystem
     /// Configuration profile settings for <see cref="Services.LocomotionSystem.MixedRealityLocomotionSystem"/>.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Locomotion System Profile", fileName = "MixedRealityLocomotionSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class MixedRealityLocomotionSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityLocomotionDataProvider>
+    public class MixedRealityLocomotionSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityLocomotionSystemDataProvider>
     {
         [SerializeField]
-        [Tooltip("If set, movement will cancel any teleportation in progress.")]
-        private bool movementCancelsTeleport = true;
+        [Tooltip("The teleportation cooldown defines the time that needs to pass after a successful teleportation for another one to be possible.")]
+        [Range(0, 10f)]
+        private float teleportCooldown = 1f;
 
         /// <summary>
-        /// If set, movement will cancel any teleportation in progress.
+        /// The teleportation cooldown defines the time that needs to pass after a successful teleportation for another one to be possible.
         /// </summary>
-        public bool MovementCancelsTeleport
+        public float TeleportCooldown
         {
-            get => movementCancelsTeleport;
-            internal set => movementCancelsTeleport = value;
+            get => teleportCooldown;
+            internal set => teleportCooldown = value;
         }
     }
 }

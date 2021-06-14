@@ -1,8 +1,8 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem;
@@ -12,70 +12,107 @@ using XRTK.Services.LocomotionSystem;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("790cdfd8-89c7-41c9-8dab-6b32e1e9d0a9")]
-    public class InstantTeleportLocomotionProvider : BaseLocomotionProvider, IMixedRealityTeleportLocomotionProvider
+    public class InstantTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {
         /// <inheritdoc />
         public InstantTeleportLocomotionProvider(string name, uint priority, InstantTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
-            : base(name, priority, profile, parentService) { }
+            : base(name, priority, profile, parentService)
+        {
+            InputAction = profile.InputAction;
+        }
 
-        private readonly Dictionary<uint, IMixedRealityInputSource> teleportInProgressDict = new Dictionary<uint, IMixedRealityInputSource>();
+        private readonly Dictionary<uint, IMixedRealityInputSource> targetRequestsDict = new Dictionary<uint, IMixedRealityInputSource>();
 
         /// <inheritdoc />
         public override void OnInputDown(InputEventData eventData)
         {
             base.OnInputDown(eventData);
+
+            if (!eventData.used && eventData.MixedRealityInputAction == InputAction &&
+                !targetRequestsDict.ContainsKey(eventData.SourceId))
+            {
+                targetRequestsDict.Add(eventData.SourceId, eventData.InputSource);
+                LocomotionSystem.RaiseTeleportTargetRequest(this, eventData.InputSource);
+                eventData.Use();
+            }
         }
 
         /// <inheritdoc />
         public override void OnInputUp(InputEventData eventData)
         {
             base.OnInputUp(eventData);
-        }
 
-        /// <inheritdoc />
-        public override void OnInputChanged(InputEventData<float> eventData)
-        {
-            base.OnInputChanged(eventData);
-        }
-
-        /// <inheritdoc />
-        public override void OnInputChanged(InputEventData<Vector2> eventData)
-        {
-            base.OnInputChanged(eventData);
-
-            if (teleportInProgressDict.ContainsKey(eventData.SourceId))
+            if (!eventData.used && eventData.MixedRealityInputAction == InputAction &&
+                targetRequestsDict.ContainsKey(eventData.SourceId))
             {
-
-            }
-            else
-            {
-
+                targetRequestsDict.Remove(eventData.SourceId);
             }
         }
 
         /// <inheritdoc />
         public override void OnTeleportStarted(LocomotionEventData eventData)
         {
-            var targetRotation = Vector3.zero;
-            var targetPosition = eventData.Pointer.Result.EndPoint;
-            targetRotation.y = eventData.Pointer.PointerOrientation;
+            base.OnTeleportStarted(eventData);
 
-            if (eventData.HotSpot != null)
+            // Was our teleport request answered and we get to start performing teleport?
+            if (!eventData.used && eventData.LocomotionProvider == this &&
+                targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
             {
-                targetPosition = eventData.HotSpot.Position;
-                if (eventData.HotSpot.OverrideTargetOrientation)
+                IsTeleporting = true;
+
+                var targetRotation = Vector3.zero;
+                var targetPosition = eventData.Pointer.Result.EndPoint;
+                targetRotation.y = eventData.Pointer.PointerOrientation;
+
+                if (eventData.HotSpot != null)
                 {
-                    targetRotation.y = eventData.HotSpot.TargetOrientation;
+                    targetPosition = eventData.HotSpot.Position;
+                    if (eventData.HotSpot.OverrideTargetOrientation)
+                    {
+                        targetRotation.y = eventData.HotSpot.TargetOrientation;
+                    }
                 }
+
+                var height = targetPosition.y;
+                targetPosition -= CameraTransform.position - LocomotionTargetTransform.position;
+                targetPosition.y = height;
+                LocomotionTargetTransform.position = targetPosition;
+                LocomotionTargetTransform.RotateAround(CameraTransform.position, Vector3.up, targetRotation.y - CameraTransform.eulerAngles.y);
+
+                LocomotionSystem.RaiseTeleportCompleted(this, eventData.Pointer, eventData.HotSpot);
+
+                eventData.Use();
             }
+        }
 
-            var height = targetPosition.y;
-            targetPosition -= CameraTransform.position - LocomotionTargetTransform.position;
-            targetPosition.y = height;
-            LocomotionTargetTransform.position = targetPosition;
-            LocomotionTargetTransform.RotateAround(CameraTransform.position, Vector3.up, targetRotation.y - CameraTransform.eulerAngles.y);
+        /// <inheritdoc />
+        public override void OnTeleportCompleted(LocomotionEventData eventData)
+        {
+            base.OnTeleportCompleted(eventData);
 
-            LocomotionSystem.RaiseTeleportComplete(eventData.Pointer, eventData.HotSpot);
+            // Did our teleport complete?
+            if (!eventData.used && eventData.LocomotionProvider == this &&
+                targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+            {
+                targetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
+                eventData.Use();
+                IsTeleporting = false;
+            }
+        }
+
+        /// <inheritdoc />
+        public override void OnTeleportCanceled(LocomotionEventData eventData)
+        {
+            base.OnTeleportCanceled(eventData);
+
+            // Have we requested a teleportation target and got canceled?
+            if (!eventData.used && eventData.LocomotionProvider == this &&
+                targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+            {
+                targetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
+                eventData.Use();
+                IsTeleporting = false;
+            }
         }
     }
 }

@@ -15,72 +15,75 @@ namespace XRTK.Interfaces.LocomotionSystem
     public interface IMixedRealityLocomotionSystem : IMixedRealityEventSystem
     {
         /// <summary>
-        /// Gets a list of currently enabled <see cref="IMixedRealityLocomotionProvider"/>s.
+        /// Gets a list of currently enabled <see cref="ILocomotionProvider"/>s.
         /// </summary>
-        IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders { get; }
+        IReadOnlyList<ILocomotionProvider> EnabledLocomotionProviders { get; }
 
         /// <summary>
         /// Enables a locomotion provider of type <typeparamref name="T"/>.
         /// </summary>
-        /// <typeparam name="T">Type of the <see cref="IMixedRealityLocomotionProvider"/> to enable.</typeparam>
-        void EnableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider;
+        /// <typeparam name="T">Type of the <see cref="ILocomotionProvider"/> to enable.</typeparam>
+        void EnableLocomotionProvider<T>() where T : ILocomotionProvider;
 
         /// <summary>
         /// Enables a locomotion provider of type <paramref name="locomotionProviderType"/>.
         /// </summary>
-        /// <paramref name="locomotionProviderType">Type of the <see cref="IMixedRealityLocomotionProvider"/> to enable.</typeparam>
+        /// <paramref name="locomotionProviderType">Type of the <see cref="ILocomotionProvider"/> to enable.</typeparam>
         void EnableLocomotionProvider(Type locomotionProviderType);
 
         /// <summary>
         /// Disables a locomotion provider of type <typeparamref name="T"/>.
         /// </summary>
-        /// <typeparam name="T">Type of the <see cref="IMixedRealityLocomotionProvider"/> to disable.</typeparam>
-        void DisableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider;
+        /// <typeparam name="T">Type of the <see cref="ILocomotionProvider"/> to disable.</typeparam>
+        void DisableLocomotionProvider<T>() where T : ILocomotionProvider;
 
         /// <summary>
         /// Disables a locomotion provider of type <paramref name="locomotionProviderType"/>.
         /// </summary>
-        /// <paramref name="locomotionProviderType">Type of the <see cref="IMixedRealityLocomotionProvider"/> to disable.</typeparam>
+        /// <paramref name="locomotionProviderType">Type of the <see cref="ILocomotionProvider"/> to disable.</typeparam>
         void DisableLocomotionProvider(Type locomotionProviderType);
 
         /// <summary>
-        /// A <see cref="IMixedRealityLocomotionProvider"/> was enabled.
+        /// A <see cref="ILocomotionProvider"/> was enabled.
         /// </summary>
-        /// <param name="locomotionProvider">The enabled <see cref="IMixedRealityLocomotionProvider"/>.</param>
-        void OnLocomotionProviderEnabled(IMixedRealityLocomotionProvider locomotionProvider);
+        /// <param name="locomotionProvider">The enabled <see cref="ILocomotionProvider"/>.</param>
+        void OnLocomotionProviderEnabled(ILocomotionProvider locomotionProvider);
 
         /// <summary>
-        /// A <see cref="IMixedRealityLocomotionProvider"/> was disabled.
+        /// A <see cref="ILocomotionProvider"/> was disabled.
         /// </summary>
-        /// <param name="locomotionProvider">The disabled <see cref="IMixedRealityLocomotionProvider"/>.</param>
-        void OnLocomotionProviderDisabled(IMixedRealityLocomotionProvider locomotionProvider);
+        /// <param name="locomotionProvider">The disabled <see cref="ILocomotionProvider"/>.</param>
+        void OnLocomotionProviderDisabled(ILocomotionProvider locomotionProvider);
 
         /// <summary>
-        /// Raise a teleportation request event.
+        /// Raise a teleportation target request event.
         /// </summary>
-        /// <param name="pointer">The pointer that raised the event.</param>
-        /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportRequest(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot);
+        /// <param name="teleportLocomotionProvider">The <see cref="ITeleportLocomotionProvider"/> that requests a teleport target.</param>
+        /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="teleportLocomotionProvider"/> requests the teleport location from.</param>
+        void RaiseTeleportTargetRequest(ITeleportLocomotionProvider teleportLocomotionProvider, IMixedRealityInputSource inputSource);
 
         /// <summary>
         /// Raise a teleportation started event.
         /// </summary>
+        /// <param name="locomotionProvider">The locomotion provider that started teleportation.</param>
         /// <param name="pointer">The pointer that raised the event.</param>
         /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportStarted(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot);
+        void RaiseTeleportStarted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot);
 
         /// <summary>
         /// Raise a teleportation completed event.
         /// </summary>
+        /// <param name="locomotionProvider">The locomotion provider whose teleportation has completed.</param>
         /// <param name="pointer">The pointer that raised the event.</param>
         /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportComplete(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot);
+        void RaiseTeleportCompleted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot);
 
         /// <summary>
         /// Raise a teleportation canceled event.
         /// </summary>
+        /// <param name="locomotionProvider">The locomotion provider whose teleport was canceled.</param>
         /// <param name="pointer">The pointer that raised the event.</param>
         /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportCanceled(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot);
+        void RaiseTeleportCanceled(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot);
     }
 }

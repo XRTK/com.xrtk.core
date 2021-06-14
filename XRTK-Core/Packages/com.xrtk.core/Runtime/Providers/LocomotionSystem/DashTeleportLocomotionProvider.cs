@@ -9,7 +9,7 @@ using XRTK.Services.LocomotionSystem;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("b3156486-94f3-4a02-98a9-a1c26fbf92d8")]
-    public class DashTeleportLocomotionProvider : BaseLocomotionProvider, IMixedRealityTeleportLocomotionProvider
+    public class DashTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {
         /// <inheritdoc />
         public DashTeleportLocomotionProvider(string name, uint priority, MixedRealityDashTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
@@ -41,7 +41,7 @@ namespace XRTK.Providers.LocomotionSystem
 
                 if (t >= 1f)
                 {
-                    LocomotionSystem.RaiseTeleportComplete(locomotionEventData.Pointer, locomotionEventData.HotSpot);
+                    LocomotionSystem.RaiseTeleportCompleted(this, locomotionEventData.Pointer, locomotionEventData.HotSpot);
                     isDashing = false;
                 }
 

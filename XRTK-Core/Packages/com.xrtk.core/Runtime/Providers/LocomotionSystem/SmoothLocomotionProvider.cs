@@ -5,30 +5,28 @@ using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.EventDatum.Input;
-using XRTK.Definitions.InputSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("1be53dfa-b8ae-4eb8-8459-17a5df87ade5")]
-    public class SmoothLocomotionProvider : BaseLocomotionProvider, IMixedRealityFreeLocomotionProvider
+    public class SmoothLocomotionProvider : BaseLocomotionProvider, IFreeLocomotionProvider
     {
         /// <inheritdoc />
         public SmoothLocomotionProvider(string name, uint priority, MixedRealitySmoothLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             speed = profile.Speed;
-            inputAction = profile.InputAction;
+            InputAction = profile.InputAction;
         }
 
         private readonly float speed;
-        private readonly MixedRealityInputAction inputAction;
 
         /// <inheritdoc />
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
             base.OnInputChanged(eventData);
 
-            if (eventData.MixedRealityInputAction == inputAction)
+            if (eventData.MixedRealityInputAction == InputAction)
             {
                 eventData.Use();
 

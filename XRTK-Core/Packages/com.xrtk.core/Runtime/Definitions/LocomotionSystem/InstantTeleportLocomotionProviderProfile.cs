@@ -14,7 +14,7 @@ namespace XRTK.Definitions.LocomotionSystem
     {
         [SerializeField]
         [Tooltip("Input action to perform locomotion the player.")]
-        [AxisConstraint(Utilities.AxisType.SingleAxis | Utilities.AxisType.Digital | Utilities.AxisType.DualAxis)]
+        [AxisConstraint(Utilities.AxisType.Digital)]
         private MixedRealityInputAction inputAction = MixedRealityInputAction.None;
 
         /// <summary>

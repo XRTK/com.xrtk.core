@@ -91,7 +91,7 @@ namespace XRTK.Services.InputSystem.Pointers
         }
 
         /// <inheritdoc />
-        public IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
+        public ITeleportHotSpot TeleportHotSpot { get; set; }
 
         /// <inheritdoc />
         public InteractionMode InteractionMode { get; }

@@ -11,7 +11,7 @@ using XRTK.Services.LocomotionSystem;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("497d2054-a467-4d6d-9d79-bd01aa6b4c22")]
-    public class BlinkTeleportLocomotionProvider : BaseLocomotionProvider, IMixedRealityTeleportLocomotionProvider
+    public class BlinkTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {
         /// <inheritdoc />
         public BlinkTeleportLocomotionProvider(string name, uint priority, MixedRealityBlinkTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
@@ -128,7 +128,7 @@ namespace XRTK.Providers.LocomotionSystem
             LocomotionTargetTransform.position = targetPosition;
             LocomotionTargetTransform.RotateAround(LocomotionTargetTransform.position, Vector3.up, targetRotation.y - LocomotionTargetTransform.eulerAngles.y);
 
-            LocomotionSystem.RaiseTeleportComplete(locomotionEventData.Pointer, locomotionEventData.HotSpot);
+            LocomotionSystem.RaiseTeleportCompleted(this, locomotionEventData.Pointer, locomotionEventData.HotSpot);
         }
 
         private void FadeOut()

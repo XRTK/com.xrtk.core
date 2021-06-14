@@ -6,5 +6,5 @@ namespace XRTK.Interfaces.LocomotionSystem
     /// <summary>
     /// The base interface to define providers for the <see cref="IMixedRealityLocomotionSystem"/>.
     /// </summary>
-    public interface IMixedRealityLocomotionDataProvider : IMixedRealityDataProvider { }
+    public interface IMixedRealityLocomotionSystemDataProvider : IMixedRealityDataProvider { }
 }

@@ -11,15 +11,13 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     [CustomEditor(typeof(MixedRealityLocomotionSystemProfile))]
     public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private SerializedProperty movementCancelsTeleport;
-
-        private static readonly GUIContent movementCancelsTeleportLabel = new GUIContent("Cancels Teleport");
+        private SerializedProperty teleportCooldown;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            movementCancelsTeleport = serializedObject.FindProperty(nameof(movementCancelsTeleport));
+            teleportCooldown = serializedObject.FindProperty(nameof(teleportCooldown));
         }
 
         public override void OnInspectorGUI()
@@ -32,9 +30,8 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             // Movement
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Movement", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(movementCancelsTeleport, movementCancelsTeleportLabel);
+            EditorGUILayout.PropertyField(teleportCooldown);
             EditorGUI.indentLevel--;
 
             serializedObject.ApplyModifiedProperties();

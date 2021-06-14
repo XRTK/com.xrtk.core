@@ -27,25 +27,21 @@ namespace XRTK.Services.LocomotionSystem
         public MixedRealityLocomotionSystem(MixedRealityLocomotionSystemProfile profile)
             : base(profile)
         {
-            MovementCancelsTeleport = profile.MovementCancelsTeleport;
+            teleportCooldown = profile.TeleportCooldown;
         }
 
+        private readonly float teleportCooldown;
+        private float currentTeleportCooldown;
         private LocomotionEventData teleportEventData;
-        private bool isTeleporting = false;
-        private readonly Dictionary<Type, List<IMixedRealityLocomotionProvider>> enabledLocomotionProviders = new Dictionary<Type, List<IMixedRealityLocomotionProvider>>()
+        private readonly Dictionary<Type, List<ILocomotionProvider>> enabledLocomotionProviders = new Dictionary<Type, List<ILocomotionProvider>>()
         {
-            { typeof(IMixedRealityFreeLocomotionProvider), new List<IMixedRealityLocomotionProvider>() },
-            { typeof(IMixedRealityTeleportLocomotionProvider), new List<IMixedRealityLocomotionProvider>() },
-            { typeof(IMixedRealityOnRailsLocomotionProvider), new List<IMixedRealityLocomotionProvider>() }
+            { typeof(IFreeLocomotionProvider), new List<ILocomotionProvider>() },
+            { typeof(ITeleportLocomotionProvider), new List<ILocomotionProvider>() },
+            { typeof(IOnRailsLocomotionProvider), new List<ILocomotionProvider>() }
         };
 
         /// <inheritdoc />
-        public IReadOnlyList<IMixedRealityLocomotionProvider> EnabledLocomotionProviders => enabledLocomotionProviders.SelectMany(kv => kv.Value).ToList();
-
-        /// <summary>
-        /// If set, movement will cancel any teleportation in progress.
-        /// </summary>
-        public bool MovementCancelsTeleport { get; private set; }
+        public IReadOnlyList<ILocomotionProvider> EnabledLocomotionProviders => enabledLocomotionProviders.SelectMany(kv => kv.Value).ToList();
 
         /// <summary>
         /// Gets the currently active locomotion target override, if any.
@@ -90,6 +86,11 @@ namespace XRTK.Services.LocomotionSystem
             {
                 EnableLocomotionProvider<Providers.LocomotionSystem.TransformPathOnRailsLocomotionProvider>();
             }
+
+            if (currentTeleportCooldown > 0f)
+            {
+                currentTeleportCooldown -= Time.deltaTime;
+            }
         }
 
         /// <inheritdoc />
@@ -107,7 +108,7 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public void EnableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider
+        public void EnableLocomotionProvider<T>() where T : ILocomotionProvider
         {
             var provider = MixedRealityToolkit.GetService<T>();
             if (!provider.IsEnabled)
@@ -119,8 +120,8 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public void EnableLocomotionProvider(Type locomotionProviderType)
         {
-            Debug.Assert(typeof(IMixedRealityLocomotionProvider).IsAssignableFrom(locomotionProviderType));
-            var locomotionProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityLocomotionProvider>();
+            Debug.Assert(typeof(ILocomotionProvider).IsAssignableFrom(locomotionProviderType));
+            var locomotionProviders = MixedRealityToolkit.GetActiveServices<ILocomotionProvider>();
 
             for (var i = 0; i < locomotionProviders.Count; i++)
             {
@@ -133,7 +134,7 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public void DisableLocomotionProvider<T>() where T : IMixedRealityLocomotionProvider
+        public void DisableLocomotionProvider<T>() where T : ILocomotionProvider
         {
             var provider = MixedRealityToolkit.GetService<T>();
             if (provider.IsEnabled)
@@ -145,8 +146,8 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public void DisableLocomotionProvider(Type locomotionProviderType)
         {
-            Debug.Assert(typeof(IMixedRealityLocomotionProvider).IsAssignableFrom(locomotionProviderType));
-            var locomotionProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityLocomotionProvider>();
+            Debug.Assert(typeof(ILocomotionProvider).IsAssignableFrom(locomotionProviderType));
+            var locomotionProviders = MixedRealityToolkit.GetActiveServices<ILocomotionProvider>();
 
             for (var i = 0; i < locomotionProviders.Count; i++)
             {
@@ -159,11 +160,11 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public void OnLocomotionProviderEnabled(IMixedRealityLocomotionProvider locomotionProvider)
+        public void OnLocomotionProviderEnabled(ILocomotionProvider locomotionProvider)
         {
-            var enabledLocomotionProvidersSnapshot = new Dictionary<Type, List<IMixedRealityLocomotionProvider>>(enabledLocomotionProviders);
+            var enabledLocomotionProvidersSnapshot = new Dictionary<Type, List<ILocomotionProvider>>(enabledLocomotionProviders);
 
-            if (locomotionProvider is IMixedRealityOnRailsLocomotionProvider)
+            if (locomotionProvider is IOnRailsLocomotionProvider)
             {
                 // On rails locomotion providers are exclusive, meaning whenever an on rails
                 // provider is enabled, any other providers must be disabled.
@@ -184,17 +185,17 @@ namespace XRTK.Services.LocomotionSystem
 
                 // Ensure the now enabled provider gets added to the managed enabled
                 // providers list.
-                if (!enabledLocomotionProvidersSnapshot[typeof(IMixedRealityOnRailsLocomotionProvider)].Contains(locomotionProvider))
+                if (!enabledLocomotionProvidersSnapshot[typeof(IOnRailsLocomotionProvider)].Contains(locomotionProvider))
                 {
-                    enabledLocomotionProviders[typeof(IMixedRealityOnRailsLocomotionProvider)].Add(locomotionProvider);
+                    enabledLocomotionProviders[typeof(IOnRailsLocomotionProvider)].Add(locomotionProvider);
                 }
             }
-            else if (locomotionProvider is IMixedRealityTeleportLocomotionProvider ||
-                locomotionProvider is IMixedRealityFreeLocomotionProvider)
+            else if (locomotionProvider is ITeleportLocomotionProvider ||
+                locomotionProvider is IFreeLocomotionProvider)
             {
                 // Free / teleport locomotion excludes on rails locomotion,
                 // disable any active on rails locomotion providers.
-                var onRailsLocomotionProviders = enabledLocomotionProvidersSnapshot[typeof(IMixedRealityOnRailsLocomotionProvider)];
+                var onRailsLocomotionProviders = enabledLocomotionProvidersSnapshot[typeof(IOnRailsLocomotionProvider)];
                 for (var i = 0; i < onRailsLocomotionProviders.Count; i++)
                 {
                     onRailsLocomotionProviders[i].Disable();
@@ -203,9 +204,9 @@ namespace XRTK.Services.LocomotionSystem
                 // Free / Teleport providers behave like a commong toggle group. There can only
                 // ever be one active provider for free locomotion and one active for teleprot locomotion.
                 // So all we have to do is disable all other providers of the respective type.
-                if (locomotionProvider is IMixedRealityTeleportLocomotionProvider)
+                if (locomotionProvider is ITeleportLocomotionProvider)
                 {
-                    var teleportLocomotionProviders = enabledLocomotionProvidersSnapshot[typeof(IMixedRealityTeleportLocomotionProvider)];
+                    var teleportLocomotionProviders = enabledLocomotionProvidersSnapshot[typeof(ITeleportLocomotionProvider)];
                     for (var i = 0; i < teleportLocomotionProviders.Count; i++)
                     {
                         var teleportLocomotionProvider = teleportLocomotionProviders[i];
@@ -222,12 +223,12 @@ namespace XRTK.Services.LocomotionSystem
                     // providers list.
                     if (!teleportLocomotionProviders.Contains(locomotionProvider))
                     {
-                        enabledLocomotionProviders[typeof(IMixedRealityTeleportLocomotionProvider)].Add(locomotionProvider);
+                        enabledLocomotionProviders[typeof(ITeleportLocomotionProvider)].Add(locomotionProvider);
                     }
                 }
                 else
                 {
-                    var freeLocomotionProviders = enabledLocomotionProvidersSnapshot[typeof(IMixedRealityFreeLocomotionProvider)];
+                    var freeLocomotionProviders = enabledLocomotionProvidersSnapshot[typeof(IFreeLocomotionProvider)];
                     for (var i = 0; i < freeLocomotionProviders.Count; i++)
                     {
                         var freeLocomotionProvider = freeLocomotionProviders[i];
@@ -244,14 +245,14 @@ namespace XRTK.Services.LocomotionSystem
                     // providers list.
                     if (!freeLocomotionProviders.Contains(locomotionProvider))
                     {
-                        enabledLocomotionProviders[typeof(IMixedRealityFreeLocomotionProvider)].Add(locomotionProvider);
+                        enabledLocomotionProviders[typeof(IFreeLocomotionProvider)].Add(locomotionProvider);
                     }
                 }
             }
         }
 
         /// <inheritdoc />
-        public void OnLocomotionProviderDisabled(IMixedRealityLocomotionProvider locomotionProvider)
+        public void OnLocomotionProviderDisabled(ILocomotionProvider locomotionProvider)
         {
             var type = locomotionProvider.GetType();
             if (enabledLocomotionProviders.ContainsKey(type) &&
@@ -261,75 +262,66 @@ namespace XRTK.Services.LocomotionSystem
             }
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionHandler> OnTeleportRequestHandler =
-            delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportRequestHandler =
+            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportTargetRequested(casted);
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportRequest(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot)
+        public void RaiseTeleportTargetRequest(ITeleportLocomotionProvider teleportLocomotionProvider, IMixedRealityInputSource inputSource)
         {
-            teleportEventData.Initialize(pointer, hotSpot);
+            teleportEventData.Initialize(teleportLocomotionProvider, inputSource);
             HandleEvent(teleportEventData, OnTeleportRequestHandler);
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionHandler> OnTeleportStartedHandler =
-            delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportStartedHandler =
+            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportStarted(casted);
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportStarted(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot)
+        public void RaiseTeleportStarted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot)
         {
-            if (isTeleporting)
+            if (currentTeleportCooldown > 0f)
             {
-                Debug.LogError("Teleportation already in progress");
                 return;
             }
 
-            isTeleporting = true;
-            teleportEventData.Initialize(pointer, hotSpot);
+            teleportEventData.Initialize(locomotionProvider, pointer, hotSpot);
             HandleEvent(teleportEventData, OnTeleportStartedHandler);
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionHandler> OnTeleportCompletedHandler =
-            delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportCompletedHandler =
+            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportCompleted(casted);
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportComplete(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot)
+        public void RaiseTeleportCompleted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot)
         {
-            if (!isTeleporting)
-            {
-                Debug.LogError("No Active Teleportation in progress.");
-                return;
-            }
-
-            teleportEventData.Initialize(pointer, hotSpot);
+            currentTeleportCooldown = teleportCooldown;
+            teleportEventData.Initialize(locomotionProvider, pointer, hotSpot);
             HandleEvent(teleportEventData, OnTeleportCompletedHandler);
-            isTeleporting = false;
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionHandler> OnTeleportCanceledHandler =
-            delegate (IMixedRealityLocomotionHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportCanceledHandler =
+            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportCanceled(casted);
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportCanceled(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot)
+        public void RaiseTeleportCanceled(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot)
         {
-            teleportEventData.Initialize(pointer, hotSpot);
+            teleportEventData.Initialize(locomotionProvider, pointer, hotSpot);
             HandleEvent(teleportEventData, OnTeleportCanceledHandler);
-            isTeleporting = false;
         }
 
         /// <inheritdoc />

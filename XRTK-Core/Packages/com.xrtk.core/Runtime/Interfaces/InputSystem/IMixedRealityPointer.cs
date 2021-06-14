@@ -51,7 +51,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <summary>
         /// The currently active teleport hotspot.
         /// </summary>
-        IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
+        ITeleportHotSpot TeleportHotSpot { get; set; }
 
         /// <summary>
         /// The <see cref="InteractionMode"/> for this pointer.

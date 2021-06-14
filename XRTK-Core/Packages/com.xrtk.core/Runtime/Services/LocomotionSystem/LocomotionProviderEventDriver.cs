@@ -11,14 +11,14 @@ namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
     /// This component is attached to the main <see cref="Camera"/> by the <see cref="IMixedRealityLocomotionSystem"/>
-    /// and provides an event bridge to active <see cref="IMixedRealityLocomotionProvider"/> implementations.
+    /// and provides an event bridge to active <see cref="ILocomotionProvider"/> implementations.
     /// It has a hard dependency on the <see cref="IMixedRealityLocomotionSystem"/> as well as the <see cref="IMixedRealityInputSystem"/>
     /// and cannot work without both being active and enabled in the application.
     /// Furthermore it expects that the <see cref="GameObject"/> it is attached to is a global <see cref="IMixedRealityInputSystem"/> listener. It will
     /// not take care of registration itself.
     /// </summary>
     public class LocomotionProviderEventDriver : MonoBehaviour,
-        IMixedRealityLocomotionHandler,
+        IMixedRealityLocomotionSystemHandler,
         IMixedRealityInputHandler,
         IMixedRealityInputHandler<float>,
         IMixedRealityInputHandler<Vector2>

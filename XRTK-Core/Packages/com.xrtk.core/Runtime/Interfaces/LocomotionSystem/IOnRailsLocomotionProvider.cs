@@ -10,5 +10,5 @@ namespace XRTK.Interfaces.LocomotionSystem
     /// that means when any on rails locomotion provider is active and enabled, all other types of locomotion are not available.
     /// There can always be only one active provider for on rails locomotion at a time.
     /// </summary>
-    public interface IMixedRealityOnRailsLocomotionProvider : IMixedRealityLocomotionProvider { }
+    public interface IOnRailsLocomotionProvider : ILocomotionProvider { }
 }

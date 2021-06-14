@@ -7,7 +7,7 @@ using XRTK.Definitions.LocomotionSystem;
 namespace XRTK.Providers.LocomotionSystem
 {
     [System.Runtime.InteropServices.Guid("e6a350da-0953-44f7-b02f-8697c0c7e201")]
-    public class TransformPathOnRailsLocomotionProvider : BaseLocomotionProvider, IMixedRealityOnRailsLocomotionProvider
+    public class TransformPathOnRailsLocomotionProvider : BaseLocomotionProvider, IOnRailsLocomotionProvider
     {
         /// <inheritdoc />
         public TransformPathOnRailsLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)

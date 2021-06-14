@@ -8,7 +8,7 @@ namespace XRTK.Interfaces.LocomotionSystem
     /// <summary>
     /// Base interface to implement for teleportation hotspots to work with the <see cref="IMixedRealityLocomotionSystem"/>.
     /// </summary>
-    public interface IMixedRealityTeleportHotSpot
+    public interface ITeleportHotSpot
     {
         /// <summary>
         /// The position the teleport will end at.

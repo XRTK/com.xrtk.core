@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Base configuration profile for <see cref="Interfaces.LocomotionSystem.IMixedRealityLocomotionProvider"/>s. Use the <see cref="Providers.LocomotionSystem.BaseLocomotionProvider"/>
+    /// Base configuration profile for <see cref="Interfaces.LocomotionSystem.ILocomotionProvider"/>s. Use the <see cref="Providers.LocomotionSystem.BaseLocomotionProvider"/>
     /// base class to get started implementing your own provider.
     /// </summary>
     public class BaseLocomotionProviderProfile : BaseMixedRealityProfile

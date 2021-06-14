@@ -9,31 +9,31 @@ namespace XRTK.Interfaces.LocomotionSystem
     /// <summary>
     /// Interface to implement for handling locomotion events by the <see cref="IMixedRealityLocomotionSystem"/>.
     /// </summary>
-    public interface IMixedRealityLocomotionHandler : IEventSystemHandler
+    public interface IMixedRealityLocomotionSystemHandler : IEventSystemHandler
     {
         /// <summary>
-        /// Raised when a <see cref="IMixedRealityTeleportLocomotionProvider"/> requests a
+        /// Raised when a <see cref="ITeleportLocomotionProvider"/> requests a
         /// target location for teleport, but no teleportation has started.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
         void OnTeleportTargetRequested(LocomotionEventData eventData);
 
         /// <summary>
-        /// Raised when a <see cref="IMixedRealityTeleportLocomotionProvider"/> has started
+        /// Raised when a <see cref="ITeleportLocomotionProvider"/> has started
         /// teleportation to a target location.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
         void OnTeleportStarted(LocomotionEventData eventData);
 
         /// <summary>
-        /// Raised when a <see cref="IMixedRealityTeleportLocomotionProvider"/> has successfully
+        /// Raised when a <see cref="ITeleportLocomotionProvider"/> has successfully
         /// completed teleportation.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
         void OnTeleportCompleted(LocomotionEventData eventData);
 
         /// <summary>
-        /// Raised when a <see cref="IMixedRealityTeleportLocomotionProvider"/> has canceled
+        /// Raised when a <see cref="ITeleportLocomotionProvider"/> has canceled
         /// teleportation.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>

@@ -12,10 +12,10 @@ using XRTK.Utilities;
 namespace XRTK.Providers.LocomotionSystem
 {
     /// <summary>
-    /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityTeleportValidationProvider"/>.
+    /// The Mixed Reality Toolkit's specific implementation of the <see cref="ITeleportValidationProvider"/>.
     /// </summary>
     [System.Runtime.InteropServices.Guid("14199fd8-1636-4147-bb08-6475e76ed1cd")]
-    public class TeleportValidationProvider : BaseDataProvider, IMixedRealityTeleportValidationProvider
+    public class TeleportValidationProvider : BaseDataProvider, ITeleportValidationProvider
     {
         /// <inheritdoc />
         public TeleportValidationProvider(string name, uint priority, MixedRealityTeleportValidationProviderProfile profile, IMixedRealityLocomotionSystem parentService)
@@ -37,7 +37,7 @@ namespace XRTK.Providers.LocomotionSystem
         private readonly float maxHeightDistance;
 
         /// <inheritdoc />
-        public TeleportValidationResult IsValid(IPointerResult pointerResult, IMixedRealityTeleportHotSpot teleportHotSpot = null)
+        public TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportHotSpot teleportHotSpot = null)
         {
             TeleportValidationResult teleportValidationResult = TeleportValidationResult.Valid;
 

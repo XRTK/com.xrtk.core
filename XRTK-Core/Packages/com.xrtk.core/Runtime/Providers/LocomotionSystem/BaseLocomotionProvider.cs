@@ -11,10 +11,11 @@ using XRTK.Services.LocomotionSystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Definitions.InputSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
-    public abstract class BaseLocomotionProvider : BaseDataProvider, IMixedRealityLocomotionProvider
+    public abstract class BaseLocomotionProvider : BaseDataProvider, ILocomotionProvider
     {
         /// <inheritdoc />
         public BaseLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
@@ -25,6 +26,9 @@ namespace XRTK.Providers.LocomotionSystem
 
         private readonly AutoStartBehavior startupBehaviour;
         private bool isInitialized;
+
+        /// <inheritdoc />
+        public MixedRealityInputAction InputAction { get; protected set; }
 
         /// <inheritdoc />
         public bool IsEnabled { get; private set; }

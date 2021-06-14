@@ -10,6 +10,7 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Platforms;
 using XRTK.Definitions.Utilities;
+using XRTK.Editor.Data;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
 using XRTK.Extensions;
@@ -87,8 +88,13 @@ namespace XRTK.Editor.Profiles
             RenderConfigurationOptions();
         }
 
-        protected void RenderConfigurationOptions()
+        protected void RenderConfigurationOptions(bool forceExpanded = false)
         {
+            if (forceExpanded)
+            {
+                configurations.isExpanded = true;
+            }
+
             configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
             if (configurations.isExpanded)
@@ -136,14 +142,19 @@ namespace XRTK.Editor.Profiles
             serializedObject.Update();
 
             var configurationProperty = configurations.GetArrayElementAtIndex(index);
+            SerializedProperty priority;
+            SerializedProperty instancedType;
+            SerializedProperty platformEntries;
+            SerializedProperty runtimePlatforms;
+            SerializedProperty profile;
 
-            var nameProperty = configurationProperty.FindPropertyRelative("name");
-            var priorityProperty = configurationProperty.FindPropertyRelative("priority");
-            var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
-            var systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
-            var platformEntriesProperty = configurationProperty.FindPropertyRelative("platformEntries");
-            var runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
-            var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
+            var nameProperty = configurationProperty.FindPropertyRelative(nameof(name));
+            priority = configurationProperty.FindPropertyRelative(nameof(priority));
+            instancedType = configurationProperty.FindPropertyRelative(nameof(instancedType));
+            var systemTypeReference = new SystemType(instancedType);
+            platformEntries = configurationProperty.FindPropertyRelative(nameof(platformEntries));
+            runtimePlatforms = platformEntries.FindPropertyRelative(nameof(runtimePlatforms));
+            profile = configurationProperty.FindPropertyRelative(nameof(profile));
 
             var hasProfile = false;
             Type profileType = null;
@@ -180,7 +191,7 @@ namespace XRTK.Editor.Profiles
                 }
             }
 
-            priorityProperty.intValue = index - 1;
+            priority.intValue = index - 1;
 
             var lastMode = EditorGUIUtility.wideMode;
             var prevLabelWidth = EditorGUIUtility.labelWidth;
@@ -215,26 +226,26 @@ namespace XRTK.Editor.Profiles
             else
             {
                 configurationProperty.isExpanded = EditorGUI.Foldout(dropdownRect, configurationProperty.isExpanded, GUIContent.none, false) ||
-                                                   hasProfile && configurationProfileProperty.objectReferenceValue == null;
+                                                   hasProfile && profile.objectReferenceValue == null;
 
-                if (!configurationProfileProperty.isExpanded)
+                if (!profile.isExpanded)
                 {
                     if (hasProfile)
                     {
                         if (GUI.Button(labelRect, nameProperty.stringValue, ButtonGuiStyle) &&
-                            configurationProfileProperty.objectReferenceValue != null)
+                            profile.objectReferenceValue != null)
                         {
-                            var profile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+                            var profileInstance = profile.objectReferenceValue as BaseMixedRealityProfile;
 
-                            Debug.Assert(profile != null);
+                            Debug.Assert(profileInstance != null);
 
-                            if (profile.ParentProfile.IsNull() ||
-                                profile.ParentProfile != ThisProfile)
+                            if (profileInstance.ParentProfile.IsNull() ||
+                                profileInstance.ParentProfile != ThisProfile)
                             {
-                                profile.ParentProfile = ThisProfile;
+                                profileInstance.ParentProfile = ThisProfile;
                             }
 
-                            Selection.activeObject = profile;
+                            Selection.activeObject = profileInstance;
                         }
                     }
                     else
@@ -256,15 +267,15 @@ namespace XRTK.Editor.Profiles
                 TypeReferencePropertyDrawer.CreateNewTypeOverride = ServiceConstraint;
 
                 EditorGUI.BeginChangeCheck();
-                EditorGUI.PropertyField(typeRect, instanceTypeProperty);
-                systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
+                EditorGUI.PropertyField(typeRect, instancedType);
+                systemTypeReference = new SystemType(instancedType);
 
                 if (EditorGUI.EndChangeCheck())
                 {
                     if (systemTypeReference.Type == null)
                     {
                         nameProperty.stringValue = string.Empty;
-                        configurationProfileProperty.objectReferenceValue = null;
+                        profile.objectReferenceValue = null;
                     }
                     else
                     {
@@ -272,32 +283,32 @@ namespace XRTK.Editor.Profiles
 
                         if (IsSystemConfiguration)
                         {
-                            configurationProfileProperty.objectReferenceValue = null;
+                            profile.objectReferenceValue = null;
                         }
                     }
                 }
 
                 if (!IsSystemConfiguration)
                 {
-                    EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
-                    runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
+                    EditorGUI.PropertyField(runtimeRect, platformEntries);
+                    runtimePlatforms = platformEntries.FindPropertyRelative(nameof(runtimePlatforms));
                 }
                 else
                 {
-                    runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
-                    runtimePlatformProperty.arraySize = 1;
-                    runtimePlatformProperty.GetArrayElementAtIndex(0).FindPropertyRelative("reference").stringValue = AllPlatformsGuid.ToString();
+                    runtimePlatforms = platformEntries.FindPropertyRelative(nameof(runtimePlatforms));
+                    runtimePlatforms.arraySize = 1;
+                    runtimePlatforms.GetArrayElementAtIndex(0).FindPropertyRelative("reference").stringValue = AllPlatformsGuid.ToString();
                 }
 
                 if (hasProfile)
                 {
                     MixedRealityProfilePropertyDrawer.ProfileTypeOverride = profileType;
-                    EditorGUI.PropertyField(profileRect, configurationProfileProperty, profileContent);
+                    EditorGUI.PropertyField(profileRect, profile, profileContent);
                 }
 
-                if (configurationProfileProperty.objectReferenceValue != null)
+                if (profile.objectReferenceValue != null)
                 {
-                    var renderedProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+                    var renderedProfile = profile.objectReferenceValue as BaseMixedRealityProfile;
                     Debug.Assert(renderedProfile != null);
 
                     if (renderedProfile.ParentProfile.IsNull() ||
@@ -313,7 +324,7 @@ namespace XRTK.Editor.Profiles
                 serializedObject.ApplyModifiedProperties();
 
                 if (MixedRealityToolkit.IsInitialized &&
-                    runtimePlatformProperty.arraySize > 0 &&
+                    runtimePlatforms.arraySize > 0 &&
                     systemTypeReference.Type != null)
                 {
                     MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
@@ -330,20 +341,16 @@ namespace XRTK.Editor.Profiles
             configurations.arraySize += 1;
             var index = configurations.arraySize - 1;
 
-            var configuration = configurations.GetArrayElementAtIndex(index);
-            configuration.isExpanded = true;
-            var nameProperty = configuration.FindPropertyRelative("name");
-            var priorityProperty = configuration.FindPropertyRelative("priority");
-            var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
-            var platformEntriesProperty = configuration.FindPropertyRelative("platformEntries");
-            var configurationProfileProperty = configuration.FindPropertyRelative("profile");
-            var runtimePlatformsProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
+            var configuration = new ConfigurationProperty(configurations.GetArrayElementAtIndex(index), true)
+            {
+                IsExpanded = true,
+                Name = $"New Configuration {index}",
+                InstancedType = null,
+                Priority = (uint)index,
+                Profile = null
+            };
 
-            nameProperty.stringValue = $"New Configuration {index}";
-            instancedTypeProperty.FindPropertyRelative("reference").stringValue = string.Empty;
-            priorityProperty.intValue = index;
-            runtimePlatformsProperty.ClearArray();
-            configurationProfileProperty.objectReferenceValue = null;
+            configuration.ApplyModifiedProperties();
             configListHeightFlags.Add(new Tuple<bool, bool>(true, false));
             serializedObject.ApplyModifiedProperties();
         }

@@ -179,7 +179,7 @@ namespace XRTK.Editor.Profiles
                 }
             }
 
-            RenderConfigurationOptions();
+            RenderConfigurationOptions(true);
 
             serializedObject.Update();
 

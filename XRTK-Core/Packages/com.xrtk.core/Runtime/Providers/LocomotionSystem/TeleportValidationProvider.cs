@@ -39,35 +39,43 @@ namespace XRTK.Providers.LocomotionSystem
         /// <inheritdoc />
         public TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportHotSpot teleportHotSpot = null)
         {
-            TeleportValidationResult teleportValidationResult = TeleportValidationResult.Valid;
+            TeleportValidationResult teleportValidationResult;
 
-            // Check hotspots only.
-            if (hotSpotsOnly && (teleportHotSpot == null || !teleportHotSpot.IsActive))
-            {
-                teleportValidationResult = TeleportValidationResult.Invalid;
-            }
             // Check distance.
-            else if ((pointerResult.EndPoint - CameraCache.Main.transform.position).sqrMagnitude > maxDistanceSquare ||
+            if ((pointerResult.EndPoint - CameraCache.Main.transform.position).sqrMagnitude > maxDistanceSquare ||
                 Mathf.Abs(pointerResult.EndPoint.y - CameraCache.Main.transform.position.y) > maxHeightDistance)
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }
-            // Check if it's in valid layers.
-            else if (((1 << pointerResult.CurrentPointerTarget.layer) & validLayers.value) == 0)
+            // Check hotspots only.
+            else if (hotSpotsOnly && (teleportHotSpot == null || !teleportHotSpot.IsActive))
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }
-            // Check if it's in invalid layers.
+            // Check if it's in our valid layers
+            else if (((1 << pointerResult.CurrentPointerTarget.layer) & validLayers.value) != 0)
+            {
+                // See if it's a hot spot
+                if (teleportHotSpot != null && teleportHotSpot.IsActive)
+                {
+                    teleportValidationResult = TeleportValidationResult.HotSpot;
+                }
+                else
+                {
+                    // If it's NOT a hotspot, check if the hit normal is too steep 
+                    // (Hotspots override dot requirements)
+                    teleportValidationResult = Vector3.Dot(pointerResult.LastRaycastHit.normal, Vector3.up) > upDirectionThreshold
+                        ? TeleportValidationResult.Valid
+                        : TeleportValidationResult.Invalid;
+                }
+            }
             else if (((1 << pointerResult.CurrentPointerTarget.layer) & invalidLayers) != 0)
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }
-            // If it's NOT a hotspot, check if the hit normal is too steep (Hotspots override dot requirements).
-            else if (teleportHotSpot == null || !teleportHotSpot.IsActive)
+            else
             {
-                teleportValidationResult = Vector3.Dot(pointerResult.LastRaycastHit.normal, Vector3.up) > upDirectionThreshold
-                    ? TeleportValidationResult.Valid
-                    : TeleportValidationResult.Invalid;
+                teleportValidationResult = TeleportValidationResult.None;
             }
 
             return teleportValidationResult;

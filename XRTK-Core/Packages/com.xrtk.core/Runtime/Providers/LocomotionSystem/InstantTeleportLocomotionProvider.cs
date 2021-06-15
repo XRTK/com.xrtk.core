@@ -31,6 +31,8 @@ namespace XRTK.Providers.LocomotionSystem
             if (!eventData.used && eventData.MixedRealityInputAction == InputAction &&
                 !targetRequestsDict.ContainsKey(eventData.SourceId))
             {
+                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Requested teleport target from input source {eventData.SourceId}.");
+
                 targetRequestsDict.Add(eventData.SourceId, eventData.InputSource);
                 LocomotionSystem.RaiseTeleportTargetRequest(this, eventData.InputSource);
                 eventData.Use();
@@ -58,6 +60,7 @@ namespace XRTK.Providers.LocomotionSystem
             if (!eventData.used && eventData.LocomotionProvider == this &&
                 targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
             {
+                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Started teleport using target provided by input source {eventData.EventSource.SourceId}.");
                 IsTeleporting = true;
 
                 var targetRotation = Vector3.zero;
@@ -94,6 +97,7 @@ namespace XRTK.Providers.LocomotionSystem
             if (!eventData.used && eventData.LocomotionProvider == this &&
                 targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
             {
+                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Completed teleport for input source {eventData.EventSource.SourceId}.");
                 targetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
                 eventData.Use();
                 IsTeleporting = false;
@@ -109,6 +113,7 @@ namespace XRTK.Providers.LocomotionSystem
             if (!eventData.used && eventData.LocomotionProvider == this &&
                 targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
             {
+                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Canceled teleport for input source {eventData.EventSource.SourceId}.");
                 targetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
                 eventData.Use();
                 IsTeleporting = false;

@@ -37,7 +37,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
         private static GUIStyle symbolicLinkMarkerStyle;
 
-        internal static string ProjectRoot => GitUtilities.RepositoryRootDir;
+        internal static string ProjectRoot => GitUtilities.RepositoryRootDir.ForwardSlashes();
 
         /// <summary>
         /// Is the sync task running?
@@ -211,7 +211,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 return false;
             }
 
-            newLink.TargetAbsolutePath = AddSubfolderPathToTarget(newLink.SourceAbsolutePath, newLink.TargetAbsolutePath);
+            newLink.TargetRelativePath = AddSubfolderPathToTarget(newLink.SourceRelativePath, newLink.TargetRelativePath);
 
             if (!CreateSymbolicLink(newLink))
             {
@@ -349,9 +349,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         }
 
         internal static bool Validate(this SymbolicLink link)
-        {
-            return ValidateSymbolicPath(link.TargetAbsolutePath, link.SourceAbsolutePath);
-        }
+            => ValidateSymbolicPath(link.TargetAbsolutePath, link.SourceAbsolutePath);
 
         private static bool ValidateSymbolicPath(string targetAbsolutePath, string sourceAbsolutePath = null)
         {

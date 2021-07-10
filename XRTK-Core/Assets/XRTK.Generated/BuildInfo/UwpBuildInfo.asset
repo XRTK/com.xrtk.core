@@ -15,3 +15,5 @@ MonoBehaviour:
   autoIncrement: 0
   bundleIdentifier: com.xrtk.core
   install: 0
+  buildAppx: 0
+  rebuildAppx: 0

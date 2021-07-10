@@ -21,9 +21,7 @@ namespace XRTK.Extensions
         /// <param name="toEncode">String to encode.</param>
         /// <returns>Encoded string.</returns>
         public static string EncodeTo64(this string toEncode)
-        {
-            return Convert.ToBase64String(Encoding.ASCII.GetBytes(toEncode));
-        }
+            => Convert.ToBase64String(Encoding.ASCII.GetBytes(toEncode));
 
         /// <summary>
         /// Decodes string from base 64 ASCII.
@@ -31,9 +29,7 @@ namespace XRTK.Extensions
         /// <param name="encodedData">String to decode.</param>
         /// <returns>Decoded string.</returns>
         public static string DecodeFrom64(this string encodedData)
-        {
-            return Encoding.ASCII.GetString(Convert.FromBase64String(encodedData));
-        }
+            => Encoding.ASCII.GetString(Convert.FromBase64String(encodedData));
 
         /// <summary>
         /// Capitalize the first character and add a space before
@@ -78,33 +74,25 @@ namespace XRTK.Extensions
         /// Replaces all back slashes in the string with forward slashes.
         /// </summary>
         public static string ForwardSlashes(this string value)
-        {
-            return value.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-        }
+            => value.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
         /// <summary>
         /// Replaces all forward slashes in the string with back slashes.
         /// </summary>
         public static string BackSlashes(this string value)
-        {
-            return value.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
-        }
+            => value.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
 
         /// <summary>
         /// Returns the URI path, excluding the filename
         /// </summary>
         public static string PathFromURI(this string value)
-        {
-            return value.Substring(0, value.LastIndexOf("/", StringComparison.Ordinal) + 1);
-        }
+            => value.Substring(0, value.LastIndexOf("/", StringComparison.Ordinal) + 1);
 
         /// <summary>
         /// Returns the filename from a URI path
         /// </summary>
         public static string FilenameFromURI(this string value)
-        {
-            return value.Substring(value.LastIndexOf("/", StringComparison.Ordinal) + 1, value.Length - value.LastIndexOf("/", StringComparison.Ordinal) - 1);
-        }
+            => value.Substring(value.LastIndexOf("/", StringComparison.Ordinal) + 1, value.Length - value.LastIndexOf("/", StringComparison.Ordinal) - 1);
 
         /// <summary>
         /// Creates a relative path from one file or folder to another.

@@ -337,7 +337,11 @@ namespace XRTK.Utilities.WebRequestRest
             backgroundThread.Join();
             progress?.Report(100f);
 
+#if UNITY_2020_1_OR_NEWER
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+#else
             if (webRequest.isNetworkError || webRequest.isHttpError)
+#endif
             {
                 if (webRequest.responseCode == 401)
                 {

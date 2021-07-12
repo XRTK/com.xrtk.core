@@ -9,14 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704a4b1a0d41bd74dbcbb0dd5193dd45, type: 3}
-  m_Name: UwpBuildInfo
+  m_Script: {fileID: 11500000, guid: a140b66429c96344083035352cb7c898, type: 3}
+  m_Name: Windows MR Loader
   m_EditorClassIdentifier: 
-  autoIncrement: 0
-  bundleIdentifier: com.xrtk.core
-  install: 0
-  solutionName: com.xrtk.core\com.xrtk.core.sln
-  buildAppx: 1
-  rebuildAppx: 0
-  platformArchitecture: 3
-  verbosity: 0

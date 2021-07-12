@@ -45,7 +45,7 @@ MonoBehaviour:
     isActive: 1
   - sourceRelativePath: /Submodules/Ultraleap/XRTK.Ultraleap/Packages/com.xrtk.ultraleap
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.ultraleap
-    isActive: 0
+    isActive: 1
   - sourceRelativePath: /Submodules/Nreal/XRTK.Nreal/Packages/com.xrtk.nreal
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.nreal
     isActive: 0

@@ -9,14 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704a4b1a0d41bd74dbcbb0dd5193dd45, type: 3}
-  m_Name: UwpBuildInfo
+  m_Script: {fileID: 11500000, guid: c8bf066bf8a4947a1be502d267edb82f, type: 3}
+  m_Name: Mock HMD Build Settings
   m_EditorClassIdentifier: 
-  autoIncrement: 0
-  bundleIdentifier: com.xrtk.core
-  install: 0
-  solutionName: com.xrtk.core\com.xrtk.core.sln
-  buildAppx: 1
-  rebuildAppx: 0
-  platformArchitecture: 3
-  verbosity: 0
+  renderMode: 1

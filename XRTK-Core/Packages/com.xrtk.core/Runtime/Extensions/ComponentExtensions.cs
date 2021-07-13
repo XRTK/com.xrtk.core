@@ -75,7 +75,7 @@ namespace XRTK.Extensions
         /// <param name="callerName">The <see cref="CallerFilePathAttribute"/> fills in this information.</param>
         public static void Validate<T>(this T component, [CallerFilePath] string callerName = "") where T : Component
         {
-            if (component == null)
+            if (component.IsNull())
             {
                 throw new MissingReferenceException($"{Path.GetFileNameWithoutExtension(callerName)} expected a {typeof(T).Name}");
             }

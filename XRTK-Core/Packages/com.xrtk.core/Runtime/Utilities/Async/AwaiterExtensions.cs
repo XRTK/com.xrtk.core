@@ -132,7 +132,7 @@ namespace XRTK.Utilities.Async
         {
             if (Application.isPlaying)
             {
-                if (coroutineRunner == null)
+                if (coroutineRunner.IsNull())
                 {
                     if (MixedRealityToolkit.IsInitialized)
                     {

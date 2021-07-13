@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -285,6 +286,68 @@ namespace XRTK.Utilities.WebRequestRest
             }
         }
 
+        private static string DownloadCacheDirectory => $"{Application.persistentDataPath}\\download_cache";
+
+        /// <summary>
+        /// Download a <see cref="AssetBundle"/> from the provided <see cref="url"/>.
+        /// </summary>
+        /// <param name="url">The url to download the <see cref="AssetBundle"/> from.</param>
+        /// <param name="fileName">Optional file name to download (including extension).</param>
+        /// <param name="headers">Optional header information for the request.</param>
+        /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
+        /// <param name="timeout">Optional time in seconds before request expires.</param>
+        /// <returns>The path to the downloaded file.</returns>
+        public static async Task<string> DownloadFileAsync(string url, string fileName = null, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                // We will try go guess the name based on the url endpoint.
+                var index = url.LastIndexOf('/');
+                fileName = url.Substring(index, url.Length - index);
+            }
+
+            if (!Directory.Exists(DownloadCacheDirectory))
+            {
+                Directory.CreateDirectory(DownloadCacheDirectory);
+            }
+
+            var filePath = $"{DownloadCacheDirectory}\\{fileName}";
+            Debug.Log(filePath);
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            using (var webRequest = UnityWebRequest.Get(url))
+            using (var fileDownloadHandler = new DownloadHandlerFile(filePath)
+            {
+                removeFileOnAbort = true
+            })
+            {
+                webRequest.downloadHandler = fileDownloadHandler;
+                var response = await ProcessRequestAsync(webRequest, headers, progress, timeout);
+                fileDownloadHandler.Dispose();
+
+                if (!response.Successful)
+                {
+                    Debug.LogError($"Failed to download file from \"{url}\"!");
+
+                    return null;
+                }
+
+                return filePath;
+            }
+        }
+
+        public static void DeleteFileDownloadCache()
+        {
+            if (Directory.Exists(DownloadCacheDirectory))
+            {
+                Directory.Delete(DownloadCacheDirectory, true);
+            }
+        }
+
         #endregion Get Multimedia Content
 
         private static async Task<Response> ProcessRequestAsync(UnityWebRequest webRequest, Dictionary<string, string> headers, IProgress<float> progress, int timeout)
@@ -358,7 +421,18 @@ namespace XRTK.Utilities.WebRequestRest
                 return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", webRequest.downloadHandler?.data, webRequest.responseCode);
             }
 
-            return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode);
+            switch (webRequest.downloadHandler)
+            {
+                case DownloadHandlerFile _:
+                case DownloadHandlerBuffer _:
+                case DownloadHandlerScript _:
+                case DownloadHandlerTexture _:
+                case DownloadHandlerAudioClip _:
+                case DownloadHandlerAssetBundle _:
+                    return new Response(true, null, null, webRequest.responseCode);
+                default:
+                    return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode);
+            }
         }
     }
 }

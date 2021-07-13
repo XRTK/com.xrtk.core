@@ -65,16 +65,16 @@ A major component of the Mixed Reality Toolkit is the Platform definitions that 
 
 ## Current Platforms
 
-* OpenVR - Default runtime platform for Windows Standalone, no special consideration.
-* [Oculus](articles/platforms/oculus.md)
-* [Windows Mixed Reality (UWP)](articles/platforms/windowsmixedreality.md)
-* [Magic Leap (Lumin)](articles/platforms/magicleap.md)
+- [Magic Leap (Lumin)](articles/platforms/magicleap.md)
+- [Oculus](articles/platforms/oculus.md)
+- OpenVR - Default runtime platform for Windows Standalone, no special consideration.
+- [Ultraleap](articles/platforms/ultraleap.md)
+- [Windows Mixed Reality (UWP)](articles/platforms/windowsmixedreality.md)
 
 ## In development
 
-* [SteamVR](articles/platforms/steamvr.md)
-* [etee](articles/platforms/etee.md)
-* [Ultraleap](articles/platforms/ultraleap.md)
-* [WebXR](articles/platforms/webxr.md)
+- [SteamVR](articles/platforms/steamvr.md)
+- [etee](articles/platforms/etee.md)
+- [WebXR](articles/platforms/webxr.md)
 
 > Want to add a platform? Check out our new [Template Generator](articles/03-template-generator.md#platform-template-generation)!

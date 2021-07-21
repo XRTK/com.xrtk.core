@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using XRTK.Extensions;
 using XRTK.Utilities.Async;
 
@@ -223,6 +225,8 @@ namespace XRTK.Utilities.WebRequestRest
         /// <returns>A new <see cref="Texture2D"/> instance.</returns>
         public static async Task<Texture2D> DownloadTextureAsync(string url, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
+            await Awaiters.UnityMainThread;
+
             bool isCached = TryGetDownloadCacheItem(url, out var cachePath);
 
             if (isCached)
@@ -245,9 +249,16 @@ namespace XRTK.Utilities.WebRequestRest
 
                 if (!isCached)
                 {
-                    using (var fileStream = File.OpenWrite(cachePath))
+                    try
                     {
-                        await fileStream.WriteAsync(downloadHandler.data, 0, downloadHandler.data.Length, CancellationToken.None);
+                        using (var fileStream = File.OpenWrite(cachePath))
+                        {
+                            await fileStream.WriteAsync(downloadHandler.data, 0, downloadHandler.data.Length, CancellationToken.None);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e);
                     }
                 }
 
@@ -266,6 +277,8 @@ namespace XRTK.Utilities.WebRequestRest
         /// <returns>A new <see cref="AudioClip"/> instance.</returns>
         public static async Task<AudioClip> DownloadAudioClipAsync(string url, AudioType audioType, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
+            await Awaiters.UnityMainThread;
+
             bool isCached = TryGetDownloadCacheItem(url, out var cachePath);
 
             if (isCached)
@@ -302,35 +315,79 @@ namespace XRTK.Utilities.WebRequestRest
         /// Download a <see cref="AssetBundle"/> from the provided <see cref="url"/>.
         /// </summary>
         /// <param name="url">The url to download the <see cref="AssetBundle"/> from.</param>
+        /// <param name="options">Asset bundle request options.</param>
         /// <param name="headers">Optional header information for the request.</param>
         /// <param name="progress">Optional <see cref="IProgress{T}"/> handler.</param>
-        /// <param name="timeout">Optional time in seconds before request expires.</param>
         /// <returns>A new <see cref="AssetBundle"/> instance.</returns>
-        public static async Task<AssetBundle> DownloadAssetBundleAsync(string url, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
+        public static async Task<AssetBundle> DownloadAssetBundleAsync(string url, AssetBundleRequestOptions options, Dictionary<string, string> headers = null, IProgress<float> progress = null)
         {
-            if (TryGetDownloadCacheItem(url, out var cachePath))
+            await Awaiters.UnityMainThread;
+
+            UnityWebRequest webRequest;
+
+            if (options == null)
             {
-                return await AssetBundle.LoadFromFileAsync(cachePath);
+                webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(options.Hash))
+                {
+                    CachedAssetBundle cachedBundle = new CachedAssetBundle(options.BundleName, Hash128.Parse(options.Hash));
+#if ENABLE_CACHING
+                    if (options.UseCrcForCachedBundle || !Caching.IsVersionCached(cachedBundle))
+                    {
+                        webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url, cachedBundle, options.Crc);
+                    }
+                    else
+                    {
+                        webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url, cachedBundle);
+                    }
+#else
+                    webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url, cachedBundle, options.Crc);
+#endif
+                }
+                else
+                {
+                    webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url, options.Crc);
+                }
+
+                if (options.Timeout > 0)
+                {
+                    webRequest.timeout = options.Timeout;
+                }
+
+                if (options.RedirectLimit > 0)
+                {
+                    webRequest.redirectLimit = options.RedirectLimit;
+                }
+
+#if !UNITY_2019_3_OR_NEWER
+                webRequest.chunkedTransfer = options.ChunkedTransfer;
+#endif
             }
 
-            using (var webRequest = UnityWebRequestAssetBundle.GetAssetBundle(url))
+            using (webRequest)
             {
-                var response = await ProcessRequestAsync(webRequest, headers, progress, timeout);
+                Response response;
+
+                try
+                {
+                    response = await ProcessRequestAsync(webRequest, headers, progress, options?.Timeout ?? -1);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                    throw;
+                }
 
                 if (!response.Successful)
                 {
-                    Debug.LogError($"Failed to download asset bundle from \"{url}\"!");
-
+                    Debug.LogError($"Failed to download asset bundle from \"{url}\"!\n{response.ResponseCode}:{response.ResponseBody}");
                     return null;
                 }
 
                 var downloadHandler = (DownloadHandlerAssetBundle)webRequest.downloadHandler;
-
-                using (var fileStream = File.OpenWrite(cachePath))
-                {
-                    await fileStream.WriteAsync(downloadHandler.data, 0, downloadHandler.data.Length, CancellationToken.None);
-                }
-
                 return downloadHandler.assetBundle;
             }
         }
@@ -346,6 +403,8 @@ namespace XRTK.Utilities.WebRequestRest
         /// <returns>The path to the downloaded file.</returns>
         public static async Task<string> DownloadFileAsync(string url, string fileName = null, Dictionary<string, string> headers = null, IProgress<float> progress = null, int timeout = -1)
         {
+            await Awaiters.UnityMainThread;
+
             if (string.IsNullOrWhiteSpace(fileName))
             {
                 // We will try go guess the name based on the url endpoint.
@@ -404,6 +463,30 @@ namespace XRTK.Utilities.WebRequestRest
         }
 
         /// <summary>
+        /// Try to delete the cached item at the uri.
+        /// </summary>
+        /// <param name="uri">The uri key of the item.</param>
+        /// <returns>True, if the cached item was successfully deleted.</returns>
+        public static bool TryDeleteCacheItem(string uri)
+        {
+            if (TryGetDownloadCacheItem(uri, out var filePath))
+            {
+                try
+                {
+                    File.Delete(filePath);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
+
+                return File.Exists(filePath);
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Deletes all the files in the download cache.
         /// </summary>
         public static void DeleteDownloadCache()
@@ -418,6 +501,8 @@ namespace XRTK.Utilities.WebRequestRest
 
         private static async Task<Response> ProcessRequestAsync(UnityWebRequest webRequest, Dictionary<string, string> headers, IProgress<float> progress, int timeout)
         {
+            await Awaiters.UnityMainThread;
+
             if (timeout > 0)
             {
                 webRequest.timeout = timeout;
@@ -446,24 +531,44 @@ namespace XRTK.Utilities.WebRequestRest
                 }
             }
 
-            var backgroundThread = new Thread(async () =>
-            {
-                await Awaiters.UnityMainThread;
+            Thread backgroundThread = null;
 
-                while (!webRequest.isDone)
+            if (progress != null)
+            {
+                backgroundThread = new Thread(async () =>
                 {
-                    progress?.Report(isUpload ? webRequest.uploadProgress : webRequest.downloadProgress * 100f);
+                    try
+                    {
+                        await Awaiters.UnityMainThread;
 
-                    await Awaiters.UnityMainThread;
-                }
-            })
+                        while (!webRequest.isDone)
+                        {
+                            progress.Report(isUpload ? webRequest.uploadProgress : webRequest.downloadProgress * 100f);
+                            await Awaiters.UnityMainThread;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Throw away
+                    }
+                })
+                {
+                    IsBackground = true
+                };
+            }
+
+            backgroundThread?.Start();
+
+            try
             {
-                IsBackground = true
-            };
+                await webRequest.SendWebRequest();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{nameof(Rest)}.{nameof(ProcessRequestAsync)}::Send Web Request Failed! {e}");
+            }
 
-            backgroundThread.Start();
-            await webRequest.SendWebRequest();
-            backgroundThread.Join();
+            backgroundThread?.Join();
             progress?.Report(100f);
 
 #if UNITY_2020_1_OR_NEWER
@@ -482,7 +587,7 @@ namespace XRTK.Utilities.WebRequestRest
                     return new Response(false, "Invalid Headers", null, webRequest.responseCode);
                 }
 
-                var responseHeaders = webRequest.GetResponseHeaders().Aggregate(string.Empty, (current, header) => $"\n{header.Key}: {header.Value}");
+                var responseHeaders = webRequest.GetResponseHeaders().Aggregate(string.Empty, (_, header) => $"\n{header.Key}: {header.Value}");
                 Debug.LogError($"REST Error {webRequest.responseCode}:{webRequest.downloadHandler?.text}{responseHeaders}");
                 return new Response(false, $"{responseHeaders}\n{webRequest.downloadHandler?.text}", null, webRequest.responseCode);
             }

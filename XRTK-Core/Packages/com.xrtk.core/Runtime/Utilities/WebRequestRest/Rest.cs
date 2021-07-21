@@ -595,12 +595,13 @@ namespace XRTK.Utilities.WebRequestRest
             switch (webRequest.downloadHandler)
             {
                 case DownloadHandlerFile _:
-                case DownloadHandlerBuffer _:
                 case DownloadHandlerScript _:
                 case DownloadHandlerTexture _:
                 case DownloadHandlerAudioClip _:
                 case DownloadHandlerAssetBundle _:
                     return new Response(true, null, null, webRequest.responseCode);
+                case DownloadHandlerBuffer _:
+                    return new Response(true, null, webRequest.downloadHandler?.data, webRequest.responseCode);
                 default:
                     return new Response(true, webRequest.downloadHandler?.text, webRequest.downloadHandler?.data, webRequest.responseCode);
             }

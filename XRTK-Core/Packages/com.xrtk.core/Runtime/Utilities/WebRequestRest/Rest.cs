@@ -479,7 +479,7 @@ namespace XRTK.Utilities.WebRequestRest
                     Debug.LogError(e);
                 }
 
-                return File.Exists(filePath);
+                return !File.Exists(filePath);
             }
 
             return false;

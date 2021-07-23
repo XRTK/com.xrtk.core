@@ -45,6 +45,8 @@ namespace XRTK.Utilities.Async
     /// </summary>
     public static class AwaiterExtensions
     {
+        private class CoroutineRunner : MonoBehaviour { }
+
         public static SimpleCoroutineAwaiter GetAwaiter(this WaitForSeconds instruction)
             => GetAwaiterReturnVoid(instruction);
 
@@ -140,16 +142,16 @@ namespace XRTK.Utilities.Async
                     }
                     else
                     {
-                        GameObject go = GameObject.Find(nameof(coroutineRunner));
+                        GameObject go = GameObject.Find(nameof(CoroutineRunner));
 
                         if (go.IsNull())
                         {
-                            go = new GameObject(nameof(coroutineRunner));
+                            go = new GameObject(nameof(CoroutineRunner));
                         }
 
                         go.DontDestroyOnLoad();
                         go.hideFlags = HideFlags.HideAndDontSave;
-                        coroutineRunner = go.EnsureComponent<MonoBehaviour>();
+                        coroutineRunner = go.EnsureComponent<CoroutineRunner>();
                     }
                 }
 
@@ -161,7 +163,7 @@ namespace XRTK.Utilities.Async
 #if UNITY_EDITOR
                 Unity.EditorCoroutines.Editor.EditorCoroutineUtility.StartCoroutineOwnerless(enumerator);
 #else
-                throw new Exception(nameof(coroutineRunner));
+                throw new Exception(nameof(CoroutineRunner));
 #endif
             }
         }

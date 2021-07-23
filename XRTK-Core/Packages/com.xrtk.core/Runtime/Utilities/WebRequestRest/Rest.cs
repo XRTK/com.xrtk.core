@@ -212,7 +212,7 @@ namespace XRTK.Utilities.WebRequestRest
 
         #region Get Multimedia Content
 
-        private static string DownloadCacheDirectory => $"{Application.temporaryCachePath}\\download_cache";
+        private static string DownloadCacheDirectory => $"{Application.temporaryCachePath}{Path.DirectorySeparatorChar}download_cache";
 
         /// <summary>
         /// Download a <see cref="Texture2D"/> from the provided <see cref="url"/>.
@@ -412,7 +412,7 @@ namespace XRTK.Utilities.WebRequestRest
             }
 
             ValidateCacheDirectory();
-            var filePath = $"{DownloadCacheDirectory}\\{fileName}";
+            var filePath = $"{DownloadCacheDirectory}{Path.DirectorySeparatorChar}{fileName}";
 
             if (File.Exists(filePath))
             {
@@ -457,7 +457,7 @@ namespace XRTK.Utilities.WebRequestRest
         public static bool TryGetDownloadCacheItem(string uri, out string filePath)
         {
             ValidateCacheDirectory();
-            filePath = $"{DownloadCacheDirectory}\\{uri.GenerateGuid()}";
+            filePath = $"{DownloadCacheDirectory}{Path.DirectorySeparatorChar}{uri.GenerateGuid()}";
             return File.Exists(filePath);
         }
 

@@ -92,8 +92,15 @@ namespace XRTK.Tests.Core
             // Tests
             Assert.IsNotNull(testService1);
             Assert.IsNotNull(dataProvider1);
+
             Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
             Assert.IsTrue(activeServiceCount + 2 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(testService1.DataProviders.Count == 1);
+
+            foreach (var dataProvider in testService1.DataProviders)
+            {
+                Assert.IsTrue(dataProvider == dataProvider1);
+            }
 
             // Tests
             Assert.IsNotNull(dataProvider1);
@@ -615,6 +622,43 @@ namespace XRTK.Tests.Core
 
             // Tests
             Assert.IsTrue(allExtensionServices.Count == 4);
+        }
+
+        [Test]
+        public void Test_05_10_RegisterMixedRealityExtensionServiceAndDataProvider()
+        {
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
+
+            var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
+            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
+
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test17-1.1"));
+
+            // Retrieve
+            var testExtensionService1 = MixedRealityToolkit.GetService<ITestExtensionService1>();
+
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestExtensionDataProvider1>(new TestExtensionDataProvider1(testExtensionService1));
+
+            // Retrieve
+            var extensionDataProvider1 = MixedRealityToolkit.GetService<ITestExtensionDataProvider1>();
+
+            // Tests
+            Assert.IsNotNull(testExtensionService1);
+            Assert.IsNotNull(extensionDataProvider1);
+
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 2 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(testExtensionService1.DataProviders.Count == 1);
+
+            foreach (var dataProvider in testExtensionService1.DataProviders)
+            {
+                Assert.IsTrue(dataProvider == extensionDataProvider1);
+            }
+
+            // Tests
+            Assert.IsNotNull(extensionDataProvider1);
         }
 
         #endregion IMixedRealityExtensionService Tests

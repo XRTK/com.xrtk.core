@@ -11,7 +11,10 @@ namespace XRTK.Tests.Services
         public TestDataProvider1(ITestService parentService, string name = "Test Data Provider 1", uint priority = 1, BaseMixedRealityProfile profile = null)
             : base(name, priority, profile, parentService)
         {
+            testSystem = parentService;
         }
+
+        private readonly ITestService testSystem = null;
 
         public bool IsEnabled { get; private set; }
 
@@ -23,6 +26,22 @@ namespace XRTK.Tests.Services
         public override void Disable()
         {
             IsEnabled = false;
+        }
+
+        /// <inheritdoc />
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            testSystem.RegisterDataProvider(this);
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            testSystem.UnRegisterDataProvider(this);
         }
     }
 }

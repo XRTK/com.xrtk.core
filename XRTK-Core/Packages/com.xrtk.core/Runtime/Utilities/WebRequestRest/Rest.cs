@@ -312,8 +312,6 @@ namespace XRTK.Utilities.WebRequestRest
                 if (!isCached &&
                     !File.Exists(cachePath))
                 {
-                    File.WriteAllText(cachePath, string.Empty);
-
                     try
                     {
                         using (var fileStream = File.OpenWrite(cachePath))
@@ -367,8 +365,6 @@ namespace XRTK.Utilities.WebRequestRest
                 if (!isCached &&
                     !File.Exists(cachePath))
                 {
-                    File.WriteAllText(cachePath, string.Empty);
-
                     try
                     {
                         using (var fileStream = File.OpenWrite(cachePath))

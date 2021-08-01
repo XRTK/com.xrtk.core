@@ -11,7 +11,10 @@ namespace XRTK.Tests.Services
         public TestExtensionDataProvider1(ITestExtensionService1 parentService, string name = "Test Extension Data Provider 1", uint priority = 10, BaseMixedRealityExtensionDataProviderProfile profile = null)
             : base(name, priority, profile, parentService)
         {
+            testExtensionSystem = parentService;
         }
+
+        private readonly ITestExtensionService1 testExtensionSystem = null;
 
         public bool IsEnabled { get; private set; }
 
@@ -27,6 +30,22 @@ namespace XRTK.Tests.Services
             base.Disable();
 
             IsEnabled = false;
+        }
+
+        /// <inheritdoc />
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            testExtensionSystem.RegisterDataProvider(this);
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            testExtensionSystem.UnRegisterDataProvider(this);
         }
     }
 }

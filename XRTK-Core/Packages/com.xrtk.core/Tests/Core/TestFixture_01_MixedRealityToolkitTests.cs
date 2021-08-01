@@ -2,11 +2,15 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.TestTools;
 using XRTK.Definitions;
+using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Services;
 using XRTK.Tests.Services;
@@ -84,10 +88,13 @@ namespace XRTK.Tests.Core
             var testService1 = MixedRealityToolkit.GetService<ITestService>();
 
             // Register
-            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
+            if(!MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1)))
+            {
+                Debug.LogError($"{typeof(TestDataProvider1)} Already registered by {typeof(TestService1)}");
+            }
 
-            // Retrieve
             var dataProvider1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
+
 
             // Tests
             Assert.IsNotNull(testService1);
@@ -639,7 +646,10 @@ namespace XRTK.Tests.Core
             var testExtensionService1 = MixedRealityToolkit.GetService<ITestExtensionService1>();
 
             // Register
-            MixedRealityToolkit.TryRegisterService<ITestExtensionDataProvider1>(new TestExtensionDataProvider1(testExtensionService1));
+            if (!MixedRealityToolkit.TryRegisterService<ITestExtensionDataProvider1>(new TestExtensionDataProvider1(testExtensionService1)))
+            {
+                Debug.LogError($"{typeof(TestExtensionDataProvider1)} Already registered by {typeof(TestExtensionService1)}");
+            }
 
             // Retrieve
             var extensionDataProvider1 = MixedRealityToolkit.GetService<ITestExtensionDataProvider1>();
@@ -809,8 +819,60 @@ namespace XRTK.Tests.Core
 
         #region Mixed Reality System Tests
 
+        private readonly List<IMixedRealityPlatform> testPlatforms = new List<IMixedRealityPlatform> { new AllPlatforms() };
+
         [Test]
-        public void Test_08_01_TestSystemsCannotBeRegisteredTwice()
+        public void Test_08_01_TestSystemRegisterationWithDataProviders()
+        {
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
+
+            var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
+            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
+
+            // Create Data Provider Configuration
+            var testProfile = ScriptableObject.CreateInstance<TestSystemProfile>();
+            var newConfig = new MixedRealityServiceConfiguration<ITestDataProvider1>(typeof(TestSystemDataProvider1), nameof(TestSystemDataProvider1), 2, testPlatforms, null);
+            var newConfigs = testProfile.RegisteredServiceConfigurations.AddItem(newConfig);
+            testProfile.RegisteredServiceConfigurations = newConfigs;
+
+            // Create Test System Configuration
+            var profile = new IMixedRealityServiceConfiguration<ITestSystem>[0];
+            var dataProviderTypes = new[] { typeof(TestSystem1) };
+            var newSystemConfig = new MixedRealityServiceConfiguration<ITestSystem>(typeof(TestSystem1), nameof(TestSystem1), 2, testPlatforms, testProfile);
+            Debug.Assert(newConfig != null);
+            var newSystemConfigs = profile.AddItem(newSystemConfig);
+
+            // Initialize Test System and it's Data Provider through the System Profile
+            var systemInitializationSuccess = MixedRealityToolkit.TryRegisterServiceConfigurations(newSystemConfigs);
+
+            Assert.IsTrue(systemInitializationSuccess);
+
+            var testSystem1Fail = MixedRealityToolkit.TryRegisterService<ITestSystem>(new TestSystem1(testProfile));
+
+            LogAssert.Expect(LogType.Error, $"There's already a ITestSystem.TestSystem1 registered!");
+            Assert.IsFalse(testSystem1Fail);
+
+            var testGetSystem1Success = MixedRealityToolkit.TryGetSystem<ITestSystem>(out var testSystem1);
+
+            // Final Tests
+            Assert.IsTrue(testSystem1 != null);
+            Assert.IsTrue(testGetSystem1Success);
+            Assert.IsTrue(activeSystemCount + 1 == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 1 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(testSystem1.DataProviders.Count == 1);
+
+            var dataProvider1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
+
+            foreach (var dataProvider in testSystem1.DataProviders)
+            {
+                Assert.IsTrue(dataProvider == dataProvider1);
+            }
+
+            Assert.IsNotNull(dataProvider1);
+        }
+
+        [Test]
+        public void Test_08_02_TestSystemsCannotBeRegisteredTwice()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 

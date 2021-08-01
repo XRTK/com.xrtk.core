@@ -2,25 +2,20 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Definitions;
-using XRTK.Definitions.CameraSystem;
-using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 
 namespace XRTK.Tests.Services
 {
-    internal class TestDataProvider1 : BaseDataProvider, ITestDataProvider1
+    internal class TestSystemDataProvider1 : BaseDataProvider, ITestDataProvider1
     {
         /// <inheritdoc />
-        public TestDataProvider1(ITestService parentService, string name = "Test Data Provider 1", uint priority = 1, BaseMixedRealityProfile profile = null)
+        public TestSystemDataProvider1(string name, uint priority, BaseMixedRealityProfile profile, ITestSystem parentService)
             : base(name, priority, profile, parentService)
-
-        //public TestDataProvider1(string name, uint priority, BaseMixedRealityProfile profile, ITestService parentService)
-        //    : base(name, priority, profile, parentService)
         {
             testSystem = parentService;
         }
 
-        private readonly ITestService testSystem = null;
+        private readonly ITestSystem testSystem = null;
 
         public bool IsEnabled { get; private set; }
 

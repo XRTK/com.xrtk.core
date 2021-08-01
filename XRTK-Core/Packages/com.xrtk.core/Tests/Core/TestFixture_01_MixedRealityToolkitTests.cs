@@ -378,7 +378,7 @@ namespace XRTK.Tests.Core
         #region Service Retrieval Tests
 
         [Test]
-        public void Test_06_01_TryRegisterMixedRealityDataProvider()
+        public void Test_05_01_TryRegisterMixedRealityDataProvider()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
@@ -403,7 +403,7 @@ namespace XRTK.Tests.Core
         }
 
         [Test]
-        public void Test_06_02_TryRegisterMixedRealityDataProviderFail()
+        public void Test_05_02_TryRegisterMixedRealityDataProviderFail()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
@@ -421,7 +421,7 @@ namespace XRTK.Tests.Core
         }
 
         [Test]
-        public void Test_06_03_TryRegisterMixedRealityDataProviderByName()
+        public void Test_05_03_TryRegisterMixedRealityDataProviderByName()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
@@ -452,7 +452,7 @@ namespace XRTK.Tests.Core
         #region Service Enable/Disable Tests
 
         [Test]
-        public void Test_07_01_EnableServicesByType()
+        public void Test_06_01_EnableServicesByType()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
@@ -479,7 +479,7 @@ namespace XRTK.Tests.Core
         }
 
         [Test]
-        public void Test_07_02_DisableServicesByType()
+        public void Test_06_02_DisableServicesByType()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
@@ -519,7 +519,7 @@ namespace XRTK.Tests.Core
         #region Mixed Reality System Tests
 
         [Test]
-        public void Test_08_01_TestSystemsCannotBeRegisteredTwice()
+        public void Test_07_01_TestSystemsCannotBeRegisteredTwice()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 

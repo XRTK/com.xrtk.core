@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Definitions;
-using XRTK.Definitions.CameraSystem;
-using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 
 namespace XRTK.Tests.Services

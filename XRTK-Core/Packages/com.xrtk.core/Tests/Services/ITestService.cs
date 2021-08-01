@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using XRTK.Interfaces;
-using XRTK.Interfaces.CameraSystem;
 
 namespace XRTK.Tests.Services
 {

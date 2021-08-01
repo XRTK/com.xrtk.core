@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
 using XRTK.Interfaces;
-using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 
 namespace XRTK.Tests.Services

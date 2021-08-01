@@ -21,7 +21,6 @@ namespace XRTK.Tests.Core
         private void SetupServiceLocator()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
-            MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile = ScriptableObject.CreateInstance<MixedRealityRegisteredServiceProvidersProfile>();
         }
 
         #region Configuration Validation Tests
@@ -29,35 +28,7 @@ namespace XRTK.Tests.Core
         private readonly List<IMixedRealityPlatform> testPlatforms = new List<IMixedRealityPlatform> { new EditorPlatform(), new WindowsStandalonePlatform() };
 
         [Test]
-        public void Test_01_ConfirmExtensionServiceProviderConfigurationNotPresent()
-        {
-            SetupServiceLocator();
-            var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
-            var dataProviderTypes = new[] { typeof(TestExtensionService1) };
-            IMixedRealityServiceConfiguration<IMixedRealityExtensionService>[] newConfigs =
-            {
-                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, testPlatforms, null)
-            };
-
-            Assert.IsFalse(profile.ValidateService(dataProviderTypes, newConfigs, false));
-        }
-
-        [Test]
-        public void Test_02_ConfirmExtensionServiceProviderConfigurationPresent()
-        {
-            SetupServiceLocator();
-            var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
-            var dataProviderTypes = new[] { typeof(TestExtensionService1) };
-            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, testPlatforms, null);
-            Debug.Assert(newConfig != null);
-            var newConfigs = profile.RegisteredServiceConfigurations.AddItem(newConfig);
-            Debug.Assert(newConfigs != null);
-            profile.RegisteredServiceConfigurations = newConfigs;
-            Assert.IsTrue(profile.ValidateService(dataProviderTypes, newConfigs, false));
-        }
-
-        [Test]
-        public void Test_03_ConfirmControllerMappingConfigurationNotPresent()
+        public void Test_01_ConfirmControllerMappingConfigurationNotPresent()
         {
             SetupServiceLocator();
             var controllerTypes = new[] { typeof(GenericOpenVRController) };

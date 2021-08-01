@@ -12,18 +12,5 @@ namespace XRTK.Definitions
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Root Profile", fileName = "MixedRealityToolkitRootProfile", order = (int)CreateProfileMenuItemIndices.Configuration - 1)]
     public sealed class MixedRealityToolkitRootProfile : BaseMixedRealityServiceProfile<IMixedRealitySystem>
-    {
-        //[SerializeField]
-        //[Tooltip("All the additional non-required services registered with the Mixed Reality Toolkit.")]
-        //private MixedRealityRegisteredServiceProvidersProfile registeredServiceProvidersProfile = null;
-
-        ///// <summary>
-        ///// All the additional non-required systems, features, and managers registered with the Mixed Reality Toolkit.
-        ///// </summary>
-        //public MixedRealityRegisteredServiceProvidersProfile RegisteredServiceProvidersProfile
-        //{
-        //    get => registeredServiceProvidersProfile;
-        //    internal set => registeredServiceProvidersProfile = value;
-        //}
-    }
+    { }
 }

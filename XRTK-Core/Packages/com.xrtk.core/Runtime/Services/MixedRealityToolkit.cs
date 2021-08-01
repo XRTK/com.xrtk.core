@@ -162,7 +162,7 @@ namespace XRTK.Services
         public static IReadOnlyDictionary<Type, IMixedRealitySystem> ActiveSystems => activeSystems;
 
         // ReSharper disable once InconsistentNaming
-        private static readonly List<Tuple<Type, IMixedRealityService>> activeSystemsDataProviders = new List<Tuple<Type, IMixedRealityService>>();
+        private static readonly List<Tuple<Type, IMixedRealityService>> registeredMixedRealityServices = new List<Tuple<Type, IMixedRealityService>>();
 
         /// <summary>
         /// Local service registry for the Mixed Reality Toolkit, to allow runtime use of the <see cref="IMixedRealityService"/>.
@@ -170,7 +170,7 @@ namespace XRTK.Services
         /// <remarks>
         /// Services can have one or more instances registered and can be executed simultaneously. Best to get them out by name or guid.
         /// </remarks>
-        public static IReadOnlyList<Tuple<Type, IMixedRealityService>> ActiveSystemsDataProviders => activeSystemsDataProviders;
+        public static IReadOnlyList<Tuple<Type, IMixedRealityService>> RegisteredMixedRealityServices => registeredMixedRealityServices;
 
         #endregion Mixed Reality runtime service registry
 
@@ -389,14 +389,14 @@ namespace XRTK.Services
                 activeSystems.Clear();
             }
 
-            if (ActiveSystemsDataProviders.Count > 0)
+            if (RegisteredMixedRealityServices.Count > 0)
             {
-                activeSystemsDataProviders.Clear();
+                registeredMixedRealityServices.Clear();
             }
 #endif
 
             Debug.Assert(ActiveSystems.Count == 0);
-            Debug.Assert(ActiveSystemsDataProviders.Count == 0);
+            Debug.Assert(RegisteredMixedRealityServices.Count == 0);
             Debug.Assert(ActivePlatforms.Count > 0, "No Active Platforms found!");
 
             ClearSystemCache();
@@ -427,8 +427,8 @@ namespace XRTK.Services
                 TryRegisterServiceInternal(system.Key, system.Value);
             }
 
-            var orderedServices = activeSystemsDataProviders.OrderBy(service => service.Item2.Priority).ToArray();
-            activeSystemsDataProviders.Clear();
+            var orderedServices = registeredMixedRealityServices.OrderBy(service => service.Item2.Priority).ToArray();
+            registeredMixedRealityServices.Clear();
 
             foreach (var (interfaceType, mixedRealityService) in orderedServices)
             {
@@ -656,7 +656,7 @@ namespace XRTK.Services
                 system.Value.OnApplicationFocus(focus);
             }
 
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 service.Item2.OnApplicationFocus(focus);
             }
@@ -674,7 +674,7 @@ namespace XRTK.Services
                 system.Value.OnApplicationPause(pause);
             }
 
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 service.Item2.OnApplicationPause(pause);
             }
@@ -988,7 +988,7 @@ namespace XRTK.Services
             }
             else if (typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
             {
-                activeSystemsDataProviders.Add(new Tuple<Type, IMixedRealityService>(interfaceType, serviceInstance));
+                registeredMixedRealityServices.Add(new Tuple<Type, IMixedRealityService>(interfaceType, serviceInstance));
             }
             else
             {
@@ -1116,9 +1116,9 @@ namespace XRTK.Services
 
                 Tuple<Type, IMixedRealityService> registryInstance = null;
 
-                for (var i = 0; i < activeSystemsDataProviders.Count; i++)
+                for (var i = 0; i < registeredMixedRealityServices.Count; i++)
                 {
-                    var service = activeSystemsDataProviders[i];
+                    var service = registeredMixedRealityServices[i];
 
                     if (service.Item2.Name == serviceName)
                     {
@@ -1127,9 +1127,9 @@ namespace XRTK.Services
                     }
                 }
 
-                if (activeSystemsDataProviders.Contains(registryInstance))
+                if (registeredMixedRealityServices.Contains(registryInstance))
                 {
-                    activeSystemsDataProviders.Remove(registryInstance);
+                    registeredMixedRealityServices.Remove(registryInstance);
                     return true;
                 }
 
@@ -1320,7 +1320,7 @@ namespace XRTK.Services
             }
 
             // Initialize all registered runtime services
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 try
                 {
@@ -1352,7 +1352,7 @@ namespace XRTK.Services
             }
 
             // Reset all registered runtime services
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 try
                 {
@@ -1384,7 +1384,7 @@ namespace XRTK.Services
             }
 
             // Reset all registered runtime services
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 try
                 {
@@ -1416,7 +1416,7 @@ namespace XRTK.Services
             }
 
             // Update all registered runtime services
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 try
                 {
@@ -1448,7 +1448,7 @@ namespace XRTK.Services
             }
 
             // Update all registered runtime services
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 try
                 {
@@ -1480,7 +1480,7 @@ namespace XRTK.Services
             }
 
             // Update all registered runtime services
-            foreach (var service in activeSystemsDataProviders)
+            foreach (var service in registeredMixedRealityServices)
             {
                 try
                 {
@@ -1499,11 +1499,11 @@ namespace XRTK.Services
             if (activeProfile == null) { return; }
 
             // Disable all registered runtime services in reverse priority order
-            for (var i = activeSystemsDataProviders.Count - 1; i >= 0; i--)
+            for (var i = registeredMixedRealityServices.Count - 1; i >= 0; i--)
             {
                 try
                 {
-                    activeSystemsDataProviders[i].Item2.Disable();
+                    registeredMixedRealityServices[i].Item2.Disable();
                 }
                 catch (Exception e)
                 {
@@ -1531,11 +1531,11 @@ namespace XRTK.Services
             if (activeProfile == null) { return; }
 
             // Destroy all registered runtime services in reverse priority order
-            for (var i = activeSystemsDataProviders.Count - 1; i >= 0; i--)
+            for (var i = registeredMixedRealityServices.Count - 1; i >= 0; i--)
             {
                 try
                 {
-                    activeSystemsDataProviders[i].Item2.Destroy();
+                    registeredMixedRealityServices[i].Item2.Destroy();
                 }
                 catch (Exception e)
                 {
@@ -1557,11 +1557,11 @@ namespace XRTK.Services
             }
 
             // Dispose all registered runtime services in reverse priority order
-            for (var i = activeSystemsDataProviders.Count - 1; i >= 0; i--)
+            for (var i = registeredMixedRealityServices.Count - 1; i >= 0; i--)
             {
                 try
                 {
-                    activeSystemsDataProviders[i].Item2.Dispose();
+                    registeredMixedRealityServices[i].Item2.Dispose();
                 }
                 catch (Exception e)
                 {
@@ -1583,7 +1583,7 @@ namespace XRTK.Services
             }
 
             activeSystems.Clear();
-            activeSystemsDataProviders.Clear();
+            registeredMixedRealityServices.Clear();
         }
 
         #endregion Multiple Service Management
@@ -1591,7 +1591,7 @@ namespace XRTK.Services
         #region Service Utilities
 
         /// <summary>
-        /// Query the <see cref="ActiveSystemsDataProviders"/> for the existence of a <see cref="IMixedRealityService"/>.
+        /// Query the <see cref="RegisteredMixedRealityServices"/> for the existence of a <see cref="IMixedRealityService"/>.
         /// </summary>
         /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
         /// <returns>Returns true, if there is a <see cref="IMixedRealityService"/> registered, otherwise false.</returns>
@@ -1599,7 +1599,7 @@ namespace XRTK.Services
             => GetService(typeof(T)) != null;
 
         /// <summary>
-        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/>.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
         /// </summary>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
         /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
@@ -1608,7 +1608,7 @@ namespace XRTK.Services
             => (T)GetService(typeof(T), showLogs);
 
         /// <summary>
-        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/>.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
         /// </summary>
         /// <param name="timeout">Optional, time out in seconds to wait before giving up search.</param>
         /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
@@ -1617,7 +1617,7 @@ namespace XRTK.Services
             => await GetService<T>().WaitUntil(system => system != null, timeout);
 
         /// <summary>
-        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/>.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
         /// </summary>
         /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
         /// <param name="service">The instance of the service class that is registered.</param>
@@ -1630,7 +1630,7 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/> by name.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> by name.
         /// </summary>
         /// <param name="serviceName">Name of the specific service to search for.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
@@ -1639,7 +1639,7 @@ namespace XRTK.Services
             => (T)GetService(typeof(T), serviceName, showLogs);
 
         /// <summary>
-        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/> by name.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> by name.
         /// </summary>
         /// <typeparam name="T">The interface type for the service to be retrieved.</typeparam>
         /// <param name="serviceName">Name of the specific service to search for.</param>
@@ -1653,7 +1653,7 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/> by type.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> by type.
         /// </summary>
         /// <param name="interfaceType">The interface type for the system to be retrieved.</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
@@ -1662,7 +1662,7 @@ namespace XRTK.Services
             => GetService(interfaceType, string.Empty, showLogs);
 
         /// <summary>
-        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/>.
+        /// Retrieve a <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/>.
         /// </summary>
         /// <param name="interfaceType">The interface type for the system to be retrieved.</param>
         /// <param name="serviceName">Name of the specific service.</param>
@@ -1679,7 +1679,7 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Retrieve the first <see cref="IMixedRealityService"/> from the <see cref="ActiveSystemsDataProviders"/> that meets the selected type and name.
+        /// Retrieve the first <see cref="IMixedRealityService"/> from the <see cref="RegisteredMixedRealityServices"/> that meets the selected type and name.
         /// </summary>
         /// <param name="interfaceType">Interface type of the service being requested.</param>
         /// <param name="serviceName">Name of the specific service.</param>
@@ -1754,11 +1754,11 @@ namespace XRTK.Services
             }
             else
             {
-                for (int i = 0; i < activeSystemsDataProviders.Count; i++)
+                for (int i = 0; i < registeredMixedRealityServices.Count; i++)
                 {
-                    if (CheckServiceMatch(interfaceType, serviceName, activeSystemsDataProviders[i].Item1, activeSystemsDataProviders[i].Item2))
+                    if (CheckServiceMatch(interfaceType, serviceName, registeredMixedRealityServices[i].Item1, registeredMixedRealityServices[i].Item2))
                     {
-                        services.Add((T)activeSystemsDataProviders[i].Item2);
+                        services.Add((T)registeredMixedRealityServices[i].Item2);
                     }
                 }
             }
@@ -1806,7 +1806,7 @@ namespace XRTK.Services
         #region System Utilities
 
         /// <summary>
-        /// Query <see cref="ActiveSystemsDataProviders"/> for the existence of a <see cref="IMixedRealitySystem"/>.
+        /// Query <see cref="RegisteredMixedRealityServices"/> for the existence of a <see cref="IMixedRealitySystem"/>.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealitySystem"/> to be retrieved.</typeparam>
         /// <returns>Returns true, if there is a <see cref="IMixedRealitySystem"/> registered, otherwise false.</returns>

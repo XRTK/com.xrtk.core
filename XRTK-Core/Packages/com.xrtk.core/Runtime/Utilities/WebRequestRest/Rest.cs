@@ -212,7 +212,70 @@ namespace XRTK.Utilities.WebRequestRest
 
         #region Get Multimedia Content
 
-        private static string DownloadCacheDirectory => $"{Application.temporaryCachePath}{Path.DirectorySeparatorChar}download_cache";
+        public static string DownloadCacheDirectory => $"{Application.temporaryCachePath}{Path.DirectorySeparatorChar}download_cache";
+
+        public static void ValidateCacheDirectory()
+        {
+            if (!Directory.Exists(DownloadCacheDirectory))
+            {
+                Directory.CreateDirectory(DownloadCacheDirectory);
+            }
+        }
+
+        /// <summary>
+        /// Try to get a file out of the download cache by uri reference.
+        /// </summary>
+        /// <param name="uri">The uri key of the item.</param>
+        /// <param name="filePath">The file path to the cached item.</param>
+        /// <returns>True, if the item was in cache, otherwise false.</returns>
+        public static bool TryGetDownloadCacheItem(string uri, out string filePath)
+        {
+            ValidateCacheDirectory();
+            filePath = $"{DownloadCacheDirectory}{Path.DirectorySeparatorChar}{uri.GenerateGuid()}";
+            var exists = File.Exists(filePath);
+
+            if (exists)
+            {
+                filePath = $"file://{Path.GetFullPath(filePath)}";
+            }
+
+            return exists;
+        }
+
+        /// <summary>
+        /// Try to delete the cached item at the uri.
+        /// </summary>
+        /// <param name="uri">The uri key of the item.</param>
+        /// <returns>True, if the cached item was successfully deleted.</returns>
+        public static bool TryDeleteCacheItem(string uri)
+        {
+            if (TryGetDownloadCacheItem(uri, out var filePath))
+            {
+                try
+                {
+                    File.Delete(filePath);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
+
+                return !File.Exists(filePath);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Deletes all the files in the download cache.
+        /// </summary>
+        public static void DeleteDownloadCache()
+        {
+            if (Directory.Exists(DownloadCacheDirectory))
+            {
+                Directory.Delete(DownloadCacheDirectory, true);
+            }
+        }
 
         /// <summary>
         /// Download a <see cref="Texture2D"/> from the provided <see cref="url"/>.
@@ -246,7 +309,8 @@ namespace XRTK.Utilities.WebRequestRest
 
                 var downloadHandler = (DownloadHandlerTexture)webRequest.downloadHandler;
 
-                if (!isCached)
+                if (!isCached &&
+                    !File.Exists(cachePath))
                 {
                     try
                     {
@@ -257,7 +321,7 @@ namespace XRTK.Utilities.WebRequestRest
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError(e);
+                        Debug.LogError($"Failed to write texture to disk!\n{e}");
                     }
                 }
 
@@ -298,11 +362,19 @@ namespace XRTK.Utilities.WebRequestRest
 
                 var downloadHandler = (DownloadHandlerAudioClip)webRequest.downloadHandler;
 
-                if (!isCached)
+                if (!isCached &&
+                    !File.Exists(cachePath))
                 {
-                    using (var fileStream = File.OpenWrite(cachePath))
+                    try
                     {
-                        await fileStream.WriteAsync(downloadHandler.data, 0, downloadHandler.data.Length, CancellationToken.None);
+                        using (var fileStream = File.OpenWrite(cachePath))
+                        {
+                            await fileStream.WriteAsync(downloadHandler.data, 0, downloadHandler.data.Length, CancellationToken.None);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError($"Failed to write audio asset to disk! {e}");
                     }
                 }
 
@@ -437,62 +509,6 @@ namespace XRTK.Utilities.WebRequestRest
                 }
 
                 return filePath;
-            }
-        }
-
-        private static void ValidateCacheDirectory()
-        {
-            if (!Directory.Exists(DownloadCacheDirectory))
-            {
-                Directory.CreateDirectory(DownloadCacheDirectory);
-            }
-        }
-
-        /// <summary>
-        /// Try to get a file out of the download cache by uri reference.
-        /// </summary>
-        /// <param name="uri">The uri key of the item.</param>
-        /// <param name="filePath">The file path to the cached item.</param>
-        /// <returns>True, if the item was in cache, otherwise false.</returns>
-        public static bool TryGetDownloadCacheItem(string uri, out string filePath)
-        {
-            ValidateCacheDirectory();
-            filePath = $"{DownloadCacheDirectory}{Path.DirectorySeparatorChar}{uri.GenerateGuid()}";
-            return File.Exists(filePath);
-        }
-
-        /// <summary>
-        /// Try to delete the cached item at the uri.
-        /// </summary>
-        /// <param name="uri">The uri key of the item.</param>
-        /// <returns>True, if the cached item was successfully deleted.</returns>
-        public static bool TryDeleteCacheItem(string uri)
-        {
-            if (TryGetDownloadCacheItem(uri, out var filePath))
-            {
-                try
-                {
-                    File.Delete(filePath);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError(e);
-                }
-
-                return !File.Exists(filePath);
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Deletes all the files in the download cache.
-        /// </summary>
-        public static void DeleteDownloadCache()
-        {
-            if (Directory.Exists(DownloadCacheDirectory))
-            {
-                Directory.Delete(DownloadCacheDirectory, true);
             }
         }
 

@@ -2,11 +2,14 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.TestTools;
 using XRTK.Definitions;
+using XRTK.Definitions.Platforms;
 using XRTK.Editor.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Services;
 using XRTK.Tests.Services;
@@ -526,7 +529,7 @@ namespace XRTK.Tests.Core
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
-            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
+            var activeServiceCount = MixedRealityToolkit.ActiveSystemsDataProviders.Count;
 
             // Create Data Provider Configuration
             var testProfile = ScriptableObject.CreateInstance<TestSystemProfile>();
@@ -557,7 +560,7 @@ namespace XRTK.Tests.Core
             Assert.IsTrue(testSystem1 != null);
             Assert.IsTrue(testGetSystem1Success);
             Assert.IsTrue(activeSystemCount + 1 == MixedRealityToolkit.ActiveSystems.Count);
-            Assert.IsTrue(activeServiceCount + 1 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeServiceCount + 1 == MixedRealityToolkit.ActiveSystemsDataProviders.Count);
             Assert.IsTrue(testSystem1.DataProviders.Count == 1);
 
             var dataProvider1 = MixedRealityToolkit.GetService<ITestDataProvider1>();

@@ -107,18 +107,6 @@ namespace XRTK.Editor.Utilities
                     window.instanceBaseType = typeof(BaseSystem);
                     window.profileBaseType = typeof(BaseMixedRealityServiceProfile<>);
                     break;
-                case Type _ when typeof(IMixedRealityExtensionDataProvider).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\DataProviderProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\DataProvider.txt";
-                    window.instanceBaseType = typeof(BaseExtensionDataProvider);
-                    window.profileBaseType = typeof(BaseMixedRealityExtensionDataProviderProfile);
-                    break;
-                case Type _ when typeof(IMixedRealityExtensionService).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\ServiceProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\Service.txt";
-                    window.instanceBaseType = typeof(BaseExtensionService);
-                    window.profileBaseType = typeof(BaseMixedRealityExtensionServiceProfile);
-                    break;
                 case Type _ when typeof(IMixedRealityDataProvider).IsAssignableFrom(interfaceType):
                     window.profileTemplatePath = $"{templatePath}\\DataProviderProfile.txt";
                     window.instanceTemplatePath = $"{templatePath}\\DataProvider.txt";
@@ -371,6 +359,16 @@ namespace XRTK.Editor.Utilities
                                 usingList.Add(profileBaseType.Namespace);
                             }
 
+                            if (!usingList.Contains("XRTK.Interfaces"))
+                            {
+                                usingList.Add("XRTK.Interfaces");
+                            }
+
+                            if (!usingList.Contains("UnityEngine"))
+                            {
+                                usingList.Add("UnityEngine");
+                            }
+                            
                             usingList.Sort();
 
                             @using = usingList.Aggregate(string.Empty, (current, item) => $"{current}{Environment.NewLine}using {item};");

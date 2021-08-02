@@ -2,7 +2,7 @@
 
 namespace #NAMESPACE#
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/#NAME#/#NAME#Profile", fileName = "#NAME#Profile", order = 99)]
+    [CreateAssetMenu(menuName = "#NAMESPACE#/#NAME#/#NAME#Profile", fileName = "#NAME#Profile", order = 99)]
     public class #NAME#Profile : #BASE#
     {
     }

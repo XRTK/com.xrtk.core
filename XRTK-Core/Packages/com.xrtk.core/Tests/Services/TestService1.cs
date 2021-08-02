@@ -5,7 +5,7 @@ using XRTK.Services;
 
 namespace XRTK.Tests.Services
 {
-    internal class TestService1 : BaseServiceWithConstructor, ITestService
+    internal class TestService1 : BaseServiceWithConstructor, ITestService1
     {
         public TestService1(string name = "Test Service 1", uint priority = 0)
             : base(name, priority)

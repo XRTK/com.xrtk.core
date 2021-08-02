@@ -8,7 +8,7 @@ namespace XRTK.Tests.Services
 {
     internal class TestDataProvider1 : BaseDataProvider, ITestDataProvider1
     {
-        public TestDataProvider1(ITestService parentService, string name = "Test Data Provider 1", uint priority = 1, BaseMixedRealityProfile profile = null)
+        public TestDataProvider1(ITestService1 parentService, string name = "Test Data Provider 1", uint priority = 1, BaseMixedRealityProfile profile = null)
             : base(name, priority, profile, parentService)
         {
         }

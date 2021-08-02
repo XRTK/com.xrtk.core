@@ -11,9 +11,6 @@ namespace XRTK.Tests.Services
         /// <inheritdoc />
         public TestDataProvider1(ITestService parentService, string name = "Test Data Provider 1", uint priority = 1, BaseMixedRealityProfile profile = null)
             : base(name, priority, profile, parentService)
-
-        //public TestDataProvider1(string name, uint priority, BaseMixedRealityProfile profile, ITestService parentService)
-        //    : base(name, priority, profile, parentService)
         {
             testSystem = parentService;
         }

@@ -87,13 +87,13 @@ namespace XRTK.Extensions
         /// Returns the URI path, excluding the filename
         /// </summary>
         public static string PathFromURI(this string value)
-            => value.Substring(0, value.LastIndexOf("/", StringComparison.Ordinal) + 1);
+            => value.Substring(0, value.LastIndexOf(Path.DirectorySeparatorChar) + 1);
 
         /// <summary>
         /// Returns the filename from a URI path
         /// </summary>
         public static string FilenameFromURI(this string value)
-            => value.Substring(value.LastIndexOf("/", StringComparison.Ordinal) + 1, value.Length - value.LastIndexOf("/", StringComparison.Ordinal) - 1);
+            => value.Substring(value.LastIndexOf(Path.DirectorySeparatorChar) + 1, value.Length - value.LastIndexOf(Path.DirectorySeparatorChar) - 1);
 
         /// <summary>
         /// Creates a relative path from one file or folder to another.

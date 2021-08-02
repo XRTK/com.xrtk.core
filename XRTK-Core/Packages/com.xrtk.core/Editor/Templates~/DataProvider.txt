@@ -7,7 +7,6 @@ namespace #NAMESPACE#
     {
         public #NAME#(string name, uint priority, #PROFILE# profile, #PARENT_INTERFACE# parentService)
             : base(name, priority, profile, parentService)
-        {
-        }#IMPLEMENTS#
+        { }
     }
 }

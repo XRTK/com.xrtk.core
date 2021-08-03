@@ -7,7 +7,7 @@ using XRTK.Definitions.LocomotionSystem;
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
     [CustomEditor(typeof(MixedRealityDashTeleportLocomotionProviderProfile))]
-    public class MixedRealityDashTeleportLocomotionProviderProfileInspector : MixedRealityLocomotionProviderProfileInspector
+    public class MixedRealityDashTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
     {
         private SerializedProperty inputAction;
         private SerializedProperty dashDuration;

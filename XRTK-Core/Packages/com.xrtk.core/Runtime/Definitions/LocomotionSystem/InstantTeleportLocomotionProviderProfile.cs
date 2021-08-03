@@ -10,7 +10,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="Providers.LocomotionSystem.InstantTeleportLocomotionProvider"/>.
     /// </summary>
-    public class InstantTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
+    public class InstantTeleportLocomotionProviderProfile : BaseTeleportLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Input action to perform locomotion the player.")]

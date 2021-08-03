@@ -7,7 +7,7 @@ using XRTK.Definitions.LocomotionSystem;
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
     [CustomEditor(typeof(MixedRealityBlinkTeleportLocomotionProviderProfile))]
-    public class MixedRealityBlinkTeleportLocomotionProviderProfileInspector : MixedRealityLocomotionProviderProfileInspector
+    public class MixedRealityBlinkTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
     {
         private SerializedProperty inputAction;
         private SerializedProperty fadeDuration;

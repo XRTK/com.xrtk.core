@@ -10,7 +10,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="Providers.LocomotionSystem.BlinkTeleportLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealityBlinkTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
+    public class MixedRealityBlinkTeleportLocomotionProviderProfile : BaseTeleportLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Input action to perform locomotion the player.")]

@@ -10,7 +10,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="Providers.LocomotionSystem.DashTeleportLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealityDashTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
+    public class MixedRealityDashTeleportLocomotionProviderProfile : BaseTeleportLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Input action to perform locomotion the player.")]

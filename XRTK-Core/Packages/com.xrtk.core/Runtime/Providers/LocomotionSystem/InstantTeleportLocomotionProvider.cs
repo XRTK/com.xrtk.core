@@ -2,10 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using System.Collections.Generic;
 using XRTK.Definitions.LocomotionSystem;
-using XRTK.EventDatum.Input;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
 
@@ -21,36 +18,6 @@ namespace XRTK.Providers.LocomotionSystem
             InputAction = profile.InputAction;
         }
 
-        private readonly Dictionary<uint, IMixedRealityInputSource> targetRequestsDict = new Dictionary<uint, IMixedRealityInputSource>();
-
-        /// <inheritdoc />
-        public override void OnInputDown(InputEventData eventData)
-        {
-            base.OnInputDown(eventData);
-
-            if (!eventData.used && eventData.MixedRealityInputAction == InputAction &&
-                !targetRequestsDict.ContainsKey(eventData.SourceId))
-            {
-                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Requested teleport target from input source {eventData.SourceId}.");
-
-                targetRequestsDict.Add(eventData.SourceId, eventData.InputSource);
-                LocomotionSystem.RaiseTeleportTargetRequest(this, eventData.InputSource);
-                eventData.Use();
-            }
-        }
-
-        /// <inheritdoc />
-        public override void OnInputUp(InputEventData eventData)
-        {
-            base.OnInputUp(eventData);
-
-            if (!eventData.used && eventData.MixedRealityInputAction == InputAction &&
-                targetRequestsDict.ContainsKey(eventData.SourceId))
-            {
-                targetRequestsDict.Remove(eventData.SourceId);
-            }
-        }
-
         /// <inheritdoc />
         public override void OnTeleportStarted(LocomotionEventData eventData)
         {
@@ -58,7 +25,7 @@ namespace XRTK.Providers.LocomotionSystem
 
             // Was our teleport request answered and we get to start performing teleport?
             if (!eventData.used && eventData.LocomotionProvider == this &&
-                targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+                TargetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
             {
                 Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Started teleport using target provided by input source {eventData.EventSource.SourceId}.");
                 IsTeleporting = true;
@@ -95,10 +62,10 @@ namespace XRTK.Providers.LocomotionSystem
 
             // Did our teleport complete?
             if (!eventData.used && eventData.LocomotionProvider == this &&
-                targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+                TargetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
             {
                 Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Completed teleport for input source {eventData.EventSource.SourceId}.");
-                targetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
+                TargetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
                 eventData.Use();
                 IsTeleporting = false;
             }
@@ -111,10 +78,10 @@ namespace XRTK.Providers.LocomotionSystem
 
             // Have we requested a teleportation target and got canceled?
             if (!eventData.used && eventData.LocomotionProvider == this &&
-                targetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+                TargetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
             {
                 Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Canceled teleport for input source {eventData.EventSource.SourceId}.");
-                targetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
+                TargetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
                 eventData.Use();
                 IsTeleporting = false;
             }

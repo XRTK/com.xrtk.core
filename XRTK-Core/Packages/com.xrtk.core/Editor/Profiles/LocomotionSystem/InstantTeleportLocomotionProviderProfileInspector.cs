@@ -7,7 +7,7 @@ using XRTK.Definitions.LocomotionSystem;
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
     [CustomEditor(typeof(InstantTeleportLocomotionProviderProfile))]
-    public class InstantTeleportLocomotionProviderProfileInspector : MixedRealityLocomotionProviderProfileInspector
+    public class InstantTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
     {
         private SerializedProperty inputAction;
 

@@ -7,6 +7,7 @@ using XRTK.Extensions;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
+using XRTK.Utilities;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -197,7 +198,7 @@ namespace XRTK.Providers.LocomotionSystem
                     color = fadeInColor
                 };
 
-                if (GraphicsSettings.renderPipelineAsset.IsNull())
+                if (RenderPipelineUtilities.GetActiveRenderingPipeline() == Definitions.Utilities.RenderPipeline.Legacy)
                 {
                     // Unity standard shader can be assumed since we created a primitive.
                     fadeMaterial.SetInt(sourceBlend, (int)BlendMode.One);

@@ -12,12 +12,13 @@ namespace XRTK.Interfaces.LocomotionSystem
     /// requests a teleportation target, the target provider will answer the request, if both share
     /// the same <see cref="IMixedRealityInputSource"/> connectinon.
     /// </summary>
-    public interface ITeleportTargetProvider
+    public interface ITeleportTargetProvider : IMixedRealityLocomotionSystemHandler
     {
         /// <summary>
         /// Gets the <see cref="ITeleportLocomotionProvider"/> that is currently requesting a teleport target
         /// from this provider, if any.
         /// </summary>
+        /// <remarks>Can be <see cref="null"/> if this provider has not received a target request at the time of evaluation.</remarks>
         ITeleportLocomotionProvider RequestingLocomotionProvider { get; }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         IMixedRealityInputSource InputSource { get; }
 
         /// <summary>
-        /// Gets the validation result for the current target location. The provider can only
+        /// Gets the validation result for the current target location. The provider should only
         /// provide valid teleportation results to <see cref="ITeleportLocomotionProvider"/>s.
         /// </summary>
         TeleportValidationResult ValidationResult { get; }

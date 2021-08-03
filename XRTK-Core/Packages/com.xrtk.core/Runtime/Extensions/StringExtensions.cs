@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
@@ -86,13 +87,13 @@ namespace XRTK.Extensions
         /// Returns the URI path, excluding the filename
         /// </summary>
         public static string PathFromURI(this string value)
-            => value.Substring(0, value.LastIndexOf("/", StringComparison.Ordinal) + 1);
+            => value.Substring(0, value.LastIndexOf(Path.DirectorySeparatorChar) + 1);
 
         /// <summary>
         /// Returns the filename from a URI path
         /// </summary>
         public static string FilenameFromURI(this string value)
-            => value.Substring(value.LastIndexOf("/", StringComparison.Ordinal) + 1, value.Length - value.LastIndexOf("/", StringComparison.Ordinal) - 1);
+            => value.Substring(value.LastIndexOf(Path.DirectorySeparatorChar) + 1, value.Length - value.LastIndexOf(Path.DirectorySeparatorChar) - 1);
 
         /// <summary>
         /// Creates a relative path from one file or folder to another.
@@ -136,6 +137,19 @@ namespace XRTK.Extensions
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Generates a <see cref="Guid"/> based on the string.
+        /// </summary>
+        /// <param name="string">The string to generate the <see cref="Guid"/>.</param>
+        /// <returns>A new <see cref="Guid"/> that represents the string.</returns>
+        public static Guid GenerateGuid(this string @string)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                return new Guid(md5.ComputeHash(Encoding.Default.GetBytes(@string)));
+            }
         }
     }
 }

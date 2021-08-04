@@ -3,6 +3,7 @@
 
 using UnityEngine.EventSystems;
 using XRTK.EventDatum;
+using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 
@@ -19,12 +20,12 @@ namespace XRTK.Services.LocomotionSystem
         public ILocomotionProvider LocomotionProvider { get; private set; }
 
         /// <summary>
-        /// The pointer that raised the event.
+        /// The teleport target pose, if any.
         /// </summary>
-        public IMixedRealityPointer Pointer { get; private set; }
+        public MixedRealityPose? Pose { get; private set; }
 
         /// <summary>
-        /// The teleport hot spot.
+        /// The teleport hot spot, if any.
         /// </summary>
         public ITeleportHotSpot HotSpot { get; private set; }
 
@@ -38,13 +39,14 @@ namespace XRTK.Services.LocomotionSystem
         /// Used to initialize/reset the event and populate the data.
         /// </summary>
         /// <param name="locomotionProvider">The <see cref="ILocomotionProvider"/> the event data is addressed at or coming from.</param>
-        /// <param name="pointer">Optional <see cref="IMixedRealityPointer"/> providing a teleport target.</param>
+        /// /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the event originated from.</param>
+        /// <param name="pose">Optional <see cref="MixedRealityPose"/> providing a teleport target.</param>
         /// <param name="hotSpot">Optional <see cref="ITeleportHotSpot"/> at the teleport target location.</param>
-        public void Initialize(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot)
+        public void Initialize(ILocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot)
         {
-            BaseInitialize(pointer.InputSourceParent);
+            BaseInitialize(inputSource);
             LocomotionProvider = locomotionProvider;
-            Pointer = pointer;
+            Pose = pose;
             HotSpot = hotSpot;
         }
 
@@ -57,7 +59,7 @@ namespace XRTK.Services.LocomotionSystem
         {
             BaseInitialize(inputSource);
             LocomotionProvider = locomotionProvider;
-            Pointer = null;
+            Pose = null;
             HotSpot = null;
         }
     }

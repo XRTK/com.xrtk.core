@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Services.LocomotionSystem
 {
@@ -284,14 +285,14 @@ namespace XRTK.Services.LocomotionSystem
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportStarted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot)
+        public void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot)
         {
             if (currentTeleportCooldown > 0f)
             {
                 return;
             }
 
-            teleportEventData.Initialize(locomotionProvider, pointer, hotSpot);
+            teleportEventData.Initialize(locomotionProvider, inputSource, pose, hotSpot);
             HandleEvent(teleportEventData, OnTeleportStartedHandler);
         }
 
@@ -303,10 +304,10 @@ namespace XRTK.Services.LocomotionSystem
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportCompleted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot)
+        public void RaiseTeleportCompleted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot)
         {
             currentTeleportCooldown = teleportCooldown;
-            teleportEventData.Initialize(locomotionProvider, pointer, hotSpot);
+            teleportEventData.Initialize(locomotionProvider, inputSource, pose, hotSpot);
             HandleEvent(teleportEventData, OnTeleportCompletedHandler);
         }
 
@@ -318,9 +319,9 @@ namespace XRTK.Services.LocomotionSystem
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportCanceled(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot)
+        public void RaiseTeleportCanceled(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource)
         {
-            teleportEventData.Initialize(locomotionProvider, pointer, hotSpot);
+            teleportEventData.Initialize(locomotionProvider, inputSource);
             HandleEvent(teleportEventData, OnTeleportCanceledHandler);
         }
 

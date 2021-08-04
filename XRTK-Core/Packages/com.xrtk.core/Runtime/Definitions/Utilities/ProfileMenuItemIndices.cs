@@ -24,7 +24,7 @@ namespace XRTK.Definitions.Utilities
         Networking,
         NetworkingDataProviders,
         Diagnostics,
-        ServiceProviders,
+        RegisteredServiceProviders,
         Settings
     }
 }

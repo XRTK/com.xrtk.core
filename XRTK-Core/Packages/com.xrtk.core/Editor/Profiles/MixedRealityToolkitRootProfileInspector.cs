@@ -21,6 +21,9 @@ namespace XRTK.Editor.Profiles
     [CustomEditor(typeof(MixedRealityToolkitRootProfile))]
     public class MixedRealityToolkitRootProfileInspector : MixedRealityServiceProfileInspector
     {
+        // Additional registered components profile
+        private SerializedProperty registeredServiceProvidersProfile;
+
         private MixedRealityToolkitRootProfile rootProfile;
         private bool didPromptToConfigure = false;
 
@@ -121,6 +124,9 @@ namespace XRTK.Editor.Profiles
                 }
             }
 
+            // Additional registered components configuration
+            registeredServiceProvidersProfile = serializedObject.FindProperty(nameof(registeredServiceProvidersProfile));
+
             platforms.Clear();
         }
 
@@ -178,6 +184,13 @@ namespace XRTK.Editor.Profiles
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
+            profileLabel.tooltip = registeredServiceProvidersProfile.tooltip;
+            EditorGUILayout.PropertyField(registeredServiceProvidersProfile, profileLabel);
+            EditorGUI.indentLevel--;
 
             serializedObject.ApplyModifiedProperties();
 

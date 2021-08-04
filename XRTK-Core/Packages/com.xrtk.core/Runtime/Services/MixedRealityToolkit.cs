@@ -419,6 +419,11 @@ namespace XRTK.Services
                 }
             }
 
+            if (!ActiveProfile.RegisteredServiceProvidersProfile.IsNull())
+            {
+                TryRegisterServiceConfigurations(ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations);
+            }
+
             var orderedCoreSystems = activeSystems.OrderBy(m => m.Value.Priority).ToArray();
             activeSystems.Clear();
 

@@ -7,7 +7,7 @@ using XRTK.Interfaces;
 
 namespace XRTK.Definitions
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Base Service Profile", fileName = "MixedRealityServiceProfile", order = (int)CreateProfileMenuItemIndices.ServiceProviders)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Base Service Profile", fileName = "MixedRealityServiceProfile", order = (int)CreateProfileMenuItemIndices.RegisteredServiceProviders)]
     public class MixedRealityServiceProfile : BaseMixedRealityServiceProfile<IMixedRealityService>
     { }
 }

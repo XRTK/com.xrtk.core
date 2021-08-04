@@ -25,7 +25,7 @@ namespace XRTK.Providers.LocomotionSystem
 
             // Was our teleport request answered and we get to start performing teleport?
             if (!eventData.used && eventData.LocomotionProvider == this &&
-                TargetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+                OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
             {
                 Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Started teleport using target provided by input source {eventData.EventSource.SourceId}.");
                 IsTeleporting = true;
@@ -62,10 +62,10 @@ namespace XRTK.Providers.LocomotionSystem
 
             // Did our teleport complete?
             if (!eventData.used && eventData.LocomotionProvider == this &&
-                TargetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+                OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
             {
                 Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Completed teleport for input source {eventData.EventSource.SourceId}.");
-                TargetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
+                OpenTargetRequests.Remove(eventData.Pointer.InputSourceParent.SourceId);
                 eventData.Use();
                 IsTeleporting = false;
             }
@@ -78,10 +78,10 @@ namespace XRTK.Providers.LocomotionSystem
 
             // Have we requested a teleportation target and got canceled?
             if (!eventData.used && eventData.LocomotionProvider == this &&
-                TargetRequestsDict.ContainsKey(eventData.EventSource.SourceId))
+                OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
             {
                 Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Canceled teleport for input source {eventData.EventSource.SourceId}.");
-                TargetRequestsDict.Remove(eventData.Pointer.InputSourceParent.SourceId);
+                OpenTargetRequests.Remove(eventData.Pointer.InputSourceParent.SourceId);
                 eventData.Use();
                 IsTeleporting = false;
             }

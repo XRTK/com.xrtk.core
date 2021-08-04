@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.InputSystem;
 
@@ -63,27 +64,28 @@ namespace XRTK.Interfaces.LocomotionSystem
         void RaiseTeleportTargetRequest(ITeleportLocomotionProvider teleportLocomotionProvider, IMixedRealityInputSource inputSource);
 
         /// <summary>
-        /// Raise a teleportation started event.
+        /// Raises a teleportation started event for <see cref="IMixedRealityLocomotionSystemHandler"/>s.
         /// </summary>
-        /// <param name="locomotionProvider">The locomotion provider that started teleportation.</param>
-        /// <param name="pointer">The pointer that raised the event.</param>
+        /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> that started teleportation.</param>
+        /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>
+        /// <param name="pose">The target <see cref="MixedRealityPose"/> the teleportation is going for.</param>
         /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportStarted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot);
+        void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot);
 
         /// <summary>
-        /// Raise a teleportation completed event.
+        /// Raises a teleportation completed event for <see cref="IMixedRealityLocomotionSystemHandler"/>s.
         /// </summary>
-        /// <param name="locomotionProvider">The locomotion provider whose teleportation has completed.</param>
-        /// <param name="pointer">The pointer that raised the event.</param>
+        /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> whose teleportation has completed.</param>
+        /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>
+        /// <param name="pose">The target <see cref="MixedRealityPose"/> the teleportation was going for.</param>
         /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportCompleted(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot);
+        void RaiseTeleportCompleted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot);
 
         /// <summary>
-        /// Raise a teleportation canceled event.
+        /// Raises a teleportation canceled event for <see cref="IMixedRealityLocomotionSystemHandler"/>s.
         /// </summary>
-        /// <param name="locomotionProvider">The locomotion provider whose teleport was canceled.</param>
-        /// <param name="pointer">The pointer that raised the event.</param>
-        /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportCanceled(ILocomotionProvider locomotionProvider, IMixedRealityPointer pointer, ITeleportHotSpot hotSpot);
+        /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> that canceled a previously started teleport.</param>
+        /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>
+        void RaiseTeleportCanceled(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource);
     }
 }

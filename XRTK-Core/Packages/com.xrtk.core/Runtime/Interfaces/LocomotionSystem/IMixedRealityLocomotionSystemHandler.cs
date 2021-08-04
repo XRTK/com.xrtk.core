@@ -20,7 +20,7 @@ namespace XRTK.Interfaces.LocomotionSystem
 
         /// <summary>
         /// Raised when a <see cref="ITeleportLocomotionProvider"/> has started
-        /// teleportation to a target location.
+        /// teleportation to a target location that was provided by a <see cref="ITeleportTargetProvider"/>.
         /// </summary>
         /// <param name="eventData"><see cref="LocomotionEventData"/> provided.</param>
         void OnTeleportStarted(LocomotionEventData eventData);

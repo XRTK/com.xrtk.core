@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services.LocomotionSystem;
 
@@ -28,6 +29,16 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <see cref="RequestingLocomotionProvider"/>'s input source.
         /// </summary>
         IMixedRealityInputSource InputSource { get; }
+
+        /// <summary>
+        /// Gets the target pose provided, if any.
+        /// </summary>
+        MixedRealityPose? TargetPose { get; }
+
+        /// <summary>
+        /// Gets the target hotspot, if any.
+        /// </summary>
+        ITeleportHotSpot HotSpot { get; }
 
         /// <summary>
         /// Gets the validation result for the current target location. The provider should only

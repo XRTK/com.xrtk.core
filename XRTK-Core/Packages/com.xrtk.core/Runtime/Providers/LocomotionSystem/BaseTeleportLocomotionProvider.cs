@@ -72,6 +72,7 @@ namespace XRTK.Providers.LocomotionSystem
                 LocomotionSystem.RaiseTeleportCanceled(this, openRequest.Value);
             }
 
+            AvailableTargetProviders.Clear();
             base.Disable();
         }
 

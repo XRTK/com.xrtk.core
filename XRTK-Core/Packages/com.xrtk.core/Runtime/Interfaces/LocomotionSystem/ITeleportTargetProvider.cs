@@ -38,7 +38,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <summary>
         /// Gets the target hotspot, if any.
         /// </summary>
-        ITeleportHotSpot HotSpot { get; set; }
+        ITeleportHotSpot HotSpot { get; }
 
         /// <summary>
         /// Gets the validation result for the current target location. The provider should only

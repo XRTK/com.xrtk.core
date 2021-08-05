@@ -77,20 +77,11 @@ namespace XRTK.Providers.LocomotionSystem
         }
 
         /// <inheritdoc />
-        public void AddTargetProvider(ITeleportTargetProvider teleportTargetProvider)
+        public void SetTargetProvider(ITeleportTargetProvider teleportTargetProvider)
         {
             if (!AvailableTargetProviders.ContainsKey(teleportTargetProvider.InputSource.SourceId))
             {
                 AvailableTargetProviders.Add(teleportTargetProvider.InputSource.SourceId, teleportTargetProvider);
-            }
-        }
-
-        /// <inheritdoc />
-        public void RemoveTargetProvider(ITeleportTargetProvider teleportTargetProvider)
-        {
-            if (AvailableTargetProviders.ContainsKey(teleportTargetProvider.InputSource.SourceId))
-            {
-                AvailableTargetProviders.Remove(teleportTargetProvider.InputSource.SourceId);
             }
         }
 
@@ -208,24 +199,14 @@ namespace XRTK.Providers.LocomotionSystem
         /// <inheritdoc />
         public override void OnTeleportCanceled(LocomotionEventData eventData)
         {
-            if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
-            {
-                OpenTargetRequests.Remove(eventData.EventSource.SourceId);
-                IsTeleporting = false;
-            }
-
+            CleanUpTeleportRequest(eventData.EventSource.SourceId);
             base.OnTeleportCanceled(eventData);
         }
 
         /// <inheritdoc />
         public override void OnTeleportCompleted(LocomotionEventData eventData)
         {
-            if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
-            {
-                OpenTargetRequests.Remove(eventData.EventSource.SourceId);
-                IsTeleporting = false;
-            }
-
+            CleanUpTeleportRequest(eventData.EventSource.SourceId);
             base.OnTeleportCompleted(eventData);
         }
 
@@ -259,7 +240,21 @@ namespace XRTK.Providers.LocomotionSystem
             {
                 // Input was released but no target provider has answered our target request,
                 // since teleport was never started, we do not cancel but simply forget about the open request.
-                OpenTargetRequests.Remove(inputSource.SourceId);
+                CleanUpTeleportRequest(inputSource.SourceId);
+            }
+        }
+
+        private void CleanUpTeleportRequest(uint inputSourceId)
+        {
+            if (OpenTargetRequests.ContainsKey(inputSourceId))
+            {
+                OpenTargetRequests.Remove(inputSourceId);
+                IsTeleporting = false;
+            }
+
+            if (AvailableTargetProviders.ContainsKey(inputSourceId))
+            {
+                AvailableTargetProviders.Remove(inputSourceId);
             }
         }
     }

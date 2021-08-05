@@ -17,16 +17,12 @@ namespace XRTK.Interfaces.LocomotionSystem
         bool IsTeleporting { get; }
 
         /// <summary>
-        /// Adds a <see cref="ITeleportTargetProvider"/> to query for a teleportatoin target.
+        /// Sets a <see cref="ITeleportTargetProvider"/> that is capable of providing teleporation targets
+        /// for a specific input source. The teleport provider can then query this provider for a target whenever
+        /// <see cref="ITeleportTargetProvider.InputSource"/> requests it.
         /// </summary>
         /// <param name="teleportTargetProvider">The <see cref="ITeleportTargetProvider"/> answering a <see cref="IMixedRealityLocomotionSystemHandler.OnTeleportTargetRequested(Services.LocomotionSystem.LocomotionEventData)"/> request.</param>
-        void AddTargetProvider(ITeleportTargetProvider teleportTargetProvider);
-
-        /// <summary>
-        /// Removes a <see cref="ITeleportTargetProvider"/>.
-        /// </summary>
-        /// <param name="teleportTargetProvider">The <see cref="ITeleportTargetProvider"/> to remove.</param>
-        void RemoveTargetProvider(ITeleportTargetProvider teleportTargetProvider);
+        void SetTargetProvider(ITeleportTargetProvider teleportTargetProvider);
     }
 }
 

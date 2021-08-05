@@ -21,18 +21,13 @@ namespace XRTK.Providers.LocomotionSystem
         /// <inheritdoc />
         public override void OnTeleportStarted(LocomotionEventData eventData)
         {
-            base.OnTeleportStarted(eventData);
-
-            // Was our teleport request answered and we get to start performing teleport?
-            if (!eventData.used && eventData.LocomotionProvider == this &&
-                OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
+            // Was this teleport provider's teleport started and did this provider
+            // actually expect a teleport to start?
+            if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
             {
-                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Started teleport using target provided by input source {eventData.EventSource.SourceId}.");
-                IsTeleporting = true;
-
                 var targetRotation = Vector3.zero;
-                var targetPosition = eventData.Pointer.Result.EndPoint;
-                targetRotation.y = eventData.Pointer.PointerOrientation;
+                var targetPosition = eventData.Pose.Value.Position;
+                targetRotation.y = eventData.Pose.Value.Rotation.eulerAngles.y;
 
                 if (eventData.HotSpot != null)
                 {
@@ -49,42 +44,11 @@ namespace XRTK.Providers.LocomotionSystem
                 LocomotionTargetTransform.position = targetPosition;
                 LocomotionTargetTransform.RotateAround(CameraTransform.position, Vector3.up, targetRotation.y - CameraTransform.eulerAngles.y);
 
-                LocomotionSystem.RaiseTeleportCompleted(this, eventData.Pointer, eventData.HotSpot);
-
-                eventData.Use();
+                var inputSource = OpenTargetRequests[eventData.EventSource.SourceId];
+                LocomotionSystem.RaiseTeleportCompleted(this, inputSource, eventData.Pose.Value, eventData.HotSpot);
             }
-        }
 
-        /// <inheritdoc />
-        public override void OnTeleportCompleted(LocomotionEventData eventData)
-        {
-            base.OnTeleportCompleted(eventData);
-
-            // Did our teleport complete?
-            if (!eventData.used && eventData.LocomotionProvider == this &&
-                OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
-            {
-                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Completed teleport for input source {eventData.EventSource.SourceId}.");
-                OpenTargetRequests.Remove(eventData.Pointer.InputSourceParent.SourceId);
-                eventData.Use();
-                IsTeleporting = false;
-            }
-        }
-
-        /// <inheritdoc />
-        public override void OnTeleportCanceled(LocomotionEventData eventData)
-        {
-            base.OnTeleportCanceled(eventData);
-
-            // Have we requested a teleportation target and got canceled?
-            if (!eventData.used && eventData.LocomotionProvider == this &&
-                OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
-            {
-                Debug.Log($"{nameof(InstantTeleportLocomotionProvider)} - Canceled teleport for input source {eventData.EventSource.SourceId}.");
-                OpenTargetRequests.Remove(eventData.Pointer.InputSourceParent.SourceId);
-                eventData.Use();
-                IsTeleporting = false;
-            }
+            base.OnTeleportStarted(eventData);
         }
     }
 }

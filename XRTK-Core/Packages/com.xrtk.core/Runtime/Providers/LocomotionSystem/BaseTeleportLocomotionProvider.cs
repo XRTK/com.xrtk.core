@@ -64,6 +64,18 @@ namespace XRTK.Providers.LocomotionSystem
         public bool IsTeleporting { get; protected set; }
 
         /// <inheritdoc />
+        public override void Disable()
+        {
+            // When being disabled, cancel any in progress teleport.
+            foreach (var openRequest in OpenTargetRequests)
+            {
+                LocomotionSystem.RaiseTeleportCanceled(this, openRequest.Value);
+            }
+
+            base.Disable();
+        }
+
+        /// <inheritdoc />
         public void AddTargetProvider(ITeleportTargetProvider teleportTargetProvider)
         {
             if (!AvailableTargetProviders.ContainsKey(teleportTargetProvider.InputSource.SourceId))
@@ -84,24 +96,22 @@ namespace XRTK.Providers.LocomotionSystem
         /// <inheritdoc />
         public override void OnInputDown(InputEventData eventData)
         {
-            base.OnInputDown(eventData);
-
             // Is this the input action this provider is configured to look out for?
             // And did we already request a teleport target for the input source that raised it?
-            if (eventData.used || eventData.MixedRealityInputAction != InputAction ||
+            if (eventData.MixedRealityInputAction != InputAction ||
                 OpenTargetRequests.ContainsKey(eventData.SourceId))
             {
                 return;
             }
 
             RaiseTeleportTargetRequest(eventData.InputSource);
+
+            base.OnInputDown(eventData);
         }
 
         /// <inheritdoc />
         public override void OnInputUp(InputEventData eventData)
         {
-            base.OnInputUp(eventData);
-
             // Has our configured teleport input action been released
             // and we have an open target request for the input source?
             if (eventData.MixedRealityInputAction == InputAction &&
@@ -110,15 +120,15 @@ namespace XRTK.Providers.LocomotionSystem
                 var inputSource = OpenTargetRequests[eventData.SourceId];
                 ProcessTeleportRequest(inputSource);
             }
+
+            base.OnInputUp(eventData);
         }
 
         /// <inheritdoc />
         public override void OnInputChanged(InputEventData<float> eventData)
         {
-            base.OnInputChanged(eventData);
-
             // Is this the input action this provider is configured to look out for?
-            if (!eventData.used && eventData.MixedRealityInputAction == InputAction)
+            if (eventData.MixedRealityInputAction == InputAction)
             {
                 // Depending on the input position we either raise a new request
                 // for a teleportation target or we start/cancel an existing
@@ -139,15 +149,15 @@ namespace XRTK.Providers.LocomotionSystem
                     ProcessTeleportRequest(inputSource);
                 }
             }
+
+            base.OnInputChanged(eventData);
         }
 
         /// <inheritdoc />
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
-            base.OnInputChanged(eventData);
-
             // Is this the input action this provider is configured to look out for?
-            if (!eventData.used && eventData.MixedRealityInputAction == InputAction)
+            if (eventData.MixedRealityInputAction == InputAction)
             {
                 // Depending on the input position we either raise a new request
                 // for a teleportation target or we start/cancel an existing
@@ -179,17 +189,42 @@ namespace XRTK.Providers.LocomotionSystem
                     }
                 }
             }
+
+            base.OnInputChanged(eventData);
+        }
+
+        /// <inheritdoc />
+        public override void OnTeleportStarted(LocomotionEventData eventData)
+        {
+            if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
+            {
+                IsTeleporting = true;
+            }
+
+            base.OnTeleportStarted(eventData);
         }
 
         /// <inheritdoc />
         public override void OnTeleportCanceled(LocomotionEventData eventData)
         {
+            if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
+            {
+                OpenTargetRequests.Remove(eventData.EventSource.SourceId);
+                IsTeleporting = false;
+            }
+
             base.OnTeleportCanceled(eventData);
         }
 
         /// <inheritdoc />
         public override void OnTeleportCompleted(LocomotionEventData eventData)
         {
+            if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
+            {
+                OpenTargetRequests.Remove(eventData.EventSource.SourceId);
+                IsTeleporting = false;
+            }
+
             base.OnTeleportCompleted(eventData);
         }
 

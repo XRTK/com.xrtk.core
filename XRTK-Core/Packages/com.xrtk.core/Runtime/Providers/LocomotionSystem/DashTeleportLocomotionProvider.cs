@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
 
@@ -16,10 +17,10 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             dashDuration = profile.DashDuration;
+            InputAction = profile.InputAction;
         }
 
         private readonly float dashDuration = .25f;
-        private bool isDashing;
         private Vector3 startPosition;
         private Quaternion startRotation;
         private Vector3 targetPosition;
@@ -32,7 +33,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             base.Update();
 
-            if (isDashing)
+            if (IsTeleporting)
             {
                 var t = dashTime / dashDuration;
 
@@ -41,8 +42,7 @@ namespace XRTK.Providers.LocomotionSystem
 
                 if (t >= 1f)
                 {
-                    LocomotionSystem.RaiseTeleportCompleted(this, locomotionEventData.Pointer, locomotionEventData.HotSpot);
-                    isDashing = false;
+                    LocomotionSystem.RaiseTeleportCompleted(this, (IMixedRealityInputSource)locomotionEventData.EventSource, locomotionEventData.Pose.Value, locomotionEventData.HotSpot);
                 }
 
                 dashTime += Time.deltaTime;
@@ -52,39 +52,32 @@ namespace XRTK.Providers.LocomotionSystem
         /// <inheritdoc />
         public override void OnTeleportStarted(LocomotionEventData eventData)
         {
-            if (eventData.used)
+            // Was this teleport provider's teleport started and did this provider
+            // actually expect a teleport to start?
+            if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
             {
-                return;
-            }
+                locomotionEventData = eventData;
+                var targetRotation = Vector3.zero;
+                targetPosition = eventData.Pose.Value.Position;
+                targetRotation.y = eventData.Pose.Value.Rotation.eulerAngles.y;
 
-            eventData.Use();
-
-            locomotionEventData = eventData;
-            var targetRotation = Vector3.zero;
-            targetPosition = eventData.Pointer.Result.EndPoint;
-            targetRotation.y = eventData.Pointer.PointerOrientation;
-
-            if (eventData.HotSpot != null)
-            {
-                targetPosition = eventData.HotSpot.Position;
-                if (eventData.HotSpot.OverrideTargetOrientation)
+                if (eventData.HotSpot != null)
                 {
-                    targetRotation.y = eventData.HotSpot.TargetOrientation;
+                    targetPosition = eventData.HotSpot.Position;
+                    if (eventData.HotSpot.OverrideTargetOrientation)
+                    {
+                        targetRotation.y = eventData.HotSpot.TargetOrientation;
+                    }
                 }
+
+                this.targetRotation = Quaternion.Euler(targetRotation);
+
+                startPosition = LocomotionTargetTransform.position;
+                startRotation = LocomotionTargetTransform.rotation;
+                dashTime = 0f;
             }
 
-            this.targetRotation = Quaternion.Euler(targetRotation);
-
-            startPosition = LocomotionTargetTransform.position;
-            startRotation = LocomotionTargetTransform.rotation;
-            dashTime = 0f;
-            isDashing = true;
+            base.OnTeleportStarted(eventData);
         }
-
-        /// <inheritdoc />
-        public override void OnTeleportCompleted(LocomotionEventData eventData) => isDashing = false;
-
-        /// <inheritdoc />
-        public override void OnTeleportCanceled(LocomotionEventData eventData) => isDashing = false;
     }
 }

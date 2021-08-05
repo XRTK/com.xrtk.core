@@ -87,8 +87,6 @@ namespace XRTK.Providers.LocomotionSystem
             {
                 IsEnabled = true;
                 LocomotionSystem.OnLocomotionProviderEnabled(this);
-
-                Debug.Log($"Enabled {GetType().Name}");
             }
             else
             {
@@ -110,8 +108,6 @@ namespace XRTK.Providers.LocomotionSystem
 
             IsEnabled = false;
             LocomotionSystem.OnLocomotionProviderDisabled(this);
-
-            Debug.Log($"Disabled {GetType().Name}");
         }
 
         /// <inheritdoc />

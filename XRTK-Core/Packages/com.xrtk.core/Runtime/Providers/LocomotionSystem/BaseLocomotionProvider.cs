@@ -18,7 +18,7 @@ namespace XRTK.Providers.LocomotionSystem
     public abstract class BaseLocomotionProvider : BaseDataProvider, ILocomotionProvider
     {
         /// <inheritdoc />
-        public BaseLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public BaseLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             startupBehaviour = profile.StartupBehaviour;
@@ -34,9 +34,9 @@ namespace XRTK.Providers.LocomotionSystem
         public bool IsEnabled { get; private set; }
 
         /// <summary>
-        /// Gets the active <see cref="MixedRealityLocomotionSystem"/> instance.
+        /// Gets the active <see cref="Services.LocomotionSystem.LocomotionSystem"/> instance.
         /// </summary>
-        protected virtual MixedRealityLocomotionSystem LocomotionSystem => (MixedRealityLocomotionSystem)ParentService;
+        protected virtual Services.LocomotionSystem.LocomotionSystem LocomotionSystem => (Services.LocomotionSystem.LocomotionSystem)ParentService;
 
         /// <summary>
         /// Gets the player camera <see cref="Transform"/>.
@@ -63,7 +63,7 @@ namespace XRTK.Providers.LocomotionSystem
                 {
                     if (Debug.isDebugBuild)
                     {
-                        Debug.Assert(!CameraTransform.parent.IsNull(), $"The {nameof(MixedRealityLocomotionSystem)} expects the camera to be parented under another transform!");
+                        Debug.Assert(!CameraTransform.parent.IsNull(), $"The {nameof(Services.LocomotionSystem.LocomotionSystem)} expects the camera to be parented under another transform!");
                     }
 
                     return CameraTransform.parent;

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace XRTK.Interfaces.LocomotionSystem
 {
     /// <summary>
-    /// Base interface to implement for teleportation hotspots to work with the <see cref="IMixedRealityLocomotionSystem"/>.
+    /// Base interface to implement for teleportation hotspots to work with the <see cref="ILocomotionSystem"/>.
     /// </summary>
     public interface ITeleportHotSpot
     {

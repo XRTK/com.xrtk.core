@@ -10,7 +10,7 @@ using XRTK.Interfaces.LocomotionSystem;
 namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
-    /// Describes a locomotion event raised by the <see cref="IMixedRealityLocomotionSystem"/>.
+    /// Describes a locomotion event raised by the <see cref="ILocomotionSystem"/>.
     /// </summary>
     public class LocomotionEventData : GenericBaseEventData
     {

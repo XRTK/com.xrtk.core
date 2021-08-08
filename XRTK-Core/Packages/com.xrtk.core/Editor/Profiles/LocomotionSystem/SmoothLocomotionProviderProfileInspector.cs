@@ -2,22 +2,25 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
-    [CustomEditor(typeof(MixedRealityBlinkTeleportLocomotionProviderProfile))]
-    public class MixedRealityBlinkTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
+    [CustomEditor(typeof(SmoothLocomotionProviderProfile))]
+    public class SmoothLocomotionProviderProfileInspector : LocomotionProviderProfileInspector
     {
         private SerializedProperty inputAction;
-        private SerializedProperty fadeDuration;
+        private SerializedProperty speed;
+
+        private static readonly GUIContent speedLabel = new GUIContent("Speed (m/s)");
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             inputAction = serializedObject.FindProperty(nameof(inputAction));
-            fadeDuration = serializedObject.FindProperty(nameof(fadeDuration));
+            speed = serializedObject.FindProperty(nameof(speed));
         }
 
         public override void OnInspectorGUI()
@@ -27,7 +30,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(inputAction);
-            EditorGUILayout.PropertyField(fadeDuration);
+            EditorGUILayout.PropertyField(speed, speedLabel);
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -7,9 +7,9 @@ using XRTK.Services.LocomotionSystem;
 namespace XRTK.Interfaces.LocomotionSystem
 {
     /// <summary>
-    /// Interface to implement for handling locomotion events by the <see cref="IMixedRealityLocomotionSystem"/>.
+    /// Interface to implement for handling locomotion events by the <see cref="ILocomotionSystem"/>.
     /// </summary>
-    public interface IMixedRealityLocomotionSystemHandler : IEventSystemHandler
+    public interface ILocomotionSystemHandler : IEventSystemHandler
     {
         /// <summary>
         /// Raised when a <see cref="ITeleportLocomotionProvider"/> requests a

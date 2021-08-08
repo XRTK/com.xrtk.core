@@ -18,7 +18,7 @@ namespace XRTK.Providers.LocomotionSystem
     public abstract class BaseTeleportLocomotionProvider : BaseLocomotionProvider, ITeleportLocomotionProvider
     {
         /// <inheritdoc />
-        public BaseTeleportLocomotionProvider(string name, uint priority, BaseTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public BaseTeleportLocomotionProvider(string name, uint priority, BaseTeleportLocomotionProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             inputThreshold = profile.InputThreshold;

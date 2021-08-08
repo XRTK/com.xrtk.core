@@ -18,7 +18,7 @@ namespace XRTK.Providers.LocomotionSystem
     public class TeleportValidationProvider : BaseDataProvider, ITeleportValidationProvider
     {
         /// <inheritdoc />
-        public TeleportValidationProvider(string name, uint priority, MixedRealityTeleportValidationProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public TeleportValidationProvider(string name, uint priority, TeleportValidationProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             hotSpotsOnly = profile.HotSpotsOnly;

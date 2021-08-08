@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
-    public abstract class BaseTeleportLocomotionProviderProfileInspector : MixedRealityLocomotionProviderProfileInspector
+    public abstract class BaseTeleportLocomotionProviderProfileInspector : LocomotionProviderProfileInspector
     {
         private SerializedProperty inputThreshold;
         private SerializedProperty teleportActivationAngle;

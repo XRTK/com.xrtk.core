@@ -10,25 +10,25 @@ using XRTK.Interfaces.InputSystem;
 namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
-    /// This component is attached to the main <see cref="Camera"/> by the <see cref="IMixedRealityLocomotionSystem"/>
+    /// This component is attached to the main <see cref="Camera"/> by the <see cref="ILocomotionSystem"/>
     /// and provides an event bridge to active <see cref="ILocomotionProvider"/> implementations.
-    /// It has a hard dependency on the <see cref="IMixedRealityLocomotionSystem"/> as well as the <see cref="IMixedRealityInputSystem"/>
+    /// It has a hard dependency on the <see cref="ILocomotionSystem"/> as well as the <see cref="IMixedRealityInputSystem"/>
     /// and cannot work without both being active and enabled in the application.
     /// Furthermore it expects that the <see cref="GameObject"/> it is attached to is a global <see cref="IMixedRealityInputSystem"/> listener. It will
     /// not take care of registration itself.
     /// </summary>
     public class LocomotionProviderEventDriver : MonoBehaviour,
-        IMixedRealityLocomotionSystemHandler,
+        ILocomotionSystemHandler,
         IMixedRealityInputHandler,
         IMixedRealityInputHandler<float>,
         IMixedRealityInputHandler<Vector2>
     {
-        private MixedRealityLocomotionSystem locomotionSystem = null;
+        private LocomotionSystem locomotionSystem = null;
         /// <summary>
-        /// Gets the currently active <see cref="MixedRealityLocomotionSystem"/> instance.
+        /// Gets the currently active <see cref="Services.LocomotionSystem.LocomotionSystem"/> instance.
         /// </summary>
-        protected MixedRealityLocomotionSystem LocomotionSystem
-            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<IMixedRealityLocomotionSystem>() as MixedRealityLocomotionSystem);
+        protected LocomotionSystem LocomotionSystem
+            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<ILocomotionSystem>() as LocomotionSystem);
 
         /// <summary>
         /// This method is called just before any of the update methods is called the first time.
@@ -37,7 +37,7 @@ namespace XRTK.Services.LocomotionSystem
         {
             try
             {
-                locomotionSystem = (await MixedRealityToolkit.GetSystemAsync<IMixedRealityLocomotionSystem>()) as MixedRealityLocomotionSystem;
+                locomotionSystem = (await MixedRealityToolkit.GetSystemAsync<ILocomotionSystem>()) as LocomotionSystem;
             }
             catch (System.Exception e)
             {

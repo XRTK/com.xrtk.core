@@ -8,7 +8,7 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="Providers.LocomotionSystem.TeleportValidationProvider"/>.
     /// </summary>
-    public class MixedRealityTeleportValidationProviderProfile : BaseMixedRealityProfile
+    public class TeleportValidationProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("Should teleportation only be allowed if the target is a hotspot?")]

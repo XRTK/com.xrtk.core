@@ -4,12 +4,11 @@
 using UnityEditor;
 using XRTK.Services;
 using XRTK.Definitions.LocomotionSystem;
-using UnityEngine;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
-    [CustomEditor(typeof(MixedRealityLocomotionSystemProfile))]
-    public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
+    [CustomEditor(typeof(LocomotionSystemProfile))]
+    public class LocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty teleportCooldown;
 

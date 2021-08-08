@@ -16,16 +16,16 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Services.LocomotionSystem
 {
     /// <summary>
-    /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityLocomotionSystem"/>
+    /// The Mixed Reality Toolkit's specific implementation of the <see cref="ILocomotionSystem"/>
     /// </summary>
     [System.Runtime.InteropServices.Guid("9453c088-285e-47aa-bfbb-dafd9109fdd5")]
-    public class MixedRealityLocomotionSystem : BaseEventSystem, IMixedRealityLocomotionSystem
+    public class LocomotionSystem : BaseEventSystem, ILocomotionSystem
     {
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="profile">The active <see cref="MixedRealityLocomotionSystemProfile"/>.</param>
-        public MixedRealityLocomotionSystem(MixedRealityLocomotionSystemProfile profile)
+        /// <param name="profile">The active <see cref="LocomotionSystemProfile"/>.</param>
+        public LocomotionSystem(LocomotionSystemProfile profile)
             : base(profile)
         {
             teleportCooldown = profile.TeleportCooldown;
@@ -263,8 +263,8 @@ namespace XRTK.Services.LocomotionSystem
             }
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportRequestHandler =
-            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<ILocomotionSystemHandler> OnTeleportRequestHandler =
+            delegate (ILocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportTargetRequested(casted);
@@ -277,8 +277,8 @@ namespace XRTK.Services.LocomotionSystem
             HandleEvent(teleportEventData, OnTeleportRequestHandler);
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportStartedHandler =
-            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<ILocomotionSystemHandler> OnTeleportStartedHandler =
+            delegate (ILocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportStarted(casted);
@@ -296,8 +296,8 @@ namespace XRTK.Services.LocomotionSystem
             HandleEvent(teleportEventData, OnTeleportStartedHandler);
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportCompletedHandler =
-            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<ILocomotionSystemHandler> OnTeleportCompletedHandler =
+            delegate (ILocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportCompleted(casted);
@@ -311,8 +311,8 @@ namespace XRTK.Services.LocomotionSystem
             HandleEvent(teleportEventData, OnTeleportCompletedHandler);
         }
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityLocomotionSystemHandler> OnTeleportCanceledHandler =
-            delegate (IMixedRealityLocomotionSystemHandler handler, BaseEventData eventData)
+        private static readonly ExecuteEvents.EventFunction<ILocomotionSystemHandler> OnTeleportCanceledHandler =
+            delegate (ILocomotionSystemHandler handler, BaseEventData eventData)
             {
                 var casted = ExecuteEvents.ValidateEventData<LocomotionEventData>(eventData);
                 handler.OnTeleportCanceled(casted);

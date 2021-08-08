@@ -10,7 +10,7 @@ namespace XRTK.Providers.LocomotionSystem
     public class TransformPathOnRailsLocomotionProvider : BaseLocomotionProvider, IOnRailsLocomotionProvider
     {
         /// <inheritdoc />
-        public TransformPathOnRailsLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public TransformPathOnRailsLocomotionProvider(string name, uint priority, BaseLocomotionProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService) { }
     }
 }

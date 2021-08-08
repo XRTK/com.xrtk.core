@@ -11,7 +11,7 @@ namespace XRTK.Interfaces.LocomotionSystem
     /// Interface to define teleportation validation data providers. A <see cref="ITeleportValidationProvider"/>
     /// is responsible for validating whether a given teleportation target position is valid or not.
     /// </summary>
-    public interface ITeleportValidationProvider : IMixedRealityLocomotionSystemDataProvider
+    public interface ITeleportValidationProvider : ILocomotionSystemDataProvider
     {
         /// <summary>
         /// Validates a <see cref="IPointerResult"/> and returns whether the <see cref="RaycastHit"/>

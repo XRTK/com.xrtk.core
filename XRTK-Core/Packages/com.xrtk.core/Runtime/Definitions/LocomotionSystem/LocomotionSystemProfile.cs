@@ -8,10 +8,10 @@ using XRTK.Interfaces.LocomotionSystem;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile settings for <see cref="Services.LocomotionSystem.MixedRealityLocomotionSystem"/>.
+    /// Configuration profile settings for <see cref="Services.LocomotionSystem.LocomotionSystem"/>.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Locomotion System Profile", fileName = "MixedRealityLocomotionSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class MixedRealityLocomotionSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityLocomotionSystemDataProvider>
+    public class LocomotionSystemProfile : BaseMixedRealityServiceProfile<ILocomotionSystemDataProvider>
     {
         [SerializeField]
         [Tooltip("The teleportation cooldown defines the time that needs to pass after a successful teleportation for another one to be possible.")]

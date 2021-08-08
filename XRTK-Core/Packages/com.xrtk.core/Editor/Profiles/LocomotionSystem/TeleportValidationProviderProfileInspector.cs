@@ -6,8 +6,8 @@ using XRTK.Definitions.LocomotionSystem;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
-    [CustomEditor(typeof(MixedRealityTeleportValidationProviderProfile))]
-    public class MixedRealityTeleportValidationProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(TeleportValidationProviderProfile))]
+    public class TeleportValidationProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty hotSpotsOnly;
         private SerializedProperty validLayers;

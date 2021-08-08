@@ -13,19 +13,19 @@ namespace XRTK.Services.LocomotionSystem
     /// that is the object being translated in space when locomotion occurs.
     ///
     /// When no enabled instance of <see cref="LocomotionTargetOverride"/> is found the
-    /// <see cref="MixedRealityLocomotionSystem"/> will target the active
+    /// <see cref="Services.LocomotionSystem.LocomotionSystem"/> will target the active
     /// <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.CameraTransform"/> if the
     /// <see cref="Interfaces.CameraSystem.IMixedRealityCameraSystem"/> is active or fallback to
     /// <see cref="Utilities.CameraCache.Main"/> parent ultimately.
     /// </summary>
     public class LocomotionTargetOverride : MonoBehaviour
     {
-        private MixedRealityLocomotionSystem locomotionSystem = null;
+        private LocomotionSystem locomotionSystem = null;
         /// <summary>
-        /// Gets the currently active <see cref="MixedRealityLocomotionSystem"/> instance.
+        /// Gets the currently active <see cref="Services.LocomotionSystem.LocomotionSystem"/> instance.
         /// </summary>
-        protected MixedRealityLocomotionSystem LocomotionSystem
-            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<IMixedRealityLocomotionSystem>() as MixedRealityLocomotionSystem);
+        protected LocomotionSystem LocomotionSystem
+            => locomotionSystem ?? (locomotionSystem = MixedRealityToolkit.GetSystem<ILocomotionSystem>() as LocomotionSystem);
 
         /// <summary>
         /// This method is called just before any of the update methods is
@@ -35,7 +35,7 @@ namespace XRTK.Services.LocomotionSystem
         {
             if (LocomotionSystem == null)
             {
-                Debug.LogError($"No active {nameof(MixedRealityLocomotionSystem)} found. {nameof(LocomotionTargetOverride)} can only work with the system enabled.");
+                Debug.LogError($"No active {nameof(Services.LocomotionSystem.LocomotionSystem)} found. {nameof(Services.LocomotionSystem.LocomotionTargetOverride)} can only work with the system enabled.");
                 this.Destroy();
                 return;
             }

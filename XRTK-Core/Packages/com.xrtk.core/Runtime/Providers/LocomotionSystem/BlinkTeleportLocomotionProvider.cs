@@ -16,7 +16,7 @@ namespace XRTK.Providers.LocomotionSystem
     public class BlinkTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {
         /// <inheritdoc />
-        public BlinkTeleportLocomotionProvider(string name, uint priority, MixedRealityBlinkTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public BlinkTeleportLocomotionProvider(string name, uint priority, BlinkTeleportLocomotionProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             fadeDuration = profile.FadeDuration;

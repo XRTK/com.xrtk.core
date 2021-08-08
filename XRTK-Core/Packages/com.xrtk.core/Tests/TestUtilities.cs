@@ -44,7 +44,7 @@ namespace XRTK.Tests
             if (useDefaultProfile)
             {
                 configuration = GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>();
-                MixedRealityToolkit.TryGetSystemProfile<IMixedRealityLocomotionSystem, MixedRealityLocomotionSystemProfile>(out var locomotionSystemProfile);
+                MixedRealityToolkit.TryGetSystemProfile<ILocomotionSystem, LocomotionSystemProfile>(out var locomotionSystemProfile);
                 Debug.Assert(locomotionSystemProfile != null);
             }
             else

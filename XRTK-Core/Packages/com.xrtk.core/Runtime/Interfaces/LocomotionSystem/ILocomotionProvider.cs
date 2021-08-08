@@ -8,10 +8,10 @@ using XRTK.Interfaces.InputSystem.Handlers;
 namespace XRTK.Interfaces.LocomotionSystem
 {
     /// <summary>
-    /// The base interface to define locomotion providers for the <see cref="IMixedRealityLocomotionSystem"/>.
+    /// The base interface to define locomotion providers for the <see cref="ILocomotionSystem"/>.
     /// </summary>
-    public interface ILocomotionProvider : IMixedRealityLocomotionSystemDataProvider,
-        IMixedRealityLocomotionSystemHandler,
+    public interface ILocomotionProvider : ILocomotionSystemDataProvider,
+        ILocomotionSystemHandler,
         IMixedRealityInputHandler,
         IMixedRealityInputHandler<float>,
         IMixedRealityInputHandler<Vector2>

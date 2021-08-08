@@ -13,7 +13,7 @@ namespace XRTK.Interfaces.LocomotionSystem
     /// System interface for a locomotion system in the Mixed Reality Toolkit.
     /// All replacement systems for providing locomotion functionality should derive from this interface.
     /// </summary>
-    public interface IMixedRealityLocomotionSystem : IMixedRealityEventSystem
+    public interface ILocomotionSystem : IMixedRealityEventSystem
     {
         /// <summary>
         /// Gets a list of currently enabled <see cref="ILocomotionProvider"/>s.
@@ -64,7 +64,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         void RaiseTeleportTargetRequest(ITeleportLocomotionProvider teleportLocomotionProvider, IMixedRealityInputSource inputSource);
 
         /// <summary>
-        /// Raises a teleportation started event for <see cref="IMixedRealityLocomotionSystemHandler"/>s.
+        /// Raises a teleportation started event for <see cref="ILocomotionSystemHandler"/>s.
         /// </summary>
         /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> that started teleportation.</param>
         /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>
@@ -73,7 +73,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot);
 
         /// <summary>
-        /// Raises a teleportation completed event for <see cref="IMixedRealityLocomotionSystemHandler"/>s.
+        /// Raises a teleportation completed event for <see cref="ILocomotionSystemHandler"/>s.
         /// </summary>
         /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> whose teleportation has completed.</param>
         /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>
@@ -82,7 +82,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         void RaiseTeleportCompleted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot);
 
         /// <summary>
-        /// Raises a teleportation canceled event for <see cref="IMixedRealityLocomotionSystemHandler"/>s.
+        /// Raises a teleportation canceled event for <see cref="ILocomotionSystemHandler"/>s.
         /// </summary>
         /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> that canceled a previously started teleport.</param>
         /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>

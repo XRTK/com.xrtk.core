@@ -7,7 +7,7 @@ using XRTK.Definitions.LocomotionSystem;
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
     [CustomEditor(typeof(BaseLocomotionProviderProfile))]
-    public class MixedRealityLocomotionProviderProfileInspector : BaseMixedRealityProfileInspector
+    public class LocomotionProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty startupBehaviour;
 

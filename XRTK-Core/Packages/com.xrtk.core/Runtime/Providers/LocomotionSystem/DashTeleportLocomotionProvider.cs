@@ -13,7 +13,7 @@ namespace XRTK.Providers.LocomotionSystem
     public class DashTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {
         /// <inheritdoc />
-        public DashTeleportLocomotionProvider(string name, uint priority, MixedRealityDashTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public DashTeleportLocomotionProvider(string name, uint priority, DashTeleportLocomotionProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             dashDuration = profile.DashDuration;

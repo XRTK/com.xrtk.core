@@ -8,13 +8,13 @@ using XRTK.Definitions.InputSystem;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile for the <see cref="Providers.LocomotionSystem.DashTeleportLocomotionProvider"/>.
+    /// Configuration profile for the <see cref="Providers.LocomotionSystem.SmoothLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealityDashTeleportLocomotionProviderProfile : BaseTeleportLocomotionProviderProfile
+    public class SmoothLocomotionProviderProfile : BaseLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Input action to perform locomotion the player.")]
-        [AxisConstraint(Utilities.AxisType.SingleAxis | Utilities.AxisType.Digital | Utilities.AxisType.DualAxis)]
+        [AxisConstraint(Utilities.AxisType.DualAxis)]
         private MixedRealityInputAction inputAction = MixedRealityInputAction.None;
 
         /// <summary>
@@ -27,16 +27,17 @@ namespace XRTK.Definitions.LocomotionSystem
         }
 
         [SerializeField]
-        [Tooltip("Duration of the dash in seconds.")]
-        private float dashDuration = .25f;
+        [Tooltip("Speed in meters per second for movement.")]
+        [Range(1f, 100f)]
+        private float speed = 5f;
 
         /// <summary>
-        /// Duration of the dash in seconds.
+        /// Speed in meters per second for movement.
         /// </summary>
-        public float DashDuration
+        public float Speed
         {
-            get => dashDuration;
-            internal set => dashDuration = value;
+            get => speed;
+            internal set => speed = value;
         }
     }
 }

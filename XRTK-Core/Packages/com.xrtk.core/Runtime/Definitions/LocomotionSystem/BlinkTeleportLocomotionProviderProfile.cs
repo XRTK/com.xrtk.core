@@ -8,13 +8,13 @@ using XRTK.Definitions.InputSystem;
 namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Configuration profile for the <see cref="Providers.LocomotionSystem.SmoothLocomotionProvider"/>.
+    /// Configuration profile for the <see cref="Providers.LocomotionSystem.BlinkTeleportLocomotionProvider"/>.
     /// </summary>
-    public class MixedRealitySmoothLocomotionProviderProfile : BaseLocomotionProviderProfile
+    public class BlinkTeleportLocomotionProviderProfile : BaseTeleportLocomotionProviderProfile
     {
         [SerializeField]
         [Tooltip("Input action to perform locomotion the player.")]
-        [AxisConstraint(Utilities.AxisType.DualAxis)]
+        [AxisConstraint(Utilities.AxisType.SingleAxis | Utilities.AxisType.Digital | Utilities.AxisType.DualAxis)]
         private MixedRealityInputAction inputAction = MixedRealityInputAction.None;
 
         /// <summary>
@@ -27,17 +27,16 @@ namespace XRTK.Definitions.LocomotionSystem
         }
 
         [SerializeField]
-        [Tooltip("Speed in meters per second for movement.")]
-        [Range(1f, 100f)]
-        private float speed = 5f;
+        [Tooltip("Duration of the fade in / fade out in seconds.")]
+        private float fadeDuration = .25f;
 
         /// <summary>
-        /// Speed in meters per second for movement.
+        /// Duration of the fade in / fade out in seconds.
         /// </summary>
-        public float Speed
+        public float FadeDuration
         {
-            get => speed;
-            internal set => speed = value;
+            get => fadeDuration;
+            internal set => fadeDuration = value;
         }
     }
 }

@@ -6,18 +6,18 @@ using XRTK.Definitions.LocomotionSystem;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
-    [CustomEditor(typeof(MixedRealityDashTeleportLocomotionProviderProfile))]
-    public class MixedRealityDashTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
+    [CustomEditor(typeof(BlinkTeleportLocomotionProviderProfile))]
+    public class BlinkTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
     {
         private SerializedProperty inputAction;
-        private SerializedProperty dashDuration;
+        private SerializedProperty fadeDuration;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             inputAction = serializedObject.FindProperty(nameof(inputAction));
-            dashDuration = serializedObject.FindProperty(nameof(dashDuration));
+            fadeDuration = serializedObject.FindProperty(nameof(fadeDuration));
         }
 
         public override void OnInspectorGUI()
@@ -27,7 +27,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(inputAction);
-            EditorGUILayout.PropertyField(dashDuration);
+            EditorGUILayout.PropertyField(fadeDuration);
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -12,7 +12,7 @@ namespace XRTK.Providers.LocomotionSystem
     public class SmoothLocomotionProvider : BaseLocomotionProvider, IFreeLocomotionProvider
     {
         /// <inheritdoc />
-        public SmoothLocomotionProvider(string name, uint priority, MixedRealitySmoothLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public SmoothLocomotionProvider(string name, uint priority, SmoothLocomotionProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             speed = profile.Speed;

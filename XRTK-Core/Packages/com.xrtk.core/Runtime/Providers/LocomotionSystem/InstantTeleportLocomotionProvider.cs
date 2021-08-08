@@ -12,7 +12,7 @@ namespace XRTK.Providers.LocomotionSystem
     public class InstantTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {
         /// <inheritdoc />
-        public InstantTeleportLocomotionProvider(string name, uint priority, InstantTeleportLocomotionProviderProfile profile, IMixedRealityLocomotionSystem parentService)
+        public InstantTeleportLocomotionProvider(string name, uint priority, InstantTeleportLocomotionProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             InputAction = profile.InputAction;

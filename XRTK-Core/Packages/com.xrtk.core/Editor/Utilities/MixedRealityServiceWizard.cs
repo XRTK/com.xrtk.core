@@ -327,7 +327,7 @@ namespace XRTK.Editor.Utilities
                             else
                             {
                                 if (interfaceType == typeof(IMixedRealityBoundarySystem) ||
-                                    interfaceType == typeof(IMixedRealityLocomotionSystem))
+                                    interfaceType == typeof(ILocomotionSystem))
                                 {
                                     profileBaseTypeName = nameof(BaseMixedRealityProfile);
                                 }

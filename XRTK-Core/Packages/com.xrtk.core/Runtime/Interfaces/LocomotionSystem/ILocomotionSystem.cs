@@ -16,6 +16,12 @@ namespace XRTK.Interfaces.LocomotionSystem
     public interface ILocomotionSystem : IMixedRealityEventSystem
     {
         /// <summary>
+        /// Gets whether teleport locomotion is currently in cooldown. While in cooldown,
+        /// no new teleport can be requested.
+        /// </summary>
+        bool IsTeleportCoolingDown { get; }
+
+        /// <summary>
         /// Gets a list of currently enabled <see cref="ILocomotionProvider"/>s.
         /// </summary>
         IReadOnlyList<ILocomotionProvider> EnabledLocomotionProviders { get; }

@@ -42,6 +42,9 @@ namespace XRTK.Services.LocomotionSystem
         };
 
         /// <inheritdoc />
+        public bool IsTeleportCoolingDown => currentTeleportCooldown > 0f;
+
+        /// <inheritdoc />
         public IReadOnlyList<ILocomotionProvider> EnabledLocomotionProviders => enabledLocomotionProviders.SelectMany(kv => kv.Value).ToList();
 
         /// <summary>
@@ -88,7 +91,7 @@ namespace XRTK.Services.LocomotionSystem
                 EnableLocomotionProvider<Providers.LocomotionSystem.TransformPathOnRailsLocomotionProvider>();
             }
 
-            if (currentTeleportCooldown > 0f)
+            if (IsTeleportCoolingDown)
             {
                 currentTeleportCooldown -= Time.deltaTime;
             }
@@ -255,7 +258,24 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public void OnLocomotionProviderDisabled(ILocomotionProvider locomotionProvider)
         {
-            var type = locomotionProvider.GetType();
+            Type type;
+            if (locomotionProvider is ITeleportLocomotionProvider)
+            {
+                type = typeof(ITeleportLocomotionProvider);
+            }
+            else if (locomotionProvider is IFreeLocomotionProvider)
+            {
+                type = typeof(IFreeLocomotionProvider);
+            }
+            else if (locomotionProvider is IOnRailsLocomotionProvider)
+            {
+                type = typeof(IOnRailsLocomotionProvider);
+            }
+            else
+            {
+                type = typeof(ILocomotionProvider);
+            }
+
             if (enabledLocomotionProviders.ContainsKey(type) &&
                 enabledLocomotionProviders[type].Contains(locomotionProvider))
             {
@@ -273,6 +293,11 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public void RaiseTeleportTargetRequest(ITeleportLocomotionProvider teleportLocomotionProvider, IMixedRealityInputSource inputSource)
         {
+            if (IsTeleportCoolingDown)
+            {
+                return;
+            }
+
             teleportEventData.Initialize(teleportLocomotionProvider, inputSource);
             HandleEvent(teleportEventData, OnTeleportRequestHandler);
         }
@@ -287,11 +312,6 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot)
         {
-            if (currentTeleportCooldown > 0f)
-            {
-                return;
-            }
-
             teleportEventData.Initialize(locomotionProvider, inputSource, pose, hotSpot);
             HandleEvent(teleportEventData, OnTeleportStartedHandler);
         }

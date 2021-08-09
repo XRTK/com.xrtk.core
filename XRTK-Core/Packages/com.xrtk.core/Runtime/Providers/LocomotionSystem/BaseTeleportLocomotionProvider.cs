@@ -173,7 +173,9 @@ namespace XRTK.Providers.LocomotionSystem
                         RaiseTeleportTargetRequest(eventData.InputSource);
                     }
                 }
-                else if (OpenTargetRequests.ContainsKey(eventData.SourceId))
+                else if (Mathf.Abs(dualAxisPosition.y) < inputThreshold &&
+                    Mathf.Abs(dualAxisPosition.x) < inputThreshold &&
+                    OpenTargetRequests.ContainsKey(eventData.SourceId))
                 {
                     // Input was relased and we have an open target request we can process now.
                     var inputSource = OpenTargetRequests[eventData.SourceId];

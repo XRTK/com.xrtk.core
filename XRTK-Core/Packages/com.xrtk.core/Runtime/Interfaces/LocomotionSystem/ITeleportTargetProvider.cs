@@ -16,11 +16,17 @@ namespace XRTK.Interfaces.LocomotionSystem
     public interface ITeleportTargetProvider : ILocomotionSystemHandler
     {
         /// <summary>
-        /// Gets the <see cref="ITeleportLocomotionProvider"/> that is currently requesting a teleport target
+        /// Gets the <see cref="ILocomotionProvider"/> that is currently requesting a teleport target
         /// from this provider, if any.
         /// </summary>
         /// <remarks>Can be <see cref="null"/> if this provider has not received a target request at the time of evaluation.</remarks>
-        ITeleportLocomotionProvider RequestingLocomotionProvider { get; }
+        ILocomotionProvider RequestingLocomotionProvider { get; }
+
+        /// <summary>
+        /// Gets whether the <see cref="ITeleportTargetProvider"/> is currently
+        /// targeting / looking for a target to answer a teleport target request made by a <see cref="ITeleportLocomotionProvider"/>.
+        /// </summary>
+        bool IsTargeting { get; }
 
         /// <summary>
         /// Gets the <see cref="IMixedRealityInputSource"/> this provider is

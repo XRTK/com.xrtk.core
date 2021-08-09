@@ -172,13 +172,12 @@ namespace XRTK.Providers.LocomotionSystem
                         // request yet.
                         RaiseTeleportTargetRequest(eventData.InputSource);
                     }
-                    else if (absoluteAngle > teleportActivationAngle &&
-                        OpenTargetRequests.ContainsKey(eventData.SourceId))
-                    {
-                        // Input was relased and we have an open target request we can process now.
-                        var inputSource = OpenTargetRequests[eventData.SourceId];
-                        ProcessTeleportRequest(inputSource);
-                    }
+                }
+                else if (OpenTargetRequests.ContainsKey(eventData.SourceId))
+                {
+                    // Input was relased and we have an open target request we can process now.
+                    var inputSource = OpenTargetRequests[eventData.SourceId];
+                    ProcessTeleportRequest(inputSource);
                 }
             }
 
@@ -257,5 +256,132 @@ namespace XRTK.Providers.LocomotionSystem
                 AvailableTargetProviders.Remove(inputSourceId);
             }
         }
+
+        //public override void OnInputChanged(InputEventData<Vector2> eventData)
+        //{
+        //    // Don't process input if we've got an active teleport request in progress.
+        //    if (eventData.used || IsTeleportRequestActive)
+        //    {
+        //        return;
+        //    }
+
+        //    // Only if we are currently answering to a teleport target
+        //    // request, we care for input change to reorient the pointer if needed.
+        //    if (RequestingLocomotionProvider != null &&
+        //        eventData.SourceId == InputSource.SourceId &&
+        //        eventData.Handedness == Handedness &&
+        //        eventData.MixedRealityInputAction == RequestingLocomotionProvider.InputAction)
+        //    {
+        //        currentDualAxisInputPosition = eventData.InputData;
+
+        //        if (Mathf.Abs(currentDualAxisInputPosition.y) > inputThreshold ||
+        //            Mathf.Abs(currentDualAxisInputPosition.x) > inputThreshold)
+        //        {
+        //            // Get the angle of the pointer input
+        //            float angle = Mathf.Atan2(currentDualAxisInputPosition.x, currentDualAxisInputPosition.y) * Mathf.Rad2Deg;
+
+        //            // Offset the angle so it's 'forward' facing
+        //            angle += angleOffset;
+        //            PointerOrientation = angle;
+
+        //            if (!teleportEnabled)
+        //            {
+        //                float absoluteAngle = Mathf.Abs(angle);
+
+        //                if (absoluteAngle < teleportActivationAngle)
+        //                {
+        //                    teleportEnabled = true;
+
+        //                    LocomotionSystem?.RaiseTeleportRequest(this, HotSpot);
+        //                }
+        //                else if (canMove)
+        //                {
+        //                    // wrap the angle value.
+        //                    if (absoluteAngle > 180f)
+        //                    {
+        //                        absoluteAngle = Mathf.Abs(absoluteAngle - 360f);
+        //                    }
+
+        //                    // Calculate the offset rotation angle from the 90 degree mark.
+        //                    // Half the rotation activation angle amount to make sure the activation angle stays centered at 90.
+        //                    float offsetRotationAngle = 90f - rotateActivationAngle;
+
+        //                    // subtract it from our current angle reading
+        //                    offsetRotationAngle = absoluteAngle - offsetRotationAngle;
+
+        //                    // if it's less than zero, then we don't have activation
+        //                    if (offsetRotationAngle > 0)
+        //                    {
+        //                        var cameraRig = CameraSystem.MainCameraRig;
+
+        //                        Debug.Assert(cameraRig != null, $"{nameof(TeleportPointer)} requires the {nameof(IMixedRealityCameraSystem)} be enabled with a valid {nameof(IMixedRealityCameraRig)}!");
+
+        //                        // check to make sure we're still under our activation threshold.
+        //                        if (offsetRotationAngle < rotateActivationAngle)
+        //                        {
+        //                            canMove = false;
+        //                            // Rotate the camera by the rotation amount.  If our angle is positive then rotate in the positive direction, otherwise in the opposite direction.
+        //                            cameraRig.PlayspaceTransform.RotateAround(cameraRig.CameraTransform.position, Vector3.up, angle >= 0.0f ? rotationAmount : -rotationAmount);
+        //                        }
+        //                        else // We may be trying to strafe backwards.
+        //                        {
+        //                            // Calculate the offset rotation angle from the 180 degree mark.
+        //                            // Half the strafe activation angle to make sure the activation angle stays centered at 180f
+        //                            float offsetStrafeAngle = 180f - backStrafeActivationAngle;
+        //                            // subtract it from our current angle reading
+        //                            offsetStrafeAngle = absoluteAngle - offsetStrafeAngle;
+
+        //                            // Check to make sure we're still under our activation threshold.
+        //                            if (offsetStrafeAngle > 0 && offsetStrafeAngle < backStrafeActivationAngle)
+        //                            {
+        //                                canMove = false;
+        //                                var playspacePosition = cameraRig.PlayspaceTransform.position;
+        //                                var height = playspacePosition.y;
+        //                                var newPosition = -cameraRig.CameraTransform.forward * strafeAmount + playspacePosition;
+        //                                newPosition.y = height;
+        //                                cameraRig.PlayspaceTransform.position = newPosition;
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (!canTeleport && !teleportEnabled)
+        //            {
+        //                // Reset the move flag when the user stops moving the joystick
+        //                // but hasn't yet started teleport request.
+        //                canMove = true;
+        //            }
+
+        //            if (canTeleport)
+        //            {
+        //                canTeleport = false;
+        //                teleportEnabled = false;
+
+        //                if (ValidationResult == TeleportValidationResult.Valid ||
+        //                    ValidationResult == TeleportValidationResult.HotSpot)
+        //                {
+        //                    LocomotionSystem?.RaiseTeleportStarted(RequestingLocomotionProvider, this, HotSpot);
+        //                }
+        //            }
+
+        //            if (teleportEnabled)
+        //            {
+        //                canTeleport = false;
+        //                teleportEnabled = false;
+        //                LocomotionSystem?.RaiseTeleportCanceled(RequestingLocomotionProvider, this, HotSpot);
+        //            }
+        //        }
+
+        //        if (teleportEnabled &&
+        //            ValidationResult == TeleportValidationResult.Valid ||
+        //            ValidationResult == TeleportValidationResult.HotSpot)
+        //        {
+        //            canTeleport = true;
+        //        }
+        //    }
+        //}
     }
 }

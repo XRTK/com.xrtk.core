@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace XRTK.Definitions.LocomotionSystem
 {
-    public abstract class BaseTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
+    public class BaseTeleportLocomotionProviderProfile : BaseLocomotionProviderProfile
     {
         [SerializeField]
         [Range(0f, 1f)]

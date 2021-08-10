@@ -22,13 +22,14 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             startupBehaviour = profile.StartupBehaviour;
+            InputAction = profile.InputAction;
         }
 
         private readonly AutoStartBehavior startupBehaviour;
         private bool isInitialized;
 
         /// <inheritdoc />
-        public MixedRealityInputAction InputAction { get; protected set; }
+        public MixedRealityInputAction InputAction { get; }
 
         /// <inheritdoc />
         public bool IsEnabled { get; private set; }

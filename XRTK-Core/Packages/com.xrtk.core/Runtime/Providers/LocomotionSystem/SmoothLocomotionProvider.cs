@@ -16,7 +16,6 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             speed = profile.Speed;
-            InputAction = profile.InputAction;
         }
 
         private readonly float speed;

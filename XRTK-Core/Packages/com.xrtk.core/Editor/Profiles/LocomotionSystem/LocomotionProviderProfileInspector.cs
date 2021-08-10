@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
+using XRTK.Editor.Extensions;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
@@ -10,12 +12,16 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     public class LocomotionProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty startupBehaviour;
+        private SerializedProperty inputAction;
+
+        private static readonly GUIContent generalSettingsHeader = new GUIContent("General Settings");
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             startupBehaviour = serializedObject.FindProperty(nameof(startupBehaviour));
+            inputAction = serializedObject.FindProperty(nameof(inputAction));
         }
 
         public override void OnInspectorGUI()
@@ -24,7 +30,14 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(startupBehaviour);
+            if (startupBehaviour.FoldoutWithBoldLabelPropertyField(generalSettingsHeader))
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(inputAction);
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUILayout.Space();
 
             serializedObject.ApplyModifiedProperties();
         }

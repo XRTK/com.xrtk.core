@@ -9,14 +9,12 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     [CustomEditor(typeof(BlinkTeleportLocomotionProviderProfile))]
     public class BlinkTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
     {
-        private SerializedProperty inputAction;
         private SerializedProperty fadeDuration;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            inputAction = serializedObject.FindProperty(nameof(inputAction));
             fadeDuration = serializedObject.FindProperty(nameof(fadeDuration));
         }
 
@@ -26,7 +24,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(inputAction);
             EditorGUILayout.PropertyField(fadeDuration);
 
             serializedObject.ApplyModifiedProperties();

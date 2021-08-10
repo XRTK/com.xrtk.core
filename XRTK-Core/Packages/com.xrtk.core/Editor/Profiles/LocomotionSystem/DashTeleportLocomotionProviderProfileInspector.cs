@@ -9,14 +9,12 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     [CustomEditor(typeof(DashTeleportLocomotionProviderProfile))]
     public class DashTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
     {
-        private SerializedProperty inputAction;
         private SerializedProperty dashDuration;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            inputAction = serializedObject.FindProperty(nameof(inputAction));
             dashDuration = serializedObject.FindProperty(nameof(dashDuration));
         }
 
@@ -26,7 +24,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(inputAction);
             EditorGUILayout.PropertyField(dashDuration);
 
             serializedObject.ApplyModifiedProperties();

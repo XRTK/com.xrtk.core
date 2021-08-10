@@ -12,11 +12,8 @@ namespace XRTK.Providers.LocomotionSystem
     public class InstantTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {
         /// <inheritdoc />
-        public InstantTeleportLocomotionProvider(string name, uint priority, InstantTeleportLocomotionProviderProfile profile, ILocomotionSystem parentService)
-            : base(name, priority, profile, parentService)
-        {
-            InputAction = profile.InputAction;
-        }
+        public InstantTeleportLocomotionProvider(string name, uint priority, BaseTeleportLocomotionProviderProfile profile, ILocomotionSystem parentService)
+            : base(name, priority, profile, parentService) { }
 
         /// <inheritdoc />
         public override void OnTeleportStarted(LocomotionEventData eventData)

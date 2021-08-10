@@ -17,7 +17,6 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             dashDuration = profile.DashDuration;
-            InputAction = profile.InputAction;
         }
 
         private readonly float dashDuration = .25f;
@@ -43,6 +42,7 @@ namespace XRTK.Providers.LocomotionSystem
                 if (t >= 1f)
                 {
                     LocomotionSystem.RaiseTeleportCompleted(this, (IMixedRealityInputSource)locomotionEventData.EventSource, locomotionEventData.Pose.Value, locomotionEventData.HotSpot);
+                    return;
                 }
 
                 dashTime += Time.deltaTime;

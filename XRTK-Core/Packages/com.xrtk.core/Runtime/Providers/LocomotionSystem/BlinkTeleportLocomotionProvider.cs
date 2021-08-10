@@ -9,6 +9,7 @@ using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
 using XRTK.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -20,7 +21,6 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             fadeDuration = profile.FadeDuration;
-            InputAction = profile.InputAction;
         }
 
         private static readonly int sourceBlend = Shader.PropertyToID("_SrcBlend");
@@ -28,9 +28,9 @@ namespace XRTK.Providers.LocomotionSystem
         private static readonly int zWrite = Shader.PropertyToID("_ZWrite");
 
         private readonly float fadeDuration;
-        private Vector3 targetPosition;
-        private Vector3 targetRotation;
-        private LocomotionEventData locomotionEventData;
+        private IMixedRealityInputSource inputSource;
+        private MixedRealityPose targetPose;
+        private ITeleportHotSpot targetHotSpot;
         private GameObject fadeSphere;
         private MeshRenderer fadeSphereRenderer;
         private Color fadeInColor = Color.clear;
@@ -97,17 +97,16 @@ namespace XRTK.Providers.LocomotionSystem
             // actually expect a teleport to start?
             if (OpenTargetRequests.ContainsKey(eventData.EventSource.SourceId))
             {
-                locomotionEventData = eventData;
-                targetRotation = Vector3.zero;
-                targetPosition = eventData.Pose.Value.Position;
-                targetRotation.y = eventData.Pose.Value.Rotation.eulerAngles.y;
+                inputSource = (IMixedRealityInputSource)eventData.EventSource;
+                targetPose = eventData.Pose.Value;
+                targetHotSpot = eventData.HotSpot;
 
                 if (eventData.HotSpot != null)
                 {
-                    targetPosition = eventData.HotSpot.Position;
-                    if (eventData.HotSpot.OverrideTargetOrientation)
+                    targetPose.Position = targetHotSpot.Position;
+                    if (targetHotSpot.OverrideTargetOrientation)
                     {
-                        targetRotation.y = eventData.HotSpot.TargetOrientation;
+                        targetPose.Rotation = Quaternion.Euler(0f, targetHotSpot.TargetOrientation, 0f);
                     }
                 }
 
@@ -141,12 +140,16 @@ namespace XRTK.Providers.LocomotionSystem
 
         private void PerformTeleport()
         {
-            var height = targetPosition.y;
-            targetPosition -= LocomotionTargetTransform.position - LocomotionTargetTransform.position;
+            var height = targetPose.Position.y;
+            targetPose.Position -= LocomotionTargetTransform.position - LocomotionTargetTransform.position;
+
+            var targetPosition = targetPose.Position;
             targetPosition.y = height;
-            LocomotionTargetTransform.position = targetPosition;
-            LocomotionTargetTransform.RotateAround(LocomotionTargetTransform.position, Vector3.up, targetRotation.y - LocomotionTargetTransform.eulerAngles.y);
-            LocomotionSystem.RaiseTeleportCompleted(this, (IMixedRealityInputSource)locomotionEventData.EventSource, locomotionEventData.Pose.Value, locomotionEventData.HotSpot);
+            targetPose.Position = targetPosition;
+
+            LocomotionTargetTransform.position = targetPose.Position;
+            LocomotionTargetTransform.RotateAround(LocomotionTargetTransform.position, Vector3.up, targetPose.Rotation.eulerAngles.y - LocomotionTargetTransform.eulerAngles.y);
+            LocomotionSystem.RaiseTeleportCompleted(this, inputSource, targetPose, targetHotSpot);
         }
 
         private void FadeOut()

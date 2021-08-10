@@ -2,10 +2,14 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEngine;
+using XRTK.Definitions.LocomotionSystem;
+using XRTK.Editor.Extensions;
 
 namespace XRTK.Editor.Profiles.LocomotionSystem
 {
-    public abstract class BaseTeleportLocomotionProviderProfileInspector : LocomotionProviderProfileInspector
+    [CustomEditor(typeof(BaseTeleportLocomotionProviderProfile))]
+    public class BaseTeleportLocomotionProviderProfileInspector : LocomotionProviderProfileInspector
     {
         private SerializedProperty inputThreshold;
         private SerializedProperty teleportActivationAngle;
@@ -14,6 +18,8 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         private SerializedProperty rotationAmount;
         private SerializedProperty backStrafeActivationAngle;
         private SerializedProperty strafeAmount;
+
+        private static readonly GUIContent singleAndDualAxisConfigHeader = new GUIContent("Single / Dual Axis Input Action Settings");
 
         protected override void OnEnable()
         {
@@ -34,16 +40,19 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             serializedObject.Update();
 
-            EditorGUILayout.LabelField("Dual Axis Input Action Settings", EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(inputThreshold);
-            EditorGUILayout.PropertyField(teleportActivationAngle);
-            EditorGUILayout.PropertyField(angleOffset);
-            EditorGUILayout.PropertyField(rotateActivationAngle);
-            EditorGUILayout.PropertyField(rotationAmount);
-            EditorGUILayout.PropertyField(backStrafeActivationAngle);
-            EditorGUILayout.PropertyField(strafeAmount);
-            EditorGUI.indentLevel--;
+            if (inputThreshold.FoldoutWithBoldLabelPropertyField(singleAndDualAxisConfigHeader))
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(teleportActivationAngle);
+                EditorGUILayout.PropertyField(angleOffset);
+                EditorGUILayout.PropertyField(rotateActivationAngle);
+                EditorGUILayout.PropertyField(rotationAmount);
+                EditorGUILayout.PropertyField(backStrafeActivationAngle);
+                EditorGUILayout.PropertyField(strafeAmount);
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUILayout.Space();
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.LocomotionSystem
@@ -23,6 +24,19 @@ namespace XRTK.Definitions.LocomotionSystem
         {
             get => startupBehaviour;
             internal set => startupBehaviour = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Input action to perform locomotion using this provider.")]
+        private MixedRealityInputAction inputAction = MixedRealityInputAction.None;
+
+        /// <summary>
+        /// Gets input action to perform locomotion using this provider.
+        /// </summary>
+        public MixedRealityInputAction InputAction
+        {
+            get => inputAction;
+            internal set => inputAction = value;
         }
     }
 }

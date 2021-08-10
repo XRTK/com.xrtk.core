@@ -9,6 +9,11 @@ using XRTK.Services.LocomotionSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
+    /// <summary>
+    /// A <see cref="ITeleportLocomotionProvider"/> implementation that dashes to a target location
+    /// and doing so teleports the player rig to said location. The player cannot intefere or freely control
+    /// the movement. The fluid translations helps with fatigue for some players.
+    /// </summary>
     [System.Runtime.InteropServices.Guid("b3156486-94f3-4a02-98a9-a1c26fbf92d8")]
     public class DashTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {

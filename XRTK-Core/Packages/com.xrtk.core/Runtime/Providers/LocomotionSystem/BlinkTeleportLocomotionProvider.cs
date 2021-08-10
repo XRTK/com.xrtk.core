@@ -13,6 +13,11 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.LocomotionSystem
 {
+    /// <summary>
+    /// A <see cref="ITeleportLocomotionProvider"/> implementation that teleports the player rig
+    /// to a target location by simulating "blink of an eye". The camera fades out for movement and then
+    /// fades back in, this can help to avoid fatigue for some players.
+    /// </summary>
     [System.Runtime.InteropServices.Guid("497d2054-a467-4d6d-9d79-bd01aa6b4c22")]
     public class BlinkTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {

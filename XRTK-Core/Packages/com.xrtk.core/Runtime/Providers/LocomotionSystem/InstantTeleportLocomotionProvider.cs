@@ -8,6 +8,10 @@ using XRTK.Services.LocomotionSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
+    /// <summary>
+    /// A simple <see cref="ITeleportLocomotionProvider"/> implementation that teleports
+    /// the player rig instantly to a target location within a single frame.
+    /// </summary>
     [System.Runtime.InteropServices.Guid("790cdfd8-89c7-41c9-8dab-6b32e1e9d0a9")]
     public class InstantTeleportLocomotionProvider : BaseTeleportLocomotionProvider
     {

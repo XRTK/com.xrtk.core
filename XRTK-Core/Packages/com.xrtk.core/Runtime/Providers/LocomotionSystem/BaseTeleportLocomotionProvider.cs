@@ -30,6 +30,7 @@ namespace XRTK.Providers.LocomotionSystem
             strafeAmount = profile.StrafeAmount;
         }
 
+        private readonly Dictionary<uint, bool> inputPreviouslyDownDict = new Dictionary<uint, bool>();
         private float inputThreshold;
         private float teleportActivationAngle;
         private float angleOffset;
@@ -127,16 +128,20 @@ namespace XRTK.Providers.LocomotionSystem
                 // request for the input source, if any.
                 var singleAxisPosition = eventData.InputData;
                 if (singleAxisPosition > inputThreshold &&
+                    !WasInputPreviouslyDown(eventData.SourceId) &&
                     !OpenTargetRequests.ContainsKey(eventData.SourceId))
                 {
                     // This is a new target request as input was pressed and we have no open
                     // request yet.
+                    inputPreviouslyDownDict[eventData.SourceId] = true;
                     RaiseTeleportTargetRequest(eventData.InputSource);
                 }
                 else if (singleAxisPosition < inputThreshold &&
+                    WasInputPreviouslyDown(eventData.SourceId) &&
                     OpenTargetRequests.ContainsKey(eventData.SourceId))
                 {
                     // Input was relased and we have an open target request we can process now.
+                    inputPreviouslyDownDict[eventData.SourceId] = false;
                     var inputSource = OpenTargetRequests[eventData.SourceId];
                     ProcessTeleportRequest(inputSource);
                 }
@@ -166,18 +171,22 @@ namespace XRTK.Providers.LocomotionSystem
 
                     var absoluteAngle = Mathf.Abs(angle);
                     if (absoluteAngle < teleportActivationAngle &&
+                        !WasInputPreviouslyDown(eventData.SourceId) &&
                         !OpenTargetRequests.ContainsKey(eventData.SourceId))
                     {
                         // This is a new target request as input was pressed and we have no open
                         // request yet.
+                        inputPreviouslyDownDict[eventData.SourceId] = true;
                         RaiseTeleportTargetRequest(eventData.InputSource);
                     }
                 }
                 else if (Mathf.Abs(dualAxisPosition.y) < inputThreshold &&
                     Mathf.Abs(dualAxisPosition.x) < inputThreshold &&
+                    WasInputPreviouslyDown(eventData.SourceId) &&
                     OpenTargetRequests.ContainsKey(eventData.SourceId))
                 {
                     // Input was relased and we have an open target request we can process now.
+                    inputPreviouslyDownDict[eventData.SourceId] = false;
                     var inputSource = OpenTargetRequests[eventData.SourceId];
                     ProcessTeleportRequest(inputSource);
                 }
@@ -257,6 +266,17 @@ namespace XRTK.Providers.LocomotionSystem
             {
                 AvailableTargetProviders.Remove(inputSourceId);
             }
+        }
+
+        private bool WasInputPreviouslyDown(uint inputSourceId)
+        {
+            if (inputPreviouslyDownDict.TryGetValue(inputSourceId, out var wasDown))
+            {
+                return wasDown;
+            }
+
+            inputPreviouslyDownDict.Add(inputSourceId, false);
+            return false;
         }
 
         //public override void OnInputChanged(InputEventData<Vector2> eventData)

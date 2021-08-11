@@ -6,7 +6,7 @@ namespace #NAMESPACE#
     public class #NAME# : #BASE#, #INTERFACE#
     {
         public #NAME#(string name, uint priority, #NAME#Profile profile)
-            : base(name, priority, profile)
+            : base(name, priority)
         {
         }#IMPLEMENTS#
     }

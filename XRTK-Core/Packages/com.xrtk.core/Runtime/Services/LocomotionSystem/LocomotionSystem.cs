@@ -72,25 +72,9 @@ namespace XRTK.Services.LocomotionSystem
             CameraCache.Main.gameObject.EnsureComponent<LocomotionProviderEventDriver>().enabled = true;
         }
 
+        /// <inheritdoc />
         public override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                EnableLocomotionProvider<Providers.LocomotionSystem.BlinkTeleportLocomotionProvider>();
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                EnableLocomotionProvider<Providers.LocomotionSystem.DashTeleportLocomotionProvider>();
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                EnableLocomotionProvider<Providers.LocomotionSystem.InstantTeleportLocomotionProvider>();
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                EnableLocomotionProvider<Providers.LocomotionSystem.TransformPathOnRailsLocomotionProvider>();
-            }
-
             if (IsTeleportCoolingDown)
             {
                 currentTeleportCooldown -= Time.deltaTime;

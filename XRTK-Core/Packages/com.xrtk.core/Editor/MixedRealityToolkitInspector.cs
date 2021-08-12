@@ -63,11 +63,9 @@ namespace XRTK.Editor
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.LabelField(new GUIContent("Mixed Reality Toolkit Root Profile", "This profile is the main root configuration for the entire XRTK."));
 
+            EditorGUILayout.PropertyField(activeProfile, GUIContent.none);
+
             if (activeProfile.objectReferenceValue != null)
-            {
-                EditorGUILayout.PropertyField(activeProfile, GUIContent.none);
-            }
-            else
             {
                 if (GUILayout.Button("Create a new root profile"))
                 {
@@ -136,7 +134,12 @@ namespace XRTK.Editor
                 }
             }
 
-            if (!activeProfile.objectReferenceValue.IsNull())
+            if (changed)
+            {
+                profileInspector.Destroy();
+            }
+
+            if (activeProfile.objectReferenceValue.IsNotNull())
             {
                 var rootProfile = activeProfile.objectReferenceValue as MixedRealityToolkitRootProfile;
 

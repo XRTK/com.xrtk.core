@@ -213,6 +213,7 @@ namespace XRTK.Providers.LocomotionSystem
                 }
                 else if (!OpenTargetRequests.ContainsKey(eventData.SourceId) && !IsTeleporting)
                 {
+                    // It's safe to allow "quick rotation".
                     canRotate = true;
                 }
             }
@@ -249,6 +250,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             OpenTargetRequests.Add(inputSource.SourceId, inputSource);
             LocomotionSystem.RaiseTeleportTargetRequest(this, inputSource);
+            canRotate = false;
         }
 
         private void ProcessTeleportRequest(IMixedRealityInputSource inputSource)
@@ -277,6 +279,9 @@ namespace XRTK.Providers.LocomotionSystem
                 // since teleport was never started, we do not cancel but simply forget about the open request.
                 CleanUpTeleportRequest(inputSource.SourceId);
             }
+
+            // We want to allow quick rotation only when no teleport request is in progress.
+            canRotate = OpenTargetRequests.Count == 0;
         }
 
         private void CleanUpTeleportRequest(uint inputSourceId)
@@ -303,31 +308,5 @@ namespace XRTK.Providers.LocomotionSystem
             inputPreviouslyDownDict.Add(inputSourceId, false);
             return false;
         }
-
-        //public override void OnInputChanged(InputEventData<Vector2> eventData)
-        //{
-        //    if (RequestingLocomotionProvider != null &&
-        //        eventData.SourceId == InputSource.SourceId &&
-        //        eventData.Handedness == Handedness &&
-        //        eventData.MixedRealityInputAction == RequestingLocomotionProvider.InputAction)
-        //    {
-        //        currentDualAxisInputPosition = eventData.InputData;
-
-        //        if (Mathf.Abs(currentDualAxisInputPosition.y) > inputThreshold ||
-        //            Mathf.Abs(currentDualAxisInputPosition.x) > inputThreshold)
-        //        {
-        //            ...
-        //        }
-        //        else
-        //        {
-        //            if (!canTeleport && !teleportEnabled)
-        //            {
-        //                // Reset the move flag when the user stops moving the joystick
-        //                // but hasn't yet started teleport request.
-        //                canRotate = true;
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

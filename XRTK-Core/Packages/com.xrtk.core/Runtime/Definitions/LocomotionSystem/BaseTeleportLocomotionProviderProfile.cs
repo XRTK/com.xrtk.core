@@ -76,32 +76,5 @@ namespace XRTK.Definitions.LocomotionSystem
             get => rotationAmount;
             internal set => rotationAmount = value;
         }
-
-        [SerializeField]
-        [Range(5, 90f)]
-        [Tooltip("The angle from the joystick down position that will activate a strafe that will move the camera back.")]
-        private float backStrafeActivationAngle = 45f;
-
-        /// <summary>
-        /// The angle from the joystick down position that will activate a strafe that will move the camera back.
-        /// </summary>
-        public float BackStrafeActivationAngle
-        {
-            get => backStrafeActivationAngle;
-            internal set => backStrafeActivationAngle = value;
-        }
-
-        [SerializeField]
-        [Tooltip("The distance to move the camera when the strafe is activated.")]
-        private float strafeAmount = 0.25f;
-
-        /// <summary>
-        /// The distance to move the camera when the strafe is activated.
-        /// </summary>
-        public float StrafeAmount
-        {
-            get => strafeAmount;
-            internal set => strafeAmount = value;
-        }
     }
 }

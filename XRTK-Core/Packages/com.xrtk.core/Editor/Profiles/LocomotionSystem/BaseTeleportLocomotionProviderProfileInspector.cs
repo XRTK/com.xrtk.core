@@ -16,8 +16,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         private SerializedProperty angleOffset;
         private SerializedProperty rotateActivationAngle;
         private SerializedProperty rotationAmount;
-        private SerializedProperty backStrafeActivationAngle;
-        private SerializedProperty strafeAmount;
 
         private static readonly GUIContent singleAndDualAxisConfigHeader = new GUIContent("Single / Dual Axis Input Action Settings");
 
@@ -30,8 +28,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             angleOffset = serializedObject.FindProperty(nameof(angleOffset));
             rotateActivationAngle = serializedObject.FindProperty(nameof(rotateActivationAngle));
             rotationAmount = serializedObject.FindProperty(nameof(rotationAmount));
-            backStrafeActivationAngle = serializedObject.FindProperty(nameof(backStrafeActivationAngle));
-            strafeAmount = serializedObject.FindProperty(nameof(strafeAmount));
         }
 
         public override void OnInspectorGUI()
@@ -47,8 +43,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
                 EditorGUILayout.PropertyField(angleOffset);
                 EditorGUILayout.PropertyField(rotateActivationAngle);
                 EditorGUILayout.PropertyField(rotationAmount);
-                EditorGUILayout.PropertyField(backStrafeActivationAngle);
-                EditorGUILayout.PropertyField(strafeAmount);
                 EditorGUI.indentLevel--;
             }
 

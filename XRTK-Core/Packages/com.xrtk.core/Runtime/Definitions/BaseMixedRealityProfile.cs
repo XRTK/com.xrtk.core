@@ -13,6 +13,6 @@ namespace XRTK.Definitions
         /// <summary>
         /// The profile's parent in the service graph hierarchy.
         /// </summary>
-        public BaseMixedRealityProfile ParentProfile { get; set; } = null;
+        public BaseMixedRealityProfile ParentProfile { get; internal set; } = null;
     }
 }

@@ -28,12 +28,14 @@ namespace XRTK.Providers.Controllers.Hands
         public MixedRealityHandController(IMixedRealityHandControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
+            trackedPoseInteractionMapping = new MixedRealityInteractionMapping("Hand Controller Tracked Pose Mapping created at runtime.", AxisType.Digital, DeviceInputType.ButtonPress);
         }
 
         private const int POSE_FRAME_BUFFER_SIZE = 5;
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
 
+        private readonly MixedRealityInteractionMapping trackedPoseInteractionMapping;
         private readonly int velocityUpdateFrameInterval = 9;
         private readonly Bounds[] cachedPalmBounds = new Bounds[4];
         private readonly Bounds[] cachedThumbBounds = new Bounds[2];
@@ -107,6 +109,11 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public bool IsPointing { get; private set; }
 
+        /// <summary>
+        /// Is gripping state from the previous update frame.
+        /// </summary>
+        private bool LastIsGripping { get; set; }
+
         /// <inheritdoc />
         public bool IsGripping { get; private set; }
 
@@ -117,9 +124,9 @@ namespace XRTK.Providers.Controllers.Hands
         public float[] FingerCurlStrengths { get; set; } = new float[] { };
 
         /// <summary>
-        /// Is gripping state from the previous update frame.
+        /// Tracked pose ID from the previous update frame.
         /// </summary>
-        private bool LastIsGripping { get; set; }
+        private string LastTrackedPoseId { get; set; }
 
         /// <inheritdoc />
         public string TrackedPoseId { get; private set; }
@@ -145,7 +152,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">Updated hand data.</param>
         public void UpdateController(HandData handData)
         {
-            if (!Enabled) { return; }
+            if (!Enabled)
+            {
+                return;
+            }
 
             var lastTrackingState = TrackingState;
             TrackingState = handData.TrackingState;
@@ -166,6 +176,7 @@ namespace XRTK.Providers.Controllers.Hands
                 LastIsPinching = IsPinching;
                 LastIsGripping = IsGripping;
                 LastIsPointing = IsPointing;
+                LastTrackedPoseId = TrackedPoseId;
 
                 UpdateJoints(handData);
                 UpdateIsPinching(handData);
@@ -476,6 +487,37 @@ namespace XRTK.Providers.Controllers.Hands
                 }
 
                 interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+            }
+
+            UpdateTrackedPoseMapping();
+        }
+
+        private void UpdateTrackedPoseMapping()
+        {
+            if (string.Equals(LastTrackedPoseId, TrackedPoseId))
+            {
+                return;
+            }
+
+            // Tracked pose has changed, first we need to raise an input up
+            // event for the previous tracked pose.
+            if (!string.IsNullOrWhiteSpace(LastTrackedPoseId))
+            {
+                trackedPoseInteractionMapping.BoolData = false;
+                trackedPoseInteractionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+            }
+
+            // Now if we have a new valid pose, raise input down for it.
+            if (!string.IsNullOrWhiteSpace(TrackedPoseId))
+            {
+                var handControllerDataProvider = (IMixedRealityHandControllerDataProvider)ControllerDataProvider;
+                if (handControllerDataProvider.TrackedPoses.TryGetValue(TrackedPoseId, out var trackedPose) &&
+                    trackedPose.InputAction != Definitions.InputSystem.MixedRealityInputAction.None)
+                {
+                    trackedPoseInteractionMapping.MixedRealityInputAction = trackedPose.InputAction;
+                    trackedPoseInteractionMapping.BoolData = true;
+                    trackedPoseInteractionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                }
             }
         }
 

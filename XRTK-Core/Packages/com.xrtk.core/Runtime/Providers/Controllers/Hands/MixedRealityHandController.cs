@@ -10,7 +10,6 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
 
@@ -26,7 +25,7 @@ namespace XRTK.Providers.Controllers.Hands
         public MixedRealityHandController() : base() { }
 
         /// <inheritdoc />
-        public MixedRealityHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+        public MixedRealityHandController(IMixedRealityHandControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
         }

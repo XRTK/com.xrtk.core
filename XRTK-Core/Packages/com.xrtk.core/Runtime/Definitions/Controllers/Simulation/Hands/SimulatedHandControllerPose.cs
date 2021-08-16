@@ -75,7 +75,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// Initialize pose data for use in editor from files.
         /// </summary>
         /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(IReadOnlyList<HandControllerPoseProfile> poses)
+        public static void Initialize(IReadOnlyDictionary<string, HandControllerPoseProfile> poses)
         {
             if (isInitialized)
             {
@@ -90,43 +90,42 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
 
             foreach (var poseData in poses)
             {
-                if (poseData.Id.Equals("open"))
+                if (poseData.Value.Id.Equals("open"))
                 {
-                    openPose = new SimulatedHandControllerPose(poseData.Id);
-                    openPose.FromJson(poseData.Data.text);
+                    openPose = new SimulatedHandControllerPose(poseData.Key);
+                    openPose.FromJson(poseData.Value.Data.text);
                     HandPoses.Add(openPose.Id, openPose);
-                    //break;
                 }
             }
 
             foreach (var poseData in poses)
             {
-                if (poseData.Data != null)
+                if (poseData.Value.Data != null)
                 {
                     if (openPose != default)
                     {
                         // If we already found the open pose, we don't want it initialized again, since we took
                         // care of that above.
-                        if (!poseData.Id.Equals("open"))
+                        if (!poseData.Key.Equals("open"))
                         {
                             // We have open pose data, offset this pose using it's palm position.
-                            var pose = new SimulatedHandControllerPose(poseData.Id);
-                            pose.FromJson(poseData.Data.text);
+                            var pose = new SimulatedHandControllerPose(poseData.Key);
+                            pose.FromJson(poseData.Value.Data.text);
                             OffsetJointsRelativeToOpenPosePalmPosition(openPose, pose);
                             HandPoses.Add(pose.Id, pose);
                         }
                     }
                     else
                     {
-                        var pose = new SimulatedHandControllerPose(poseData.Id);
-                        pose.FromJson(poseData.Data.text);
+                        var pose = new SimulatedHandControllerPose(poseData.Key);
+                        pose.FromJson(poseData.Value.Data.text);
                         HandPoses.Add(pose.Id, pose);
                     }
                 }
 
-                if (poseData.IsDefault)
+                if (poseData.Value.IsDefault)
                 {
-                    DefaultHandPose = poseData;
+                    DefaultHandPose = poseData.Value;
                 }
             }
 

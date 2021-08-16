@@ -41,7 +41,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         public SimulatedHandDataConverter(Handedness handedness,
-            IReadOnlyList<HandControllerPoseProfile> trackedPoses,
+            IReadOnlyDictionary<string, HandControllerPoseProfile> trackedPoses,
             float handPoseAnimationSpeed,
             float jitterAmount,
             float defaultDistance)
@@ -76,7 +76,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private readonly float handPoseAnimationSpeed;
         private readonly float jitterAmount;
         private readonly float defaultDistance;
-        private readonly IReadOnlyList<HandControllerPoseProfile> poseDefinitions;
+        private readonly IReadOnlyDictionary<string, HandControllerPoseProfile> poseDefinitions;
         private readonly StopWatch handUpdateStopWatch;
         private readonly StopWatch lastUpdatedStopWatch;
 
@@ -257,13 +257,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Default pose if no other fitting user input.</returns>
         private SimulatedHandControllerPose GetTargetHandPose()
         {
-            for (int i = 0; i < poseDefinitions.Count; i++)
+            foreach (var pose in poseDefinitions)
             {
-                var result = poseDefinitions[i];
-
-                if (Input.GetKey(result.KeyCode))
+                if (Input.GetKey(pose.Value.KeyCode))
                 {
-                    return SimulatedHandControllerPose.GetPoseByName(result.Id);
+                    return SimulatedHandControllerPose.GetPoseByName(pose.Key);
                 }
             }
 

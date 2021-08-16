@@ -24,23 +24,25 @@ namespace XRTK.Providers.Controllers.Hands
         /// Creates a new recognizer instance to work on the provided list of poses.
         /// </summary>
         /// <param name="recognizablePoses">Recognizable poses by this recognizer.</param>
-        public HandTrackedPosePostProcessor(IReadOnlyList<HandControllerPoseProfile> recognizablePoses)
+        public HandTrackedPosePostProcessor(IReadOnlyDictionary<string, HandControllerPoseProfile> recognizablePoses)
         {
             bakedHandDatas = new HandData[recognizablePoses.Count];
             definitions = new Dictionary<int, HandControllerPoseProfile>();
 
-            for (int i = 0; i < recognizablePoses.Count; i++)
+            var i = 0;
+            foreach (var pose in recognizablePoses)
             {
-                var item = recognizablePoses[i];
-                if (item.DidBake)
+                if (pose.Value.DidBake)
                 {
-                    bakedHandDatas[i] = item.ToHandData();
-                    definitions.Add(i, item);
+                    bakedHandDatas[i] = pose.Value.ToHandData();
+                    definitions.Add(i, pose.Value);
                 }
                 else
                 {
-                    throw new ArgumentException($"Pose definition {item.Id} was not baked. Only baked poses are supported for recognition.");
+                    throw new ArgumentException($"Pose definition {pose.Key} was not baked. Only baked poses are supported for recognition.");
                 }
+
+                i++;
             }
         }
 

@@ -54,16 +54,26 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 ? profile.GripThreshold
                 : inputSystemProfile.GripThreshold;
 
-            if (profile.TrackedPoses != null && profile.TrackedPoses.Count > 0)
+            IReadOnlyList<HandControllerPoseProfile> trackedPoses;
+            if (profile.TrackedPoses != null &&
+                profile.TrackedPoses.Count > 0)
             {
-                TrackedPoses = profile.TrackedPoses.Count != inputSystemProfile.TrackedPoses.Count
+                trackedPoses = profile.TrackedPoses.Count != inputSystemProfile.TrackedPoses.Count
                     ? profile.TrackedPoses
                     : inputSystemProfile.TrackedPoses;
             }
             else
             {
-                TrackedPoses = inputSystemProfile.TrackedPoses;
+                trackedPoses = inputSystemProfile.TrackedPoses;
             }
+
+            var dict = new Dictionary<string, HandControllerPoseProfile>();
+            for (var i = 0; i < trackedPoses.Count; i++)
+            {
+                dict.Add(trackedPoses[i].Id, trackedPoses[i]);
+            }
+
+            TrackedPoses = dict;
 
             if (TrackedPoses == null || TrackedPoses.Count == 0)
             {
@@ -106,7 +116,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         public HandRenderingMode RenderingMode { get; set; }
 
-        private IReadOnlyList<HandControllerPoseProfile> TrackedPoses { get; }
+        /// <inheritdoc />
+        public IReadOnlyDictionary<string, HandControllerPoseProfile> TrackedPoses { get; }
 
         /// <inheritdoc />
         protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)

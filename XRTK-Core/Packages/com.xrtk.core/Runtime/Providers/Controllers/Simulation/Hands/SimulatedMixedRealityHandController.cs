@@ -7,6 +7,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands
@@ -21,7 +22,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedMixedRealityHandController() : base() { }
 
         /// <inheritdoc />
-        public SimulatedMixedRealityHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+        public SimulatedMixedRealityHandController(IMixedRealityHandControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         { }
 

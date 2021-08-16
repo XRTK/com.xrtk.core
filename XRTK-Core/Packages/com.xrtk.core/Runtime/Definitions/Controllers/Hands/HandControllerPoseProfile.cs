@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers.Hands
@@ -30,6 +31,15 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Describes the hand pose.
         /// </summary>
         public string Description => description;
+
+        [SerializeField]
+        [Tooltip("Input action raise whenever this pose is recognized.")]
+        private MixedRealityInputAction inputAction = MixedRealityInputAction.None;
+
+        /// <summary>
+        /// Input action raise whenever this pose is recognized.
+        /// </summary>
+        public MixedRealityInputAction InputAction => inputAction;
 
         [SerializeField]
         [Tooltip("Is this the default (idle) hand pose?")]

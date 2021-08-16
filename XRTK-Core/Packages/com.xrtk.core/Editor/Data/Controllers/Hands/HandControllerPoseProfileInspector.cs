@@ -17,6 +17,7 @@ namespace XRTK.Editor.Data.Controllers.Hands
     {
         private SerializedProperty id;
         private SerializedProperty description;
+        private SerializedProperty inputAction;
         private SerializedProperty isDefault;
         private SerializedProperty keyCode;
         private SerializedProperty data;
@@ -41,6 +42,7 @@ namespace XRTK.Editor.Data.Controllers.Hands
 
             id = serializedObject.FindProperty(nameof(id));
             description = serializedObject.FindProperty(nameof(description));
+            inputAction = serializedObject.FindProperty(nameof(inputAction));
             isDefault = serializedObject.FindProperty(nameof(isDefault));
             keyCode = serializedObject.FindProperty(nameof(keyCode));
             data = serializedObject.FindProperty(nameof(data));
@@ -65,6 +67,7 @@ namespace XRTK.Editor.Data.Controllers.Hands
 
                 EditorGUILayout.PropertyField(id);
                 EditorGUILayout.PropertyField(description);
+                EditorGUILayout.PropertyField(inputAction);
                 EditorGUILayout.PropertyField(data);
 
                 EditorGUI.indentLevel--;

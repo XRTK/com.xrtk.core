@@ -35,7 +35,7 @@ namespace XRTK.Providers.LocomotionSystem
         private readonly float fadeDuration;
         private IMixedRealityInputSource inputSource;
         private MixedRealityPose targetPose;
-        private ITeleportHotSpot targetHotSpot;
+        private ITeleportAnchor targetHotSpot;
         private GameObject fadeSphere;
         private MeshRenderer fadeSphereRenderer;
         private Color fadeInColor = Color.clear;

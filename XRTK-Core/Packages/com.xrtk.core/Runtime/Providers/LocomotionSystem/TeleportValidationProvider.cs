@@ -37,7 +37,7 @@ namespace XRTK.Providers.LocomotionSystem
         private readonly float maxHeightDistance;
 
         /// <inheritdoc />
-        public TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportHotSpot teleportHotSpot = null)
+        public TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportAnchor teleportHotSpot = null)
         {
             TeleportValidationResult teleportValidationResult;
 

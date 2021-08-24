@@ -27,7 +27,7 @@ namespace XRTK.Services.LocomotionSystem
         /// <summary>
         /// The teleport hot spot, if any.
         /// </summary>
-        public ITeleportHotSpot HotSpot { get; private set; }
+        public ITeleportAnchor HotSpot { get; private set; }
 
         /// <summary>
         /// Constructor.
@@ -41,8 +41,8 @@ namespace XRTK.Services.LocomotionSystem
         /// <param name="locomotionProvider">The <see cref="ILocomotionProvider"/> the event data is addressed at or coming from.</param>
         /// /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the event originated from.</param>
         /// <param name="pose">Optional <see cref="MixedRealityPose"/> providing a teleport target.</param>
-        /// <param name="hotSpot">Optional <see cref="ITeleportHotSpot"/> at the teleport target location.</param>
-        public void Initialize(ILocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportHotSpot hotSpot)
+        /// <param name="hotSpot">Optional <see cref="ITeleportAnchor"/> at the teleport target location.</param>
+        public void Initialize(ILocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor hotSpot)
         {
             BaseInitialize(inputSource);
             LocomotionProvider = locomotionProvider;

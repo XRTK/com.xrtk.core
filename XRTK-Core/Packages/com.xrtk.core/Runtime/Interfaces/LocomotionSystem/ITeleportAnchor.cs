@@ -6,9 +6,11 @@ using UnityEngine;
 namespace XRTK.Interfaces.LocomotionSystem
 {
     /// <summary>
-    /// Base interface to implement for teleportation hotspots to work with the <see cref="ILocomotionSystem"/>.
+    /// Interface for teleportation anchors supported by the <see cref="ILocomotionSystem"/>.
+    /// A teleport anchor is a predefined teleportatio location and thus always a valid
+    /// teleport target when enabled.
     /// </summary>
-    public interface ITeleportHotSpot
+    public interface ITeleportAnchor
     {
         /// <summary>
         /// The position the teleport will end at.
@@ -21,8 +23,8 @@ namespace XRTK.Interfaces.LocomotionSystem
         Vector3 Normal { get; }
 
         /// <summary>
-        /// Gets whether this hotspot is active. An inactive hotspot cannot be
-        /// teleported to.
+        /// Gets whether this anchor is active.
+        /// An inactive anchor cannot be teleported to.
         /// </summary>
         bool IsActive { get; }
 
@@ -32,12 +34,9 @@ namespace XRTK.Interfaces.LocomotionSystem
         bool OverrideTargetOrientation { get; }
 
         /// <summary>
-        /// Should the destination orientation be overridden?
-        /// Useful when you want to orient the user in a specific direction when they teleport to this position.
+        /// If <see cref="OverrideTargetOrientation"/> is set, this will specify the camera's target
+        /// orientation on the Y-axis.
         /// </summary>
-        /// <remarks>
-        /// Override orientation is the transform forward of the GameObject this component is attached to.
-        /// </remarks>
         float TargetOrientation { get; }
     }
 }

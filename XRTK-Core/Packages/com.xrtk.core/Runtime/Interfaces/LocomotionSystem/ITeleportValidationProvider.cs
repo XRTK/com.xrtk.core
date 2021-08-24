@@ -18,8 +18,8 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// qualifies for teleporation.
         /// </summary>
         /// <param name="pointerResult">The <see cref="IPointerResult"/> to validate.</param>
-        /// <param name="teleportHotSpot"><see cref="ITeleportHotSpot"/> found at the target position, if any.</param>
+        /// <param name="teleportHotSpot"><see cref="ITeleportAnchor"/> found at the target position, if any.</param>
         /// <returns>The <see cref="TeleportValidationResult"/> for <paramref name="pointerResult"/>.</returns>
-        TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportHotSpot teleportHotSpot = null);
+        TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportAnchor teleportHotSpot = null);
     }
 }

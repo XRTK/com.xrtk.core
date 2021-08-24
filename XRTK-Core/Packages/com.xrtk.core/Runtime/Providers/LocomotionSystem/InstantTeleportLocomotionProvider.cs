@@ -30,12 +30,12 @@ namespace XRTK.Providers.LocomotionSystem
                 var targetPosition = eventData.Pose.Value.Position;
                 targetRotation.y = eventData.Pose.Value.Rotation.eulerAngles.y;
 
-                if (eventData.HotSpot != null)
+                if (eventData.Anchor != null)
                 {
-                    targetPosition = eventData.HotSpot.Position;
-                    if (eventData.HotSpot.OverrideTargetOrientation)
+                    targetPosition = eventData.Anchor.Position;
+                    if (eventData.Anchor.OverrideTargetOrientation)
                     {
-                        targetRotation.y = eventData.HotSpot.TargetOrientation;
+                        targetRotation.y = eventData.Anchor.TargetOrientation;
                     }
                 }
 
@@ -46,7 +46,7 @@ namespace XRTK.Providers.LocomotionSystem
                 LocomotionTargetTransform.RotateAround(CameraTransform.position, Vector3.up, targetRotation.y - CameraTransform.eulerAngles.y);
 
                 var inputSource = OpenTargetRequests[eventData.EventSource.SourceId];
-                LocomotionSystem.RaiseTeleportCompleted(this, inputSource, eventData.Pose.Value, eventData.HotSpot);
+                LocomotionSystem.RaiseTeleportCompleted(this, inputSource, eventData.Pose.Value, eventData.Anchor);
             }
 
             base.OnTeleportStarted(eventData);

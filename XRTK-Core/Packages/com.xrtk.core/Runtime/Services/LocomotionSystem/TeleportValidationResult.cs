@@ -14,6 +14,6 @@ namespace XRTK.Services.LocomotionSystem
         None = 0,
         Valid,
         Invalid,
-        HotSpot,
+        Anchor,
     }
 }

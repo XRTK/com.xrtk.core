@@ -46,7 +46,7 @@ namespace XRTK.Providers.LocomotionSystem
 
                 if (t >= 1f)
                 {
-                    LocomotionSystem.RaiseTeleportCompleted(this, (IMixedRealityInputSource)locomotionEventData.EventSource, locomotionEventData.Pose.Value, locomotionEventData.HotSpot);
+                    LocomotionSystem.RaiseTeleportCompleted(this, (IMixedRealityInputSource)locomotionEventData.EventSource, locomotionEventData.Pose.Value, locomotionEventData.Anchor);
                     return;
                 }
 
@@ -66,12 +66,12 @@ namespace XRTK.Providers.LocomotionSystem
                 targetPosition = eventData.Pose.Value.Position;
                 targetRotation.y = eventData.Pose.Value.Rotation.eulerAngles.y;
 
-                if (eventData.HotSpot != null)
+                if (eventData.Anchor != null)
                 {
-                    targetPosition = eventData.HotSpot.Position;
-                    if (eventData.HotSpot.OverrideTargetOrientation)
+                    targetPosition = eventData.Anchor.Position;
+                    if (eventData.Anchor.OverrideTargetOrientation)
                     {
-                        targetRotation.y = eventData.HotSpot.TargetOrientation;
+                        targetRotation.y = eventData.Anchor.TargetOrientation;
                     }
                 }
 

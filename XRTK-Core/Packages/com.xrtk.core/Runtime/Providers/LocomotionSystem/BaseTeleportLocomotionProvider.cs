@@ -265,7 +265,7 @@ namespace XRTK.Providers.LocomotionSystem
                 if (teleportTargetProvider.TargetPose.HasValue)
                 {
                     // We have a valid teleport target, we can start teleportation.
-                    LocomotionSystem.RaiseTeleportStarted(this, inputSource, teleportTargetProvider.TargetPose.Value, teleportTargetProvider.HotSpot);
+                    LocomotionSystem.RaiseTeleportStarted(this, inputSource, teleportTargetProvider.TargetPose.Value, teleportTargetProvider.Anchor);
                 }
                 else
                 {

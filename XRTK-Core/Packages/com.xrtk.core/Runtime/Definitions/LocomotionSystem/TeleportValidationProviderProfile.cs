@@ -11,16 +11,16 @@ namespace XRTK.Definitions.LocomotionSystem
     public class TeleportValidationProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        [Tooltip("Should teleportation only be allowed if the target is a hotspot?")]
-        private bool hotSpotsOnly = false;
+        [Tooltip("Should teleportation only be allowed if the target is a teleport anchor?")]
+        private bool anchorsOnly = false;
 
         /// <summary>
-        /// Should teleportation only be allowed if the target is a hotspot?
+        /// Should teleportation only be allowed if the target is a <see cref="Interfaces.LocomotionSystem.ITeleportAnchor"/>?
         /// </summary>
-        public bool HotSpotsOnly
+        public bool AnchorsOnly
         {
-            get => hotSpotsOnly;
-            internal set => hotSpotsOnly = value;
+            get => anchorsOnly;
+            internal set => anchorsOnly = value;
         }
 
         [SerializeField]

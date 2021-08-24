@@ -294,9 +294,9 @@ namespace XRTK.Services.LocomotionSystem
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor hotSpot)
+        public void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor anchor)
         {
-            teleportEventData.Initialize(locomotionProvider, inputSource, pose, hotSpot);
+            teleportEventData.Initialize(locomotionProvider, inputSource, pose, anchor);
             HandleEvent(teleportEventData, OnTeleportStartedHandler);
         }
 
@@ -308,10 +308,10 @@ namespace XRTK.Services.LocomotionSystem
             };
 
         /// <inheritdoc />
-        public void RaiseTeleportCompleted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor hotSpot)
+        public void RaiseTeleportCompleted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor anchor)
         {
             currentTeleportCooldown = teleportCooldown;
-            teleportEventData.Initialize(locomotionProvider, inputSource, pose, hotSpot);
+            teleportEventData.Initialize(locomotionProvider, inputSource, pose, anchor);
             HandleEvent(teleportEventData, OnTeleportCompletedHandler);
         }
 

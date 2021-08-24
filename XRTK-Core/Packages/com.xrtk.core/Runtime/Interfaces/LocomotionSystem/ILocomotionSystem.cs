@@ -75,8 +75,8 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> that started teleportation.</param>
         /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>
         /// <param name="pose">The target <see cref="MixedRealityPose"/> the teleportation is going for.</param>
-        /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor hotSpot);
+        /// <param name="anchor">The teleport target anchor, if any.</param>
+        void RaiseTeleportStarted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor anchor);
 
         /// <summary>
         /// Raises a teleportation completed event for <see cref="ILocomotionSystemHandler"/>s.
@@ -84,8 +84,8 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <param name="locomotionProvider">The <see cref="ITeleportLocomotionProvider"/> whose teleportation has completed.</param>
         /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> the <paramref name="locomotionProvider"/>'s teleport request originated from.</param>
         /// <param name="pose">The target <see cref="MixedRealityPose"/> the teleportation was going for.</param>
-        /// <param name="hotSpot">The teleport target hot spot, if any.</param>
-        void RaiseTeleportCompleted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor hotSpot);
+        /// <param name="anchor">The teleport target anchor, if any.</param>
+        void RaiseTeleportCompleted(ITeleportLocomotionProvider locomotionProvider, IMixedRealityInputSource inputSource, MixedRealityPose pose, ITeleportAnchor anchor);
 
         /// <summary>
         /// Raises a teleportation canceled event for <see cref="ILocomotionSystemHandler"/>s.

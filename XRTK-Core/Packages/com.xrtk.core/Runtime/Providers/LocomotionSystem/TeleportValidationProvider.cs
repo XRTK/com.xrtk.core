@@ -21,7 +21,7 @@ namespace XRTK.Providers.LocomotionSystem
         public TeleportValidationProvider(string name, uint priority, TeleportValidationProviderProfile profile, ILocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            hotSpotsOnly = profile.HotSpotsOnly;
+            anchorsOnly = profile.AnchorsOnly;
             validLayers = profile.ValidLayers;
             invalidLayers = profile.InvalidLayers;
             upDirectionThreshold = profile.UpDirectionThreshold;
@@ -29,7 +29,7 @@ namespace XRTK.Providers.LocomotionSystem
             maxHeightDistance = profile.MaxHeightDistance;
         }
 
-        private readonly bool hotSpotsOnly;
+        private readonly bool anchorsOnly;
         private readonly LayerMask validLayers;
         private readonly LayerMask invalidLayers;
         private readonly float upDirectionThreshold;
@@ -37,7 +37,7 @@ namespace XRTK.Providers.LocomotionSystem
         private readonly float maxHeightDistance;
 
         /// <inheritdoc />
-        public TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportAnchor teleportHotSpot = null)
+        public TeleportValidationResult IsValid(IPointerResult pointerResult, ITeleportAnchor anchor = null)
         {
             TeleportValidationResult teleportValidationResult;
 
@@ -47,8 +47,8 @@ namespace XRTK.Providers.LocomotionSystem
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }
-            // Check hotspots only.
-            else if (hotSpotsOnly && (teleportHotSpot == null || !teleportHotSpot.IsActive))
+            // Check anchors only.
+            else if (anchorsOnly && (anchor == null || !anchor.IsActive))
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }
@@ -56,14 +56,14 @@ namespace XRTK.Providers.LocomotionSystem
             else if (((1 << pointerResult.CurrentPointerTarget.layer) & validLayers.value) != 0)
             {
                 // See if it's a hot spot
-                if (teleportHotSpot != null && teleportHotSpot.IsActive)
+                if (anchor != null && anchor.IsActive)
                 {
-                    teleportValidationResult = TeleportValidationResult.HotSpot;
+                    teleportValidationResult = TeleportValidationResult.Anchor;
                 }
                 else
                 {
-                    // If it's NOT a hotspot, check if the hit normal is too steep 
-                    // (Hotspots override dot requirements)
+                    // If it's NOT an anchor, check if the hit normal is too steep 
+                    // (Anchors override dot requirements)
                     teleportValidationResult = Vector3.Dot(pointerResult.LastRaycastHit.normal, Vector3.up) > upDirectionThreshold
                         ? TeleportValidationResult.Valid
                         : TeleportValidationResult.Invalid;

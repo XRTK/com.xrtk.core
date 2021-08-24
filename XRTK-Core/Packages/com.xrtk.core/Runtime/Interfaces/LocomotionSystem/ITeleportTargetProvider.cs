@@ -42,9 +42,9 @@ namespace XRTK.Interfaces.LocomotionSystem
         MixedRealityPose? TargetPose { get; }
 
         /// <summary>
-        /// Gets the target hotspot, if any.
+        /// Gets the target anchor, if any.
         /// </summary>
-        ITeleportAnchor HotSpot { get; }
+        ITeleportAnchor Anchor { get; }
 
         /// <summary>
         /// Gets the validation result for the current target location. The provider should only

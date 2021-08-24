@@ -35,7 +35,7 @@ namespace XRTK.Providers.LocomotionSystem
         private readonly float fadeDuration;
         private IMixedRealityInputSource inputSource;
         private MixedRealityPose targetPose;
-        private ITeleportAnchor targetHotSpot;
+        private ITeleportAnchor targetAnchor;
         private GameObject fadeSphere;
         private MeshRenderer fadeSphereRenderer;
         private Color fadeInColor = Color.clear;
@@ -104,14 +104,14 @@ namespace XRTK.Providers.LocomotionSystem
             {
                 inputSource = (IMixedRealityInputSource)eventData.EventSource;
                 targetPose = eventData.Pose.Value;
-                targetHotSpot = eventData.HotSpot;
+                targetAnchor = eventData.Anchor;
 
-                if (eventData.HotSpot != null)
+                if (eventData.Anchor != null)
                 {
-                    targetPose.Position = targetHotSpot.Position;
-                    if (targetHotSpot.OverrideTargetOrientation)
+                    targetPose.Position = targetAnchor.Position;
+                    if (targetAnchor.OverrideTargetOrientation)
                     {
-                        targetPose.Rotation = Quaternion.Euler(0f, targetHotSpot.TargetOrientation, 0f);
+                        targetPose.Rotation = Quaternion.Euler(0f, targetAnchor.TargetOrientation, 0f);
                     }
                 }
 
@@ -154,7 +154,7 @@ namespace XRTK.Providers.LocomotionSystem
 
             LocomotionTargetTransform.position = targetPose.Position;
             LocomotionTargetTransform.RotateAround(LocomotionTargetTransform.position, Vector3.up, targetPose.Rotation.eulerAngles.y - LocomotionTargetTransform.eulerAngles.y);
-            LocomotionSystem.RaiseTeleportCompleted(this, inputSource, targetPose, targetHotSpot);
+            LocomotionSystem.RaiseTeleportCompleted(this, inputSource, targetPose, targetAnchor);
         }
 
         private void FadeOut()

@@ -103,7 +103,11 @@ namespace XRTK.Editor.BuildPipeline
                     buildInfoInstance = buildInfo as BuildInfo;
                 }
 
-                Debug.Assert(buildInfoInstance.IsNotNull());
+                if (buildInfoInstance.IsNull())
+                {
+                    return null;
+                }
+
                 var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
                 Debug.Assert(buildAsset.IsNotNull());
                 buildInfo = buildInfoInstance;

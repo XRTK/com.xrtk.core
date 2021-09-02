@@ -263,7 +263,7 @@ namespace XRTK.Editor.BuildPipeline
 
             PlayerSettings.SetAdditionalIl2CppArgs(buildInfo.BuildTarget != BuildTarget.Android
                 ? $"--cachedirectory=\"{cacheDirectory}\""
-                : $"--cachedirectory=\"{string.Empty}\"");
+                : string.Empty);
 
             BuildReport buildReport = default;
 

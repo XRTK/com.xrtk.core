@@ -19,6 +19,7 @@ using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -45,7 +46,9 @@ namespace XRTK.Editor.BuildPipeline
                 BuildInfo buildInfoInstance;
                 var currentPlatformTarget = MixedRealityPreferences.CurrentPlatformTarget.GetType();
 
-                if (buildInfo == null ||
+                bool isBuildInfoNull = buildInfo == null;
+
+                if (isBuildInfoNull ||
                     buildInfo.BuildPlatform.GetType() != currentPlatformTarget)
                 {
                     buildInfoInstance = AppDomain.CurrentDomain
@@ -62,17 +65,34 @@ namespace XRTK.Editor.BuildPipeline
                                 return null;
                             }
 
-                            var assetGuids = AssetDatabase.FindAssets($"t:{type}");
+                            var buildInfos = Object.FindObjectsOfType(type);
 
-                            foreach (var guid in assetGuids)
+                            foreach (var info in buildInfos)
                             {
-                                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                                var assetPath = AssetDatabase.GetAssetPath(info);
                                 var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
 
                                 if (asset?.BuildPlatform.GetType() == currentPlatformTarget)
                                 {
                                     instance = asset as BuildInfo;
                                     break;
+                                }
+                            }
+
+                            if (instance.IsNull())
+                            {
+                                var assetGuids = AssetDatabase.FindAssets($"t:{type}");
+
+                                foreach (var guid in assetGuids)
+                                {
+                                    var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                                    var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
+
+                                    if (asset?.BuildPlatform.GetType() == currentPlatformTarget)
+                                    {
+                                        instance = asset as BuildInfo;
+                                        break;
+                                    }
                                 }
                             }
 
@@ -115,6 +135,7 @@ namespace XRTK.Editor.BuildPipeline
 
                 return buildInfo;
             }
+            internal set => buildInfo = value;
         }
 
         public static string GetValidVersionString(string version)

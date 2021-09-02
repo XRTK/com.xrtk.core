@@ -74,10 +74,14 @@ namespace XRTK.Editor.BuildPipeline
         {
             titleContent = new GUIContent("Build Window");
             minSize = new Vector2(512, 256);
-            Assert.IsNotNull(UnityPlayerBuildTools.BuildInfo);
         }
 
-        private void OnFocus() => platforms.Clear();
+        private void OnFocus()
+        {
+            UnityPlayerBuildTools.BuildInfo = null;
+            Assert.IsNotNull(UnityPlayerBuildTools.BuildInfo);
+            platforms.Clear();
+        }
 
         private void OnGUI()
         {
@@ -162,7 +166,8 @@ namespace XRTK.Editor.BuildPipeline
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
 
-            if (UnityPlayerBuildTools.BuildInfo is ScriptableObject buildObject)
+            if (!isBuilding &&
+                UnityPlayerBuildTools.BuildInfo is ScriptableObject buildObject)
             {
                 var editor = UnityEditor.Editor.CreateEditor(buildObject);
 

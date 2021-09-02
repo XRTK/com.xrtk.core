@@ -254,19 +254,16 @@ namespace XRTK.Editor.BuildPipeline
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
-            var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
-
-            if (cacheIl2Cpp)
+            if (buildInfo.BuildTarget != BuildTarget.Android)
             {
-                var il2cppCache = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
+                var cacheDirectory = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
 
-                if (!Directory.Exists(il2cppCache))
+                if (!Directory.Exists(cacheDirectory))
                 {
-                    Directory.CreateDirectory(il2cppCache);
+                    Directory.CreateDirectory(cacheDirectory);
                 }
 
-                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
+                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{cacheDirectory}\"");
             }
 
             BuildReport buildReport = default;
@@ -292,11 +289,6 @@ namespace XRTK.Editor.BuildPipeline
             catch (Exception e)
             {
                 Debug.LogError(e);
-            }
-
-            if (cacheIl2Cpp)
-            {
-                PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
             }
 
             if (PlayerSettings.GetApplicationIdentifier(buildTargetGroup) != oldBuildIdentifier)

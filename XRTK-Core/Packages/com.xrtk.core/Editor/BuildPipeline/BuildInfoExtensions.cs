@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -12,10 +13,10 @@ namespace XRTK.Editor.BuildPipeline
         /// Append symbols to the end of the <see cref="IBuildInfo"/>'s<see cref="IBuildInfo.BuildSymbols"/>.
         /// </summary>
         /// <param name="buildInfo"></param>
-        /// <param name="symbol">The string array to append.</param>
-        public static void AppendSymbols(this IBuildInfo buildInfo, params string[] symbol)
+        /// <param name="symbols">The string array to append.</param>
+        public static void AppendSymbols(this IBuildInfo buildInfo, params string[] symbols)
         {
-            buildInfo.AppendSymbols((IEnumerable<string>)symbol);
+            buildInfo.AppendSymbols((IEnumerable<string>)symbols);
         }
 
         /// <summary>
@@ -26,8 +27,8 @@ namespace XRTK.Editor.BuildPipeline
         public static void AppendSymbols(this IBuildInfo buildInfo, IEnumerable<string> symbols)
         {
             var toAdd = symbols
-                .Except(buildInfo.BuildSymbols.Split(';'))
                 .Where(symbol => !string.IsNullOrEmpty(symbol))
+                .Except(buildInfo.BuildSymbols.Split(';'))
                 .ToArray();
 
             if (!toAdd.Any())
@@ -40,7 +41,9 @@ namespace XRTK.Editor.BuildPipeline
                 buildInfo.BuildSymbols += ";";
             }
 
-            buildInfo.BuildSymbols += string.Join(";", toAdd);
+            var newSymbols = string.Join(";", toAdd);
+
+            buildInfo.BuildSymbols += newSymbols;
         }
 
         /// <summary>
@@ -52,8 +55,8 @@ namespace XRTK.Editor.BuildPipeline
         {
             var toKeep = buildInfo.BuildSymbols
                 .Split(';')
-                .Except(symbolsToRemove)
                 .Where(symbol => !string.IsNullOrEmpty(symbol))
+                .Except(symbolsToRemove)
                 .ToArray();
 
             if (!toKeep.Any())
@@ -66,7 +69,9 @@ namespace XRTK.Editor.BuildPipeline
                 buildInfo.BuildSymbols = string.Empty;
             }
 
-            buildInfo.BuildSymbols += string.Join(";", toKeep);
+            var newSymbols = string.Join(";", toKeep);
+
+            buildInfo.BuildSymbols += newSymbols;
         }
 
         /// <summary>

@@ -169,11 +169,17 @@ namespace XRTK.Editor.BuildPipeline
             if (!isBuilding &&
                 UnityPlayerBuildTools.BuildInfo is ScriptableObject buildObject)
             {
-                var editor = UnityEditor.Editor.CreateEditor(buildObject);
+                var buildAsset = AssetDatabase.GetAssetPath(buildObject);
+                var asset = AssetDatabase.LoadAssetAtPath<ScriptableObject>(buildAsset);
 
-                if (!editor.IsNull())
+                if (asset.IsNotNull())
                 {
-                    editor.OnInspectorGUI();
+                    var editor = UnityEditor.Editor.CreateEditor(asset);
+
+                    if (!editor.IsNull())
+                    {
+                        editor.OnInspectorGUI();
+                    }
                 }
             }
 

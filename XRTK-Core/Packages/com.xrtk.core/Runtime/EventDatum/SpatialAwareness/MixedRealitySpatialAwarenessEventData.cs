@@ -5,7 +5,7 @@ using System;
 using UnityEngine.EventSystems;
 using XRTK.Interfaces.Providers.SpatialObservers;
 
-namespace XRTK.EventDatum.SpatialAwareness
+namespace XRTK.EventDatum.SpatialAwarenessSystem
 {
     /// <summary>
     /// Data for spatial awareness events.

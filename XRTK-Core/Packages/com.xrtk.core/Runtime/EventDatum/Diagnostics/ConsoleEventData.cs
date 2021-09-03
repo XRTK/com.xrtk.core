@@ -4,7 +4,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace XRTK.EventDatum.Diagnostics
+namespace XRTK.EventDatum.DiagnosticsSystem
 {
     /// <summary>
     /// The event data associated with console events.

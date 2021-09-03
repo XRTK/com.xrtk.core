@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
 
-namespace XRTK.EventDatum.Diagnostics
+namespace XRTK.EventDatum.DiagnosticsSystem
 {
     /// <summary>
     /// The event data associated with memory events.

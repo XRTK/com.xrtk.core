@@ -1,6 +1,3 @@
-[submodule "Submodules/ARCore"]
-	path = Submodules/ARCore
-	url = https://github.com/XRTK/ARCore.git
 [submodule "Submodules/Examples"]
 	path = Submodules/Examples
 	url = https://github.com/XRTK/Examples.git

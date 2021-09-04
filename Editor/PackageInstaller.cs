@@ -77,7 +77,9 @@ namespace XRTK.Editor
                 {
                     var destinationDirectory = Path.GetFullPath(destinationPath);
 
-                    if (!Directory.Exists(destinationDirectory))
+                    // Check if directory or symbolic link exists before attempting to create it
+                    if (!Directory.Exists(destinationDirectory) &&
+                        !File.Exists(destinationDirectory))
                     {
                         Directory.CreateDirectory(destinationDirectory);
                     }

@@ -13,18 +13,6 @@ MonoBehaviour:
   m_Name: SymbolicLinkSettings
   m_EditorClassIdentifier: 
   symbolicLinks:
-  - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Packages/com.xrtk.wmr
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.wmr
-    isActive: 1
-  - sourceRelativePath: /Submodules/Lumin/XRTK.Lumin/Packages/com.xrtk.lumin
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.lumin
-    isActive: 1
-  - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Packages/com.xrtk.sdk
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.sdk
-    isActive: 1
-  - sourceRelativePath: /Submodules/Oculus/XRTK.Oculus/Packages/com.xrtk.oculus
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.oculus
-    isActive: 1
   - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Packages/com.xrtk.sdk/Profiles~
     targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/SDK/Profiles
     isActive: 1
@@ -43,21 +31,6 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/Examples/XRTK.Examples/Assets/XRTK.Examples
     targetRelativePath: /XRTK-Core/Assets/XRTK.Examples
     isActive: 1
-  - sourceRelativePath: /Submodules/Ultraleap/XRTK.Ultraleap/Packages/com.xrtk.ultraleap
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.ultraleap
-    isActive: 1
   - sourceRelativePath: /Submodules/Ultraleap/XRTK.Ultraleap/Packages/com.xrtk.ultraleap/Profiles~
     targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/Ultraleap/Profiles
-    isActive: 1
-  - sourceRelativePath: /Submodules/glTF/XRTK.glTF/Packages/com.xrtk.gltf
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.gltf
-    isActive: 1
-  - sourceRelativePath: /Submodules/WebXR/XRTK.WebXR/Packages/com.xrtk.webxr
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.webxr
-    isActive: 1
-  - sourceRelativePath: /Submodules/WebXR/XRTK.WebXR/Packages/com.xrtk.webxr/Profiles~
-    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/WebXR/Profiles
-    isActive: 1
-  - sourceRelativePath: /Submodules/WebXR/Submodules/Simple-WebXR-Unity/com.rufus31415.simplewebxr/Runtime/Plugins
-    targetRelativePath: /Submodules/WebXR/XRTK.WebXR/Packages/com.xrtk.webxr/Runtime/Plugins
     isActive: 1

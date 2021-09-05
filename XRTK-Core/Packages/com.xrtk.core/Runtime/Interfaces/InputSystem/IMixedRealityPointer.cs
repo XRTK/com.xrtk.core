@@ -9,7 +9,6 @@ using XRTK.Definitions.Physics;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Physics;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Interfaces.TeleportSystem;
 
 namespace XRTK.Interfaces.InputSystem
 {
@@ -47,11 +46,6 @@ namespace XRTK.Interfaces.InputSystem
         /// The currently active cursor modifier.
         /// </summary>
         ICursorModifier CursorModifier { get; set; }
-
-        /// <summary>
-        /// The currently active teleport hotspot.
-        /// </summary>
-        IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
 
         /// <summary>
         /// The <see cref="InteractionMode"/> for this pointer.

@@ -29,6 +29,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Extensions;
 using XRTK.Services;
@@ -45,6 +46,22 @@ namespace XRTK.Utilities.Async
     /// </summary>
     public static class AwaiterExtensions
     {
+        /// <summary>
+        /// Runs the async task synchronously.
+        /// </summary>
+        /// <param name="asyncFunc"><see cref="Func{TResult}"/> callback.</param>
+        public static void RunSynchronously(Func<Task> asyncFunc)
+            => Task.Run(async () => await asyncFunc()).Wait();
+
+        /// <summary>
+        /// Runs the async task synchronously.
+        /// </summary>
+        /// <typeparam name="T">Return type.</typeparam>
+        /// <param name="asyncFunc"><see cref="Func{TResult}"/> callback.</param>
+        /// <returns></returns>
+        public static T RunSynchronously<T>(Func<Task<T>> asyncFunc)
+            => Task.Run(async () => await asyncFunc()).Result;
+
         private class CoroutineRunner : MonoBehaviour { }
 
         public static SimpleCoroutineAwaiter GetAwaiter(this WaitForSeconds instruction)

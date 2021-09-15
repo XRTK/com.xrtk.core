@@ -34,15 +34,6 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/Ultraleap/XRTK.Ultraleap/Packages/com.xrtk.ultraleap/Profiles~
     targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/Ultraleap/Profiles
     isActive: 1
-<<<<<<< HEAD
   - sourceRelativePath: /Submodules/glTF/XRTK.glTF/Packages/com.xrtk.gltf
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.gltf
     isActive: 1
-  - sourceRelativePath: /Submodules/SpatialPersistence/XRTK.SpatialPersistence/Packages/com.xrtk.spatial-persistence
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.spatial-persistence
-    isActive: 1
-  - sourceRelativePath: /Submodules/SpatialPersistence.ASA/XRTK.SpatialPersistence.ASA/Packages/com.xrtk.spatial-persistence.asa
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.spatial-persistence.asa
-    isActive: 1
-=======
->>>>>>> ead34fc1e16d69c4b281e368cc7f396ac05db25b

@@ -28,6 +28,7 @@
     "com.xrtk.lumin": "file:../../Submodules/Lumin/XRTK.Lumin/Packages/com.xrtk.lumin",
     "com.xrtk.oculus": "file:../../Submodules/Oculus/XRTK.Oculus/Packages/com.xrtk.oculus",
     "com.xrtk.sdk": "file:../../Submodules/SDK/XRTK.SDK/Packages/com.xrtk.sdk",
+    "com.xrtk.spatial-persistence": "file:../../Submodules/SpatialPersistence/XRTK.SpatialPersistence/Packages/com.xrtk.spatial-persistence",
     "com.xrtk.ultraleap": "file:../../Submodules/Ultraleap/XRTK.Ultraleap/Packages/com.xrtk.ultraleap",
     "com.xrtk.wmr": "file:../../Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Packages/com.xrtk.wmr",
     "com.unity.modules.ai": "1.0.0",

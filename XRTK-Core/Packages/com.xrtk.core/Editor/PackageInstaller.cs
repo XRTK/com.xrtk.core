@@ -37,9 +37,7 @@ namespace XRTK.Editor
         /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
         public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = false)
-        {
-            return TryInstallAssets(new Dictionary<string, string> { { sourcePath, destinationPath } }, regenerateGuids);
-        }
+            => TryInstallAssets(new Dictionary<string, string> { { sourcePath, destinationPath } }, regenerateGuids);
 
         /// <summary>
         /// Attempt to copy any assets found in the source path into the project.
@@ -77,7 +75,15 @@ namespace XRTK.Editor
                 }
                 else
                 {
-                    Directory.CreateDirectory(Path.GetFullPath(destinationPath));
+                    var destinationDirectory = Path.GetFullPath(destinationPath);
+
+                    // Check if directory or symbolic link exists before attempting to create it
+                    if (!Directory.Exists(destinationDirectory) &&
+                        !File.Exists(destinationDirectory))
+                    {
+                        Directory.CreateDirectory(destinationDirectory);
+                    }
+
                     EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
 
                     var copiedAssets = UnityFileHelper.GetUnityAssetsAtPath(sourcePath);

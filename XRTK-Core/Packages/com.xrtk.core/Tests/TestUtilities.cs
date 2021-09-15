@@ -6,9 +6,9 @@ using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Definitions.TeleportSystem;
+using XRTK.Definitions.LocomotionSystem;
+using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Editor.Extensions;
-using XRTK.Interfaces.TeleportSystem;
 using XRTK.Services;
 
 namespace XRTK.Tests
@@ -44,9 +44,8 @@ namespace XRTK.Tests
             if (useDefaultProfile)
             {
                 configuration = GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>();
-                MixedRealityToolkit.TryGetSystemProfile<IMixedRealityTeleportSystem, MixedRealityTeleportSystemProfile>(out var teleportSystemProfile);
-                Debug.Assert(teleportSystemProfile != null);
-                teleportSystemProfile.TeleportProvider = typeof(TestTeleportProvider);
+                MixedRealityToolkit.TryGetSystemProfile<ILocomotionSystem, LocomotionSystemProfile>(out var locomotionSystemProfile);
+                Debug.Assert(locomotionSystemProfile != null);
             }
             else
             {

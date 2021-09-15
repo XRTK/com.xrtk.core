@@ -10,7 +10,6 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Physics;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Interfaces.TeleportSystem;
 
 namespace XRTK.Services.InputSystem.Pointers
 {
@@ -89,9 +88,6 @@ namespace XRTK.Services.InputSystem.Pointers
             }
             set => cursorModifier = value;
         }
-
-        /// <inheritdoc />
-        public IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
 
         /// <inheritdoc />
         public InteractionMode InteractionMode { get; }

@@ -34,6 +34,3 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/Ultraleap/XRTK.Ultraleap/Packages/com.xrtk.ultraleap/Profiles~
     targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/Ultraleap/Profiles
     isActive: 1
-  - sourceRelativePath: /Submodules/glTF/XRTK.glTF/Packages/com.xrtk.gltf
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.gltf
-    isActive: 1

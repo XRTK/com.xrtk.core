@@ -24,7 +24,6 @@
     "com.unity.ide.vscode": "1.2.4",
     "com.unity.mobile.android-logcat": "1.2.3",
     "com.unity.test-framework": "1.1.29",
-    "com.unity.xr.management": "4.0.7",
     "com.xrtk.gltf": "file:../../Submodules/glTF/XRTK.glTF/Packages/com.xrtk.gltf",
     "com.xrtk.lumin": "file:../../Submodules/Lumin/XRTK.Lumin/Packages/com.xrtk.lumin",
     "com.xrtk.oculus": "file:../../Submodules/Oculus/XRTK.Oculus/Packages/com.xrtk.oculus",

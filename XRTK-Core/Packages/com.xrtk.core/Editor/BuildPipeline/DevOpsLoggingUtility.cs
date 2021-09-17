@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace XRTK.Editor.Utilities
+namespace XRTK.Editor.BuildPipeline
 {
     [InitializeOnLoad]
     public static class DevOpsLoggingUtility

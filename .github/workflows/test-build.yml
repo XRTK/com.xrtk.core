@@ -116,12 +116,12 @@ jobs:
         with:
           submodules: true
 
-      - run: echo ${{ needs.setup.outputs.editor-path }}
-      - run: echo ${{ needs.setup.outputs.project-path }}
+      - run: echo "${{ needs.setup.outputs.editor-path }}"
+      - run: echo "${{ needs.setup.outputs.project-path }}"
 
       - uses: xrtk/unity-action@main
         with:
           name: 'validation'
-          editor-path: ${{ needs.setup.outputs.editor-path }}
-          project-path: ${{ needs.setup.outputs.project-path }}
+          editor-path: '${{ needs.setup.outputs.editor-path }}'
+          project-path: '${{ needs.setup.outputs.project-path }}'
           args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject'

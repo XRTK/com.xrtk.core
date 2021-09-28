@@ -119,7 +119,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        build-target: [StandaloneWindows64, WSAPlayer, Android]
+        build-target: [StandaloneWindows64, WSAPlayer, Android, Lumin]
       max-parallel: 1
 
     steps:

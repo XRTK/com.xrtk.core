@@ -119,11 +119,11 @@ jobs:
         if: always()
         with:
           name: 'Validation-Results'
-          path: '${{ steps.validate-project-setup.outputs.project-path }}/Builds/Logs'
+          path: '${{ steps.validate-project-setup.outputs.project-path }}\Builds\Logs'
 
       - name: cleanup
         run: |
-          $logDirectory = "${{ steps.validate-project-setup.outputs.project-path }}/Builds/Logs"
+          $logDirectory = "${{ steps.validate-project-setup.outputs.project-path }}\Builds"
           
           if (Test-Path -Path $logDirectory) {
             Remove-Item $logDirectory -Force -Recurse
@@ -160,10 +160,10 @@ jobs:
       - name: 'zip artifacts'
         if: always()
         run: |
-          $artifacts = "${{ needs.validate.outputs.project-path }}/Builds"
+          $artifacts = "${{ needs.validate.outputs.project-path }}\Builds"
 
           if (Test-Path -Path $artifacts) {
-            Compress-Archive -Path $artifacts -DestinationPath ${{ github.workspace }}/${{ matrix.build-target }}-Artifacts.zip
+            Compress-Archive -Path "$artifacts\*" -DestinationPath ${{ github.workspace }}\${{ matrix.build-target }}-Artifacts.zip
             Remove-Item $artifacts -Force -Recurse
           }
         shell: powershell
@@ -172,4 +172,4 @@ jobs:
         if: always()
         with:
           name: '${{ matrix.build-target }}-Artifacts'
-          path: '${{ github.workspace }}/${{ matrix.build-target }}-Artifacts.zip'
+          path: '${{ github.workspace }}\${{ matrix.build-target }}-Artifacts.zip'

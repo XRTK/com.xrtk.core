@@ -132,7 +132,7 @@ jobs:
           name: '${{ matrix.built-target }}-Tests'
           editor-path: '${{ needs.setup.outputs.editor-path }}'
           project-path: '${{ needs.setup.outputs.project-path }}'
-          build-target: '${{ materix.build-target }}'
+          build-target: '${{ matrix.build-target }}'
           args: '-batchmode -runEditorTests'
 
       - uses: xrtk/unity-action@main
@@ -140,5 +140,5 @@ jobs:
           name: '${{ matrix.built-target }}-Build'
           editor-path: '${{ needs.setup.outputs.editor-path }}'
           project-path: '${{ needs.setup.outputs.project-path }}'
-          build-target: '${{ materix.build-target }}'
+          build-target: '${{ matrix.build-target }}'
           args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild'

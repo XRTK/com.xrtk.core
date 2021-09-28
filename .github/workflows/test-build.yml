@@ -129,7 +129,7 @@ jobs:
 
       - uses: xrtk/unity-action@main
         with:
-          name: '${{ matrix.built-target }}-Tests'
+          name: '${{ matrix.build-target }}-Tests'
           editor-path: '${{ needs.setup.outputs.editor-path }}'
           project-path: '${{ needs.setup.outputs.project-path }}'
           build-target: '${{ matrix.build-target }}'
@@ -137,7 +137,7 @@ jobs:
 
       - uses: xrtk/unity-action@main
         with:
-          name: '${{ matrix.built-target }}-Build'
+          name: '${{ matrix.build-target }}-Build'
           editor-path: '${{ needs.setup.outputs.editor-path }}'
           project-path: '${{ needs.setup.outputs.project-path }}'
           build-target: '${{ matrix.build-target }}'

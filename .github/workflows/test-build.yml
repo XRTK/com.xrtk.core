@@ -1,4 +1,4 @@
-name: XRTK UPM CI
+name: XRTK CI
 
 on:
   push:
@@ -120,8 +120,7 @@ jobs:
         with:
           name: 'Validation-Results'
           path: |
-            **/Logs
-            **/*.log
+            **/Logs/
             
   build:
     needs: validate
@@ -132,9 +131,9 @@ jobs:
       max-parallel: 1
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
+      # - uses: actions/checkout@v2
+      #   with:
+      #     submodules: true
 
       - uses: xrtk/unity-action@main
         name: '${{ matrix.build-target }}-Tests'
@@ -159,7 +158,6 @@ jobs:
         with:
           name: '${{ matrix.build-target }}-Build-Results'
           path: |
-            **/Logs
-            **/*.log
+            **/Logs/
             **/*test*.xml
             **/Builds/

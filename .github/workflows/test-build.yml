@@ -120,6 +120,15 @@ jobs:
         with:
           name: 'Validation-Results'
           path: '${{ steps.validate-project-setup.outputs.project-path }}/Builds/Logs'
+
+      - name: cleanup
+        run: |
+          $logDirectory = "${{ steps.validate-project-setup.outputs.project-path }}/Builds/Logs"
+          
+          if (Test-Path -Path $logDirectory) {
+            Remove-Item $logDirectory -Force -Recurse
+          }
+        shell: powershell
             
   build:
     needs: validate

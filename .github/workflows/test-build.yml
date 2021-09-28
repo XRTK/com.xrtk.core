@@ -159,5 +159,5 @@ jobs:
           name: '${{ matrix.build-target }}-Build-Results'
           path: |
             **/Logs/
-            **/*test*.xml
             **/Builds/
+            !**/Builds/**/*_BackUpThisFolder_ButDontShipItWithYourGame/

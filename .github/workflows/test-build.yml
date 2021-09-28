@@ -14,12 +14,14 @@ jobs:
   setup:
     runs-on: self-hosted
     outputs:
-      editor-path: ${{ steps.validate.outputs.editor-path }}
-      project-path: ${{ steps.validate.outputs.project-path }}
+      editor-path: ${{ steps.validate-paths.outputs.editor-path }}
+      project-path: ${{ steps.validate-paths.outputs.project-path }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
 
-      - id: validate
+      - id: validate-paths
         name: 'Unity Installation Validation'
         run: |
           Write-Host "Unity Installation Validation"
@@ -104,6 +106,14 @@ jobs:
           Write-Host "::set-output name=editor-path::$editorPath"
           exit 0
         shell: powershell
+
+      - uses: xrtk/unity-action@main
+        with:
+          name: 'validation'
+          editor-path: '${{ steps.validate-paths.outputs.editor-path }}'
+          project-path: '${{ steps.validate-paths.outputs.project-path }}'
+          args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject'
+
   build:
     needs: setup
     runs-on: self-hosted
@@ -119,7 +129,16 @@ jobs:
 
       - uses: xrtk/unity-action@main
         with:
-          name: 'validation'
+          name: '${{ matrix.built-target }}-Tests'
           editor-path: '${{ needs.setup.outputs.editor-path }}'
           project-path: '${{ needs.setup.outputs.project-path }}'
-          args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject'
+          build-target: '${{ materix.build-target }}'
+          args: '-batchmode -runEditorTests'
+
+      - uses: xrtk/unity-action@main
+        with:
+          name: '${{ matrix.built-target }}-Build'
+          editor-path: '${{ needs.setup.outputs.editor-path }}'
+          project-path: '${{ needs.setup.outputs.project-path }}'
+          build-target: '${{ materix.build-target }}'
+          args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild'

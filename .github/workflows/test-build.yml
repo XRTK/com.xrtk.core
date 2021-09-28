@@ -116,6 +116,9 @@ jobs:
         with:
           submodules: true
 
+      - run: echo ${{ needs.setup.outputs.editor-path }}
+      - run: echo ${{ needs.setup.outputs.project-path }}
+
       - uses: xrtk/unity-action@main
         with:
           name: 'validation'

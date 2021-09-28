@@ -131,10 +131,6 @@ jobs:
       max-parallel: 1
 
     steps:
-      # - uses: actions/checkout@v2
-      #   with:
-      #     submodules: true
-
       - uses: xrtk/unity-action@main
         name: '${{ matrix.build-target }}-Tests'
         with:
@@ -153,11 +149,19 @@ jobs:
           build-target: '${{ matrix.build-target }}'
           args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild'
 
+      - name: 'zip artifacts'
+        if: always()
+        run: |
+          $artifacts = "${{ needs.validate.outputs.project-path }}/Builds"
+
+          if (Test-Path -Path $artifacts) {
+            Compress-Archive -Path $artifacts -DestinationPath ${{ github.workspace }}/${{ matrix.build-target }}-Artifacts.zip
+            Remove-Item $artifacts -Force -Recurse
+          }
+        shell: powershell
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: '${{ matrix.build-target }}-Build-Results'
-          path: |
-            **/Logs/
-            **/Builds/
-            !**/Builds/**/*_BackUpThisFolder_ButDontShipItWithYourGame/
+          name: '${{ matrix.build-target }}-Artifacts'
+          path: '${{ github.workspace }}/${{ matrix.build-target }}-Artifacts.zip'

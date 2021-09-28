@@ -14,12 +14,12 @@ jobs:
   setup:
     runs-on: self-hosted
     outputs:
-      editor-path: ${{ steps.valiate-unity-installation.editor-path }}
-      project-path: ${{ steps.validate-unity-installation.project-path }}
+      editor-path: ${{ steps.valiate.outputs.editor-path }}
+      project-path: ${{ steps.validate.outputs.project-path }}
     steps:
       - uses: actions/checkout@v2
 
-      - id: validate-unity-installation
+      - id: validate
         name: 'Unity Installation Validation'
         run: |
           Write-Host "Unity Installation Validation"

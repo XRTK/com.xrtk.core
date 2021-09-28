@@ -119,8 +119,7 @@ jobs:
         if: always()
         with:
           name: 'Validation-Results'
-          path: |
-            **/Logs/
+          path: '${{ steps.validate-project-setup.outputs.project-path }}/Builds/Logs'
             
   build:
     needs: validate

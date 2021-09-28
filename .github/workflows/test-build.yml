@@ -11,17 +11,17 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  setup:
+  validate:
     runs-on: self-hosted
     outputs:
-      editor-path: ${{ steps.validate-paths.outputs.editor-path }}
-      project-path: ${{ steps.validate-paths.outputs.project-path }}
+      editor-path: ${{ steps.validate-project-setup.outputs.editor-path }}
+      project-path: ${{ steps.validate-project-setup.outputs.project-path }}
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
 
-      - id: validate-paths
+      - id: validate-project-setup
         name: 'Unity Installation Validation'
         run: |
           Write-Host "Unity Installation Validation"
@@ -108,14 +108,23 @@ jobs:
         shell: powershell
 
       - uses: xrtk/unity-action@main
+        name: 'project-validation'
         with:
-          name: 'validation'
-          editor-path: '${{ steps.validate-paths.outputs.editor-path }}'
-          project-path: '${{ steps.validate-paths.outputs.project-path }}'
+          name: 'project-validation'
+          editor-path: '${{ steps.validate-project-setup.outputs.editor-path }}'
+          project-path: '${{ steps.validate-project-setup.outputs.project-path }}'
           args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject'
 
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: 'Validation-Results'
+          path: |
+            **/Logs
+            **/*.log
+            
   build:
-    needs: setup
+    needs: validate
     runs-on: self-hosted
     strategy:
       matrix:
@@ -128,17 +137,29 @@ jobs:
           submodules: true
 
       - uses: xrtk/unity-action@main
+        name: '${{ matrix.build-target }}-Tests'
         with:
           name: '${{ matrix.build-target }}-Tests'
-          editor-path: '${{ needs.setup.outputs.editor-path }}'
-          project-path: '${{ needs.setup.outputs.project-path }}'
+          editor-path: '${{ needs.validate.outputs.editor-path }}'
+          project-path: '${{ needs.validate.outputs.project-path }}'
           build-target: '${{ matrix.build-target }}'
           args: '-batchmode -runEditorTests'
 
       - uses: xrtk/unity-action@main
+        name: '${{ matrix.build-target }}-Build'
         with:
           name: '${{ matrix.build-target }}-Build'
-          editor-path: '${{ needs.setup.outputs.editor-path }}'
-          project-path: '${{ needs.setup.outputs.project-path }}'
+          editor-path: '${{ needs.validate.outputs.editor-path }}'
+          project-path: '${{ needs.validate.outputs.project-path }}'
           build-target: '${{ matrix.build-target }}'
           args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild'
+
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: '${{ matrix.build-target }}-Build-Results'
+          path: |
+            **/Logs
+            **/*.log
+            **/*test*.xml
+            **/Builds/

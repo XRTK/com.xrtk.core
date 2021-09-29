@@ -29,20 +29,23 @@ namespace XRTK.Editor.BuildPipeline
 
         public void LogFormat(LogType logType, Object context, string format, params object[] args)
         {
-            switch (logType)
+            if (CILoggingUtility.LoggingEnabled)
             {
-                case LogType.Log:
-                    break;
-                case LogType.Assert:
-                case LogType.Error:
-                case LogType.Exception:
-                    format = $"{Error}{format}";
-                    break;
-                case LogType.Warning:
-                    format = $"{Warning}{format}";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(logType), logType, null);
+                switch (logType)
+                {
+                    case LogType.Log:
+                        break;
+                    case LogType.Assert:
+                    case LogType.Error:
+                    case LogType.Exception:
+                        format = $"{Error}{format}";
+                        break;
+                    case LogType.Warning:
+                        format = $"{Warning}{format}";
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(logType), logType, null);
+                }
             }
 
             defaultLogger.LogFormat(logType, context, format, args);
@@ -79,6 +82,8 @@ namespace XRTK.Editor.BuildPipeline
     public static class CILoggingUtility
     {
         public static ICILogger Logger { get; }
+
+        public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
 
         public readonly static List<string> IgnoredLogs = new List<string>
         {

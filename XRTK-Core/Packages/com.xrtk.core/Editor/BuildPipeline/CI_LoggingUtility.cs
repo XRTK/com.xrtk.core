@@ -30,7 +30,7 @@ namespace XRTK.Editor.BuildPipeline
         /// <inheritdoc />
         public void LogFormat(LogType logType, Object context, string format, params object[] args)
         {
-            if (CILoggingUtility.LoggingEnabled && !CILoggingUtility.IgnoredLogs.Any(format.Contains))
+            if (CILoggingUtility.LoggingEnabled && !CILoggingUtility.IgnoredLogs.Any(args.Contains))
             {
                 switch (logType)
                 {

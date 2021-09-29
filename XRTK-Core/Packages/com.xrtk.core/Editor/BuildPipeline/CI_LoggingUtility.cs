@@ -17,37 +17,59 @@ namespace XRTK.Editor.BuildPipeline
         string Warning { get; }
     }
 
-    public class AzurePipelinesLogger : ICILogger
+    public abstract class AbstractCILogger : ICILogger
     {
-        public string Error => "##vso[task.logissue type=error;]";
+        private readonly ILogHandler defaultLogger;
 
-        public string Warning => "##vso[task.logissue type=warning;]";
+        protected AbstractCILogger()
+        {
+            defaultLogger = Debug.unityLogger.logHandler;
+            Debug.unityLogger.logHandler = this;
+        }
 
         public void LogFormat(LogType logType, Object context, string format, params object[] args)
         {
-            throw new NotImplementedException();
+            switch (logType)
+            {
+                case LogType.Log:
+                    break;
+                case LogType.Assert:
+                case LogType.Error:
+                case LogType.Exception:
+                    format = $"{Error}{format}";
+                    break;
+                case LogType.Warning:
+                    format = $"{Warning}{format}";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(logType), logType, null);
+            }
+
+            defaultLogger.LogFormat(logType, context, format, args);
         }
 
         public void LogException(Exception exception, Object context)
         {
-            throw new NotImplementedException();
+            defaultLogger.LogException(exception, context);
         }
+
+        public virtual string Error => string.Empty;
+
+        public virtual string Warning => string.Empty;
     }
 
-    public class GitHubActionsLogger : ICILogger
+    public class AzurePipelinesLogger : AbstractCILogger
     {
-        public string Error => "::error::";
-        public string Warning => "::warning::";
+        public override string Error => "##vso[task.logissue type=error;]";
 
-        public void LogFormat(LogType logType, Object context, string format, params object[] args)
-        {
-            throw new NotImplementedException();
-        }
+        public override string Warning => "##vso[task.logissue type=warning;]";
+    }
 
-        public void LogException(Exception exception, Object context)
-        {
-            throw new NotImplementedException();
-        }
+    public class GitHubActionsLogger : AbstractCILogger
+    {
+        public override string Error => "::error::";
+
+        public override string Warning => "::warning::";
     }
 
     /// <summary>
@@ -57,8 +79,6 @@ namespace XRTK.Editor.BuildPipeline
     public static class CILoggingUtility
     {
         public static ICILogger Logger { get; }
-
-        public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
 
         public readonly static List<string> IgnoredLogs = new List<string>
         {
@@ -73,48 +93,14 @@ namespace XRTK.Editor.BuildPipeline
 
         static CILoggingUtility()
         {
-            if (LoggingEnabled)
+            if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("AGENT_NAME")))
             {
-                var ciVar = Environment.GetEnvironmentVariable("CI");
-                Debug.Log($"CI: {ciVar}");
-
-                var agentVar = Environment.GetEnvironmentVariable("AGENT_NAME");
-                Debug.Log($"AGENT: {agentVar}");
-
-                if (!string.IsNullOrWhiteSpace(agentVar))
-                {
-                    Logger = new AzurePipelinesLogger();
-                }
-
-                var githubVar = Environment.GetEnvironmentVariable("GITHUB_WORKFLOW");
-                Debug.Log($"GitHub: {githubVar}");
-
-                if (!string.IsNullOrWhiteSpace(githubVar))
-                {
-                    Logger = new GitHubActionsLogger();
-                }
-
-                Application.logMessageReceived += OnLogMessageReceived;
-            }
-        }
-
-        private static void OnLogMessageReceived(string condition, string stacktrace, LogType type)
-        {
-            if (!LoggingEnabled || IgnoredLogs.Any(condition.Contains))
-            {
-                return;
+                Logger = new AzurePipelinesLogger();
             }
 
-            switch (type)
+            if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("GITHUB_WORKFLOW")))
             {
-                case LogType.Error:
-                case LogType.Assert:
-                case LogType.Exception:
-                    Debug.Log($"{Logger.Error}{condition}\n{stacktrace}");
-                    break;
-                case LogType.Warning:
-                    Debug.Log($"{Logger.Warning}{condition}\n{stacktrace}");
-                    break;
+                Logger = new GitHubActionsLogger();
             }
         }
     }

@@ -30,7 +30,17 @@ namespace XRTK.Editor.BuildPipeline
         /// <inheritdoc />
         public void LogFormat(LogType logType, Object context, string format, params object[] args)
         {
-            if (CILoggingUtility.LoggingEnabled && !CILoggingUtility.IgnoredLogs.Any(args.Contains))
+            var skip = false;
+
+            foreach (var arg in args)
+            {
+                if (arg is string message)
+                {
+                    skip = CILoggingUtility.IgnoredLogs.Any(message.Contains);
+                }
+            }
+
+            if (CILoggingUtility.LoggingEnabled && !skip)
             {
                 switch (logType)
                 {

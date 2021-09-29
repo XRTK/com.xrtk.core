@@ -56,11 +56,7 @@ namespace XRTK.Editor.BuildPipeline
     [InitializeOnLoad]
     public static class CILoggingUtility
     {
-        public static ICILogger Logger { get; private set; } =
-        {
-            new AzurePipelinesLogger(),
-            new GitHubActionsLogger()
-        };
+        public static ICILogger Logger { get; }
 
         public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
 

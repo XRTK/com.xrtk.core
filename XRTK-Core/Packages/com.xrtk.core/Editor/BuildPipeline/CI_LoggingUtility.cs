@@ -27,9 +27,10 @@ namespace XRTK.Editor.BuildPipeline
             Debug.unityLogger.logHandler = this;
         }
 
+        /// <inheritdoc />
         public void LogFormat(LogType logType, Object context, string format, params object[] args)
         {
-            if (CILoggingUtility.LoggingEnabled)
+            if (CILoggingUtility.LoggingEnabled && !CILoggingUtility.IgnoredLogs.Any(format.Contains))
             {
                 switch (logType)
                 {
@@ -51,6 +52,7 @@ namespace XRTK.Editor.BuildPipeline
             defaultLogger.LogFormat(logType, context, format, args);
         }
 
+        /// <inheritdoc />
         public void LogException(Exception exception, Object context)
         {
             defaultLogger.LogException(exception, context);
@@ -61,6 +63,9 @@ namespace XRTK.Editor.BuildPipeline
         public virtual string Warning => string.Empty;
     }
 
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands
+    /// </summary>
     public class AzurePipelinesLogger : AbstractCILogger
     {
         public override string Error => "##vso[task.logissue type=error;]";
@@ -68,6 +73,9 @@ namespace XRTK.Editor.BuildPipeline
         public override string Warning => "##vso[task.logissue type=warning;]";
     }
 
+    /// <summary>
+    /// https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#about-workflow-commands
+    /// </summary>
     public class GitHubActionsLogger : AbstractCILogger
     {
         public override string Error => "::error::";
@@ -75,9 +83,6 @@ namespace XRTK.Editor.BuildPipeline
         public override string Warning => "::warning::";
     }
 
-    /// <summary>
-    /// https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands
-    /// </summary>
     [InitializeOnLoad]
     public static class CILoggingUtility
     {
@@ -89,7 +94,6 @@ namespace XRTK.Editor.BuildPipeline
         {
             @".android\repositories.cfg could not be loaded",
             @"Using symlinks in Unity projects may cause your project to become corrupted",
-            @"Assembly 'Newtonsoft.Json' has non matching file name:",
             @"Skipping WindowsDictationDataProvider registration",
             @"Skipping WindowsSpeechDataProvider registration",
             @"Cancelling DisplayDialog: Built in VR Detected XR Plug-in Management has detected that this project is using built in VR.",

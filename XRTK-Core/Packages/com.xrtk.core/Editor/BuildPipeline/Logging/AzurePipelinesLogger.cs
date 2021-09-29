@@ -4,12 +4,15 @@
 namespace XRTK.Editor.BuildPipeline.Logging
 {
     /// <summary>
+    /// Azure Pipelines CI Logger
     /// https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands
     /// </summary>
     public class AzurePipelinesLogger : AbstractCILogger
     {
+        /// <inheritdoc />
         public override string Error => "##vso[task.logissue type=error;]";
 
+        /// <inheritdoc />
         public override string Warning => "##vso[task.logissue type=warning;]";
     }
 }

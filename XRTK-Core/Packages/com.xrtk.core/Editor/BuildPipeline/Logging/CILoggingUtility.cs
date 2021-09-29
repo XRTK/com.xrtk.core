@@ -8,13 +8,25 @@ using UnityEngine;
 
 namespace XRTK.Editor.BuildPipeline.Logging
 {
+    /// <summary>
+    /// Logging utility designed to properly output logs to continuous integration workflow logging consoles.
+    /// </summary>
     [InitializeOnLoad]
     public static class CILoggingUtility
     {
+        /// <summary>
+        /// The logger to use.
+        /// </summary>
         public static ICILogger Logger { get; set; }
 
+        /// <summary>
+        /// Is CI Logging currently enabled?
+        /// </summary>
         public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
 
+        /// <summary>
+        /// List of ignored log messages.
+        /// </summary>
         public static readonly List<string> IgnoredLogs = new List<string>
         {
             @".android\repositories.cfg could not be loaded",

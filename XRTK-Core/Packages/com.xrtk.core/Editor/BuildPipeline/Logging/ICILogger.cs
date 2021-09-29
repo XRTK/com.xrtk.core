@@ -5,10 +5,19 @@ using UnityEngine;
 
 namespace XRTK.Editor.BuildPipeline.Logging
 {
+    /// <summary>
+    /// CI Logging interface.
+    /// </summary>
     public interface ICILogger : ILogHandler
     {
+        /// <summary>
+        /// Error message prefix.
+        /// </summary>
         string Error { get; }
 
+        /// <summary>
+        /// Warning message prefix.
+        /// </summary>
         string Warning { get; }
     }
 }

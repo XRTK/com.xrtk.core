@@ -8,6 +8,9 @@ using Object = UnityEngine.Object;
 
 namespace XRTK.Editor.BuildPipeline.Logging
 {
+    /// <summary>
+    /// Base abstract logger to use when creating custom loggers.
+    /// </summary>
     public abstract class AbstractCILogger : ICILogger
     {
         private readonly ILogHandler defaultLogger;
@@ -59,8 +62,10 @@ namespace XRTK.Editor.BuildPipeline.Logging
             defaultLogger.LogException(exception, context);
         }
 
+        /// <inheritdoc />
         public virtual string Error => string.Empty;
 
+        /// <inheritdoc />
         public virtual string Warning => string.Empty;
     }
 }

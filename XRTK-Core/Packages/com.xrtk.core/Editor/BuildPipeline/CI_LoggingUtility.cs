@@ -1,14 +1,16 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Editor.BuildPipeline
 {
-    public interface ICILogger
+    public interface ICILogger : ILogHandler
     {
         string Error { get; }
 
@@ -20,12 +22,32 @@ namespace XRTK.Editor.BuildPipeline
         public string Error => "##vso[task.logissue type=error;]";
 
         public string Warning => "##vso[task.logissue type=warning;]";
+
+        public void LogFormat(LogType logType, Object context, string format, params object[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LogException(Exception exception, Object context)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class GitHubActionsLogger : ICILogger
     {
         public string Error => "::error::";
         public string Warning => "::warning::";
+
+        public void LogFormat(LogType logType, Object context, string format, params object[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LogException(Exception exception, Object context)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -34,7 +56,7 @@ namespace XRTK.Editor.BuildPipeline
     [InitializeOnLoad]
     public static class CILoggingUtility
     {
-        public static ICILogger[] Loggers { get; } =
+        public static ICILogger Logger { get; private set; } =
         {
             new AzurePipelinesLogger(),
             new GitHubActionsLogger()
@@ -57,6 +79,25 @@ namespace XRTK.Editor.BuildPipeline
         {
             if (LoggingEnabled)
             {
+                var ciVar = Environment.GetEnvironmentVariable("CI");
+                Debug.Log($"CI: {ciVar}");
+
+                var agentVar = Environment.GetEnvironmentVariable("AGENT_NAME");
+                Debug.Log($"AGENT: {agentVar}");
+
+                if (!string.IsNullOrWhiteSpace(agentVar))
+                {
+                    Logger = new AzurePipelinesLogger();
+                }
+
+                var githubVar = Environment.GetEnvironmentVariable("GITHUB_WORKFLOW");
+                Debug.Log($"GitHub: {githubVar}");
+
+                if (!string.IsNullOrWhiteSpace(githubVar))
+                {
+                    Logger = new GitHubActionsLogger();
+                }
+
                 Application.logMessageReceived += OnLogMessageReceived;
             }
         }
@@ -73,16 +114,10 @@ namespace XRTK.Editor.BuildPipeline
                 case LogType.Error:
                 case LogType.Assert:
                 case LogType.Exception:
-                    foreach (var logger in Loggers)
-                    {
-                        Debug.Log($"{logger.Error}{condition}\n{stacktrace}");
-                    }
+                    Debug.Log($"{Logger.Error}{condition}\n{stacktrace}");
                     break;
                 case LogType.Warning:
-                    foreach (var logger in Loggers)
-                    {
-                        Debug.Log($"{logger.Warning}{condition}\n{stacktrace}");
-                    }
+                    Debug.Log($"{Logger.Warning}{condition}\n{stacktrace}");
                     break;
             }
         }

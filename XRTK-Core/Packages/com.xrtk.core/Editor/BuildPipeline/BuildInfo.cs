@@ -211,9 +211,6 @@ namespace XRTK.Editor.BuildPipeline
                         }
 
                         break;
-                    default:
-                        Debug.LogWarning($"unused arg: {arguments[i]}");
-                        break;
                 }
             }
         }

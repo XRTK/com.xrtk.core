@@ -155,7 +155,7 @@ namespace XRTK.Editor.BuildPipeline
                 switch (arguments[i])
                 {
                     case "-ignoreCompilerErrors":
-                        DevOpsLoggingUtility.LoggingEnabled = false;
+                        CILoggingUtility.LoggingEnabled = false;
                         break;
                     case "-autoIncrement":
                         AutoIncrement = true;
@@ -210,6 +210,9 @@ namespace XRTK.Editor.BuildPipeline
                                 break;
                         }
 
+                        break;
+                    default:
+                        Debug.LogWarning($"unused arg: {arguments[i]}");
                         break;
                 }
             }

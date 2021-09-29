@@ -308,7 +308,7 @@ namespace XRTK.Editor.BuildPipeline
         [UsedImplicitly]
         public static void ValidateProject()
         {
-            DevOpsLoggingUtility.LoggingEnabled = false;
+            CILoggingUtility.LoggingEnabled = false;
 
             try
             {

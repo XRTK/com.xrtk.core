@@ -8,12 +8,41 @@ using UnityEngine;
 
 namespace XRTK.Editor.BuildPipeline
 {
-    [InitializeOnLoad]
-    public static class DevOpsLoggingUtility
+    public interface ICILogger
     {
+        string Error { get; }
+
+        string Warning { get; }
+    }
+
+    public class AzurePipelinesLogger : ICILogger
+    {
+        public string Error => "##vso[task.logissue type=error;]";
+
+        public string Warning => "##vso[task.logissue type=warning;]";
+    }
+
+    public class GitHubActionsLogger : ICILogger
+    {
+        public string Error => "::error::";
+        public string Warning => "::warning::";
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands
+    /// </summary>
+    [InitializeOnLoad]
+    public static class CILoggingUtility
+    {
+        public static ICILogger[] Loggers { get; } =
+        {
+            new AzurePipelinesLogger(),
+            new GitHubActionsLogger()
+        };
+
         public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
 
-        public static List<string> IgnoredLogs = new List<string>()
+        public readonly static List<string> IgnoredLogs = new List<string>
         {
             @".android\repositories.cfg could not be loaded",
             @"Using symlinks in Unity projects may cause your project to become corrupted",
@@ -24,7 +53,7 @@ namespace XRTK.Editor.BuildPipeline
             @"Reference rewriter: Error: method `System.Numerics.Vector3[] Windows.Perception.Spatial.SpatialStageFrameOfReference::TryGetMovementBounds(Windows.Perception.Spatial.SpatialCoordinateSystem)` doesn't exist in target framework. It is referenced from XRTK.WindowsMixedReality.dll at System.Boolean XRTK.WindowsMixedReality.Providers.BoundarySystem.WindowsMixedRealityBoundaryDataProvider::TryGetBoundaryGeometry"
         };
 
-        static DevOpsLoggingUtility()
+        static CILoggingUtility()
         {
             if (LoggingEnabled)
             {
@@ -44,10 +73,16 @@ namespace XRTK.Editor.BuildPipeline
                 case LogType.Error:
                 case LogType.Assert:
                 case LogType.Exception:
-                    Debug.Log($"##vso[task.logissue type=error;]{condition}\n{stacktrace}");
+                    foreach (var logger in Loggers)
+                    {
+                        Debug.Log($"{logger.Error}{condition}\n{stacktrace}");
+                    }
                     break;
                 case LogType.Warning:
-                    Debug.Log($"##vso[task.logissue type=warning;]{condition}\n{stacktrace}");
+                    foreach (var logger in Loggers)
+                    {
+                        Debug.Log($"{logger.Warning}{condition}\n{stacktrace}");
+                    }
                     break;
             }
         }

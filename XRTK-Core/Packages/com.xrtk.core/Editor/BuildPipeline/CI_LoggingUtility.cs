@@ -107,6 +107,7 @@ namespace XRTK.Editor.BuildPipeline
             @"Skipping WindowsDictationDataProvider registration",
             @"Skipping WindowsSpeechDataProvider registration",
             @"Cancelling DisplayDialog: Built in VR Detected XR Plug-in Management has detected that this project is using built in VR.",
+            @"Reference Rewriter found some errors while running with command",
             @"Reference rewriter: Error: method `System.Numerics.Vector3[] Windows.Perception.Spatial.SpatialStageFrameOfReference::TryGetMovementBounds(Windows.Perception.Spatial.SpatialCoordinateSystem)` doesn't exist in target framework. It is referenced from XRTK.WindowsMixedReality.dll at System.Boolean XRTK.WindowsMixedReality.Providers.BoundarySystem.WindowsMixedRealityBoundaryDataProvider::TryGetBoundaryGeometry"
         };
 

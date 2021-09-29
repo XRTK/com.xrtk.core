@@ -308,8 +308,6 @@ namespace XRTK.Editor.BuildPipeline
         [UsedImplicitly]
         public static void ValidateProject()
         {
-            CILoggingUtility.LoggingEnabled = false;
-
             try
             {
                 SymbolicLinker.RunSync(true);

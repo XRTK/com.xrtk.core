@@ -154,9 +154,6 @@ namespace XRTK.Editor.BuildPipeline
             {
                 switch (arguments[i])
                 {
-                    case "-ignoreCompilerErrors":
-                        CILoggingUtility.LoggingEnabled = false;
-                        break;
                     case "-autoIncrement":
                         AutoIncrement = true;
                         break;

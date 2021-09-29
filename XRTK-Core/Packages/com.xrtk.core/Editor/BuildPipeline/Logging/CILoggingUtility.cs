@@ -11,7 +11,7 @@ namespace XRTK.Editor.BuildPipeline.Logging
     [InitializeOnLoad]
     public static class CILoggingUtility
     {
-        public static ICILogger Logger { get; }
+        public static ICILogger Logger { get; set; }
 
         public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
 

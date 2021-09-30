@@ -24,6 +24,7 @@ jobs:
 
       - name: get package info
         run: |
+          Write-Host $PSScriptRoot
           $packageDir = Get-ChildItem $PSScriptRoot -Recurse | Where-Object { $_.PSIsContainer -and (-not ($_.Parent.FullName.Contains('Submodules') -or $_.Parent.FullName.Contains('Builds'))) -and $_.Parent.FullName.Contains('Packages') -and $_.Name.Contains('com.xrtk') } | Select-Object -ExpandProperty FullName
           Write-Host $packageDir
 

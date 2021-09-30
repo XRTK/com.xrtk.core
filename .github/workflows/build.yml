@@ -22,12 +22,6 @@ jobs:
         with:
           submodules: true
 
-      - name: get package info
-        run: |
-          $packageDir = Get-Item -Path "**/Packages/com.*" | Select-Object -ExpandProperty FullName
-          Write-Host $packageDir
-        working-directory: ${{ github.workspace }}
-
       - id: unity-validate
         uses: xrtk/unity-validate@main
 
@@ -109,5 +103,8 @@ jobs:
 
       - name: upm subtree split
         run: |
-          git subtree split --prefix="XRTK.Core/Packages/com.xrtk.core" -b upm
+          $packageDir = Get-Item -Path "**/Packages/com.*" | Select-Object -ExpandProperty FullName
+          Write-Host $packageDir
+          git subtree split --prefix="$packageDir" -b upm
           git push -u origin upm --force
+        working-directory: ${{ github.workspace }}

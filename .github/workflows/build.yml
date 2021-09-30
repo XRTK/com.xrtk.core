@@ -107,7 +107,9 @@ jobs:
       - name: upm subtree split
         run: |
           $packageDir = Get-Item -Path "**/Packages/com.*" | Select-Object -ExpandProperty FullName
+          $packageDir = $packageDir.replace('${{ github.workspace }}/','')
           Write-Host $packageDir
           git subtree split --prefix="$packageDir" -b upm
           git push -u origin upm --force
         working-directory: ${{ github.workspace }}
+        shell: pwsh

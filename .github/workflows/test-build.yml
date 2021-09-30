@@ -15,116 +15,33 @@ jobs:
   validate:
     runs-on: self-hosted
     outputs:
-      editor-path: ${{ steps.validate-project-setup.outputs.editor-path }}
-      project-path: ${{ steps.validate-project-setup.outputs.project-path }}
+      editor-path: ${{ steps.unity-validate.outputs.editor-path }}
+      project-path: ${{ steps.unity-validate.outputs.project-path }}
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
 
-      - id: validate-project-setup
-        name: 'Unity Installation Validation'
-        run: |
-          Write-Host "Unity Installation Validation"
-          $editorRootPath = ""
-          $editorFileEx = ""
-          $versionFile = "${{ '**/ProjectSettings/ProjectVersion.txt' }}"
-
-          if ( -not (Test-Path -Path $versionFile) ) {
-            Write-Error "Failed to find a valid project version file at `"$versionFile`""
-            exit 1
-          }
-
-          $projectPath = (Get-Item $versionFile).Directory.Parent.FullName
-          Write-Host "Unity project path: `"$projectPath`""
-          Write-Host "::set-output name=project-path::$projectPath"
-
-          $version = Get-Content -Path $versionFile
-          $pattern = '(?<version>(?:(?<major>\d+)\.)?(?:(?<minor>\d+)\.)?(?:(?<patch>\d+[fab]\d+)\b))|((?:\((?<revision>\w+))\))'
-          $matches = $matches = [regex]::Matches($version, $pattern)
-          $unityVersion = $matches[1].Groups['version'].Value.Trim()
-          $unityVersionChangeSet = $matches[2].Groups['revision'].Value.Trim()
-
-          if ( (-not $global:PSVersionTable.Platform) -or ($global:PSVersionTable.Platform -eq "Win32NT") ) {
-            $hubPath = "C:\Program Files\Unity Hub\Unity Hub.exe"
-            $editorRootPath = "C:\Program Files\Unity\Hub\Editor\"
-            $editorFileEx = "\Editor\Unity.exe"
-            $modules = @('windows-il2cpp', 'universal-windows-platform', 'lumin', 'webgl', 'android')
-          }
-          elseif ( $global:PSVersionTable.OS.Contains("Darwin") ) {
-            $hubPath = "/Applications/Unity Hub.app/Contents/MacOS/Unity Hub"
-            $editorRootPath = "/Applications/Unity/Hub/Editor/"
-            $editorFileEx = "/Unity.app"
-            $modules = @('mac-il2cpp', 'ios', 'lumin', 'webgl', 'android')
-          }
-          elseif ( $global:PSVersionTable.OS.Contains("Linux") ) {
-            $hubPath = "./UnityHub.AppImage"
-            $editorRootPath = "~/Unity/Hub/Editor/"
-            $editorFileEx = "/Unity"
-            $modules = @('linux', 'lumin', 'webgl', 'android')
-          }
-
-          if ( Test-Path -Path $hubPath ) {
-            Write-Host "Unity Hub found at `"$hubPath`""
-            Write-Host ""
-          } else {
-            Write-Error "Failed to validate Unity Hub path at `"$hubPath`""
-            exit 1
-          }
-
-          Write-Host "Editor root path currently set to: `"$editorRootPath`""
-          Write-Host ""
-
-          Write-Host "Unity HUB CLI Options:"
-          $p = Start-Process -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
-          Write-Host ""
-
-          $editorPath = "{0}{1}{2}" -f $editorRootPath,$unityVersion,$editorFileEx
-
-          if ( -not (Test-Path -Path $editorPath) ) {
-            Write-Host "Installing $unityVersion ($unityVersionChangeSet)..."
-            $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet",'--cm');
-
-            foreach ( $module in $modules ) {
-              $installArgs += '-m'
-              $installArgs += $module
-            }
-
-            $p = Start-Process -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
-            Write-Host ""
-          }
-
-          Write-Host "Getting installed editors..."
-          $p = Start-Process -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
-          Write-Host ""
-
-          if ( -not (Test-Path -Path $editorPath) ) {
-            Write-Error "Failed to find a valid editor installation at `"$editorPath`""
-            exit 1
-          }
-
-          Write-Host "Unity Editor path: `"$editorPath`""
-          Write-Host "::set-output name=editor-path::$editorPath"
-          exit 0
-        shell: powershell
+      - id: unity-validate
+        uses: xrtk/unity-validate@main
 
       - uses: xrtk/unity-action@main
         name: 'project-validation'
         with:
           name: 'project-validation'
-          editor-path: '${{ steps.validate-project-setup.outputs.editor-path }}'
-          project-path: '${{ steps.validate-project-setup.outputs.project-path }}'
+          editor-path: '${{ steps.unity-validate.outputs.editor-path }}'
+          project-path: '${{ steps.unity-validate.outputs.project-path }}'
           args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject'
 
       - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: 'Validation-Results'
-          path: '${{ steps.validate-project-setup.outputs.project-path }}\Builds\Logs'
+          path: '${{ steps.unity-validate.outputs.project-path }}\Builds\Logs'
 
       - name: cleanup
         run: |
-          $logDirectory = "${{ steps.validate-project-setup.outputs.project-path }}\Builds"
+          $logDirectory = "${{ steps.unity-validate.outputs.project-path }}\Builds"
 
           if (Test-Path -Path $logDirectory) {
             Remove-Item $logDirectory -Force -Recurse

@@ -59,6 +59,11 @@ namespace XRTK.Editor.BuildPipeline.Logging
         /// <inheritdoc />
         public void LogException(Exception exception, Object context)
         {
+            if (CILoggingUtility.LoggingEnabled)
+            {
+                exception = new Exception($"{Error}{exception.Message}", exception);
+            }
+
             defaultLogger.LogException(exception, context);
         }
 

@@ -91,3 +91,16 @@ jobs:
         with:
           name: '${{ matrix.build-target }}-Artifacts'
           path: '${{ github.workspace }}\${{ matrix.build-target }}-Artifacts.zip'
+
+  publish:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: build
+    runs-on:  ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: upm subtree split
+        run: |
+          git subtree split --prefix="XRTK.Core/Packages/com.xrtk.core" -b upm
+          git push -u origin upm --force

@@ -24,9 +24,9 @@ jobs:
 
       - name: get package info
         run: |
-          $packageDir = Get-ChildItem ${{ github.workspace }} -Recurse | Where-Object { $_.PSIsContainer -and (-not ($_.Parent.FullName.Contains('Submodules') -or $_.Parent.FullName.Contains('Builds'))) -and $_.Parent.FullName.Contains('Packages') -and $_.Name.Contains('com.xrtk') } | Select-Object -ExpandProperty FullName
+          $packageDir = Get-Item -Path "**/Packages/com.*" | Select-Object -ExpandProperty FullName
           Write-Host $packageDir
-          Write-Host ${{ github.workspace }}${{ '**/Packages/com.*' }}
+        workingDirectory: ${{ github.workspace }}
 
       - id: unity-validate
         uses: xrtk/unity-validate@main

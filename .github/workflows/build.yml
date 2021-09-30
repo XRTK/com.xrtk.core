@@ -26,7 +26,7 @@ jobs:
         run: |
           $packageDir = Get-Item -Path "**/Packages/com.*" | Select-Object -ExpandProperty FullName
           Write-Host $packageDir
-        workingDirectory: ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}
 
       - id: unity-validate
         uses: xrtk/unity-validate@main

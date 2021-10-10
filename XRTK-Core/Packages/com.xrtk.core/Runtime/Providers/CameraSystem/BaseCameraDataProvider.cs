@@ -82,17 +82,7 @@ namespace XRTK.Providers.CameraSystem
         private bool cameraOpaqueLastFrame;
 
         /// <inheritdoc />
-        public virtual bool IsOpaque
-        {
-            get
-            {
-#if UNITY_2020_1_OR_NEWER
-                return XRDeviceUtilities.IsDisplayOpaque;
-#else
-                return true;
-#endif // UNITY_2020_1_OR_NEWER
-            }
-        }
+        public virtual bool IsOpaque => XRDeviceUtilities.IsDisplayOpaque;
 
         /// <inheritdoc />
         public virtual bool IsStereoscopic => CameraRig.PlayerCamera.stereoEnabled;

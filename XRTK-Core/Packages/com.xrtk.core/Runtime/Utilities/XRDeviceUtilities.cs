@@ -1,12 +1,9 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine.XR;
-
-#if UNITY_2020_1_OR_NEWER
 using UnityEngine;
+using UnityEngine.XR;
 using System.Collections.Generic;
-#endif
 
 namespace XRTK.Utilities
 {
@@ -22,7 +19,6 @@ namespace XRTK.Utilities
         {
             get
             {
-#if UNITY_2020_1_OR_NEWER
                 var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
                 SubsystemManager.GetInstances(xrDisplaySubsystems);
                 for (int i = 0; i < xrDisplaySubsystems.Count; i++)
@@ -35,13 +31,8 @@ namespace XRTK.Utilities
                 }
 
                 return false;
-#else
-                return XRDevice.isPresent;
-#endif // UNITY_2020_1_OR_NEWER
             }
         }
-
-#if UNITY_2020_1_OR_NEWER
 
         /// <summary>
         /// Gets whether the device has an opaque display.
@@ -66,7 +57,5 @@ namespace XRTK.Utilities
                 return true;
             }
         }
-
-#endif // UNITY_2020_1_OR_NEWER
     }
 }

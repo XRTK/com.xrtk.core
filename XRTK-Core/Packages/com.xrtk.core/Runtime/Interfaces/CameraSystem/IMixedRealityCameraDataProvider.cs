@@ -19,25 +19,13 @@ namespace XRTK.Interfaces.CameraSystem
         bool IsStereoscopic { get; }
 
         /// <summary>
-        /// Is the head height, and thus the camera y-position, managed by the device itself?
-        /// If true, the <see cref="DefaultHeadHeight"/> setting is ignored and has no effect
-        /// on camera positioning.
-        /// </summary>
-        bool HeadHeightIsManagedByDevice { get; }
-
-        /// <summary>
         /// The <see cref="IMixedRealityCameraRig"/> reference for this data provider.
         /// </summary>
         IMixedRealityCameraRig CameraRig { get; }
 
         /// <summary>
-        /// The default head height when a platform doesn't automatically set it.
-        /// </summary>
-        float DefaultHeadHeight { get; }
-
-        /// <summary>
         /// The current head height of the player
         /// </summary>
-        float HeadHeight { get; set; }
+        float HeadHeight { get; }
     }
 }

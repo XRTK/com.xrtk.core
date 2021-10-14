@@ -21,15 +21,6 @@ namespace XRTK.Interfaces.CameraSystem
         IMixedRealityCameraRig MainCameraRig { get; }
 
         /// <summary>
-        /// Sets the <see cref="IMixedRealityCameraDataProvider.HeadHeight"/>. If <see cref="setForAllCameraProviders"/> is true, then it's set
-        /// for all <see cref="CameraDataProviders"/>, otherwise it only sets the <see cref="MainCameraRig"/>.
-        /// </summary>
-        /// <param name="value">The height value to set.</param>
-        /// <param name="setForAllCameraProviders">If <see cref="setForAllCameraProviders"/> is true, then it's set
-        /// for all <see cref="CameraDataProviders"/>, otherwise it only sets the <see cref="MainCameraRig"/>.</param>
-        void SetHeadHeight(float value, bool setForAllCameraProviders = false);
-
-        /// <summary>
         /// Registers the <see cref="IMixedRealityCameraDataProvider"/> with the <see cref="IMixedRealityCameraSystem"/>.
         /// </summary>
         /// <param name="dataProvider"></param>

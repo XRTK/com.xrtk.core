@@ -66,24 +66,6 @@ namespace XRTK.Services.CameraSystem
         }
 
         /// <inheritdoc />
-        public void SetHeadHeight(float value, bool setForAllCameraProviders = false)
-        {
-            foreach (var dataProvider in cameraDataProviders)
-            {
-                if (setForAllCameraProviders ||
-                    dataProvider.CameraRig == MainCameraRig)
-                {
-                    dataProvider.HeadHeight = value;
-
-                    if (!setForAllCameraProviders)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-
-        /// <inheritdoc />
         public void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {
             cameraDataProviders.Add(dataProvider);

@@ -155,7 +155,7 @@ namespace XRTK.Services.CameraSystem
                 }
 
                 cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
-                cameraPoseDriver.UseRelativeTransform = true;
+                cameraPoseDriver.UseRelativeTransform = false;
                 return cameraPoseDriver;
             }
         }

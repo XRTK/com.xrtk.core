@@ -10,12 +10,18 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     public class BlinkTeleportLocomotionProviderProfileInspector : BaseTeleportLocomotionProviderProfileInspector
     {
         private SerializedProperty fadeDuration;
+        private SerializedProperty fadeMaterial;
+        private SerializedProperty fadeInColor;
+        private SerializedProperty fadeOutColor;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             fadeDuration = serializedObject.FindProperty(nameof(fadeDuration));
+            fadeMaterial = serializedObject.FindProperty(nameof(fadeMaterial));
+            fadeInColor = serializedObject.FindProperty(nameof(fadeInColor));
+            fadeOutColor = serializedObject.FindProperty(nameof(fadeOutColor));
         }
 
         public override void OnInspectorGUI()
@@ -25,6 +31,9 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(fadeDuration);
+            EditorGUILayout.PropertyField(fadeMaterial);
+            EditorGUILayout.PropertyField(fadeInColor);
+            EditorGUILayout.PropertyField(fadeOutColor);
 
             serializedObject.ApplyModifiedProperties();
         }

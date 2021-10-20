@@ -37,13 +37,13 @@ namespace XRTK.Providers.CameraSystem
                 throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
             }
 
-            trackingOriginMode = profile.TrackingOriginMode;
             isCameraPersistent = profile.IsCameraPersistent;
             cameraRigType = profile.CameraRigType.Type;
 
 #if XRTK_USE_LEGACYVR
             DefaultHeadHeight = profile.DefaultHeadHeight;
 #else
+            trackingOriginMode = profile.TrackingOriginMode;
             defaultHeadHeight = profile.DefaultHeadHeight > 0f ? profile.DefaultHeadHeight : 1.6f;
 #endif
 
@@ -76,10 +76,10 @@ namespace XRTK.Providers.CameraSystem
         private readonly double bodyAdjustmentAngle;
 
         private bool cameraOpaqueLastFrame;
-        private TrackingOriginModeFlags trackingOriginMode;
-        private static List<XRInputSubsystem> inputSubsystems = new List<XRInputSubsystem>();
 
 #if XRTK_USE_XRSDK
+        private static List<XRInputSubsystem> inputSubsystems = new List<XRInputSubsystem>();
+        private TrackingOriginModeFlags trackingOriginMode;
         private readonly float defaultHeadHeight;
         private bool trackingOriginInitialized = false;
         private bool trackingOriginInitializing = false;

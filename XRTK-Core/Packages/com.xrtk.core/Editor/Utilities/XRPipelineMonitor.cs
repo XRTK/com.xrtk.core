@@ -77,11 +77,11 @@ namespace XRTK.Editor.Utilities
                             break;
                         }
                         // or it it's only here because some other package needs it...
-                        else if (package.dependencies != null)
+                        else if (package.resolvedDependencies != null)
                         {
-                            for (var i = 0; i < package.dependencies.Length; i++)
+                            for (var i = 0; i < package.resolvedDependencies.Length; i++)
                             {
-                                if (package.dependencies[i].name.Equals(xrSDKPackageId))
+                                if (package.resolvedDependencies[i].name.Equals(xrSDKPackageId))
                                 {
                                     // Package found. We are using XR SDK Management.
                                     DetectedPipeline = XRPipeline.XRSDK;

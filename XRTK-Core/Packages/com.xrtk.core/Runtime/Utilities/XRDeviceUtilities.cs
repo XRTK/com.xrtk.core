@@ -1,9 +1,12 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using UnityEngine.XR;
+
+#if !XRTK_USE_LEGACYVR || UNITY_2020_1_OR_NEWER
+using UnityEngine;
 using System.Collections.Generic;
+#endif
 
 namespace XRTK.Utilities
 {
@@ -19,6 +22,9 @@ namespace XRTK.Utilities
         {
             get
             {
+#if XRTK_USE_LEGACYVR && !UNITY_2020_1_OR_NEWER
+                return XRDevice.isPresent;
+#else
                 var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
                 SubsystemManager.GetInstances(xrDisplaySubsystems);
                 for (int i = 0; i < xrDisplaySubsystems.Count; i++)
@@ -31,6 +37,7 @@ namespace XRTK.Utilities
                 }
 
                 return false;
+#endif
             }
         }
 
@@ -41,6 +48,9 @@ namespace XRTK.Utilities
         {
             get
             {
+#if XRTK_USE_LEGACYVR && !UNITY_2020_1_OR_NEWER
+                return true;
+#else
                 var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
                 SubsystemManager.GetInstances(xrDisplaySubsystems);
                 for (int i = 0; i < xrDisplaySubsystems.Count; i++)
@@ -55,6 +65,7 @@ namespace XRTK.Utilities
                 // When no device is attached we are assuming the display
                 // device is the computer's display, which should be opaque.
                 return true;
+#endif
             }
         }
     }

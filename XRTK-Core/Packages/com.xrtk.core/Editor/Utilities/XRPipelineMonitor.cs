@@ -127,10 +127,12 @@ namespace XRTK.Editor.Utilities
             var buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
             var scriptingDefineSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
-            var updated = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(scriptingDefineSymbols))
             {
+                var updated = new StringBuilder();
                 var alreadyAdded = false;
+                var hadToRemove = false;
+
                 var splits = scriptingDefineSymbols.Split(';');
                 for (var i = 0; i < splits.Length; i++)
                 {
@@ -141,6 +143,7 @@ namespace XRTK.Editor.Utilities
                     }
                     else if (split.Equals(defineSymbolToRemove))
                     {
+                        hadToRemove = true;
                         continue;
                     }
 
@@ -151,13 +154,22 @@ namespace XRTK.Editor.Utilities
                 {
                     updated.Append($";{defineSymbolToAdd}");
                 }
+
+                // If we didn't have to anything to the symbols,
+                // then we can go get some coffee already.
+                if (alreadyAdded && !hadToRemove)
+                {
+                    return;
+                }
+
+                // Update symbols otherwise and then get coffee.
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, updated.ToString());
             }
             else
             {
-                updated.Append(defineSymbolToAdd);
+                // There was no symbols at all defined yet, just add the new one.
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, defineSymbolToAdd);
             }
-
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, updated.ToString());
         }
     }
 }

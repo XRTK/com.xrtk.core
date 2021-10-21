@@ -8,8 +8,11 @@ using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 using XRTK.Utilities;
-using System.Collections.Generic;
+
+#if !XRTK_USE_LEGACYVR
 using UnityEngine.XR;
+using System.Collections.Generic;
+#endif
 
 namespace XRTK.Providers.CameraSystem
 {
@@ -218,7 +221,7 @@ namespace XRTK.Providers.CameraSystem
                 }
             }
 
-#if XRTK_USE_XRSDK
+#if !XRTK_USE_LEGACYVR
             // We keep trying to intiailze the tracking origin,
             // until it worked, because at application launch the
             // subystems might not be ready yet.
@@ -284,7 +287,7 @@ namespace XRTK.Providers.CameraSystem
 
         #endregion IMixedRealitySerivce Implementation
 
-#if XRTK_USE_XRSDK
+#if !XRTK_USE_LEGACYVR
         #region Tracking Origin Setup
 
         private bool SetupTrackingOrigin()
@@ -405,7 +408,7 @@ namespace XRTK.Providers.CameraSystem
         }
 #endif
 
-#if XRTK_USE_XRSDK
+#if !XRTK_USE_LEGACYVR
         /// <summary>
         /// Updates the camera height offset to the specified value.
         /// </summary>

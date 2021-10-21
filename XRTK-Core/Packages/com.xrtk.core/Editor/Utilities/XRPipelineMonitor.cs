@@ -38,7 +38,6 @@ namespace XRTK.Editor.Utilities
         private static DateTimeOffset requestStartTime;
 
         private const string legacyVRScriptingDefineSymbol = "XRTK_USE_LEGACYVR";
-        private const string xrSDKScriptingDefineSymbol = "XRTK_USE_XRSDK";
         private const string xrSDKPackageId = "com.unity.xr.management";
 
         /// <summary>
@@ -109,20 +108,6 @@ namespace XRTK.Editor.Utilities
 
         private static void UpdateProjectScriptingDefineSymbols()
         {
-            var defineSymbolToAdd = string.Empty;
-            var defineSymbolToRemove = string.Empty;
-            switch (DetectedPipeline)
-            {
-                case XRPipeline.LegacyVR:
-                    defineSymbolToAdd = legacyVRScriptingDefineSymbol;
-                    defineSymbolToRemove = xrSDKScriptingDefineSymbol;
-                    break;
-                case XRPipeline.XRSDK:
-                    defineSymbolToAdd = xrSDKScriptingDefineSymbol;
-                    defineSymbolToRemove = legacyVRScriptingDefineSymbol;
-                    break;
-            }
-
             var buildTarget = EditorUserBuildSettings.activeBuildTarget;
             var buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
             var scriptingDefineSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
@@ -137,22 +122,25 @@ namespace XRTK.Editor.Utilities
                 for (var i = 0; i < splits.Length; i++)
                 {
                     var split = splits[i];
-                    if (split.Equals(defineSymbolToAdd))
+                    if (split.Equals(legacyVRScriptingDefineSymbol))
                     {
-                        alreadyAdded = true;
-                    }
-                    else if (split.Equals(defineSymbolToRemove))
-                    {
-                        hadToRemove = true;
-                        continue;
+                        if (DetectedPipeline == XRPipeline.LegacyVR)
+                        {
+                            alreadyAdded = true;
+                        }
+                        else
+                        {
+                            hadToRemove = true;
+                            continue;
+                        }
                     }
 
                     updated.Append(i == splits.Length - 1 ? split : $"{split};");
                 }
 
-                if (!alreadyAdded)
+                if (!alreadyAdded && DetectedPipeline == XRPipeline.LegacyVR)
                 {
-                    updated.Append($";{defineSymbolToAdd}");
+                    updated.Append($";{legacyVRScriptingDefineSymbol}");
                 }
 
                 // If we didn't have to anything to the symbols,
@@ -165,10 +153,10 @@ namespace XRTK.Editor.Utilities
                 // Update symbols otherwise and then get coffee.
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, updated.ToString());
             }
-            else
+            else if (DetectedPipeline == XRPipeline.LegacyVR)
             {
                 // There was no symbols at all defined yet, just add the new one.
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, defineSymbolToAdd);
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, legacyVRScriptingDefineSymbol);
             }
         }
     }

@@ -38,7 +38,6 @@ namespace XRTK.Editor.Utilities
         private static DateTimeOffset requestStartTime;
 
         private const string legacyVRScriptingDefineSymbol = "XRTK_USE_LEGACYVR";
-        private const string xrSDKScriptingDefineSymbol = "XRTK_USE_XRSDK";
         private const string xrSDKPackageId = "com.unity.xr.management";
 
         /// <summary>
@@ -77,11 +76,11 @@ namespace XRTK.Editor.Utilities
                             break;
                         }
                         // or it it's only here because some other package needs it...
-                        else if (package.dependencies != null)
+                        else if (package.resolvedDependencies != null)
                         {
-                            for (var i = 0; i < package.dependencies.Length; i++)
+                            for (var i = 0; i < package.resolvedDependencies.Length; i++)
                             {
-                                if (package.dependencies[i].name.Equals(xrSDKPackageId))
+                                if (package.resolvedDependencies[i].name.Equals(xrSDKPackageId))
                                 {
                                     // Package found. We are using XR SDK Management.
                                     DetectedPipeline = XRPipeline.XRSDK;
@@ -109,55 +108,56 @@ namespace XRTK.Editor.Utilities
 
         private static void UpdateProjectScriptingDefineSymbols()
         {
-            var defineSymbolToAdd = string.Empty;
-            var defineSymbolToRemove = string.Empty;
-            switch (DetectedPipeline)
-            {
-                case XRPipeline.LegacyVR:
-                    defineSymbolToAdd = legacyVRScriptingDefineSymbol;
-                    defineSymbolToRemove = xrSDKScriptingDefineSymbol;
-                    break;
-                case XRPipeline.XRSDK:
-                    defineSymbolToAdd = xrSDKScriptingDefineSymbol;
-                    defineSymbolToRemove = legacyVRScriptingDefineSymbol;
-                    break;
-            }
-
             var buildTarget = EditorUserBuildSettings.activeBuildTarget;
             var buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
             var scriptingDefineSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
-            var updated = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(scriptingDefineSymbols))
             {
+                var updated = new StringBuilder();
                 var alreadyAdded = false;
+                var hadToRemove = false;
+
                 var splits = scriptingDefineSymbols.Split(';');
                 for (var i = 0; i < splits.Length; i++)
                 {
                     var split = splits[i];
-                    if (split.Equals(defineSymbolToAdd))
+                    if (split.Equals(legacyVRScriptingDefineSymbol))
                     {
-                        alreadyAdded = true;
-                    }
-                    else if (split.Equals(defineSymbolToRemove))
-                    {
-                        continue;
+                        if (DetectedPipeline == XRPipeline.LegacyVR)
+                        {
+                            alreadyAdded = true;
+                        }
+                        else
+                        {
+                            hadToRemove = true;
+                            continue;
+                        }
                     }
 
                     updated.Append(i == splits.Length - 1 ? split : $"{split};");
                 }
 
-                if (!alreadyAdded)
+                if (!alreadyAdded && DetectedPipeline == XRPipeline.LegacyVR)
                 {
-                    updated.Append($";{defineSymbolToAdd}");
+                    updated.Append($";{legacyVRScriptingDefineSymbol}");
                 }
-            }
-            else
-            {
-                updated.Append(defineSymbolToAdd);
-            }
 
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, updated.ToString());
+                // If we didn't have to anything to the symbols,
+                // then we can go get some coffee already.
+                if (alreadyAdded && !hadToRemove)
+                {
+                    return;
+                }
+
+                // Update symbols otherwise and then get coffee.
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, updated.ToString());
+            }
+            else if (DetectedPipeline == XRPipeline.LegacyVR)
+            {
+                // There was no symbols at all defined yet, just add the new one.
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, legacyVRScriptingDefineSymbol);
+            }
         }
     }
 }

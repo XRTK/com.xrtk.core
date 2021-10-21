@@ -45,9 +45,7 @@ namespace XRTK.Providers.CameraSystem
 
 #if XRTK_USE_LEGACYVR
             DefaultHeadHeight = profile.DefaultHeadHeight;
-#endif
-
-#if XRTK_USE_XRSDK
+#else
             trackingOriginMode = profile.TrackingOriginMode;
             defaultHeadHeight = profile.DefaultHeadHeight > 0f ? profile.DefaultHeadHeight : 1.6f;
 #endif
@@ -79,22 +77,19 @@ namespace XRTK.Providers.CameraSystem
         private readonly int opaqueQualityLevel;
         private readonly float bodyAdjustmentSpeed;
         private readonly double bodyAdjustmentAngle;
-
         private bool cameraOpaqueLastFrame;
-
-#if XRTK_USE_XRSDK
-        private static List<XRInputSubsystem> inputSubsystems = new List<XRInputSubsystem>();
-        private TrackingOriginModeFlags trackingOriginMode;
-        private readonly float defaultHeadHeight;
-        private bool trackingOriginInitialized = false;
-        private bool trackingOriginInitializing = false;
-#endif
 
 #if XRTK_USE_LEGACYVR
         /// <summary>
         /// The fallback value if the <see cref="DefaultHeadHeight"/> is zero.
         /// </summary>
         private const float BodyHeightFallback = 1.6f;
+#else
+        private static List<XRInputSubsystem> inputSubsystems = new List<XRInputSubsystem>();
+        private TrackingOriginModeFlags trackingOriginMode;
+        private readonly float defaultHeadHeight;
+        private bool trackingOriginInitialized = false;
+        private bool trackingOriginInitializing = false;
 #endif
 
         /// <inheritdoc />
@@ -136,13 +131,10 @@ namespace XRTK.Providers.CameraSystem
                 headHeight = value;
                 CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
             }
-#endif
-
-#if XRTK_USE_XRSDK
+#else
             get => CameraRig.CameraTransform.localPosition.y;
 #endif
         }
-
 
         #region IMixedRealitySerivce Implementation
 
@@ -163,9 +155,7 @@ namespace XRTK.Providers.CameraSystem
 
 #if XRTK_USE_LEGACYVR
             ApplySettingsForDefaultHeadHeight();
-#endif
-
-#if XRTK_USE_XRSDK
+#else
             // We attempt to intialize the camera tracking origin, which might
             // fail at this point if the subystems are not ready, in which case,
             // we set a flag to keep trying.
@@ -485,9 +475,7 @@ namespace XRTK.Providers.CameraSystem
             bodyLocalPosition.y = HeadHeight > 0f
                 ? cameraLocalPosition.y - HeadHeight
                 : cameraLocalPosition.y - BodyHeightFallback;
-#endif
-
-#if XRTK_USE_XRSDK
+#else
             bodyLocalPosition.y = cameraLocalPosition.y - Math.Abs(HeadHeight);
 #endif
 

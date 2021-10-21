@@ -39,18 +39,15 @@ namespace XRTK.Interfaces.CameraSystem
         float DefaultHeadHeight { get; }
 #endif
 
+        /// <summary>
+        /// The current head height of the player
+        /// </summary>
+        float HeadHeight
+        {
+            get;
 #if XRTK_USE_LEGACYVR
-        /// <summary>
-        /// The current head height of the player
-        /// </summary>
-        float HeadHeight { get; set; }
+            set;
 #endif
-
-#if XRTK_USE_XRSDK
-        /// <summary>
-        /// The current head height of the player
-        /// </summary>
-        float HeadHeight { get; }
-#endif
+        }
     }
 }

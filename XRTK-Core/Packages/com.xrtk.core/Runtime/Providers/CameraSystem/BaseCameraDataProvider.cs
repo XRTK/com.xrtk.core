@@ -2,14 +2,17 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 using XRTK.Utilities;
+
+#if XRTK_USE_XRSDK
+using System.Collections.Generic;
+using UnityEngine.XR;
+#endif
 
 namespace XRTK.Providers.CameraSystem
 {
@@ -42,7 +45,9 @@ namespace XRTK.Providers.CameraSystem
 
 #if XRTK_USE_LEGACYVR
             DefaultHeadHeight = profile.DefaultHeadHeight;
-#else
+#endif
+
+#if XRTK_USE_XRSDK
             trackingOriginMode = profile.TrackingOriginMode;
             defaultHeadHeight = profile.DefaultHeadHeight > 0f ? profile.DefaultHeadHeight : 1.6f;
 #endif
@@ -129,7 +134,10 @@ namespace XRTK.Providers.CameraSystem
                 CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
             }
         }
-#else
+
+#endif
+
+#if XRTK_USE_XRSDK
         /// <inheritdoc />
         public virtual float HeadHeight => CameraRig.CameraTransform.localPosition.y;
 #endif
@@ -153,7 +161,9 @@ namespace XRTK.Providers.CameraSystem
 
 #if XRTK_USE_LEGACYVR
             ApplySettingsForDefaultHeadHeight();
-#else
+#endif
+
+#if XRTK_USE_XRSDK
             // We attempt to intialize the camera tracking origin, which might
             // fail at this point if the subystems are not ready, in which case,
             // we set a flag to keep trying.
@@ -404,7 +414,9 @@ namespace XRTK.Providers.CameraSystem
             ResetRigTransforms();
             SyncRigTransforms();
         }
-#else
+#endif
+
+#if XRTK_USE_XRSDK
         /// <summary>
         /// Updates the camera height offset to the specified value.
         /// </summary>
@@ -471,7 +483,9 @@ namespace XRTK.Providers.CameraSystem
             bodyLocalPosition.y = HeadHeight > 0f
                 ? cameraLocalPosition.y - HeadHeight
                 : cameraLocalPosition.y - BodyHeightFallback;
-#else
+#endif
+
+#if XRTK_USE_XRSDK
             bodyLocalPosition.y = cameraLocalPosition.y - Math.Abs(HeadHeight);
 #endif
 

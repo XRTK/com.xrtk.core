@@ -14,6 +14,7 @@ namespace XRTK.Editor.Utilities
     /// This component checks which XR SDK pipeline is being used by the project
     /// and adds platform define symbols as needed.
     /// </summary>
+    [InitializeOnLoad]
     public class XRPipelineMonitor
     {
         /// <summary>
@@ -46,8 +47,7 @@ namespace XRTK.Editor.Utilities
         /// </summary>
         public static XRPipeline DetectedPipeline { get; private set; }
 
-        [InitializeOnLoadMethod]
-        private static void Initialize()
+        static XRPipelineMonitor()
         {
 #if UNITY_2020_1_OR_NEWER
             DetectedPipeline = XRPipeline.XRSDK;

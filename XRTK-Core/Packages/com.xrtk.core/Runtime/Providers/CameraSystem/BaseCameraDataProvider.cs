@@ -116,12 +116,15 @@ namespace XRTK.Providers.CameraSystem
         public float DefaultHeadHeight { get; }
 #endif
 
+
 #if XRTK_USE_LEGACYVR
         private float headHeight;
+#endif
 
         /// <inheritdoc />
         public virtual float HeadHeight
         {
+#if XRTK_USE_LEGACYVR
             get => headHeight;
             set
             {
@@ -133,14 +136,13 @@ namespace XRTK.Providers.CameraSystem
                 headHeight = value;
                 CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
             }
-        }
-
 #endif
 
 #if XRTK_USE_XRSDK
-        /// <inheritdoc />
-        public virtual float HeadHeight => CameraRig.CameraTransform.localPosition.y;
+            get => CameraRig.CameraTransform.localPosition.y;
 #endif
+        }
+
 
         #region IMixedRealitySerivce Implementation
 

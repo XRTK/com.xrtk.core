@@ -8,11 +8,8 @@ using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 using XRTK.Utilities;
-
-#if XRTK_USE_XRSDK
 using System.Collections.Generic;
 using UnityEngine.XR;
-#endif
 
 namespace XRTK.Providers.CameraSystem
 {

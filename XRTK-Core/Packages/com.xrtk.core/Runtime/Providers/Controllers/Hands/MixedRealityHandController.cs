@@ -126,17 +126,17 @@ namespace XRTK.Providers.Controllers.Hands
         public string TrackedPoseId { get; private set; }
 
         /// <summary>
-        /// The hand's pointer pose in playspace.
+        /// The hand's pointer pose in the camera rig's local coordinate space.
         /// </summary>
         private MixedRealityPose SpatialPointerPose { get; set; }
 
         /// <summary>
-        /// The hand's index finger tip pose in playspace.
+        /// The hand's index finger tip pose in the camera rig's local coordinate space.
         /// </summary>
         private MixedRealityPose IndexFingerTipPose { get; set; }
 
         /// <summary>
-        /// The hand's grip pose in playspace.
+        /// The hand's grip pose in the camera rig's local coordinate space.
         /// </summary>
         private MixedRealityPose GripPose { get; set; }
 
@@ -799,8 +799,8 @@ namespace XRTK.Providers.Controllers.Hands
                 // Translate to world space.
                 if (CameraSystem != null)
                 {
-                    pose.Position = CameraSystem.MainCameraRig.PlayspaceTransform.TransformPoint(pose.Position);
-                    pose.Rotation = CameraSystem.MainCameraRig.PlayspaceTransform.rotation * pose.Rotation;
+                    pose.Position = CameraSystem.MainCameraRig.RigTransform.TransformPoint(pose.Position);
+                    pose.Rotation = CameraSystem.MainCameraRig.RigTransform.rotation * pose.Rotation;
                 }
 
                 return lastHandRootPose != MixedRealityPose.ZeroIdentity;

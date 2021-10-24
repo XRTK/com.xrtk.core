@@ -24,8 +24,8 @@ namespace XRTK.Definitions.Utilities
         /// </summary>
         Body,
         /// <summary>
-        /// Calculates position and orientation based on the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>
+        /// Calculates position and orientation based on the <see cref="IMixedRealityCameraRig.RigTransform"/>
         /// </summary>
-        Playspace,
+        Rig
     }
 }

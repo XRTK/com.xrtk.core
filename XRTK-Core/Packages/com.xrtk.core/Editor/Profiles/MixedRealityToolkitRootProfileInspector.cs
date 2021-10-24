@@ -110,8 +110,8 @@ namespace XRTK.Editor.Profiles
                     {
                         if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem))
                         {
-                            var playspace = cameraSystem.MainCameraRig.PlayspaceTransform;
-                            Debug.Assert(playspace != null);
+                            var rig = cameraSystem.MainCameraRig.RigTransform;
+                            Debug.Assert(rig != null);
                         }
 
                         MixedRealityToolkit.Instance.ActiveProfile = rootProfile;

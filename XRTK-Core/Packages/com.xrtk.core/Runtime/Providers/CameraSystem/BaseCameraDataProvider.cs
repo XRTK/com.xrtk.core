@@ -148,8 +148,15 @@ namespace XRTK.Providers.CameraSystem
 
             if (CameraRig == null)
             {
-                // TODO Currently we always get the main camera. Should we provide a tag to search for alts?
-                CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                if (CameraCache.Main.transform.parent.IsNull())
+                {
+                    CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                }
+                else
+                {
+                    CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                }
+
                 Debug.Assert(CameraRig != null);
             }
 
@@ -265,9 +272,9 @@ namespace XRTK.Providers.CameraSystem
                 cameraTransform.rotation = Quaternion.identity;
             }
 
-            if (CameraRig.PlayspaceTransform != null)
+            if (CameraRig.RigTransform != null)
             {
-                CameraRig.PlayspaceTransform.gameObject.Destroy();
+                CameraRig.RigTransform.gameObject.Destroy();
             }
 
             if (CameraRig is Component component &&
@@ -444,13 +451,13 @@ namespace XRTK.Providers.CameraSystem
         }
 
         /// <summary>
-        /// Resets the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>, <see cref="IMixedRealityCameraRig.CameraTransform"/>,
+        /// Resets the <see cref="IMixedRealityCameraRig.RigTransform"/>, <see cref="IMixedRealityCameraRig.CameraTransform"/>,
         /// and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
         /// </summary>
         protected virtual void ResetRigTransforms()
         {
-            CameraRig.PlayspaceTransform.position = Vector3.zero;
-            CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
+            CameraRig.RigTransform.position = Vector3.zero;
+            CameraRig.RigTransform.rotation = Quaternion.identity;
 
             // If the camera is a 2d camera then we can adjust the camera's height to match the head height.
             CameraRig.CameraTransform.position = IsStereoscopic ? Vector3.zero : new Vector3(0f, HeadHeight, 0f);
@@ -461,7 +468,7 @@ namespace XRTK.Providers.CameraSystem
         }
 
         /// <summary>
-        /// Called each <see cref="LateUpdate"/> to sync the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>,
+        /// Called each <see cref="LateUpdate"/> to sync the <see cref="IMixedRealityCameraRig.RigTransform"/>,
         /// <see cref="IMixedRealityCameraRig.CameraTransform"/>, and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
         /// </summary>
         protected virtual void SyncRigTransforms()

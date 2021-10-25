@@ -137,14 +137,14 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (handData.TrackingState == TrackingState.Tracked && !PlatformProvidesIsPointing)
             {
-                var playspaceTransform = CameraSystem != null
-                    ? CameraSystem.MainCameraRig.PlayspaceTransform
+                var rigTransform = CameraSystem != null
+                    ? CameraSystem.MainCameraRig.RigTransform
                     : CameraCache.Main.transform.parent;
                 var localPalmPose = handData.Joints[(int)TrackedHandJoint.Palm];
                 var worldPalmPose = new MixedRealityPose
                 {
                     Position = handData.RootPose.Position + handData.RootPose.Rotation * localPalmPose.Position,
-                    Rotation = playspaceTransform.rotation * handData.RootPose.Rotation * localPalmPose.Rotation
+                    Rotation = rigTransform.rotation * handData.RootPose.Rotation * localPalmPose.Rotation
                 };
 
                 // We check if the palm forward is roughly in line with the camera lookAt.

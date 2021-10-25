@@ -176,10 +176,10 @@ namespace XRTK.Providers.Controllers
                 for (int j = 0; j < interactionProfile.PointerProfiles.Length; j++)
                 {
                     var pointerProfile = interactionProfile.PointerProfiles[j];
-                    var playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
-                        ? cameraSystem.MainCameraRig.PlayspaceTransform
+                    var rigTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                        ? cameraSystem.MainCameraRig.RigTransform
                         : CameraCache.Main.transform.parent;
-                    var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, playspaceTransform);
+                    var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, rigTransform);
                     var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
 
                     if (pointer != null)
@@ -229,11 +229,11 @@ namespace XRTK.Providers.Controllers
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (!controllerModel.IsNull())
             {
-                var playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
-                    ? cameraSystem.MainCameraRig.PlayspaceTransform
+                var rigTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                    ? cameraSystem.MainCameraRig.RigTransform
                     : CameraCache.Main.transform.parent;
 
-                var controllerObject = Object.Instantiate(controllerModel, playspaceTransform);
+                var controllerObject = Object.Instantiate(controllerModel, rigTransform);
                 Debug.Assert(controllerObject != null);
                 controllerObject.name = $"{GetType().Name}_Visualization";
                 Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();

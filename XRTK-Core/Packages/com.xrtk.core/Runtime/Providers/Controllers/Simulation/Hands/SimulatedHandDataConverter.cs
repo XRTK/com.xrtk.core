@@ -205,13 +205,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             var position = PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
 
             // At this point we know the hand's root pose in world space and
-            // need to translate to playspace.
+            // need to translate to the camera rig's local coordinate space.
             var rootPose = new MixedRealityPose(position, rotation);
-            var playspaceTransform = CameraSystem != null
-                ? CameraSystem.MainCameraRig.PlayspaceTransform
+            var rigTransform = CameraSystem != null
+                ? CameraSystem.MainCameraRig.RigTransform
                 : CameraCache.Main.transform.parent;
-            rootPose.Position = playspaceTransform.InverseTransformPoint(rootPose.Position);
-            rootPose.Rotation = Quaternion.Inverse(playspaceTransform.rotation) * playspaceTransform.rotation * rootPose.Rotation;
+            rootPose.Position = rigTransform.InverseTransformPoint(rootPose.Position);
+            rootPose.Rotation = Quaternion.Inverse(rigTransform.rotation) * rigTransform.rotation * rootPose.Rotation;
 
             // Compute joint poses relative to root pose.
             var jointPoses = ComputeJointPoses(Pose, handedness);

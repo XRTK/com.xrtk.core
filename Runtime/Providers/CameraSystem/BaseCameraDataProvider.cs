@@ -42,6 +42,7 @@ namespace XRTK.Providers.CameraSystem
 
             isCameraPersistent = profile.IsCameraPersistent;
             cameraRigType = profile.CameraRigType.Type;
+            applyQualitySettings = profile.ApplyQualitySettings;
 
 #if XRTK_USE_LEGACYVR
             DefaultHeadHeight = profile.DefaultHeadHeight;
@@ -67,6 +68,7 @@ namespace XRTK.Providers.CameraSystem
         private readonly IMixedRealityCameraSystem cameraSystem;
         private readonly bool isCameraPersistent;
         private readonly Type cameraRigType;
+        private readonly bool applyQualitySettings;
         private readonly float nearClipPlaneTransparentDisplay;
         private readonly CameraClearFlags cameraClearFlagsTransparentDisplay;
         private readonly Color backgroundColorTransparentDisplay;
@@ -172,13 +174,16 @@ namespace XRTK.Providers.CameraSystem
 
             cameraOpaqueLastFrame = IsOpaque;
 
-            if (IsOpaque)
+            if (applyQualitySettings)
             {
-                ApplySettingsForOpaqueDisplay();
-            }
-            else
-            {
-                ApplySettingsForTransparentDisplay();
+                if (IsOpaque)
+                {
+                    ApplySettingsForOpaqueDisplay();
+                }
+                else
+                {
+                    ApplySettingsForTransparentDisplay();
+                }
             }
 
             cameraSystem.RegisterCameraDataProvider(this);
@@ -218,13 +223,16 @@ namespace XRTK.Providers.CameraSystem
                 ApplySettingsForDefaultHeadHeight();
 #endif
 
-                if (IsOpaque)
+                if (applyQualitySettings)
                 {
-                    ApplySettingsForOpaqueDisplay();
-                }
-                else
-                {
-                    ApplySettingsForTransparentDisplay();
+                    if (IsOpaque)
+                    {
+                        ApplySettingsForOpaqueDisplay();
+                    }
+                    else
+                    {
+                        ApplySettingsForTransparentDisplay();
+                    }
                 }
             }
 

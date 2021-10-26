@@ -174,5 +174,14 @@ namespace XRTK.Definitions.CameraSystem
         /// The speed at which the body transform will sync it's rotation with the head transform.
         /// </summary>
         public float BodyAdjustmentSpeed => bodyAdjustmentSpeed;
+
+        [SerializeField]
+        [Tooltip("Set, if you want XRTK to apply quality settings for the camera.")]
+        private bool applyQualitySettings = true;
+
+        /// <summary>
+        /// If set, XRTK will update the quality settings for the camera as configured in the profile.
+        /// </summary>
+        public bool ApplyQualitySettings => applyQualitySettings;
     }
 }

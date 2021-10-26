@@ -14,6 +14,7 @@ namespace XRTK.Editor.Profiles.CameraSystem
     {
         private SerializedProperty trackingOriginMode;
         private SerializedProperty isCameraPersistent;
+        private SerializedProperty applyQualitySettings;
 
         private SerializedProperty nearClipPlaneOpaqueDisplay;
         private SerializedProperty cameraClearFlagsOpaqueDisplay;
@@ -42,6 +43,7 @@ namespace XRTK.Editor.Profiles.CameraSystem
 
             trackingOriginMode = serializedObject.FindProperty(nameof(trackingOriginMode));
             isCameraPersistent = serializedObject.FindProperty(nameof(isCameraPersistent));
+            applyQualitySettings = serializedObject.FindProperty(nameof(applyQualitySettings));
 
             nearClipPlaneOpaqueDisplay = serializedObject.FindProperty(nameof(nearClipPlaneOpaqueDisplay));
             cameraClearFlagsOpaqueDisplay = serializedObject.FindProperty(nameof(cameraClearFlagsOpaqueDisplay));
@@ -75,6 +77,7 @@ namespace XRTK.Editor.Profiles.CameraSystem
                 EditorGUILayout.PropertyField(defaultHeadHeight);
                 EditorGUILayout.PropertyField(bodyAdjustmentAngle);
                 EditorGUILayout.PropertyField(bodyAdjustmentSpeed);
+                EditorGUILayout.PropertyField(applyQualitySettings);
                 EditorGUI.indentLevel--;
             }
 

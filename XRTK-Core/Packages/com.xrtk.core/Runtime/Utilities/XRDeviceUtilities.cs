@@ -3,7 +3,7 @@
 
 using UnityEngine.XR;
 
-#if UNITY_2020_1_OR_NEWER
+#if !XRTK_USE_LEGACYVR || UNITY_2020_1_OR_NEWER
 using UnityEngine;
 using System.Collections.Generic;
 #endif
@@ -22,7 +22,9 @@ namespace XRTK.Utilities
         {
             get
             {
-#if UNITY_2020_1_OR_NEWER
+#if XRTK_USE_LEGACYVR && !UNITY_2020_1_OR_NEWER
+                return XRDevice.isPresent;
+#else
                 var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
                 SubsystemManager.GetInstances(xrDisplaySubsystems);
                 for (int i = 0; i < xrDisplaySubsystems.Count; i++)
@@ -35,13 +37,9 @@ namespace XRTK.Utilities
                 }
 
                 return false;
-#else
-                return XRDevice.isPresent;
-#endif // UNITY_2020_1_OR_NEWER
+#endif
             }
         }
-
-#if UNITY_2020_1_OR_NEWER
 
         /// <summary>
         /// Gets whether the device has an opaque display.
@@ -50,6 +48,9 @@ namespace XRTK.Utilities
         {
             get
             {
+#if XRTK_USE_LEGACYVR && !UNITY_2020_1_OR_NEWER
+                return true;
+#else
                 var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
                 SubsystemManager.GetInstances(xrDisplaySubsystems);
                 for (int i = 0; i < xrDisplaySubsystems.Count; i++)
@@ -64,9 +65,8 @@ namespace XRTK.Utilities
                 // When no device is attached we are assuming the display
                 // device is the computer's display, which should be opaque.
                 return true;
+#endif
             }
         }
-
-#endif // UNITY_2020_1_OR_NEWER
     }
 }

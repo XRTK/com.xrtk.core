@@ -89,7 +89,7 @@ namespace XRTK.Definitions.Controllers.Hands
         public float GripStrength { get; set; }
 
         /// <summary>
-        /// The hand's pointer pose, relative to <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.PlayspaceTransform"/>.
+        /// The hand's pointer pose, relative to <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.RigTransform"/>.
         /// </summary>
         public MixedRealityPose PointerPose { get; set; }
 
@@ -102,7 +102,7 @@ namespace XRTK.Definitions.Controllers.Hands
 
         /// <summary>
         /// The hands root pose. <see cref="Joints"/> poses are relative to the root pose.
-        /// The root pose itself is relative to <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.PlayspaceTransform"/>.
+        /// The root pose itself is relative to <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.RigTransform"/>.
         /// </summary>
         public MixedRealityPose RootPose { get; set; }
 

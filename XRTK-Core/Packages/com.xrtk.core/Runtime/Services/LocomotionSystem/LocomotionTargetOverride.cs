@@ -14,7 +14,7 @@ namespace XRTK.Services.LocomotionSystem
     ///
     /// When no enabled instance of <see cref="LocomotionTargetOverride"/> is found the
     /// <see cref="Services.LocomotionSystem.LocomotionSystem"/> will target the active
-    /// <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.CameraTransform"/> if the
+    /// <see cref="Interfaces.CameraSystem.IMixedRealityCameraRig.RigTransform"/> if the
     /// <see cref="Interfaces.CameraSystem.IMixedRealityCameraSystem"/> is active or fallback to
     /// <see cref="Utilities.CameraCache.Main"/> parent ultimately.
     /// </summary>

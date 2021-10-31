@@ -152,13 +152,11 @@ namespace XRTK.Providers.CameraSystem
             {
                 if (CameraCache.Main.transform.parent.IsNull())
                 {
-                    CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
-                }
-                else
-                {
-                    CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                    var rigTransform = new GameObject().transform;
+                    CameraCache.Main.transform.SetParent(rigTransform);
                 }
 
+                CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
                 Debug.Assert(CameraRig != null);
             }
 

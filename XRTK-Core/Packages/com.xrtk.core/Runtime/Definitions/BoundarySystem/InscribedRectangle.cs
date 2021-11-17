@@ -188,7 +188,7 @@ namespace XRTK.Definitions.BoundarySystem
 
                         // Calculate the midpoint between the top and bottom collision points.
                         Vector2 verticalMidpoint = new Vector2((aX + bX) * 0.5f, (aY + bY) * 0.5f);
-                        if (TryFixMaximumRectangle(
+                        if (TryFitMaximumRectangle(
                             geometryEdges,
                             verticalMidpoint,
                             angleRadians,
@@ -213,7 +213,7 @@ namespace XRTK.Definitions.BoundarySystem
                         // Calculate the midpoint between the left and right collision points.
                         var horizontalMidpoint = new Vector2((aX + bX) * 0.5f, (aY + bY) * 0.5f);
 
-                        if (TryFixMaximumRectangle(
+                        if (TryFitMaximumRectangle(
                             geometryEdges,
                             horizontalMidpoint,
                             angleRadians,
@@ -426,7 +426,7 @@ namespace XRTK.Definitions.BoundarySystem
         /// True if a rectangle with an area greater than or equal to minArea was able to be fit
         /// within the geometry at centerPoint.
         /// </returns>
-        private static bool TryFixMaximumRectangle(
+        private static bool TryFitMaximumRectangle(
             Edge[] geometryEdges,
             Vector2 centerPoint,
             float angleRadians,

@@ -13,7 +13,7 @@ namespace XRTK.Services.DiagnosticsSystem
     /// information to identify performance issues.
     /// </summary>
     [System.Runtime.InteropServices.Guid("1B5E5A67-864C-4A3D-A099-5A46EAD399A8")]
-    public class MixedRealityFrameDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
+    public class MixedRealityFrameDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider, IMixedRealityFrameDiagnosticsDataProvider
     {
         /// <inheritdoc />
         public MixedRealityFrameDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityDiagnosticsSystem parentService)
@@ -49,15 +49,11 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        /// <summary>
-        /// The last computed GPU frame rate.
-        /// </summary>
-        private int GPUFrameRate { get; set; } = 0;
+        /// <inheritdoc />
+        public int GPUFrameRate { get; set; } = 0;
 
-        /// <summary>
-        /// The last computed CPU frame rate.
-        /// </summary>
-        private int CPUFrameRate { get; set; } = 0;
+        /// <inheritdoc />
+        public int CPUFrameRate { get; set; } = 0;
 
         /// <summary>
         /// Computed property returns the target refresh rate of the device,

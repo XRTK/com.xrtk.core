@@ -25,3 +25,6 @@
 [submodule "Submodules/SpatialPersistence.ASA"]
 	path = Submodules/SpatialPersistence.ASA
 	url = https://github.com/XRTK/SpatialPersistence.ASA.git
+[submodule "Submodules/Pico"]
+	path = Submodules/Pico
+	url = https://github.com/XRTK/com.xrtk.pico.git

@@ -31,6 +31,7 @@
     "com.xrtk.spatial-persistence": "file:../../Submodules/SpatialPersistence/XRTK.SpatialPersistence/Packages/com.xrtk.spatial-persistence",
     "com.xrtk.ultraleap": "file:../../Submodules/Ultraleap/XRTK.Ultraleap/Packages/com.xrtk.ultraleap",
     "com.xrtk.wmr": "file:../../Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Packages/com.xrtk.wmr",
+    "com.xrtk.pico": "file:../../Submodules/Pico/XRTK.Pico/Packages/com.xrtk.pico",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

@@ -215,7 +215,7 @@ namespace XRTK.Editor
                 }
             }
 
-            return destinationPath.Replace($"{ProjectRootPath}\\", string.Empty);
+            return destinationPath.Replace($"{ProjectRootPath}\\".BackSlashes(), string.Empty);
         }
 
         /// <summary>

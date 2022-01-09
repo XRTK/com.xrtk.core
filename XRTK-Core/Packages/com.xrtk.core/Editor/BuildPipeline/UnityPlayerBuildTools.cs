@@ -436,7 +436,7 @@ namespace XRTK.Editor.BuildPipeline
             return File.Exists($"{storePath}{Path.DirectorySeparatorChar}project.lock.json");
         }
 
-#region IOrderedCallback
+        #region IOrderedCallback
 
         /// <inheritdoc />
         public int callbackOrder { get; }
@@ -447,6 +447,6 @@ namespace XRTK.Editor.BuildPipeline
         /// <inheritdoc />
         public void OnPostprocessBuild(BuildReport report) => buildInfo?.OnPostProcessBuild(report);
 
-#endregion IOrderedCallback
+        #endregion IOrderedCallback
     }
 }

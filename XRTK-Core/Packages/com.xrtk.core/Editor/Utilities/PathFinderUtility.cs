@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Extensions;
 
 namespace XRTK.Editor.Utilities
 {
@@ -101,7 +102,7 @@ namespace XRTK.Editor.Utilities
                 PathFinderCache.Add(pathFinderType, resolvedPath);
             }
 
-            return resolvedPath;
+            return resolvedPath.BackSlashes();
         }
 
         #region Core Paths

@@ -119,7 +119,7 @@ namespace XRTK.Editor.Utilities
                     coreAbsoluteFolderPath = Path.GetFullPath(XRTK_Core_RelativeFolderPath);
                 }
 
-                return coreAbsoluteFolderPath;
+                return coreAbsoluteFolderPath.BackSlashes();
             }
         }
 

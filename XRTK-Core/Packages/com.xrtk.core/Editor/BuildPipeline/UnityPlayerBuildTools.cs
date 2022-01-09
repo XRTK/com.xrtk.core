@@ -128,7 +128,7 @@ namespace XRTK.Editor.BuildPipeline
                     return null;
                 }
 
-                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
+                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}{Path.DirectorySeparatorChar}BuildInfo{Path.DirectorySeparatorChar}");
                 Debug.Assert(buildAsset.IsNotNull());
                 buildInfo = buildInfoInstance;
                 Debug.Assert(buildInfo != null);
@@ -254,7 +254,7 @@ namespace XRTK.Editor.BuildPipeline
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            var cacheDirectory = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
+            var cacheDirectory = $"{Directory.GetParent(Application.dataPath)}{Path.DirectorySeparatorChar}Library{Path.DirectorySeparatorChar}il2cpp_cache{Path.DirectorySeparatorChar}{buildInfo.BuildTarget}";
 
             if (!Directory.Exists(cacheDirectory))
             {
@@ -362,7 +362,13 @@ namespace XRTK.Editor.BuildPipeline
 
                 if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
                 {
-                    var androidSdkPath = EditorPrefs.GetString("AndroidSdkRoot", "C:\\Program Files (x86)\\Android\\android-sdk");
+                    var androidSdkPath = EditorPrefs.GetString("AndroidSdkRoot",
+#if UNITY_EDITOR_WIN
+                        "C:\\Program Files (x86)\\Android\\android-sdk"
+#else
+                        string.Empty
+#endif
+                        );
                     Debug.Log($"AndroidSdkRoot: {androidSdkPath}");
                 }
 
@@ -427,7 +433,7 @@ namespace XRTK.Editor.BuildPipeline
 
             await new Process().RunAsync($"restore \"{storePath}/project.json\"", nugetPath);
 
-            return File.Exists($"{storePath}\\project.lock.json");
+            return File.Exists($"{storePath}{Path.DirectorySeparatorChar}project.lock.json");
         }
 
         #region IOrderedCallback

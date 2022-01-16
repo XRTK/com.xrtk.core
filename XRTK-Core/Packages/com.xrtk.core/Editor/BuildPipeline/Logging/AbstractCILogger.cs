@@ -30,8 +30,8 @@ namespace XRTK.Editor.BuildPipeline.Logging
             {
                 if (arg is string message)
                 {
-                    skip = string.IsNullOrWhiteSpace(message);// ||
-                          // CILoggingUtility.IgnoredLogs.Any(message.Contains);
+                    skip = string.IsNullOrWhiteSpace(message) ||
+                           CILoggingUtility.IgnoredLogs.Any(message.Contains);
                 }
             }
 
@@ -40,15 +40,15 @@ namespace XRTK.Editor.BuildPipeline.Logging
                 switch (logType)
                 {
                     case LogType.Log:
-                        format = $"{Log}{format}";
+                        format = $"\n{Log}{format}";
                         break;
                     case LogType.Assert:
                     case LogType.Error:
                     case LogType.Exception:
-                        format = $"{Error}{format}";
+                        format = $"\n{Error}{format}";
                         break;
                     case LogType.Warning:
-                        format = $"{Warning}{format}";
+                        format = $"\n{Warning}{format}";
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(logType), logType, null);
@@ -63,7 +63,7 @@ namespace XRTK.Editor.BuildPipeline.Logging
         {
             if (CILoggingUtility.LoggingEnabled)
             {
-                exception = new Exception($"{Error}{exception.Message}", exception);
+                exception = new Exception($"\n{Error}{exception.Message}", exception);
             }
 
             defaultLogger.LogException(exception, context);

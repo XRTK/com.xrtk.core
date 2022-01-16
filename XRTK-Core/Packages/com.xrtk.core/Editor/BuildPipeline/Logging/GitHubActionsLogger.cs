@@ -10,6 +10,9 @@ namespace XRTK.Editor.BuildPipeline.Logging
     public class GitHubActionsLogger : AbstractCILogger
     {
         /// <inheritdoc />
+        public override string Log => "::debug::";
+
+        /// <inheritdoc />
         public override string Error => "::error::";
 
         /// <inheritdoc />

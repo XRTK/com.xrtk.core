@@ -11,6 +11,11 @@ namespace XRTK.Editor.BuildPipeline.Logging
     public interface ICILogger : ILogHandler
     {
         /// <summary>
+        /// Log message prefix.
+        /// </summary>
+        string Log { get; }
+
+        /// <summary>
         /// Error message prefix.
         /// </summary>
         string Error { get; }

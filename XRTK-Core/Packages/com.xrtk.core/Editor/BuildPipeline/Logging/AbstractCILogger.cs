@@ -39,6 +39,7 @@ namespace XRTK.Editor.BuildPipeline.Logging
                 switch (logType)
                 {
                     case LogType.Log:
+                        format = $"{Log}{format}";
                         break;
                     case LogType.Assert:
                     case LogType.Error:
@@ -66,6 +67,9 @@ namespace XRTK.Editor.BuildPipeline.Logging
 
             defaultLogger.LogException(exception, context);
         }
+
+        /// <inheritdoc />
+        public virtual string Log => string.Empty;
 
         /// <inheritdoc />
         public virtual string Error => string.Empty;

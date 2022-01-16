@@ -10,6 +10,9 @@ namespace XRTK.Editor.BuildPipeline.Logging
     public class AzurePipelinesLogger : AbstractCILogger
     {
         /// <inheritdoc />
+        public override string Log => "##[task.logissue type=debug;]";
+
+        /// <inheritdoc />
         public override string Error => "##vso[task.logissue type=error;]";
 
         /// <inheritdoc />

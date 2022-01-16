@@ -50,7 +50,7 @@ namespace XRTK.Editor.BuildPipeline.Logging
                 Logger = new GitHubActionsLogger();
             }
 
-            Debug.Log(Logger != null ? $"{Logger.Warning} Started {Logger.GetType().Name}" : "No logger enabled");
+            Debug.Log(Logger != null ? $"\n{Logger.Warning} Started {Logger.GetType().Name} | Logging Enabled: {LoggingEnabled}" : "\nNo logger enabled");
         }
     }
 }

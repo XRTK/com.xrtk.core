@@ -30,7 +30,8 @@ namespace XRTK.Editor.BuildPipeline.Logging
             {
                 if (arg is string message)
                 {
-                    skip = CILoggingUtility.IgnoredLogs.Any(message.Contains);
+                    skip = string.IsNullOrWhiteSpace(message);// ||
+                          // CILoggingUtility.IgnoredLogs.Any(message.Contains);
                 }
             }
 

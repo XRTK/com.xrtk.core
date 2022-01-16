@@ -115,7 +115,7 @@ namespace XRTK.Extensions
         /// <param name="isActive">The <see cref="GameObject"/>'s active state to set.</param>
         public static void SetActive(this Component component, bool isActive)
         {
-            if (component.gameObject.activeInHierarchy != isActive)
+            if (component.gameObject.activeSelf != isActive)
             {
                 component.gameObject.SetActive(isActive);
             }

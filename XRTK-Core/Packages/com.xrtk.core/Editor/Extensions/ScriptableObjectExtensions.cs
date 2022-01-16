@@ -57,11 +57,11 @@ namespace XRTK.Editor.Extensions
 
             if (!string.IsNullOrWhiteSpace(Path.GetExtension(path)))
             {
-                var subtractedPath = path.Substring(path.LastIndexOf("/", StringComparison.Ordinal));
+                var subtractedPath = path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal));
                 path = path.Replace(subtractedPath, string.Empty);
             }
 
-            path = path.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);
+            path = path.Replace($"{Directory.GetParent(Application.dataPath).FullName}{Path.DirectorySeparatorChar}", string.Empty);
 
             if (!Directory.Exists(Path.GetFullPath(path)))
             {

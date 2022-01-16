@@ -134,7 +134,7 @@ namespace XRTK.Editor.Utilities
                     File.Move($"{fullPath}{META}", $"{newPath}{META}");
                 }
 
-                var assemblyPath = $"{directoryPath}\\{assembly.name}{DLL}";
+                var assemblyPath = $"{directoryPath}{Path.DirectorySeparatorChar}{assembly.name}{DLL}";
 
                 EditorUtility.DisplayProgressBar("Replacing source with assembly", "Copying assembly into project...", 0.5f);
 
@@ -286,11 +286,11 @@ namespace XRTK.Editor.Utilities
 
         private static string Hide(this string path)
         {
-            var index = path.LastIndexOf("\\", StringComparison.Ordinal);
+            var index = path.LastIndexOf(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal);
 
             if (index == 0)
             {
-                index = path.LastIndexOf("/", StringComparison.Ordinal);
+                index = path.LastIndexOf(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal);
             }
 
             if (index == 0)
@@ -313,7 +313,7 @@ namespace XRTK.Editor.Utilities
                 fileName = fileName.TrimStart('.');
             }
 
-            return path.Replace($"\\.{fileName}", $"\\{fileName}");
+            return path.Replace($"{Path.DirectorySeparatorChar}.{fileName}", $"{Path.DirectorySeparatorChar}{fileName}");
         }
 
         private static string GetUnityProjectRelativePath(this string path)

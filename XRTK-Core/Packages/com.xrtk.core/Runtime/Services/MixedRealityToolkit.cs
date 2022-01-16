@@ -530,40 +530,21 @@ namespace XRTK.Services
             // We'll enforce that here, then tracking can update it to the appropriate position later.
             CameraCache.Main.transform.position = Vector3.zero;
 
-            bool addedComponents = false;
+            // We need at least one instance of the event system to be active.
+            EnsureEventSystemSetup();
+        }
 
-            if (!Application.isPlaying)
-            {
-                var eventSystems = FindObjectsOfType<EventSystem>();
-
-                if (eventSystems.Length == 0)
-                {
-                    CameraCache.Main.gameObject.EnsureComponent<EventSystem>();
-                    addedComponents = true;
-                }
-                else
-                {
-                    bool raiseWarning;
-
-                    if (eventSystems.Length == 1)
-                    {
-                        raiseWarning = eventSystems[0].gameObject != CameraCache.Main.gameObject;
-                    }
-                    else
-                    {
-                        raiseWarning = true;
-                    }
-
-                    if (raiseWarning)
-                    {
-                        Debug.LogWarning($"Found an existing event system in your scene. The {nameof(MixedRealityToolkit)} requires only one, and must be found on the main camera.");
-                    }
-                }
-            }
-
-            if (!addedComponents)
+        private static void EnsureEventSystemSetup()
+        {
+            var eventSystems = FindObjectsOfType<EventSystem>();
+            if (eventSystems.Length == 0)
             {
                 CameraCache.Main.gameObject.EnsureComponent<EventSystem>();
+                Debug.Log($"There was no {nameof(EventSystem)} in the scene. The {nameof(MixedRealityToolkit)} requires one and added it to the main camera.");
+            }
+            else if (eventSystems.Length > 1)
+            {
+                Debug.LogError($"There is more than one {nameof(EventSystem)} active in the scene. Please make sure only one instance of it exists as it may cause errors.");
             }
         }
 

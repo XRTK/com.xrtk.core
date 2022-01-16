@@ -68,7 +68,7 @@ namespace XRTK.Editor
                     for (int i = 0; i < installedAssets.Count; i++)
                     {
                         EditorUtility.DisplayProgressBar("Verifying assets...", Path.GetFileNameWithoutExtension(installedAssets[i]), i / (float)installedAssets.Count);
-                        installedAssets[i] = installedAssets[i].Replace($"{ProjectRootPath}\\", string.Empty).BackSlashes();
+                        installedAssets[i] = installedAssets[i].Replace($"{ProjectRootPath}{Path.DirectorySeparatorChar}", string.Empty).BackSlashes();
                     }
 
                     EditorUtility.ClearProgressBar();
@@ -215,7 +215,7 @@ namespace XRTK.Editor
                 }
             }
 
-            return destinationPath.Replace($"{ProjectRootPath}\\", string.Empty);
+            return destinationPath.Replace($"{ProjectRootPath}{Path.DirectorySeparatorChar}", string.Empty);
         }
 
         /// <summary>

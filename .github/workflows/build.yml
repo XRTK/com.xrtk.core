@@ -2,114 +2,64 @@ name: XRTK CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - 'main'
   pull_request:
     branches:
       - '*'
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 concurrency:
-  group: ${{ github.head_ref }}
+  group: ${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  validate:
-    runs-on: self-hosted
-    outputs:
-      editor-path: ${{ steps.unity-validate.outputs.editor-path }}
-      project-path: ${{ steps.unity-validate.outputs.project-path }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-
-      - id: unity-validate
-        name: Unity Editor Validation
-        uses: xrtk/unity-validate@main
-
-      - uses: xrtk/unity-action@main
-        name: Project Validation
-        with:
-          name: 'project-validation'
-          editor-path: '${{ steps.unity-validate.outputs.editor-path }}'
-          project-path: '${{ steps.unity-validate.outputs.project-path }}'
-          args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.ValidateProject'
-
-      - uses: actions/upload-artifact@v2
-        name: Upload Artifacts
-        if: always()
-        with:
-          name: 'Validation-Results'
-          path: '${{ steps.unity-validate.outputs.project-path }}\Builds\Logs'
-
-      - name: Cleanup Job
-        run: |
-          $logDirectory = "${{ steps.unity-validate.outputs.project-path }}\Builds"
-
-          if (Test-Path -Path $logDirectory) {
-            Remove-Item $logDirectory -Force -Recurse
-          }
-        shell: powershell
-
   build:
-    needs: validate
-    runs-on: self-hosted
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        build-target: [StandaloneWindows64, WSAPlayer, Android, Lumin]
-      max-parallel: 1
+        include:
+          - os: windows
+            build-target: Android
+          - os: windows
+            build-target: StandaloneWindows64
+          - os: windows
+            build-target: WSAPlayer
+          - os: macos
+            build-target: Android
 
-    steps:
-      - uses: xrtk/unity-action@main
-        name: '${{ matrix.build-target }}-Tests'
-        with:
-          name: '${{ matrix.build-target }}-Tests'
-          editor-path: '${{ needs.validate.outputs.editor-path }}'
-          project-path: '${{ needs.validate.outputs.project-path }}'
-          build-target: '${{ matrix.build-target }}'
-          args: '-batchmode -runEditorTests'
-
-      - uses: xrtk/unity-action@main
-        name: '${{ matrix.build-target }}-Build'
-        with:
-          name: '${{ matrix.build-target }}-Build'
-          editor-path: '${{ needs.validate.outputs.editor-path }}'
-          project-path: '${{ needs.validate.outputs.project-path }}'
-          build-target: '${{ matrix.build-target }}'
-          args: '-quit -batchmode -executeMethod XRTK.Editor.BuildPipeline.UnityPlayerBuildTools.StartCommandLineBuild'
-
-      - name: Zip Artifacts
-        if: always()
-        run: |
-          $artifacts = "${{ needs.validate.outputs.project-path }}\Builds"
-
-          if (Test-Path -Path $artifacts) {
-            Compress-Archive -Path "$artifacts\*" -DestinationPath ${{ github.workspace }}\${{ matrix.build-target }}-Artifacts.zip
-            Remove-Item $artifacts -Force -Recurse
-          }
-        shell: powershell
-
-      - uses: actions/upload-artifact@v2
-        name: Upload Artifacts
-        if: always()
-        with:
-          name: '${{ matrix.build-target }}-Artifacts'
-          path: '${{ github.workspace }}\${{ matrix.build-target }}-Artifacts.zip'
-
-  publish:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    needs: build
-    runs-on:  ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          clean: true
 
-      - name: upm subtree split
-        run: |
-          $packageDir = Get-Item -Path "**/Packages/com.*" | Select-Object -ExpandProperty FullName
-          $packageDir = $packageDir.replace('${{ github.workspace }}/','')
-          Write-Host $packageDir
-          git subtree split --prefix="$packageDir" -b upm
-          git push -u origin upm --force
-        working-directory: ${{ github.workspace }}
-        shell: pwsh
+      - name: Unity Build (${{ matrix.build-target }})
+        uses: xrtk/unity-build@development
+        with:
+          build-target: ${{ matrix.build-target }}
+
+  build-success:
+    if: ${{ github.ref != 'refs/heads/main' || github.base_ref != 'main' }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo success!
+
+  publish:
+    if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'main' }}
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: xrtk/upm-release@v1
+        name: publish upm package
+        with:
+          upm-username: 'xrtk-build-bot'
+          upm-email: 'xrtk-build-bot@xrtk.io'
+          upm-server-address: 'http://upm.xrtk.io:4873'
+          upm-auth-token: '${{ secrets.UPM_CREDENTIALS }}'
+          github-username: 'XRTK-Build-Bot'
+          github-pat: '${{ secrets.GIT_TOKEN }}'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'

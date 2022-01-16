@@ -40,12 +40,12 @@ namespace XRTK.Editor.BuildPipeline.Logging
 
         static CILoggingUtility()
         {
-            if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("AGENT_NAME")))
+            if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("TF_BUILD")))
             {
                 Logger = new AzurePipelinesLogger();
             }
 
-            if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("GITHUB_WORKFLOW")))
+            if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("GITHUB_ACTIONS")))
             {
                 Logger = new GitHubActionsLogger();
             }

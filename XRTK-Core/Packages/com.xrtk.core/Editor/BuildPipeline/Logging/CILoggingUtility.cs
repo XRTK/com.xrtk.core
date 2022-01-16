@@ -31,7 +31,7 @@ namespace XRTK.Editor.BuildPipeline.Logging
             {
                 if (loggingEnabled == value) { return; }
 
-                Debug.LogWarning(value ? "Logging Enabled" : "Logging Disabled");
+                Debug.Log(value ? "CI Logging Enabled" : "CI Logging Disabled");
 
                 loggingEnabled = value;
             }

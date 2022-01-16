@@ -33,6 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          submodules: recursive
           clean: true
 
       - name: Unity Build (${{ matrix.build-target }})

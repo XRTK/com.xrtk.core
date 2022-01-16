@@ -102,7 +102,7 @@ namespace XRTK.Editor.Utilities
             ignoredPath = ignoredPath.Replace($"{rootDir.ForwardSlashes()}/", string.Empty);
             var directory = ignoredPath.Replace(Path.GetFileName(ignoredPath), Path.GetFileNameWithoutExtension(ignoredPath));
             directory = directory.Substring(0, directory.LastIndexOf("/", StringComparison.Ordinal));
-            var gitIgnoreFilePath = $"{rootDir}\\.gitignore";
+            var gitIgnoreFilePath = $"{rootDir}{Path.DirectorySeparatorChar}.gitignore";
 
             if (File.Exists(gitIgnoreFilePath))
             {

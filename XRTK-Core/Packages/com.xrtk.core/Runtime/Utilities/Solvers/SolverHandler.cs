@@ -233,8 +233,8 @@ namespace XRTK.SDK.Utilities.Solvers
                 case TrackedObjectType.Body:
                     TrackTransform(cameraSystem.MainCameraRig.BodyTransform);
                     break;
-                case TrackedObjectType.Playspace:
-                    TrackTransform(cameraSystem.MainCameraRig.PlayspaceTransform);
+                case TrackedObjectType.Rig:
+                    TrackTransform(cameraSystem.MainCameraRig.RigTransform);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

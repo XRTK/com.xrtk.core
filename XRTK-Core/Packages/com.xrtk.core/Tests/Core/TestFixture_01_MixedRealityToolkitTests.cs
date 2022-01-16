@@ -6,6 +6,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.TestTools;
 using XRTK.Definitions;
+using XRTK.Editor.BuildPipeline.Logging;
 using XRTK.Editor.Utilities;
 using XRTK.Interfaces;
 using XRTK.Services;
@@ -21,7 +22,7 @@ namespace XRTK.Tests.Core
         public void Test_01_InitializeMixedRealityToolkit()
         {
             // Disable throwing error/warning logs in the CI/CD pipeline.
-            DevOpsLoggingUtility.LoggingEnabled = false;
+            CILoggingUtility.LoggingEnabled = false;
 
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             MixedRealityToolkit.ConfirmInitialized();

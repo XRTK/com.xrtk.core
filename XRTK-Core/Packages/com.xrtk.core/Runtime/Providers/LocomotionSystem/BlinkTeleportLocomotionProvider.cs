@@ -7,7 +7,6 @@ using XRTK.Extensions;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services.LocomotionSystem;
-using XRTK.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Definitions.Utilities;
 
@@ -26,20 +25,20 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             fadeDuration = profile.FadeDuration;
+            fadeMaterial = profile.FadeMaterial;
+            fadeInColor = profile.FadeInColor;
+            fadeOutColor = profile.FadeOutColor;
         }
 
-        private static readonly int sourceBlend = Shader.PropertyToID("_SrcBlend");
-        private static readonly int destinationBlend = Shader.PropertyToID("_DstBlend");
-        private static readonly int zWrite = Shader.PropertyToID("_ZWrite");
-
         private readonly float fadeDuration;
+        private readonly Material fadeMaterial;
+        private readonly Color fadeInColor;
+        private readonly Color fadeOutColor;
         private IMixedRealityInputSource inputSource;
         private MixedRealityPose targetPose;
         private ITeleportAnchor targetAnchor;
         private GameObject fadeSphere;
         private MeshRenderer fadeSphereRenderer;
-        private Color fadeInColor = Color.clear;
-        private Color fadeOutColor = Color.black;
         private bool isFadingOut;
         private bool isFadingIn;
         private float fadeTime;
@@ -215,30 +214,6 @@ namespace XRTK.Providers.LocomotionSystem
                 fadeSphereRenderer.allowOcclusionWhenDynamic = false;
                 fadeSphereRenderer.lightProbeUsage = LightProbeUsage.Off;
                 fadeSphereRenderer.reflectionProbeUsage = ReflectionProbeUsage.Off;
-
-                // Finally paint the sphere with a transparency enabled material.
-                // We use the default material created on the sphere to clone its properties.
-                var fadeMaterial = new Material(fadeSphereRenderer.material)
-                {
-                    color = fadeInColor
-                };
-
-                if (RenderPipelineUtilities.GetActiveRenderingPipeline() == Definitions.Utilities.RenderPipeline.Legacy)
-                {
-                    // Unity standard shader can be assumed since we created a primitive.
-                    fadeMaterial.SetInt(sourceBlend, (int)BlendMode.One);
-                    fadeMaterial.SetInt(destinationBlend, (int)BlendMode.OneMinusSrcAlpha);
-                    fadeMaterial.SetInt(zWrite, 0);
-                    fadeMaterial.DisableKeyword("_ALPHATEST_ON");
-                    fadeMaterial.DisableKeyword("_ALPHABLEND_ON");
-                    fadeMaterial.EnableKeyword("_ALPHAPREMULTIPLY_ON");
-                    fadeMaterial.renderQueue = 3000;
-                }
-                else
-                {
-                    Debug.LogError($"{nameof(BlinkTeleportLocomotionProvider)} does not support render pipelines. The provider won't be able to fade in and out.");
-                }
-
                 fadeSphereRenderer.material = fadeMaterial;
             }
 

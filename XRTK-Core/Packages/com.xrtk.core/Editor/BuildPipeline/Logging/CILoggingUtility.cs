@@ -19,10 +19,23 @@ namespace XRTK.Editor.BuildPipeline.Logging
         /// </summary>
         public static ICILogger Logger { get; set; }
 
+        private static bool loggingEnabled = Application.isBatchMode;
+
         /// <summary>
         /// Is CI Logging currently enabled?
         /// </summary>
-        public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
+        public static bool LoggingEnabled
+        {
+            get => loggingEnabled;
+            set
+            {
+                if (loggingEnabled == value) { return; }
+
+                Debug.LogWarning(value ? "Logging Enabled" : "Logging Disabled");
+
+                loggingEnabled = value;
+            }
+        }
 
         /// <summary>
         /// List of ignored log messages.

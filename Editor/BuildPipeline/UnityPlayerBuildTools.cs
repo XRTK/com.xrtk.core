@@ -14,6 +14,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Editor.BuildPipeline.Logging;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
@@ -308,7 +309,7 @@ namespace XRTK.Editor.BuildPipeline
         [UsedImplicitly]
         public static void ValidateProject()
         {
-            DevOpsLoggingUtility.LoggingEnabled = false;
+            CILoggingUtility.LoggingEnabled = false;
 
             try
             {

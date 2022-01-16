@@ -54,7 +54,6 @@ namespace XRTK.Editor.BuildPipeline.Logging
                 }
             }
 
-            Debug.Log($"{Warning} -> {logType} | {context} | {format} | {args}");
             defaultLogger.LogFormat(logType, context, format, args);
         }
 

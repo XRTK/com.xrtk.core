@@ -51,6 +51,13 @@ namespace XRTK.Editor.BuildPipeline.Logging
             }
 
             Debug.Log(Logger != null ? $"\n{Logger.Warning} Started {Logger.GetType().Name} | Logging Enabled: {LoggingEnabled}" : "\nNo logger enabled");
+            Debug.Log("test log");
+            Debug.LogFormat("Test {0} Log", "Format");
+            Debug.LogWarning("test warning");
+            Debug.LogWarningFormat("Test {0} Warning", "Format");
+            Debug.LogError("test error");
+            Debug.LogErrorFormat("Test {0} Error", "Format");
+            Debug.Assert(false, "test assert");
         }
     }
 }

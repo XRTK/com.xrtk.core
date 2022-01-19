@@ -17,6 +17,15 @@ namespace XRTK.Definitions.CameraSystem
     public class BaseMixedRealityCameraDataProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
+        [Tooltip("Sets the tracking type of the camera.")]
+        private TrackingType trackingType = TrackingType.Auto;
+
+        /// <summary>
+        /// The configured tracking type of the camera.
+        /// </summary>
+        public TrackingType TrackingType => trackingType;
+
+        [SerializeField]
         [Tooltip("Sets the type of tracking origin to use for this Rig. Tracking origins identify where 0,0,0 is in the world of tracking.")]
         private TrackingOriginModeFlags trackingOriginMode = TrackingOriginModeFlags.Unknown;
 

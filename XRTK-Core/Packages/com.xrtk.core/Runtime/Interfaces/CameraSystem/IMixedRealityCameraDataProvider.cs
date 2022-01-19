@@ -1,6 +1,8 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using XRTK.Services.CameraSystem;
+
 namespace XRTK.Interfaces.CameraSystem
 {
     /// <summary>
@@ -31,6 +33,11 @@ namespace XRTK.Interfaces.CameraSystem
         /// The <see cref="IMixedRealityCameraRig"/> reference for this data provider.
         /// </summary>
         IMixedRealityCameraRig CameraRig { get; }
+
+        /// <summary>
+        /// The <see cref="Services.CameraSystem.TrackingType"/> this provider is configured to use.
+        /// </summary>
+        TrackingType TrackingType { get; }
 
 #if XRTK_USE_LEGACYVR
         /// <summary>

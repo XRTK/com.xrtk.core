@@ -8,6 +8,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 using XRTK.Utilities;
+using XRTK.Services.CameraSystem;
 
 #if !XRTK_USE_LEGACYVR
 using UnityEngine.XR;
@@ -43,6 +44,8 @@ namespace XRTK.Providers.CameraSystem
             isCameraPersistent = profile.IsCameraPersistent;
             cameraRigType = profile.CameraRigType.Type;
             applyQualitySettings = profile.ApplyQualitySettings;
+
+            TrackingType = profile.TrackingType;
 
 #if XRTK_USE_LEGACYVR
             DefaultHeadHeight = profile.DefaultHeadHeight;
@@ -107,6 +110,9 @@ namespace XRTK.Providers.CameraSystem
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }
+
+        /// <inheritdoc />
+        public TrackingType TrackingType { get; }
 
 #if XRTK_USE_LEGACYVR
         /// <inheritdoc />

@@ -41,6 +41,7 @@ namespace XRTK.Providers.CameraSystem
                 throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
             }
 
+            eyeTextureResolution = profile.EyeTextureResolution;
             isCameraPersistent = profile.IsCameraPersistent;
             cameraRigType = profile.CameraRigType.Type;
             applyQualitySettings = profile.ApplyQualitySettings;
@@ -69,6 +70,7 @@ namespace XRTK.Providers.CameraSystem
         }
 
         private readonly IMixedRealityCameraSystem cameraSystem;
+        private readonly float eyeTextureResolution;
         private readonly bool isCameraPersistent;
         private readonly Type cameraRigType;
         private readonly bool applyQualitySettings;
@@ -191,6 +193,11 @@ namespace XRTK.Providers.CameraSystem
             }
 
             cameraSystem.RegisterCameraDataProvider(this);
+
+            if (Application.isPlaying)
+            {
+                XRSettings.eyeTextureResolutionScale = eyeTextureResolution;
+            }
         }
 
         /// <inheritdoc />

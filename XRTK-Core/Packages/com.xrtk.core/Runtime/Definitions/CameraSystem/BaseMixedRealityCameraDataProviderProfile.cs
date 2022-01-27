@@ -35,6 +35,17 @@ namespace XRTK.Definitions.CameraSystem
         public TrackingOriginModeFlags TrackingOriginMode => trackingOriginMode;
 
         [SerializeField]
+        [Range(1f, 2f)]
+        [Tooltip("Rendered eye texture resolution. A value greater than 1 has an impact on performance.")]
+        private float eyeTextureResolution = 1f;
+
+        /// <summary>
+        /// Rendered eye texture resolution. A value greater than 1 has
+        /// an impact on performance.
+        /// </summary>
+        public float EyeTextureResolution => eyeTextureResolution;
+
+        [SerializeField]
         private bool isCameraPersistent = true;
 
         /// <summary>

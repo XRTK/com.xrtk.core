@@ -52,7 +52,7 @@ namespace XRTK.Providers.CameraSystem
             DefaultHeadHeight = profile.DefaultHeadHeight;
 #else
             trackingOriginMode = profile.TrackingOriginMode;
-            defaultHeadHeight = profile.DefaultHeadHeight > 0f ? profile.DefaultHeadHeight : 1.6f;
+            defaultHeadHeight = profile.DefaultHeadHeight;
 #endif
 
             nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;

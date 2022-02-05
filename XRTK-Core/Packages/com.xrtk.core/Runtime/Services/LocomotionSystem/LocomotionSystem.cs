@@ -91,7 +91,10 @@ namespace XRTK.Services.LocomotionSystem
         /// <inheritdoc />
         public override void Destroy()
         {
-            CameraCache.Main.gameObject.EnsureComponentDestroyed<LocomotionProviderEventDriver>();
+            if (Camera.main != null)
+            {
+                CameraCache.Main.gameObject.EnsureComponentDestroyed<LocomotionProviderEventDriver>();
+            }
             base.Destroy();
         }
 

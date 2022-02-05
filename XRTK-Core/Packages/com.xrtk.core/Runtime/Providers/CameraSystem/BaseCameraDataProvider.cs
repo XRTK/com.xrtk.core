@@ -156,54 +156,18 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Initialize();
 
-            if (CameraRig == null)
-            {
-                if (CameraCache.Main.transform.parent.IsNull())
-                {
-                    var rigTransform = new GameObject().transform;
-                    CameraCache.Main.transform.SetParent(rigTransform);
-                }
-
-                CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
-                Debug.Assert(CameraRig != null);
-            }
-
-#if XRTK_USE_LEGACYVR
-            ApplySettingsForDefaultHeadHeight();
-#else
-            // We attempt to intialize the camera tracking origin, which might
-            // fail at this point if the subystems are not ready, in which case,
-            // we set a flag to keep trying.
-            trackingOriginInitialized = SetupTrackingOrigin();
-            trackingOriginInitializing = !trackingOriginInitialized;
-#endif
-
-            cameraOpaqueLastFrame = IsOpaque;
-
-            if (applyQualitySettings)
-            {
-                if (IsOpaque)
-                {
-                    ApplySettingsForOpaqueDisplay();
-                }
-                else
-                {
-                    ApplySettingsForTransparentDisplay();
-                }
-            }
-
             cameraSystem.RegisterCameraDataProvider(this);
 
-            if (Application.isPlaying)
-            {
-                XRSettings.eyeTextureResolutionScale = eyeTextureResolution;
-            }
+
+
         }
 
         /// <inheritdoc />
         public override void Enable()
         {
             base.Enable();
+
+            EnsureCameraRigSetup();
 
             if (Application.isPlaying &&
                 isCameraPersistent)
@@ -311,7 +275,52 @@ namespace XRTK.Providers.CameraSystem
             cameraSystem.UnRegisterCameraDataProvider(this);
         }
 
-        #endregion IMixedRealitySerivce Implementation
+#endregion IMixedRealitySerivce Implementation
+
+        private void EnsureCameraRigSetup()
+        {
+            if (CameraRig == null)
+            {
+                if (CameraCache.Main.transform.parent.IsNull())
+                {
+                    var rigTransform = new GameObject().transform;
+                    CameraCache.Main.transform.SetParent(rigTransform);
+                }
+
+                CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                Debug.Assert(CameraRig != null);
+            }
+
+#if XRTK_USE_LEGACYVR
+            ApplySettingsForDefaultHeadHeight();
+#else
+            // We attempt to intialize the camera tracking origin, which might
+            // fail at this point if the subystems are not ready, in which case,
+            // we set a flag to keep trying.
+            trackingOriginInitialized = SetupTrackingOrigin();
+            trackingOriginInitializing = !trackingOriginInitialized;
+#endif
+
+            cameraOpaqueLastFrame = IsOpaque;
+
+            if (applyQualitySettings)
+            {
+                if (IsOpaque)
+                {
+                    ApplySettingsForOpaqueDisplay();
+                }
+                else
+                {
+                    ApplySettingsForTransparentDisplay();
+                }
+            }
+
+
+            if (Application.isPlaying)
+            {
+                XRSettings.eyeTextureResolutionScale = eyeTextureResolution;
+            }
+        }
 
 #if !XRTK_USE_LEGACYVR
         #region Tracking Origin Setup
@@ -325,6 +334,7 @@ namespace XRTK.Providers.CameraSystem
             // we can still keep going and assume everything is ready.
             var trackingOriginModeSet = true;
 
+#if !UNITY_EDITOR
             if (inputSubsystems.Count != 0)
             {
                 for (int i = 0; i < inputSubsystems.Count; i++)
@@ -345,6 +355,10 @@ namespace XRTK.Providers.CameraSystem
                 // connected, position the camera at the configured default offset.
                 UpdateCameraHeightOffset(defaultHeadHeight);
             }
+#else
+            // The editor does not have a tracking type, so just update the default headheight for simulation
+            UpdateCameraHeightOffset(defaultHeadHeight);
+#endif 
 
             return trackingOriginModeSet;
         }
@@ -402,7 +416,7 @@ namespace XRTK.Providers.CameraSystem
             SyncRigTransforms();
         }
 
-        #endregion Tracking Origin Setup
+#endregion Tracking Origin Setup
 #endif
 
 #if XRTK_USE_LEGACYVR
@@ -435,9 +449,9 @@ namespace XRTK.Providers.CameraSystem
 #endif
 
 #if !XRTK_USE_LEGACYVR
-        /// <summary>
-        /// Updates the camera height offset to the specified value.
-        /// </summary>
+            /// <summary>
+            /// Updates the camera height offset to the specified value.
+            /// </summary>
         protected virtual void UpdateCameraHeightOffset(float heightOffset = 0f)
         {
             CameraRig.CameraTransform.localPosition = new Vector3(

@@ -122,8 +122,15 @@ namespace XRTK.Services
                 DestroyAllServices();
             }
 
-            EnsureMixedRealityRequirements();
-            InitializeServiceLocator();
+            if (HasActiveProfile)
+            {
+                EnsureMixedRealityRequirements();
+                InitializeServiceLocator();
+            }
+            else
+            {
+                Debug.LogError("Unable to restart Toolkit as no profile was found");
+            }
 
             isResetting = false;
         }
@@ -316,10 +323,11 @@ namespace XRTK.Services
                 }
 #endif // UNITY_EDITOR
 
-                EnsureMixedRealityRequirements();
-
+                // if the Toolit has a profile, validate toolkit requirements and initialise services
                 if (HasActiveProfile)
                 {
+                    EnsureMixedRealityRequirements();
+
                     InitializeServiceLocator();
                 }
             }
@@ -530,8 +538,21 @@ namespace XRTK.Services
             // We'll enforce that here, then tracking can update it to the appropriate position later.
             CameraCache.Main.transform.position = Vector3.zero;
 
+            // Validate the CameraRig is setup with the main camera as a child of the rig
+            EnsureCameraRig();
+
             // We need at least one instance of the event system to be active.
             EnsureEventSystemSetup();
+        }
+
+        private static void EnsureCameraRig()
+        {
+            if (CameraCache.Main.transform.parent.IsNull())
+            {
+                var rigTransform = new GameObject("XRCameraRig").transform;
+                CameraCache.Main.transform.SetParent(rigTransform);
+                Debug.Log($"There was no XRCameraRig in the scene. The {nameof(MixedRealityToolkit)} requires one and added it, as well as making the main camera a child of the rig.");
+            }
         }
 
         private static void EnsureEventSystemSetup()

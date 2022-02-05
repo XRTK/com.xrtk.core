@@ -229,7 +229,6 @@ namespace XRTK.Services.CameraSystem
                 bodyTransform.name = playerBodyName;
             }
 
-
             if (PlayerCamera.transform.parent.name != rigName)
             {
                 // Since the scene is set up with a different camera parent, its likely
@@ -237,7 +236,7 @@ namespace XRTK.Services.CameraSystem
                 // something else. We print a warning to call out the fact that we're
                 // co-opting this object for use with teleporting and such, since that
                 // might cause conflicts with the parent's intended purpose.
-                Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.");
+                Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.\nPlease ensure youe scene is configured properly in the editor using \'MixedRealityToolkit -> Configure..\'");
                 // If we rename it, we make it clearer that why it's being teleported around at runtime.
                 PlayerCamera.transform.parent.name = rigName;
             }

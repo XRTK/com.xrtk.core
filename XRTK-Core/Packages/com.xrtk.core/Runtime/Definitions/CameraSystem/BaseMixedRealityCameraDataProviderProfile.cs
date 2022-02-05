@@ -17,6 +17,15 @@ namespace XRTK.Definitions.CameraSystem
     public class BaseMixedRealityCameraDataProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
+        [Tooltip("Sets the tracking type of the camera.")]
+        private TrackingType trackingType = TrackingType.Auto;
+
+        /// <summary>
+        /// The configured tracking type of the camera.
+        /// </summary>
+        public TrackingType TrackingType => trackingType;
+
+        [SerializeField]
         [Tooltip("Sets the type of tracking origin to use for this Rig. Tracking origins identify where 0,0,0 is in the world of tracking.")]
         private TrackingOriginModeFlags trackingOriginMode = TrackingOriginModeFlags.Unknown;
 
@@ -24,6 +33,17 @@ namespace XRTK.Definitions.CameraSystem
         /// Gets or sets the type of tracking origin to use for this Rig. Tracking origins identify where 0,0,0 is in the world of tracking. Not all devices support all tracking spaces; if the selected tracking space is not set it will fall back to Stationary.
         /// </summary>
         public TrackingOriginModeFlags TrackingOriginMode => trackingOriginMode;
+
+        [SerializeField]
+        [Range(1f, 2f)]
+        [Tooltip("Rendered eye texture resolution. A value greater than 1 has an impact on performance.")]
+        private float eyeTextureResolution = 1f;
+
+        /// <summary>
+        /// Rendered eye texture resolution. A value greater than 1 has
+        /// an impact on performance.
+        /// </summary>
+        public float EyeTextureResolution => eyeTextureResolution;
 
         [SerializeField]
         private bool isCameraPersistent = true;

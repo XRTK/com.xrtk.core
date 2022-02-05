@@ -8,6 +8,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 using XRTK.Utilities;
+using XRTK.Services.CameraSystem;
 
 #if !XRTK_USE_LEGACYVR
 using UnityEngine.XR;
@@ -40,15 +41,18 @@ namespace XRTK.Providers.CameraSystem
                 throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
             }
 
+            eyeTextureResolution = profile.EyeTextureResolution;
             isCameraPersistent = profile.IsCameraPersistent;
             cameraRigType = profile.CameraRigType.Type;
             applyQualitySettings = profile.ApplyQualitySettings;
+
+            TrackingType = profile.TrackingType;
 
 #if XRTK_USE_LEGACYVR
             DefaultHeadHeight = profile.DefaultHeadHeight;
 #else
             trackingOriginMode = profile.TrackingOriginMode;
-            defaultHeadHeight = profile.DefaultHeadHeight > 0f ? profile.DefaultHeadHeight : 1.6f;
+            defaultHeadHeight = profile.DefaultHeadHeight;
 #endif
 
             nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
@@ -66,6 +70,7 @@ namespace XRTK.Providers.CameraSystem
         }
 
         private readonly IMixedRealityCameraSystem cameraSystem;
+        private readonly float eyeTextureResolution;
         private readonly bool isCameraPersistent;
         private readonly Type cameraRigType;
         private readonly bool applyQualitySettings;
@@ -107,6 +112,9 @@ namespace XRTK.Providers.CameraSystem
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }
+
+        /// <inheritdoc />
+        public TrackingType TrackingType { get; }
 
 #if XRTK_USE_LEGACYVR
         /// <inheritdoc />
@@ -185,6 +193,11 @@ namespace XRTK.Providers.CameraSystem
             }
 
             cameraSystem.RegisterCameraDataProvider(this);
+
+            if (Application.isPlaying)
+            {
+                XRSettings.eyeTextureResolutionScale = eyeTextureResolution;
+            }
         }
 
         /// <inheritdoc />

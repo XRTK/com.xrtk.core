@@ -155,6 +155,7 @@ namespace XRTK.Services.CameraSystem
                 }
 
                 cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+
 #if XRTK_USE_LEGACYVR
                 cameraPoseDriver.UseRelativeTransform = true;
 #else
@@ -203,6 +204,28 @@ namespace XRTK.Services.CameraSystem
         #endregion IMixedRealityCameraRig Implementation
 
         #region MonoBehaviour Implementation
+
+        private void Start()
+        {
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                && CameraPoseDriver.IsNotNull())
+            {
+                switch (cameraSystem.TrackingType)
+                {
+                    case TrackingType.SixDegreesOfFreedom:
+                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
+                        break;
+                    case TrackingType.ThreeDegreesOfFreedom:
+                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
+                        break;
+                    case TrackingType.Auto:
+                    default:
+                        // For now, leave whatever the user has confitured manually on the component. Once we
+                        // have APIs in place to querey platform capabilities, we might use that for auto.
+                        break;
+                }
+            }
+        }
 
         private void OnValidate()
         {

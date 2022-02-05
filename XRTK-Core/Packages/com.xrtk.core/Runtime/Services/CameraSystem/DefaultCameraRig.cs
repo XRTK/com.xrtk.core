@@ -229,7 +229,8 @@ namespace XRTK.Services.CameraSystem
                 bodyTransform.name = playerBodyName;
             }
 
-            if (playerCamera != null && playerCamera.transform.parent.name != rigName)
+
+            if (PlayerCamera.transform.parent.name != rigName)
             {
                 // Since the scene is set up with a different camera parent, its likely
                 // that there's an expectation that that parent is going to be used for
@@ -238,7 +239,7 @@ namespace XRTK.Services.CameraSystem
                 // might cause conflicts with the parent's intended purpose.
                 Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.");
                 // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                playerCamera.transform.parent.name = rigName;
+                PlayerCamera.transform.parent.name = rigName;
             }
         }
 

@@ -224,6 +224,12 @@ namespace XRTK.Editor
                     Debug.Assert(!string.IsNullOrWhiteSpace(activeScene.path), "Configured Scene must be saved in order to set it as the Start Scene!\n" + "Please save your scene and set it as the Start Scene in the XRTK preferences.");
                     MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(activeScene.path);
                 }
+
+                if (XRTK.Utilities.CameraCache.Main.transform.parent.IsNull())
+                {
+                    var rigTransform = new GameObject("XRCameraRig").transform;
+                    XRTK.Utilities.CameraCache.Main.transform.SetParent(rigTransform);
+                }
             }
             catch (Exception e)
             {

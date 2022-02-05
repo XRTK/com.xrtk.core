@@ -115,18 +115,6 @@ namespace XRTK.Services.CameraSystem
                 }
                 else
                 {
-                    if (playerCamera.transform.parent.name != rigName)
-                    {
-                        // Since the scene is set up with a different camera parent, its likely
-                        // that there's an expectation that that parent is going to be used for
-                        // something else. We print a warning to call out the fact that we're
-                        // co-opting this object for use with teleporting and such, since that
-                        // might cause conflicts with the parent's intended purpose.
-                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.");
-                        // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        playerCamera.transform.parent.name = rigName;
-                    }
-
                     rigTransform = playerCamera.transform.parent;
                 }
 
@@ -239,6 +227,18 @@ namespace XRTK.Services.CameraSystem
                 !bodyTransform.name.Equals(playerBodyName))
             {
                 bodyTransform.name = playerBodyName;
+            }
+
+            if (playerCamera != null && playerCamera.transform.parent.name != rigName)
+            {
+                // Since the scene is set up with a different camera parent, its likely
+                // that there's an expectation that that parent is going to be used for
+                // something else. We print a warning to call out the fact that we're
+                // co-opting this object for use with teleporting and such, since that
+                // might cause conflicts with the parent's intended purpose.
+                Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.");
+                // If we rename it, we make it clearer that why it's being teleported around at runtime.
+                playerCamera.transform.parent.name = rigName;
             }
         }
 

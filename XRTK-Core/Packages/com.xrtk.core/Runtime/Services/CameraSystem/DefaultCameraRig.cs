@@ -19,10 +19,10 @@ namespace XRTK.Services.CameraSystem
         #region IMixedRealityCameraRig Implementation
 
         [SerializeField]
-        private string playspaceName = "MixedRealityPlayspace";
+        private string rigName = MixedRealityToolkit.DefaultXRCameraRigName;
 
         [SerializeField]
-        private Transform playspaceTransform = null;
+        private Transform rigTransform = null;
 
         /// <inheritdoc />
         public GameObject GameObject
@@ -41,13 +41,13 @@ namespace XRTK.Services.CameraSystem
         }
 
         /// <inheritdoc />
-        public Transform PlayspaceTransform
+        public Transform RigTransform
         {
             get
             {
-                if (playspaceTransform != null)
+                if (rigTransform != null)
                 {
-                    return playspaceTransform;
+                    return rigTransform;
                 }
 
                 if (MixedRealityToolkit.IsApplicationQuitting)
@@ -55,29 +55,29 @@ namespace XRTK.Services.CameraSystem
                     return null;
                 }
 
-                var playspaceTransformLookup = GameObject.Find(playspaceName);
+                var rigTransformLookup = GameObject.Find(rigName);
 
-                playspaceTransform = playspaceTransformLookup.IsNull()
-                    ? new GameObject(playspaceName).transform
-                    : playspaceTransformLookup.transform;
+                rigTransform = rigTransformLookup.IsNull()
+                    ? new GameObject(rigName).transform
+                    : rigTransformLookup.transform;
 
-                if (CameraTransform.parent != playspaceTransform)
+                if (CameraTransform.parent != rigTransform)
                 {
-                    CameraTransform.SetParent(playspaceTransform);
+                    CameraTransform.SetParent(rigTransform);
                 }
 
-                if (BodyTransform.parent != playspaceTransform)
+                if (BodyTransform.parent != rigTransform)
                 {
-                    BodyTransform.SetParent(playspaceTransform);
+                    BodyTransform.SetParent(rigTransform);
                 }
 
-                // It's very important that the MixedRealityPlayspace align with the tracked space,
-                // otherwise world-locked things like playspace boundaries won't be aligned properly.
-                // For now, we'll just assume that when the playspace is first initialized, the
+                // It's very important that the rig transform aligns with the tracked space,
+                // otherwise world-locked things like boundaries won't be aligned properly.
+                // For now, we'll just assume that when the rig is first initialized, the
                 // tracked space origin overlaps with the world space origin. If a platform ever does
                 // something else (i.e, placing the lower left hand corner of the tracked space at world
                 // space 0,0,0), we should compensate for that here.
-                return playspaceTransform;
+                return rigTransform;
             }
         }
 
@@ -111,26 +111,12 @@ namespace XRTK.Services.CameraSystem
 
                 if (playerCamera.transform.parent == null)
                 {
-                    playerCamera.transform.SetParent(PlayspaceTransform);
+                    playerCamera.transform.SetParent(RigTransform);
                 }
                 else
                 {
-                    if (playerCamera.transform.parent.name != playspaceName)
-                    {
-                        // Since the scene is set up with a different camera parent, its likely
-                        // that there's an expectation that that parent is going to be used for
-                        // something else. We print a warning to call out the fact that we're
-                        // co-opting this object for use with teleporting and such, since that
-                        // might cause conflicts with the parent's intended purpose.
-                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
-                        // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        playerCamera.transform.parent.name = playspaceName;
-                    }
-
-                    playspaceTransform = playerCamera.transform.parent;
+                    rigTransform = playerCamera.transform.parent;
                 }
-
-                Debug.Assert(CameraPoseDriver != null);
 
                 return playerCamera;
             }
@@ -155,7 +141,15 @@ namespace XRTK.Services.CameraSystem
                 }
 
                 cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+
+#if XRTK_USE_LEGACYVR
                 cameraPoseDriver.UseRelativeTransform = true;
+#else
+                cameraPoseDriver.UseRelativeTransform = false;
+#endif
+
+                Debug.Assert(cameraPoseDriver != null);
+
                 return cameraPoseDriver;
             }
         }
@@ -183,13 +177,13 @@ namespace XRTK.Services.CameraSystem
 
                 if (bodyTransform == null)
                 {
-                    bodyTransform = PlayspaceTransform.Find(playerBodyName);
+                    bodyTransform = RigTransform.Find(playerBodyName);
                 }
 
                 if (bodyTransform == null)
                 {
                     bodyTransform = new GameObject(playerBodyName).transform;
-                    bodyTransform.transform.SetParent(PlayspaceTransform);
+                    bodyTransform.transform.SetParent(RigTransform);
                 }
 
                 return bodyTransform;
@@ -202,16 +196,50 @@ namespace XRTK.Services.CameraSystem
 
         private void OnValidate()
         {
-            if (playspaceTransform != null &&
-                !playspaceTransform.name.Equals(playspaceName))
+            if (rigTransform != null &&
+                !rigTransform.name.Equals(rigName))
             {
-                playspaceTransform.name = playspaceName;
+                rigTransform.name = rigName;
             }
 
             if (bodyTransform != null &&
                 !bodyTransform.name.Equals(playerBodyName))
             {
                 bodyTransform.name = playerBodyName;
+            }
+
+            if (PlayerCamera.transform.parent.name != rigName)
+            {
+                // Since the scene is set up with a different camera parent, its likely
+                // that there's an expectation that that parent is going to be used for
+                // something else. We print a warning to call out the fact that we're
+                // co-opting this object for use with teleporting and such, since that
+                // might cause conflicts with the parent's intended purpose.
+                Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.\nPlease ensure youe scene is configured properly in the editor using \'MixedRealityToolkit -> Configure..\'");
+                // If we rename it, we make it clearer that why it's being teleported around at runtime.
+                PlayerCamera.transform.parent.name = rigName;
+            }
+        }
+
+        private void Start()
+        {
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                && CameraPoseDriver.IsNotNull())
+            {
+                switch (cameraSystem.TrackingType)
+                {
+                    case TrackingType.SixDegreesOfFreedom:
+                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
+                        break;
+                    case TrackingType.ThreeDegreesOfFreedom:
+                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
+                        break;
+                    case TrackingType.Auto:
+                    default:
+                        // For now, leave whatever the user has configured manually on the component. Once we
+                        // have APIs in place to query platform capabilities, we might use that for auto.
+                        break;
+                }
             }
         }
 

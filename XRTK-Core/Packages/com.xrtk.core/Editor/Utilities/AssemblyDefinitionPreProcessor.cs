@@ -44,7 +44,14 @@ namespace XRTK.Editor.Utilities
                     return;
                 }
 
-                var newVersion = $"[assembly: AssemblyVersion(\"{packageJson.Version}\")]";
+                var packageVersion = packageJson.Version;
+
+                if (packageVersion.Contains("-preview."))
+                {
+                    packageVersion = packageVersion.Substring(0, packageVersion.IndexOf("-", StringComparison.Ordinal));
+                }
+
+                var newVersion = $"[assembly: AssemblyVersion(\"{packageVersion}\")]";
                 var asmdefs = Directory.GetFiles(assetPath.Replace("package.json", string.Empty), "*.asmdef", SearchOption.AllDirectories);
 
                 foreach (var assembly in asmdefs)

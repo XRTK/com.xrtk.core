@@ -10,7 +10,7 @@ namespace XRTK.Seed
 {
     internal class PackageManifest
     {
-        internal static string ManifestFilePath => $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
+        internal static string ManifestFilePath => $"{Directory.GetParent(Application.dataPath)}{Path.DirectorySeparatorChar}Packages{Path.DirectorySeparatorChar}manifest.json";
 
         [JsonProperty("scopedRegistries")]
         public List<ScopedRegistry> ScopedRegistries { get; set; }

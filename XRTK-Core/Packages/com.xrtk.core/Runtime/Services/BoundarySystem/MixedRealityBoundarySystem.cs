@@ -68,19 +68,19 @@ namespace XRTK.Services.BoundarySystem
 
         private readonly Dictionary<BoundsCache, ProximityAlert> trackedObjects = new Dictionary<BoundsCache, ProximityAlert>(3);
 
-        private Transform playspaceTransform = null;
+        private Transform rigTransform = null;
 
-        private Transform PlayspaceTransform
+        private Transform RigTransform
         {
             get
             {
-                if (playspaceTransform == null)
+                if (rigTransform == null)
                 {
-                    playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
-                       ? cameraSystem.MainCameraRig.PlayspaceTransform
+                    rigTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                       ? cameraSystem.MainCameraRig.RigTransform
                        : CameraCache.Main.transform.parent;
                 }
-                return playspaceTransform;
+                return rigTransform;
             }
         }
 
@@ -98,7 +98,7 @@ namespace XRTK.Services.BoundarySystem
                 }
 
                 boundaryVisualizationRoot = new GameObject(nameof(BoundarySystemVisualizationRoot));
-                boundaryVisualizationRoot.transform.SetParent(PlayspaceTransform, false);
+                boundaryVisualizationRoot.transform.SetParent(RigTransform, false);
 
                 return boundaryVisualizationRoot;
             }
@@ -184,7 +184,7 @@ namespace XRTK.Services.BoundarySystem
                     return floorVisualization;
                 }
 
-                var position = PlayspaceTransform.position;
+                var position = RigTransform.position;
 
                 // Render the floor.
                 floorVisualization = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -577,7 +577,7 @@ namespace XRTK.Services.BoundarySystem
             // Handle the user teleporting (boundary moves with them).
             if (referenceSpace == Space.World)
             {
-                position = PlayspaceTransform.InverseTransformPoint(position);
+                position = RigTransform.InverseTransformPoint(position);
             }
 
             if (position.y < 0 ||
@@ -605,7 +605,7 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            var transformedCenter = PlayspaceTransform.TransformPoint(new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
+            var transformedCenter = RigTransform.TransformPoint(new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
 
             center = new Vector2(transformedCenter.x, transformedCenter.z);
             angle = rectangularBounds.Angle;

@@ -112,39 +112,13 @@ namespace XRTK.Services.InputSystem
         {
             base.Initialize();
 
-            bool addedComponents = false;
+            EnsureStandaloneInputModuleSetup();
 
             if (!Application.isPlaying)
             {
-                var standaloneInputModules = UnityEngine.Object.FindObjectsOfType<StandaloneInputModule>();
-
                 var cameraTransform = CameraCache.Main.transform;
                 cameraTransform.position = Vector3.zero;
                 cameraTransform.rotation = Quaternion.identity;
-
-                if (standaloneInputModules.Length == 0)
-                {
-                    CameraCache.Main.gameObject.EnsureComponent<StandaloneInputModule>();
-                    addedComponents = true;
-                }
-                else
-                {
-                    bool raiseWarning;
-
-                    if (standaloneInputModules.Length == 1)
-                    {
-                        raiseWarning = standaloneInputModules[0].gameObject != CameraCache.Main.gameObject;
-                    }
-                    else
-                    {
-                        raiseWarning = true;
-                    }
-
-                    if (raiseWarning)
-                    {
-                        Debug.LogWarning("Found an existing Standalone Input Module in your scene. The Mixed Reality Input System requires only one, and must be found on the main camera.");
-                    }
-                }
             }
             else
             {
@@ -174,12 +148,21 @@ namespace XRTK.Services.InputSystem
                 dictationEventData = new DictationEventData(eventSystem);
             }
 
-            if (!addedComponents)
+            GazeProvider = CameraCache.Main.gameObject.EnsureComponent(gazeProviderType) as IMixedRealityGazeProvider;
+        }
+
+        private void EnsureStandaloneInputModuleSetup()
+        {
+            var standaloneInputModules = UnityEngine.Object.FindObjectsOfType<StandaloneInputModule>();
+            if (standaloneInputModules.Length == 0)
             {
                 CameraCache.Main.gameObject.EnsureComponent<StandaloneInputModule>();
+                Debug.Log($"There was no {nameof(StandaloneInputModule)} in the scene. The {nameof(MixedRealityInputSystem)} requires one and added it to the main camera.");
             }
-
-            GazeProvider = CameraCache.Main.gameObject.EnsureComponent(gazeProviderType) as IMixedRealityGazeProvider;
+            else if (standaloneInputModules.Length > 1)
+            {
+                Debug.LogError($"There is more than one {nameof(StandaloneInputModule)} active in the scene. Please make sure only one instance of it exists as it may cause errors.");
+            }
         }
 
         /// <inheritdoc />

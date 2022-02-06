@@ -12,7 +12,11 @@ namespace XRTK.Editor.Profiles.CameraSystem
     [CustomEditor(typeof(BaseMixedRealityCameraDataProviderProfile), true, isFallback = true)]
     public class BaseMixedRealityCameraDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
+        private SerializedProperty trackingType;
+        private SerializedProperty trackingOriginMode;
+        private SerializedProperty eyeTextureResolution;
         private SerializedProperty isCameraPersistent;
+        private SerializedProperty applyQualitySettings;
 
         private SerializedProperty nearClipPlaneOpaqueDisplay;
         private SerializedProperty cameraClearFlagsOpaqueDisplay;
@@ -39,7 +43,11 @@ namespace XRTK.Editor.Profiles.CameraSystem
         {
             base.OnEnable();
 
+            trackingType = serializedObject.FindProperty(nameof(trackingType));
+            trackingOriginMode = serializedObject.FindProperty(nameof(trackingOriginMode));
+            eyeTextureResolution = serializedObject.FindProperty(nameof(eyeTextureResolution));
             isCameraPersistent = serializedObject.FindProperty(nameof(isCameraPersistent));
+            applyQualitySettings = serializedObject.FindProperty(nameof(applyQualitySettings));
 
             nearClipPlaneOpaqueDisplay = serializedObject.FindProperty(nameof(nearClipPlaneOpaqueDisplay));
             cameraClearFlagsOpaqueDisplay = serializedObject.FindProperty(nameof(cameraClearFlagsOpaqueDisplay));
@@ -65,13 +73,17 @@ namespace XRTK.Editor.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            if (isCameraPersistent.FoldoutWithBoldLabelPropertyField(platformSettingsFoldoutHeader))
+            if (trackingType.FoldoutWithBoldLabelPropertyField(platformSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(trackingOriginMode);
+                EditorGUILayout.PropertyField(eyeTextureResolution);
+                EditorGUILayout.PropertyField(isCameraPersistent);
                 EditorGUILayout.PropertyField(cameraRigType);
                 EditorGUILayout.PropertyField(defaultHeadHeight);
                 EditorGUILayout.PropertyField(bodyAdjustmentAngle);
                 EditorGUILayout.PropertyField(bodyAdjustmentSpeed);
+                EditorGUILayout.PropertyField(applyQualitySettings);
                 EditorGUI.indentLevel--;
             }
 

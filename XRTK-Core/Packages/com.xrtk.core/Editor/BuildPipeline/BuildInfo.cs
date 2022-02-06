@@ -10,6 +10,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Platforms;
+using XRTK.Editor.BuildPipeline.Logging;
 using XRTK.Interfaces;
 using XRTK.Services;
 
@@ -154,6 +155,9 @@ namespace XRTK.Editor.BuildPipeline
             {
                 switch (arguments[i])
                 {
+                    case "-ignoreCompilerErrors":
+                        CILoggingUtility.LoggingEnabled = false;
+                        break;
                     case "-autoIncrement":
                         AutoIncrement = true;
                         break;

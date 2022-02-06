@@ -19,6 +19,9 @@
 [submodule "Submodules/glTF"]
 	path = Submodules/glTF
 	url = https://github.com/XRTK/glTF.git
-[submodule "Submodules/WebXR"]
-	path = Submodules/WebXR
-	url = https://github.com/XRTK/WebXR.git
+[submodule "Submodules/SpatialPersistence"]
+	path = Submodules/SpatialPersistence
+	url = https://github.com/XRTK/SpatialPersistence.git
+[submodule "Submodules/SpatialPersistence.ASA"]
+	path = Submodules/SpatialPersistence.ASA
+	url = https://github.com/XRTK/SpatialPersistence.ASA.git

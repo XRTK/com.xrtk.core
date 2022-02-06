@@ -341,14 +341,20 @@ namespace XRTK.Providers.CameraSystem
             {
                 for (int i = 0; i < inputSubsystems.Count; i++)
                 {
-                    var result = SetupTrackingOrigin(inputSubsystems[i]);
-                    if (result)
+                    if (inputSubsystems[i].SubsystemDescriptor.id == "MockHMD Head Tracking")
                     {
-                        inputSubsystems[i].trackingOriginUpdated -= XRInputSubsystem_OnTrackingOriginUpdated;
-                        inputSubsystems[i].trackingOriginUpdated += XRInputSubsystem_OnTrackingOriginUpdated;
+                        UpdateCameraHeightOffset(defaultHeadHeight);
                     }
-
-                    trackingOriginModeSet &= result;
+                    else
+                    {
+                        var result = SetupTrackingOrigin(inputSubsystems[i]);
+                        if (result)
+                        {
+                            inputSubsystems[i].trackingOriginUpdated -= XRInputSubsystem_OnTrackingOriginUpdated;
+                            inputSubsystems[i].trackingOriginUpdated += XRInputSubsystem_OnTrackingOriginUpdated;
+                        }
+                        trackingOriginModeSet &= result;
+                    }
                 }
             }
             else

@@ -316,7 +316,7 @@ namespace XRTK.Providers.CameraSystem
             {
                 if (CameraCache.Main.transform.parent.IsNull())
                 {
-                    var rigTransform = new GameObject().transform;
+                    var rigTransform = new GameObject(MixedRealityToolkit.DefaultXRCameraRigName).transform;
                     CameraCache.Main.transform.SetParent(rigTransform);
                 }
 
@@ -420,7 +420,7 @@ namespace XRTK.Providers.CameraSystem
             SyncRigTransforms();
         }
 
-#endregion Tracking Origin Setup
+        #endregion Tracking Origin Setup
 #endif
 
 #if XRTK_USE_LEGACYVR

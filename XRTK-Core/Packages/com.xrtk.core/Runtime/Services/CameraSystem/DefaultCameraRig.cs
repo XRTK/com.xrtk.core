@@ -19,7 +19,7 @@ namespace XRTK.Services.CameraSystem
         #region IMixedRealityCameraRig Implementation
 
         [SerializeField]
-        private string rigName = "XRCameraRig";
+        private string rigName = MixedRealityToolkit.DefaultXRCameraRigName;
 
         [SerializeField]
         private Transform rigTransform = null;

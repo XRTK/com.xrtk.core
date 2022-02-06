@@ -122,15 +122,8 @@ namespace XRTK.Services
                 DestroyAllServices();
             }
 
-            if (HasActiveProfile)
-            {
-                EnsureMixedRealityRequirements();
-                InitializeServiceLocator();
-            }
-            else
-            {
-                Debug.LogError("Unable to restart Toolkit as no profile was found");
-            }
+            EnsureMixedRealityRequirements();
+            InitializeServiceLocator();
 
             isResetting = false;
         }

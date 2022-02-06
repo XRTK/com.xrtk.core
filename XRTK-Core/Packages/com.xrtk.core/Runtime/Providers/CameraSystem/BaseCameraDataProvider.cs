@@ -168,8 +168,8 @@ namespace XRTK.Providers.CameraSystem
 #if XRTK_USE_LEGACYVR
             ApplySettingsForDefaultHeadHeight();
 #else
-            // We attempt to intialize the camera tracking origin, which might
-            // fail at this point if the subystems are not ready, in which case,
+            // We attempt to initialize the camera tracking origin, which might
+            // fail at this point if the subsytems are not ready, in which case,
             // we set a flag to keep trying.
             trackingOriginInitialized = SetupTrackingOrigin();
             trackingOriginInitializing = !trackingOriginInitialized;
@@ -245,9 +245,9 @@ namespace XRTK.Providers.CameraSystem
             }
 
 #if !XRTK_USE_LEGACYVR
-            // We keep trying to intiailze the tracking origin,
+            // We keep trying to initialize the tracking origin,
             // until it worked, because at application launch the
-            // subystems might not be ready yet.
+            // subsytems might not be ready yet.
             if (trackingOriginInitializing && !trackingOriginInitialized)
             {
                 trackingOriginInitialized = SetupTrackingOrigin();

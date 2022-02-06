@@ -118,8 +118,6 @@ namespace XRTK.Services.CameraSystem
                     rigTransform = playerCamera.transform.parent;
                 }
 
-                Debug.Assert(CameraPoseDriver != null);
-
                 return playerCamera;
             }
         }
@@ -149,6 +147,9 @@ namespace XRTK.Services.CameraSystem
 #else
                 cameraPoseDriver.UseRelativeTransform = false;
 #endif
+
+                Debug.Assert(cameraPoseDriver != null);
+
                 return cameraPoseDriver;
             }
         }
@@ -193,28 +194,6 @@ namespace XRTK.Services.CameraSystem
 
         #region MonoBehaviour Implementation
 
-        private void Start()
-        {
-            if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
-                && CameraPoseDriver.IsNotNull())
-            {
-                switch (cameraSystem.TrackingType)
-                {
-                    case TrackingType.SixDegreesOfFreedom:
-                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
-                        break;
-                    case TrackingType.ThreeDegreesOfFreedom:
-                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
-                        break;
-                    case TrackingType.Auto:
-                    default:
-                        // For now, leave whatever the user has confitured manually on the component. Once we
-                        // have APIs in place to querey platform capabilities, we might use that for auto.
-                        break;
-                }
-            }
-        }
-
         private void OnValidate()
         {
             if (rigTransform != null &&
@@ -239,6 +218,28 @@ namespace XRTK.Services.CameraSystem
                 Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.\nPlease ensure youe scene is configured properly in the editor using \'MixedRealityToolkit -> Configure..\'");
                 // If we rename it, we make it clearer that why it's being teleported around at runtime.
                 PlayerCamera.transform.parent.name = rigName;
+            }
+        }
+
+        private void Start()
+        {
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                && CameraPoseDriver.IsNotNull())
+            {
+                switch (cameraSystem.TrackingType)
+                {
+                    case TrackingType.SixDegreesOfFreedom:
+                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
+                        break;
+                    case TrackingType.ThreeDegreesOfFreedom:
+                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
+                        break;
+                    case TrackingType.Auto:
+                    default:
+                        // For now, leave whatever the user has configured manually on the component. Once we
+                        // have APIs in place to query platform capabilities, we might use that for auto.
+                        break;
+                }
             }
         }
 

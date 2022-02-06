@@ -308,7 +308,7 @@ namespace XRTK.Providers.CameraSystem
             cameraSystem.UnRegisterCameraDataProvider(this);
         }
 
-#endregion IMixedRealitySerivce Implementation
+        #endregion IMixedRealitySerivce Implementation
 
         private void EnsureCameraRigSetup()
         {

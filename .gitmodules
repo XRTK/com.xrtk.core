@@ -25,3 +25,6 @@
 [submodule "Submodules/SpatialPersistence.ASA"]
 	path = Submodules/SpatialPersistence.ASA
 	url = https://github.com/XRTK/SpatialPersistence.ASA.git
+[submodule "Submodules/WebXR"]
+	path = Submodules/WebXR
+	url = https://github.com/XRTK/com.xrtk.webxr

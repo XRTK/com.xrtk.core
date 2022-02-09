@@ -9,6 +9,8 @@ EditorBuildSettings:
     path: Assets/XRTK.Examples/BaseScene.unity
     guid: 092b39bb8f12afa498a539bd456a71d6
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: c4982dfe119d0264490af5c151c3827a,
+      type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: c1ab88c6e8137d949b3ba9d7c77ff5eb,
       type: 2}
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: bf4ca4b201eff6f47bfcf89c2053db39,

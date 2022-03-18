@@ -156,23 +156,20 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Initialize();
 
-            if (CameraRig == null)
-            {
-                if (CameraCache.Main.transform.parent.IsNull())
-                {
-                    var rigTransform = new GameObject().transform;
-                    CameraCache.Main.transform.SetParent(rigTransform);
-                }
+            cameraSystem.RegisterCameraDataProvider(this);
 
-                CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
-                Debug.Assert(CameraRig != null);
+            if (!Application.isPlaying)
+            {
+                return;
             }
+
+            EnsureCameraRigSetup();
 
 #if XRTK_USE_LEGACYVR
             ApplySettingsForDefaultHeadHeight();
 #else
-            // We attempt to intialize the camera tracking origin, which might
-            // fail at this point if the subystems are not ready, in which case,
+            // We attempt to initialize the camera tracking origin, which might
+            // fail at this point if the subsytems are not ready, in which case,
             // we set a flag to keep trying.
             trackingOriginInitialized = SetupTrackingOrigin();
             trackingOriginInitializing = !trackingOriginInitialized;
@@ -192,8 +189,6 @@ namespace XRTK.Providers.CameraSystem
                 }
             }
 
-            cameraSystem.RegisterCameraDataProvider(this);
-
             if (Application.isPlaying)
             {
                 XRSettings.eyeTextureResolutionScale = eyeTextureResolution;
@@ -204,6 +199,8 @@ namespace XRTK.Providers.CameraSystem
         public override void Enable()
         {
             base.Enable();
+
+            EnsureCameraRigSetup();
 
             if (Application.isPlaying &&
                 isCameraPersistent)
@@ -248,9 +245,9 @@ namespace XRTK.Providers.CameraSystem
             }
 
 #if !XRTK_USE_LEGACYVR
-            // We keep trying to intiailze the tracking origin,
+            // We keep trying to initialize the tracking origin,
             // until it worked, because at application launch the
-            // subystems might not be ready yet.
+            // subsytems might not be ready yet.
             if (trackingOriginInitializing && !trackingOriginInitialized)
             {
                 trackingOriginInitialized = SetupTrackingOrigin();
@@ -313,6 +310,21 @@ namespace XRTK.Providers.CameraSystem
 
         #endregion IMixedRealitySerivce Implementation
 
+        private void EnsureCameraRigSetup()
+        {
+            if (CameraRig == null)
+            {
+                if (CameraCache.Main.transform.parent.IsNull())
+                {
+                    var rigTransform = new GameObject(MixedRealityToolkit.DefaultXRCameraRigName).transform;
+                    CameraCache.Main.transform.SetParent(rigTransform);
+                }
+
+                CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                Debug.Assert(CameraRig != null);
+            }
+        }
+
 #if !XRTK_USE_LEGACYVR
         #region Tracking Origin Setup
 
@@ -329,14 +341,20 @@ namespace XRTK.Providers.CameraSystem
             {
                 for (int i = 0; i < inputSubsystems.Count; i++)
                 {
-                    var result = SetupTrackingOrigin(inputSubsystems[i]);
-                    if (result)
+                    if (inputSubsystems[i].SubsystemDescriptor.id == "MockHMD Head Tracking")
                     {
-                        inputSubsystems[i].trackingOriginUpdated -= XRInputSubsystem_OnTrackingOriginUpdated;
-                        inputSubsystems[i].trackingOriginUpdated += XRInputSubsystem_OnTrackingOriginUpdated;
+                        UpdateCameraHeightOffset(defaultHeadHeight);
                     }
-
-                    trackingOriginModeSet &= result;
+                    else
+                    {
+                        var result = SetupTrackingOrigin(inputSubsystems[i]);
+                        if (result)
+                        {
+                            inputSubsystems[i].trackingOriginUpdated -= XRInputSubsystem_OnTrackingOriginUpdated;
+                            inputSubsystems[i].trackingOriginUpdated += XRInputSubsystem_OnTrackingOriginUpdated;
+                        }
+                        trackingOriginModeSet &= result;
+                    }
                 }
             }
             else

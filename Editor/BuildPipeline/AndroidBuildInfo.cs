@@ -1,6 +1,7 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
@@ -22,6 +23,23 @@ namespace XRTK.Editor.BuildPipeline
 
         /// <inheritdoc />
         public override string ExecutableFileExtension => ".apk";
+
+        public override void ParseCommandLineArgs()
+        {
+            base.ParseCommandLineArgs();
+
+            var arguments = Environment.GetCommandLineArgs();
+
+            for (int i = 0; i < arguments.Length; ++i)
+            {
+                switch (arguments[i])
+                {
+                    case "-splitApk":
+                        PlayerSettings.Android.useAPKExpansionFiles = true;
+                        break;
+                }
+            }
+        }
 
         /// <inheritdoc />
         public override void OnPreProcessBuild(BuildReport report)

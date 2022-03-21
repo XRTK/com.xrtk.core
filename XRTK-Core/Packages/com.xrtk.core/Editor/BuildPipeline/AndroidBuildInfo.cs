@@ -41,7 +41,6 @@ namespace XRTK.Editor.BuildPipeline
                 {
                     case "-splitApk":
                         UseExpansionFiles = true;
-                        Debug.LogWarning("try to split apk during build");
                         break;
                 }
             }

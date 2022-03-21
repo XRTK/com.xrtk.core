@@ -23,14 +23,19 @@ jobs:
         include:
           - os: windows
             build-target: Android
-          - os: windows
-            build-target: Lumin
-          - os: windows
-            build-target: StandaloneWindows64
-          - os: windows
-            build-target: WSAPlayer
+            build-args: -splitApk
           - os: macos
             build-target: Android
+            build-args: -splitApk
+          - os: windows
+            build-target: Lumin
+            build-args: ''
+          - os: windows
+            build-target: StandaloneWindows64
+            build-args: ''
+          - os: windows
+            build-target: WSAPlayer
+            build-args: ''
 
     steps:
       - uses: actions/checkout@v2
@@ -42,6 +47,7 @@ jobs:
         uses: xrtk/unity-build@main
         with:
           build-target: ${{ matrix.build-target }}
+          additional-build-args: ${{ matrix.build-args }}
 
   build-success:
     if: ${{ github.ref != 'refs/heads/main' || github.base_ref != 'main' }}

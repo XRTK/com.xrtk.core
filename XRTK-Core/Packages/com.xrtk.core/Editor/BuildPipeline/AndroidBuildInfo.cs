@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
+using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Platforms;
 using XRTK.Interfaces;
@@ -15,6 +16,8 @@ namespace XRTK.Editor.BuildPipeline
     [RuntimePlatform(typeof(AndroidPlatform))]
     public class AndroidBuildInfo : BuildInfo
     {
+        private bool prevApkExpansionSettings;
+
         /// <inheritdoc />
         public override BuildTarget BuildTarget => BuildTarget.Android;
 
@@ -23,6 +26,8 @@ namespace XRTK.Editor.BuildPipeline
 
         /// <inheritdoc />
         public override string ExecutableFileExtension => ".apk";
+
+        public bool UseExpansionFiles { get; set; }
 
         public override void ParseCommandLineArgs()
         {
@@ -35,7 +40,8 @@ namespace XRTK.Editor.BuildPipeline
                 switch (arguments[i])
                 {
                     case "-splitApk":
-                        PlayerSettings.Android.useAPKExpansionFiles = true;
+                        UseExpansionFiles = true;
+                        Debug.LogWarning("try to split apk during build");
                         break;
                 }
             }
@@ -49,6 +55,10 @@ namespace XRTK.Editor.BuildPipeline
             {
                 return;
             }
+
+            prevApkExpansionSettings = PlayerSettings.Android.useAPKExpansionFiles;
+
+            PlayerSettings.Android.useAPKExpansionFiles = UseExpansionFiles;
 
             if (VersionCode.HasValue)
             {
@@ -70,6 +80,11 @@ namespace XRTK.Editor.BuildPipeline
             {
                 // TODO generate manifest
             }
+        }
+
+        public override void OnPostProcessBuild(BuildReport report)
+        {
+            PlayerSettings.Android.useAPKExpansionFiles = prevApkExpansionSettings;
         }
     }
 }

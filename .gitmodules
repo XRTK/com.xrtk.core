@@ -27,4 +27,4 @@
 	url = https://github.com/XRTK/SpatialPersistence.ASA.git
 [submodule "Submodules/WebXR"]
 	path = Submodules/WebXR
-	url = https://github.com/XRTK/com.xrtk.webxr
+	url = https://github.com/XRTK/com.xrtk.webxr.git

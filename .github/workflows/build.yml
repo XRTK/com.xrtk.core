@@ -33,6 +33,17 @@ jobs:
             build-target: Android
 
     steps:
+      - name: clean git
+        run: |
+          if (Test-Path -Path '.git') {
+            Remove-Item '.git' -Recurse -Force
+          }
+
+          if (Test-Path -Path 'Submodules') {
+            Remove-Item 'Submodules' -Recurse -Force
+          }
+        shell: pwsh
+
       - uses: actions/checkout@v2
         with:
           submodules: recursive

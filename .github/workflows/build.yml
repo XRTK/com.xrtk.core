@@ -35,6 +35,7 @@ jobs:
     steps:
       - name: clean git
         run: |
+          ls
           if (Test-Path -Path '.git') {
             rmdir -force -r '.git'
           }

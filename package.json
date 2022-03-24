@@ -1,0 +1,30 @@
+{
+  "name": "com.xrtk.core",
+  "displayName": "XRTK.Core",
+  "description": "The core framework of the Mixed Reality Toolkit",
+  "keywords": [
+    "XRTK",
+    "VR",
+    "AR",
+    "XR",
+    "Mixed Reality",
+    "DI"
+  ],
+  "version": "0.3.0-preview.65",
+  "unity": "2019.4",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XRTK/XRTK-Core.git"
+  },
+  "author": "XRTK Team (https://github.com/XRTK)",
+  "dependencies": {
+    "com.unity.ugui": "1.0.0",
+    "com.unity.modules.vr": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.textmeshpro": "2.1.6",
+    "com.unity.xr.legacyinputhelpers": "2.1.8",
+    "com.unity.editorcoroutines": "1.0.0",
+    "com.unity.addressables": "1.18.15"
+  }
+}

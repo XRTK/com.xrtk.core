@@ -33,6 +33,13 @@ jobs:
             build-target: Android
 
     steps:
+      - name: clean git
+        run: |
+          if (Test-Path -Path '.git') {
+            rmdir -force -r '.git'
+          }
+        shell: pwsh
+
       - uses: actions/checkout@v2
         with:
           submodules: recursive

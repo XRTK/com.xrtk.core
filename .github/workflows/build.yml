@@ -19,7 +19,11 @@ jobs:
   validate-editor-installation:
     runs-on: ${{ matrix.os }}
     strategy:
-      matrix: [windows, macos]
+      matrix:
+        include:
+          - os: windows
+          - os: macos
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -29,6 +33,7 @@ jobs:
         uses: xrtk/unity-validate@main
 
   build:
+    needs: validate-editor-installation
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

@@ -19,6 +19,7 @@ jobs:
   validate-editor-installation:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows

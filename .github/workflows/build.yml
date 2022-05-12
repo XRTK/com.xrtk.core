@@ -24,11 +24,7 @@ jobs:
           - os: windows
             build-target: Android
           - os: windows
-            build-target: Lumin
-          - os: windows
             build-target: StandaloneWindows64
-          - os: windows
-            build-target: WSAPlayer
           - os: macos
             build-target: Android
 

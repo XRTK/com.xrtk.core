@@ -14,11 +14,13 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Editor.BuildPipeline.Logging;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -45,7 +47,9 @@ namespace XRTK.Editor.BuildPipeline
                 BuildInfo buildInfoInstance;
                 var currentPlatformTarget = MixedRealityPreferences.CurrentPlatformTarget.GetType();
 
-                if (buildInfo == null ||
+                bool isBuildInfoNull = buildInfo == null;
+
+                if (isBuildInfoNull ||
                     buildInfo.BuildPlatform.GetType() != currentPlatformTarget)
                 {
                     buildInfoInstance = AppDomain.CurrentDomain
@@ -62,17 +66,34 @@ namespace XRTK.Editor.BuildPipeline
                                 return null;
                             }
 
-                            var assetGuids = AssetDatabase.FindAssets($"t:{type}");
+                            var buildInfos = Object.FindObjectsOfType(type);
 
-                            foreach (var guid in assetGuids)
+                            foreach (var info in buildInfos)
                             {
-                                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                                var assetPath = AssetDatabase.GetAssetPath(info);
                                 var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
 
                                 if (asset?.BuildPlatform.GetType() == currentPlatformTarget)
                                 {
                                     instance = asset as BuildInfo;
                                     break;
+                                }
+                            }
+
+                            if (instance.IsNull())
+                            {
+                                var assetGuids = AssetDatabase.FindAssets($"t:{type}");
+
+                                foreach (var guid in assetGuids)
+                                {
+                                    var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                                    var asset = AssetDatabase.LoadAssetAtPath(assetPath, type) as IBuildInfo;
+
+                                    if (asset?.BuildPlatform.GetType() == currentPlatformTarget)
+                                    {
+                                        instance = asset as BuildInfo;
+                                        break;
+                                    }
                                 }
                             }
 
@@ -103,17 +124,22 @@ namespace XRTK.Editor.BuildPipeline
                     buildInfoInstance = buildInfo as BuildInfo;
                 }
 
-                Debug.Assert(buildInfoInstance.IsNotNull());
-                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}\\BuildInfo\\");
+                if (buildInfoInstance.IsNull())
+                {
+                    return null;
+                }
+
+                var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}{Path.DirectorySeparatorChar}BuildInfo{Path.DirectorySeparatorChar}");
                 Debug.Assert(buildAsset.IsNotNull());
                 buildInfo = buildInfoInstance;
                 Debug.Assert(buildInfo != null);
 
                 return buildInfo;
             }
+            internal set => buildInfo = value;
         }
 
-        private static string GetValidVersionString(string version)
+        public static string GetValidVersionString(string version)
         {
             if (string.IsNullOrWhiteSpace(version))
             {
@@ -229,20 +255,16 @@ namespace XRTK.Editor.BuildPipeline
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            var cacheIl2Cpp = buildInfo.BuildTarget != BuildTarget.Android;
-            var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
+            var cacheDirectory = $"{Directory.GetParent(Application.dataPath)}{Path.DirectorySeparatorChar}Library{Path.DirectorySeparatorChar}il2cpp_cache{Path.DirectorySeparatorChar}{buildInfo.BuildTarget}";
 
-            if (cacheIl2Cpp)
+            if (!Directory.Exists(cacheDirectory))
             {
-                var il2cppCache = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
-
-                if (!Directory.Exists(il2cppCache))
-                {
-                    Directory.CreateDirectory(il2cppCache);
-                }
-
-                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
+                Directory.CreateDirectory(cacheDirectory);
             }
+
+            PlayerSettings.SetAdditionalIl2CppArgs(buildInfo.BuildTarget != BuildTarget.Android
+                ? $"--cachedirectory=\"{cacheDirectory}\""
+                : string.Empty);
 
             BuildReport buildReport = default;
 
@@ -269,11 +291,6 @@ namespace XRTK.Editor.BuildPipeline
                 Debug.LogError(e);
             }
 
-            if (cacheIl2Cpp)
-            {
-                PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
-            }
-
             if (PlayerSettings.GetApplicationIdentifier(buildTargetGroup) != oldBuildIdentifier)
             {
                 PlayerSettings.SetApplicationIdentifier(buildTargetGroup, oldBuildIdentifier);
@@ -292,6 +309,8 @@ namespace XRTK.Editor.BuildPipeline
         [UsedImplicitly]
         public static void ValidateProject()
         {
+            CILoggingUtility.LoggingEnabled = false;
+
             try
             {
                 SymbolicLinker.RunSync(true);
@@ -344,7 +363,13 @@ namespace XRTK.Editor.BuildPipeline
 
                 if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
                 {
-                    var androidSdkPath = EditorPrefs.GetString("AndroidSdkRoot", "C:\\Program Files (x86)\\Android\\android-sdk");
+                    var androidSdkPath = EditorPrefs.GetString("AndroidSdkRoot",
+#if UNITY_EDITOR_WIN
+                        "C:\\Program Files (x86)\\Android\\android-sdk"
+#else
+                        string.Empty
+#endif
+                        );
                     Debug.Log($"AndroidSdkRoot: {androidSdkPath}");
                 }
 
@@ -409,7 +434,7 @@ namespace XRTK.Editor.BuildPipeline
 
             await new Process().RunAsync($"restore \"{storePath}/project.json\"", nugetPath);
 
-            return File.Exists($"{storePath}\\project.lock.json");
+            return File.Exists($"{storePath}{Path.DirectorySeparatorChar}project.lock.json");
         }
 
         #region IOrderedCallback

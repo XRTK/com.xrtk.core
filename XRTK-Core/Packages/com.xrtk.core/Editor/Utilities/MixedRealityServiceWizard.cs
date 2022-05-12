@@ -16,7 +16,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.Events;
-using XRTK.Interfaces.TeleportSystem;
+using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services;
 using Assembly = System.Reflection.Assembly;
 
@@ -84,7 +84,7 @@ namespace XRTK.Editor.Utilities
                 return;
             }
 
-            var templatePath = $"{PathFinderUtility.XRTK_Core_AbsoluteFolderPath}\\Editor\\Templates~"; ;
+            var templatePath = $"{PathFinderUtility.XRTK_Core_AbsoluteFolderPath}{Path.DirectorySeparatorChar}Editor{Path.DirectorySeparatorChar}Templates~"; ;
 
             window = CreateInstance<MixedRealityServiceWizard>();
             window.minSize = new Vector2(MIN_HORIZONTAL_SIZE, MIN_VERTICAL_SIZE);
@@ -96,38 +96,38 @@ namespace XRTK.Editor.Utilities
             switch (interfaceType)
             {
                 case Type _ when typeof(IMixedRealityEventSystem).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\SystemProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\System.txt";
+                    window.profileTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}SystemProfile.txt";
+                    window.instanceTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}System.txt";
                     window.instanceBaseType = typeof(BaseEventSystem);
                     window.profileBaseType = typeof(BaseMixedRealityServiceProfile<>);
                     break;
                 case Type _ when typeof(IMixedRealitySystem).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\SystemProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\System.txt";
+                    window.profileTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}SystemProfile.txt";
+                    window.instanceTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}System.txt";
                     window.instanceBaseType = typeof(BaseSystem);
                     window.profileBaseType = typeof(BaseMixedRealityServiceProfile<>);
                     break;
                 case Type _ when typeof(IMixedRealityExtensionDataProvider).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\DataProviderProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\DataProvider.txt";
+                    window.profileTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}DataProviderProfile.txt";
+                    window.instanceTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}DataProvider.txt";
                     window.instanceBaseType = typeof(BaseExtensionDataProvider);
                     window.profileBaseType = typeof(BaseMixedRealityExtensionDataProviderProfile);
                     break;
                 case Type _ when typeof(IMixedRealityExtensionService).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\ServiceProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\Service.txt";
+                    window.profileTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}ServiceProfile.txt";
+                    window.instanceTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}Service.txt";
                     window.instanceBaseType = typeof(BaseExtensionService);
                     window.profileBaseType = typeof(BaseMixedRealityExtensionServiceProfile);
                     break;
                 case Type _ when typeof(IMixedRealityDataProvider).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\DataProviderProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\DataProvider.txt";
+                    window.profileTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}DataProviderProfile.txt";
+                    window.instanceTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}DataProvider.txt";
                     window.instanceBaseType = typeof(BaseDataProvider);
                     window.profileBaseType = typeof(BaseMixedRealityProfile);
                     break;
                 case Type _ when typeof(IMixedRealityService).IsAssignableFrom(interfaceType):
-                    window.profileTemplatePath = $"{templatePath}\\ServiceProfile.txt";
-                    window.instanceTemplatePath = $"{templatePath}\\Service.txt";
+                    window.profileTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}ServiceProfile.txt";
+                    window.instanceTemplatePath = $"{templatePath}{Path.DirectorySeparatorChar}Service.txt";
                     window.instanceBaseType = typeof(BaseServiceWithConstructor);
                     window.profileBaseType = typeof(BaseMixedRealityServiceProfile<>);
                     break;
@@ -327,7 +327,7 @@ namespace XRTK.Editor.Utilities
                             else
                             {
                                 if (interfaceType == typeof(IMixedRealityBoundarySystem) ||
-                                    interfaceType == typeof(IMixedRealityTeleportSystem))
+                                    interfaceType == typeof(ILocomotionSystem))
                                 {
                                     profileBaseTypeName = nameof(BaseMixedRealityProfile);
                                 }

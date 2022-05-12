@@ -52,5 +52,15 @@ namespace XRTK.Utilities
 
             return cachedCamera = newMain;
         }
+
+        /// <summary>
+        /// Validates if both the CameraCache reference as well as <see cref="Camera.main"/> is Null to avoid creating a new camera if it does not exist.
+        /// </summary>
+        public static bool IsNull => Camera.main == null || cachedCamera == null;
+
+        /// <summary>
+        /// Validates if both the CameraCache reference as well as <see cref="Camera.main"/> is NotNull to avoid creating a new camera if it does not exist.
+        /// </summary>
+        public static bool IsNotNull => !IsNull;
     }
 }

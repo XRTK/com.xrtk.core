@@ -6,7 +6,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyVersion("0.2.18")]
+[assembly: AssemblyVersion("0.3.0")]
 [assembly: AssemblyTitle("com.xrtk.core")]
 [assembly: AssemblyCompany("XRTK")]
 [assembly: AssemblyCopyright("Copyright (c) XRTK. All rights reserved.")]
@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 // Note: these are the names of the assembly definitions themselves, not necessarily the actual namespace the class is in.
 [assembly: InternalsVisibleTo("XRTK.Editor")]
 [assembly: InternalsVisibleTo("XRTK.Tests")]
+[assembly: InternalsVisibleTo("XRTK.Examples.Editor")]
 [assembly: InternalsVisibleTo("XRTK.WindowsMixedReality")]
 [assembly: InternalsVisibleTo("XRTK.WindowsMixedReality.Player")]
 [assembly: InternalsVisibleTo("XRTK.Oculus")]

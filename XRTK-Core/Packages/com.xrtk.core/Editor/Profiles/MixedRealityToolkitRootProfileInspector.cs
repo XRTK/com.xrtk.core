@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Experimental.SceneManagement;
+
 using UnityEditor.PackageManager;
 using UnityEngine;
 using XRTK.Definitions;
@@ -70,7 +70,7 @@ namespace XRTK.Editor.Profiles
 
             rootProfile = target as MixedRealityToolkitRootProfile;
 
-            var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+            var prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 
             // Create the MixedRealityToolkit object if none exists.
             if (!MixedRealityToolkit.IsInitialized && prefabStage == null && !didPromptToConfigure)
@@ -110,8 +110,8 @@ namespace XRTK.Editor.Profiles
                     {
                         if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem))
                         {
-                            var playspace = cameraSystem.MainCameraRig.PlayspaceTransform;
-                            Debug.Assert(playspace != null);
+                            var rig = cameraSystem.MainCameraRig.RigTransform;
+                            Debug.Assert(rig != null);
                         }
 
                         MixedRealityToolkit.Instance.ActiveProfile = rootProfile;

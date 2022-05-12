@@ -7,7 +7,7 @@ using UnityEngine.SpatialTracking;
 namespace XRTK.Interfaces.CameraSystem
 {
     /// <summary>
-    /// This interface is to be implemented by a <see cref="MonoBehaviour"/> and attached to the playspace root object.
+    /// This interface is to be implemented by a <see cref="MonoBehaviour"/> and attached to the rig root object.
     /// </summary>
     public interface IMixedRealityCameraRig
     {
@@ -17,11 +17,11 @@ namespace XRTK.Interfaces.CameraSystem
         GameObject GameObject { get; }
 
         /// <summary>
-        /// The root playspace transform that serves as the root of the camera rig.<para/>
+        /// The root rig transform.<para/>
         /// This transform serves as a virtual representation of the physical space.<para/>
         /// All physical objects that have digital twins will use this frame of reference to synchronize their transform data.
         /// </summary>
-        Transform PlayspaceTransform { get; }
+        Transform RigTransform { get; }
 
         /// <summary>
         /// The player's head transform where the <see cref="Camera"/> is located.

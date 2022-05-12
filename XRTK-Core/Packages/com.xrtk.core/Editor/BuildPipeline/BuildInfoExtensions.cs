@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -12,10 +13,10 @@ namespace XRTK.Editor.BuildPipeline
         /// Append symbols to the end of the <see cref="IBuildInfo"/>'s<see cref="IBuildInfo.BuildSymbols"/>.
         /// </summary>
         /// <param name="buildInfo"></param>
-        /// <param name="symbol">The string array to append.</param>
-        public static void AppendSymbols(this IBuildInfo buildInfo, params string[] symbol)
+        /// <param name="symbols">The string array to append.</param>
+        public static void AppendSymbols(this IBuildInfo buildInfo, params string[] symbols)
         {
-            buildInfo.AppendSymbols((IEnumerable<string>)symbol);
+            buildInfo.AppendSymbols((IEnumerable<string>)symbols);
         }
 
         /// <summary>
@@ -25,8 +26,10 @@ namespace XRTK.Editor.BuildPipeline
         /// <param name="symbols">The string collection to append.</param>
         public static void AppendSymbols(this IBuildInfo buildInfo, IEnumerable<string> symbols)
         {
-            string[] toAdd = symbols.Except(buildInfo.BuildSymbols.Split(';'))
-                                    .Where(symbol => !string.IsNullOrEmpty(symbol)).ToArray();
+            var toAdd = symbols
+                .Where(symbol => !string.IsNullOrEmpty(symbol))
+                .Except(buildInfo.BuildSymbols.Split(';'))
+                .ToArray();
 
             if (!toAdd.Any())
             {
@@ -38,7 +41,9 @@ namespace XRTK.Editor.BuildPipeline
                 buildInfo.BuildSymbols += ";";
             }
 
-            buildInfo.BuildSymbols += string.Join(";", toAdd);
+            var newSymbols = string.Join(";", toAdd);
+
+            buildInfo.BuildSymbols += newSymbols;
         }
 
         /// <summary>
@@ -48,7 +53,11 @@ namespace XRTK.Editor.BuildPipeline
         /// <param name="symbolsToRemove">The string collection to remove.</param>
         public static void RemoveSymbols(this IBuildInfo buildInfo, IEnumerable<string> symbolsToRemove)
         {
-            var toKeep = buildInfo.BuildSymbols.Split(';').Except(symbolsToRemove).ToString();
+            var toKeep = buildInfo.BuildSymbols
+                .Split(';')
+                .Where(symbol => !string.IsNullOrEmpty(symbol))
+                .Except(symbolsToRemove)
+                .ToArray();
 
             if (!toKeep.Any())
             {
@@ -60,7 +69,9 @@ namespace XRTK.Editor.BuildPipeline
                 buildInfo.BuildSymbols = string.Empty;
             }
 
-            buildInfo.BuildSymbols += string.Join(";", toKeep);
+            var newSymbols = string.Join(";", toKeep);
+
+            buildInfo.BuildSymbols += newSymbols;
         }
 
         /// <summary>
@@ -70,11 +81,8 @@ namespace XRTK.Editor.BuildPipeline
         /// <param name="symbols">The string array of symbols to match.</param>
         /// <returns>True, if any of the provided symbols are in the <see cref="IBuildInfo.BuildSymbols"/></returns>
         public static bool HasAnySymbols(this IBuildInfo buildInfo, params string[] symbols)
-        {
-            if (string.IsNullOrEmpty(buildInfo.BuildSymbols)) { return false; }
-
-            return buildInfo.BuildSymbols.Split(';').Intersect(symbols).Any();
-        }
+            => !string.IsNullOrEmpty(buildInfo.BuildSymbols) &&
+               buildInfo.BuildSymbols.Split(';').Intersect(symbols).Any();
 
         /// <summary>
         /// Does the <see cref="IBuildInfo"/> contain any of the provided symbols in the <see cref="IBuildInfo.BuildSymbols"/>?
@@ -83,11 +91,8 @@ namespace XRTK.Editor.BuildPipeline
         /// <param name="symbols">The string collection of symbols to match.</param>
         /// <returns>True, if any of the provided symbols are in the <see cref="IBuildInfo.BuildSymbols"/></returns>
         public static bool HasAnySymbols(this IBuildInfo buildInfo, IEnumerable<string> symbols)
-        {
-            if (string.IsNullOrEmpty(buildInfo.BuildSymbols)) { return false; }
-
-            return buildInfo.BuildSymbols.Split(';').Intersect(symbols).Any();
-        }
+            => !string.IsNullOrEmpty(buildInfo.BuildSymbols) &&
+               buildInfo.BuildSymbols.Split(';').Intersect(symbols).Any();
 
         /// <summary>
         /// Checks if the <see cref="IBuildInfo"/> has any configuration symbols (i.e. debug, release, or master).
@@ -95,12 +100,10 @@ namespace XRTK.Editor.BuildPipeline
         /// <param name="buildInfo"></param>
         /// <returns>True, if the <see cref="IBuildInfo.BuildSymbols"/> contains debug, release, or master.</returns>
         public static bool HasConfigurationSymbol(this IBuildInfo buildInfo)
-        {
-            return buildInfo.HasAnySymbols(
+            => buildInfo.HasAnySymbols(
                 UnityPlayerBuildTools.BuildSymbolDebug,
                 UnityPlayerBuildTools.BuildSymbolRelease,
                 UnityPlayerBuildTools.BuildSymbolMaster);
-        }
 
         /// <summary>
         /// Appends the <see cref="IBuildInfo"/>'s <see cref="IBuildInfo.BuildSymbols"/> without including debug, release or master.

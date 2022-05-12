@@ -10,6 +10,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Platforms;
+using XRTK.Editor.BuildPipeline.Logging;
 using XRTK.Interfaces;
 using XRTK.Services;
 
@@ -19,6 +20,11 @@ namespace XRTK.Editor.BuildPipeline
     [RuntimePlatform(typeof(WindowsStandalonePlatform))]
     public class BuildInfo : ScriptableObject, IBuildInfo
     {
+        protected virtual void OnEnable()
+        {
+            IsCommandLine = Application.isBatchMode;
+        }
+
         [SerializeField]
         private bool autoIncrement;
 
@@ -65,7 +71,7 @@ namespace XRTK.Editor.BuildPipeline
         public virtual IMixedRealityPlatform BuildPlatform => MixedRealityPreferences.CurrentPlatformTarget;
 
         /// <inheritdoc />
-        public bool IsCommandLine => Application.isBatchMode;
+        public bool IsCommandLine { get; private set; }
 
         private string outputDirectory;
 
@@ -141,9 +147,6 @@ namespace XRTK.Editor.BuildPipeline
         public string BuildSymbols { get; set; } = string.Empty;
 
         /// <inheritdoc />
-        public string Architecture { get; set; }
-
-        /// <inheritdoc />
         public virtual void ParseCommandLineArgs()
         {
             var arguments = Environment.GetCommandLineArgs();
@@ -152,6 +155,9 @@ namespace XRTK.Editor.BuildPipeline
             {
                 switch (arguments[i])
                 {
+                    case "-ignoreCompilerErrors":
+                        CILoggingUtility.LoggingEnabled = false;
+                        break;
                     case "-autoIncrement":
                         AutoIncrement = true;
                         break;
@@ -189,23 +195,6 @@ namespace XRTK.Editor.BuildPipeline
                         break;
                     case "-colorSpace":
                         ColorSpace = (ColorSpace)Enum.Parse(typeof(ColorSpace), arguments[++i]);
-                        break;
-                    case "-buildArchitecture":
-                        var architecture = arguments[++i].Substring(1);
-
-                        switch (architecture)
-                        {
-                            case "x86":
-                            case "x64":
-                            case "ARM":
-                            case "ARM64":
-                                Architecture = architecture;
-                                break;
-                            default:
-                                Debug.LogError($"Failed to parse -buildArchitecture: {architecture}");
-                                break;
-                        }
-
                         break;
                     case "-buildConfiguration":
                         var configuration = arguments[++i].Substring(1).ToLower();

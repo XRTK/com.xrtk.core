@@ -1,7 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.IO;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace XRTK.Extensions
@@ -63,6 +65,60 @@ namespace XRTK.Extensions
         {
             var foundComponent = gameObject.GetComponent(component);
             return foundComponent.IsNull() ? gameObject.AddComponent(component) : foundComponent;
+        }
+
+        /// <summary>
+        /// Ensure that a component of type <typeparamref name="T"/> is removed and destroyed if it
+        /// exists on the game object.
+        /// </summary>
+        /// <param name="gameObject">The <see cref="GameObject"/> to remove the component from.</param>
+        public static void EnsureComponentDestroyed<T>(this GameObject gameObject) where T : Component
+        {
+            T foundComponent = gameObject.GetComponent<T>();
+            if (foundComponent.IsNotNull())
+            {
+                foundComponent.Destroy();
+            }
+        }
+
+        /// Validates the <see cref="Component"/> reference.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="Component"/>.</typeparam>
+        /// <param name="component">The target <see cref="Component"/>.</param>
+        /// <param name="callerName">The <see cref="CallerFilePathAttribute"/> fills in this information.</param>
+        public static void Validate<T>(this T component, [CallerFilePath] string callerName = "") where T : Component
+        {
+            if (component.IsNull())
+            {
+                throw new MissingReferenceException($"{Path.GetFileNameWithoutExtension(callerName)} expected a {typeof(T).Name}");
+            }
+        }
+
+        /// <summary>
+        /// Ensure that a component of type <paramref name="component"/> is removed and destroyed if it
+        /// exists on the game object.
+        /// </summary>
+        /// <param name="gameObject">The <see cref="GameObject"/> to remove the component from.</param>
+        /// <param name="component">A component on the game object for which a component of type should be removed.</param>
+        public static void EnsureComponentDestroyed(this GameObject gameObject, Type component)
+        {
+            var foundComponent = gameObject.GetComponent(component);
+            if (foundComponent.IsNotNull())
+            {
+                foundComponent.Destroy();
+            }
+        }
+
+        /// Sets the <see cref="GameObject"/> this <see cref="Component"/> is attached to, to the specified state.
+        /// </summary>
+        /// <param name="component">The target <see cref="Component"/></param>
+        /// <param name="isActive">The <see cref="GameObject"/>'s active state to set.</param>
+        public static void SetActive(this Component component, bool isActive)
+        {
+            if (component.gameObject.activeSelf != isActive)
+            {
+                component.gameObject.SetActive(isActive);
+            }
         }
     }
 }

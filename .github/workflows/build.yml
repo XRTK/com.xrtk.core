@@ -1,0 +1,93 @@
+name: XRTK CI
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - '*'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-editor-installation:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows
+          - os: macos
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          clean: true
+
+      - name: validate editor installation
+        uses: xrtk/unity-validate@main
+
+  build:
+    needs: validate-editor-installation
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows
+            build-target: Android
+          - os: windows
+            build-target: StandaloneWindows64
+          - os: macos
+            build-target: Android
+
+    steps:
+      - name: clean git
+        run: |
+          if (Test-Path -Path '.git') {
+            Remove-Item '.git' -Recurse -Force
+          }
+
+          if (Test-Path -Path 'Submodules') {
+            Remove-Item 'Submodules' -Recurse -Force
+          }
+        shell: pwsh
+
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          clean: true
+
+      - name: Unity Build (${{ matrix.build-target }})
+        uses: xrtk/unity-build@main
+        with:
+          build-target: ${{ matrix.build-target }}
+
+  build-success:
+    if: ${{ github.ref != 'refs/heads/main' || github.base_ref != 'main' }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo success!
+
+  publish:
+    if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'main' }}
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: xrtk/upm-release@main
+        name: publish upm package
+        with:
+          upm-username: 'xrtk-build-bot'
+          upm-email: 'xrtk-build-bot@xrtk.io'
+          upm-server-address: 'http://upm.xrtk.io:4873'
+          upm-auth-token: '${{ secrets.UPM_CREDENTIALS }}'
+          github-username: 'XRTK-Build-Bot'
+          github-pat: '${{ secrets.GIT_TOKEN }}'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'

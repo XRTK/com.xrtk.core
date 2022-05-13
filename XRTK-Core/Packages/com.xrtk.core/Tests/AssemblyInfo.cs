@@ -3,7 +3,7 @@
 
 using System.Reflection;
 
-[assembly: AssemblyVersion("0.3.2")]
+[assembly: AssemblyVersion("0.3.3")]
 [assembly: AssemblyTitle("com.xrtk.tests")]
 [assembly: AssemblyCompany("XRTK")]
 [assembly: AssemblyCopyright("Copyright (c) XRTK. All rights reserved.")]

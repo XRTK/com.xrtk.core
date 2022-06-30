@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Reflection;
+using System;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Editor.Utilities
 {
@@ -16,33 +17,6 @@ namespace XRTK.Editor.Utilities
         private string[] filters;
         private bool filterFlag;
         private bool overwriteIcons;
-        private MethodInfo getIconForObject;
-        private MethodInfo setIconForObject;
-        private MethodInfo forceReloadInspectors;
-        private MethodInfo copyMonoScriptIconToImporters;
-
-        private void OnEnable()
-        {
-            if (getIconForObject == null)
-            {
-                getIconForObject = typeof(EditorGUIUtility).GetMethod("GetIconForObject", BindingFlags.NonPublic | BindingFlags.Static);
-            }
-
-            if (setIconForObject == null)
-            {
-                setIconForObject = typeof(EditorGUIUtility).GetMethod("SetIconForObject", BindingFlags.NonPublic | BindingFlags.Static);
-            }
-
-            if (forceReloadInspectors == null)
-            {
-                forceReloadInspectors = typeof(EditorUtility).GetMethod("ForceReloadInspectors", BindingFlags.NonPublic | BindingFlags.Static);
-            }
-
-            if (copyMonoScriptIconToImporters == null)
-            {
-                copyMonoScriptIconToImporters = typeof(MonoImporter).GetMethod("CopyMonoScriptIconToImporters", BindingFlags.NonPublic | BindingFlags.Static);
-            }
-        }
 
         public override void OnInspectorGUI()
         {
@@ -59,6 +33,7 @@ namespace XRTK.Editor.Utilities
                 filters = !string.IsNullOrEmpty(filter) ? filter.Split(',') : null;
 
                 Object[] selectedAsset = Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets);
+
                 for (int i = 0; i < selectedAsset.Length; i++)
                 {
                     EditorUtility.DisplayProgressBar("Updating Icons...", $"{i} of {selectedAsset.Length} {selectedAsset[i].name}", i / (float)selectedAsset.Length);
@@ -68,6 +43,7 @@ namespace XRTK.Editor.Utilities
                     if (filters != null)
                     {
                         bool matched = filterFlag;
+
                         for (int j = 0; j < filters.Length; j++)
                         {
                             if (selectedAsset[i].name.ToLower().Contains(filters[j].ToLower()))
@@ -83,7 +59,14 @@ namespace XRTK.Editor.Utilities
                         }
                     }
 
-                    SetIcon(selectedAsset[i], icon, overwriteIcons);
+                    try
+                    {
+                        SetIcon(path, icon, overwriteIcons);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e);
+                    }
                 }
 
                 AssetDatabase.SaveAssets();
@@ -94,18 +77,18 @@ namespace XRTK.Editor.Utilities
             GUI.enabled = false;
         }
 
-        private void SetIcon(Object selectedObject, Texture2D texture, bool overwrite)
+        private void SetIcon(string objectPath, Texture2D texture, bool overwrite)
         {
-            var setIcon = (Texture2D)getIconForObject.Invoke(null, new object[] { selectedObject });
+            var monoImporter = AssetImporter.GetAtPath(objectPath) as MonoImporter;
+            var setIcon = monoImporter.GetIcon();
 
             if (setIcon != null && !overwrite)
             {
                 return;
             }
 
-            setIconForObject.Invoke(null, new object[] { selectedObject, texture });
-            forceReloadInspectors.Invoke(null, null);
-            copyMonoScriptIconToImporters.Invoke(null, new object[] { selectedObject as MonoScript });
+            monoImporter.SetIcon(texture);
+            monoImporter.SaveAndReimport();
         }
     }
 }

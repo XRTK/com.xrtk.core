@@ -4,7 +4,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyVersion("0.3.4")]
+[assembly: AssemblyVersion("0.3.5")]
 [assembly: AssemblyTitle("com.xrtk.core.tests.services")]
 [assembly: AssemblyCompany("XRTK")]
 [assembly: AssemblyCopyright("Copyright (c) XRTK. All rights reserved.")]

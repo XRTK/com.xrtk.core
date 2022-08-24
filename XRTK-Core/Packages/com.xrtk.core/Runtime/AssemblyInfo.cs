@@ -6,7 +6,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyVersion("0.3.5")]
+[assembly: AssemblyVersion("0.3.6")]
 [assembly: AssemblyTitle("com.xrtk.core")]
 [assembly: AssemblyCompany("XRTK")]
 [assembly: AssemblyCopyright("Copyright (c) XRTK. All rights reserved.")]

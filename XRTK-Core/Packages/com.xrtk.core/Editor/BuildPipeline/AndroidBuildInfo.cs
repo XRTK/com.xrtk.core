@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
+using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Platforms;
 using XRTK.Interfaces;
@@ -48,6 +49,12 @@ namespace XRTK.Editor.BuildPipeline
                 EditorUserBuildSettings.activeBuildTarget != BuildTarget)
             {
                 return;
+            }
+
+            if (Application.isBatchMode)
+            {
+                // Disable to prevent gradle form killing parallel builds
+                EditorPrefs.SetBool("AndroidGradleStopDaemonsOnExit", false);
             }
 
             if (VersionCode.HasValue)

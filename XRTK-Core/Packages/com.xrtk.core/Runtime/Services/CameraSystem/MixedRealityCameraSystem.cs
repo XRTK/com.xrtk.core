@@ -31,7 +31,7 @@ namespace XRTK.Services.CameraSystem
         {
             base.Destroy();
 
-            Debug.Assert(cameraDataProviders.Count == 0, "Failed to clean up camera data provider references!");
+            Debug.Assert(cameraDataProviders.Count == 0, $"Failed to clean up {cameraDataProviders}!");
         }
 
         #endregion IMixedRealityService Implementation

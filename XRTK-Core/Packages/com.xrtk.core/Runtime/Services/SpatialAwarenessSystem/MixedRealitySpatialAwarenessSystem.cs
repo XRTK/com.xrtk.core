@@ -32,7 +32,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             spatialMeshVisibility = profile.MeshDisplayOption;
         }
 
-        private GameObject spatialAwarenessParent = null;
+        private GameObject spatialAwarenessParent;
 
         /// <summary>
         /// Parent <see cref="GameObject"/> which will encapsulate all of the spatial awareness system created scene objects.
@@ -58,12 +58,12 @@ namespace XRTK.Services.SpatialAwarenessSystem
             }
         }
 
-        private GameObject meshParent = null;
+        private GameObject meshParent;
 
         /// <inheritdoc />
         public GameObject SpatialMeshesParent => meshParent != null ? meshParent : (meshParent = CreateSecondGenerationParent("Meshes"));
 
-        private GameObject surfaceParent = null;
+        private GameObject surfaceParent;
 
         /// <inheritdoc />
         public GameObject SurfacesParent => surfaceParent != null ? surfaceParent : (surfaceParent = CreateSecondGenerationParent("Surfaces"));
@@ -178,8 +178,8 @@ namespace XRTK.Services.SpatialAwarenessSystem
 
         #region IMixedRealityService Implementation
 
-        private MixedRealitySpatialAwarenessEventData<SpatialMeshObject> meshEventData = null;
-        private MixedRealitySpatialAwarenessEventData<GameObject> surfaceFindingEventData = null;
+        private MixedRealitySpatialAwarenessEventData<SpatialMeshObject> meshEventData;
+        private MixedRealitySpatialAwarenessEventData<GameObject> surfaceFindingEventData;
 
         /// <inheritdoc/>
         public override void Initialize()
@@ -198,6 +198,8 @@ namespace XRTK.Services.SpatialAwarenessSystem
         public override void Destroy()
         {
             base.Destroy();
+
+            Debug.Assert(DetectedSpatialObservers.Count == 0, $"Failed to clean up {DetectedSpatialObservers}!");
 
             if (!Application.isPlaying) { return; }
 

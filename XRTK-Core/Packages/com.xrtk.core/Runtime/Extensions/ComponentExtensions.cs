@@ -68,6 +68,20 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
+        /// Ensure that a component of type exists on the game object.
+        /// If it doesn't exist, creates it.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="type">the type of <see cref="Component"/> on the game object for which a component of type should exist.</param>
+        /// <returns>The component that was retrieved or created.</returns>
+        public static Component EnsureComponent(this Component component, Type type)
+        {
+            var gameObject = component.gameObject;
+            var foundComponent = gameObject.GetComponent(type);
+            return foundComponent.IsNull() ? gameObject.AddComponent(type) : foundComponent;
+        }
+
+        /// <summary>
         /// Ensure that a component of type <typeparamref name="T"/> is removed and destroyed if it
         /// exists on the game object.
         /// </summary>

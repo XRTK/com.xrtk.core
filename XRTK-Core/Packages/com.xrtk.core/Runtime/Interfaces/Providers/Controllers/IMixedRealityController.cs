@@ -1,7 +1,6 @@
 ﻿// Copyright (c) XRTK All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
@@ -72,11 +71,6 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// be sure to check this value before using rotation data.
         /// </remarks>
         bool IsRotationAvailable { get; }
-
-        /// <summary>
-        /// Mapping definition for this controller, linking the Physical inputs to logical Input System Actions
-        /// </summary>
-        MixedRealityInteractionMapping[] Interactions { get; }
 
         /// <summary>
         /// Gets how fast the controller rotates or revolves relative to its

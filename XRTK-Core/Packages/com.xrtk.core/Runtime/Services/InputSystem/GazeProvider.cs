@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.EventDatum.Input;
+using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
@@ -154,7 +155,6 @@ namespace XRTK.Services.InputSystem
 
         protected IMixedRealityInputSystem InputSystem
             => inputSystem ?? (inputSystem = MixedRealityToolkit.GetSystem<IMixedRealityInputSystem>());
-
 
         #region InternalGazePointer Class
 
@@ -306,7 +306,7 @@ namespace XRTK.Services.InputSystem
                 }
 
                 // We've been destroyed during the await.
-                if (this == null) { return; }
+                if (this.IsNull()) { return; }
 
                 lateInitialize = false;
                 InputSystem.Register(gameObject);
@@ -392,8 +392,8 @@ namespace XRTK.Services.InputSystem
             {
                 if (eventData.InputSource.Pointers[i].PointerId == GazePointer.PointerId)
                 {
-                    InputSystem.RaisePointerUp(gazePointer, eventData.MixedRealityInputAction);
-                    InputSystem.RaisePointerClicked(gazePointer, eventData.MixedRealityInputAction);
+                    InputSystem.RaisePointerUp(gazePointer, eventData.InputAction);
+                    InputSystem.RaisePointerClicked(gazePointer, eventData.InputAction);
                     return;
                 }
             }
@@ -406,7 +406,7 @@ namespace XRTK.Services.InputSystem
             {
                 if (eventData.InputSource.Pointers[i].PointerId == GazePointer.PointerId)
                 {
-                    InputSystem.RaisePointerDown(gazePointer, eventData.MixedRealityInputAction, eventData.InputSource);
+                    InputSystem.RaisePointerDown(gazePointer, eventData.InputAction, eventData.InputSource);
                     return;
                 }
             }
@@ -465,7 +465,7 @@ namespace XRTK.Services.InputSystem
             }
 
             // We've been destroyed during the await.
-            if (this == null) { return; }
+            if (this.IsNull()) { return; }
 
             InputSystem.RaiseSourceDetected(GazeInputSource);
             GazePointer.BaseCursor?.SetVisibility(true);
@@ -477,10 +477,10 @@ namespace XRTK.Services.InputSystem
         public void SetGazeCursor(GameObject cursor)
         {
             Debug.Assert(cursor != null);
-            cursor.transform.parent = transform.parent;
+            cursor!.transform.parent = transform.parent;
             GazePointer.BaseCursor = cursor.GetComponent<IMixedRealityCursor>();
             Debug.Assert(GazePointer.BaseCursor != null, "Failed to load cursor");
-            GazePointer.BaseCursor.SetVisibilityOnSourceDetected = false;
+            GazePointer.BaseCursor!.SetVisibilityOnSourceDetected = false;
             GazePointer.BaseCursor.Pointer = GazePointer;
         }
 

@@ -220,14 +220,13 @@ namespace XRTK.Providers.Controllers.Simulation
         /// <param name="handedness">Handedness to lookup.</param>
         /// <param name="controller">Controller instance if found.</param>
         /// <returns>True, if instance exists for given handedness.</returns>
-        protected bool TryGetController(Handedness handedness, out BaseController controller)
+        protected bool TryGetController(Handedness handedness, out IMixedRealityController controller)
         {
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
-                if (ActiveControllers[i] is BaseController existingController &&
-                    existingController.ControllerHandedness == handedness)
+                if (ActiveControllers[i].ControllerHandedness == handedness)
                 {
-                    controller = existingController;
+                    controller = ActiveControllers[i];
                     return true;
                 }
             }

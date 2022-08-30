@@ -83,5 +83,11 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <param name="handMeshData">Hand mesh data for rendering the hand as a mesh.</param>
         /// <returns>True, if mesh data available and not <see cref="HandMeshData.Empty"/>.</returns>
         bool TryGetHandMeshData(out HandMeshData handMeshData);
+
+        /// <summary>
+        /// Update the controller with the provided <see cref="HandData"/>
+        /// </summary>
+        /// <param name="handData"></param>
+        void UpdateController(HandData handData);
     }
 }

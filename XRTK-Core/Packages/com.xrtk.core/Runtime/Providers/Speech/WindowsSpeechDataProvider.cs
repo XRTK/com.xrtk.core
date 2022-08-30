@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -100,22 +100,6 @@ namespace XRTK.Providers.Speech
         }
 
         /// <inheritdoc />
-        public override void Update()
-        {
-            base.Update();
-
-            if (keywordRecognizer == null || !keywordRecognizer.IsRunning) { return; }
-
-            for (int i = 0; i < commands.Length; i++)
-            {
-                if (Input.GetKeyDown(commands[i].KeyCode))
-                {
-                    OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.UtcNow, commands[i].Keyword);
-                }
-            }
-        }
-
-        /// <inheritdoc />
         public override void Disable()
         {
             base.Disable();
@@ -143,7 +127,7 @@ namespace XRTK.Providers.Speech
         #region IMixedRealitySpeechDataProvider Implementation
 
         /// <inheritdoc />
-        public override bool IsRecognitionActive => keywordRecognizer != null && keywordRecognizer.IsRunning;
+        public override bool IsRecognitionActive => keywordRecognizer is { IsRunning: true };
 
         /// <summary>
         /// The <see cref="RecognitionConfidenceLevel"/> that the <see cref="KeywordRecognizer"/> is using.
@@ -153,19 +137,34 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override void StartRecognition()
         {
-            if (keywordRecognizer != null && !keywordRecognizer.IsRunning)
+            if (keywordRecognizer is { IsRunning: false })
             {
                 keywordRecognizer.Start();
+
+                for (int i = 0; i < commands.Length; i++)
+                {
+                    commands[i].OnKeyword += Command_OnKeyword;
+                }
             }
         }
 
         /// <inheritdoc />
         public override void StopRecognition()
         {
-            if (keywordRecognizer != null && keywordRecognizer.IsRunning)
+            if (keywordRecognizer is { IsRunning: true })
             {
+                for (int i = 0; i < commands.Length; i++)
+                {
+                    commands[i].OnKeyword -= Command_OnKeyword;
+                }
+
                 keywordRecognizer.Stop();
             }
+        }
+
+        private void Command_OnKeyword(string keyword)
+        {
+            OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.UtcNow, keyword);
         }
 
         private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
@@ -179,7 +178,7 @@ namespace XRTK.Providers.Speech
             {
                 if (commands[i].Keyword == text)
                 {
-                    InputSystem.RaiseSpeechCommandRecognized(inputSource, commands[i].Action, (RecognitionConfidenceLevel)confidence, phraseDuration, phraseStartTime, text);
+                    InputSystem.RaiseSpeechCommandRecognized(inputSource, (RecognitionConfidenceLevel)confidence, phraseDuration, phraseStartTime, text);
                     break;
                 }
             }

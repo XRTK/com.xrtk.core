@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using XRTK.Services;
 using XRTK.Utilities;
 using XRTK.Extensions;
@@ -11,7 +12,6 @@ using XRTK.Services.LocomotionSystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Definitions.InputSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -29,7 +29,7 @@ namespace XRTK.Providers.LocomotionSystem
         private bool isInitialized;
 
         /// <inheritdoc />
-        public MixedRealityInputAction InputAction { get; }
+        public InputAction InputAction { get; }
 
         /// <inheritdoc />
         public bool IsEnabled { get; private set; }

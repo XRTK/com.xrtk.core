@@ -9,7 +9,7 @@ using XRTK.Services;
 
 namespace XRTK.Tests.InputSystem
 {
-    public class TestFixture_03_InputSystemTests
+    public class TestFixture_01_InputSystemTests
     {
         [Test]
         public void Test01_CreateMixedRealityInputSystem()

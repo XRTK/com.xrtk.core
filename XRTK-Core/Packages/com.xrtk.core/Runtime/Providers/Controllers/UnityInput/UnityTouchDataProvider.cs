@@ -15,6 +15,7 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// Manages Touch devices using unity input system.
     /// </summary>
+    [Obsolete]
     [System.Runtime.InteropServices.Guid("4D4D36E3-6ACB-45E5-8316-0B15A098EA2F")]
     public class UnityTouchDataProvider : BaseControllerDataProvider
     {
@@ -81,7 +82,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             {
                 try
                 {
-                    controller = new UnityTouchController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerMappingProfile(typeof(UnityTouchController), Handedness.Any));
+                    controller = new UnityTouchController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerProfile(typeof(UnityTouchController), Handedness.Any));
                 }
                 catch (Exception e)
                 {

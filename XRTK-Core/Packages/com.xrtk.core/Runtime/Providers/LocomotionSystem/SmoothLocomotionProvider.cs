@@ -3,8 +3,8 @@
 
 using UnityEngine;
 using XRTK.Definitions.LocomotionSystem;
-using XRTK.Interfaces.LocomotionSystem;
 using XRTK.EventDatum.Input;
+using XRTK.Interfaces.LocomotionSystem;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -30,7 +30,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             base.OnInputChanged(eventData);
 
-            if (eventData.MixedRealityInputAction == InputAction)
+            if (eventData.InputAction == InputAction)
             {
                 var forwardDirection = CameraTransform.forward;
                 forwardDirection.y = 0f;

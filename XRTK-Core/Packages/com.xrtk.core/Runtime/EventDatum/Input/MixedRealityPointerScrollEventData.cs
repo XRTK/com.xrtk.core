@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.InputSystem;
+using UnityEngine.InputSystem;
 using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.EventDatum.Input
@@ -28,7 +28,7 @@ namespace XRTK.EventDatum.Input
         /// <param name="inputAction"></param>
         /// <param name="scrollDelta"></param>
         /// <param name="inputSource"></param>
-        public void Initialize(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
+        public void Initialize(IMixedRealityPointer pointer, InputAction inputAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
         {
             Initialize(pointer, inputAction, inputSource);
             ScrollDelta = scrollDelta;

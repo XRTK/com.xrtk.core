@@ -29,6 +29,6 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Currently you can register more than one controller type and handedness into the
         /// <see cref="BaseMixedRealityControllerDataProviderProfile"/>, but this method will only return the first one found.
         /// </remarks>
-        MixedRealityControllerMappingProfile GetControllerMappingProfile(Type controllerType, Handedness handedness);
+        MixedRealityControllerProfile GetControllerProfile(Type controllerType, Handedness handedness);
     }
 }

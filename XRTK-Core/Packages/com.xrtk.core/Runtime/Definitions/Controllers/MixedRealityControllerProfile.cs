@@ -1,15 +1,15 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Definitions.Controllers
 {
-    public class MixedRealityControllerMappingProfile : BaseMixedRealityProfile
+    public class MixedRealityControllerProfile : BaseMixedRealityProfile
     {
         [SerializeField]
         [Implements(typeof(IMixedRealityController), TypeGrouping.ByNamespaceFlat)]
@@ -43,15 +43,15 @@ namespace XRTK.Definitions.Controllers
         }
 
         [SerializeField]
-        private MixedRealityInteractionMappingProfile[] interactionMappingProfiles = Array.Empty<MixedRealityInteractionMappingProfile>();
+        private MixedRealityPointerProfile[] pointerProfiles;
 
         /// <summary>
-        /// Details the list of available interaction profiles available for the controller.
+        /// The pointer profiles for this interaction if the interaction is 3 or 6 Dof
         /// </summary>
-        public MixedRealityInteractionMappingProfile[] InteractionMappingProfiles
+        public MixedRealityPointerProfile[] PointerProfiles
         {
-            get => interactionMappingProfiles;
-            internal set => interactionMappingProfiles = value;
+            get => pointerProfiles;
+            internal set => pointerProfiles = value;
         }
     }
 }

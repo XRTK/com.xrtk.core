@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Controllers.Hands;
@@ -161,19 +162,6 @@ namespace XRTK.Definitions.InputSystem
         #region Profile Options
 
         [SerializeField]
-        [Tooltip("Input System Action Mapping profile for setting up avery action a user can make in your application.")]
-        private MixedRealityInputActionsProfile inputActionsProfile;
-
-        /// <summary>
-        /// Input System Action Mapping profile for setting up avery action a user can make in your application.
-        /// </summary>
-        public MixedRealityInputActionsProfile InputActionsProfile
-        {
-            get => inputActionsProfile;
-            internal set => inputActionsProfile = value;
-        }
-
-        [SerializeField]
         [Tooltip("Speech Command profile for wiring up Voice Input to Actions.")]
         private MixedRealitySpeechCommandsProfile speechCommandsProfile;
 
@@ -187,16 +175,13 @@ namespace XRTK.Definitions.InputSystem
         }
 
         [SerializeField]
-        [Tooltip("Gesture Mapping Profile for recognizing gestures across all platforms.")]
-        private MixedRealityGesturesProfile gesturesProfile;
+        [Tooltip("Input System Action Mapping profile for setting up avery action a user can make in your application.")]
+        private InputActionAsset inputActions;
 
-        /// <summary>
-        /// Gesture Mapping Profile for recognizing gestures across all platforms.
-        /// </summary>
-        public MixedRealityGesturesProfile GesturesProfile
+        public InputActionAsset InputActions
         {
-            get => gesturesProfile;
-            internal set => gesturesProfile = value;
+            get => inputActions;
+            internal set => inputActions = value;
         }
 
         #endregion Profile Options

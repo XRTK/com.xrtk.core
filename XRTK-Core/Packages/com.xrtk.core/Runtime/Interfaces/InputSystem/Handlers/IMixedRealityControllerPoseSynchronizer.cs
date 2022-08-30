@@ -1,8 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.InputSystem;
+using UnityEngine.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 
@@ -51,6 +51,6 @@ namespace XRTK.Interfaces.InputSystem.Handlers
         /// <summary>
         /// The input action that will drive the Transform's pose, position, or rotation.
         /// </summary>
-        MixedRealityInputAction PoseAction { get; set; }
+        InputAction PoseAction { get; set; }
     }
 }

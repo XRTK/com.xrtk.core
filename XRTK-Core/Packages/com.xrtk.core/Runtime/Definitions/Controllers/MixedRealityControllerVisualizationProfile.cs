@@ -2,8 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem.Handlers;
 
@@ -14,11 +15,11 @@ namespace XRTK.Definitions.Controllers
     {
         [SerializeField]
         [Implements(typeof(IMixedRealityControllerVisualizer), TypeGrouping.ByNamespaceFlat)]
-        [Tooltip("The concrete Controller Visualizer component to use on the rendered controller model.")]
-        private SystemType controllerVisualizationType = null;
+        [Tooltip("The concrete Controller Visualizer component to use on the rendered controller controllerModel.")]
+        private SystemType controllerVisualizationType;
 
         /// <summary>
-        /// The concrete Controller Visualizer component to use on the rendered controller model
+        /// The concrete Controller Visualizer component to use on the rendered controller controllerModel
         /// </summary>
         public SystemType ControllerVisualizationType
         {
@@ -28,10 +29,10 @@ namespace XRTK.Definitions.Controllers
 
         [SerializeField]
         [Tooltip("Use the platform SDK to load the default controller models.")]
-        private bool useDefaultModels = false;
+        private bool useDefaultModels;
 
         /// <summary>
-        /// User the controller model loader provided by the SDK, or provide override models.
+        /// User the controller controllerModel loader provided by the SDK, or provide override models.
         /// </summary>
         public bool UseDefaultModels
         {
@@ -41,22 +42,23 @@ namespace XRTK.Definitions.Controllers
 
         [Prefab]
         [SerializeField]
-        private GameObject model = null;
+        [FormerlySerializedAs("model")]
+        private GameObject controllerModel;
 
         public GameObject LeftHandModel
         {
-            get => model;
-            private set => model = value;
+            get => controllerModel;
+            private set => controllerModel = value;
         }
 
         [SerializeField]
         [Tooltip("This is the controller pose that this visualization will synchronize it's position and rotation with.")]
-        private MixedRealityInputAction pointerPose = MixedRealityInputAction.None;
+        private InputAction pointerPose;
 
         /// <summary>
         /// This is the controller pose that this visualization will synchronize it's position and rotation with.
         /// </summary>
-        public MixedRealityInputAction PointerPose
+        public InputAction PointerPose
         {
             get => pointerPose;
             private set => pointerPose = value;
@@ -64,12 +66,12 @@ namespace XRTK.Definitions.Controllers
 
         [SerializeField]
         [Tooltip("This is the controller pose that this visualization will synchronize it's position and rotation with.")]
-        private MixedRealityInputAction alternatePointerPose = MixedRealityInputAction.None;
+        private InputAction alternatePointerPose;
 
         /// <summary>
         /// This is the controller pose that this visualization will synchronize it's position and rotation with.
         /// </summary>
-        public MixedRealityInputAction AlternatePointerPose
+        public InputAction AlternatePointerPose
         {
             get => alternatePointerPose;
             private set => alternatePointerPose = value;

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine.EventSystems;
@@ -10,7 +10,7 @@ namespace XRTK.EventDatum.Input
     /// <summary>
     /// Describes an source state event that has a source id.
     /// </summary>
-    /// <remarks>Source State events do not have an associated <see cref="Definitions.InputSystem.MixedRealityInputAction"/>.</remarks>
+    /// <remarks>Source State events do not have an associated <see cref="UnityEngine.InputSystem.InputAction"/>.</remarks>
     public class SourceStateEventData : BaseInputEventData
     {
         public IMixedRealityController Controller { get; private set; }
@@ -26,7 +26,7 @@ namespace XRTK.EventDatum.Input
         public void Initialize(IMixedRealityInputSource inputSource, IMixedRealityController controller)
         {
             // NOTE: Source State events do not have an associated Input Action.
-            BaseInitialize(inputSource, Definitions.InputSystem.MixedRealityInputAction.None);
+            BaseInitialize(inputSource, null);
             Controller = controller;
         }
     }

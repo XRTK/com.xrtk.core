@@ -1,7 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace XRTK.Definitions.Controllers
 {
@@ -19,12 +21,13 @@ namespace XRTK.Definitions.Controllers
         protected bool HasSetupDefaults => hasSetupDefaults;
 
         [SerializeField]
-        private MixedRealityControllerMappingProfile[] controllerMappingProfiles = new MixedRealityControllerMappingProfile[0];
+        [FormerlySerializedAs("controllerMappingProfiles")]
+        private MixedRealityControllerProfile[] controllerProfiles = Array.Empty<MixedRealityControllerProfile>();
 
-        public MixedRealityControllerMappingProfile[] ControllerMappingProfiles
+        public MixedRealityControllerProfile[] ControllerProfiles
         {
-            get => controllerMappingProfiles;
-            internal set => controllerMappingProfiles = value;
+            get => controllerProfiles;
+            internal set => controllerProfiles = value;
         }
 
         public abstract ControllerDefinition[] GetDefaultControllerOptions();

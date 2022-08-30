@@ -8,7 +8,6 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
@@ -26,8 +25,8 @@ namespace XRTK.Providers.Controllers.Hands
         public MixedRealityHandController() : base() { }
 
         /// <inheritdoc />
-        public MixedRealityHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
-            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
+        public MixedRealityHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerProfile controllerProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerProfile)
         {
         }
 
@@ -61,28 +60,28 @@ namespace XRTK.Providers.Controllers.Hands
         private static IMixedRealityCameraSystem CameraSystem
             => cameraSystem ?? (cameraSystem = MixedRealityToolkit.GetSystem<IMixedRealityCameraSystem>());
 
-        /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
-        {
-            // 6 DoF pose of the spatial pointer ("far interaction pointer").
-            new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer),
-            // Select / pinch button press / release.
-            new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
-            // Hand in pointing pose yes/no?
-            new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
-            // Grip / grab button press / release.
-            new MixedRealityInteractionMapping("Grip", AxisType.Digital, DeviceInputType.TriggerPress),
-            // 6 DoF grip pose ("Where to put things when grabbing something?")
-            new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip),
-            // 6 DoF index finger tip pose (mainly for "near interaction pointer").
-            new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger)
-        };
+        ///// <inheritdoc />
+        //public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
+        //{
+        //    // 6 DoF pose of the spatial pointer ("far interaction pointer").
+        //    new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer),
+        //    // Select / pinch button press / release.
+        //    new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
+        //    // Hand in pointing pose yes/no?
+        //    new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
+        //    // Grip / grab button press / release.
+        //    new MixedRealityInteractionMapping("Grip", AxisType.Digital, DeviceInputType.TriggerPress),
+        //    // 6 DoF grip pose ("Where to put things when grabbing something?")
+        //    new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip),
+        //    // 6 DoF index finger tip pose (mainly for "near interaction pointer").
+        //    new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger)
+        //};
 
-        /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
+        ///// <inheritdoc />
+        //public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
 
-        /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
+        ///// <inheritdoc />
+        //public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
         /// <summary>
         /// Gets the current palm normal of the hand controller.
@@ -185,7 +184,7 @@ namespace XRTK.Providers.Controllers.Hands
                 InputSystem?.RaiseSourcePoseChanged(InputSource, this, handData.RootPose);
             }
 
-            UpdateInteractionMappings();
+            //UpdateInteractionMappings();
         }
 
         #region Hand Bounds Implementation
@@ -449,108 +448,108 @@ namespace XRTK.Providers.Controllers.Hands
 
         #region Interaction Mappings
 
-        protected virtual void UpdateInteractionMappings()
-        {
-            for (int i = 0; i < Interactions.Length; i++)
-            {
-                var interactionMapping = Interactions[i];
-                switch (interactionMapping.InputType)
-                {
-                    case DeviceInputType.SpatialPointer:
-                        UpdateSpatialPointerMapping(interactionMapping);
-                        break;
-                    case DeviceInputType.Select:
-                        UpdateSelectMapping(interactionMapping);
-                        break;
-                    case DeviceInputType.ButtonPress:
-                        UpdatePointingMapping(interactionMapping);
-                        break;
-                    case DeviceInputType.TriggerPress:
-                        UpdateGripMapping(interactionMapping);
-                        break;
-                    case DeviceInputType.SpatialGrip:
-                        UpdateGripPoseMapping(interactionMapping);
-                        break;
-                    case DeviceInputType.IndexFinger:
-                        UpdateIndexFingerMapping(interactionMapping);
-                        break;
-                }
+        //protected virtual void UpdateInteractionMappings()
+        //{
+        //    for (int i = 0; i < Interactions.Length; i++)
+        //    {
+        //        var interactionMapping = Interactions[i];
+        //        switch (interactionMapping.InputType)
+        //        {
+        //            case DeviceInputType.SpatialPointer:
+        //                UpdateSpatialPointerMapping(interactionMapping);
+        //                break;
+        //            case DeviceInputType.Select:
+        //                UpdateSelectMapping(interactionMapping);
+        //                break;
+        //            case DeviceInputType.ButtonPress:
+        //                UpdatePointingMapping(interactionMapping);
+        //                break;
+        //            case DeviceInputType.TriggerPress:
+        //                UpdateGripMapping(interactionMapping);
+        //                break;
+        //            case DeviceInputType.SpatialGrip:
+        //                UpdateGripPoseMapping(interactionMapping);
+        //                break;
+        //            case DeviceInputType.IndexFinger:
+        //                UpdateIndexFingerMapping(interactionMapping);
+        //                break;
+        //        }
 
-                interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
-            }
-        }
+        //        interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+        //    }
+        //}
 
-        private void UpdateGripPoseMapping(MixedRealityInteractionMapping interactionMapping)
-        {
-            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-            interactionMapping.PoseData = GripPose;
-        }
+        //private void UpdateGripPoseMapping(MixedRealityInteractionMapping interactionMapping)
+        //{
+        //    Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+        //    interactionMapping.PoseData = GripPose;
+        //}
 
-        private void UpdateSpatialPointerMapping(MixedRealityInteractionMapping interactionMapping)
-        {
-            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-            interactionMapping.PoseData = SpatialPointerPose;
-        }
+        //private void UpdateSpatialPointerMapping(MixedRealityInteractionMapping interactionMapping)
+        //{
+        //    Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+        //    interactionMapping.PoseData = SpatialPointerPose;
+        //}
 
-        private void UpdateSelectMapping(MixedRealityInteractionMapping interactionMapping)
-        {
-            Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
+        //private void UpdateSelectMapping(MixedRealityInteractionMapping interactionMapping)
+        //{
+        //    Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
 
-            if (!LastIsPinching && IsPinching)
-            {
-                interactionMapping.BoolData = true;
-            }
-            else if (LastIsPinching && !IsPinching)
-            {
-                interactionMapping.BoolData = false;
-            }
-            else if (IsPinching)
-            {
-                interactionMapping.BoolData = LastIsPinching;
-            }
-        }
+        //    if (!LastIsPinching && IsPinching)
+        //    {
+        //        interactionMapping.BoolData = true;
+        //    }
+        //    else if (LastIsPinching && !IsPinching)
+        //    {
+        //        interactionMapping.BoolData = false;
+        //    }
+        //    else if (IsPinching)
+        //    {
+        //        interactionMapping.BoolData = LastIsPinching;
+        //    }
+        //}
 
-        private void UpdateGripMapping(MixedRealityInteractionMapping interactionMapping)
-        {
-            Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
+        //private void UpdateGripMapping(MixedRealityInteractionMapping interactionMapping)
+        //{
+        //    Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
 
-            if (!LastIsGripping && IsGripping)
-            {
-                interactionMapping.BoolData = true;
-            }
-            else if (LastIsGripping && !IsGripping)
-            {
-                interactionMapping.BoolData = false;
-            }
-            else if (IsGripping)
-            {
-                interactionMapping.BoolData = LastIsGripping;
-            }
-        }
+        //    if (!LastIsGripping && IsGripping)
+        //    {
+        //        interactionMapping.BoolData = true;
+        //    }
+        //    else if (LastIsGripping && !IsGripping)
+        //    {
+        //        interactionMapping.BoolData = false;
+        //    }
+        //    else if (IsGripping)
+        //    {
+        //        interactionMapping.BoolData = LastIsGripping;
+        //    }
+        //}
 
-        private void UpdatePointingMapping(MixedRealityInteractionMapping interactionMapping)
-        {
-            Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
+        //private void UpdatePointingMapping(MixedRealityInteractionMapping interactionMapping)
+        //{
+        //    Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
 
-            if (!LastIsPointing && IsPointing)
-            {
-                interactionMapping.BoolData = true;
-            }
-            else if (LastIsPointing && !IsPointing)
-            {
-                interactionMapping.BoolData = false;
-            }
-            else if (IsPointing)
-            {
-                interactionMapping.BoolData = LastIsPointing;
-            }
-        }
+        //    if (!LastIsPointing && IsPointing)
+        //    {
+        //        interactionMapping.BoolData = true;
+        //    }
+        //    else if (LastIsPointing && !IsPointing)
+        //    {
+        //        interactionMapping.BoolData = false;
+        //    }
+        //    else if (IsPointing)
+        //    {
+        //        interactionMapping.BoolData = LastIsPointing;
+        //    }
+        //}
 
-        private void UpdateIndexFingerMapping(MixedRealityInteractionMapping interactionMapping)
-        {
-            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-            interactionMapping.PoseData = IndexFingerTipPose;
-        }
+        //private void UpdateIndexFingerMapping(MixedRealityInteractionMapping interactionMapping)
+        //{
+        //    Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+        //    interactionMapping.PoseData = IndexFingerTipPose;
+        //}
 
         #endregion Interaction Mappings
 

@@ -121,7 +121,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 return;
             }
 
-            var simulatedHandController = (MixedRealityHandController)simulatedController;
+            var simulatedHandController = (IMixedRealityHandController)simulatedController;
             var converter = simulatedHandController.ControllerHandedness == Handedness.Left
                 ? leftHandConverter
                 : rightHandConverter;
@@ -141,7 +141,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             try
             {
-                controller = new SimulatedMixedRealityHandController(this, TrackingState.Tracked, handedness, GetControllerMappingProfile(typeof(SimulatedMixedRealityHandController), handedness));
+                controller = new SimulatedMixedRealityHandController(this, TrackingState.Tracked, handedness, GetControllerProfile(typeof(SimulatedMixedRealityHandController), handedness));
             }
             catch (Exception e)
             {

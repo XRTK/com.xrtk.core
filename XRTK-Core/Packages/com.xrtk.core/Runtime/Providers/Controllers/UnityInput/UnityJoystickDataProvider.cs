@@ -14,6 +14,7 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// Manages joysticks using unity input system.
     /// </summary>
+    [Obsolete]
     [System.Runtime.InteropServices.Guid("A4D8D13B-253C-469A-A3A2-ECFE16DD969F")]
     public class UnityJoystickDataProvider : BaseControllerDataProvider
     {
@@ -129,7 +130,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             try
             {
-                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, Handedness.None, GetControllerMappingProfile(controllerType, Handedness.None)) as GenericJoystickController;
+                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, Handedness.None, GetControllerProfile(controllerType, Handedness.None)) as GenericJoystickController;
             }
             catch (Exception e)
             {

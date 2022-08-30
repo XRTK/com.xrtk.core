@@ -126,41 +126,5 @@ namespace XRTK.Extensions
             input.Values.CopyTo(output, 0);
             return output;
         }
-
-        /// <summary>
-        /// Overload extension to enable getting of an InteractionDefinition of a specific type
-        /// </summary>
-        /// <param name="input">The InteractionDefinition array reference</param>
-        /// <param name="key">The specific DeviceInputType value to query</param>
-        public static MixedRealityInteractionMapping GetInteractionByType(this MixedRealityInteractionMapping[] input, DeviceInputType key)
-        {
-            for (int i = 0; i < input?.Length; i++)
-            {
-                if (input[i].InputType == key)
-                {
-                    return input[i];
-                }
-            }
-
-            return default;
-        }
-
-        /// <summary>
-        /// Overload extension to enable getting of an InteractionDefinition of a specific type
-        /// </summary>
-        /// <param name="input">The InteractionDefinition array reference</param>
-        /// <param name="key">The specific DeviceInputType value to query</param>
-        public static bool SupportsInputType(this MixedRealityInteractionMapping[] input, DeviceInputType key)
-        {
-            for (int i = 0; i < input.Length; i++)
-            {
-                if (input[i].InputType == key)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 }

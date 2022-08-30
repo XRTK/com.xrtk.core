@@ -1,8 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine.EventSystems;
-using XRTK.Definitions.InputSystem;
+using UnityEngine.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 
@@ -27,7 +27,7 @@ namespace XRTK.EventDatum.Input
         /// <param name="inputSource"></param>
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
-        public void Initialize(IMixedRealityInputSource inputSource, Handedness handedness, MixedRealityInputAction inputAction)
+        public void Initialize(IMixedRealityInputSource inputSource, Handedness handedness, InputAction inputAction)
         {
             BaseInitialize(inputSource, inputAction);
             Handedness = handedness;
@@ -55,7 +55,7 @@ namespace XRTK.EventDatum.Input
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
         /// <param name="data"></param>
-        public void Initialize(IMixedRealityInputSource inputSource, Handedness handedness, MixedRealityInputAction inputAction, T data)
+        public void Initialize(IMixedRealityInputSource inputSource, Handedness handedness, InputAction inputAction, T data)
         {
             Initialize(inputSource, handedness, inputAction);
             InputData = data;

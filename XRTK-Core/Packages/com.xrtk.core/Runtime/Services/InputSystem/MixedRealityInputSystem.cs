@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
 using XRTK.Extensions;
-using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
@@ -38,6 +38,7 @@ namespace XRTK.Services.InputSystem
             }
 
             gazeProviderType = profile.GazeProviderType.Type;
+            inputActions = profile.InputActions;
 
             if (!MixedRealityToolkit.TryCreateAndRegisterService(profile.FocusProviderType?.Type, out focusProvider, profile.FocusProviderType?.Type.Name, 2u, profile, this))
             {
@@ -70,10 +71,9 @@ namespace XRTK.Services.InputSystem
         public IMixedRealityGazeProvider GazeProvider { get; private set; }
 
         private readonly Type gazeProviderType;
+        private readonly InputActionAsset inputActions;
         private readonly Stack<GameObject> modalInputStack = new Stack<GameObject>();
         private readonly Stack<GameObject> fallbackInputStack = new Stack<GameObject>();
-
-        private InputSystemUIInputModule standaloneInputModule;
 
         /// <inheritdoc />
         public bool IsInputEnabled => disabledRefCount <= 0;
@@ -163,18 +163,19 @@ namespace XRTK.Services.InputSystem
                 Debug.LogError($"There is more than one {nameof(InputSystemUIInputModule)} active in the scene. Please make sure only one instance of it exists as it may cause errors.");
             }
 
-            standaloneInputModule = standaloneInputModules[0];
+            var standaloneInputModule = standaloneInputModules[0];
+            standaloneInputModule.xrTrackingOrigin = CameraCache.Main.transform.root;
+            var playerInput = standaloneInputModule.xrTrackingOrigin.EnsureComponent<PlayerInput>();
+            playerInput.actions = inputActions;
+            playerInput.camera = CameraCache.Main;
+            playerInput.uiInputModule = standaloneInputModule;
+            playerInput.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
         }
 
         /// <inheritdoc />
         public override void Enable()
         {
             base.Enable();
-
-            if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem))
-            {
-                standaloneInputModule.xrTrackingOrigin = cameraSystem.MainCameraRig.RigTransform;
-            }
 
             InputEnabled?.Invoke();
         }
@@ -206,6 +207,13 @@ namespace XRTK.Services.InputSystem
                 if (!inputModule.IsNull())
                 {
                     inputModule.Destroy();
+                }
+
+                var playerInput = CameraCache.Main.transform.root.GetComponent<PlayerInput>();
+
+                if (!playerInput.IsNull())
+                {
+                    playerInput.Destroy();
                 }
             }
         }
@@ -809,7 +817,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDown(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDown(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null)
         {
             // Create input event
             pointerEventData.Initialize(pointer, inputAction, inputSource);
@@ -839,7 +847,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerClicked(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerClicked(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null)
         {
             // Create input event
             pointerEventData.Initialize(pointer, inputAction, inputSource);
@@ -862,7 +870,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerUp(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerUp(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null)
         {
             // Create input event
             pointerEventData.Initialize(pointer, inputAction);
@@ -892,7 +900,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerScroll(IMixedRealityPointer pointer, InputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerScrollEventData.Initialize(pointer, scrollAction, scrollDelta);
 
@@ -918,7 +926,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDragBegin(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDragBegin(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
@@ -944,7 +952,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDrag(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDrag(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
@@ -967,7 +975,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDragEnd(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDragEnd(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
@@ -999,13 +1007,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaiseOnInputDown(IMixedRealityInputSource source, MixedRealityInputAction inputAction)
+        public void RaiseOnInputDown(IMixedRealityInputSource source, InputAction inputAction)
         {
             RaiseOnInputDown(source, Handedness.None, inputAction);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputDown(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction)
+        public void RaiseOnInputDown(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1021,13 +1029,13 @@ namespace XRTK.Services.InputSystem
         #region Input Pressed
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, MixedRealityInputAction inputAction)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction inputAction)
         {
             RaiseOnInputPressed(source, Handedness.None, inputAction);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1039,13 +1047,13 @@ namespace XRTK.Services.InputSystem
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, MixedRealityInputAction inputAction, float pressAmount)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction inputAction, float pressAmount)
         {
             RaiseOnInputPressed(source, Handedness.None, inputAction, pressAmount);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, float pressAmount)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, float pressAmount)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1068,13 +1076,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaiseOnInputUp(IMixedRealityInputSource source, MixedRealityInputAction inputAction)
+        public void RaiseOnInputUp(IMixedRealityInputSource source, InputAction inputAction)
         {
             RaiseOnInputUp(source, Handedness.None, inputAction);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputUp(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction)
+        public void RaiseOnInputUp(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1097,13 +1105,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, MixedRealityInputAction inputAction, float inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, float inputPosition)
         {
             RaisePositionInputChanged(source, Handedness.None, inputAction, inputPosition);
         }
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, float inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, float inputPosition)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1122,13 +1130,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, MixedRealityInputAction inputAction, Vector2 inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, Vector2 inputPosition)
         {
             RaisePositionInputChanged(source, Handedness.None, inputAction, inputPosition);
         }
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, Vector2 inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Vector2 inputPosition)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1147,13 +1155,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, MixedRealityInputAction inputAction, Vector3 position)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, Vector3 position)
         {
             RaisePositionInputChanged(source, Handedness.None, inputAction, position);
         }
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, Vector3 position)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Vector3 position)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1176,13 +1184,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaiseRotationInputChanged(IMixedRealityInputSource source, MixedRealityInputAction inputAction, Quaternion rotation)
+        public void RaiseRotationInputChanged(IMixedRealityInputSource source, InputAction inputAction, Quaternion rotation)
         {
             RaiseRotationInputChanged(source, Handedness.None, inputAction, rotation);
         }
 
         /// <inheritdoc />
-        public void RaiseRotationInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, Quaternion rotation)
+        public void RaiseRotationInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Quaternion rotation)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1205,13 +1213,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePoseInputChanged(IMixedRealityInputSource source, MixedRealityInputAction inputAction, MixedRealityPose inputData)
+        public void RaisePoseInputChanged(IMixedRealityInputSource source, InputAction inputAction, MixedRealityPose inputData)
         {
             RaisePoseInputChanged(source, Handedness.None, inputAction, inputData);
         }
 
         /// <inheritdoc />
-        public void RaisePoseInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, MixedRealityPose inputData)
+        public void RaisePoseInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, MixedRealityPose inputData)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1226,191 +1234,6 @@ namespace XRTK.Services.InputSystem
 
         #endregion Generic Input Events
 
-        #region Gesture Events
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler> OnGestureStarted =
-            delegate (IMixedRealityGestureHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData>(eventData);
-                handler.OnGestureStarted(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureStarted(IMixedRealityController controller, MixedRealityInputAction action)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-
-            inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
-            HandleEvent(inputEventData, OnGestureStarted);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler> OnGestureUpdated =
-            delegate (IMixedRealityGestureHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData>(eventData);
-                handler.OnGestureUpdated(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
-            HandleEvent(inputEventData, OnGestureUpdated);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<Vector2>> OnGestureVector2PositionUpdated =
-            delegate (IMixedRealityGestureHandler<Vector2> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<Vector2>>(eventData);
-                handler.OnGestureUpdated(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Vector2 inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            vector2InputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(vector2InputEventData, OnGestureVector2PositionUpdated);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<Vector3>> OnGesturePositionUpdated =
-            delegate (IMixedRealityGestureHandler<Vector3> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<Vector3>>(eventData);
-                handler.OnGestureUpdated(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Vector3 inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            positionInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(positionInputEventData, OnGesturePositionUpdated);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<Quaternion>> OnGestureRotationUpdated =
-            delegate (IMixedRealityGestureHandler<Quaternion> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<Quaternion>>(eventData);
-                handler.OnGestureUpdated(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Quaternion inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            rotationInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(rotationInputEventData, OnGestureRotationUpdated);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<MixedRealityPose>> OnGesturePoseUpdated =
-            delegate (IMixedRealityGestureHandler<MixedRealityPose> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<MixedRealityPose>>(eventData);
-                handler.OnGestureUpdated(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, MixedRealityPose inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            poseInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(poseInputEventData, OnGesturePoseUpdated);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler> OnGestureCompleted =
-            delegate (IMixedRealityGestureHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData>(eventData);
-                handler.OnGestureCompleted(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
-            HandleEvent(inputEventData, OnGestureCompleted);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<Vector2>> OnGestureVector2PositionCompleted =
-            delegate (IMixedRealityGestureHandler<Vector2> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<Vector2>>(eventData);
-                handler.OnGestureCompleted(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Vector2 inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            vector2InputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(vector2InputEventData, OnGestureVector2PositionCompleted);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<Vector3>> OnGesturePositionCompleted =
-            delegate (IMixedRealityGestureHandler<Vector3> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<Vector3>>(eventData);
-                handler.OnGestureCompleted(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Vector3 inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            positionInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(positionInputEventData, OnGesturePositionCompleted);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<Quaternion>> OnGestureRotationCompleted =
-            delegate (IMixedRealityGestureHandler<Quaternion> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<Quaternion>>(eventData);
-                handler.OnGestureCompleted(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Quaternion inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            rotationInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(rotationInputEventData, OnGestureRotationCompleted);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler<MixedRealityPose>> OnGesturePoseCompleted =
-            delegate (IMixedRealityGestureHandler<MixedRealityPose> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<MixedRealityPose>>(eventData);
-                handler.OnGestureCompleted(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, MixedRealityPose inputData)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            poseInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
-            HandleEvent(poseInputEventData, OnGesturePoseCompleted);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityGestureHandler> OnGestureCanceled =
-            delegate (IMixedRealityGestureHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData>(eventData);
-                handler.OnGestureCanceled(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseGestureCanceled(IMixedRealityController controller, MixedRealityInputAction action)
-        {
-            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
-            inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
-            HandleEvent(inputEventData, OnGestureCanceled);
-        }
-
-        #endregion Gesture Events
-
         #region Speech Keyword Events
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealitySpeechHandler> OnSpeechKeywordRecognizedEventHandler =
@@ -1421,12 +1244,12 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaiseSpeechCommandRecognized(IMixedRealityInputSource source, MixedRealityInputAction inputAction, RecognitionConfidenceLevel confidence, TimeSpan phraseDuration, DateTime phraseStartTime, string text)
+        public void RaiseSpeechCommandRecognized(IMixedRealityInputSource source, RecognitionConfidenceLevel confidence, TimeSpan phraseDuration, DateTime phraseStartTime, string text)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
-            speechEventData.Initialize(source, inputAction, confidence, phraseDuration, phraseStartTime, text);
+            speechEventData.Initialize(source, confidence, phraseDuration, phraseStartTime, text);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(speechEventData, OnSpeechKeywordRecognizedEventHandler);

@@ -78,7 +78,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             try
             {
-                Controller = new MouseController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerMappingProfile(typeof(MouseController), Handedness.Any));
+                Controller = new MouseController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerProfile(typeof(MouseController), Handedness.Any));
             }
             catch (Exception e)
             {

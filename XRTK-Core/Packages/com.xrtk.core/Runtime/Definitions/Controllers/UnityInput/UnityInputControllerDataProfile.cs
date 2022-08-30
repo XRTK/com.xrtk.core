@@ -1,7 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Definitions.Utilities;
+using System;
 using XRTK.Providers.Controllers.UnityInput;
 
 namespace XRTK.Definitions.Controllers.UnityInput.Profiles
@@ -12,7 +12,7 @@ namespace XRTK.Definitions.Controllers.UnityInput.Profiles
         {
             return new[]
             {
-                new ControllerDefinition(typeof(GenericJoystickController), Handedness.None, true),
+                new ControllerDefinition(typeof(GenericJoystickController)),
                 new ControllerDefinition(typeof(XboxController))
             };
         }

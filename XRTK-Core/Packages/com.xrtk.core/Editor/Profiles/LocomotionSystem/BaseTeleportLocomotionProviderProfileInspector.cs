@@ -17,7 +17,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         private SerializedProperty rotateActivationAngle;
         private SerializedProperty rotationAmount;
 
-        private static readonly GUIContent singleAndDualAxisConfigHeader = new GUIContent("Single / Dual Axis Input Action Settings");
+        private static readonly GUIContent singleAndDualAxisConfigHeader = new GUIContent("Input Action Settings");
 
         protected override void OnEnable()
         {

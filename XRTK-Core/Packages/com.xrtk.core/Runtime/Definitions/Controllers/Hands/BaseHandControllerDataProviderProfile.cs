@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
@@ -61,7 +62,7 @@ namespace XRTK.Definitions.Controllers.Hands
 
         [SerializeField]
         [Tooltip("Tracked hand poses for pose detection.")]
-        private HandControllerPoseProfile[] trackedPoses = new HandControllerPoseProfile[0];
+        private HandControllerPoseProfile[] trackedPoses = Array.Empty<HandControllerPoseProfile>();
 
         /// <summary>
         /// Tracked hand poses for pose detection.

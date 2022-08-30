@@ -27,12 +27,12 @@ namespace XRTK.Providers.Controllers
                 throw new UnassignedReferenceException($"A {nameof(profile)} is required for {name}");
             }
 
-            controllerMappingProfiles = profile.ControllerMappingProfiles;
+            controllerProfiles = profile.ControllerProfiles;
 
-            if (controllerMappingProfiles == null ||
-                controllerMappingProfiles.Length == 0)
+            if (controllerProfiles == null ||
+                controllerProfiles.Length == 0)
             {
-                throw new UnassignedReferenceException($"{nameof(controllerMappingProfiles)} has no defined controller mappings for {name}");
+                throw new UnassignedReferenceException($"{nameof(controllerProfiles)} has no defined controller mappings for {name}");
             }
 
             InputSystem = parentService;
@@ -40,7 +40,7 @@ namespace XRTK.Providers.Controllers
 
         protected readonly IMixedRealityInputSystem InputSystem;
 
-        private readonly MixedRealityControllerMappingProfile[] controllerMappingProfiles;
+        private readonly MixedRealityControllerProfile[] controllerProfiles;
 
         private readonly List<IMixedRealityController> activeControllers = new List<IMixedRealityController>();
 
@@ -48,7 +48,7 @@ namespace XRTK.Providers.Controllers
         public IReadOnlyList<IMixedRealityController> ActiveControllers => activeControllers;
 
         /// <inheritdoc />
-        public MixedRealityControllerMappingProfile GetControllerMappingProfile(Type controllerType, Handedness handedness)
+        public MixedRealityControllerProfile GetControllerProfile(Type controllerType, Handedness handedness)
         {
             if (controllerType == null)
             {
@@ -64,12 +64,12 @@ namespace XRTK.Providers.Controllers
 
             // TODO provide a way to choose profiles with additional args instead of returning the first one found.
 
-            for (int i = 0; i < controllerMappingProfiles.Length; i++)
+            for (int i = 0; i < controllerProfiles.Length; i++)
             {
-                if (handedness == controllerMappingProfiles[i].Handedness &&
-                    controllerMappingProfiles[i].ControllerType?.Type == controllerType)
+                if (handedness == controllerProfiles[i].Handedness &&
+                    controllerProfiles[i].ControllerType?.Type == controllerType)
                 {
-                    return controllerMappingProfiles[i];
+                    return controllerProfiles[i];
                 }
             }
 

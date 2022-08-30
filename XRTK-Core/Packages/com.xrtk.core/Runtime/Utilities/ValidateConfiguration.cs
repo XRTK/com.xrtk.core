@@ -144,7 +144,7 @@ namespace XRTK.Utilities
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var errorsFound = false;
-                var mappingConfigurationSource = profile.ControllerMappingProfiles;
+                var mappingConfigurationSource = profile.ControllerProfiles;
 
                 if (mappingConfigurationSource != null)
                 {

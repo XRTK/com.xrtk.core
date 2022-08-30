@@ -14,6 +14,7 @@ namespace XRTK.Editor.Profiles.InputSystem
         private SerializedProperty pointingRaycastLayerMasks;
         private SerializedProperty drawDebugPointingRays;
         private SerializedProperty debugPointingRayColors;
+        private SerializedProperty inputAction;
 
         protected override void OnEnable()
         {
@@ -24,6 +25,7 @@ namespace XRTK.Editor.Profiles.InputSystem
             pointingRaycastLayerMasks = serializedObject.FindProperty(nameof(pointingRaycastLayerMasks));
             drawDebugPointingRays = serializedObject.FindProperty(nameof(drawDebugPointingRays));
             debugPointingRayColors = serializedObject.FindProperty(nameof(debugPointingRayColors));
+            inputAction = serializedObject.FindProperty(nameof(inputAction));
         }
 
         public override void OnInspectorGUI()
@@ -34,9 +36,11 @@ namespace XRTK.Editor.Profiles.InputSystem
 
             EditorGUILayout.PropertyField(pointerPrefab);
             EditorGUILayout.PropertyField(pointingExtent);
-            EditorGUILayout.PropertyField(pointingRaycastLayerMasks, true);
+            EditorGUILayout.PropertyField(pointingRaycastLayerMasks);
             EditorGUILayout.PropertyField(drawDebugPointingRays);
-            EditorGUILayout.PropertyField(debugPointingRayColors, true);
+            EditorGUILayout.PropertyField(debugPointingRayColors);
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(inputAction);
 
             serializedObject.ApplyModifiedProperties();
         }

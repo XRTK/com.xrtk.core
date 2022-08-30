@@ -1,9 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.InputSystem;
 using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.EventDatum.Input
@@ -34,7 +33,7 @@ namespace XRTK.EventDatum.Input
         /// <param name="dictationAudioClip"></param>
         public void Initialize(IMixedRealityInputSource inputSource, string dictationResult, AudioClip dictationAudioClip = null)
         {
-            BaseInitialize(inputSource, MixedRealityInputAction.None);
+            BaseInitialize(inputSource, null);
             DictationResult = dictationResult;
             DictationAudioClip = dictationAudioClip;
         }

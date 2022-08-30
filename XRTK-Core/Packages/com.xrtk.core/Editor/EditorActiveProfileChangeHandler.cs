@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Editor.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Services;
 
@@ -23,17 +22,6 @@ namespace XRTK.Editor
         {
             if (MixedRealityToolkit.HasActiveProfile)
             {
-                if (MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>() &&
-                    InputMappingAxisUtility.CheckUnityInputManagerMappings(ControllerMappingUtilities.UnityInputManagerAxes))
-                {
-                    Debug.Log($"{nameof(IMixedRealityInputSystem)} was enabled, updated input axis mappings.");
-                }
-                else if (!MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>() &&
-                         InputMappingAxisUtility.RemoveMappings(ControllerMappingUtilities.UnityInputManagerAxes))
-                {
-                    Debug.Log($"{nameof(IMixedRealityInputSystem)} was disabled, removed input axis mappings.");
-                }
-
                 if (MixedRealityToolkit.IsSystemEnabled<IMixedRealitySpatialAwarenessSystem>() &&
                     LayerUtilities.CheckLayers(MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessLayers))
                 {

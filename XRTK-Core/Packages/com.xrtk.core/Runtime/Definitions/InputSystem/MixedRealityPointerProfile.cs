@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -53,5 +54,11 @@ namespace XRTK.Definitions.InputSystem
         /// The colors to use when debugging pointer rays.
         /// </summary>
         public Color[] DebugPointingRayColors => debugPointingRayColors;
+
+        [SerializeField]
+        [Tooltip("The input action that drives this pointer's position")]
+        private InputAction inputAction = null;
+
+        public InputAction InputAction => inputAction;
     }
 }

@@ -1,17 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Editor.Extensions;
-using XRTK.Editor.Profiles.InputSystem.Controllers;
-using XRTK.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Editor.Profiles.InputSystem
@@ -24,7 +19,6 @@ namespace XRTK.Editor.Profiles.InputSystem
         private static readonly GUIContent GazeCursorPrefabContent = new GUIContent("Gaze Cursor Prefab");
         private static readonly GUIContent GlobalPointerSettingsContent = new GUIContent("Global Pointer Settings");
         private static readonly GUIContent GlobalHandSettingsContent = new GUIContent("Global Hand Settings");
-        private static readonly GUIContent ShowControllerMappingsContent = new GUIContent("Controller Action Mappings");
 
         private SerializedProperty focusProviderType;
         private SerializedProperty gazeProviderType;
@@ -42,17 +36,13 @@ namespace XRTK.Editor.Profiles.InputSystem
         private SerializedProperty boundsMode;
         private SerializedProperty trackedPoses;
 
-        private SerializedProperty inputActionsProfile;
+        private SerializedProperty inputActions;
         private SerializedProperty speechCommandsProfile;
-        private SerializedProperty gesturesProfile;
 
         private bool showGlobalPointerOptions;
         private bool showGlobalHandOptions;
-        private bool showAggregatedSimpleControllerMappingProfiles;
         private ReorderableList poseProfilesList;
         private int currentlySelectedPoseElement;
-
-        private Dictionary<string, Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>> controllerMappingProfiles;
 
         protected override void OnEnable()
         {
@@ -74,39 +64,8 @@ namespace XRTK.Editor.Profiles.InputSystem
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
             trackedPoses = serializedObject.FindProperty(nameof(trackedPoses));
 
-            inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
-            gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
+            inputActions = serializedObject.FindProperty(nameof(inputActions));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
-
-            controllerMappingProfiles = new Dictionary<string, Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>>();
-
-            for (int i = 0; i < Configurations?.arraySize; i++)
-            {
-                var configurationProperty = Configurations.GetArrayElementAtIndex(i);
-                var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
-
-                if (configurationProfileProperty != null &&
-                    configurationProfileProperty.objectReferenceValue is BaseMixedRealityControllerDataProviderProfile controllerDataProviderProfile)
-                {
-                    if (controllerDataProviderProfile.IsNull() ||
-                        controllerDataProviderProfile.ControllerMappingProfiles == null)
-                    {
-                        continue;
-                    }
-
-                    foreach (var mappingProfile in controllerDataProviderProfile.ControllerMappingProfiles)
-                    {
-                        if (mappingProfile.IsNull()) { continue; }
-
-                        AssetDatabase.TryGetGUIDAndLocalFileIdentifier(mappingProfile, out var guid, out long _);
-
-                        if (!controllerMappingProfiles.ContainsKey(guid))
-                        {
-                            controllerMappingProfiles.Add(guid, new Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>(controllerDataProviderProfile, mappingProfile));
-                        }
-                    }
-                }
-            }
 
             poseProfilesList = new ReorderableList(serializedObject, trackedPoses, true, false, true, true)
             {
@@ -182,29 +141,10 @@ namespace XRTK.Editor.Profiles.InputSystem
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(inputActionsProfile);
+            EditorGUILayout.PropertyField(inputActions);
             EditorGUILayout.PropertyField(speechCommandsProfile);
-            EditorGUILayout.PropertyField(gesturesProfile);
 
             EditorGUILayout.Space();
-
-            showAggregatedSimpleControllerMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showAggregatedSimpleControllerMappingProfiles, ShowControllerMappingsContent);
-
-            if (showAggregatedSimpleControllerMappingProfiles)
-            {
-                foreach (var controllerMappingProfile in controllerMappingProfiles)
-                {
-                    var (dataProviderProfile, mappingProfile) = controllerMappingProfile.Value;
-                    var profileEditor = CreateEditor(dataProviderProfile);
-
-                    if (profileEditor is BaseMixedRealityControllerDataProviderProfileInspector inspector)
-                    {
-                        inspector.RenderControllerMappingButton(mappingProfile);
-                    }
-
-                    profileEditor.Destroy();
-                }
-            }
 
             serializedObject.ApplyModifiedProperties();
 

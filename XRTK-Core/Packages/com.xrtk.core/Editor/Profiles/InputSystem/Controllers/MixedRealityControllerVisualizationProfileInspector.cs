@@ -4,8 +4,6 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
-using XRTK.Definitions.Utilities;
-using XRTK.Editor.PropertyDrawers;
 using XRTK.Interfaces.InputSystem.Handlers;
 
 namespace XRTK.Editor.Profiles.InputSystem.Controllers
@@ -15,28 +13,22 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
     {
         private SerializedProperty controllerVisualizationType;
         private SerializedProperty useDefaultModels;
-        private SerializedProperty model;
+        private SerializedProperty controllerModel;
         private SerializedProperty pointerPose;
         private SerializedProperty alternatePointerPose;
         private SerializedProperty controllerVisualizationSettings;
 
         private MixedRealityControllerVisualizationProfile controllerVisualizationProfile;
 
-        private readonly MixedRealityInputActionDropdown inputActionDropdown = new MixedRealityInputActionDropdown();
-
-        private float defaultLabelWidth;
-
         protected override void OnEnable()
         {
             base.OnEnable();
-
-            defaultLabelWidth = EditorGUIUtility.labelWidth;
 
             controllerVisualizationProfile = target as MixedRealityControllerVisualizationProfile;
 
             controllerVisualizationType = serializedObject.FindProperty(nameof(controllerVisualizationType));
             useDefaultModels = serializedObject.FindProperty(nameof(useDefaultModels));
-            model = serializedObject.FindProperty(nameof(model));
+            controllerModel = serializedObject.FindProperty(nameof(controllerModel));
             pointerPose = serializedObject.FindProperty(nameof(pointerPose));
             alternatePointerPose = serializedObject.FindProperty(nameof(alternatePointerPose));
             controllerVisualizationSettings = serializedObject.FindProperty(nameof(controllerVisualizationSettings));
@@ -46,11 +38,13 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
         {
             RenderHeader("This profile controls how the controller should be rendered in the scene.");
 
+            var defaultLabelWidth = EditorGUIUtility.labelWidth;
+
             serializedObject.Update();
 
             EditorGUIUtility.labelWidth = 168f;
 
-            var leftHandModelPrefab = model.objectReferenceValue as GameObject;
+            var modelPrefab = controllerModel.objectReferenceValue as GameObject;
 
             EditorGUILayout.PropertyField(controllerVisualizationType);
 
@@ -62,23 +56,24 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
             EditorGUILayout.PropertyField(useDefaultModels);
 
-            if (useDefaultModels.boolValue && leftHandModelPrefab != null)
+            if (useDefaultModels.boolValue && modelPrefab != null)
             {
                 EditorGUILayout.HelpBox("When default models are used, the global left and right hand models will only be used if the default models cannot be loaded from the driver.", MessageType.Warning);
             }
 
             EditorGUI.BeginChangeCheck();
-            leftHandModelPrefab = EditorGUILayout.ObjectField(new GUIContent(model.displayName, "Note: If the default model is not found, the fallback is the global left hand model."), leftHandModelPrefab, typeof(GameObject), false) as GameObject;
+            modelPrefab = EditorGUILayout.ObjectField(new GUIContent(controllerModel.displayName, "Note: If the default controllerModel is not found, the fallback is the global controllerModel."), modelPrefab, typeof(GameObject), false) as GameObject;
 
-            if (EditorGUI.EndChangeCheck() && CheckVisualizer(leftHandModelPrefab))
+            if (EditorGUI.EndChangeCheck() && CheckVisualizer(modelPrefab))
             {
-                model.objectReferenceValue = leftHandModelPrefab;
+                controllerModel.objectReferenceValue = modelPrefab;
             }
 
-            inputActionDropdown.OnGui(new GUIContent(pointerPose.displayName, pointerPose.tooltip), pointerPose, AxisType.SixDof);
-            inputActionDropdown.OnGui(new GUIContent(alternatePointerPose.displayName, alternatePointerPose.tooltip), alternatePointerPose, AxisType.SixDof);
-
             EditorGUIUtility.labelWidth = defaultLabelWidth;
+
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(pointerPose);
+            EditorGUILayout.PropertyField(alternatePointerPose);
 
             serializedObject.ApplyModifiedProperties();
         }

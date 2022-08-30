@@ -88,7 +88,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             // Is this the input action this provider is configured to look out for?
             // And did we already request a teleport target for the input source that raised it?
-            if (eventData.MixedRealityInputAction != InputAction ||
+            if (eventData.InputAction != InputAction ||
                 OpenTargetRequests.ContainsKey(eventData.SourceId))
             {
                 return;
@@ -104,7 +104,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             // Has our configured teleport input action been released
             // and we have an open target request for the input source?
-            if (eventData.MixedRealityInputAction == InputAction &&
+            if (eventData.InputAction == InputAction &&
                 OpenTargetRequests.ContainsKey(eventData.SourceId))
             {
                 var inputSource = OpenTargetRequests[eventData.SourceId];
@@ -118,7 +118,7 @@ namespace XRTK.Providers.LocomotionSystem
         public override void OnInputChanged(InputEventData<float> eventData)
         {
             // Is this the input action this provider is configured to look out for?
-            if (eventData.MixedRealityInputAction == InputAction)
+            if (eventData.InputAction == InputAction)
             {
                 // Depending on the input position we either raise a new request
                 // for a teleportation target or we start/cancel an existing
@@ -151,7 +151,7 @@ namespace XRTK.Providers.LocomotionSystem
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
             // Is this the input action this provider is configured to look out for?
-            if (eventData.MixedRealityInputAction == InputAction)
+            if (eventData.InputAction == InputAction)
             {
                 // Depending on the input position we either raise a new request
                 // for a teleportation target or we start/cancel an existing
@@ -206,7 +206,7 @@ namespace XRTK.Providers.LocomotionSystem
                     WasInputPreviouslyDown(eventData.SourceId) &&
                     OpenTargetRequests.ContainsKey(eventData.SourceId))
                 {
-                    // Input was relased and we have an open target request we can process now.
+                    // Input was released and we have an open target request we can process now.
                     inputPreviouslyDownDict[eventData.SourceId] = false;
                     var inputSource = OpenTargetRequests[eventData.SourceId];
                     ProcessTeleportRequest(inputSource);

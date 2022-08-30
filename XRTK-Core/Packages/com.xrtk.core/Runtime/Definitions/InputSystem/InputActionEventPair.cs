@@ -1,9 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace XRTK.Definitions.InputSystem
 {
@@ -15,12 +16,12 @@ namespace XRTK.Definitions.InputSystem
     {
         [SerializeField]
         [Tooltip("The MixedRealityInputAction to listen for to invoke the UnityEvent.")]
-        private MixedRealityInputAction inputAction = MixedRealityInputAction.None;
+        private InputAction inputAction = null;
 
         /// <summary>
         /// The <see cref="MixedRealityInputAction"/> to listen for to invoke the <see cref="UnityEvent"/>.
         /// </summary>
-        public MixedRealityInputAction InputAction => inputAction;
+        public InputAction InputAction => inputAction;
 
         [SerializeField]
         [Tooltip("The UnityEvent to invoke when MixedRealityInputAction is raised.")]

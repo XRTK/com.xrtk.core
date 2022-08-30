@@ -1,28 +1,33 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace XRTK.Definitions.InputSystem
 {
     /// <summary>
-    /// Data structure for mapping Voice and Keyboard input to <see cref="MixedRealityInputAction"/>s that can be raised by the Input System.
+    /// Data structure for mapping Voice and <see cref="UnityEngine.InputSystem.InputAction"/>s that can be raised by the Input System.
     /// </summary>
     [Serializable]
-    public struct SpeechCommands
+    public class SpeechCommands
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="keyword">The Keyword.</param>
-        /// <param name="keyCode">The KeyCode.</param>
-        /// <param name="action">The Action to perform when Keyword or KeyCode is recognized.</param>
-        public SpeechCommands(string keyword, KeyCode keyCode, MixedRealityInputAction action)
+        /// <param name="inputAction">The Action.</param>
+        public SpeechCommands(string keyword, InputAction inputAction)
         {
             this.keyword = keyword;
-            this.keyCode = keyCode;
-            this.action = action;
+            this.inputAction = inputAction;
+            inputAction.performed += OnInputAction_Performed;
+        }
+
+        ~SpeechCommands()
+        {
+            inputAction.performed -= OnInputAction_Performed;
         }
 
         [SerializeField]
@@ -35,21 +40,19 @@ namespace XRTK.Definitions.InputSystem
         public string Keyword => keyword;
 
         [SerializeField]
-        [Tooltip("The corresponding KeyCode that also raises the same action as the Keyword.")]
-        private KeyCode keyCode;
+        [Tooltip("The InputAction to listen for.")]
+        private InputAction inputAction;
 
         /// <summary>
-        /// The corresponding KeyCode that also raises the same action as the Keyword.
+        /// The <see cref="InputAction"/> to listen for.
         /// </summary>
-        public KeyCode KeyCode => keyCode;
+        public InputAction InputAction => inputAction;
 
-        [SerializeField]
-        [Tooltip("The Action that is raised by either the Keyword or KeyCode.")]
-        private MixedRealityInputAction action;
+        public event Action<string> OnKeyword;
 
-        /// <summary>
-        /// The <see cref="MixedRealityInputAction"/> that is raised by either the Keyword or KeyCode.
-        /// </summary>
-        public MixedRealityInputAction Action => action;
+        private void OnInputAction_Performed(InputAction.CallbackContext callbackContext)
+        {
+            OnKeyword?.Invoke(keyword);
+        }
     }
 }

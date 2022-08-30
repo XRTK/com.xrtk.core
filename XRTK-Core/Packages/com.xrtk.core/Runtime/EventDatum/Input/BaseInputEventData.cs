@@ -1,9 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.InputSystem;
+using UnityEngine.InputSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 
@@ -35,7 +35,7 @@ namespace XRTK.EventDatum.Input
         /// <summary>
         /// The Input Action for this event.
         /// </summary>
-        public MixedRealityInputAction MixedRealityInputAction { get; private set; }
+        public InputAction InputAction { get; private set; }
 
         /// <summary>
         /// Constructor.
@@ -54,12 +54,12 @@ namespace XRTK.EventDatum.Input
         /// </summary>
         /// <param name="inputSource"></param>
         /// <param name="inputAction"></param>
-        protected void BaseInitialize(IMixedRealityInputSource inputSource, MixedRealityInputAction inputAction)
+        protected void BaseInitialize(IMixedRealityInputSource inputSource, InputAction inputAction)
         {
             Reset();
             EventTime = DateTime.UtcNow;
             InputSource = inputSource;
-            MixedRealityInputAction = inputAction;
+            InputAction = inputAction;
             SourceId = InputSource.SourceId;
         }
     }

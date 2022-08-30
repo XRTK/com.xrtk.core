@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.InputSystem;
+using UnityEngine.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 
 namespace XRTK.Interfaces.LocomotionSystem
@@ -19,7 +19,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <summary>
         /// The input action used to perform locomotion using this provider.
         /// </summary>
-        MixedRealityInputAction InputAction { get; }
+        InputAction InputAction { get; }
 
         /// <summary>
         /// Gets whether this locomotion provider is enabled and handling locomotion requests.

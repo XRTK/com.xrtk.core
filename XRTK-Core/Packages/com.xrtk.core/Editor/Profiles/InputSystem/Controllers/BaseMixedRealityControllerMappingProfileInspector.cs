@@ -5,25 +5,20 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.InputSystem;
 using XRTK.Editor.PropertyDrawers;
 
 namespace XRTK.Editor.Profiles.InputSystem.Controllers
 {
-    [CustomEditor(typeof(MixedRealityControllerMappingProfile))]
+    [CustomEditor(typeof(MixedRealityControllerProfile))]
     public class BaseMixedRealityControllerMappingProfileInspector : BaseMixedRealityProfileInspector
     {
-        private static readonly GUIContent EditButtonContent = new GUIContent("Edit Button Mappings");
-
         private SerializedProperty controllerType;
         private SerializedProperty handedness;
         private SerializedProperty visualizationProfile;
-        private SerializedProperty useCustomInteractions;
-        private SerializedProperty interactionMappingProfiles;
-
-        private MixedRealityControllerMappingProfile controllerMappingProfile;
-
-        private ReorderableList interactionsList;
-        private int currentlySelectedElement;
+        private SerializedProperty pointerProfiles;
+        private ReorderableList profileList;
+        private int selectedPointerIndex;
 
         protected override void OnEnable()
         {
@@ -32,20 +27,15 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
             controllerType = serializedObject.FindProperty(nameof(controllerType));
             handedness = serializedObject.FindProperty(nameof(handedness));
             visualizationProfile = serializedObject.FindProperty(nameof(visualizationProfile));
-            useCustomInteractions = serializedObject.FindProperty(nameof(useCustomInteractions));
-            interactionMappingProfiles = serializedObject.FindProperty(nameof(interactionMappingProfiles));
+            pointerProfiles = serializedObject.FindProperty(nameof(pointerProfiles));
 
-            controllerMappingProfile = target as MixedRealityControllerMappingProfile;
-
-            var showButtons = useCustomInteractions.boolValue;
-
-            interactionsList = new ReorderableList(serializedObject, interactionMappingProfiles, false, false, showButtons, showButtons)
+            profileList = new ReorderableList(serializedObject, pointerProfiles, true, false, true, true)
             {
                 elementHeight = EditorGUIUtility.singleLineHeight * 1.5f
             };
-            interactionsList.drawElementCallback += DrawConfigurationOptionElement;
-            interactionsList.onAddCallback += OnConfigurationOptionAdded;
-            interactionsList.onRemoveCallback += OnConfigurationOptionRemoved;
+            profileList.drawElementCallback += DrawConfigurationOptionElement;
+            profileList.onAddCallback += OnConfigurationOptionAdded;
+            profileList.onRemoveCallback += OnConfigurationOptionRemoved;
         }
 
         public override void OnInspectorGUI()
@@ -59,50 +49,42 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
             EditorGUILayout.PropertyField(visualizationProfile);
             EditorGUILayout.Space();
 
-            if (GUILayout.Button(EditButtonContent))
-            {
-                ControllerPopupWindow.Show(controllerMappingProfile, interactionMappingProfiles);
-            }
-
             EditorGUILayout.Space();
-            interactionsList.DoLayoutList();
+            EditorGUILayout.LabelField("Registered Pointers", EditorStyles.boldLabel);
+            profileList.DoLayoutList();
 
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawConfigurationOptionElement(Rect position, int index, bool isActive, bool isFocused)
+        private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             if (isFocused)
             {
-                currentlySelectedElement = index;
+                selectedPointerIndex = index;
             }
 
-            position.height = EditorGUIUtility.singleLineHeight;
-            position.y += 3;
-            position.xMin += 8;
-            var mappingProfileProperty = interactionMappingProfiles.GetArrayElementAtIndex(index);
-            MixedRealityProfilePropertyDrawer.ProfileTypeOverride = typeof(MixedRealityInteractionMappingProfile);
-            EditorGUI.PropertyField(position, mappingProfileProperty, GUIContent.none);
+            rect.height = EditorGUIUtility.singleLineHeight;
+            rect.y += 3;
+            var mappingProfileProperty = pointerProfiles.GetArrayElementAtIndex(index);
+            MixedRealityProfilePropertyDrawer.ProfileTypeOverride = typeof(MixedRealityPointerProfile);
+            EditorGUI.PropertyField(rect, mappingProfileProperty, GUIContent.none);
         }
 
         private void OnConfigurationOptionAdded(ReorderableList list)
         {
-            interactionMappingProfiles.arraySize += 1;
-            var index = interactionMappingProfiles.arraySize - 1;
+            pointerProfiles.arraySize += 1;
+            var index = pointerProfiles.arraySize - 1;
 
-            var mappingProfileProperty = interactionMappingProfiles.GetArrayElementAtIndex(index);
+            var mappingProfileProperty = pointerProfiles.GetArrayElementAtIndex(index);
             mappingProfileProperty.objectReferenceValue = null;
-            serializedObject.ApplyModifiedProperties();
         }
 
         private void OnConfigurationOptionRemoved(ReorderableList list)
         {
-            if (currentlySelectedElement >= 0)
+            if (selectedPointerIndex >= 0)
             {
-                interactionMappingProfiles.DeleteArrayElementAtIndex(currentlySelectedElement);
+                pointerProfiles.DeleteArrayElementAtIndex(selectedPointerIndex);
             }
-
-            serializedObject.ApplyModifiedProperties();
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
@@ -26,13 +27,13 @@ namespace XRTK.Definitions.InputSystem
         private RecognitionConfidenceLevel recognitionConfidenceLevel = RecognitionConfidenceLevel.Medium;
 
         /// <summary>
-        /// The speech recognizer's minimum confidence level setting that will raise the action.
+        /// The speech recognizers minimum confidence level setting that will raise the action.
         /// </summary>
         public RecognitionConfidenceLevel SpeechRecognitionConfidenceLevel => recognitionConfidenceLevel;
 
         [SerializeField]
         [Tooltip("The list of Speech Commands users use in your application.")]
-        private SpeechCommands[] speechCommands = new SpeechCommands[0];
+        private SpeechCommands[] speechCommands = Array.Empty<SpeechCommands>();
 
         /// <summary>
         /// The list of Speech Commands users use in your application.

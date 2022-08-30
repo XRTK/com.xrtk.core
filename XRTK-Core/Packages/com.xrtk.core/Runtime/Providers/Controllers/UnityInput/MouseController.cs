@@ -1,7 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
@@ -20,36 +19,36 @@ namespace XRTK.Providers.Controllers.UnityInput
         public MouseController() { }
 
         /// <inheritdoc />
-        public MouseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
-            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
+        public MouseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerProfile controllerProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerProfile)
         {
         }
 
-        /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultInteractions
-        {
-            get
-            {
-                var singleAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
-                singleAxisProcessor.InvertX = true;
-                var dualAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
-                dualAxisProcessor.InvertX = true;
-                dualAxisProcessor.InvertY = true;
-                return new[]
-                {
-                    new MixedRealityInteractionMapping("Spatial Mouse Position", AxisType.SixDof, DeviceInputType.SpatialPointer),
-                    new MixedRealityInteractionMapping("Mouse Position", AxisType.DualAxis, DeviceInputType.PointerPosition, ControllerMappingLibrary.MouseY, ControllerMappingLibrary.MouseX, new List<InputProcessor>{ singleAxisProcessor }),
-                    new MixedRealityInteractionMapping("Mouse Scroll Position", AxisType.DualAxis, DeviceInputType.Scroll, ControllerMappingLibrary.MouseScroll, ControllerMappingLibrary.MouseScroll, new List<InputProcessor>{ dualAxisProcessor }),
-                    new MixedRealityInteractionMapping("Left Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse0),
-                    new MixedRealityInteractionMapping("Right Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse1),
-                    new MixedRealityInteractionMapping("Mouse Button 2", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse2),
-                    new MixedRealityInteractionMapping("Mouse Button 3", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse3),
-                    new MixedRealityInteractionMapping("Mouse Button 4", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse4),
-                    new MixedRealityInteractionMapping("Mouse Button 5", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse5),
-                    new MixedRealityInteractionMapping("Mouse Button 6", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse6),
-                };
-            }
-        }
+        ///// <inheritdoc />
+        //public override MixedRealityInteractionMapping[] DefaultInteractions
+        //{
+        //    get
+        //    {
+        //        var singleAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+        //        singleAxisProcessor.InvertX = true;
+        //        var dualAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+        //        dualAxisProcessor.InvertX = true;
+        //        dualAxisProcessor.InvertY = true;
+        //        return new[]
+        //        {
+        //            new MixedRealityInteractionMapping("Spatial Mouse Position", AxisType.SixDof, DeviceInputType.SpatialPointer),
+        //            new MixedRealityInteractionMapping("Mouse Position", AxisType.DualAxis, DeviceInputType.PointerPosition, ControllerMappingLibrary.MouseY, ControllerMappingLibrary.MouseX, new List<InputProcessor>{ singleAxisProcessor }),
+        //            new MixedRealityInteractionMapping("Mouse Scroll Position", AxisType.DualAxis, DeviceInputType.Scroll, ControllerMappingLibrary.MouseScroll, ControllerMappingLibrary.MouseScroll, new List<InputProcessor>{ dualAxisProcessor }),
+        //            new MixedRealityInteractionMapping("Left Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse0),
+        //            new MixedRealityInteractionMapping("Right Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse1),
+        //            new MixedRealityInteractionMapping("Mouse Button 2", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse2),
+        //            new MixedRealityInteractionMapping("Mouse Button 3", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse3),
+        //            new MixedRealityInteractionMapping("Mouse Button 4", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse4),
+        //            new MixedRealityInteractionMapping("Mouse Button 5", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse5),
+        //            new MixedRealityInteractionMapping("Mouse Button 6", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse6),
+        //        };
+        //    }
+        //}
 
         public static bool IsInGameWindow => Input.mousePresent &&
                                              (Input.mousePosition.x > 0 ||
@@ -79,75 +78,75 @@ namespace XRTK.Providers.Controllers.UnityInput
                 controllerPose.Rotation = InputSource.Pointers[0].BaseCursor.Rotation;
             }
 
-            mousePosition.x = Input.GetAxis(Interactions[1].AxisCodeX);
-            mousePosition.y = Input.GetAxis(Interactions[1].AxisCodeY);
+            //mousePosition.x = Input.GetAxis(Interactions[1].AxisCodeX);
+            //mousePosition.y = Input.GetAxis(Interactions[1].AxisCodeY);
 
-            InputSystem?.RaiseSourcePositionChanged(InputSource, this, mousePosition);
-            InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
+            //InputSystem?.RaiseSourcePositionChanged(InputSource, this, mousePosition);
+            //InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
 
-            for (int i = 0; i < Interactions.Length; i++)
-            {
-                if (Interactions[i].InputType == DeviceInputType.SpatialPointer)
-                {
-                    Interactions[i].PoseData = controllerPose;
+            //for (int i = 0; i < Interactions.Length; i++)
+            //{
+            //    if (Interactions[i].InputType == DeviceInputType.SpatialPointer)
+            //    {
+            //        Interactions[i].PoseData = controllerPose;
 
-                    // If our value was updated, raise it.
-                    if (Interactions[i].Updated)
-                    {
-                        InputSystem?.RaisePoseInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].PoseData);
-                    }
-                }
+            //        // If our value was updated, raise it.
+            //        if (Interactions[i].Updated)
+            //        {
+            //            InputSystem?.RaisePoseInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].PoseData);
+            //        }
+            //    }
 
-                if (Interactions[i].InputType == DeviceInputType.PointerPosition)
-                {
-                    Interactions[i].Vector2Data = mousePosition;
+            //    if (Interactions[i].InputType == DeviceInputType.PointerPosition)
+            //    {
+            //        Interactions[i].Vector2Data = mousePosition;
 
-                    // If our value was updated, raise it.
-                    if (Interactions[i].Updated)
-                    {
-                        InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
-                    }
-                }
+            //        // If our value was updated, raise it.
+            //        if (Interactions[i].Updated)
+            //        {
+            //            InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
+            //        }
+            //    }
 
-                if (Interactions[i].InputType == DeviceInputType.Scroll)
-                {
-                    Interactions[i].Vector2Data = Input.mouseScrollDelta;
+            //    if (Interactions[i].InputType == DeviceInputType.Scroll)
+            //    {
+            //        Interactions[i].Vector2Data = Input.mouseScrollDelta;
 
-                    // If our value was updated, raise it.
-                    if (Interactions[i].Updated)
-                    {
-                        InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
-                    }
-                }
+            //        // If our value was updated, raise it.
+            //        if (Interactions[i].Updated)
+            //        {
+            //            InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
+            //        }
+            //    }
 
-                if (Interactions[i].AxisType == AxisType.Digital)
-                {
-                    var keyButton = Input.GetKey(Interactions[i].KeyCode);
+            //    if (Interactions[i].AxisType == AxisType.Digital)
+            //    {
+            //        var keyButton = Input.GetKey(Interactions[i].KeyCode);
 
-                    // Update the interaction data source
-                    Interactions[i].BoolData = keyButton;
+            //        // Update the interaction data source
+            //        Interactions[i].BoolData = keyButton;
 
-                    // If our value changed raise it.
-                    if (Interactions[i].ControlActivated)
-                    {
-                        // Raise input system Event if it enabled
-                        if (Interactions[i].BoolData)
-                        {
-                            InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
-                        }
-                        else
-                        {
-                            InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
-                        }
-                    }
+            //        // If our value changed raise it.
+            //        if (Interactions[i].ControlActivated)
+            //        {
+            //            // Raise input system Event if it enabled
+            //            if (Interactions[i].BoolData)
+            //            {
+            //                InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+            //            }
+            //            else
+            //            {
+            //                InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+            //            }
+            //        }
 
-                    // If our value was updated, raise it.
-                    if (Interactions[i].Updated)
-                    {
-                        InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
-                    }
-                }
-            }
+            //        // If our value was updated, raise it.
+            //        if (Interactions[i].Updated)
+            //        {
+            //            InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+            //        }
+            //    }
+            //}
         }
     }
 }

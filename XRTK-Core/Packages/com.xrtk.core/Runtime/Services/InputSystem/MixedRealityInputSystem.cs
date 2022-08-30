@@ -1,15 +1,17 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
@@ -59,7 +61,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public IReadOnlyCollection<IMixedRealityController> DetectedControllers => detectedControllers;
 
-        private readonly IMixedRealityFocusProvider focusProvider = null;
+        private readonly IMixedRealityFocusProvider focusProvider;
 
         /// <inheritdoc />
         public IMixedRealityFocusProvider FocusProvider => focusProvider;
@@ -70,6 +72,8 @@ namespace XRTK.Services.InputSystem
         private readonly Type gazeProviderType;
         private readonly Stack<GameObject> modalInputStack = new Stack<GameObject>();
         private readonly Stack<GameObject> fallbackInputStack = new Stack<GameObject>();
+
+        private InputSystemUIInputModule standaloneInputModule;
 
         /// <inheritdoc />
         public bool IsInputEnabled => disabledRefCount <= 0;
@@ -114,13 +118,7 @@ namespace XRTK.Services.InputSystem
 
             EnsureStandaloneInputModuleSetup();
 
-            if (!Application.isPlaying)
-            {
-                var cameraTransform = CameraCache.Main.transform;
-                cameraTransform.position = Vector3.zero;
-                cameraTransform.rotation = Quaternion.identity;
-            }
-            else
+            if (Application.isPlaying)
             {
                 var eventSystem = EventSystem.current;
                 sourceStateEventData = new SourceStateEventData(eventSystem);
@@ -153,22 +151,30 @@ namespace XRTK.Services.InputSystem
 
         private void EnsureStandaloneInputModuleSetup()
         {
-            var standaloneInputModules = UnityEngine.Object.FindObjectsOfType<StandaloneInputModule>();
+            var standaloneInputModules = UnityEngine.Object.FindObjectsOfType<InputSystemUIInputModule>();
+
             if (standaloneInputModules.Length == 0)
             {
-                CameraCache.Main.EnsureComponent<StandaloneInputModule>();
-                Debug.Log($"There was no {nameof(StandaloneInputModule)} in the scene. The {nameof(MixedRealityInputSystem)} requires one and added it to the main camera.");
+                standaloneInputModules = new[] { CameraCache.Main.EnsureComponent<InputSystemUIInputModule>() };
+                Debug.Log($"There was no {nameof(InputSystemUIInputModule)} in the scene. The {nameof(MixedRealityInputSystem)} requires one and added it to the main camera.");
             }
             else if (standaloneInputModules.Length > 1)
             {
-                Debug.LogError($"There is more than one {nameof(StandaloneInputModule)} active in the scene. Please make sure only one instance of it exists as it may cause errors.");
+                Debug.LogError($"There is more than one {nameof(InputSystemUIInputModule)} active in the scene. Please make sure only one instance of it exists as it may cause errors.");
             }
+
+            standaloneInputModule = standaloneInputModules[0];
         }
 
         /// <inheritdoc />
         public override void Enable()
         {
             base.Enable();
+
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem))
+            {
+                standaloneInputModule.xrTrackingOrigin = cameraSystem.MainCameraRig.RigTransform;
+            }
 
             InputEnabled?.Invoke();
         }
@@ -195,7 +201,7 @@ namespace XRTK.Services.InputSystem
                     component.Destroy();
                 }
 
-                var inputModule = CameraCache.Main.GetComponent<StandaloneInputModule>();
+                var inputModule = CameraCache.Main.GetComponent<InputSystemUIInputModule>();
 
                 if (!inputModule.IsNull())
                 {
@@ -219,7 +225,7 @@ namespace XRTK.Services.InputSystem
             Debug.Assert(eventData != null);
             var baseInputEventData = ExecuteEvents.ValidateEventData<BaseInputEventData>(eventData);
             Debug.Assert(baseInputEventData != null);
-            Debug.Assert(!baseInputEventData.used);
+            Debug.Assert(!baseInputEventData!.used);
 
             if (baseInputEventData.InputSource == null)
             {

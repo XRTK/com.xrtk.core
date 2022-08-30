@@ -52,20 +52,16 @@ namespace XRTK.Services.CameraSystem
             {
                 if (mainCameraRig == null)
                 {
-                    foreach (var dataProvider in cameraDataProviders)
-                    {
-                        if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
-                        {
-                            mainCameraRig = dataProvider.CameraRig;
-                            break;
-                        }
-                    }
+                    // for now we always expect the rig to be on the transform root of the main camera with tag "mainCamera".
+                    Debug.Assert(CameraCache.Main.transform.root != null, "The main camera has no ancestors! A valid XRRig needs to be setup.");
+                    mainCameraRig = CameraCache.Main.transform.root.GetComponent<IMixedRealityCameraRig>();
+                    Debug.Assert(mainCameraRig != null, $"Failed to find a valid {nameof(IMixedRealityCameraRig)} on the root of the main camera!");
                 }
 
                 return mainCameraRig;
             }
         }
-        
+
         /// <inheritdoc />
         public void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {

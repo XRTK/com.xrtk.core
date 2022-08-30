@@ -187,42 +187,45 @@ namespace XRTK.Providers.CameraSystem
         }
 
         /// <inheritdoc />
-        public override void Disable()
-        {
-            base.Disable();
-
-            if (CameraRig == null ||
-                CameraRig.GameObject.IsNull())
-            {
-                return;
-            }
-
-            if (!CameraRig.PlayerCamera.IsNull() &&
-                !CameraRig.PlayerCamera.transform.IsNull())
-            {
-                var cameraTransform = CameraRig.PlayerCamera.transform;
-                cameraTransform.SetParent(null);
-                cameraTransform.position = Vector3.one;
-                cameraTransform.rotation = Quaternion.identity;
-            }
-
-            if (CameraRig.RigTransform != null)
-            {
-                CameraRig.RigTransform.gameObject.Destroy();
-            }
-
-            if (CameraRig is Component component and IMixedRealityCameraRig)
-            {
-                component.Destroy();
-            }
-        }
-
-        /// <inheritdoc />
         public override void Destroy()
         {
             base.Destroy();
 
             cameraSystem.UnRegisterCameraDataProvider(this);
+        }
+
+        /// <inheritdoc />
+        protected override void OnDispose(bool finalizing)
+        {
+            base.OnDispose(finalizing);
+
+            if (finalizing)
+            {
+                if (CameraRig == null ||
+                    CameraRig.GameObject.IsNull())
+                {
+                    return;
+                }
+
+                if (!CameraRig.PlayerCamera.IsNull() &&
+                    !CameraRig.PlayerCamera.transform.IsNull())
+                {
+                    var cameraTransform = CameraRig.PlayerCamera.transform;
+                    cameraTransform.SetParent(null);
+                    cameraTransform.position = Vector3.one;
+                    cameraTransform.rotation = Quaternion.identity;
+                }
+
+                if (CameraRig.RigTransform != null)
+                {
+                    CameraRig.RigTransform.gameObject.Destroy();
+                }
+
+                if (CameraRig is Component component and IMixedRealityCameraRig)
+                {
+                    component.Destroy();
+                }
+            }
         }
 
         #endregion IMixedRealitySerivce Implementation

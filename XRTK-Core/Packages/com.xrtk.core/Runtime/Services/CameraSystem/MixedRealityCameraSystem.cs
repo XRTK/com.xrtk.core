@@ -72,7 +72,8 @@ namespace XRTK.Services.CameraSystem
             {
                 foreach (var dataProvider in cameraDataProviders)
                 {
-                    if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
+                    if (dataProvider.CameraRig != null &&
+                        dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
                     {
                         return dataProvider.TrackingType;
                     }

@@ -384,12 +384,11 @@ namespace XRTK.Editor.BuildPipeline
             {
                 Debug.LogError("Failed to find a valid build report!");
                 EditorApplication.Exit(1);
+                return;
             }
-            else
-            {
-                Debug.Log($"Exiting command line build...\nBuild success? {buildReport.summary.result}\nBuild time: {buildReport.summary.totalTime:g}");
-                EditorApplication.Exit(buildReport.summary.result == BuildResult.Succeeded ? 0 : 1);
-            }
+
+            Debug.Log($"Exiting command line build...\nBuild success? {buildReport.summary.result}\nBuild time: {buildReport.summary.totalTime:g}");
+            EditorApplication.Exit(buildReport.summary.result == BuildResult.Succeeded ? 0 : 1);
         }
 
         internal static bool CheckBuildScenes()
@@ -399,7 +398,7 @@ namespace XRTK.Editor.BuildPipeline
                 return EditorUtility.DisplayDialog(
                     "Attention!",
                     "No scenes are present in the build settings.\n" +
-                    "The current scene will be the one built.\n\n" +
+                    "The build requires at least one scene to be defined.\n\n" +
                     "Do you want to cancel and add one?",
                     "Continue Anyway",
                     "Cancel Build");

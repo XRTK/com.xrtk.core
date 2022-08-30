@@ -26,6 +26,7 @@
     "com.unity.modules.unitywebrequest": "1.0.0",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.ugui": "1.0.0",
-    "com.unity.xr.management": "4.2.1"
+    "com.unity.xr.management": "4.2.1",
+    "com.unity.inputsystem": "1.4.2"
   }
 }

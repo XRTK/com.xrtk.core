@@ -754,7 +754,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: com.xrtk.core
-  metroPackageVersion: 0.2.15.0
+  metroPackageVersion: 0.3.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -867,7 +867,7 @@ PlayerSettings:
   luminIsChannelApp: 0
   luminVersion:
     m_VersionCode: 1
-    m_VersionName: 0.2.15
+    m_VersionName: 0.3.0
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   cloudProjectId: 

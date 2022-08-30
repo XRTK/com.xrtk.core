@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
@@ -12,7 +13,7 @@ namespace XRTK.Definitions.Controllers
     {
         [SerializeField]
         [Implements(typeof(IMixedRealityController), TypeGrouping.ByNamespaceFlat)]
-        private SystemType controllerType = null;
+        private SystemType controllerType;
 
         /// <summary>
         /// The type of controller this mapping corresponds to.
@@ -33,7 +34,7 @@ namespace XRTK.Definitions.Controllers
         }
 
         [SerializeField]
-        private MixedRealityControllerVisualizationProfile visualizationProfile = null;
+        private MixedRealityControllerVisualizationProfile visualizationProfile;
 
         public MixedRealityControllerVisualizationProfile VisualizationProfile
         {
@@ -42,16 +43,7 @@ namespace XRTK.Definitions.Controllers
         }
 
         [SerializeField]
-        private bool useCustomInteractions = true;
-
-        internal bool UseCustomInteractions
-        {
-            get => useCustomInteractions;
-            set => useCustomInteractions = value;
-        }
-
-        [SerializeField]
-        private MixedRealityInteractionMappingProfile[] interactionMappingProfiles = new MixedRealityInteractionMappingProfile[0];
+        private MixedRealityInteractionMappingProfile[] interactionMappingProfiles = Array.Empty<MixedRealityInteractionMappingProfile>();
 
         /// <summary>
         /// Details the list of available interaction profiles available for the controller.

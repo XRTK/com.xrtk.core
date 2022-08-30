@@ -266,8 +266,6 @@ namespace XRTK.Providers.CameraSystem
 
                     CameraRig = rigTransform.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
 
-                    Debug.Assert(CameraRig != null);
-
                     if (CameraRig is DefaultCameraRig cameraRig)
                     {
                         cameraRig.PlayerCamera = xrCamera;
@@ -278,6 +276,12 @@ namespace XRTK.Providers.CameraSystem
                         cameraRig.BodyTransform = playerBody;
                     }
                 }
+                else
+                {
+                    CameraRig = xrCamera.transform.root.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                }
+
+                Debug.Assert(CameraRig != null);
             }
         }
 

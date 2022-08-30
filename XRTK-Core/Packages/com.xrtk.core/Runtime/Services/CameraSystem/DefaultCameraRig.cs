@@ -273,12 +273,6 @@ namespace XRTK.Services.CameraSystem
             {
                 bodyTransform.name = playerBodyName;
             }
-
-            if (cameraOffset != null &&
-                !cameraOffset.name.Equals(trackingSpaceName))
-            {
-                cameraOffset.name = trackingSpaceName;
-            }
         }
 
         #endregion MonoBehaviour Implementation

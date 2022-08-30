@@ -108,8 +108,6 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Initialize();
 
-            cameraSystem.RegisterCameraDataProvider(this);
-
             EnsureCameraRigSetup();
 
             if (!Application.isPlaying)
@@ -140,6 +138,8 @@ namespace XRTK.Providers.CameraSystem
             base.Enable();
 
             EnsureCameraRigSetup();
+
+            cameraSystem.RegisterCameraDataProvider(this);
 
             if (Application.isPlaying &&
                 isCameraPersistent)
@@ -186,10 +186,9 @@ namespace XRTK.Providers.CameraSystem
             SyncRigTransforms();
         }
 
-        /// <inheritdoc />
-        public override void Destroy()
+        public override void Disable()
         {
-            base.Destroy();
+            base.Disable();
 
             cameraSystem.UnRegisterCameraDataProvider(this);
         }

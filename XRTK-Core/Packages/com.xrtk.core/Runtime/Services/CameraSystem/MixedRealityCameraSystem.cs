@@ -43,7 +43,7 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders => cameraDataProviders;
 
-        private IMixedRealityCameraRig mainCameraRig = null;
+        private IMixedRealityCameraRig mainCameraRig;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig MainCameraRig
@@ -57,6 +57,7 @@ namespace XRTK.Services.CameraSystem
                         if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
                         {
                             mainCameraRig = dataProvider.CameraRig;
+                            break;
                         }
                     }
                 }
@@ -64,47 +65,7 @@ namespace XRTK.Services.CameraSystem
                 return mainCameraRig;
             }
         }
-
-        /// <inheritdoc />
-        public TrackingType TrackingType
-        {
-            get
-            {
-                foreach (var dataProvider in cameraDataProviders)
-                {
-                    if (dataProvider.CameraRig != null &&
-                        dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
-                    {
-                        return dataProvider.TrackingType;
-                    }
-                }
-
-                // If we can't find the active camera data provider we must rely
-                // on whatever the platform default is.
-                return TrackingType.Auto;
-            }
-        }
-
-#if XRTK_USE_LEGACYVR
-        /// <inheritdoc />
-        public void SetHeadHeight(float value, bool setForAllCameraProviders = false)
-        {
-            foreach (var dataProvider in cameraDataProviders)
-            {
-                if (setForAllCameraProviders ||
-                    dataProvider.CameraRig == MainCameraRig)
-                {
-                    dataProvider.HeadHeight = value;
-
-                    if (!setForAllCameraProviders)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-#endif
-
+        
         /// <inheritdoc />
         public void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {

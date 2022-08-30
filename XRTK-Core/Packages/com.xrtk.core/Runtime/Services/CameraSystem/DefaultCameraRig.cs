@@ -1,8 +1,10 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.SpatialTracking;
+using UnityEngine.XR;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
@@ -18,11 +20,15 @@ namespace XRTK.Services.CameraSystem
     {
         #region IMixedRealityCameraRig Implementation
 
-        [SerializeField]
-        private string rigName = MixedRealityToolkit.DefaultXRCameraRigName;
+        public const string Default_XRRigName = "XRRig";
+        public const string Default_CameraOffsetName = "TrackingSpace";
+        public const string Default_BodyName = "PlayerBody";
 
         [SerializeField]
-        private Transform rigTransform = null;
+        private string rigName = Default_XRRigName;
+
+        [SerializeField]
+        private Transform rigTransform;
 
         /// <inheritdoc />
         public GameObject GameObject
@@ -56,36 +62,86 @@ namespace XRTK.Services.CameraSystem
                 }
 
                 var rigTransformLookup = GameObject.Find(rigName);
-
-                rigTransform = rigTransformLookup.IsNull()
+                return rigTransformLookup.IsNull()
                     ? new GameObject(rigName).transform
                     : rigTransformLookup.transform;
-
-                if (CameraTransform.parent != rigTransform)
-                {
-                    CameraTransform.SetParent(rigTransform);
-                }
-
-                if (BodyTransform.parent != rigTransform)
-                {
-                    BodyTransform.SetParent(rigTransform);
-                }
-
-                // It's very important that the rig transform aligns with the tracked space,
-                // otherwise world-locked things like boundaries won't be aligned properly.
-                // For now, we'll just assume that when the rig is first initialized, the
-                // tracked space origin overlaps with the world space origin. If a platform ever does
-                // something else (i.e, placing the lower left hand corner of the tracked space at world
-                // space 0,0,0), we should compensate for that here.
-                return rigTransform;
             }
+            internal set => rigTransform = value;
+        }
+
+        [SerializeField]
+        private string trackingSpaceName = Default_CameraOffsetName;
+
+        [SerializeField]
+        private Transform trackingSpace;
+
+        public Transform TrackingSpace
+        {
+            get
+            {
+                if (trackingSpace != null)
+                {
+                    return trackingSpace;
+                }
+
+                if (MixedRealityToolkit.IsApplicationQuitting)
+                {
+                    return null;
+                }
+
+                trackingSpace = CameraOffset.cameraFloorOffsetObject.transform;
+
+                return trackingSpace;
+            }
+            internal set => trackingSpace = value;
+        }
+
+        [SerializeField]
+        private CameraOffset cameraOffset;
+
+        internal CameraOffset CameraOffset
+        {
+            get
+            {
+                if (cameraOffset != null)
+                {
+                    return cameraOffset;
+                }
+
+                if (MixedRealityToolkit.IsApplicationQuitting)
+                {
+                    return null;
+                }
+
+                cameraOffset = RigTransform.gameObject.EnsureComponent<CameraOffset>();
+                cameraOffset.TrackingOriginMode = TrackingOriginModeFlags.Device;
+
+                var cameraOffsetGo = GameObject.Find(trackingSpaceName);
+
+                if (cameraOffsetGo == null)
+                {
+                    cameraOffsetGo = new GameObject(trackingSpaceName);
+                }
+
+                trackingSpace = cameraOffsetGo.transform;
+
+                if (trackingSpace.parent != RigTransform)
+                {
+                    trackingSpace.SetParent(RigTransform);
+                }
+
+                cameraOffset.cameraFloorOffsetObject = cameraOffsetGo;
+
+                return cameraOffset;
+            }
+            set => cameraOffset = value;
         }
 
         /// <inheritdoc />
         public Transform CameraTransform => PlayerCamera == null ? null : playerCamera == null ? null : playerCamera.transform;
 
         [SerializeField]
-        private Camera playerCamera = null;
+        private Camera playerCamera;
 
         /// <inheritdoc />
         public Camera PlayerCamera
@@ -109,30 +165,40 @@ namespace XRTK.Services.CameraSystem
                     playerCamera = CameraCache.Main;
                 }
 
-                if (playerCamera.transform.parent == null)
+                // this should only really happen if we've manually
+                // added the camera rig.
+                if (playerCamera.transform.parent != TrackingSpace)
                 {
-                    playerCamera.transform.SetParent(RigTransform);
-                }
-                else
-                {
-                    rigTransform = playerCamera.transform.parent;
+                    var cameraPose = new Pose();
+                    cameraPose.position = playerCamera.transform.position;
+                    cameraPose.position.y = 0.0f;
+                    cameraPose.rotation = playerCamera.transform.rotation;
+                    playerCamera.transform.parent = TrackingSpace;
+
+                    playerCamera.nearClipPlane = 0.01f;
+                    playerCamera.transform.position = Vector3.zero;
+                    playerCamera.transform.rotation = Quaternion.identity;
+
+                    RigTransform.position = cameraPose.position;
+                    RigTransform.rotation = cameraPose.rotation;
                 }
 
                 return playerCamera;
             }
+            internal set => playerCamera = value;
         }
 
         [SerializeField]
-        private TrackedPoseDriver cameraPoseDriver = null;
+        private TrackedPoseDriver trackedPoseDriver;
 
         /// <inheritdoc />
-        public TrackedPoseDriver CameraPoseDriver
+        public TrackedPoseDriver TrackedPoseDriver
         {
             get
             {
-                if (cameraPoseDriver != null)
+                if (trackedPoseDriver != null)
                 {
-                    return cameraPoseDriver;
+                    return trackedPoseDriver;
                 }
 
                 if (MixedRealityToolkit.IsApplicationQuitting)
@@ -140,25 +206,20 @@ namespace XRTK.Services.CameraSystem
                     return null;
                 }
 
-                cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+                trackedPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+                trackedPoseDriver.SetPoseSource(TrackedPoseDriver.DeviceType.GenericXRDevice, TrackedPoseDriver.TrackedPose.Center);
+                trackedPoseDriver.UseRelativeTransform = false;
 
-#if XRTK_USE_LEGACYVR
-                cameraPoseDriver.UseRelativeTransform = true;
-#else
-                cameraPoseDriver.UseRelativeTransform = false;
-#endif
-
-                Debug.Assert(cameraPoseDriver != null);
-
-                return cameraPoseDriver;
+                return trackedPoseDriver;
             }
+            internal set => trackedPoseDriver = value;
         }
 
         [SerializeField]
-        private string playerBodyName = "PlayerBody";
+        private string playerBodyName = Default_BodyName;
 
         [SerializeField]
-        private Transform bodyTransform = null;
+        private Transform bodyTransform;
 
         /// <inheritdoc />
         public Transform BodyTransform
@@ -175,19 +236,18 @@ namespace XRTK.Services.CameraSystem
                     return null;
                 }
 
-                if (bodyTransform == null)
-                {
-                    bodyTransform = RigTransform.Find(playerBodyName);
-                }
+                bodyTransform = RigTransform.Find(playerBodyName);
 
                 if (bodyTransform == null)
                 {
                     bodyTransform = new GameObject(playerBodyName).transform;
-                    bodyTransform.transform.SetParent(RigTransform);
                 }
+
+                bodyTransform.SetParent(TrackingSpace);
 
                 return bodyTransform;
             }
+            internal set => bodyTransform = value;
         }
 
         #endregion IMixedRealityCameraRig Implementation
@@ -202,45 +262,22 @@ namespace XRTK.Services.CameraSystem
                 rigTransform.name = rigName;
             }
 
+            if (trackingSpace != null &&
+                !trackingSpace.name.Equals(trackingSpaceName))
+            {
+                trackingSpace.name = trackingSpaceName;
+            }
+
             if (bodyTransform != null &&
                 !bodyTransform.name.Equals(playerBodyName))
             {
                 bodyTransform.name = playerBodyName;
             }
 
-            if (MixedRealityToolkit.IsInitialized &&
-                PlayerCamera.transform.parent.name != rigName)
+            if (cameraOffset != null &&
+                !cameraOffset.name.Equals(trackingSpaceName))
             {
-                // Since the scene is set up with a different camera parent, its likely
-                // that there's an expectation that that parent is going to be used for
-                // something else. We print a warning to call out the fact that we're
-                // co-opting this object for use with teleporting and such, since that
-                // might cause conflicts with the parent's intended purpose.
-                Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {rigName}. The existing parent will be renamed and used instead.\nPlease ensure your scene is configured properly in the editor using \'MixedRealityToolkit -> Configure..\'");
-                // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                PlayerCamera.transform.parent.name = rigName;
-            }
-        }
-
-        private void Start()
-        {
-            if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
-                && CameraPoseDriver.IsNotNull())
-            {
-                switch (cameraSystem.TrackingType)
-                {
-                    case TrackingType.SixDegreesOfFreedom:
-                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
-                        break;
-                    case TrackingType.ThreeDegreesOfFreedom:
-                        CameraPoseDriver.trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
-                        break;
-                    case TrackingType.Auto:
-                    default:
-                        // For now, leave whatever the user has configured manually on the component. Once we
-                        // have APIs in place to query platform capabilities, we might use that for auto.
-                        break;
-                }
+                cameraOffset.name = trackingSpaceName;
             }
         }
 

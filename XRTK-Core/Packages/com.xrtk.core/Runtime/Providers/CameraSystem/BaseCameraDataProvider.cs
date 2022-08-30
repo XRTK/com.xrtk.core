@@ -2,18 +2,16 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
+using UnityEngine.SpatialTracking;
+using UnityEngine.XR;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
-using XRTK.Utilities;
 using XRTK.Services.CameraSystem;
-
-#if !XRTK_USE_LEGACYVR
-using UnityEngine.XR;
-using System.Collections.Generic;
-#endif
+using XRTK.Utilities;
 
 namespace XRTK.Providers.CameraSystem
 {
@@ -46,14 +44,8 @@ namespace XRTK.Providers.CameraSystem
             cameraRigType = profile.CameraRigType.Type;
             applyQualitySettings = profile.ApplyQualitySettings;
 
-            TrackingType = profile.TrackingType;
-
-#if XRTK_USE_LEGACYVR
-            DefaultHeadHeight = profile.DefaultHeadHeight;
-#else
             trackingOriginMode = profile.TrackingOriginMode;
             defaultHeadHeight = profile.DefaultHeadHeight;
-#endif
 
             nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
             cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay;
@@ -70,34 +62,29 @@ namespace XRTK.Providers.CameraSystem
         }
 
         private readonly IMixedRealityCameraSystem cameraSystem;
+
         private readonly float eyeTextureResolution;
         private readonly bool isCameraPersistent;
         private readonly Type cameraRigType;
         private readonly bool applyQualitySettings;
-        private readonly float nearClipPlaneTransparentDisplay;
-        private readonly CameraClearFlags cameraClearFlagsTransparentDisplay;
-        private readonly Color backgroundColorTransparentDisplay;
-        private readonly int transparentQualityLevel;
+
+        private readonly TrackingOriginModeFlags trackingOriginMode;
+        private readonly float defaultHeadHeight;
+
         private readonly float nearClipPlaneOpaqueDisplay;
         private readonly CameraClearFlags cameraClearFlagsOpaqueDisplay;
         private readonly Color backgroundColorOpaqueDisplay;
         private readonly int opaqueQualityLevel;
-        private readonly float bodyAdjustmentSpeed;
-        private readonly double bodyAdjustmentAngle;
-        private bool cameraOpaqueLastFrame;
 
-#if XRTK_USE_LEGACYVR
-        /// <summary>
-        /// The fallback value if the <see cref="DefaultHeadHeight"/> is zero.
-        /// </summary>
-        private const float BodyHeightFallback = 1.6f;
-#else
-        private static List<XRInputSubsystem> inputSubsystems = new List<XRInputSubsystem>();
-        private TrackingOriginModeFlags trackingOriginMode;
-        private readonly float defaultHeadHeight;
-        private bool trackingOriginInitialized = false;
-        private bool trackingOriginInitializing = false;
-#endif
+        private readonly float nearClipPlaneTransparentDisplay;
+        private readonly CameraClearFlags cameraClearFlagsTransparentDisplay;
+        private readonly Color backgroundColorTransparentDisplay;
+        private readonly int transparentQualityLevel;
+
+        private readonly double bodyAdjustmentAngle;
+        private readonly float bodyAdjustmentSpeed;
+
+        private bool cameraOpaqueLastFrame;
 
         /// <inheritdoc />
         public virtual bool IsOpaque => XRDeviceUtilities.IsDisplayOpaque;
@@ -105,46 +92,11 @@ namespace XRTK.Providers.CameraSystem
         /// <inheritdoc />
         public virtual bool IsStereoscopic => CameraRig.PlayerCamera.stereoEnabled;
 
-#if XRTK_USE_LEGACYVR
-        /// <inheritdoc />
-        public virtual bool HeadHeightIsManagedByDevice => XRDeviceUtilities.IsDevicePresent;
-#endif
-
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }
 
         /// <inheritdoc />
-        public TrackingType TrackingType { get; }
-
-#if XRTK_USE_LEGACYVR
-        /// <inheritdoc />
-        public float DefaultHeadHeight { get; }
-#endif
-
-
-#if XRTK_USE_LEGACYVR
-        private float headHeight;
-#endif
-
-        /// <inheritdoc />
-        public virtual float HeadHeight
-        {
-#if XRTK_USE_LEGACYVR
-            get => headHeight;
-            set
-            {
-                if (value.Equals(headHeight))
-                {
-                    return;
-                }
-
-                headHeight = value;
-                CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
-            }
-#else
-            get => CameraRig.CameraTransform.localPosition.y;
-#endif
-        }
+        public virtual float HeadHeight => CameraRig.CameraTransform.localPosition.y;
 
         #region IMixedRealitySerivce Implementation
 
@@ -158,22 +110,12 @@ namespace XRTK.Providers.CameraSystem
 
             cameraSystem.RegisterCameraDataProvider(this);
 
+            EnsureCameraRigSetup();
+
             if (!Application.isPlaying)
             {
                 return;
             }
-
-            EnsureCameraRigSetup();
-
-#if XRTK_USE_LEGACYVR
-            ApplySettingsForDefaultHeadHeight();
-#else
-            // We attempt to initialize the camera tracking origin, which might
-            // fail at this point if the subsytems are not ready, in which case,
-            // we set a flag to keep trying.
-            trackingOriginInitialized = SetupTrackingOrigin();
-            trackingOriginInitializing = !trackingOriginInitialized;
-#endif
 
             cameraOpaqueLastFrame = IsOpaque;
 
@@ -189,10 +131,7 @@ namespace XRTK.Providers.CameraSystem
                 }
             }
 
-            if (Application.isPlaying)
-            {
-                XRSettings.eyeTextureResolutionScale = eyeTextureResolution;
-            }
+            XRSettings.eyeTextureResolutionScale = eyeTextureResolution;
         }
 
         /// <inheritdoc />
@@ -207,10 +146,6 @@ namespace XRTK.Providers.CameraSystem
             {
                 CameraRig.PlayerCamera.transform.root.DontDestroyOnLoad();
             }
-
-#if XRTK_USE_LEGACYVR
-            ApplySettingsForDefaultHeadHeight();
-#endif
         }
 
         /// <inheritdoc />
@@ -227,10 +162,6 @@ namespace XRTK.Providers.CameraSystem
             {
                 cameraOpaqueLastFrame = IsOpaque;
 
-#if XRTK_USE_LEGACYVR
-                ApplySettingsForDefaultHeadHeight();
-#endif
-
                 if (applyQualitySettings)
                 {
                     if (IsOpaque)
@@ -243,17 +174,6 @@ namespace XRTK.Providers.CameraSystem
                     }
                 }
             }
-
-#if !XRTK_USE_LEGACYVR
-            // We keep trying to initialize the tracking origin,
-            // until it worked, because at application launch the
-            // subsytems might not be ready yet.
-            if (trackingOriginInitializing && !trackingOriginInitialized)
-            {
-                trackingOriginInitialized = SetupTrackingOrigin();
-                trackingOriginInitializing = !trackingOriginInitialized;
-            }
-#endif
         }
 
         /// <inheritdoc />
@@ -277,8 +197,6 @@ namespace XRTK.Providers.CameraSystem
                 return;
             }
 
-            ResetRigTransforms();
-
             if (!CameraRig.PlayerCamera.IsNull() &&
                 !CameraRig.PlayerCamera.transform.IsNull())
             {
@@ -293,8 +211,7 @@ namespace XRTK.Providers.CameraSystem
                 CameraRig.RigTransform.gameObject.Destroy();
             }
 
-            if (CameraRig is Component component &&
-                component is IMixedRealityCameraRig)
+            if (CameraRig is Component component and IMixedRealityCameraRig)
             {
                 component.Destroy();
             }
@@ -314,156 +231,55 @@ namespace XRTK.Providers.CameraSystem
         {
             if (CameraRig == null)
             {
-                if (CameraCache.Main.transform.parent.IsNull())
+                var xrCamera = CameraCache.Main;
+
+                if (xrCamera.transform.parent.IsNull())
                 {
-                    var rigTransform = new GameObject(MixedRealityToolkit.DefaultXRCameraRigName).transform;
-                    CameraCache.Main.transform.SetParent(rigTransform);
-                }
+                    var rigTransform = new GameObject(DefaultCameraRig.Default_XRRigName).transform;
+                    var trackingSpace = new GameObject(DefaultCameraRig.Default_CameraOffsetName);
+                    trackingSpace.transform.SetParent(rigTransform);
 
-                CameraRig = CameraCache.Main.transform.parent.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
-                Debug.Assert(CameraRig != null);
-            }
-        }
+                    var cameraPose = new Pose();
+                    cameraPose.position = xrCamera.transform.position;
+                    cameraPose.position.y = 0.0f;
+                    cameraPose.rotation = xrCamera.transform.rotation;
+                    xrCamera.transform.SetParent(trackingSpace.transform);
 
-#if !XRTK_USE_LEGACYVR
-        #region Tracking Origin Setup
+                    xrCamera.nearClipPlane = 0.01f;
+                    xrCamera.transform.localPosition = Vector3.zero;
+                    xrCamera.transform.localRotation = Quaternion.identity;
 
-        private bool SetupTrackingOrigin()
-        {
-            SubsystemManager.GetInstances(inputSubsystems);
+                    rigTransform.position = cameraPose.position;
+                    rigTransform.rotation = cameraPose.rotation;
 
-            // We assume the tracking mode to be set, that way
-            // when in editor and no subsystems are connected / running
-            // we can still keep going and assume everything is ready.
-            var trackingOriginModeSet = true;
+                    var trackedPoseDriver = xrCamera.EnsureComponent<TrackedPoseDriver>();
+                    trackedPoseDriver.SetPoseSource(TrackedPoseDriver.DeviceType.GenericXRDevice, TrackedPoseDriver.TrackedPose.Center);
+                    trackedPoseDriver.UseRelativeTransform = false;
 
-            if (inputSubsystems.Count != 0)
-            {
-                for (int i = 0; i < inputSubsystems.Count; i++)
-                {
-                    if (inputSubsystems[i].SubsystemDescriptor.id == "MockHMD Head Tracking")
+                    var cameraOffset = rigTransform.EnsureComponent<CameraOffset>();
+                    cameraOffset.cameraYOffset = defaultHeadHeight;
+                    cameraOffset.TrackingOriginMode = trackingOriginMode;
+                    cameraOffset.cameraFloorOffsetObject = trackingSpace;
+
+                    var playerBody = new GameObject(DefaultCameraRig.Default_BodyName).transform;
+                    playerBody.transform.SetParent(trackingSpace.transform);
+
+                    CameraRig = rigTransform.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+
+                    Debug.Assert(CameraRig != null);
+
+                    if (CameraRig is DefaultCameraRig cameraRig)
                     {
-                        UpdateCameraHeightOffset(defaultHeadHeight);
-                    }
-                    else
-                    {
-                        var result = SetupTrackingOrigin(inputSubsystems[i]);
-                        if (result)
-                        {
-                            inputSubsystems[i].trackingOriginUpdated -= XRInputSubsystem_OnTrackingOriginUpdated;
-                            inputSubsystems[i].trackingOriginUpdated += XRInputSubsystem_OnTrackingOriginUpdated;
-                        }
-                        trackingOriginModeSet &= result;
+                        cameraRig.PlayerCamera = xrCamera;
+                        cameraRig.RigTransform = rigTransform;
+                        cameraRig.TrackingSpace = trackingSpace.transform;
+                        cameraRig.TrackedPoseDriver = trackedPoseDriver;
+                        cameraRig.CameraOffset = cameraOffset;
+                        cameraRig.BodyTransform = playerBody;
                     }
                 }
             }
-            else
-            {
-                // No subsystems available, we are probably running in editor without a device
-                // connected, position the camera at the configured default offset.
-                UpdateCameraHeightOffset(defaultHeadHeight);
-            }
-
-            return trackingOriginModeSet;
         }
-
-        private bool SetupTrackingOrigin(XRInputSubsystem subsystem)
-        {
-            if (subsystem == null)
-            {
-                return false;
-            }
-
-            var trackingOriginModeSet = false;
-            var supportedModes = subsystem.GetSupportedTrackingOriginModes();
-            var requestedMode = trackingOriginMode;
-
-            if (requestedMode == TrackingOriginModeFlags.Floor)
-            {
-                if ((supportedModes & (TrackingOriginModeFlags.Floor | TrackingOriginModeFlags.Unknown)) == 0)
-                {
-                    Debug.LogWarning("Attempting to set the tracking origin to floor, but the device does not support it.");
-                }
-                else
-                {
-                    trackingOriginModeSet = subsystem.TrySetTrackingOriginMode(requestedMode);
-                }
-            }
-            else if (requestedMode == TrackingOriginModeFlags.Device)
-            {
-                if ((supportedModes & (TrackingOriginModeFlags.Device | TrackingOriginModeFlags.Unknown)) == 0)
-                {
-                    Debug.LogWarning("Attempting to set the camera system tracking origin to device, but the device does not support it.");
-                }
-                else
-                {
-                    trackingOriginModeSet = subsystem.TrySetTrackingOriginMode(requestedMode) && subsystem.TryRecenter();
-                }
-            }
-
-            if (trackingOriginModeSet)
-            {
-                UpdateTrackingOrigin(subsystem.GetTrackingOriginMode());
-            }
-
-            return trackingOriginModeSet;
-        }
-
-        private void XRInputSubsystem_OnTrackingOriginUpdated(XRInputSubsystem subsystem) => UpdateTrackingOrigin(subsystem.GetTrackingOriginMode());
-
-        private void UpdateTrackingOrigin(TrackingOriginModeFlags trackingOriginModeFlags)
-        {
-            trackingOriginMode = trackingOriginModeFlags;
-
-            UpdateCameraHeightOffset(trackingOriginMode == TrackingOriginModeFlags.Device ? defaultHeadHeight : 0.0f);
-            ResetRigTransforms();
-            SyncRigTransforms();
-        }
-
-        #endregion Tracking Origin Setup
-#endif
-
-#if XRTK_USE_LEGACYVR
-        /// <summary>
-        /// Depending on whether there is an XR device connected,
-        /// moves the camera to the setting from the camera profile.
-        /// </summary>
-        protected virtual void ApplySettingsForDefaultHeadHeight()
-        {
-            // We need to check whether the application is playing or not here.
-            // Since this code is executed even when not in play mode, we want
-            // to definitely apply the head height configured in the editor, when
-            // not in play mode. It helps with working in the editor and visualizing
-            // the user's perspective. When running though, we need to make sure we do
-            // not interfere with any platform provided head pose tracking.
-            if (!Application.isPlaying || !HeadHeightIsManagedByDevice)
-            {
-                HeadHeight = DefaultHeadHeight;
-            }
-            // If we are running and the device/platform provides the head pose,
-            // we need to make sure to reset any applied head height while in edit mode.
-            else if (Application.isPlaying && HeadHeightIsManagedByDevice)
-            {
-                HeadHeight = 0f;
-            }
-
-            ResetRigTransforms();
-            SyncRigTransforms();
-        }
-#endif
-
-#if !XRTK_USE_LEGACYVR
-        /// <summary>
-        /// Updates the camera height offset to the specified value.
-        /// </summary>
-        protected virtual void UpdateCameraHeightOffset(float heightOffset = 0f)
-        {
-            CameraRig.CameraTransform.localPosition = new Vector3(
-                CameraRig.CameraTransform.localPosition.x,
-                heightOffset,
-                CameraRig.CameraTransform.localPosition.z);
-        }
-#endif
 
         /// <summary>
         /// Applies opaque settings from camera profile.
@@ -488,25 +304,10 @@ namespace XRTK.Providers.CameraSystem
         }
 
         /// <summary>
-        /// Resets the <see cref="IMixedRealityCameraRig.RigTransform"/>, <see cref="IMixedRealityCameraRig.CameraTransform"/>,
-        /// and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
-        /// </summary>
-        protected virtual void ResetRigTransforms()
-        {
-            CameraRig.RigTransform.position = Vector3.zero;
-            CameraRig.RigTransform.rotation = Quaternion.identity;
-
-            // If the camera is a 2d camera then we can adjust the camera's height to match the head height.
-            CameraRig.CameraTransform.position = IsStereoscopic ? Vector3.zero : new Vector3(0f, HeadHeight, 0f);
-
-            CameraRig.CameraTransform.rotation = Quaternion.identity;
-            CameraRig.BodyTransform.position = Vector3.zero;
-            CameraRig.BodyTransform.rotation = Quaternion.identity;
-        }
-
-        /// <summary>
-        /// Called each <see cref="LateUpdate"/> to sync the <see cref="IMixedRealityCameraRig.RigTransform"/>,
-        /// <see cref="IMixedRealityCameraRig.CameraTransform"/>, and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
+        /// Called each <see cref="LateUpdate"/> to sync the
+        /// <see cref="IMixedRealityCameraRig.RigTransform"/>,
+        /// <see cref="IMixedRealityCameraRig.CameraTransform"/>, and
+        /// <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
         /// </summary>
         protected virtual void SyncRigTransforms()
         {
@@ -514,15 +315,7 @@ namespace XRTK.Providers.CameraSystem
             var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
 
             bodyLocalPosition.x = cameraLocalPosition.x;
-
-#if XRTK_USE_LEGACYVR
-            bodyLocalPosition.y = HeadHeight > 0f
-                ? cameraLocalPosition.y - HeadHeight
-                : cameraLocalPosition.y - BodyHeightFallback;
-#else
             bodyLocalPosition.y = cameraLocalPosition.y - Math.Abs(HeadHeight);
-#endif
-
             bodyLocalPosition.z = cameraLocalPosition.z;
 
             CameraRig.BodyTransform.localPosition = bodyLocalPosition;

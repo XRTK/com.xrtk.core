@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.SpatialTracking;
 using UnityEngine.XR;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
@@ -18,16 +19,16 @@ namespace XRTK.Definitions.CameraSystem
     {
         [SerializeField]
         [Tooltip("Sets the tracking type of the camera.")]
-        private TrackingType trackingType = TrackingType.Auto;
+        private TrackedPoseDriver.TrackingType trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
 
         /// <summary>
         /// The configured tracking type of the camera.
         /// </summary>
-        public TrackingType TrackingType => trackingType;
+        public TrackedPoseDriver.TrackingType TrackingType => trackingType;
 
         [SerializeField]
         [Tooltip("Sets the type of tracking origin to use for this Rig. Tracking origins identify where 0,0,0 is in the world of tracking.")]
-        private TrackingOriginModeFlags trackingOriginMode = TrackingOriginModeFlags.Unknown;
+        private TrackingOriginModeFlags trackingOriginMode = TrackingOriginModeFlags.Device;
 
         /// <summary>
         /// Gets or sets the type of tracking origin to use for this Rig. Tracking origins identify where 0,0,0 is in the world of tracking. Not all devices support all tracking spaces; if the selected tracking space is not set it will fall back to Stationary.
@@ -57,7 +58,7 @@ namespace XRTK.Definitions.CameraSystem
         [Min(0.0001f)]
         [SerializeField]
         [Tooltip("The near clipping plane distance for an opaque display.")]
-        private float nearClipPlaneOpaqueDisplay = 0.1f;
+        private float nearClipPlaneOpaqueDisplay = 0.01f;
 
         /// <summary>
         /// The near clipping plane distance for an opaque display.
@@ -169,11 +170,8 @@ namespace XRTK.Definitions.CameraSystem
         [Range(0f, 3f)]
         [SerializeField]
         [Tooltip("The default head height the rig will start at if a platform doesn't automatically adjust the height for you.")]
-        private float defaultHeadHeight = 1.6f;
+        private float defaultHeadHeight = 1.36144f;
 
-        /// <summary>
-        /// The default head height the rig will start at if a platform doesn't automatically adjust the height for you.
-        /// </summary>
         public float DefaultHeadHeight => defaultHeadHeight;
 
         [SerializeField]

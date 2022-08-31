@@ -24,6 +24,7 @@ namespace XRTK.Services.LocomotionSystem
         IMixedRealityInputHandler<Vector2>
     {
         private LocomotionSystem locomotionSystem = null;
+
         /// <summary>
         /// Gets the currently active <see cref="Services.LocomotionSystem.LocomotionSystem"/> instance.
         /// </summary>

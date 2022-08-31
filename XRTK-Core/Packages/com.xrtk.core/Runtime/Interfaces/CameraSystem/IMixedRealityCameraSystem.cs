@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
-using XRTK.Services.CameraSystem;
 
 namespace XRTK.Interfaces.CameraSystem
 {
@@ -20,22 +19,6 @@ namespace XRTK.Interfaces.CameraSystem
         /// The reference to the <see cref="IMixedRealityCameraRig"/> attached to the Main Camera (typically this is the player's camera).
         /// </summary>
         IMixedRealityCameraRig MainCameraRig { get; }
-
-        /// <summary>
-        /// Gets the configured <see cref="TrackingType"/> for the active <see cref="IMixedRealityCameraRig"/>.
-        /// </summary>
-        TrackingType TrackingType { get; }
-
-#if XRTK_USE_LEGACYVR
-        /// <summary>
-        /// Sets the <see cref="IMixedRealityCameraDataProvider.HeadHeight"/>. If <see cref="setForAllCameraProviders"/> is true, then it's set
-        /// for all <see cref="CameraDataProviders"/>, otherwise it only sets the <see cref="MainCameraRig"/>.
-        /// </summary>
-        /// <param name="value">The height value to set.</param>
-        /// <param name="setForAllCameraProviders">If <see cref="setForAllCameraProviders"/> is true, then it's set
-        /// for all <see cref="CameraDataProviders"/>, otherwise it only sets the <see cref="MainCameraRig"/>.</param>
-        void SetHeadHeight(float value, bool setForAllCameraProviders = false);
-#endif
 
         /// <summary>
         /// Registers the <see cref="IMixedRealityCameraDataProvider"/> with the <see cref="IMixedRealityCameraSystem"/>.

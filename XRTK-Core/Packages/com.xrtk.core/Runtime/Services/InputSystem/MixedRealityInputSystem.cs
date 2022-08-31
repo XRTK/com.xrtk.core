@@ -148,7 +148,7 @@ namespace XRTK.Services.InputSystem
                 dictationEventData = new DictationEventData(eventSystem);
             }
 
-            GazeProvider = CameraCache.Main.gameObject.EnsureComponent(gazeProviderType) as IMixedRealityGazeProvider;
+            GazeProvider = CameraCache.Main.EnsureComponent(gazeProviderType) as IMixedRealityGazeProvider;
         }
 
         private void EnsureStandaloneInputModuleSetup()
@@ -156,7 +156,7 @@ namespace XRTK.Services.InputSystem
             var standaloneInputModules = UnityEngine.Object.FindObjectsOfType<StandaloneInputModule>();
             if (standaloneInputModules.Length == 0)
             {
-                CameraCache.Main.gameObject.EnsureComponent<StandaloneInputModule>();
+                CameraCache.Main.EnsureComponent<StandaloneInputModule>();
                 Debug.Log($"There was no {nameof(StandaloneInputModule)} in the scene. The {nameof(MixedRealityInputSystem)} requires one and added it to the main camera.");
             }
             else if (standaloneInputModules.Length > 1)

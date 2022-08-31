@@ -1,12 +1,9 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine.XR;
-
-#if !XRTK_USE_LEGACYVR || UNITY_2020_1_OR_NEWER
-using UnityEngine;
 using System.Collections.Generic;
-#endif
+using UnityEngine;
+using UnityEngine.XR;
 
 namespace XRTK.Utilities
 {
@@ -15,6 +12,8 @@ namespace XRTK.Utilities
     /// </summary>
     public static class XRDeviceUtilities
     {
+        private static List<XRDisplaySubsystem> xrDisplaySubsystems = new List<XRDisplaySubsystem>();
+
         /// <summary>
         /// Gets whether an XR display device is currently connected to the machine.
         /// </summary>
@@ -22,14 +21,12 @@ namespace XRTK.Utilities
         {
             get
             {
-#if XRTK_USE_LEGACYVR && !UNITY_2020_1_OR_NEWER
-                return XRDevice.isPresent;
-#else
-                var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
                 SubsystemManager.GetInstances(xrDisplaySubsystems);
+
                 for (int i = 0; i < xrDisplaySubsystems.Count; i++)
                 {
                     var xrDisplay = xrDisplaySubsystems[i];
+
                     if (xrDisplay.running)
                     {
                         return true;
@@ -37,7 +34,6 @@ namespace XRTK.Utilities
                 }
 
                 return false;
-#endif
             }
         }
 
@@ -48,14 +44,12 @@ namespace XRTK.Utilities
         {
             get
             {
-#if XRTK_USE_LEGACYVR && !UNITY_2020_1_OR_NEWER
-                return true;
-#else
-                var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
                 SubsystemManager.GetInstances(xrDisplaySubsystems);
+
                 for (int i = 0; i < xrDisplaySubsystems.Count; i++)
                 {
                     var xrDisplay = xrDisplaySubsystems[i];
+
                     if (xrDisplay.running)
                     {
                         return xrDisplay.displayOpaque;
@@ -65,7 +59,6 @@ namespace XRTK.Utilities
                 // When no device is attached we are assuming the display
                 // device is the computer's display, which should be opaque.
                 return true;
-#endif
             }
         }
     }

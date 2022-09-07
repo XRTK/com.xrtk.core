@@ -40,7 +40,7 @@ namespace XRTK.Interfaces.InputSystem.Handlers
     /// Interface to implement for generic gesture input.
     /// </summary>
     /// <typeparam name="T">The type of data you want to listen for.</typeparam>
-    public interface IMixedRealityGestureHandler<T> : IMixedRealityGestureHandler
+    public interface IMixedRealityGestureHandler<T> : IMixedRealityGestureHandler where T : struct
     {
         /// <summary>
         /// Gesture Updated Event.

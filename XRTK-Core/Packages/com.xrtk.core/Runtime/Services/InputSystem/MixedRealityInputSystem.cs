@@ -1058,7 +1058,7 @@ namespace XRTK.Services.InputSystem
             Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
-            floatInputEventData.Initialize(source, handedness, inputAction, pressAmount);
+            floatInputEventData.Initialize(source, handedness, inputAction);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(floatInputEventData, SingleAxisInputEventHandler);
@@ -1116,7 +1116,7 @@ namespace XRTK.Services.InputSystem
             Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
-            floatInputEventData.Initialize(source, handedness, inputAction, inputPosition);
+            floatInputEventData.Initialize(source, handedness, inputAction);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(floatInputEventData, SingleAxisInputEventHandler);
@@ -1141,7 +1141,7 @@ namespace XRTK.Services.InputSystem
             Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
-            vector2InputEventData.Initialize(source, handedness, inputAction, inputPosition);
+            vector2InputEventData.Initialize(source, handedness, inputAction);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(vector2InputEventData, OnTwoDoFInputChanged);
@@ -1166,7 +1166,7 @@ namespace XRTK.Services.InputSystem
             Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
-            positionInputEventData.Initialize(source, handedness, inputAction, position);
+            positionInputEventData.Initialize(source, handedness, inputAction);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(positionInputEventData, OnPositionInputChanged);
@@ -1195,7 +1195,7 @@ namespace XRTK.Services.InputSystem
             Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
-            rotationInputEventData.Initialize(source, handedness, inputAction, rotation);
+            rotationInputEventData.Initialize(source, handedness, inputAction);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(positionInputEventData, OnRotationInputChanged);
@@ -1224,7 +1224,7 @@ namespace XRTK.Services.InputSystem
             Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
-            poseInputEventData.Initialize(source, handedness, inputAction, inputData);
+            poseInputEventData.Initialize(source, handedness, inputAction);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(poseInputEventData, OnPoseInputChanged);

@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace XRTK.Definitions.InputSystem
 {
     /// <summary>
-    /// Data structure for mapping Voice and <see cref="UnityEngine.InputSystem.InputAction"/>s that can be raised by the Input System.
+    /// Data structure for mapping Voice and <see cref="InputActionReference"/>s that can be raised by the Input System.
     /// </summary>
     [Serializable]
     public class SpeechCommands
@@ -18,16 +18,16 @@ namespace XRTK.Definitions.InputSystem
         /// </summary>
         /// <param name="keyword">The Keyword.</param>
         /// <param name="inputAction">The Action.</param>
-        public SpeechCommands(string keyword, InputAction inputAction)
+        public SpeechCommands(string keyword, InputActionReference inputAction)
         {
             this.keyword = keyword;
             this.inputAction = inputAction;
-            inputAction.performed += OnInputAction_Performed;
+            inputAction.action.performed += OnInputAction_Performed;
         }
 
         ~SpeechCommands()
         {
-            inputAction.performed -= OnInputAction_Performed;
+            inputAction.action.performed -= OnInputAction_Performed;
         }
 
         [SerializeField]
@@ -41,12 +41,12 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("The InputAction to listen for.")]
-        private InputAction inputAction;
+        private InputActionReference inputAction;
 
         /// <summary>
         /// The <see cref="InputAction"/> to listen for.
         /// </summary>
-        public InputAction InputAction => inputAction;
+        public InputActionReference InputAction => inputAction;
 
         public event Action<string> OnKeyword;
 

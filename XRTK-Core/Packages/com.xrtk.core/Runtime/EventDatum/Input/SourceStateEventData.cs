@@ -10,7 +10,7 @@ namespace XRTK.EventDatum.Input
     /// <summary>
     /// Describes an source state event that has a source id.
     /// </summary>
-    /// <remarks>Source State events do not have an associated <see cref="UnityEngine.InputSystem.InputAction"/>.</remarks>
+    /// <remarks>Source State events do not have an associated <see cref="UnityEngine.InputSystem.InputActionReference"/>.</remarks>
     public class SourceStateEventData : BaseInputEventData
     {
         public IMixedRealityController Controller { get; private set; }

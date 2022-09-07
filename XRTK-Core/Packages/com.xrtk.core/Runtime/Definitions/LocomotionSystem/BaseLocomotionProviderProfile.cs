@@ -20,23 +20,15 @@ namespace XRTK.Definitions.LocomotionSystem
         /// <summary>
         /// Gets startup behaviour for this provider.
         /// </summary>
-        public AutoStartBehavior StartupBehaviour
-        {
-            get => startupBehaviour;
-            internal set => startupBehaviour = value;
-        }
+        public AutoStartBehavior StartupBehaviour => startupBehaviour;
 
         [SerializeField]
         [Tooltip("Input action to perform locomotion using this provider.")]
-        private InputAction inputAction;
+        private InputActionReference inputAction = null;
 
         /// <summary>
         /// Gets input action to perform locomotion using this provider.
         /// </summary>
-        public InputAction InputAction
-        {
-            get => inputAction;
-            internal set => inputAction = value;
-        }
+        public InputActionReference InputAction => inputAction;
     }
 }

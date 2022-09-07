@@ -78,13 +78,14 @@ _ReSharper.Caches
 # Project Specific List #
 # ===================== #
 artifacts/
-ThirdParty/
-ThirdParty.meta
 --Version/
 XRTK-Core/Assets/MagicLeap/
 XRTK-Core/Assets/MagicLeap.meta
+XRTK-Core/Assets/Plugins.meta
 XRTK-Core/Assets/Plugins/Lumin/Editor/
 XRTK-Core/Assets/Plugins/Lumin/Editor.meta
 XRTK-Core/Assets/StreamingAssets/
 XRTK-Core/Assets/StreamingAssets.meta
 XRTK-Core/ProjectSettings/Packages/com.unity.probuilder/Settings.json
+ConsoleE/
+ConsoleE.meta

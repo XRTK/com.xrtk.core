@@ -57,7 +57,7 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("The input action that drives this pointer's position")]
-        private InputAction inputAction = null;
+        private InputActionReference inputAction = null;
 
         public InputAction InputAction => inputAction;
     }

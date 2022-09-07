@@ -21,11 +21,7 @@ namespace XRTK.Definitions.Controllers
         /// <summary>
         /// The concrete Controller Visualizer component to use on the rendered controller controllerModel
         /// </summary>
-        public SystemType ControllerVisualizationType
-        {
-            get => controllerVisualizationType;
-            private set => controllerVisualizationType = value;
-        }
+        public SystemType ControllerVisualizationType => controllerVisualizationType;
 
         [SerializeField]
         [Tooltip("Use the platform SDK to load the default controller models.")]
@@ -34,47 +30,31 @@ namespace XRTK.Definitions.Controllers
         /// <summary>
         /// User the controller controllerModel loader provided by the SDK, or provide override models.
         /// </summary>
-        public bool UseDefaultModels
-        {
-            get => useDefaultModels;
-            private set => useDefaultModels = value;
-        }
+        public bool UseDefaultModels => useDefaultModels;
 
         [Prefab]
         [SerializeField]
         [FormerlySerializedAs("model")]
         private GameObject controllerModel;
 
-        public GameObject LeftHandModel
-        {
-            get => controllerModel;
-            private set => controllerModel = value;
-        }
+        public GameObject LeftHandModel => controllerModel;
 
         [SerializeField]
         [Tooltip("This is the controller pose that this visualization will synchronize it's position and rotation with.")]
-        private InputAction pointerPose;
+        private InputActionReference pointerPose = null;
 
         /// <summary>
         /// This is the controller pose that this visualization will synchronize it's position and rotation with.
         /// </summary>
-        public InputAction PointerPose
-        {
-            get => pointerPose;
-            private set => pointerPose = value;
-        }
+        public InputAction PointerPose => pointerPose.action;
 
         [SerializeField]
         [Tooltip("This is the controller pose that this visualization will synchronize it's position and rotation with.")]
-        private InputAction alternatePointerPose;
+        private InputActionReference alternatePointerPose = null;
 
         /// <summary>
         /// This is the controller pose that this visualization will synchronize it's position and rotation with.
         /// </summary>
-        public InputAction AlternatePointerPose
-        {
-            get => alternatePointerPose;
-            private set => alternatePointerPose = value;
-        }
+        public InputAction AlternatePointerPose => alternatePointerPose.action;
     }
 }

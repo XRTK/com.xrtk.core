@@ -3,15 +3,15 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using XRTK.Services;
-using XRTK.Utilities;
-using XRTK.Extensions;
-using XRTK.Interfaces.LocomotionSystem;
-using XRTK.EventDatum.Input;
-using XRTK.Services.LocomotionSystem;
-using XRTK.Interfaces.CameraSystem;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.EventDatum.Input;
+using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
+using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Services;
+using XRTK.Services.LocomotionSystem;
+using XRTK.Utilities;
 
 namespace XRTK.Providers.LocomotionSystem
 {
@@ -22,7 +22,7 @@ namespace XRTK.Providers.LocomotionSystem
             : base(name, priority, profile, parentService)
         {
             startupBehaviour = profile.StartupBehaviour;
-            InputAction = profile.InputAction;
+            InputAction = profile.InputAction?.action;
         }
 
         private readonly AutoStartBehavior startupBehaviour;

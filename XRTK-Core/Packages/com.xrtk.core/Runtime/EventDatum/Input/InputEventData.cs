@@ -38,27 +38,14 @@ namespace XRTK.EventDatum.Input
     /// Describes and input event with a specific type.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class InputEventData<T> : InputEventData
+    public class InputEventData<T> : InputEventData where T : struct
     {
         /// <summary>
         /// The input data of the event.
         /// </summary>
-        public T InputData { get; private set; }
+        public T InputData => InputAction.ReadValue<T>();
 
         /// <inheritdoc />
         public InputEventData(EventSystem eventSystem) : base(eventSystem) { }
-
-        /// <summary>
-        /// Used to initialize/reset the event and populate the data.
-        /// </summary>
-        /// <param name="inputSource"></param>
-        /// <param name="handedness"></param>
-        /// <param name="inputAction"></param>
-        /// <param name="data"></param>
-        public void Initialize(IMixedRealityInputSource inputSource, Handedness handedness, InputAction inputAction, T data)
-        {
-            Initialize(inputSource, handedness, inputAction);
-            InputData = data;
-        }
     }
 }

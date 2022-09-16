@@ -392,8 +392,8 @@ namespace XRTK.Services.InputSystem
             {
                 if (eventData.InputSource.Pointers[i].PointerId == GazePointer.PointerId)
                 {
-                    InputSystem.RaisePointerUp(gazePointer, eventData.InputAction);
-                    InputSystem.RaisePointerClicked(gazePointer, eventData.InputAction);
+                    InputSystem.RaisePointerUp(gazePointer, eventData.Context);
+                    InputSystem.RaisePointerClicked(gazePointer, eventData.Context);
                     return;
                 }
             }
@@ -406,7 +406,7 @@ namespace XRTK.Services.InputSystem
             {
                 if (eventData.InputSource.Pointers[i].PointerId == GazePointer.PointerId)
                 {
-                    InputSystem.RaisePointerDown(gazePointer, eventData.InputAction, eventData.InputSource);
+                    InputSystem.RaisePointerDown(gazePointer, eventData.Context, eventData.InputSource);
                     return;
                 }
             }

@@ -35,7 +35,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <summary>
         /// Enables a locomotion provider of type <paramref name="locomotionProviderType"/>.
         /// </summary>
-        /// <paramref name="locomotionProviderType">Type of the <see cref="ILocomotionProvider"/> to enable.</typeparam>
+        /// <paramref name="locomotionProviderType">Type of the <see cref="ILocomotionProvider"/> to enable.</paramref>
         void EnableLocomotionProvider(Type locomotionProviderType);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace XRTK.Interfaces.LocomotionSystem
         /// <summary>
         /// Disables a locomotion provider of type <paramref name="locomotionProviderType"/>.
         /// </summary>
-        /// <paramref name="locomotionProviderType">Type of the <see cref="ILocomotionProvider"/> to disable.</typeparam>
+        /// <paramref name="locomotionProviderType">Type of the <see cref="ILocomotionProvider"/> to disable.</paramref>
         void DisableLocomotionProvider(Type locomotionProviderType);
 
         /// <summary>

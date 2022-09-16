@@ -140,11 +140,6 @@ namespace XRTK.Providers.Speech
             if (keywordRecognizer is { IsRunning: false })
             {
                 keywordRecognizer.Start();
-
-                for (int i = 0; i < commands.Length; i++)
-                {
-                    commands[i].OnKeyword += Command_OnKeyword;
-                }
             }
         }
 
@@ -153,18 +148,8 @@ namespace XRTK.Providers.Speech
         {
             if (keywordRecognizer is { IsRunning: true })
             {
-                for (int i = 0; i < commands.Length; i++)
-                {
-                    commands[i].OnKeyword -= Command_OnKeyword;
-                }
-
                 keywordRecognizer.Stop();
             }
-        }
-
-        private void Command_OnKeyword(string keyword)
-        {
-            OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.UtcNow, keyword);
         }
 
         private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)

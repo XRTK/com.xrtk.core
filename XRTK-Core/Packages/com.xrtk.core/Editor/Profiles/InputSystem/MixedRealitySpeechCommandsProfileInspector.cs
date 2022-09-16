@@ -65,7 +65,7 @@ namespace XRTK.Editor.Profiles.InputSystem
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(KeywordContent, EditorStyles.boldLabel, GUILayout.Width(128f));
+            EditorGUILayout.LabelField(KeywordContent, EditorStyles.boldLabel, GUILayout.ExpandWidth(true));
             GUILayout.EndHorizontal();
             GUILayout.Space(12f);
 
@@ -75,8 +75,6 @@ namespace XRTK.Editor.Profiles.InputSystem
                 SerializedProperty speechCommand = list.GetArrayElementAtIndex(i);
                 var keyword = speechCommand.FindPropertyRelative("keyword");
                 EditorGUILayout.PropertyField(keyword, GUIContent.none, GUILayout.ExpandWidth(true));
-                var inputAction = speechCommand.FindPropertyRelative("inputAction");
-                EditorGUILayout.PropertyField(inputAction);
 
                 if (GUILayout.Button(MinusButtonContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {

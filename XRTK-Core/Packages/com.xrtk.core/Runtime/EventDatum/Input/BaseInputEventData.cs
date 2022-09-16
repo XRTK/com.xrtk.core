@@ -33,9 +33,9 @@ namespace XRTK.EventDatum.Input
         public uint SourceId { get; private set; }
 
         /// <summary>
-        /// The Input Action for this event.
+        /// The Input Action Callback Context for this event.
         /// </summary>
-        public InputAction InputAction { get; private set; }
+        public InputAction.CallbackContext Context { get; private set; }
 
         /// <summary>
         /// Constructor.
@@ -53,13 +53,13 @@ namespace XRTK.EventDatum.Input
         /// Used to initialize/reset the event and populate the data.
         /// </summary>
         /// <param name="inputSource"></param>
-        /// <param name="inputAction"></param>
-        protected void BaseInitialize(IMixedRealityInputSource inputSource, InputAction inputAction)
+        /// <param name="context"></param>
+        protected void BaseInitialize(IMixedRealityInputSource inputSource, InputAction.CallbackContext context)
         {
             Reset();
             EventTime = DateTime.UtcNow;
             InputSource = inputSource;
-            InputAction = inputAction;
+            Context = context;
             SourceId = InputSource.SourceId;
         }
     }

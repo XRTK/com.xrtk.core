@@ -88,7 +88,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             // Is this the input action this provider is configured to look out for?
             // And did we already request a teleport target for the input source that raised it?
-            if (eventData.InputAction != InputAction ||
+            if (eventData.Context.action != InputAction ||
                 OpenTargetRequests.ContainsKey(eventData.SourceId))
             {
                 return;
@@ -104,7 +104,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             // Has our configured teleport input action been released
             // and we have an open target request for the input source?
-            if (eventData.InputAction == InputAction &&
+            if (eventData.Context.action == InputAction &&
                 OpenTargetRequests.ContainsKey(eventData.SourceId))
             {
                 var inputSource = OpenTargetRequests[eventData.SourceId];
@@ -118,7 +118,7 @@ namespace XRTK.Providers.LocomotionSystem
         public override void OnInputChanged(InputEventData<float> eventData)
         {
             // Is this the input action this provider is configured to look out for?
-            if (eventData.InputAction == InputAction)
+            if (eventData.Context.action == InputAction)
             {
                 // Depending on the input position we either raise a new request
                 // for a teleportation target or we start/cancel an existing
@@ -151,7 +151,7 @@ namespace XRTK.Providers.LocomotionSystem
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
             // Is this the input action this provider is configured to look out for?
-            if (eventData.InputAction == InputAction)
+            if (eventData.Context.action == InputAction)
             {
                 // Depending on the input position we either raise a new request
                 // for a teleportation target or we start/cancel an existing
@@ -258,7 +258,7 @@ namespace XRTK.Providers.LocomotionSystem
             // Is a target provider available for the input source?
             if (AvailableTargetProviders.ContainsKey(inputSource.SourceId))
             {
-                // We have a target provider that anwered our previous
+                // We have a target provider that answered our previous
                 // target request. Check if the provider has a valid teleportation
                 // target for us and start teleport, cancel everything otherwise.
                 var teleportTargetProvider = AvailableTargetProviders[inputSource.SourceId];

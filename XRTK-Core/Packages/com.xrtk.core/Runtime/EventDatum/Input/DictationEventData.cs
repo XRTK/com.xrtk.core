@@ -33,7 +33,7 @@ namespace XRTK.EventDatum.Input
         /// <param name="dictationAudioClip"></param>
         public void Initialize(IMixedRealityInputSource inputSource, string dictationResult, AudioClip dictationAudioClip = null)
         {
-            BaseInitialize(inputSource, null);
+            BaseInitialize(inputSource, default);
             DictationResult = dictationResult;
             DictationAudioClip = dictationAudioClip;
         }

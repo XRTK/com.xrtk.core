@@ -95,6 +95,7 @@ namespace XRTK.Extensions
             }
         }
 
+        /// <summary>
         /// Validates the <see cref="Component"/> reference.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="Component"/>.</typeparam>
@@ -123,6 +124,7 @@ namespace XRTK.Extensions
             }
         }
 
+        /// <summary>
         /// Sets the <see cref="GameObject"/> this <see cref="Component"/> is attached to, to the specified state.
         /// </summary>
         /// <param name="component">The target <see cref="Component"/></param>
@@ -134,5 +136,20 @@ namespace XRTK.Extensions
                 component.gameObject.SetActive(isActive);
             }
         }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// Copies any matching serialized properties of the same name from the source to the target.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        public static void CopySerializedProperties<T>(this T source, T target) where T : Component
+        {
+            var serializedSource = new UnityEditor.SerializedObject(source);
+            var serializedTarget = new UnityEditor.SerializedObject(target);
+            serializedSource.CopySerializedProperties(serializedTarget);
+        }
+#endif
     }
 }

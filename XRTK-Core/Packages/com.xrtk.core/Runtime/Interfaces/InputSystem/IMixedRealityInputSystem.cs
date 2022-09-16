@@ -65,7 +65,7 @@ namespace XRTK.Interfaces.InputSystem
         void PushInputDisable();
 
         /// <summary>
-        /// Pop disabled input state. When the last disabled state is 
+        /// Pop disabled input state. When the last disabled state is
         /// popped off the stack input will be re-enabled.
         /// </summary>
         void PopInputDisable();
@@ -250,7 +250,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="pointer">The pointer where the event originates.</param>
         /// <param name="inputAction">The action associated with this event.</param>
         /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
-        void RaisePointerDown(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null);
+        void RaisePointerDown(IMixedRealityPointer pointer, InputAction.CallbackContext inputAction, IMixedRealityInputSource inputSource = null);
 
         #endregion Pointer Down
 
@@ -262,7 +262,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="pointer">The pointer where the event originates.</param>
         /// <param name="inputAction">The action associated with this event.</param>
         /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
-        void RaisePointerClicked(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null);
+        void RaisePointerClicked(IMixedRealityPointer pointer, InputAction.CallbackContext inputAction, IMixedRealityInputSource inputSource = null);
 
         #endregion Pointer Click
 
@@ -274,7 +274,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="pointer">The pointer where the event originates.</param>
         /// <param name="inputAction">The action associated with this event.</param>
         /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
-        void RaisePointerUp(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null);
+        void RaisePointerUp(IMixedRealityPointer pointer, InputAction.CallbackContext inputAction, IMixedRealityInputSource inputSource = null);
 
         #endregion Pointer Up
 
@@ -285,7 +285,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="scrollAction">The action associated with this event.</param>
         /// <param name="scrollDelta">The distance this pointer has scrolled since the scroll event was last raised.</param>
         /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
-        void RaisePointerScroll(IMixedRealityPointer pointer, InputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null);
+        void RaisePointerScroll(IMixedRealityPointer pointer, InputAction.CallbackContext scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null);
 
         #region Pointer Dragging
 
@@ -296,7 +296,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="draggedAction">The action associated with this event.</param>
         /// <param name="dragDelta">The distance this pointer has been moved since the last time the dragged event was last raised.</param>
         /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
-        void RaisePointerDragBegin(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
+        void RaisePointerDragBegin(IMixedRealityPointer pointer, InputAction.CallbackContext draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
 
         /// <summary>
         /// Raise the pointer drag event.
@@ -305,7 +305,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="draggedAction">The action associated with this event.</param>
         /// <param name="dragDelta">The distance this pointer has been moved since the last time the dragged event was last raised.</param>
         /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
-        void RaisePointerDrag(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
+        void RaisePointerDrag(IMixedRealityPointer pointer, InputAction.CallbackContext draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
 
         /// <summary>
         /// Raise the pointer drag end event.
@@ -314,7 +314,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="draggedAction">The action associated with this event.</param>
         /// <param name="dragDelta">The distance this pointer has been moved since the last time the dragged event was last raised.</param>
         /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
-        void RaisePointerDragEnd(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
+        void RaisePointerDragEnd(IMixedRealityPointer pointer, InputAction.CallbackContext draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
 
         #endregion Pointer Dragging
 
@@ -329,7 +329,7 @@ namespace XRTK.Interfaces.InputSystem
         /// </summary>
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
-        void RaiseOnInputDown(IMixedRealityInputSource source, InputAction inputAction);
+        void RaiseOnInputDown(IMixedRealityInputSource source, InputAction.CallbackContext inputAction);
 
         /// <summary>
         /// Raise the input down event.
@@ -337,7 +337,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
-        void RaiseOnInputDown(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction);
+        void RaiseOnInputDown(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction);
 
         #endregion Input Down
 
@@ -348,7 +348,7 @@ namespace XRTK.Interfaces.InputSystem
         /// </summary>
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
-        void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction inputAction);
+        void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction.CallbackContext inputAction);
 
         /// <summary>
         /// Raise Input Pressed.
@@ -356,7 +356,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
-        void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction);
+        void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction);
 
         /// <summary>
         /// Raise Input Pressed.
@@ -364,7 +364,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
         /// <param name="pressAmount"></param>
-        void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction inputAction, float pressAmount);
+        void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, float pressAmount);
 
         /// <summary>
         /// Raise Input Pressed.
@@ -373,7 +373,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
         /// <param name="pressAmount"></param>
-        void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, float pressAmount);
+        void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, float pressAmount);
 
         #endregion Input Pressed
 
@@ -384,7 +384,7 @@ namespace XRTK.Interfaces.InputSystem
         /// </summary>
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
-        void RaiseOnInputUp(IMixedRealityInputSource source, InputAction inputAction);
+        void RaiseOnInputUp(IMixedRealityInputSource source, InputAction.CallbackContext inputAction);
 
         /// <summary>
         /// Raise the input up event.
@@ -392,7 +392,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
-        void RaiseOnInputUp(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction);
+        void RaiseOnInputUp(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction);
 
         #endregion Input Up
 
@@ -404,7 +404,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
         /// <param name="position"></param>
-        void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, float position);
+        void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, float position);
 
         /// <summary>
         /// Raise the 1st degree of freedom input event.
@@ -413,7 +413,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
         /// <param name="position"></param>
-        void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, float position);
+        void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, float position);
 
         /// <summary>
         /// Raise the 2 degrees of freedom input event.
@@ -421,7 +421,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
         /// <param name="position"></param>
-        void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, Vector2 position);
+        void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, Vector2 position);
 
         /// <summary>
         /// Raise the 2 degrees of freedom input event.
@@ -430,7 +430,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
         /// <param name="position"></param>
-        void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Vector2 position);
+        void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, Vector2 position);
 
         /// <summary>
         /// Raise the 3 degrees of freedom input event.
@@ -438,7 +438,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
         /// <param name="position"></param>
-        void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, Vector3 position);
+        void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, Vector3 position);
 
         /// <summary>
         /// Raise the 3 degrees of freedom input event.
@@ -447,7 +447,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
         /// <param name="position"></param>
-        void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Vector3 position);
+        void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, Vector3 position);
 
         #endregion Input Position Changed
 
@@ -459,7 +459,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
         /// <param name="rotation"></param>
-        void RaiseRotationInputChanged(IMixedRealityInputSource source, InputAction inputAction, Quaternion rotation);
+        void RaiseRotationInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, Quaternion rotation);
 
         /// <summary>
         /// Raise the 3 degrees of freedom input event.
@@ -468,7 +468,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
         /// <param name="rotation"></param>
-        void RaiseRotationInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Quaternion rotation);
+        void RaiseRotationInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, Quaternion rotation);
 
         #endregion Input Rotation Changed
 
@@ -480,7 +480,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="source"></param>
         /// <param name="inputAction"></param>
         /// <param name="inputData"></param>
-        void RaisePoseInputChanged(IMixedRealityInputSource source, InputAction inputAction, MixedRealityPose inputData);
+        void RaisePoseInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, MixedRealityPose inputData);
 
         /// <summary>
         /// Raise the 6 degrees of freedom input event.
@@ -489,7 +489,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="handedness"></param>
         /// <param name="inputAction"></param>
         /// <param name="inputData"></param>
-        void RaisePoseInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, MixedRealityPose inputData);
+        void RaisePoseInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, MixedRealityPose inputData);
 
         #endregion Input Pose Changed
 

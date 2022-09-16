@@ -30,7 +30,7 @@ namespace XRTK.Providers.LocomotionSystem
         {
             base.OnInputChanged(eventData);
 
-            if (eventData.InputAction == InputAction)
+            if (eventData.Context.action == InputAction)
             {
                 var forwardDirection = CameraTransform.forward;
                 forwardDirection.y = 0f;

@@ -1,9 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.IO;
+using System;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Editor.Extensions;
@@ -14,6 +17,8 @@ namespace XRTK.Editor.Profiles.InputSystem
     [CustomEditor(typeof(MixedRealityInputSystemProfile))]
     public class MixedRealityInputSystemProfileInspector : MixedRealityServiceProfileInspector
     {
+        private const string kDefaultInputActionsAssetPath = "Packages/com.unity.inputsystem/InputSystem/Plugins/PlayerInput/DefaultInputActions.inputactions";
+
         private static readonly GUIContent FocusProviderContent = new GUIContent("Focus Provider");
         private static readonly GUIContent GazeProviderContent = new GUIContent("Gaze Provider");
         private static readonly GUIContent GazeCursorPrefabContent = new GUIContent("Gaze Cursor Prefab");
@@ -142,6 +147,7 @@ namespace XRTK.Editor.Profiles.InputSystem
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(inputActions);
+            DoHelpCreateAssetUI();
             EditorGUILayout.PropertyField(speechCommandsProfile);
 
             EditorGUILayout.Space();
@@ -200,6 +206,84 @@ namespace XRTK.Editor.Profiles.InputSystem
             }
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        // Since Unity's Input System doesn't have a public way to generate a clone of
+        // the default input action maps, we just lifted this helper method from
+        // UnityEngine.InputSystem.Editor.PlayerInputEditor.cs
+        private void DoHelpCreateAssetUI()
+        {
+            if (inputActions.objectReferenceValue != null)
+            {
+                // All good. We already have an asset.
+                return;
+            }
+
+            EditorGUILayout.HelpBox("There are no input actions associated with the input system yet. " +
+                                    "Click the button below to create a new set of input actions or drag an " +
+                                    "existing input actions asset into the field above.", MessageType.Info);
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.Space();
+
+            if (GUILayout.Button(new GUIContent("Create Actions..."), EditorStyles.miniButton, GUILayout.MaxWidth(120)))
+            {
+                // Request save file location.
+                var defaultFileName = Application.productName;
+                var fileName = EditorUtility.SaveFilePanel("Create Input Actions Asset", "Assets", defaultFileName, InputActionAsset.Extension);
+
+                // Create and import asset and open editor.
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    if (!fileName.StartsWith(Application.dataPath))
+                    {
+                        Debug.LogError($"Path must be located in Assets/ folder (got: '{fileName}')");
+                        EditorGUILayout.EndHorizontal();
+                        return;
+                    }
+
+                    if (!fileName.EndsWith($".{InputActionAsset.Extension}"))
+                    {
+                        fileName += $".{InputActionAsset.Extension}";
+                    }
+
+                    // Load default actions and update all GUIDs.
+                    var defaultActionsText = File.ReadAllText(kDefaultInputActionsAssetPath);
+                    var newActions = InputActionAsset.FromJson(defaultActionsText);
+
+                    foreach (var map in newActions.actionMaps)
+                    {
+                        Debug.Assert(map.id != Guid.Empty);
+
+                        foreach (var action in map.actions)
+                        {
+                            Debug.Assert(action.id != Guid.Empty);
+                        }
+                    }
+
+                    newActions.name = Path.GetFileNameWithoutExtension(fileName);
+                    var newActionsText = newActions.ToJson();
+
+                    // Write it out and tell the asset DB to pick it up.
+                    File.WriteAllText(fileName, newActionsText);
+
+                    // Import the new asset
+                    var relativePath = $"Assets/{fileName.Substring(Application.dataPath.Length + 1)}";
+                    AssetDatabase.ImportAsset(relativePath, ImportAssetOptions.ForceSynchronousImport);
+
+                    // Load imported object.
+                    var inputActionAsset = AssetDatabase.LoadAssetAtPath<InputActionAsset>(relativePath);
+
+                    // Set it on the PlayerInput component.
+                    inputActions.objectReferenceValue = inputActionAsset;
+                    serializedObject.ApplyModifiedProperties();
+
+                    // Open the asset.
+                    AssetDatabase.OpenAsset(inputActionAsset);
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Separator();
         }
     }
 }

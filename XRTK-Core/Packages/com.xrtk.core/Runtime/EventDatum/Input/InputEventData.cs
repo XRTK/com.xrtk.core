@@ -26,10 +26,10 @@ namespace XRTK.EventDatum.Input
         /// </summary>
         /// <param name="inputSource"></param>
         /// <param name="handedness"></param>
-        /// <param name="inputAction"></param>
-        public void Initialize(IMixedRealityInputSource inputSource, Handedness handedness, InputAction inputAction)
+        /// <param name="context"></param>
+        public void Initialize(IMixedRealityInputSource inputSource, Handedness handedness, InputAction.CallbackContext context)
         {
-            BaseInitialize(inputSource, inputAction);
+            BaseInitialize(inputSource, context);
             Handedness = handedness;
         }
     }
@@ -43,7 +43,7 @@ namespace XRTK.EventDatum.Input
         /// <summary>
         /// The input data of the event.
         /// </summary>
-        public T InputData => InputAction.ReadValue<T>();
+        public T InputData => Context.ReadValue<T>();
 
         /// <inheritdoc />
         public InputEventData(EventSystem eventSystem) : base(eventSystem) { }

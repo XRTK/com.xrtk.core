@@ -47,7 +47,7 @@ namespace XRTK.EventDatum.Input
         /// <param name="recognizedText"></param>
         public void Initialize(IMixedRealityInputSource inputSource, RecognitionConfidenceLevel confidence, TimeSpan phraseDuration, DateTime phraseStartTime, string recognizedText)
         {
-            BaseInitialize(inputSource, null);
+            BaseInitialize(inputSource, default);
             Confidence = confidence;
             PhraseDuration = phraseDuration;
             PhraseStartTime = phraseStartTime;

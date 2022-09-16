@@ -17,6 +17,7 @@ using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services.InputSystem.Sources;
 using XRTK.Utilities;
+using UnityInputSystem = UnityEngine.InputSystem.InputSystem;
 
 namespace XRTK.Services.InputSystem
 {
@@ -44,6 +45,8 @@ namespace XRTK.Services.InputSystem
             {
                 throw new Exception($"The {nameof(IMixedRealityInputSystem)} failed to start the {nameof(IMixedRealityFocusProvider)}!");
             }
+
+            UnityInputSystem.onDeviceChange += OnDeviceChange;
         }
 
         /// <inheritdoc />
@@ -80,6 +83,9 @@ namespace XRTK.Services.InputSystem
 
         private int disabledRefCount;
 
+        private PlayerInput playerInput;
+        private InputSystemUIInputModule inputModule;
+
         private SourceStateEventData sourceStateEventData;
         private SourcePoseEventData<TrackingState> sourceTrackingEventData;
         private SourcePoseEventData<Vector2> sourceVector2EventData;
@@ -103,7 +109,7 @@ namespace XRTK.Services.InputSystem
         private SpeechEventData speechEventData;
         private DictationEventData dictationEventData;
 
-        #region IMixedRealityManager Implementation
+        #region IMixedRealityService Implementation
 
         /// <inheritdoc />
         /// <remarks>
@@ -116,7 +122,7 @@ namespace XRTK.Services.InputSystem
         {
             base.Initialize();
 
-            EnsureStandaloneInputModuleSetup();
+            EnsureInputModuleSetup();
 
             if (Application.isPlaying)
             {
@@ -149,27 +155,72 @@ namespace XRTK.Services.InputSystem
             GazeProvider = CameraCache.Main.EnsureComponent(gazeProviderType) as IMixedRealityGazeProvider;
         }
 
-        private void EnsureStandaloneInputModuleSetup()
+        private void EnsureInputModuleSetup()
         {
-            var standaloneInputModules = UnityEngine.Object.FindObjectsOfType<InputSystemUIInputModule>();
+            var inputModules = UnityEngine.Object.FindObjectsOfType<InputSystemUIInputModule>();
 
-            if (standaloneInputModules.Length == 0)
+            if (inputModules.Length == 0)
             {
-                standaloneInputModules = new[] { CameraCache.Main.EnsureComponent<InputSystemUIInputModule>() };
+                inputModule = CameraCache.Main.EnsureComponent<InputSystemUIInputModule>();
                 Debug.Log($"There was no {nameof(InputSystemUIInputModule)} in the scene. The {nameof(MixedRealityInputSystem)} requires one and added it to the main camera.");
             }
-            else if (standaloneInputModules.Length > 1)
+            else if (inputModules.Length >= 1)
             {
-                Debug.LogError($"There is more than one {nameof(InputSystemUIInputModule)} active in the scene. Please make sure only one instance of it exists as it may cause errors.");
+                if (inputModules.Length > 1)
+                {
+                    Debug.LogError($"There is more than one {nameof(InputSystemUIInputModule)} active in the scene. Please make sure only one instance of it exists as it may cause errors.");
+
+                    foreach (var uiInputModule in inputModules)
+                    {
+                        if (uiInputModule.gameObject == CameraCache.Main.gameObject)
+                        {
+                            inputModule = uiInputModule;
+                            break;
+                        }
+                    }
+
+                    if (inputModule == null)
+                    {
+                        inputModule = inputModules[0];
+                    }
+                }
+                else
+                {
+                    inputModule = inputModules[0];
+                }
+
+                if (CameraCache.Main.gameObject != inputModule.gameObject)
+                {
+                    var message = $"A valid {nameof(InputSystemUIInputModule)} was found, but it wasn't properly located on the main camera.";
+#if UNITY_EDITOR
+                    var moveIt = UnityEditor.EditorUtility.DisplayDialog("Alert!", message, "Move it", "Leave it");
+
+                    if (moveIt)
+                    {
+                        var newInputModule = CameraCache.Main.EnsureComponent<InputSystemUIInputModule>();
+                        newInputModule.CopySerializedProperties(newInputModule);
+
+                        inputModule.Destroy();
+                        inputModule = newInputModule;
+                    }
+#else
+                    Debug.LogWarning(message);
+#endif
+                }
             }
 
-            var standaloneInputModule = standaloneInputModules[0];
-            standaloneInputModule.xrTrackingOrigin = CameraCache.Main.transform.root;
-            var playerInput = standaloneInputModule.xrTrackingOrigin.EnsureComponent<PlayerInput>();
+            inputModule.xrTrackingOrigin = CameraCache.Main.transform.root;
+            playerInput = CameraCache.Main.EnsureComponent<PlayerInput>();
             playerInput.actions = inputActions;
             playerInput.camera = CameraCache.Main;
-            playerInput.uiInputModule = standaloneInputModule;
+            playerInput.uiInputModule = inputModule;
             playerInput.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+
+            // TODO make sure we're not subscribing a crazy amount of times.
+            playerInput.onActionTriggered += OnActionTriggered;
+            playerInput.onControlsChanged += OnControlsChanged;
+            playerInput.onDeviceLost += OnDeviceLost;
+            playerInput.onDeviceRegained += OnDeviceRegained;
         }
 
         /// <inheritdoc />
@@ -177,6 +228,7 @@ namespace XRTK.Services.InputSystem
         {
             base.Enable();
 
+            playerInput.ActivateInput();
             InputEnabled?.Invoke();
         }
 
@@ -185,6 +237,7 @@ namespace XRTK.Services.InputSystem
         {
             base.Disable();
 
+            playerInput.DeactivateInput();
             InputDisabled?.Invoke();
         }
 
@@ -192,6 +245,8 @@ namespace XRTK.Services.InputSystem
         protected override void OnDispose(bool finalizing)
         {
             base.OnDispose(finalizing);
+
+            UnityInputSystem.onDeviceChange -= OnDeviceChange;
 
             if (finalizing)
             {
@@ -202,25 +257,83 @@ namespace XRTK.Services.InputSystem
                     component.Destroy();
                 }
 
-                var inputModule = CameraCache.Main.GetComponent<InputSystemUIInputModule>();
+                if (inputModule == null)
+                {
+                    inputModule = CameraCache.Main.GetComponent<InputSystemUIInputModule>();
+                }
 
                 if (!inputModule.IsNull())
                 {
                     inputModule.Destroy();
                 }
 
-                var playerInput = CameraCache.Main.transform.root.GetComponent<PlayerInput>();
+                if (playerInput == null)
+                {
+                    playerInput = CameraCache.Main.GetComponent<PlayerInput>();
+                }
 
                 if (!playerInput.IsNull())
                 {
+                    playerInput.onActionTriggered -= OnActionTriggered;
+                    playerInput.onControlsChanged -= OnControlsChanged;
+                    playerInput.onDeviceLost -= OnDeviceLost;
+                    playerInput.onDeviceRegained -= OnDeviceRegained;
+
                     playerInput.Destroy();
                 }
             }
         }
 
-        #endregion IMixedRealityManager Implementation
+        #endregion IMixedRealityService Implementation
 
-        #region IEventSystemManager Implementation
+        #region Unity Input System Events
+
+        private void OnDeviceChange(InputDevice inputDevice, InputDeviceChange inputDeviceChange)
+        {
+            switch (inputDeviceChange)
+            {
+                case InputDeviceChange.Added:
+                case InputDeviceChange.Removed:
+                case InputDeviceChange.Disconnected:
+                case InputDeviceChange.Reconnected:
+                case InputDeviceChange.Enabled:
+                case InputDeviceChange.Disabled:
+                    Debug.Log($"{inputDevice.name} | {inputDeviceChange}");
+                    break;
+                case InputDeviceChange.UsageChanged:
+                case InputDeviceChange.ConfigurationChanged:
+                case InputDeviceChange.SoftReset:
+                case InputDeviceChange.HardReset:
+                    // Nothing for now
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(inputDeviceChange), inputDeviceChange, null);
+            }
+        }
+
+        private void OnActionTriggered(InputAction.CallbackContext context)
+        {
+            Debug.Log($"{nameof(OnActionTriggered)} | {context.control.valueType} | {context}");
+        }
+
+        private void OnControlsChanged(PlayerInput playerInput)
+        {
+            Debug.Log($"{nameof(OnControlsChanged)} | {playerInput}");
+        }
+
+        private void OnDeviceLost(PlayerInput playerInput)
+        {
+            Debug.Log($"{nameof(OnDeviceLost)} | {playerInput}");
+        }
+
+        private void OnDeviceRegained(PlayerInput playerInput)
+        {
+            Debug.Log($"{nameof(OnDeviceRegained)} | {playerInput}");
+        }
+
+        #endregion Unity Input System Events
+
+        #region IMixedRealityEventSystem Implementation
 
         /// <inheritdoc />
         public override void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler)
@@ -355,7 +468,7 @@ namespace XRTK.Services.InputSystem
             base.Unregister(listener);
         }
 
-        #endregion IEventSystemManager Implementation
+        #endregion IMixedRealityEventSystem Implementation
 
         #region Input Disabled Options
 
@@ -817,7 +930,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDown(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDown(IMixedRealityPointer pointer, InputAction.CallbackContext inputAction, IMixedRealityInputSource inputSource = null)
         {
             // Create input event
             pointerEventData.Initialize(pointer, inputAction, inputSource);
@@ -847,7 +960,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerClicked(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerClicked(IMixedRealityPointer pointer, InputAction.CallbackContext inputAction, IMixedRealityInputSource inputSource = null)
         {
             // Create input event
             pointerEventData.Initialize(pointer, inputAction, inputSource);
@@ -870,7 +983,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerUp(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerUp(IMixedRealityPointer pointer, InputAction.CallbackContext inputAction, IMixedRealityInputSource inputSource = null)
         {
             // Create input event
             pointerEventData.Initialize(pointer, inputAction);
@@ -900,7 +1013,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerScroll(IMixedRealityPointer pointer, InputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerScroll(IMixedRealityPointer pointer, InputAction.CallbackContext scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerScrollEventData.Initialize(pointer, scrollAction, scrollDelta);
 
@@ -926,7 +1039,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDragBegin(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDragBegin(IMixedRealityPointer pointer, InputAction.CallbackContext draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
@@ -952,7 +1065,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDrag(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDrag(IMixedRealityPointer pointer, InputAction.CallbackContext draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
@@ -975,7 +1088,7 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerDragEnd(IMixedRealityPointer pointer, InputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerDragEnd(IMixedRealityPointer pointer, InputAction.CallbackContext draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
             pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
@@ -1007,13 +1120,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaiseOnInputDown(IMixedRealityInputSource source, InputAction inputAction)
+        public void RaiseOnInputDown(IMixedRealityInputSource source, InputAction.CallbackContext inputAction)
         {
             RaiseOnInputDown(source, Handedness.None, inputAction);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputDown(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction)
+        public void RaiseOnInputDown(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1029,13 +1142,13 @@ namespace XRTK.Services.InputSystem
         #region Input Pressed
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction inputAction)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction.CallbackContext inputAction)
         {
             RaiseOnInputPressed(source, Handedness.None, inputAction);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1047,13 +1160,13 @@ namespace XRTK.Services.InputSystem
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction inputAction, float pressAmount)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, float pressAmount)
         {
             RaiseOnInputPressed(source, Handedness.None, inputAction, pressAmount);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, float pressAmount)
+        public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, float pressAmount)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1076,13 +1189,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaiseOnInputUp(IMixedRealityInputSource source, InputAction inputAction)
+        public void RaiseOnInputUp(IMixedRealityInputSource source, InputAction.CallbackContext inputAction)
         {
             RaiseOnInputUp(source, Handedness.None, inputAction);
         }
 
         /// <inheritdoc />
-        public void RaiseOnInputUp(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction)
+        public void RaiseOnInputUp(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1105,13 +1218,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, float inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, float inputPosition)
         {
             RaisePositionInputChanged(source, Handedness.None, inputAction, inputPosition);
         }
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, float inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, float inputPosition)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1130,13 +1243,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, Vector2 inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, Vector2 inputPosition)
         {
             RaisePositionInputChanged(source, Handedness.None, inputAction, inputPosition);
         }
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Vector2 inputPosition)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, Vector2 inputPosition)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1155,13 +1268,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction inputAction, Vector3 position)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, Vector3 position)
         {
             RaisePositionInputChanged(source, Handedness.None, inputAction, position);
         }
 
         /// <inheritdoc />
-        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Vector3 position)
+        public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, Vector3 position)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1184,13 +1297,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaiseRotationInputChanged(IMixedRealityInputSource source, InputAction inputAction, Quaternion rotation)
+        public void RaiseRotationInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, Quaternion rotation)
         {
             RaiseRotationInputChanged(source, Handedness.None, inputAction, rotation);
         }
 
         /// <inheritdoc />
-        public void RaiseRotationInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, Quaternion rotation)
+        public void RaiseRotationInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, Quaternion rotation)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 
@@ -1213,13 +1326,13 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePoseInputChanged(IMixedRealityInputSource source, InputAction inputAction, MixedRealityPose inputData)
+        public void RaisePoseInputChanged(IMixedRealityInputSource source, InputAction.CallbackContext inputAction, MixedRealityPose inputData)
         {
             RaisePoseInputChanged(source, Handedness.None, inputAction, inputData);
         }
 
         /// <inheritdoc />
-        public void RaisePoseInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction inputAction, MixedRealityPose inputData)
+        public void RaisePoseInputChanged(IMixedRealityInputSource source, Handedness handedness, InputAction.CallbackContext inputAction, MixedRealityPose inputData)
         {
             Debug.Assert(detectedInputSources.Contains(source));
 

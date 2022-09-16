@@ -26,7 +26,7 @@ namespace XRTK.EventDatum.Input
         public void Initialize(IMixedRealityInputSource inputSource, IMixedRealityController controller)
         {
             // NOTE: Source State events do not have an associated Input Action.
-            BaseInitialize(inputSource, null);
+            BaseInitialize(inputSource, default);
             Controller = controller;
         }
     }

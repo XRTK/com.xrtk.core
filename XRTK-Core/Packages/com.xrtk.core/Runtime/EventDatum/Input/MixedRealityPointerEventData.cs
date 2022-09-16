@@ -24,11 +24,11 @@ namespace XRTK.EventDatum.Input
         /// Used to initialize/reset the event and populate the data.
         /// </summary>
         /// <param name="pointer"></param>
-        /// <param name="inputAction"></param>
+        /// <param name="context"></param>
         /// <param name="inputSource"></param>
-        public void Initialize(IMixedRealityPointer pointer, InputAction inputAction, IMixedRealityInputSource inputSource = null)
+        public void Initialize(IMixedRealityPointer pointer, InputAction.CallbackContext context, IMixedRealityInputSource inputSource = null)
         {
-            BaseInitialize(inputSource ?? pointer.InputSourceParent, inputAction);
+            BaseInitialize(inputSource ?? pointer.InputSourceParent, context);
             Pointer = pointer;
         }
     }

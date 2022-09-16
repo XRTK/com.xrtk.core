@@ -153,8 +153,7 @@ namespace XRTK.Services.InputSystem
 
         private IMixedRealityInputSystem inputSystem = null;
 
-        protected IMixedRealityInputSystem InputSystem
-            => inputSystem ?? (inputSystem = MixedRealityToolkit.GetSystem<IMixedRealityInputSystem>());
+        protected IMixedRealityInputSystem InputSystem => inputSystem ??= MixedRealityToolkit.GetSystem<IMixedRealityInputSystem>();
 
         #region InternalGazePointer Class
 

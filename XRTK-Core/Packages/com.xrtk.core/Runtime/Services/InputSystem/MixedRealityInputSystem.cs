@@ -46,6 +46,11 @@ namespace XRTK.Services.InputSystem
                 throw new Exception($"The {nameof(IMixedRealityInputSystem)} failed to start the {nameof(IMixedRealityFocusProvider)}!");
             }
 
+            foreach (var device in UnityInputSystem.devices)
+            {
+                var inputSource = RequestNewGenericInputSource(device.name);
+                RaiseSourceDetected(inputSource);
+            }
             UnityInputSystem.onDeviceChange += OnDeviceChange;
         }
 
@@ -313,6 +318,13 @@ namespace XRTK.Services.InputSystem
 
         private void OnActionTriggered(InputAction.CallbackContext context)
         {
+            var type = context.control.valueType;
+
+            if (type == typeof(Vector2))
+            {
+                RaisePositionInputChanged(null, context, context.ReadValue<Vector2>());
+            }
+
             Debug.Log($"{nameof(OnActionTriggered)} | {context.control.valueType} | {context}");
         }
 

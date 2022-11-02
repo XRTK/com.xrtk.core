@@ -13,7 +13,7 @@ on:
 
 concurrency:
   group: ${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   validate-editor-installation:
@@ -23,7 +23,7 @@ jobs:
       matrix:
         include:
           - os: windows
-          - os: macos
+          #- os: macos
 
     steps:
       - uses: actions/checkout@v3
@@ -43,8 +43,8 @@ jobs:
             build-target: Android
           - os: windows
             build-target: StandaloneWindows64
-          - os: macos
-            build-target: Android
+          #- os: macos
+          #  build-target: Android
 
     steps:
       - name: clean git

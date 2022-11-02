@@ -26,7 +26,7 @@ jobs:
           - os: macos
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           clean: true
 
@@ -58,7 +58,7 @@ jobs:
           }
         shell: pwsh
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
           clean: true

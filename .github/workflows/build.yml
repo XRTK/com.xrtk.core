@@ -67,7 +67,7 @@ jobs:
           git submodule update --init --recursive
 
       - name: Unity Build (${{ matrix.build-target }})
-        uses: xrtk/unity-build@main
+        uses: xrtk/unity-build@refactored-unity-action-test
         with:
           build-target: ${{ matrix.build-target }}
 

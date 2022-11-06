@@ -30,8 +30,8 @@ jobs:
         with:
           clean: true
 
-      - name: validate editor installation
-        uses: xrtk/unity-validate@main
+      - name: Unity Setup/Installation
+        uses: xrtk/unity-setup@main
 
   build:
     needs: validate-editor-installation

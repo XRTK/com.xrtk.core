@@ -16,25 +16,25 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  validate-editor-installation:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: windows
-          #- os: macos
+  # validate-editor-installation:
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       include:
+  #         - os: windows
+  #         #- os: macos
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          clean: true
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         clean: true
 
-      - name: Unity Setup/Installation
-        uses: xrtk/unity-setup@main
+  #     - name: Unity Setup/Installation
+  #       uses: xrtk/unity-setup@main
 
   build:
-    needs: validate-editor-installation
+    #needs: validate-editor-installation
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -65,6 +65,9 @@ jobs:
       - name: Checkout submodules
         run: |
           git submodule update --init --recursive
+
+      - name: Unity Setup
+        uses: xrtk/unity-setup@main
 
       - name: Unity Build (${{ matrix.build-target }})
         uses: xrtk/unity-build@refactored-unity-action-test

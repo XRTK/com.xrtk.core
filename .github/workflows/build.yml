@@ -43,8 +43,8 @@ jobs:
             build-target: Android
           - os: windows
             build-target: StandaloneWindows64
-          #- os: macos
-          #  build-target: Android
+          - os: macos
+            build-target: Android
 
     steps:
       - name: clean git
@@ -66,8 +66,7 @@ jobs:
         run: |
           git submodule update --init --recursive
 
-      - name: Unity Setup
-        uses: xrtk/unity-setup@main
+      - uses: xrtk/unity-setup@v4
 
       - name: Unity Build (${{ matrix.build-target }})
         uses: xrtk/unity-build@refactored-unity-action-test

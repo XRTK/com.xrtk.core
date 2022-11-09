@@ -30,8 +30,7 @@ jobs:
   #       with:
   #         clean: true
 
-  #     - name: Unity Setup/Installation
-  #       uses: xrtk/unity-setup@main
+  #     - uses: xrtk/unity-setup@v4
 
   build:
     #needs: validate-editor-installation
@@ -39,12 +38,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: windows
-            build-target: Android
-          - os: windows
+          - os: ubuntu-latest
+            build-target: StandaloneLinux64
+          - os: windows-latest
             build-target: StandaloneWindows64
-          - os: macos
-            build-target: Android
+          - os: macos-latest
+            build-target: StandaloneOSX
 
     steps:
       - name: clean git
@@ -67,6 +66,17 @@ jobs:
           git submodule update --init --recursive
 
       - uses: xrtk/unity-setup@v4
+
+        # Activates the installation with the provided credentials
+        # https://github.com/XRTK/activate-unity-license
+      - uses: xrtk/activate-unity-license@v1
+        with:
+          # Required
+          username: ${{ secrets.UNITY_USERNAME }}
+          password: ${{ secrets.UNITY_PASSWORD }}
+          # Optional
+          license-type: 'Personal' # Chooses license type to use [ Personal, Professional ]
+          serial: ${{ secrets.UNITY_SERIAL }} # Required for pro/plus activations
 
       - name: Unity Build (${{ matrix.build-target }})
         uses: xrtk/unity-build@refactored-unity-action-test

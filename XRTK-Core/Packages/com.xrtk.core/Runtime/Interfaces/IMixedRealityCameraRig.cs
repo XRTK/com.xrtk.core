@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.SpatialTracking;
 
@@ -34,9 +35,9 @@ namespace XRTK.Interfaces.CameraSystem
         Camera PlayerCamera { get; }
 
         /// <summary>
-        /// The <see cref="TrackedPoseDriver"/> attached to the <see cref="CameraTransform"/>.
+        /// The <see cref="UnityEngine.SpatialTracking.TrackedPoseDriver"/> attached to the <see cref="CameraTransform"/>.
         /// </summary>
-        TrackedPoseDriver CameraPoseDriver { get; }
+        TrackedPoseDriver TrackedPoseDriver { get; }
 
         /// <summary>
         /// The player's body transform, located at the player's feet.

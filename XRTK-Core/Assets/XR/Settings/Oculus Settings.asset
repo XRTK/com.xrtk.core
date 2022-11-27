@@ -16,10 +16,10 @@ MonoBehaviour:
   m_StereoRenderingModeAndroid: 2
   SharedDepthBuffer: 1
   DashSupport: 1
-  LowOverheadMode: 1
-  OptimizeBufferDiscards: 0
+  LowOverheadMode: 0
+  OptimizeBufferDiscards: 1
   PhaseSync: 0
-  SymmetricProjection: 0
+  SymmetricProjection: 1
   SubsampledLayout: 0
   LateLatching: 0
   LateLatchingDebug: 0

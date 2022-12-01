@@ -66,6 +66,8 @@ jobs:
           git submodule update --init --recursive
 
       - uses: xrtk/unity-setup@v5
+        with:
+          version-file-path: 'XRTK.Core/ProjectSettings/ProjectVersion.txt'
 
         # Activates the installation with the provided credentials
         # https://github.com/XRTK/activate-unity-license

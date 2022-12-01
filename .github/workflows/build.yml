@@ -67,7 +67,7 @@ jobs:
 
       - uses: xrtk/unity-setup@v5
         with:
-          version-file-path: 'XRTK.Core/ProjectSettings/ProjectVersion.txt'
+          version-file-path: '**/ProjectSettings/ProjectVersion.txt'
 
         # Activates the installation with the provided credentials
         # https://github.com/XRTK/activate-unity-license

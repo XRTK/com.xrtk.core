@@ -116,8 +116,6 @@ namespace XRTK.Editor.BuildPipeline
                         Debug.LogError($"Failed to find or create a valid {nameof(IBuildInfo)} instance!");
                         return null;
                     }
-
-                    Debug.Assert(buildInfoInstance.IsNotNull());
                 }
                 else
                 {
@@ -130,10 +128,15 @@ namespace XRTK.Editor.BuildPipeline
                 }
 
                 var buildAsset = buildInfoInstance.GetOrCreateAsset($"{MixedRealityPreferences.ProfileGenerationPath}{Path.DirectorySeparatorChar}BuildInfo{Path.DirectorySeparatorChar}");
-                Debug.Assert(buildAsset.IsNotNull());
-                buildInfo = buildInfoInstance;
-                Debug.Assert(buildInfo != null);
 
+                if (buildAsset.IsNull())
+                {
+                    Debug.LogError($"Failed to create a valid {nameof(BuildInfo)} asset");
+                    return null;
+                }
+
+                buildInfo = buildInfoInstance;
+                Debug.Assert(buildInfo != null, "Failed to convert a valid build info instance.");
                 return buildInfo;
             }
             internal set => buildInfo = value;

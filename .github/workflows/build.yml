@@ -65,11 +65,11 @@ jobs:
         run: |
           git submodule update --init --recursive
 
-      - uses: xrtk/unity-setup@v4
+      - uses: xrtk/unity-setup@v5
 
         # Activates the installation with the provided credentials
         # https://github.com/XRTK/activate-unity-license
-      - uses: xrtk/activate-unity-license@v1
+      - uses: xrtk/activate-unity-license@v2
         with:
           # Required
           username: ${{ secrets.UNITY_USERNAME }}

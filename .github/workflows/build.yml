@@ -65,7 +65,7 @@ jobs:
           serial: ${{ secrets.UNITY_SERIAL }} # Required for pro/plus activations
 
       - name: Unity Build (${{ matrix.build-target }})
-        uses: xrtk/unity-build@refactored-unity-action-test
+        uses: xrtk/unity-build@v4
         with:
           build-target: ${{ matrix.build-target }}
 

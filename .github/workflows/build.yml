@@ -16,24 +16,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  # validate-editor-installation:
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       include:
-  #         - os: windows
-  #         #- os: macos
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         clean: true
-
-  #     - uses: xrtk/unity-setup@v4
-
   build:
-    #needs: validate-editor-installation
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -65,8 +48,9 @@ jobs:
         run: |
           git submodule update --init --recursive
 
-      - uses: xrtk/unity-setup@v5
+      - uses: xrtk/unity-setup@v6
         with:
+          build-targets: ${{ matrix.built-target }}
           version-file-path: '**/ProjectSettings/ProjectVersion.txt'
 
         # Activates the installation with the provided credentials

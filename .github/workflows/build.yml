@@ -48,7 +48,7 @@ jobs:
         run: |
           git submodule update --init --recursive
 
-      - uses: xrtk/unity-setup@v6
+      - uses: xrtk/unity-setup@v7
         with:
           build-targets: ${{ matrix.built-target }}
           version-file-path: '**/ProjectSettings/ProjectVersion.txt'
